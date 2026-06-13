@@ -1,0 +1,27 @@
+{
+  "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+  "number": "2024-001",
+  "name": "Smith v. Jones - Contract Dispute",
+  "description": "Commercial contract dispute arising from breach of services agreement",
+  "status": "Open",
+  "openedDate": "2024-01-15T00:00:00Z",
+  "clientId": "b2c3d4e5-f6a7-8901-bcde-f12345678901",
+  "staffResponsibleId": "c3d4e5f6-a7b8-9012-cdef-123456789012",
+  "matterTypeId": "d4e5f6a7-b8c9-0123-def0-234567890123",
+  "tags": [
+    "Litigation",
+    "Commercial"
+  ],
+  "links": [
+    {
+      "rel": "self",
+      "href": "https://api.smokeball.com/matters/a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+      "type": "Matter"
+    },
+    {
+      "rel": "contacts",
+      "href": "https://api.smokeball.com/matters/a1b2c3d4-e5f6-7890-abcd-ef1234567890/roles",
+      "type": "MatterRoles"
+    }
+  ]
+}

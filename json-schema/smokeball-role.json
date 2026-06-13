@@ -1,0 +1,89 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/smokeball/json-schema/smokeball-role.json",
+  "title": "Smokeball Role",
+  "type": "object",
+  "properties": {
+    "href": {
+      "type": "string",
+      "nullable": true
+    },
+    "relation": {
+      "type": "string",
+      "nullable": true
+    },
+    "method": {
+      "type": "string",
+      "default": "GET",
+      "nullable": true
+    },
+    "self": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Link"
+        }
+      ],
+      "nullable": true
+    },
+    "id": {
+      "type": "string",
+      "description": "Unique identifier of the role.",
+      "nullable": true,
+      "example": "009f778f-83df-454a-b344-768a862a7e55"
+    },
+    "name": {
+      "type": "string",
+      "description": "Name of the role.",
+      "nullable": true,
+      "example": "Client"
+    },
+    "contact": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Link"
+        }
+      ],
+      "description": "Hypermedia link of the associated contact.",
+      "nullable": true
+    },
+    "roleDescription": {
+      "type": "string",
+      "description": "Name of the role (user editable).",
+      "nullable": true,
+      "example": "Head Honcho"
+    },
+    "description": {
+      "type": "string",
+      "description": "Description of the role.",
+      "nullable": true,
+      "example": "The person for whom I am working"
+    },
+    "representatives": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/Link"
+      },
+      "description": "List of hypermedia links of the associated representatives.",
+      "nullable": true
+    },
+    "relationships": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/Relationship"
+      },
+      "description": "List of associated relationships.",
+      "nullable": true
+    },
+    "isClient": {
+      "type": "boolean",
+      "description": "Boolean flag indicating if role belongs to a 'Client'.",
+      "example": false
+    },
+    "isOtherSide": {
+      "type": "boolean",
+      "description": "Boolean flag indicating if role belongs to an 'OtherSide'.",
+      "example": false
+    }
+  },
+  "additionalProperties": false
+}

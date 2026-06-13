@@ -1,0 +1,160 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/smokeball/json-schema/smokeball-staff.json",
+  "title": "Smokeball Staff",
+  "type": "object",
+  "properties": {
+    "href": {
+      "type": "string",
+      "nullable": true
+    },
+    "relation": {
+      "type": "string",
+      "nullable": true
+    },
+    "method": {
+      "type": "string",
+      "default": "GET",
+      "nullable": true
+    },
+    "self": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Link"
+        }
+      ],
+      "nullable": true
+    },
+    "id": {
+      "type": "string",
+      "description": "Unique identifier of the staff member.",
+      "nullable": true,
+      "example": "b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2"
+    },
+    "versionId": {
+      "type": "string",
+      "description": "Version id of the record.",
+      "nullable": true,
+      "example": "750eb5c5-ac0b-7d11-4997-e0ce9d8896c8"
+    },
+    "title": {
+      "type": "string",
+      "description": "Staff member's title.",
+      "nullable": true,
+      "example": "Mr"
+    },
+    "firstName": {
+      "type": "string",
+      "description": "Staff member's first name.",
+      "nullable": true,
+      "example": "John"
+    },
+    "middleName": {
+      "type": "string",
+      "description": "Staff member's middle name (if applicable).",
+      "nullable": true,
+      "example": ""
+    },
+    "lastName": {
+      "type": "string",
+      "description": "Staff member's last name.",
+      "nullable": true,
+      "example": "Smith"
+    },
+    "initials": {
+      "type": "string",
+      "description": "Staff member's initials.",
+      "nullable": true,
+      "example": "JS"
+    },
+    "phone": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/PhoneNumber"
+        }
+      ],
+      "description": "Staff member's phone details.",
+      "nullable": true
+    },
+    "cell": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/PhoneNumber"
+        }
+      ],
+      "description": "Staff member's mobile details.",
+      "nullable": true
+    },
+    "email": {
+      "type": "string",
+      "description": "Staff member's email address.",
+      "nullable": true,
+      "example": "john.smith@brown.com"
+    },
+    "role": {
+      "type": "string",
+      "description": "Staff member's role.",
+      "nullable": true,
+      "example": "Bookkeeper"
+    },
+    "rate": {
+      "type": "number",
+      "description": "Staff member's hourly rate in dollars.",
+      "format": "double",
+      "nullable": true,
+      "example": 150
+    },
+    "avatar": {
+      "type": "string",
+      "description": "Staff member's avatar.",
+      "nullable": true,
+      "example": "https://example-avatar-url.com/image"
+    },
+    "former": {
+      "type": "boolean",
+      "description": "Whether he/she is a former member.",
+      "example": false
+    },
+    "enabled": {
+      "type": "boolean",
+      "description": "Whether staff member is enabled.",
+      "example": true
+    },
+    "userId": {
+      "type": "string",
+      "description": "Staff member's User Id, if enabled.",
+      "nullable": true,
+      "example": "14b5dd57-3681-420e-a483-4823424eef45"
+    },
+    "colorFill": {
+      "type": "string",
+      "description": "Staff member's fill color hex code.",
+      "nullable": true,
+      "example": "#797d85"
+    },
+    "colorStroke": {
+      "type": "string",
+      "description": "Staff member's stroke color hex code.",
+      "nullable": true,
+      "example": "#64666a"
+    },
+    "licenceNumbers": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/LicenceNumber"
+      },
+      "description": "Licence numbers of the staff member.",
+      "nullable": true
+    },
+    "outOfOffice": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/OutOfOffice"
+        }
+      ],
+      "description": "Staff member's Out-of-office period, if enabled.",
+      "nullable": true
+    }
+  },
+  "additionalProperties": false
+}

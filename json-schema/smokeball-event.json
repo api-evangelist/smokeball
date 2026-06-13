@@ -1,0 +1,146 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/smokeball/json-schema/smokeball-event.json",
+  "title": "Smokeball Event",
+  "type": "object",
+  "properties": {
+    "href": {
+      "type": "string",
+      "nullable": true
+    },
+    "relation": {
+      "type": "string",
+      "nullable": true
+    },
+    "method": {
+      "type": "string",
+      "default": "GET",
+      "nullable": true
+    },
+    "self": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Link"
+        }
+      ],
+      "nullable": true
+    },
+    "id": {
+      "type": "string",
+      "description": "Unique identifier of the event.",
+      "nullable": true,
+      "example": "b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2"
+    },
+    "matter": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Link"
+        }
+      ],
+      "description": "Hypermedia link of the associated matter.",
+      "nullable": true
+    },
+    "attendees": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/Link"
+      },
+      "description": "Hypermedia link of all the attendees.",
+      "nullable": true
+    },
+    "externalAttendees": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/Link"
+      },
+      "description": "Hypermedia link of all the contacts of the external or third party attendees.",
+      "nullable": true
+    },
+    "eventType": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/EventType"
+        }
+      ],
+      "description": "**Deprecated.** Use `type` instead.\n\nThe type of the event.\r\n\r\nPossible values: Non Recurring Event = 0, Recurring Pattern Series = 1, Single Recurring Occurrence = 2, Modified Recurring Occurrence = 3, Deleted Recurring Occurrence = 4",
+      "example": "0",
+      "deprecated": true
+    },
+    "type": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/EventType"
+        }
+      ],
+      "description": "The type of the event.\r\n\r\nPossible values: Normal, Pattern, Occurrence, ChangedOccurrence, DeletedOccurrence",
+      "example": "Normal"
+    },
+    "subject": {
+      "type": "string",
+      "description": "Subject of event.",
+      "nullable": true,
+      "example": "Subject"
+    },
+    "description": {
+      "type": "string",
+      "description": "Description of event.",
+      "nullable": true,
+      "example": "Description"
+    },
+    "location": {
+      "type": "string",
+      "description": "Location of event.",
+      "nullable": true,
+      "example": "Location"
+    },
+    "allDay": {
+      "type": "boolean",
+      "description": "Whether or not the event is all day.",
+      "example": false
+    },
+    "nonBillable": {
+      "type": "boolean",
+      "description": "Whether or not the event is billable.\r\nNote events with a duration greater than 12 hours automatically become non-billable.",
+      "example": false
+    },
+    "startTime": {
+      "type": "string",
+      "description": "Start date and time of the event.\r\nSupported date format is ISO YYYY-MM-DDThh:mm:ss.\r\nNote: date and time will correlate with the time zone provided.",
+      "format": "date-time",
+      "example": "2000-01-01T20:00:00"
+    },
+    "endTime": {
+      "type": "string",
+      "description": "End date and time of the event.\r\nSupported date format is ISO YYYY-MM-DDThh:mm:ss.\r\nNote: date and time will correlate with the time zone provided.",
+      "format": "date-time",
+      "example": "2000-01-01T20:00:00"
+    },
+    "timeZone": {
+      "type": "string",
+      "description": "Time zone of the event for determining the start time and end time.\r\nTime zones will be in the IANA time zone format.",
+      "nullable": true,
+      "example": "Australia/Sydney"
+    },
+    "lastUpdated": {
+      "type": "string",
+      "description": "The last date and time the event was updated.\r\nSupported date format is ISO YYYY-MM-DDThh:mm:ss.",
+      "format": "date-time",
+      "example": "2000-01-01T20:00:00"
+    },
+    "additionalData": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string",
+        "nullable": true
+      },
+      "description": "Any additional data provided for the event.",
+      "nullable": true
+    },
+    "isDeleted": {
+      "type": "boolean",
+      "description": "Whether the event has been deleted.",
+      "example": false
+    }
+  },
+  "additionalProperties": false
+}

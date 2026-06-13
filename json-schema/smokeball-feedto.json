@@ -1,0 +1,139 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/smokeball/json-schema/smokeball-feedto.json",
+  "title": "Smokeball FeeDto",
+  "required": [
+    "feeDate",
+    "subject"
+  ],
+  "type": "object",
+  "properties": {
+    "updatedByUserId": {
+      "type": "string",
+      "description": "Unique identifier of the user updating the fee.\r\n\r\nThis field is reserved for server-to-server operations.",
+      "nullable": true,
+      "example": "750eb5c5-ac0b-7d11-4997-e0ce9d8896c8"
+    },
+    "staffId": {
+      "type": "string",
+      "description": "Unique identifier of the associated staff member.\r\n\r\nWhen StaffId is not provided, the API will attempt to match your User Id to a Staff Id automatically.",
+      "nullable": true,
+      "example": "750eb5c5-ac0b-7d11-4997-e0ce9d8896c8"
+    },
+    "invoiceId": {
+      "type": "string",
+      "description": "Unique identifier of the associated invoice.",
+      "nullable": true,
+      "example": "750eb5c5-ac0b-7d11-4997-e0ce9d8896c8"
+    },
+    "activityCode": {
+      "type": "string",
+      "description": "The activity code associated to the fee.",
+      "nullable": true,
+      "example": "PRT"
+    },
+    "feeType": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/FeeType"
+        }
+      ],
+      "description": "The type of the fee (Fixed = 0, Time = 1).",
+      "example": 0
+    },
+    "feeDate": {
+      "type": "string",
+      "description": "The date of the fee.",
+      "format": "date-time",
+      "example": "2022-07-01"
+    },
+    "subject": {
+      "minLength": 1,
+      "type": "string",
+      "description": "The subject - this should be a short description of the fee.",
+      "example": "Review contract"
+    },
+    "description": {
+      "type": "string",
+      "description": "Optional detailed description of the fee.",
+      "nullable": true,
+      "example": "Print documents"
+    },
+    "duration": {
+      "type": "integer",
+      "description": "The duration billed - in minutes. This duration is used if there are no sub activities.",
+      "format": "int64",
+      "example": 60
+    },
+    "durationWorked": {
+      "type": "integer",
+      "description": "The duration worked - in minutes. This duration is used if there are no sub activities.",
+      "format": "int64",
+      "nullable": true,
+      "example": 50
+    },
+    "rate": {
+      "type": "number",
+      "description": "The rate of the fee in dollars.",
+      "format": "double",
+      "example": 350
+    },
+    "tax": {
+      "type": "number",
+      "description": "Tax amount of the fee in dollars. Only applicable in AU and UK regions.\r\n\r\nWhen TaxOutOfScope or TaxExempt is true, this value must be 0.",
+      "format": "double",
+      "nullable": true,
+      "example": 35
+    },
+    "taxInclusive": {
+      "type": "boolean",
+      "description": "If true, the amount is tax inclusive, otherwise tax exclusive. Only applicable in AU and UK regions.\r\n\r\nTax inclusive means: Amount exc. tax = Amount - Tax, Amount inc. tax = Amount.\r\n\r\nTax exclusive means: Amount exc. tax = Amount, Amount inc. tax = Amount + Tax.\r\n\r\n(Amount = Rate for fixed fees, or Rate * Duration for time fees, Tax = value of the Tax field)",
+      "example": false
+    },
+    "taxExempt": {
+      "type": "boolean",
+      "description": "True if the fee is exempt from tax.\r\n\r\nThis field is mutually exclusive with TaxOutOfScope.\r\nWhen true, Tax must be 0.",
+      "example": false
+    },
+    "taxOutOfScope": {
+      "type": "boolean",
+      "description": "True if the fee is out of scope for tax purposes. Only supported in UK regions.\r\n\r\nThis field is mutually exclusive with TaxExempt.\r\nWhen true, Tax must be 0.",
+      "example": false
+    },
+    "finalized": {
+      "type": "boolean",
+      "description": "True if the fee has been finalized.",
+      "example": false
+    },
+    "isWrittenOff": {
+      "type": "boolean",
+      "description": "True if the fee is written off. True only allowed if IsBillable is true.\r\n\r\nWritten off fee will show on an invoice with their amount, but will not be counted in the invoice total.",
+      "example": false
+    },
+    "isBillable": {
+      "type": "boolean",
+      "description": "True if the fee is billable. Non-billable fee will, by default, not be shown on invoices (and, if shown, the amount will be 0).",
+      "example": false
+    },
+    "isInvoicedExternally": {
+      "type": "boolean",
+      "description": "True if the fee is invoiced externally.",
+      "example": false
+    },
+    "sourceItems": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/FeeSourceItemDto"
+      },
+      "description": "The source items on the fee.",
+      "nullable": true
+    },
+    "createdFromActivityId": {
+      "type": "string",
+      "description": "Associates an existing activity id to a fee.\r\nOnly valid for Fee creation. \r\nValue is supplied by Smokeball for some partners.",
+      "nullable": true,
+      "example": "504b9f77-20c7-4dee-8227-d3007c8f6cea"
+    }
+  },
+  "additionalProperties": false
+}

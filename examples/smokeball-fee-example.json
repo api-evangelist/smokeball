@@ -1,0 +1,13 @@
+{
+  "id": "e1f2a3b4-c5d6-7890-ef01-890123456789",
+  "matterId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+  "staffId": "c3d4e5f6-a7b8-9012-cdef-123456789012",
+  "description": "Legal research on contract enforceability",
+  "date": "2024-01-20T00:00:00Z",
+  "quantity": 2.5,
+  "rate": 350.0,
+  "amount": 875.0,
+  "feeType": "TimeEntry",
+  "activityCode": "RES",
+  "isBillable": true
+}

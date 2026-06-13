@@ -1,0 +1,126 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/smokeball/json-schema/smokeball-expensedto.json",
+  "title": "Smokeball ExpenseDto",
+  "type": "object",
+  "properties": {
+    "updatedByUserId": {
+      "type": "string",
+      "description": "Unique identifier of the user updating the expense.\r\n\r\nThis field is reserved for server-to-server operations.",
+      "nullable": true,
+      "example": "750eb5c5-ac0b-7d11-4997-e0ce9d8896c8"
+    },
+    "staffId": {
+      "type": "string",
+      "description": "Unique identifier of the associated staff member.\r\n\r\nWhen StaffId is not provided, the API will attempt to match your User Id to a Staff Id automatically.",
+      "nullable": true,
+      "example": "47efff74-3e4b-45b3-bddf-affc6649db0b"
+    },
+    "invoiceId": {
+      "type": "string",
+      "description": "Unique identifier of the associated invoice.",
+      "nullable": true,
+      "example": "fdb766bc-eb20-4bc1-9417-08b51a7b2286"
+    },
+    "expenseDate": {
+      "type": "string",
+      "description": "The date of the expense.",
+      "format": "date-time",
+      "example": "2022-07-01"
+    },
+    "activityCode": {
+      "type": "string",
+      "description": "The activity code associated to the expense.",
+      "nullable": true,
+      "example": "PRT"
+    },
+    "subject": {
+      "type": "string",
+      "description": "The subject - this should be a short description of the expense.",
+      "nullable": true,
+      "example": "Review contract"
+    },
+    "description": {
+      "type": "string",
+      "description": "Optional detailed description of the expense.",
+      "nullable": true,
+      "example": "Print documents"
+    },
+    "costType": {
+      "type": "string",
+      "description": "The cost type of the expense.\r\n\r\n* Hard - Direct cost such as travel, accommodation, or materials.\r\n\r\n* Soft - Indirect cost such as administrative fees or overhead.",
+      "example": "Hard"
+    },
+    "quantity": {
+      "type": "number",
+      "description": "The quantity of the expense in units (if not applicable, use 1).\r\n\r\nThe expense amount will be calculated as Quantity * Price.",
+      "format": "double",
+      "example": 3
+    },
+    "price": {
+      "type": "number",
+      "description": "The price of the expense in dollars. Limited to 2 decimal places (cents).\r\n\r\nThe expense amount will be calculated as Quantity * Price.",
+      "format": "double",
+      "example": 350.32
+    },
+    "tax": {
+      "type": "number",
+      "description": "Tax amount of the expense in dollars. Only applicable in AU and UK regions.\r\n\r\nWhen TaxOutOfScope or TaxExempt is true, this value must be 0.\r\nWhen TaxZeroRated is true, this value can be greater than 0.",
+      "format": "double",
+      "nullable": true,
+      "example": 90
+    },
+    "outputTax": {
+      "type": "number",
+      "description": "Output tax amount of the expense in dollars. Only applicable in AU and UK regions.\r\n\r\nWhen TaxOutOfScope or TaxZeroRated is true, this value must be 0.\r\nWhen TaxExempt is true, this value can be greater than 0.",
+      "format": "double",
+      "nullable": true,
+      "example": 85
+    },
+    "taxInclusive": {
+      "type": "boolean",
+      "description": "If true, the amount is tax inclusive, otherwise tax exclusive. Only applicable in AU and UK regions.\r\n\r\nTax inclusive means: Amount exc. tax = Amount - Tax, Amount inc. tax = Amount.\r\n\r\nTax exclusive means: Amount exc. tax = Amount, Amount inc. tax = Amount + Tax.\r\n(Amount = Price * Quantity, Tax = value of the Tax field)\r\n\r\nThis field is mutually exclusive with TaxZeroRated, TaxOutOfScope and TaxExempt.",
+      "example": false
+    },
+    "taxZeroRated": {
+      "type": "boolean",
+      "description": "True if the expense is zero-rated for tax purposes. Only supported in UK regions.\r\n\r\nThis field is mutually exclusive with TaxInclusive, TaxOutOfScope and TaxExempt.\r\nWhen true, OutputTax must be 0.",
+      "example": false
+    },
+    "taxOutOfScope": {
+      "type": "boolean",
+      "description": "True if the expense is out of scope for tax purposes. Only supported in UK regions.\r\n\r\nThis field is mutually exclusive with TaxInclusive, TaxZeroRated and TaxExempt.\r\nWhen true, both Tax and OutputTax must be 0.",
+      "example": false
+    },
+    "taxExempt": {
+      "type": "boolean",
+      "description": "True if the expense is exempt from tax.\r\n\r\nThis field is mutually exclusive with TaxInclusive, TaxZeroRated and TaxOutOfScope.\r\nWhen true, Tax must be 0 but OutputTax can be greater than 0.",
+      "example": false
+    },
+    "finalized": {
+      "type": "boolean",
+      "description": "True if the expense has been finalized.",
+      "example": false
+    },
+    "isWrittenOff": {
+      "type": "boolean",
+      "description": "True if the expense is written off. True only allowed if IsBillable is true. \r\n\r\nWritten off expenses will show on an invoice with their amount, but will not be counted in the invoice total.",
+      "example": false
+    },
+    "isBillable": {
+      "type": "boolean",
+      "description": "True if the expense is billable. Non-billable expense will, by default, not be shown on invoices (and, if shown, the amount will be 0).",
+      "example": false
+    },
+    "isInvoicedExternally": {
+      "type": "boolean",
+      "description": "True if the expense is invoiced externally.",
+      "example": false
+    },
+    "assignToFirmOwner": {
+      "type": "boolean",
+      "description": "Assigns expense to a firm owner if true. Ignored if a StaffId is provided.\r\n\r\nNote: If there are multiple firm owners, it is not guaranteed that the same firm owner will be assigned everytime."
+    }
+  },
+  "additionalProperties": false
+}

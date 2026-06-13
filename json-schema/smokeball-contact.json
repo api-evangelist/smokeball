@@ -1,0 +1,103 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/smokeball/json-schema/smokeball-contact.json",
+  "title": "Smokeball Contact",
+  "type": "object",
+  "properties": {
+    "href": {
+      "type": "string",
+      "nullable": true
+    },
+    "relation": {
+      "type": "string",
+      "nullable": true
+    },
+    "method": {
+      "type": "string",
+      "default": "GET",
+      "nullable": true
+    },
+    "self": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Link"
+        }
+      ],
+      "nullable": true
+    },
+    "id": {
+      "type": "string",
+      "description": "Unique identifier of the contact.",
+      "nullable": true,
+      "example": "b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2"
+    },
+    "externalSystemId": {
+      "type": "string",
+      "description": "External system id for the contact.",
+      "nullable": true,
+      "example": "EXT01"
+    },
+    "versionId": {
+      "type": "string",
+      "description": "Version id of the record.",
+      "nullable": true,
+      "example": "750eb5c5-ac0b-7d11-4997-e0ce9d8896c8"
+    },
+    "person": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Person"
+        }
+      ],
+      "description": "Contact person details (if applicable).",
+      "nullable": true
+    },
+    "company": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Company"
+        }
+      ],
+      "description": "Contact company details (if applicable).",
+      "nullable": true
+    },
+    "trust": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Trust"
+        }
+      ],
+      "description": "Contact trust details (if applicable).\r\n\r\nNote that Trust is only supported in the US. It is not available in other regions.",
+      "nullable": true
+    },
+    "groupOfPeople": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/GroupOfPeople"
+        }
+      ],
+      "description": "Contact group details (if applicable).",
+      "nullable": true
+    },
+    "isDeleted": {
+      "type": "boolean",
+      "description": "Returns true if the contact is deleted.",
+      "example": true
+    },
+    "lastUpdated": {
+      "type": "integer",
+      "description": "Last updated timestamp.",
+      "format": "int64",
+      "example": 637847425252027400
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/Tag"
+      },
+      "description": "Set of contact's tags.",
+      "nullable": true
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,12 @@
+{
+  "blogFeeds": [
+    {
+      "name": "Smokeball Legal Resources Blog",
+      "url": "https://www.smokeball.com/blog",
+      "rssUrl": "https://www.smokeball.com/blog/rss.xml",
+      "description": "Legal practice management insights, law firm business tips, technology guides, and compliance updates from Smokeball.",
+      "lastFetched": null,
+      "posts": []
+    }
+  ]
+}

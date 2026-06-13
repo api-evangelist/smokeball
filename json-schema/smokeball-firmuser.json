@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/smokeball/json-schema/smokeball-firmuser.json",
+  "title": "Smokeball FirmUser",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "nullable": true
+    },
+    "href": {
+      "type": "string",
+      "nullable": true
+    },
+    "relation": {
+      "type": "string",
+      "nullable": true
+    },
+    "method": {
+      "type": "string",
+      "default": "GET",
+      "nullable": true
+    },
+    "self": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Link"
+        }
+      ],
+      "nullable": true
+    },
+    "staffId": {
+      "type": "string",
+      "description": "Unique identifier of the staff member.",
+      "nullable": true,
+      "example": "750eb5c5-ac0b-7d11-4997-e0ce9d8896c8"
+    },
+    "userId": {
+      "type": "string",
+      "description": "Unique identifier of the user.",
+      "nullable": true,
+      "example": "b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2"
+    },
+    "isFormerUser": {
+      "type": "boolean",
+      "description": "Returns true if this user is a former user.",
+      "example": false
+    }
+  },
+  "additionalProperties": false
+}

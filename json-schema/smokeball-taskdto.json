@@ -1,0 +1,99 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/smokeball/json-schema/smokeball-taskdto.json",
+  "title": "Smokeball TaskDto",
+  "required": [
+    "staffId"
+  ],
+  "type": "object",
+  "properties": {
+    "matterId": {
+      "type": "string",
+      "description": "Unique identifier of the matter associated to the task.",
+      "nullable": true,
+      "example": "750eb5c5-ac0b-7d11-4997-e0ce9d8896c8"
+    },
+    "staffId": {
+      "minLength": 1,
+      "type": "string",
+      "description": "Unique identifier of the associated staff member creating or updating the task.",
+      "example": "750eb5c5-ac0b-7d11-4997-e0ce9d8896c8"
+    },
+    "completedByStaffId": {
+      "type": "string",
+      "description": "Unique identifier of the associated staff member completing the task.",
+      "nullable": true,
+      "example": "750eb5c5-ac0b-7d11-4997-e0ce9d8896c8"
+    },
+    "assigneeIds": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Unique identifier(s) of the associated staff member(s) assigned to the task.",
+      "nullable": true
+    },
+    "subject": {
+      "type": "string",
+      "description": "The subject - this should be a short description of the task.",
+      "nullable": true,
+      "example": "Review contract for John Smith"
+    },
+    "note": {
+      "type": "string",
+      "description": "Notes on the task.",
+      "nullable": true,
+      "example": "Contract needs to be reviewed and discussed with John"
+    },
+    "isCompleted": {
+      "type": "boolean",
+      "description": "True when the task is completed.",
+      "example": false
+    },
+    "categories": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Categories for the task.",
+      "nullable": true
+    },
+    "completedDate": {
+      "type": "string",
+      "description": "**Deprecated.** Use `CompletedDateOnly` instead.\n\nCompleted date of the task in UTC.\r\nIf not provided and IsCompleted is set to true, the current date will be used.",
+      "format": "date-time",
+      "nullable": true,
+      "example": "2020-02-15T13:00:00Z",
+      "deprecated": true
+    },
+    "completedDateOnly": {
+      "type": "string",
+      "description": "Completed date of the task. Takes precendence over CompletedDate if set.\r\nIf not provided and IsCompleted is set to true, the current date will be used.\n\nAny time/timezone information will be discarded\nand only the date portion will be considered.",
+      "format": "date-time",
+      "nullable": true,
+      "example": "2020-02-15"
+    },
+    "dueDate": {
+      "type": "string",
+      "description": "**Deprecated.** Use `DueDateOnly` instead.\n\nDue date of the task in UTC.",
+      "format": "date-time",
+      "nullable": true,
+      "example": "2020-02-15T13:00:00Z",
+      "deprecated": true
+    },
+    "dueDateOnly": {
+      "type": "string",
+      "description": "Due date of the task. Takes precendence over DueDate if set.\n\nAny time/timezone information will be discarded\nand only the date portion will be considered.",
+      "format": "date-time",
+      "nullable": true,
+      "example": "2020-02-15"
+    },
+    "duration": {
+      "type": "string",
+      "description": "Duration of the task in ISO 8601 duration format.",
+      "nullable": true,
+      "example": "PT4H33M"
+    }
+  },
+  "additionalProperties": false
+}

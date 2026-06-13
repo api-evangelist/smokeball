@@ -1,0 +1,116 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/smokeball/json-schema/smokeball-bankaccount.json",
+  "title": "Smokeball BankAccount",
+  "type": "object",
+  "properties": {
+    "href": {
+      "type": "string",
+      "nullable": true
+    },
+    "relation": {
+      "type": "string",
+      "nullable": true
+    },
+    "method": {
+      "type": "string",
+      "default": "GET",
+      "nullable": true
+    },
+    "self": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Link"
+        }
+      ],
+      "nullable": true
+    },
+    "id": {
+      "type": "string",
+      "description": "Unique identifier of the bank account.",
+      "nullable": true,
+      "example": "b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2"
+    },
+    "type": {
+      "type": "string",
+      "description": "The type of the bank account (Operating, Trust, Credit, ControlledMoney).",
+      "example": "Trust"
+    },
+    "status": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/AccountState"
+        }
+      ],
+      "description": "The status of the account (Open, Closed)."
+    },
+    "matter": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Link"
+        }
+      ],
+      "description": "The Matter associated to the account. \r\n\r\nApplies to 'ControlledMoney' accounts only.",
+      "nullable": true
+    },
+    "accountType": {
+      "type": "integer",
+      "description": "The type of the bank account (Operating = 0, Trust = 1, Credit = 2, ControlledMoney = 3).\r\n\r\nThis field is deprecated and scheduled for removal - use the Type field instead.",
+      "format": "int32",
+      "example": 0
+    },
+    "accountName": {
+      "type": "string",
+      "description": "Account Name.",
+      "nullable": true,
+      "example": "John Smith"
+    },
+    "accountNumber": {
+      "type": "string",
+      "description": "Account Number.",
+      "nullable": true,
+      "example": "10436489"
+    },
+    "bankName": {
+      "type": "string",
+      "description": "Bank Name.",
+      "nullable": true,
+      "example": "Commonwealth Bank"
+    },
+    "branchNumber": {
+      "type": "string",
+      "description": "Branch Number.",
+      "nullable": true,
+      "example": "062201"
+    },
+    "branchName": {
+      "type": "string",
+      "description": "Branch Name.",
+      "nullable": true,
+      "example": "Sydney"
+    },
+    "balance": {
+      "type": "number",
+      "description": "Total balance of the bank account.",
+      "format": "double",
+      "example": 1000
+    },
+    "contactBalances": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/BankAccountContactBalance"
+      },
+      "description": "List of contact balances.\r\n\r\nIf balances are stored by matter, not by contact, then there can be\r\na contact balance with no contact id. In this case, MatterBalances are used instead.\r\n\r\nOnly supported in US.",
+      "nullable": true
+    },
+    "matterBalances": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/BankAccountMatterBalance"
+      },
+      "description": "List of matter balances.\r\n\r\nA matter balance will be equal to the sum of all contact balances with the same MatterId.",
+      "nullable": true
+    }
+  },
+  "additionalProperties": false
+}

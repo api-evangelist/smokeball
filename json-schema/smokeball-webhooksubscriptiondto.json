@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/smokeball/json-schema/smokeball-webhooksubscriptiondto.json",
+  "title": "Smokeball WebhookSubscriptionDto",
+  "type": "object",
+  "properties": {
+    "key": {
+      "type": "string",
+      "description": "Unique key used for creating signature header in webhook notification requests.",
+      "nullable": true,
+      "example": "da4e7fd1-5394-4ca9-b1c6-e18c4e2bf262"
+    },
+    "name": {
+      "type": "string",
+      "description": "Name or description of the webhook subscription.",
+      "nullable": true,
+      "example": "Listen to matter and contact changes"
+    },
+    "eventTypes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "The event types that the webhook subscription should be subscribed to.",
+      "nullable": true,
+      "example": [
+        "matter.updated",
+        "contact.created"
+      ]
+    },
+    "eventNotificationUrl": {
+      "type": "string",
+      "description": "The uri to notify when an event has occurred.",
+      "nullable": true,
+      "example": "http://yourdomain.com/notify"
+    }
+  },
+  "additionalProperties": false
+}

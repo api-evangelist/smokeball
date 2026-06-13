@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/smokeball/json-schema/smokeball-roledto.json",
+  "title": "Smokeball RoleDto",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Name of the role.",
+      "nullable": true,
+      "example": "Provider"
+    },
+    "displayName": {
+      "type": "string",
+      "description": "Display Name of the role.",
+      "nullable": true,
+      "example": "Medical Provider"
+    },
+    "description": {
+      "type": "string",
+      "description": "Description of the role.",
+      "nullable": true,
+      "example": "Client"
+    },
+    "contactId": {
+      "type": "string",
+      "description": "Unique identifier of the contact.",
+      "nullable": true,
+      "example": "c85d28cb-a760-4627-aa59-0a853c2e65ed"
+    },
+    "representativeIds": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of associated representative contact ids.",
+      "nullable": true,
+      "example": [
+        "776e778f-83df-454a-b344-768a862a7e67"
+      ]
+    },
+    "isMatterItemRequired": {
+      "type": "boolean",
+      "description": "Boolean flag indicating if matter item is required."
+    },
+    "relationships": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/RelationshipDto"
+      },
+      "description": "List if relationships associated with the role.",
+      "nullable": true
+    }
+  },
+  "additionalProperties": false
+}

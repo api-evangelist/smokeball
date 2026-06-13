@@ -1,0 +1,268 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/smokeball/json-schema/smokeball-matter.json",
+  "title": "Smokeball Matter",
+  "type": "object",
+  "properties": {
+    "href": {
+      "type": "string",
+      "nullable": true
+    },
+    "relation": {
+      "type": "string",
+      "nullable": true
+    },
+    "method": {
+      "type": "string",
+      "default": "GET",
+      "nullable": true
+    },
+    "self": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Link"
+        }
+      ],
+      "nullable": true
+    },
+    "id": {
+      "type": "string",
+      "description": "Unique identifier of the matter.",
+      "nullable": true,
+      "example": "b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2"
+    },
+    "externalSystemId": {
+      "type": "string",
+      "description": "External system id for the matter.",
+      "nullable": true,
+      "example": "EXT01"
+    },
+    "versionId": {
+      "type": "string",
+      "description": "Version id of the record. This can be used in the UpdatedSince query parameter.",
+      "nullable": true,
+      "example": "637771038395217729"
+    },
+    "number": {
+      "type": "string",
+      "description": "Human-friendly number assigned to matter.",
+      "nullable": true,
+      "example": "FUS-124"
+    },
+    "title": {
+      "type": "string",
+      "description": "Title of the matter.",
+      "nullable": true,
+      "example": "AM-0323-0005 - Smith - Sale - Jones"
+    },
+    "matterType": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Link"
+        }
+      ],
+      "description": "Hypermedia link of the associated matter type.",
+      "nullable": true
+    },
+    "clients": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/Link"
+      },
+      "description": "List of hypermedia links of 'Client' contacts associated with the matter.",
+      "nullable": true
+    },
+    "otherSides": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/Link"
+      },
+      "description": "List of hypermedia links of 'OtherSide' contacts associated with the matter.",
+      "nullable": true
+    },
+    "description": {
+      "type": "string",
+      "description": "Brief description of the matter.",
+      "nullable": true,
+      "example": "This is a brief description for the matter"
+    },
+    "status": {
+      "type": "string",
+      "description": "Current status of the matter.\r\n\r\nPossible values: Open, Pending, Closed, Deleted or Cancelled.",
+      "nullable": true,
+      "example": "Open"
+    },
+    "personResponsible": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Link"
+        }
+      ],
+      "description": "Hypermedia link of the person responsible for the matter (if applicable).",
+      "nullable": true
+    },
+    "personAssisting": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Link"
+        }
+      ],
+      "description": "Hypermedia link of the person assisting in the matter (if applicable).",
+      "nullable": true
+    },
+    "personAssistingStaffs": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/Link"
+      },
+      "description": "List of hypermedia links of additional person assisting staff members associated with the matter.",
+      "nullable": true
+    },
+    "originatingStaff": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Link"
+        }
+      ],
+      "description": "Hypermedia link of the originating attorney (if in US) or introducer (if in AU) of the matter.",
+      "nullable": true
+    },
+    "originatingStaffs": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/Link"
+      },
+      "description": "List of hypermedia links of additional originating (if in US) or introducer (if in AU) staff members associated with the matter.",
+      "nullable": true
+    },
+    "splitOriginatingStaffSettings": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/SplitMatterStaffSettings"
+        }
+      ],
+      "description": "Settings for splitting originating staff members on a matter.",
+      "nullable": true
+    },
+    "supervisor": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Link"
+        }
+      ],
+      "description": "Hypermedia link of the supervisor of the matter.\r\n\r\nOnly supported in the UK.",
+      "nullable": true
+    },
+    "clientCode": {
+      "type": "string",
+      "description": "Associates an external client code to this matter.\r\n\r\nOnly supported in AU and UK.",
+      "nullable": true,
+      "example": "Client A"
+    },
+    "openedDate": {
+      "type": "string",
+      "description": "Date the matter was opened.",
+      "format": "date-time",
+      "nullable": true,
+      "example": "2022-04-23T14:00:00Z"
+    },
+    "closedDate": {
+      "type": "string",
+      "description": "Date the matter was closed.",
+      "format": "date-time",
+      "nullable": true,
+      "example": "2022-04-23T14:00:00Z"
+    },
+    "leadOpenedDate": {
+      "type": "string",
+      "description": "Date the lead was opened.\r\n\r\nOnly applies if isLead is true.",
+      "format": "date-time",
+      "nullable": true,
+      "example": "2022-04-23T14:00:00Z"
+    },
+    "leadClosedDate": {
+      "type": "string",
+      "description": "Date the lead was closed.\r\n\r\nOnly applies if isLead is true.",
+      "format": "date-time",
+      "nullable": true,
+      "example": "2022-04-23T14:00:00Z"
+    },
+    "leadClosedReason": {
+      "type": "string",
+      "description": "Reason the lead was closed.\r\n\r\nOnly applies if isLead is true.",
+      "nullable": true,
+      "example": "No longer interested"
+    },
+    "isLead": {
+      "type": "boolean",
+      "description": "Boolean flag indicating if the matter is a lead.",
+      "example": false
+    },
+    "branch": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Link"
+        }
+      ],
+      "description": "Hypermedia link of the associated branch.",
+      "nullable": true
+    },
+    "branchProviderId": {
+      "type": "string",
+      "description": "Unique identifier of the associated branch provider.",
+      "nullable": true,
+      "example": "Smokeball"
+    },
+    "referralType": {
+      "type": "string",
+      "description": "The referral type of the matter.",
+      "nullable": true
+    },
+    "referrer": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Link"
+        }
+      ],
+      "description": "The referrer contact of the matter.",
+      "nullable": true
+    },
+    "referralAgreementFeeType": {
+      "type": "string",
+      "description": "The referral agreement fee type.",
+      "nullable": true
+    },
+    "referralAgreementFee": {
+      "type": "number",
+      "description": "The referral agreement fee value.",
+      "format": "double",
+      "nullable": true
+    },
+    "referralAgreementFeeComment": {
+      "type": "string",
+      "description": "The referral agreement fee comment.",
+      "nullable": true
+    },
+    "items": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/IMatterItem"
+        },
+        "nullable": true
+      },
+      "description": "Items associated with the matter.",
+      "nullable": true
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/MatterTag"
+      },
+      "description": "Tags associated with the matter.",
+      "nullable": true
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/smokeball/json-schema/smokeball-tag.json",
+  "title": "Smokeball Tag",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Identifier of the tag. Role tags do not have an identifier.",
+      "nullable": true
+    },
+    "name": {
+      "type": "string",
+      "description": "Name of tag.",
+      "nullable": true
+    },
+    "type": {
+      "type": "string",
+      "description": "Type of tag. Accepted values are 'Role' or 'Custom'",
+      "example": "Custom"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Represents a tag with an identifier, name, and type."
+}

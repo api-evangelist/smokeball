@@ -1,0 +1,92 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/smokeball/json-schema/smokeball-mattertype.json",
+  "title": "Smokeball MatterType",
+  "type": "object",
+  "properties": {
+    "href": {
+      "type": "string",
+      "nullable": true
+    },
+    "relation": {
+      "type": "string",
+      "nullable": true
+    },
+    "method": {
+      "type": "string",
+      "default": "GET",
+      "nullable": true
+    },
+    "self": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Link"
+        }
+      ],
+      "nullable": true
+    },
+    "id": {
+      "type": "string",
+      "description": "Unique identifier of the matter type.",
+      "nullable": true,
+      "example": "009f778f-83df-454a-b344-768a862a7e55"
+    },
+    "versionId": {
+      "type": "string",
+      "description": "Version id of the record.",
+      "nullable": true,
+      "example": "832e778f-83df-454a-b344-768a862a7e67"
+    },
+    "name": {
+      "type": "string",
+      "description": "Name of the matter type.",
+      "nullable": true,
+      "example": "Federal Litigation"
+    },
+    "category": {
+      "type": "string",
+      "description": "Name of the category to which the matter type belongs.",
+      "nullable": true,
+      "example": "Litigation"
+    },
+    "type": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/TypeCategory"
+        }
+      ],
+      "description": "Name of the category type to which the matter type belongs (i.e. MatterType or LeadType).\r\n            \r\nPossible values: Matter Type = 0, Lead Type = 1.",
+      "example": 0
+    },
+    "representativeOptions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of possible representative types for the matter type.",
+      "nullable": true,
+      "example": [
+        "Applicant",
+        "Respondent"
+      ]
+    },
+    "location": {
+      "type": "string",
+      "description": "State to which the matter type belongs.",
+      "nullable": true,
+      "example": "Litigation"
+    },
+    "isDeleted": {
+      "type": "boolean",
+      "description": "Returns true if the matter type is deleted.\r\n\r\nDeleted matter types cannot be used when creating new leads/matters."
+    },
+    "items": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/MatterListItem"
+      },
+      "nullable": true
+    }
+  },
+  "additionalProperties": false
+}

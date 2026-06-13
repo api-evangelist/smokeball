@@ -1,0 +1,213 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/smokeball/json-schema/smokeball-matterdto.json",
+  "title": "Smokeball MatterDto",
+  "type": "object",
+  "properties": {
+    "externalSystemId": {
+      "type": "string",
+      "description": "External system id for the matter.",
+      "nullable": true,
+      "example": "EXT01"
+    },
+    "number": {
+      "type": "string",
+      "description": "Human-friendly number assigned to matter.",
+      "nullable": true,
+      "example": "FUS-124"
+    },
+    "matterTypeId": {
+      "type": "string",
+      "description": "Unique identifier of the matter type associated with the matter.\r\n            \r\nMatter types define what information can be saved to the matter, relevant to that area of law and state / location.\r\n            \r\nA pre-configured list of matter types can be obtained via the 'GET /mattertypes' API.\r\n            \r\n'Lead' matter types are different from the standard matter types used when creating a 'Matter'.\r\n            \r\nUse the 'Type' query parameter in the 'GET /mattertypes' API call to get 'Lead' specific matter types.",
+      "nullable": true,
+      "example": "009f778f-83df-454a-b344-768a862a7e55"
+    },
+    "clientIds": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of 'Client' contact id's associated with the matter.",
+      "nullable": true,
+      "example": [
+        "832e778f-83df-454a-b344-768a862a7e67"
+      ]
+    },
+    "otherSideIds": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of 'OtherSide' contact id's associated with the matter.",
+      "nullable": true,
+      "example": [
+        "776e778f-83df-454a-b344-768a862a6e58"
+      ]
+    },
+    "branchId": {
+      "type": "string",
+      "description": "Unique identifier of the associated branch.",
+      "nullable": true,
+      "example": "dd4e4381-b6a0-4c64-8feb-e8ea8016ea42"
+    },
+    "branchProviderId": {
+      "type": "string",
+      "description": "Unique identifier of the associated branch provider.",
+      "nullable": true,
+      "example": "Smokeball"
+    },
+    "clientRole": {
+      "type": "string",
+      "description": "'Client' matter type representative option for the matter.\r\n\r\nIf unsure, this can be left empty and the default Client role will be used.",
+      "nullable": true,
+      "example": "Buyer"
+    },
+    "otherSideRole": {
+      "type": "string",
+      "description": "'OtherSide' matter type representative option for the matter.\r\n\r\nIf unsure, this can be left empty and the default OtherSide role will be used.",
+      "nullable": true,
+      "example": "Seller"
+    },
+    "description": {
+      "type": "string",
+      "description": "Brief description of the matter.",
+      "nullable": true,
+      "example": "This is a brief description for the matter"
+    },
+    "status": {
+      "type": "string",
+      "description": "Current status of matter.\r\n\r\nPossible values: Open, Pending, Closed, Deleted or Cancelled.",
+      "nullable": true,
+      "example": "Open"
+    },
+    "openedDate": {
+      "type": "string",
+      "description": "Date the matter was opened. This can be backdated if required.",
+      "format": "date-time",
+      "nullable": true,
+      "example": "2022-04-23T14:00:00Z"
+    },
+    "closedDate": {
+      "type": "string",
+      "description": "Date the matter was closed. This can be backdated if required.",
+      "format": "date-time",
+      "nullable": true,
+      "example": "2022-04-23T14:00:00Z"
+    },
+    "leadOpenedDate": {
+      "type": "string",
+      "description": "Date the lead was opened. This can be backdated if required.\r\n\r\nOnly applies if isLead is true.",
+      "format": "date-time",
+      "nullable": true,
+      "example": "2022-04-23T14:00:00Z"
+    },
+    "leadClosedDate": {
+      "type": "string",
+      "description": "Date the lead was closed. This can be backdated if required.\r\n\r\nOnly applies if isLead is true.",
+      "format": "date-time",
+      "nullable": true,
+      "example": "2022-04-23T14:00:00Z"
+    },
+    "leadClosedReason": {
+      "type": "string",
+      "description": "Reason the lead was closed.\r\n\r\nOnly applies if isLead is true.",
+      "nullable": true,
+      "example": "No longer interested"
+    },
+    "referralType": {
+      "type": "string",
+      "description": "Referral Type of the matter.\r\n\r\nCustom Referral Types are also supported, the name or id of the Custom Referral Type can be used. If the name is used, it is looked up and stored as the id.\r\n\r\nSee the Referral Types API for retrieval of all valid Referral Types.\r\n\r\nPossible values may also differ per region.",
+      "nullable": true,
+      "example": "Google"
+    },
+    "referrerId": {
+      "type": "string",
+      "description": "Contact id of the person that referred the matter.",
+      "nullable": true,
+      "example": "97bbe49f-6460-4bfc-b287-34ddfdbb81ef"
+    },
+    "referralAgreementFeeType": {
+      "type": "string",
+      "description": "The referral agreement fee type.\r\n\r\nPossible values: %, Flat fee, Other",
+      "nullable": true
+    },
+    "referralAgreementFee": {
+      "type": "number",
+      "description": "The referral agreement fee value.",
+      "format": "double",
+      "nullable": true
+    },
+    "referralAgreementFeeComment": {
+      "type": "string",
+      "description": "The referral agreement fee comment.",
+      "nullable": true
+    },
+    "personResponsibleStaffId": {
+      "type": "string",
+      "description": "Staff id of the person responsible for the matter (if applicable).",
+      "nullable": true,
+      "example": "c85d28cb-a760-4627-aa59-0a853c2e65ed"
+    },
+    "personAssistingStaffId": {
+      "type": "string",
+      "description": "Staff id of the person assisting in the matter (if applicable).",
+      "nullable": true,
+      "example": "c85d28cb-a760-4627-aa59-0a853c2e65ed"
+    },
+    "personAssistingStaffIds": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Staff ids of the other persons assisting in the matter (if applicable).",
+      "nullable": true,
+      "example": [
+        "c85d28cb-a760-4627-aa59-0a853c2e65ed"
+      ]
+    },
+    "originatingStaffId": {
+      "type": "string",
+      "description": "Staff id of the originating attorney (if in US) or an Introducer (if in AU)",
+      "nullable": true,
+      "example": "c85d28cb-a760-4627-aa59-0a853c2e65ed"
+    },
+    "originatingStaffIds": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Staff ids of the other originating attorneys (if in US) or an Introducer (if in AU)\r\n\r\nRequired when SplitOriginatingStaffSettings is provided and enabled.",
+      "nullable": true,
+      "example": [
+        "c85d28cb-a760-4627-aa59-0a853c2e65ed"
+      ]
+    },
+    "splitOriginatingStaffSettings": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/SplitMatterStaffSettingsDto"
+        }
+      ],
+      "description": "Settings for splitting originating staff members on a matter.\n\nWhen enabled, this allows distribution of originating staff responsibilities across multiple staff members\nusing either equal splits or custom ratios. The staff IDs specified in SplitMatterStaffs must exactly\nmatch the OriginatingStaffIds provided.\n\nValidation rules:\n- OriginatingStaffIds must be provided when this setting is enabled\n- Staff ratios must sum to 10000 (100%) when using UseRatio split method\n- RemainderStaffId must be one of the staff members in the SplitMatterStaffs collection\n- No duplicate staff members allowed",
+      "nullable": true
+    },
+    "supervisorStaffId": {
+      "type": "string",
+      "description": "Staff id of the supervisor of the matter.\r\n\r\nOnly supported in the UK.",
+      "nullable": true,
+      "example": "c85d28cb-a760-4627-aa59-0a853c2e65ed"
+    },
+    "clientCode": {
+      "type": "string",
+      "description": "Associates an external client code to this matter.\r\n\r\nOnly supported in AU and UK.",
+      "nullable": true,
+      "example": "Client A"
+    },
+    "isLead": {
+      "type": "boolean",
+      "description": "Optional boolean flag indicating if a 'Lead' is being created. This must be set to 'true' when creating a 'Lead'.",
+      "example": false
+    }
+  },
+  "additionalProperties": false
+}

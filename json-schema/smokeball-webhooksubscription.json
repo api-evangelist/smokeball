@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/smokeball/json-schema/smokeball-webhooksubscription.json",
+  "title": "Smokeball WebhookSubscription",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "nullable": true
+    },
+    "href": {
+      "type": "string",
+      "nullable": true
+    },
+    "relation": {
+      "type": "string",
+      "nullable": true
+    },
+    "method": {
+      "type": "string",
+      "default": "GET",
+      "nullable": true
+    },
+    "self": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Link"
+        }
+      ],
+      "nullable": true
+    },
+    "accountId": {
+      "type": "string",
+      "description": "Unique identifier of the associated account.",
+      "nullable": true,
+      "example": "da4e7fd1-5394-4ca9-b1c6-e18c4e2bf262"
+    },
+    "name": {
+      "type": "string",
+      "description": "Name or description of the subscription.",
+      "nullable": true,
+      "example": "Listen to matter and contact changes"
+    },
+    "eventTypes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "The event types that the webhook subscription is subscribed to.",
+      "nullable": true,
+      "example": [
+        "matter.updated",
+        "contact.created"
+      ]
+    },
+    "eventNotificationUrl": {
+      "type": "string",
+      "description": "The uri to notify when an event has occurred.",
+      "nullable": true,
+      "example": "http://yourdomain.com/notify"
+    },
+    "createdDateUtc": {
+      "type": "string",
+      "description": "The webhook subscription creation date.",
+      "format": "date-time",
+      "example": "2022-04-23T14:00:00Z"
+    },
+    "updatedDateUtc": {
+      "type": "string",
+      "description": "The webhook subscription last updated date.",
+      "format": "date-time",
+      "example": "2022-04-23T14:00:00Z"
+    },
+    "lastUpdated": {
+      "type": "integer",
+      "description": "Last updated timestamp",
+      "format": "int64",
+      "example": 637847425252027400
+    }
+  },
+  "additionalProperties": false
+}

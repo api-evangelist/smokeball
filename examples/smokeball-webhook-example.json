@@ -1,0 +1,13 @@
+{
+  "id": "d0e1f2a3-b4c5-6789-de01-789012345678",
+  "url": "https://your-app.example.com/webhooks/smokeball",
+  "topics": [
+    "matters/created",
+    "matters/updated",
+    "contacts/created",
+    "tasks/completed"
+  ],
+  "status": "Active",
+  "secret": "your-webhook-signing-secret",
+  "createdDate": "2024-01-01T00:00:00Z"
+}

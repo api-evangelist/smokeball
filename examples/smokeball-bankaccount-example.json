@@ -1,0 +1,10 @@
+{
+  "id": "f2a3b4c5-d6e7-8901-f012-901234567890",
+  "name": "IOLTA Trust Account",
+  "accountType": "Trust",
+  "bankName": "First National Bank",
+  "accountNumber": "****5678",
+  "routingNumber": "071000013",
+  "currency": "USD",
+  "balance": 125000.0
+}

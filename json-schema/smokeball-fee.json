@@ -1,0 +1,243 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/smokeball/json-schema/smokeball-fee.json",
+  "title": "Smokeball Fee",
+  "type": "object",
+  "properties": {
+    "href": {
+      "type": "string",
+      "nullable": true
+    },
+    "relation": {
+      "type": "string",
+      "nullable": true
+    },
+    "method": {
+      "type": "string",
+      "default": "GET",
+      "nullable": true
+    },
+    "self": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Link"
+        }
+      ],
+      "nullable": true
+    },
+    "id": {
+      "type": "string",
+      "description": "Unique identifier of the fee.",
+      "nullable": true,
+      "example": "b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2"
+    },
+    "versionId": {
+      "type": "string",
+      "description": "Unique version identifier of the fee.",
+      "nullable": true,
+      "example": "750eb5c5-ac0b-7d11-4997-e0ce9d8896c8"
+    },
+    "matter": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Link"
+        }
+      ],
+      "description": "The matter associated to the fee.",
+      "nullable": true
+    },
+    "staff": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Link"
+        }
+      ],
+      "description": "The staff member associated to the fee.",
+      "nullable": true
+    },
+    "matterId": {
+      "type": "string",
+      "description": "Deprecated, use Matter.",
+      "nullable": true
+    },
+    "staffId": {
+      "type": "string",
+      "description": "Deprecated, use Staff.",
+      "nullable": true
+    },
+    "createdByUserId": {
+      "type": "string",
+      "description": "Unique identifier of the user that created the fee.",
+      "nullable": true,
+      "example": "750eb5c5-ac0b-7d11-4997-e0ce9d8896c8"
+    },
+    "createdDate": {
+      "type": "string",
+      "description": "Date the fee was created.",
+      "format": "date-time",
+      "example": "2026-04-13T11:00:00Z"
+    },
+    "lastUpdatedByUserId": {
+      "type": "string",
+      "description": "Unique identifier of the user that updated the fee.",
+      "nullable": true,
+      "example": "750eb5c5-ac0b-7d11-4997-e0ce9d8896c8"
+    },
+    "invoiceId": {
+      "type": "string",
+      "description": "Unique identifier of the associated invoice.",
+      "nullable": true,
+      "example": "750eb5c5-ac0b-7d11-4997-e0ce9d8896c8"
+    },
+    "activityCode": {
+      "type": "string",
+      "description": "The activity code associated to the fee.",
+      "nullable": true,
+      "example": "PRT"
+    },
+    "utbmsTaskCode": {
+      "type": "string",
+      "description": "The UTBMS task code associated to the fee, where UTBMS is enabled. Only applicable in US.",
+      "nullable": true,
+      "example": "L110"
+    },
+    "subject": {
+      "type": "string",
+      "description": "The subject - this should be a short description of the fee.",
+      "nullable": true,
+      "example": "Review contract"
+    },
+    "description": {
+      "type": "string",
+      "description": "Optional detailed description of the fee.",
+      "nullable": true,
+      "example": "Print documents"
+    },
+    "feeDate": {
+      "type": "string",
+      "description": "The date of the fee.",
+      "format": "date-time",
+      "example": "2022-07-01"
+    },
+    "feeType": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/FeeType"
+        }
+      ],
+      "description": "The type of the fee (Fixed = 0, Time = 1).",
+      "example": 0
+    },
+    "finalized": {
+      "type": "boolean",
+      "description": "True if the fee has been finalized.",
+      "example": false
+    },
+    "isInvoicedExternally": {
+      "type": "boolean",
+      "description": "True if the fee is invoiced externally.",
+      "example": false
+    },
+    "isWrittenOff": {
+      "type": "boolean",
+      "description": "True if the fee is written off. True only allowed if IsBillable is true.\r\n\r\nWritten off fee will show on an invoice with their amount, but will not be counted in the invoice total.",
+      "example": false
+    },
+    "isBillable": {
+      "type": "boolean",
+      "description": "True if the fee is billable. Non-billable fee will, by default, not be shown on invoices (and, if shown, the amount will be 0).",
+      "nullable": true,
+      "example": false
+    },
+    "tax": {
+      "type": "number",
+      "description": "GST amount of the fee in dollars. Only applicable in AU.",
+      "format": "double",
+      "example": 35
+    },
+    "taxInclusive": {
+      "type": "boolean",
+      "description": "If true, the amount is GST inclusive, otherwise GST exclusive. Only applicable in AU.\r\n\r\nGST inclusive means: Amount exc. GST = Amount - GST, Amount inc. GST = Amount.\r\n\r\nGST exclusive means: Amount exc. GST = Amount, Amount inc. GST = Amount + GST.",
+      "example": false
+    },
+    "taxExempt": {
+      "type": "boolean",
+      "description": "True if the fee is tax exempt. In that case, Tax will always be 0.",
+      "example": false
+    },
+    "taxOutOfScope": {
+      "type": "boolean",
+      "description": "True if the fee is out of scope for tax. In that case, Tax will always be 0.",
+      "example": false
+    },
+    "duration": {
+      "type": "integer",
+      "description": "The duration billed - in minutes.",
+      "format": "int64",
+      "example": 60
+    },
+    "durationWorked": {
+      "type": "integer",
+      "description": "The duration worked - in minutes.",
+      "format": "int64",
+      "nullable": true,
+      "example": 50
+    },
+    "rate": {
+      "type": "number",
+      "description": "The rate of the fee in dollars.",
+      "format": "double",
+      "example": 350
+    },
+    "amount": {
+      "type": "number",
+      "description": "Total amount of the fee in dollars. Calculated using Rate and Duration depending on the fee type.\r\n\r\nThis amount includes tax depending on the TaxInclusive property. See AmountExcTax and AmountIncTax.",
+      "format": "double",
+      "example": 350
+    },
+    "amountExcTax": {
+      "type": "number",
+      "description": "Amount excluding tax in dollars. Calculated from Amount and Tax depending on the TaxInclusive property.\r\n\r\nIf tax is not applicable (outside AU), this will be the same as Amount.",
+      "format": "double",
+      "example": 315
+    },
+    "amountIncTax": {
+      "type": "number",
+      "description": "Amount including tax in dollars. Calculated from Amount and Tax depending on the TaxInclusive property.\r\n\r\nIf tax is not applicable (outside AU), this will be the same as Amount.",
+      "format": "double",
+      "example": 350
+    },
+    "billableAmountExcTax": {
+      "type": "number",
+      "description": "Billable amount excluding tax in dollars. If fee is billable, value will be the same as AmountExcTax. If it's non-billable,\r\nvalue will be 0.\r\n\r\nIf the fee is partially billable (i.e. has source items, some of which are billable and some not),\r\nthis value will contain the amount calculated from billable items only.",
+      "format": "double",
+      "example": 315
+    },
+    "billableTax": {
+      "type": "number",
+      "description": "Billable tax in dollars. If fee is billable, value will be the same as Tax. If it's non-billable,\r\nvalue will be 0.\r\n\r\nIf the fee is partially billable (i.e. has source items, some of which are billable\r\nand some not), this value will contain the tax calculated from billable items only.\r\nIn all other cases, the value will be the same as Tax.",
+      "format": "double",
+      "example": 35
+    },
+    "isDeleted": {
+      "type": "boolean",
+      "description": "True if the fee is deleted.",
+      "example": false
+    },
+    "sourceItems": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/FeeSourceItem"
+      },
+      "description": "The source items on the fee.",
+      "nullable": true
+    },
+    "createdFromActivityId": {
+      "type": "string",
+      "description": "Unique identifier of the Activity used to create the fee, if applicable.",
+      "nullable": true,
+      "example": "504b9f77-20c7-4dee-8227-d3007c8f6cea"
+    }
+  },
+  "additionalProperties": false
+}

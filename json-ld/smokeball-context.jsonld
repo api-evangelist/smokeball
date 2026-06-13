@@ -1,0 +1,277 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "smokeball": "https://docs.smokeball.com/vocab/",
+    "owl": "http://www.w3.org/2002/07/owl#",
+
+    "id": "@id",
+    "type": "@type",
+
+    "Matter": {
+      "@id": "smokeball:Matter",
+      "@context": {
+        "id": {"@id": "schema:identifier", "@type": "xsd:string"},
+        "number": {"@id": "smokeball:matterNumber", "@type": "xsd:string"},
+        "name": {"@id": "schema:name", "@type": "xsd:string"},
+        "description": {"@id": "schema:description", "@type": "xsd:string"},
+        "status": {"@id": "smokeball:matterStatus", "@type": "xsd:string"},
+        "openedDate": {"@id": "schema:startDate", "@type": "xsd:dateTime"},
+        "closedDate": {"@id": "schema:endDate", "@type": "xsd:dateTime"},
+        "matterTypeId": {"@id": "smokeball:matterType", "@type": "@id"},
+        "clientId": {"@id": "schema:client", "@type": "@id"},
+        "staffResponsibleId": {"@id": "schema:accountablePerson", "@type": "@id"},
+        "tags": {"@id": "schema:keywords"},
+        "links": {"@id": "schema:url"}
+      }
+    },
+
+    "Contact": {
+      "@id": "smokeball:Contact",
+      "@context": {
+        "id": {"@id": "schema:identifier", "@type": "xsd:string"},
+        "type": {"@id": "schema:additionalType", "@type": "xsd:string"},
+        "person": {"@id": "schema:Person"},
+        "company": {"@id": "schema:Organization"},
+        "tags": {"@id": "schema:keywords"},
+        "relations": {"@id": "schema:knows"}
+      }
+    },
+
+    "Person": {
+      "@id": "schema:Person",
+      "@context": {
+        "firstName": {"@id": "schema:givenName", "@type": "xsd:string"},
+        "lastName": {"@id": "schema:familyName", "@type": "xsd:string"},
+        "dateOfBirth": {"@id": "schema:birthDate", "@type": "xsd:date"},
+        "email": {"@id": "schema:email", "@type": "xsd:string"},
+        "phone": {"@id": "schema:telephone"},
+        "address": {"@id": "schema:address"}
+      }
+    },
+
+    "Company": {
+      "@id": "schema:Organization",
+      "@context": {
+        "name": {"@id": "schema:name", "@type": "xsd:string"},
+        "email": {"@id": "schema:email", "@type": "xsd:string"},
+        "phone": {"@id": "schema:telephone"},
+        "address": {"@id": "schema:address"},
+        "abn": {"@id": "schema:taxID", "@type": "xsd:string"}
+      }
+    },
+
+    "Address": {
+      "@id": "schema:PostalAddress",
+      "@context": {
+        "addressLine1": {"@id": "schema:streetAddress", "@type": "xsd:string"},
+        "addressLine2": {"@id": "smokeball:addressLine2", "@type": "xsd:string"},
+        "city": {"@id": "schema:addressLocality", "@type": "xsd:string"},
+        "state": {"@id": "schema:addressRegion", "@type": "xsd:string"},
+        "zipCode": {"@id": "schema:postalCode", "@type": "xsd:string"},
+        "country": {"@id": "schema:addressCountry", "@type": "xsd:string"}
+      }
+    },
+
+    "Fee": {
+      "@id": "smokeball:Fee",
+      "@context": {
+        "id": {"@id": "schema:identifier", "@type": "xsd:string"},
+        "matterId": {"@id": "smokeball:matter", "@type": "@id"},
+        "staffId": {"@id": "schema:performer", "@type": "@id"},
+        "description": {"@id": "schema:description", "@type": "xsd:string"},
+        "date": {"@id": "schema:dateCreated", "@type": "xsd:dateTime"},
+        "quantity": {"@id": "smokeball:quantity", "@type": "xsd:decimal"},
+        "rate": {"@id": "schema:price", "@type": "xsd:decimal"},
+        "amount": {"@id": "smokeball:amount", "@type": "xsd:decimal"},
+        "activityCode": {"@id": "smokeball:activityCode", "@type": "xsd:string"},
+        "isBillable": {"@id": "smokeball:isBillable", "@type": "xsd:boolean"}
+      }
+    },
+
+    "Expense": {
+      "@id": "smokeball:Expense",
+      "@context": {
+        "id": {"@id": "schema:identifier", "@type": "xsd:string"},
+        "matterId": {"@id": "smokeball:matter", "@type": "@id"},
+        "description": {"@id": "schema:description", "@type": "xsd:string"},
+        "date": {"@id": "schema:dateCreated", "@type": "xsd:dateTime"},
+        "amount": {"@id": "smokeball:amount", "@type": "xsd:decimal"},
+        "isBillable": {"@id": "smokeball:isBillable", "@type": "xsd:boolean"}
+      }
+    },
+
+    "Invoice": {
+      "@id": "schema:Invoice",
+      "@context": {
+        "id": {"@id": "schema:identifier", "@type": "xsd:string"},
+        "matterId": {"@id": "smokeball:matter", "@type": "@id"},
+        "invoiceNumber": {"@id": "schema:confirmationNumber", "@type": "xsd:string"},
+        "invoiceDate": {"@id": "schema:dateIssued", "@type": "xsd:dateTime"},
+        "dueDate": {"@id": "schema:paymentDueDate", "@type": "xsd:dateTime"},
+        "status": {"@id": "smokeball:invoiceStatus", "@type": "xsd:string"},
+        "totals": {"@id": "smokeball:invoiceTotals"},
+        "debtors": {"@id": "schema:customer"}
+      }
+    },
+
+    "BankAccount": {
+      "@id": "schema:BankAccount",
+      "@context": {
+        "id": {"@id": "schema:identifier", "@type": "xsd:string"},
+        "name": {"@id": "schema:name", "@type": "xsd:string"},
+        "accountType": {"@id": "smokeball:accountType", "@type": "xsd:string"},
+        "bankName": {"@id": "smokeball:bankName", "@type": "xsd:string"},
+        "accountNumber": {"@id": "schema:accountId", "@type": "xsd:string"},
+        "currency": {"@id": "schema:currency", "@type": "xsd:string"},
+        "balance": {"@id": "smokeball:balance", "@type": "xsd:decimal"}
+      }
+    },
+
+    "Transaction": {
+      "@id": "schema:MoneyTransfer",
+      "@context": {
+        "id": {"@id": "schema:identifier", "@type": "xsd:string"},
+        "bankAccountId": {"@id": "smokeball:bankAccount", "@type": "@id"},
+        "matterId": {"@id": "smokeball:matter", "@type": "@id"},
+        "description": {"@id": "schema:description", "@type": "xsd:string"},
+        "amount": {"@id": "smokeball:amount", "@type": "xsd:decimal"},
+        "date": {"@id": "schema:dateCreated", "@type": "xsd:dateTime"},
+        "transactionType": {"@id": "smokeball:transactionType", "@type": "xsd:string"}
+      }
+    },
+
+    "Task": {
+      "@id": "schema:Action",
+      "@context": {
+        "id": {"@id": "schema:identifier", "@type": "xsd:string"},
+        "matterId": {"@id": "smokeball:matter", "@type": "@id"},
+        "subject": {"@id": "schema:name", "@type": "xsd:string"},
+        "description": {"@id": "schema:description", "@type": "xsd:string"},
+        "dueDate": {"@id": "schema:endDate", "@type": "xsd:dateTime"},
+        "priority": {"@id": "smokeball:priority", "@type": "xsd:string"},
+        "status": {"@id": "smokeball:taskStatus", "@type": "xsd:string"},
+        "assignedTo": {"@id": "schema:agent", "@type": "@id"},
+        "completedDate": {"@id": "schema:actionStatus"},
+        "subTasks": {"@id": "smokeball:SubTask", "@container": "@list"}
+      }
+    },
+
+    "Event": {
+      "@id": "schema:Event",
+      "@context": {
+        "id": {"@id": "schema:identifier", "@type": "xsd:string"},
+        "matterId": {"@id": "smokeball:matter", "@type": "@id"},
+        "subject": {"@id": "schema:name", "@type": "xsd:string"},
+        "description": {"@id": "schema:description", "@type": "xsd:string"},
+        "startDate": {"@id": "schema:startDate", "@type": "xsd:dateTime"},
+        "endDate": {"@id": "schema:endDate", "@type": "xsd:dateTime"},
+        "location": {"@id": "schema:location", "@type": "xsd:string"},
+        "eventType": {"@id": "schema:eventStatus", "@type": "xsd:string"},
+        "attendees": {"@id": "schema:attendee"}
+      }
+    },
+
+    "Staff": {
+      "@id": "schema:Person",
+      "@context": {
+        "id": {"@id": "schema:identifier", "@type": "xsd:string"},
+        "firstName": {"@id": "schema:givenName", "@type": "xsd:string"},
+        "lastName": {"@id": "schema:familyName", "@type": "xsd:string"},
+        "email": {"@id": "schema:email", "@type": "xsd:string"},
+        "role": {"@id": "schema:jobTitle", "@type": "xsd:string"},
+        "isActive": {"@id": "smokeball:isActive", "@type": "xsd:boolean"}
+      }
+    },
+
+    "Firm": {
+      "@id": "schema:LegalService",
+      "@context": {
+        "id": {"@id": "schema:identifier", "@type": "xsd:string"},
+        "name": {"@id": "schema:name", "@type": "xsd:string"},
+        "address": {"@id": "schema:address"},
+        "phone": {"@id": "schema:telephone", "@type": "xsd:string"},
+        "email": {"@id": "schema:email", "@type": "xsd:string"},
+        "status": {"@id": "smokeball:firmStatus", "@type": "xsd:string"}
+      }
+    },
+
+    "WebhookSubscription": {
+      "@id": "smokeball:WebhookSubscription",
+      "@context": {
+        "id": {"@id": "schema:identifier", "@type": "xsd:string"},
+        "url": {"@id": "schema:url", "@type": "xsd:anyURI"},
+        "topics": {"@id": "smokeball:webhookTopics"},
+        "status": {"@id": "smokeball:webhookStatus", "@type": "xsd:string"},
+        "createdDate": {"@id": "schema:dateCreated", "@type": "xsd:dateTime"}
+      }
+    },
+
+    "Memo": {
+      "@id": "schema:Note",
+      "@context": {
+        "id": {"@id": "schema:identifier", "@type": "xsd:string"},
+        "matterId": {"@id": "smokeball:matter", "@type": "@id"},
+        "subject": {"@id": "schema:name", "@type": "xsd:string"},
+        "body": {"@id": "schema:text", "@type": "xsd:string"},
+        "authorId": {"@id": "schema:author", "@type": "@id"},
+        "createdDate": {"@id": "schema:dateCreated", "@type": "xsd:dateTime"}
+      }
+    },
+
+    "IntakeForm": {
+      "@id": "schema:WebContent",
+      "@context": {
+        "id": {"@id": "schema:identifier", "@type": "xsd:string"},
+        "name": {"@id": "schema:name", "@type": "xsd:string"},
+        "description": {"@id": "schema:description", "@type": "xsd:string"},
+        "category": {"@id": "schema:category", "@type": "xsd:string"},
+        "status": {"@id": "smokeball:formStatus", "@type": "xsd:string"}
+      }
+    },
+
+    "Plugin": {
+      "@id": "schema:SoftwareApplication",
+      "@context": {
+        "id": {"@id": "schema:identifier", "@type": "xsd:string"},
+        "name": {"@id": "schema:name", "@type": "xsd:string"},
+        "description": {"@id": "schema:description", "@type": "xsd:string"},
+        "pluginType": {"@id": "smokeball:pluginType", "@type": "xsd:string"},
+        "version": {"@id": "schema:softwareVersion", "@type": "xsd:string"}
+      }
+    },
+
+    "ActivityCode": {
+      "@id": "smokeball:ActivityCode",
+      "@context": {
+        "id": {"@id": "schema:identifier", "@type": "xsd:string"},
+        "code": {"@id": "smokeball:code", "@type": "xsd:string"},
+        "description": {"@id": "schema:description", "@type": "xsd:string"},
+        "activityRateType": {"@id": "smokeball:activityRateType", "@type": "xsd:string"},
+        "entryType": {"@id": "smokeball:entryType", "@type": "xsd:string"}
+      }
+    },
+
+    "Subscription": {
+      "@id": "schema:Subscription",
+      "@context": {
+        "id": {"@id": "schema:identifier", "@type": "xsd:string"},
+        "tierId": {"@id": "smokeball:tier", "@type": "@id"},
+        "status": {"@id": "smokeball:subscriptionStatus", "@type": "xsd:string"},
+        "currentPeriodStart": {"@id": "schema:startDate", "@type": "xsd:dateTime"},
+        "currentPeriodEnd": {"@id": "schema:endDate", "@type": "xsd:dateTime"},
+        "currency": {"@id": "schema:currency", "@type": "xsd:string"}
+      }
+    },
+
+    "Link": {
+      "@id": "schema:URL",
+      "@context": {
+        "rel": {"@id": "schema:name", "@type": "xsd:string"},
+        "href": {"@id": "schema:url", "@type": "xsd:anyURI"},
+        "type": {"@id": "schema:additionalType", "@type": "xsd:string"}
+      }
+    }
+  }
+}

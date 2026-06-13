@@ -49,6 +49,14 @@ apis:
         url: https://github.com/smokeballdev/api-docs
       - type: OpenAPI
         url: https://docs.smokeball.com/openapi.json
+      - type: OpenAPI
+        url: openapi/smokeball-smokeball-api-openapi.yml
+      - type: JSONSchema
+        url: json-schema/smokeball-schemas.json
+      - type: JSONLDContext
+        url: json-ld/smokeball-context.jsonld
+      - type: Vocabulary
+        url: vocabulary/smokeball-vocabulary.yml
 common:
   - type: Website
     url: https://www.smokeball.com
@@ -60,6 +68,8 @@ common:
     url: https://www.linkedin.com/company/smokeball-legal-software
   - type: Blog
     url: https://www.smokeball.com/blog
+  - type: BlogFeed
+    url: blogs/blogs.json
   - type: Pricing
     url: https://www.smokeball.com/pricing
   - type: StatusPage

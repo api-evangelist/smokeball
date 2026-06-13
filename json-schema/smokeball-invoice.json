@@ -1,0 +1,163 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/smokeball/json-schema/smokeball-invoice.json",
+  "title": "Smokeball Invoice",
+  "type": "object",
+  "properties": {
+    "href": {
+      "type": "string",
+      "nullable": true
+    },
+    "relation": {
+      "type": "string",
+      "nullable": true
+    },
+    "method": {
+      "type": "string",
+      "default": "GET",
+      "nullable": true
+    },
+    "self": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Link"
+        }
+      ],
+      "nullable": true
+    },
+    "id": {
+      "type": "string",
+      "description": "The unique identifier of the invoice.",
+      "nullable": true,
+      "example": "16567e88-784c-470e-8952-e5a70fe2eb0c"
+    },
+    "versionId": {
+      "type": "string",
+      "description": "The unique identifier representing the current version of the invoice.",
+      "nullable": true,
+      "example": "39ffde97-eeeb-4747-bb8f-7c7c10b3c985"
+    },
+    "matter": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Link"
+        }
+      ],
+      "description": "A link to the matter associated with the invoice.",
+      "nullable": true
+    },
+    "matterId": {
+      "type": "string",
+      "description": "The unique identifier of the matter this invoice belongs to.",
+      "nullable": true,
+      "example": "6398a045-509e-49a2-9268-bb8231fa9340"
+    },
+    "lastUpdatedByUserId": {
+      "type": "string",
+      "description": "The unique identifier of the user who last updated the invoice.",
+      "nullable": true,
+      "example": "5fc5ee85-6643-4623-b019-a0dccceafe47"
+    },
+    "description": {
+      "type": "string",
+      "description": "A short description of the invoice contents or purpose.",
+      "nullable": true,
+      "example": "Services provided."
+    },
+    "status": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/InvoiceStatus"
+        }
+      ],
+      "description": "The status of the invoice.\r\n\r\nPossible values: Draft = 0, Final = 1, Paid = 2, Deleted = 3 or Void = 4.",
+      "example": 0
+    },
+    "invoiceNumber": {
+      "type": "integer",
+      "description": "The sequential number assigned to the invoice.",
+      "format": "int64",
+      "nullable": true,
+      "example": 10001
+    },
+    "invoiceTitle": {
+      "type": "string",
+      "description": "The main title of the invoice.",
+      "nullable": true,
+      "example": "My First Invoice"
+    },
+    "invoiceTitleLine2": {
+      "type": "string",
+      "description": "The optional second line of the invoice title.",
+      "nullable": true,
+      "example": "Subtitle"
+    },
+    "issuedDate": {
+      "type": "string",
+      "description": "The date the invoice was issued.",
+      "format": "date-time",
+      "example": "2022-09-16T00:00:00+00:00"
+    },
+    "dueDate": {
+      "type": "string",
+      "description": "The date by which payment for the invoice is due.",
+      "format": "date-time",
+      "example": "2022-09-25T00:00:00+00:00"
+    },
+    "paidDate": {
+      "type": "string",
+      "description": "The date the invoice was fully paid.\r\n\r\nOnly populated if the invoice has been paid in full.",
+      "format": "date-time",
+      "example": "2022-09-20T00:00:00+00:00"
+    },
+    "discount": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Discount"
+        }
+      ],
+      "description": "The discount configuration for the invoice (e.g., fixed or percentage).\r\n\r\nSee InvoiceTotals.Discount for the actual amount discounted.",
+      "nullable": true
+    },
+    "surcharge": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Surcharge"
+        }
+      ],
+      "description": "The surcharge configuration for the invoice (e.g., fixed or percentage).",
+      "nullable": true
+    },
+    "debtors": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/Debtor"
+      },
+      "description": "The list of debtors associated with this invoice.",
+      "nullable": true
+    },
+    "entries": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/InvoicedMatterEntryItem"
+      },
+      "description": "The individual entries (fees or expenses) included in the invoice.",
+      "nullable": true
+    },
+    "waived": {
+      "type": "boolean",
+      "description": "Indicates whether the invoice has been waived.",
+      "example": false
+    },
+    "invoiceTotals": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/InvoiceTotals"
+        }
+      ],
+      "description": "The calculated totals for the invoice, including billed, paid, unpaid, tax, interest, discounts, etc.",
+      "nullable": true
+    }
+  },
+  "additionalProperties": false
+}

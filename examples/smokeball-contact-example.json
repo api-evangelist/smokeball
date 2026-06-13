@@ -1,0 +1,32 @@
+{
+  "id": "b2c3d4e5-f6a7-8901-bcde-f12345678901",
+  "type": "Person",
+  "person": {
+    "firstName": "Jane",
+    "lastName": "Smith",
+    "dateOfBirth": "1980-05-20",
+    "email": "jane.smith@example.com",
+    "phone": {
+      "areaCode": "312",
+      "number": "5550100"
+    },
+    "address": {
+      "addressLine1": "123 Main St",
+      "city": "Chicago",
+      "state": "IL",
+      "zipCode": "60601",
+      "country": "US"
+    }
+  },
+  "tags": [
+    "Client",
+    "VIP"
+  ],
+  "links": [
+    {
+      "rel": "self",
+      "href": "https://api.smokeball.com/contacts/b2c3d4e5-f6a7-8901-bcde-f12345678901",
+      "type": "Contact"
+    }
+  ]
+}

@@ -1,0 +1,182 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/smokeball/json-schema/smokeball-task.json",
+  "title": "Smokeball Task",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "nullable": true
+    },
+    "href": {
+      "type": "string",
+      "nullable": true
+    },
+    "relation": {
+      "type": "string",
+      "nullable": true
+    },
+    "method": {
+      "type": "string",
+      "default": "GET",
+      "nullable": true
+    },
+    "self": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Link"
+        }
+      ],
+      "nullable": true
+    },
+    "matter": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Link"
+        }
+      ],
+      "description": "Matter associated to the task.",
+      "nullable": true
+    },
+    "parentTask": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Link"
+        }
+      ],
+      "description": "The parent task associated to this task. Id is missing if this task is not a sub task.",
+      "nullable": true
+    },
+    "createdBy": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Link"
+        }
+      ],
+      "description": "The staff member who created the task.",
+      "nullable": true
+    },
+    "completedBy": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Link"
+        }
+      ],
+      "description": "The staff member who completed the task.",
+      "nullable": true
+    },
+    "lastUpdatedBy": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Link"
+        }
+      ],
+      "description": "The staff member who last updated the task.",
+      "nullable": true
+    },
+    "assignees": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/Link"
+      },
+      "description": "The staff member(s) assigned to the task.",
+      "nullable": true
+    },
+    "subTasks": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/Link"
+      },
+      "description": "The tasks associated to the task.",
+      "nullable": true
+    },
+    "subject": {
+      "type": "string",
+      "description": "The subject - a short description of the task.",
+      "nullable": true,
+      "example": "Review contract for John Smith"
+    },
+    "note": {
+      "type": "string",
+      "description": "Notes on the task.",
+      "nullable": true,
+      "example": "Contract needs to be reviewed and discussed with John"
+    },
+    "categories": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Categories for the task.",
+      "nullable": true
+    },
+    "dueDate": {
+      "type": "string",
+      "description": "**Deprecated.** Use `DueDateOnly` instead.\n\nThe due date of the task in UTC.",
+      "format": "date-time",
+      "nullable": true,
+      "example": "2020-02-15T13:00:00Z",
+      "deprecated": true
+    },
+    "dueDateOnly": {
+      "type": "string",
+      "description": "The due date of the task.\n\nThe time portion will always be set to 00:00:00\nand should be ignored. Only the date portion is relevant.",
+      "format": "date-time",
+      "nullable": true,
+      "example": "2020-02-15T00:00:00"
+    },
+    "completedDate": {
+      "type": "string",
+      "description": "**Deprecated.** Use `CompletedDateOnly` instead.\n\nWhen the task was completed in UTC.",
+      "format": "date-time",
+      "nullable": true,
+      "example": "2020-02-15T13:00:00Z",
+      "deprecated": true
+    },
+    "completedDateOnly": {
+      "type": "string",
+      "description": "The date when the task was completed.\n\nThe time portion will always be set to 00:00:00\nand should be ignored. Only the date portion is relevant.",
+      "format": "date-time",
+      "nullable": true,
+      "example": "2020-02-15T00:00:00"
+    },
+    "createdDate": {
+      "type": "string",
+      "description": "**Deprecated.** Use `CreatedDateOnly` instead.\n\nWhen the task was created in UTC.",
+      "format": "date-time",
+      "nullable": true,
+      "example": "2020-02-15T13:00:00Z",
+      "deprecated": true
+    },
+    "createdDateOnly": {
+      "type": "string",
+      "description": "The date when the task was created.\n\nThe time portion will always be set to 00:00:00\nand should be ignored. Only the date portion is relevant.",
+      "format": "date-time",
+      "nullable": true,
+      "example": "2020-02-15T00:00:00"
+    },
+    "isCompleted": {
+      "type": "boolean",
+      "description": "True when the task is completed.",
+      "example": false
+    },
+    "isDeleted": {
+      "type": "boolean",
+      "description": "True when the task is deleted.",
+      "example": false
+    },
+    "lastUpdated": {
+      "type": "integer",
+      "description": "Last updated timestamp.",
+      "format": "int64",
+      "example": 637847425252027400
+    },
+    "duration": {
+      "type": "string",
+      "description": "Duration of the task in ISO 8601 duration format.",
+      "nullable": true,
+      "example": "PT4H33M"
+    }
+  },
+  "additionalProperties": false
+}

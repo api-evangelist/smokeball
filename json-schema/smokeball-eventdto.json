@@ -1,0 +1,107 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/smokeball/json-schema/smokeball-eventdto.json",
+  "title": "Smokeball EventDto",
+  "type": "object",
+  "properties": {
+    "matterId": {
+      "type": "string",
+      "description": "Matter Id.",
+      "nullable": true,
+      "example": "b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2"
+    },
+    "subject": {
+      "type": "string",
+      "description": "Subject of event.",
+      "nullable": true,
+      "example": "Subject"
+    },
+    "description": {
+      "type": "string",
+      "description": "Description of event.",
+      "nullable": true,
+      "example": "Description"
+    },
+    "location": {
+      "type": "string",
+      "description": "Location of event.",
+      "nullable": true,
+      "example": "Location"
+    },
+    "allDay": {
+      "type": "boolean",
+      "description": "Whether or not the event is all day.",
+      "example": false
+    },
+    "nonBillable": {
+      "type": "boolean",
+      "description": "Whether or not the event is billable.\r\nNote events with a duration greater than 12 hours automatically become non-billable.",
+      "example": false
+    },
+    "type": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/EventType"
+        }
+      ],
+      "description": "The type of the event.\r\n\r\nWe currently support create and updates requests for non recurring events (type = Normal).",
+      "nullable": true,
+      "example": "Normal"
+    },
+    "eventType": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/EventType"
+        }
+      ],
+      "description": "**Deprecated.** Use `type` instead.\n\nThe type of the event.\r\n\r\nWe currently support create and updates requests for non recurring events (EventType = 0).",
+      "nullable": true,
+      "example": "0",
+      "deprecated": true
+    },
+    "attendees": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "The staff Ids of the attendees of the event.",
+      "nullable": true
+    },
+    "externalAttendees": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "The contact Ids of the external or third party attendees of the event.\r\n\r\nThe contacts must be of Person type and must be part of the matter.",
+      "nullable": true
+    },
+    "startTime": {
+      "type": "string",
+      "description": "Start date and time of the event.\r\nSupported date format is ISO YYYY-MM-DDThh:mm:ss.\r\nNote: date and time will correlate with the time zone provided.",
+      "format": "date-time",
+      "example": "2000-01-01T20:00:00"
+    },
+    "endTime": {
+      "type": "string",
+      "description": "End date and time of the event.\r\nSupported date format is ISO YYYY-MM-DDThh:mm:ss.\r\nNote: date and time will correlate with the time zone provided.",
+      "format": "date-time",
+      "example": "2000-01-01T20:00:00"
+    },
+    "timeZone": {
+      "type": "string",
+      "description": "Time zone of the event for determining the start time and end time.\r\nTime zones are expected in the IANA time zone format.\r\nFor a list of valid time zones, see https://nodatime.org/TimeZones.",
+      "nullable": true,
+      "example": "Australia/Sydney"
+    },
+    "additionalData": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string",
+        "nullable": true
+      },
+      "description": "Collection of key value pairs to update file meta data.",
+      "nullable": true
+    }
+  },
+  "additionalProperties": false
+}

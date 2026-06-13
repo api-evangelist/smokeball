@@ -1,0 +1,303 @@
+vocabulary:
+  name: Smokeball API Vocabulary
+  description: Domain vocabulary for the Smokeball legal practice management API, covering legal matters, contacts, billing, trust accounting, documents, and firm operations.
+  url: https://docs.smokeball.com/docs/api-docs/1e13a13124aee-introduction
+  version: "1.0"
+
+terms:
+
+  # Core Legal Entities
+  - term: Matter
+    definition: The central unit of work in Smokeball, representing a legal case or transaction. Contains all associated contacts, documents, time entries, billing, and workflow information.
+    type: Resource
+    relatedTerms: [MatterType, MatterItem, Role, Stage, Memo]
+    paths:
+      - /matters
+      - /matters/{matterId}
+
+  - term: MatterType
+    definition: A classification template for matters that defines the layout, roles, and workflow applicable to a specific type of legal work (e.g., Conveyancing, Family Law, Litigation).
+    type: Resource
+    relatedTerms: [Matter, Layout]
+    paths:
+      - /mattertypes
+      - /mattertypes/{id}
+
+  - term: Contact
+    definition: A person or company stored in the Smokeball address book. Contacts can be linked to matters via roles and can be individuals (Person), companies (Company), trusts (Trust), or groups.
+    type: Resource
+    relatedTerms: [Person, Company, Trust, Role, Tag]
+    paths:
+      - /contacts
+      - /contacts/{id}
+
+  - term: Person
+    definition: A natural individual contact within Smokeball, containing demographic fields such as name, date of birth, address, phone numbers, and identification details.
+    type: Schema
+    relatedTerms: [Contact, Company]
+
+  - term: Company
+    definition: An organization contact within Smokeball, containing business name, ABN/registration number, and associated people.
+    type: Schema
+    relatedTerms: [Contact, Person]
+
+  - term: Role
+    definition: The relationship between a contact and a matter, defining the capacity in which the contact participates (e.g., Client, Opposing Counsel, Vendor).
+    type: Resource
+    relatedTerms: [Matter, Contact, MatterType]
+    paths:
+      - /matters/{matterId}/roles
+      - /matters/{matterId}/roles/{id}
+
+  # Time and Billing
+  - term: Fee
+    definition: A billable time entry or flat charge recorded against a matter. Fees have a date, rate, quantity, activity code, and staff member association.
+    type: Resource
+    relatedTerms: [Matter, ActivityCode, Staff, Invoice]
+    paths:
+      - /matters/{matterId}/fees
+      - /matters/{matterId}/fees/{id}
+
+  - term: Expense
+    definition: A disbursement or out-of-pocket cost recorded against a matter, such as filing fees, courier charges, or court costs.
+    type: Resource
+    relatedTerms: [Matter, Invoice]
+    paths:
+      - /matters/{matterId}/expenses
+      - /matters/{matterId}/expenses/{id}
+
+  - term: ActivityCode
+    definition: A standardized code used to classify the type of legal work performed on a fee entry (e.g., research, drafting, court appearance). Supports UTBMS task codes.
+    type: Resource
+    relatedTerms: [Fee, UtbmsDetails]
+    paths:
+      - /activitycodes
+      - /activitycodes/{id}
+
+  - term: Invoice
+    definition: A formal billing document generated from fees and expenses on a matter. Can be in draft, sent, paid, or written-off status.
+    type: Resource
+    relatedTerms: [Matter, Fee, Expense, BankAccount, Debtor]
+    paths:
+      - /matters/{matterId}/invoices
+      - /matters/{matterId}/invoices/{invoiceId}
+
+  - term: BillingConfiguration
+    definition: Matter-level billing settings including billing type (hourly, fixed, contingency), billing frequency, and timekeeper assignments.
+    type: Resource
+    relatedTerms: [Matter, Fee]
+    paths:
+      - /matters/{matterId}/billingconfiguration
+
+  # Trust Accounting
+  - term: BankAccount
+    definition: A financial account managed within Smokeball, which can be a trust/IOLTA account or an office account. Trust accounts are subject to regulated accounting rules.
+    type: Resource
+    relatedTerms: [Transaction, ProtectedAccountBalance, Matter]
+    paths:
+      - /bankaccounts
+      - /bankaccounts/{id}
+
+  - term: Transaction
+    definition: A financial movement recorded within a bank account, such as a deposit, withdrawal, or transfer. Trust transactions must be allocated to specific matters.
+    type: Resource
+    relatedTerms: [BankAccount, Matter]
+    paths:
+      - /bankaccounts/{bankAccountId}/transactions
+      - /bankaccounts/{bankAccountId}/transactions/{id}
+
+  - term: Requisition
+    definition: A request to move funds from a trust/IOLTA account, such as paying a vendor or transferring fees to the office account.
+    type: Resource
+    relatedTerms: [BankAccount, Transaction]
+    paths:
+      - /bankaccounts/{id}/requisitions
+
+  - term: ProtectedAccountBalance
+    definition: Funds within a trust account that have been ring-fenced or protected from general use, typically pending a specific disbursement or court order.
+    type: Resource
+    relatedTerms: [BankAccount]
+    paths:
+      - /bankaccounts/{id}/protect-funds
+      - /bankaccounts/{id}/unprotect-funds/{protectionId}
+
+  # Documents
+  - term: File
+    definition: A document stored in the Smokeball document management system, associated with a matter. Supports upload, download, versioning, and preview.
+    type: Resource
+    relatedTerms: [Folder, Matter, Task]
+    paths:
+      - /matters/{matterId}/documents/files
+      - /matters/{matterId}/documents/files/{fileId}
+
+  - term: Folder
+    definition: A hierarchical container for organizing files within a matter's document library.
+    type: Resource
+    relatedTerms: [File, Matter]
+    paths:
+      - /matters/{matterId}/documents/folders
+      - /matters/{matterId}/documents/folders/{folderId}
+
+  # Tasks and Workflow
+  - term: Task
+    definition: An actionable to-do item that can be associated with a matter, assigned to staff, given a due date, and tracked through completion. Can contain sub-tasks.
+    type: Resource
+    relatedTerms: [SubTask, Staff, Matter, TaskDocument]
+    paths:
+      - /tasks
+      - /tasks/{id}
+
+  - term: SubTask
+    definition: A child task nested within a parent Task, representing a smaller step in completing the parent task.
+    type: Schema
+    relatedTerms: [Task]
+
+  - term: Stage
+    definition: A milestone or phase in a matter's workflow, used to track progress through a predefined stage set (e.g., Instruction → Exchange → Settlement).
+    type: Resource
+    relatedTerms: [StageSet, Matter]
+    paths:
+      - /stages
+      - /matters/{matterId}/stages
+
+  - term: StageSet
+    definition: A collection of ordered stages that define the lifecycle workflow for a particular matter type.
+    type: Resource
+    relatedTerms: [Stage, MatterType]
+    paths:
+      - /stagesets
+      - /stagesets/{id}
+
+  # Events and Calendar
+  - term: Event
+    definition: A calendar event or appointment associated with a matter or firm, with start/end times, location, and optional reminders.
+    type: Resource
+    relatedTerms: [Reminder, Matter, Staff]
+    paths:
+      - /events
+      - /events/{eventId}
+
+  - term: Reminder
+    definition: A notification configured for an event that alerts assigned staff before the event occurs.
+    type: Resource
+    relatedTerms: [Event]
+    paths:
+      - /events/{eventId}/reminders
+      - /events/{eventId}/reminders/{reminderId}
+
+  # Staff and Firm
+  - term: Staff
+    definition: A professional user within the law firm who can be assigned to matters, tasks, fees, and events. Staff have roles such as Partner, Associate, Paralegal, and Secretary.
+    type: Resource
+    relatedTerms: [FirmUser, Matter, Fee, Task]
+    paths:
+      - /staff
+      - /staff/{id}
+
+  - term: FirmUser
+    definition: A user account within the Smokeball firm subscription, including login details, licensing information, and out-of-office settings.
+    type: Resource
+    relatedTerms: [Staff]
+    paths:
+      - /firmusers
+      - /firmusers/{id}
+
+  - term: Firm
+    definition: The law firm entity within Smokeball, containing firm name, address, subscription status, and billing information.
+    type: Resource
+    relatedTerms: [FirmUser, Staff, Subscription]
+    paths:
+      - /firm
+
+  # Communication and Collaboration
+  - term: Memo
+    definition: An internal note or observation recorded against a matter, typically used for case notes, file notes, or internal communications.
+    type: Resource
+    relatedTerms: [Matter]
+    paths:
+      - /matters/{matterId}/memos
+      - /matters/{matterId}/memos/{id}
+
+  - term: Notification
+    definition: A system-generated alert or update sent to firm users about matter activity, task completions, or upcoming deadlines.
+    type: Resource
+    relatedTerms: [Staff, Matter]
+    paths:
+      - /notifications
+      - /notifications/{id}
+
+  # Integrations and Webhooks
+  - term: WebhookSubscription
+    definition: A configured endpoint that receives real-time HTTP POST notifications when specified Smokeball events occur (e.g., matter created, contact updated, task completed).
+    type: Resource
+    relatedTerms: [Plugin]
+    paths:
+      - /webhooks
+      - /webhooks/{id}
+
+  - term: Plugin
+    definition: A third-party integration or application registered within the Smokeball platform. Plugins can subscribe to matters and surface custom UI within the Smokeball interface.
+    type: Resource
+    relatedTerms: [WebhookSubscription]
+    paths:
+      - /plugins
+      - /plugins/{pluginId}
+
+  # Intake and Client Portal
+  - term: IntakeForm
+    definition: A digital intake form published to clients to collect information before or during matter creation. Responses are stored as submissions.
+    type: Resource
+    relatedTerms: [IntakeSubmission, Matter]
+    paths:
+      - /intake/forms
+
+  - term: IntakeSubmission
+    definition: A completed response to an intake form, submitted by a client or prospect. Can be associated with an existing matter.
+    type: Resource
+    relatedTerms: [IntakeForm, Matter]
+    paths:
+      - /intake/{matterId}/submissions
+      - /intake/{matterId}/submissions/{submissionId}
+
+  # Access Control
+  - term: Group
+    definition: An authorization group that controls which staff members or plugins can access certain resources within the Smokeball account.
+    type: Resource
+    relatedTerms: [Policy, FirmUser]
+    paths:
+      - /groups
+      - /groups/{id}
+
+  - term: Policy
+    definition: An access control rule defining what operations a group is permitted to perform on Smokeball resources.
+    type: Resource
+    relatedTerms: [Group]
+    paths:
+      - /policies/{reference}
+
+  # Subscriptions and Billing
+  - term: Subscription
+    definition: The commercial subscription record for a Smokeball firm, including tier, add-ons, billing cycle, payment methods, and usage charges.
+    type: Resource
+    relatedTerms: [Tier, AddOn, PaymentMethod, SubscriptionInvoice]
+    paths:
+      - /subscriptions
+      - /subscriptions/{id}
+
+  - term: Tier
+    definition: A Smokeball subscription plan level (e.g., Grow, Prosper, Prosper+) that determines the features and user count available to a firm.
+    type: Resource
+    relatedTerms: [Subscription]
+    paths:
+      - /subscriptions/tiers
+
+  # Authentication
+  - term: OAuth2ClientCredentials
+    definition: The authentication mechanism used by the Smokeball API. Integrations obtain an access token using a client_id and client_secret via the OAuth 2.0 client credentials grant flow.
+    type: Concept
+    relatedTerms: [Subscription, FirmUser]
+
+  - term: Region
+    definition: The geographic deployment of the Smokeball API. Available regions are US (api.smokeball.com), AU (api.smokeball.com.au), and UK (api.smokeball.co.uk), each with their own base URL.
+    type: Concept
+    relatedTerms: [Firm]
