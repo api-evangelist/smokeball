@@ -1,0 +1,77 @@
+aid: smokeball
+name: Smokeball
+description: Legal practice management software with a REST API for managing matters,
+  contacts, documents, time entries, billing, trust accounting, and law firm workflows.
+  The API follows REST principles, accepts JSON, returns JSON, and supports OAuth
+  2.0 authentication. Available in US, AU, and UK regions.
+type: Index
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+url: https://raw.githubusercontent.com/api-evangelist/smokeball/refs/heads/main/apis.yml
+created: '2026-06-13'
+modified: '2026-06-13'
+specificationVersion: '0.19'
+tags:
+  - Legal
+  - Law Firm
+  - Practice Management
+  - Matters
+  - Contacts
+  - Documents
+  - Billing
+  - Trust Accounting
+  - Time Tracking
+apis:
+  - aid: smokeball:smokeball-api
+    name: Smokeball API
+    description: REST API for integrating with Smokeball legal practice management
+      software, supporting matters, contacts, documents, time entries, billing, trust
+      accounting, staff, webhooks, and law firm workflows across US, AU, and UK regions.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://docs.smokeball.com/docs/api-docs/1e13a13124aee-introduction
+    baseURL: https://api.smokeball.com
+    tags:
+      - Legal
+      - Matters
+      - Contacts
+      - Documents
+      - Billing
+      - Webhooks
+    properties:
+      - type: Documentation
+        url: https://docs.smokeball.com/docs/api-docs/1e13a13124aee-introduction
+      - type: Authentication
+        url: https://docs.smokeball.com/docs/api-docs/authentication
+      - type: RateLimits
+        url: https://smokeball.mintlify.app/docs/api-docs/vj4jovpoopdov-rate-limits
+      - type: GitHubOrg
+        url: https://github.com/smokeballdev
+      - type: GitHubRepository
+        url: https://github.com/smokeballdev/api-docs
+      - type: OpenAPI
+        url: https://docs.smokeball.com/openapi.json
+common:
+  - type: Website
+    url: https://www.smokeball.com
+  - type: Documentation
+    url: https://docs.smokeball.com/docs/api-docs/1e13a13124aee-introduction
+  - type: GitHubOrg
+    url: https://github.com/smokeballdev
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/smokeball-legal-software
+  - type: Blog
+    url: https://www.smokeball.com/blog
+  - type: Pricing
+    url: https://www.smokeball.com/pricing
+  - type: StatusPage
+    url: https://status.smokeball.com
+  - type: X
+    url: https://x.com/smokeballnews
+  - type: Plans
+    url: plans/smokeball-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/smokeball-rate-limits.yml
+  - type: FinOps
+    url: finops/smokeball-finops.yml
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

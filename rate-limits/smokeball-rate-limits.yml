@@ -1,0 +1,44 @@
+name: Smokeball API Rate Limits
+description: The Smokeball API implements request throttling using the token bucket
+  algorithm to ensure consistent platform performance and protect infrastructure from
+  abuse. Limits apply uniformly across all regions (US, AU, UK).
+version: '0.1'
+url: https://smokeball.mintlify.app/docs/api-docs/vj4jovpoopdov-rate-limits
+algorithm: Token Bucket
+limits:
+  - name: Default Rate Limit
+    description: Maximum number of API requests allowed per second under normal operating
+      conditions.
+    requests: 5
+    window: second
+    scope: per API partner / integration
+    applies_to:
+      - US region
+      - AU region
+      - UK region
+
+  - name: Default Burst Limit
+    description: Maximum number of concurrent API requests allowed at any given moment.
+    concurrent_requests: 5
+    scope: per API partner / integration
+    applies_to:
+      - US region
+      - AU region
+      - UK region
+
+throttling:
+  response_code: 429
+  response_message: Too Many Requests
+  retry_strategy: Exponential backoff recommended
+
+best_practices:
+  - Implement exponential backoff when receiving 429 responses
+  - Monitor your request rate to stay within limits
+  - Cache responses where possible to reduce redundant calls
+  - Batch requests when appropriate to minimize total call volume
+
+limit_increases:
+  available: true
+  process: Contact Smokeball support with use case details, projected request volume,
+    desired limit increases, and business justification.
+  contact: https://support.smokeball.com

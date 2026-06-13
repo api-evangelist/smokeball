@@ -1,0 +1,85 @@
+name: Smokeball Plans and Pricing
+description: Smokeball offers four subscription tiers for legal practice management
+  software. API access (including REST API and PowerBI connectivity) is available
+  on Boost, Grow, and Prosper+ plans. The Prosper+ plan is required for firms seeking
+  direct API credentials for custom app development.
+version: '0.1'
+url: https://www.smokeball.com/pricing
+plans:
+  - name: Bill
+    description: Entry-level plan covering core billing and accounting features including
+      invoicing, time and expense tracking, online payments, trust accounting and
+      reporting, and accounting integrations.
+    price: From $149/month per user
+    features:
+      - Invoicing
+      - Time and expense tracking
+      - Online payments
+      - Trust accounting and reporting
+      - Accounting integrations
+      - Archie AI Assistant
+    api_access: false
+
+  - name: Boost
+    description: Adds full matter and client management, browser-based access, Microsoft
+      365 integration, client portal, eSignature, eFiling, and API/PowerBI access
+      for custom integrations.
+    price: From $149/month per user
+    features:
+      - Everything in Bill
+      - Browser-based access
+      - Client and matter management
+      - Task and calendar management
+      - Microsoft 365 integration
+      - Client portal
+      - eSignature
+      - eFiling
+      - Communicate powered by Smokeball AI
+      - API access
+      - PowerBI connectivity
+    api_access: true
+
+  - name: Grow
+    description: Best-value plan adding practice area templates, advanced document
+      automation, automated forms and templates, email management, and web app access.
+    price: From $149/month per user
+    features:
+      - Everything in Boost
+      - Practice area templates and calculators
+      - Advanced document automation
+      - Automated forms and templates
+      - Email management
+      - Web app access
+      - API access
+      - PowerBI connectivity
+    api_access: true
+
+  - name: Prosper+
+    description: Full platform tier including lead management, advanced intake, custom
+      workflows, staff activity reporting, profitability reporting, and AutoTime.
+      Required for firms applying for direct Smokeball API credentials to build custom
+      apps.
+    price: From $149/month per user
+    features:
+      - Everything in Grow
+      - Firm insights reporting
+      - Lead management
+      - Inquiry intake
+      - Advanced matter intake
+      - Custom workflows
+      - Staff activity reporting
+      - Profitability reporting
+      - Intake powered by Smokeball AI
+      - AutoTime (automatic time tracking)
+      - API access (required plan for API credential applications)
+      - PowerBI connectivity
+    api_access: true
+    api_credential_eligibility: true
+
+notes:
+  - API credentials for custom app development require Prosper+ plan and application
+    through Smokeball's developer access program.
+  - Technology partners should apply through the Smokeball Partner Platform rather
+    than the firm API access pathway.
+  - Higher API rate limits are available by contacting Smokeball support with use
+    case and projected volume details.

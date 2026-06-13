@@ -1,0 +1,73 @@
+name: Smokeball FinOps
+description: Financial operations guidance for teams integrating with the Smokeball
+  API. Smokeball uses a SaaS subscription model where API access is bundled with
+  platform plans rather than metered separately. Cost optimization focuses on plan
+  tier selection and efficient use of API rate limits.
+version: '1.0'
+framework: FinOps Framework 1.0 (FOCUS-aligned)
+url: https://www.smokeball.com/pricing
+
+cost_model:
+  type: SaaS Subscription (API bundled)
+  billing_cycle: Monthly per user
+  api_metering: false
+  description: API access is included in Boost, Grow, and Prosper+ subscription plans.
+    There are no separate per-call or per-request charges for API usage. Costs are
+    driven entirely by plan tier and user seat count.
+
+plan_cost_drivers:
+  - driver: Plan Tier
+    description: Determines feature set and API access eligibility. Higher tiers unlock
+      API credentials and advanced capabilities. Prosper+ is required for direct API
+      credential applications.
+    tiers:
+      - name: Bill
+        api_access: false
+      - name: Boost
+        api_access: true
+      - name: Grow
+        api_access: true
+      - name: Prosper+
+        api_access: true
+        notes: Required for API credential applications by law firms building custom
+          apps.
+
+  - driver: User Seat Count
+    description: Pricing is per user per month. Total cost scales linearly with number
+      of licensed users on the firm's account.
+
+optimization_recommendations:
+  - recommendation: Choose the minimum plan tier that includes API access
+    description: Boost, Grow, and Prosper+ all include API and PowerBI access. Select
+      based on feature needs beyond API access to avoid over-provisioning.
+
+  - recommendation: Minimize redundant API calls via caching
+    description: Cache frequently-read data (matter types, referral types, staff lists,
+      activity codes) to reduce API call volume and stay within the 5 req/sec default
+      limit without needing a rate limit increase.
+
+  - recommendation: Batch operations where possible
+    description: The Smokeball API supports batch-style workflows for certain resources.
+      Grouping related operations reduces integration latency and API overhead.
+
+  - recommendation: Use webhooks instead of polling
+    description: Subscribe to Smokeball webhooks for real-time event notifications
+      (matters, contacts, documents, tasks) instead of polling endpoints repeatedly.
+      This reduces API call volume and associated load.
+
+  - recommendation: Monitor rate limit usage proactively
+    description: Track 429 response rates to determine if default rate limits (5 req/sec)
+      are being routinely hit. Contact Smokeball support for a limit increase only
+      when business-justified, as this requires a support engagement.
+
+visibility:
+  - tagging: Not applicable (no per-call billing)
+  - monitoring: Track integration usage via application-level logging of API calls
+    and 429 error rates.
+  - reporting: Use Smokeball's built-in firm insights and profitability reporting
+    (Prosper+ plan) to understand the value delivered by integrated workflows.
+
+forecasting:
+  method: Seat-count forecasting
+  description: Forecast API-related costs by projecting user seat growth on the required
+    plan tier. No variable API usage costs to model.
