@@ -5,7 +5,7 @@ description: Legal practice management software with a REST API for managing mat
   The API follows REST principles, accepts JSON, returns JSON, and supports OAuth
   2.0 authentication. Available in US, AU, and UK regions.
 type: Index
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 url: https://raw.githubusercontent.com/api-evangelist/smokeball/refs/heads/main/apis.yml
 created: '2026-06-13'
 modified: '2026-06-13'
@@ -26,7 +26,7 @@ apis:
     description: REST API for integrating with Smokeball legal practice management
       software, supporting matters, contacts, documents, time entries, billing, trust
       accounting, staff, webhooks, and law firm workflows across US, AU, and UK regions.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://docs.smokeball.com/docs/api-docs/1e13a13124aee-introduction
     baseURL: https://api.smokeball.com
     tags:
