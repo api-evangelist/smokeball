@@ -1,0 +1,21 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/smokeball-smokeball-api-openapi.yml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+schemes:
+- name: api-key
+  type: apiKey
+  in: header
+  parameter: x-api-key
+  sources:
+  - openapi/smokeball-smokeball-api-openapi.yml
+- name: token
+  type: apiKey
+  in: header
+  parameter: Authorization
+  sources:
+  - openapi/smokeball-smokeball-api-openapi.yml

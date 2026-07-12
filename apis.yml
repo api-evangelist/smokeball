@@ -58,6 +58,10 @@ apis:
       - type: Vocabulary
         url: vocabulary/smokeball-vocabulary.yml
 common:
+  - type: DomainSecurity
+    url: security/smokeball-domain-security.yml
+  - type: Authentication
+    url: authentication/smokeball-authentication.yml
   - type: Website
     url: https://www.smokeball.com
   - type: Documentation
