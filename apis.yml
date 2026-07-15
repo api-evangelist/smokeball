@@ -58,6 +58,8 @@ apis:
       - type: Vocabulary
         url: vocabulary/smokeball-vocabulary.yml
 common:
+  - type: AgenticAccess
+    url: agentic-access/smokeball-agentic-access.yml
   - type: DomainSecurity
     url: security/smokeball-domain-security.yml
   - type: Authentication
