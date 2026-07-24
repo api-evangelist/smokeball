@@ -1,0 +1,144 @@
+openapi: 3.0.1
+info:
+  title: Smokeball Activity Codes Search API
+  version: '1.0'
+  description: REST API for integrating with Smokeball legal practice management software. Supports matters, contacts, documents, time entries, billing, trust accounting, staff, webhooks, and law firm workflows across US, AU, and UK regions. Uses OAuth 2.0 (client credentials) authentication.
+  contact:
+    name: Smokeball Developer Support
+    url: https://docs.smokeball.com/docs/api-docs/1e13a13124aee-introduction
+  x-api-id: smokeball
+  x-audience: external-public
+servers:
+- url: https://api.smokeball.com
+- url: https://api.smokeball.com.au
+- url: https://api.smokeball.co.uk
+- url: https://stagingapi.smokeball.com
+- url: https://stagingapi.smokeball.com.au
+- url: https://stagingapi.smokeball.co.uk
+security:
+- api-key: []
+  token: []
+tags:
+- name: Search
+paths:
+  /search/files:
+    post:
+      tags:
+      - Search
+      summary: Search files with advanced filters
+      description: Performs a full-account file search and returns files matching the provided query, paging options and filters.
+      operationId: SearchFilesAsync
+      parameters:
+      - name: Offset
+        in: query
+        schema:
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+          format: int32
+      - name: Limit
+        in: query
+        schema:
+          maximum: 500
+          minimum: 1
+          type: integer
+          format: int32
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/FileSearchRequest'
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/FileSearchRequest'
+          application/*+json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/FileSearchRequest'
+      responses:
+        '200':
+          description: Returns the matching files.
+          content:
+            application/json:
+              schema:
+                type: array
+                items: {}
+        '400':
+          description: When request body fields are invalid.
+components:
+  schemas:
+    FileSearchFilters:
+      type: object
+      properties:
+        searchFields:
+          type: array
+          items:
+            type: string
+          description: "Which file fields to match the search query against. Allowed values: `Name`, `Content`.\r\nOmit the property (or pass an empty array) to default to both."
+          nullable: true
+          example:
+          - Name
+          - Content
+        includeFileExtensions:
+          type: array
+          items:
+            type: string
+          description: File extensions to include in the results (e.g. `pdf`, `docx`). When empty or null, all extensions are allowed.
+          nullable: true
+          example:
+          - pdf
+          - docx
+        excludeFileExtensions:
+          type: array
+          items:
+            type: string
+          description: File extensions to exclude from the results. Applied after IncludeFileExtensions.
+          nullable: true
+          example:
+          - tmp
+          - bak
+        authorIds:
+          type: array
+          items:
+            type: string
+          description: User identifiers of file authors to filter by. Results match files authored by any of the supplied users.
+          nullable: true
+          example:
+          - 750eb5c5-ac0b-7d11-4997-e0ce9d8896c8
+        contactIds:
+          type: array
+          items:
+            type: string
+          description: Contact identifiers to filter by. Results match files associated with any of the supplied contacts.
+          nullable: true
+          example:
+          - b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2
+      additionalProperties: false
+    FileSearchRequest:
+      required:
+      - query
+      type: object
+      properties:
+        query:
+          minLength: 1
+          type: string
+          description: Full-text search expression. Required and non-empty.
+          example: contract
+        filters:
+          allOf:
+          - $ref: '#/components/schemas/FileSearchFilters'
+          description: Filters narrowing the search to specific extensions, date ranges, authors, contacts, and which fields to match against.
+          nullable: true
+      additionalProperties: false
+  securitySchemes:
+    api-key:
+      type: apiKey
+      name: x-api-key
+      in: header
+    token:
+      type: apiKey
+      name: Authorization
+      in: header
+      x-amazon-apigateway-authtype: cognito_user_pools

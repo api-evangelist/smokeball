@@ -1,0 +1,509 @@
+openapi: 3.0.1
+info:
+  title: Smokeball Activity Codes Stages API
+  version: '1.0'
+  description: REST API for integrating with Smokeball legal practice management software. Supports matters, contacts, documents, time entries, billing, trust accounting, staff, webhooks, and law firm workflows across US, AU, and UK regions. Uses OAuth 2.0 (client credentials) authentication.
+  contact:
+    name: Smokeball Developer Support
+    url: https://docs.smokeball.com/docs/api-docs/1e13a13124aee-introduction
+  x-api-id: smokeball
+  x-audience: external-public
+servers:
+- url: https://api.smokeball.com
+- url: https://api.smokeball.com.au
+- url: https://api.smokeball.co.uk
+- url: https://stagingapi.smokeball.com
+- url: https://stagingapi.smokeball.com.au
+- url: https://stagingapi.smokeball.co.uk
+security:
+- api-key: []
+  token: []
+tags:
+- name: Stages
+paths:
+  /stages:
+    get:
+      tags:
+      - Stages
+      summary: Get stage to matter mappings in the firm
+      description: Returns a list of stage to matter mappings in the firm.
+      operationId: GetMatterStages
+      parameters:
+      - name: Offset
+        in: query
+        schema:
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+          format: int32
+      - name: Limit
+        in: query
+        schema:
+          maximum: 500
+          minimum: 1
+          type: integer
+          format: int32
+      - name: UpdatedSince
+        in: query
+        description: Returns items updated since a specified time (.net ticks representation of the UTC datetime).
+        schema:
+          type: integer
+          format: int64
+      - name: LastUpdated
+        in: query
+        description: "Deprecated, use updatedSince\r\nReturns items updated since a specified time."
+        schema:
+          type: string
+          format: date-time
+      responses:
+        '200':
+          description: When request is successful. Returns a paged collection of 'MatterStage' objects.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MatterStagePagedCollection'
+  /matters/{matterId}/stages:
+    get:
+      tags:
+      - Stages
+      summary: Get a matter stage information
+      description: Returns the specified matters stage information.
+      operationId: GetStagesOnMatter
+      parameters:
+      - name: matterId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: When request is successful. Returns a 'MatterStage' object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MatterStage'
+        '400':
+          description: When an unsupported request is made.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '403':
+          description: When the matter stage is not associated with the authenticated client.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: When matter stage information with specified matter id does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+  /stagesets:
+    get:
+      tags:
+      - Stages
+      summary: Get stage sets for the firm
+      description: Returns a list of stage sets for the firm.
+      operationId: GetStageSets
+      parameters:
+      - name: Offset
+        in: query
+        schema:
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+          format: int32
+      - name: Limit
+        in: query
+        schema:
+          maximum: 500
+          minimum: 1
+          type: integer
+          format: int32
+      - name: UpdatedSince
+        in: query
+        description: Returns items updated since a specified time (.net ticks representation of the UTC datetime).
+        schema:
+          type: integer
+          format: int64
+      - name: LastUpdated
+        in: query
+        description: "Deprecated, use updatedSince\r\nReturns items updated since a specified time."
+        schema:
+          type: string
+          format: date-time
+      responses:
+        '200':
+          description: When request is successful. Returns a paged collection of 'StageSet' objects.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StageSetPagedCollection'
+  /stagesets/{id}:
+    get:
+      tags:
+      - Stages
+      summary: Get a stage set
+      description: Returns the specified stage set.
+      operationId: GetStageSetById
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: When request is successful. Returns a 'StageSet' object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StageSet'
+        '400':
+          description: When an unsupported request is made.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: When stage set with specified id does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+  /stagesets/{stageSetId}/stages/{id}:
+    get:
+      tags:
+      - Stages
+      summary: Get a stage on a stage set
+      description: Return the specified stage on the stage set.
+      operationId: GetStageOnStageSet
+      parameters:
+      - name: stageSetId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: When request is successful. Returns a 'Stage' object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Stage'
+        '400':
+          description: When an unsupported request is made.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: When stage or stage set with specified id does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+components:
+  schemas:
+    MatterStagePagedCollection:
+      type: object
+      properties:
+        id:
+          type: string
+          nullable: true
+        href:
+          type: string
+          nullable: true
+        relation:
+          type: string
+          nullable: true
+        method:
+          type: string
+          default: GET
+          nullable: true
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/MatterStage'
+          nullable: true
+        offset:
+          type: integer
+          format: int32
+          nullable: true
+        limit:
+          type: integer
+          format: int32
+          nullable: true
+        size:
+          type: integer
+          format: int64
+        first:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+        previous:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+        next:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+        last:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+      additionalProperties: false
+    StageSetPagedCollection:
+      type: object
+      properties:
+        id:
+          type: string
+          nullable: true
+        href:
+          type: string
+          nullable: true
+        relation:
+          type: string
+          nullable: true
+        method:
+          type: string
+          default: GET
+          nullable: true
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/StageSet'
+          nullable: true
+        offset:
+          type: integer
+          format: int32
+          nullable: true
+        limit:
+          type: integer
+          format: int32
+          nullable: true
+        size:
+          type: integer
+          format: int64
+        first:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+        previous:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+        next:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+        last:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+      additionalProperties: false
+    Link:
+      type: object
+      properties:
+        id:
+          type: string
+          nullable: true
+        href:
+          type: string
+          nullable: true
+        relation:
+          type: string
+          nullable: true
+        method:
+          type: string
+          default: GET
+          nullable: true
+      additionalProperties: false
+    ProblemDetails:
+      type: object
+      properties:
+        type:
+          type: string
+          nullable: true
+        title:
+          type: string
+          nullable: true
+        status:
+          type: integer
+          format: int32
+          nullable: true
+        detail:
+          type: string
+          nullable: true
+        instance:
+          type: string
+          nullable: true
+      additionalProperties: {}
+    MatterStage:
+      type: object
+      properties:
+        id:
+          type: string
+          nullable: true
+        href:
+          type: string
+          nullable: true
+        relation:
+          type: string
+          nullable: true
+        method:
+          type: string
+          default: GET
+          nullable: true
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+        versionId:
+          type: string
+          description: Version id of the record.
+          nullable: true
+          example: da4e7fd1-5394-4ca9-b1c6-e18c4e2bf262
+        matter:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          description: Matter in which this mapping is associated to.
+          nullable: true
+        stageSet:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          description: Current stage set of the matter.
+          nullable: true
+        stage:
+          allOf:
+          - $ref: '#/components/schemas/Stage'
+          description: Current stage of the matter.
+          nullable: true
+        lastUpdated:
+          type: integer
+          description: Timestamp when the matter stage was last updated.
+          format: int64
+          example: 637847425252027400
+      additionalProperties: false
+      description: Contains the current stage of the matter.
+    Stage:
+      type: object
+      properties:
+        href:
+          type: string
+          nullable: true
+        relation:
+          type: string
+          nullable: true
+        method:
+          type: string
+          default: GET
+          nullable: true
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+        id:
+          type: string
+          description: Unique identifier of the stage.
+          nullable: true
+          example: 45b94df1-1657-48b0-ae81-583b42ed52d6
+        versionId:
+          type: string
+          description: Version id of the record.
+          nullable: true
+          example: 09d1f360-b810-4a63-acaa-5ed81a551f06
+        name:
+          type: string
+          description: Name of the stage.
+          nullable: true
+          example: Review contract
+        isDeleted:
+          type: boolean
+          description: True when the stage is deleted.
+          example: true
+        lastUpdated:
+          type: integer
+          description: Timestamp when the stage was last updated.
+          format: int64
+          example: 637847425252027400
+      additionalProperties: false
+      description: Contains information of a stage in a stage set.
+    StageSet:
+      type: object
+      properties:
+        href:
+          type: string
+          nullable: true
+        relation:
+          type: string
+          nullable: true
+        method:
+          type: string
+          default: GET
+          nullable: true
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+        id:
+          type: string
+          description: Unique identifier of the stage set.
+          nullable: true
+          example: 6ccc033d-67c9-4090-8705-3aff0c5a8cfb
+        versionId:
+          type: string
+          description: Version id of the record.
+          nullable: true
+          example: 499244ff-651f-4f66-b618-9defde27c281
+        name:
+          type: string
+          description: Name of the stage set.
+          nullable: true
+          example: Review contract
+        isDeleted:
+          type: boolean
+          description: True when the stage set is deleted.
+          example: true
+        stages:
+          type: array
+          items:
+            $ref: '#/components/schemas/Stage'
+          description: Stages of the stage set.
+          nullable: true
+        lastUpdated:
+          type: integer
+          description: Timestamp when the stage set was last updated.
+          format: int64
+          example: 637847425252027400
+      additionalProperties: false
+      description: Contains the stage set and stages information.
+  securitySchemes:
+    api-key:
+      type: apiKey
+      name: x-api-key
+      in: header
+    token:
+      type: apiKey
+      name: Authorization
+      in: header
+      x-amazon-apigateway-authtype: cognito_user_pools

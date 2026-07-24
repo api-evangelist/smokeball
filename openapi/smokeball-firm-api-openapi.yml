@@ -1,0 +1,1015 @@
+openapi: 3.0.1
+info:
+  title: Smokeball Activity Codes Firm API
+  version: '1.0'
+  description: REST API for integrating with Smokeball legal practice management software. Supports matters, contacts, documents, time entries, billing, trust accounting, staff, webhooks, and law firm workflows across US, AU, and UK regions. Uses OAuth 2.0 (client credentials) authentication.
+  contact:
+    name: Smokeball Developer Support
+    url: https://docs.smokeball.com/docs/api-docs/1e13a13124aee-introduction
+  x-api-id: smokeball
+  x-audience: external-public
+servers:
+- url: https://api.smokeball.com
+- url: https://api.smokeball.com.au
+- url: https://api.smokeball.co.uk
+- url: https://stagingapi.smokeball.com
+- url: https://stagingapi.smokeball.com.au
+- url: https://stagingapi.smokeball.co.uk
+security:
+- api-key: []
+  token: []
+tags:
+- name: Firm
+paths:
+  /firm:
+    get:
+      tags:
+      - Firm
+      summary: Get firm
+      description: Retrieves the details of the firm associated with the authenticated client.
+      operationId: GetFirm
+      responses:
+        '200':
+          description: When request is successful. Returns a 'Firm' object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Firm'
+        '404':
+          description: When firm does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+    put:
+      tags:
+      - Firm
+      summary: Update firm
+      description: Updates firm details for the current authenticated client.
+      operationId: UpdateFirm
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/UpdateFirmDto'
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/UpdateFirmDto'
+          application/*+json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/UpdateFirmDto'
+      responses:
+        '202':
+          description: When request is accepted. Returns a hypermedia 'Link' object of the firm to be updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Link'
+        '404':
+          description: When firm does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+    post:
+      tags:
+      - Firm
+      summary: Create firm
+      description: Creates a firm for the current authenticated client and registers an existing user as a staff member and firm owner.
+      operationId: CreateFirm
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/CreateFirmDto'
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/CreateFirmDto'
+          application/*+json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/CreateFirmDto'
+      responses:
+        '202':
+          description: When request is accepted. Returns a hypermedia 'Link' object of the firm to be created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Link'
+        '400':
+          description: When staff user does not exist or is already associated with another firm.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '403':
+          description: When an unsupported request is made.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+  /firmusers:
+    get:
+      tags:
+      - Firm
+      summary: Get firm user mappings
+      description: Retrieves a list of user mappings in the firm associated with the authenticated client.
+      responses:
+        '200':
+          description: When request is successful. Returns an array of one or more 'FirmUser' objects.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/FirmUser'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+  /firmusers/{id}:
+    get:
+      tags:
+      - Firm
+      summary: Get firm user mapping
+      description: Retrieves a user mapping (based on staff or user id parameter provided) in the firm associated with the authenticated client.
+      operationId: GetFirmUserByIdAsync
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: When request is successful. Returns a 'FirmUser' object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FirmUser'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+    put:
+      tags:
+      - Firm
+      summary: Update firm user mapping
+      description: Updates a user mapping in the firm associated with the authenticated client.
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/FirmUserDto'
+              description: Represents a mapping between a user and a staff member in a firm.
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/FirmUserDto'
+              description: Represents a mapping between a user and a staff member in a firm.
+          application/*+json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/FirmUserDto'
+              description: Represents a mapping between a user and a staff member in a firm.
+      responses:
+        '202':
+          description: When request is accepted. Returns a hypermedia 'Link' object of the user to be updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Link'
+        '400':
+          description: When staff or user has not been provided.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '403':
+          description: When staff does not belong to the firm.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: When 'FirmUser' does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+    delete:
+      tags:
+      - Firm
+      summary: Delete firm user mapping
+      description: "Removes the user from the firm associated with the authenticated client.\r\n\r\nThe staff member is set as a former staff member and a former user. User access is also disabled."
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Link'
+        '202':
+          description: When request is accepted. Returns a hypermedia 'Link' object of the user to be deleted.
+        '404':
+          description: When 'FirmUser' object does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+components:
+  schemas:
+    FirmAddress:
+      type: object
+      properties:
+        buildingLevel:
+          type: string
+          description: Building level in address (if applicable).
+          nullable: true
+          example: Level 1
+        unitNumber:
+          type: string
+          description: Unit number in address (if applicable).
+          nullable: true
+          example: '10'
+        unitType:
+          type: string
+          description: Unit type (e.g. Unit,Flat,Villa,Suite,etc.) in address (if applicable).
+          nullable: true
+          example: Suite
+        streetNumber:
+          type: string
+          description: Street number in address.
+          nullable: true
+          example: '100'
+        streetName:
+          type: string
+          description: Street name in address.
+          nullable: true
+          example: Broad
+        streetType:
+          type: string
+          description: Street type (e.g. Street,Road,Avenue,Lane,etc.) in address.
+          nullable: true
+          example: Street
+        addressLine1:
+          type: string
+          description: First line of address.
+          nullable: true
+          example: Level 1/10
+        addressLine2:
+          type: string
+          description: Second line of address (if applicable).
+          nullable: true
+          example: 100 Broad Street
+        city:
+          type: string
+          description: City, district, suburb, town, or village.
+          nullable: true
+          example: Chicago
+        state:
+          type: string
+          description: State, province, or region.
+          nullable: true
+          example: IL
+        zipCode:
+          type: string
+          description: Zip or post code.
+          nullable: true
+          example: '60606'
+        county:
+          type: string
+          description: County (if applicable)
+          nullable: true
+          example: Berkshire
+        locality:
+          type: string
+          description: Locality (if applicable)
+          nullable: true
+          example: Windsor
+        country:
+          type: string
+          description: Country.
+          nullable: true
+          example: United States
+        careOf:
+          type: string
+          description: Care of the addressee (if applicable).
+          nullable: true
+          readOnly: true
+          example: ''
+        poBoxType:
+          type: string
+          description: PO box type in address (if applicable).
+          nullable: true
+          readOnly: true
+          example: ''
+        poBoxNumber:
+          type: string
+          description: PO box Number in address (if applicable).
+          nullable: true
+          readOnly: true
+          example: ''
+      additionalProperties: false
+    Link:
+      type: object
+      properties:
+        id:
+          type: string
+          nullable: true
+        href:
+          type: string
+          nullable: true
+        relation:
+          type: string
+          nullable: true
+        method:
+          type: string
+          default: GET
+          nullable: true
+      additionalProperties: false
+    PhoneNumberDto:
+      type: object
+      properties:
+        areaCode:
+          type: string
+          description: Phone area code.
+          nullable: true
+          example: '555'
+        number:
+          type: string
+          description: Phone number (excluding area code).
+          nullable: true
+          example: '1234567'
+      additionalProperties: false
+    FirmDxAddressDto:
+      type: object
+      properties:
+        number:
+          type: string
+          description: Direct Exchange number (if applicable).
+          nullable: true
+          example: '376'
+        exchange:
+          type: string
+          description: Direct Exchange name.
+          nullable: true
+          example: DX
+        state:
+          type: string
+          description: State, province, or region.
+          nullable: true
+          example: NSW
+      additionalProperties: false
+    LicenceNumber:
+      type: object
+      properties:
+        state:
+          type: string
+          description: State associated to the licence.
+          nullable: true
+          example: IL
+        type:
+          type: string
+          description: Type of the licence.
+          nullable: true
+          example: ''
+        number:
+          type: string
+          description: Licence number.
+          nullable: true
+      additionalProperties: false
+    FirmSubscriptionDto:
+      type: object
+      properties:
+        productSuite:
+          type: string
+          description: "Optional product suite to use when creating the firm.\r\n\r\nUse 'SMOKEBALL' to use the new product suite."
+          nullable: true
+        promotionId:
+          type: string
+          description: Optional promotion ID that will be used when the firm is subscribed.
+          nullable: true
+        interval:
+          type: string
+          description: "Optional interval to register the account subscription with.\r\n\r\nPossible values: Monthly, Yearly"
+          nullable: true
+      additionalProperties: false
+      description: The subscription details for the firm.
+    CreateFirmDto:
+      type: object
+      properties:
+        productId:
+          type: string
+          description: "The product/tier the firm is subscribed to. Must be set when creating the firm and is optional when updating the firm.\r\n\r\nThe supported products are listed in order below, the identifier (in brackets) must be used.\r\n\r\n* Bill (SMK001)\r\n\r\n* Boost (SMK004)\r\n\r\n* Grow (SMK002)\r\n\r\n* Prosper + (SMK003)\r\n\r\nPossible values: SMK001, SMK004, SMK002, SMK003"
+          nullable: true
+          example: SMK001
+        addOnIds:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+          description: "The optional add-ons the firm is subscribed to. Must be specified with an accompanying productId.\r\n\r\nThe supported add-ons are listed below, the identifier (listed in brackets) must be used.\r\n\r\n* Intake (ADD001)\r\n\r\n* AutoTime (ADD003)\r\n\r\n* FamilyPro (ADD004)\r\n\r\n* Api (ADD005)\r\n\r\n* Workflows (ADD006)\r\n\r\n* PowerBI (ADD007)\r\n\r\n* Archie (ADD008)\r\n\r\n* SSO (ADD010)\r\n\r\nPossible values: ADD01, ADD003, ADD004, ADD005, ADD006, ADD007, ADD008, ADD010"
+          nullable: true
+          example:
+          - ADD01
+          - ADD003
+        name:
+          type: string
+          description: The name of the firm.
+          nullable: true
+          example: Brown LLC
+        email:
+          type: string
+          description: "The email of the firm.\r\n\r\nOnly supported in AU."
+          nullable: true
+          example: john.smith@law.com
+        abn:
+          type: string
+          description: "Represents a different field depending on the region.\r\n\r\n* For AU: Australian Business Number (ABN) of the firm.\r\n\r\n* For UK: Value-added Tax Number (VAT) of the firm.\r\n\r\nOnly supported in AU and UK."
+          nullable: true
+          example: '1234567890'
+        acn:
+          type: string
+          description: "Represents a different field depending on the region.\r\n\r\n* For AU: Australian Company Number (ACN) of the firm.\r\n\r\n* For UK: Company Registration Number (CRN) of the firm.\r\n\r\nOnly supported in AU and UK."
+          nullable: true
+          example: '1234567890'
+        streetAddress:
+          allOf:
+          - $ref: '#/components/schemas/FirmAddressDto'
+          description: Street address of the firm.
+          nullable: true
+        mailingAddress:
+          allOf:
+          - $ref: '#/components/schemas/FirmAddressDto'
+          description: Mailing address of the firm.
+          nullable: true
+        dxAddress:
+          allOf:
+          - $ref: '#/components/schemas/FirmDxAddressDto'
+          description: "DX address of the firm.\r\n\r\nOnly supported in AU."
+          nullable: true
+        phone:
+          allOf:
+          - $ref: '#/components/schemas/PhoneNumberDto'
+          description: Phone number of the firm.
+          nullable: true
+        fax:
+          allOf:
+          - $ref: '#/components/schemas/PhoneNumberDto'
+          description: Fax number of the firm.
+          nullable: true
+        isInternal:
+          type: boolean
+          description: Whether firm is being created for internal use. Internal firms will not be subscribed for payment processing and will not be charged.
+          example: false
+        staff:
+          allOf:
+          - $ref: '#/components/schemas/StaffDto'
+          description: The staff member that will be created with the firm. This staff member will become the firm owner.
+          nullable: true
+        subscription:
+          allOf:
+          - $ref: '#/components/schemas/FirmSubscriptionDto'
+          description: Optional subscription details that will be used when creating the firm.
+          nullable: true
+      additionalProperties: false
+    FirmAccountStatus:
+      enum:
+      - Active
+      - Warning
+      - Suspended
+      type: string
+    StylingDetails:
+      type: object
+      properties:
+        primaryColorHexCode:
+          type: string
+          description: Firm's primary color hex code.
+          nullable: true
+          example: '#FF000000'
+        secondaryColorHexCode:
+          type: string
+          description: Firm's secondary color hex code.
+          nullable: true
+          example: '#FF000000'
+        fontFamilyName:
+          type: string
+          description: Firm's font family name.
+          nullable: true
+          example: Open Sans
+      additionalProperties: false
+    UpdateFirmDto:
+      type: object
+      properties:
+        productId:
+          type: string
+          description: "The product/tier the firm is subscribed to. Must be set when creating the firm and is optional when updating the firm.\r\n\r\nThe supported products are listed in order below, the identifier (in brackets) must be used.\r\n\r\n* Bill (SMK001)\r\n\r\n* Boost (SMK004)\r\n\r\n* Grow (SMK002)\r\n\r\n* Prosper + (SMK003)\r\n\r\nPossible values: SMK001, SMK004, SMK002, SMK003"
+          nullable: true
+          example: SMK001
+        addOnIds:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+          description: "The optional add-ons the firm is subscribed to. Must be specified with an accompanying productId.\r\n\r\nThe supported add-ons are listed below, the identifier (listed in brackets) must be used.\r\n\r\n* Intake (ADD001)\r\n\r\n* AutoTime (ADD003)\r\n\r\n* FamilyPro (ADD004)\r\n\r\n* Api (ADD005)\r\n\r\n* Workflows (ADD006)\r\n\r\n* PowerBI (ADD007)\r\n\r\n* Archie (ADD008)\r\n\r\n* SSO (ADD010)\r\n\r\nPossible values: ADD01, ADD003, ADD004, ADD005, ADD006, ADD007, ADD008, ADD010"
+          nullable: true
+          example:
+          - ADD01
+          - ADD003
+        name:
+          type: string
+          description: The name of the firm.
+          nullable: true
+          example: Brown LLC
+        email:
+          type: string
+          description: "The email of the firm.\r\n\r\nOnly supported in AU."
+          nullable: true
+          example: john.smith@law.com
+        abn:
+          type: string
+          description: "Represents a different field depending on the region.\r\n\r\n* For AU: Australian Business Number (ABN) of the firm.\r\n\r\n* For UK: Value-added Tax Number (VAT) of the firm.\r\n\r\nOnly supported in AU and UK."
+          nullable: true
+          example: '1234567890'
+        acn:
+          type: string
+          description: "Represents a different field depending on the region.\r\n\r\n* For AU: Australian Company Number (ACN) of the firm.\r\n\r\n* For UK: Company Registration Number (CRN) of the firm.\r\n\r\nOnly supported in AU and UK."
+          nullable: true
+          example: '1234567890'
+        streetAddress:
+          allOf:
+          - $ref: '#/components/schemas/FirmAddressDto'
+          description: Street address of the firm.
+          nullable: true
+        mailingAddress:
+          allOf:
+          - $ref: '#/components/schemas/FirmAddressDto'
+          description: Mailing address of the firm.
+          nullable: true
+        dxAddress:
+          allOf:
+          - $ref: '#/components/schemas/FirmDxAddressDto'
+          description: "DX address of the firm.\r\n\r\nOnly supported in AU."
+          nullable: true
+        phone:
+          allOf:
+          - $ref: '#/components/schemas/PhoneNumberDto'
+          description: Phone number of the firm.
+          nullable: true
+        fax:
+          allOf:
+          - $ref: '#/components/schemas/PhoneNumberDto'
+          description: Fax number of the firm.
+          nullable: true
+        status:
+          allOf:
+          - $ref: '#/components/schemas/FirmStatusDto'
+          description: The status of the firm.
+          nullable: true
+      additionalProperties: false
+    FirmUserDto:
+      type: object
+      properties:
+        userId:
+          type: string
+          description: Unique identifier of the associated user.
+          nullable: true
+          example: b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2
+        staffId:
+          type: string
+          description: Unique identifier of the associated staff member..
+          nullable: true
+          example: 750eb5c5-ac0b-7d11-4997-e0ce9d8896c8
+      additionalProperties: false
+      description: Represents a mapping between a user and a staff member in a firm.
+    PhoneNumber:
+      type: object
+      properties:
+        areaCode:
+          type: string
+          description: Phone area code.
+          nullable: true
+          example: '555'
+        number:
+          type: string
+          description: Phone number (excluding area code).
+          nullable: true
+          example: '1234567'
+      additionalProperties: false
+    FirmStatus:
+      type: object
+      properties:
+        status:
+          allOf:
+          - $ref: '#/components/schemas/FirmAccountStatus'
+          description: The status of the firm.
+          example: Active
+        statusMessage:
+          type: string
+          description: The status message of the firm.
+          nullable: true
+      additionalProperties: false
+      description: The status of the firm.
+    Firm:
+      type: object
+      properties:
+        href:
+          type: string
+          nullable: true
+        relation:
+          type: string
+          nullable: true
+        method:
+          type: string
+          default: GET
+          nullable: true
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+        id:
+          type: string
+          description: Unique identifier of the firm.
+          nullable: true
+          example: f4ff1eff-b7fe-4d46-4e46-01d985838d76
+        versionId:
+          type: string
+          description: Version id of the record.
+          nullable: true
+          example: 750eb5c5-ac0b-7d11-4997-e0ce9d8896c8
+        owner:
+          type: string
+          description: "The owner/white-label partner used by the firm.\r\n\r\nPossible values: Smokeball, PracticeEvolve, TriConvey."
+          nullable: true
+          example: Smokeball
+        name:
+          type: string
+          description: The name of the firm.
+          nullable: true
+          example: Brown LLC
+        status:
+          allOf:
+          - $ref: '#/components/schemas/FirmStatus'
+          description: The status of the firm.
+          nullable: true
+        productId:
+          type: string
+          description: "The product/tier the firm is subscribed to. Must be set when creating the firm and is optional when updating the firm.\r\n\r\nThe supported products are listed in order below, the identifier (in brackets) must be used.\r\n\r\n* Bill (SMK001)\r\n\r\n* Boost (SMK004)\r\n\r\n* Grow (SMK002)\r\n\r\n* Prosper + (SMK003)\r\n\r\nPossible values: SMK001, SMK004, SMK002, SMK003"
+          nullable: true
+          example: SMK001
+        addOnIds:
+          type: array
+          items:
+            type: string
+          description: "The optional add-ons the firm is subscribed to. Must be specified with an accompanying productId.\r\n\r\nThe supported add-ons are listed below, the identifier (listed in brackets) must be used.\r\n\r\n* Intake (ADD001)\r\n\r\n* AutoTime (ADD003)\r\n\r\n* FamilyPro (ADD004)\r\n\r\n* Api (ADD005)\r\n\r\n* Workflows (ADD006)\r\n\r\n* PowerBI (ADD007)\r\n\r\n* Archie (ADD008)\r\n\r\n* SSO (ADD010)\r\n\r\n* PracticeEvolve (ADD011)\r\n\r\n* CustomReporting (ADD012)\r\n\r\nPossible values: ADD001, ADD003, ADD004, ADD005, ADD006, ADD007, ADD008, ADD010, ADD011, ADD012"
+          nullable: true
+          example:
+          - ADD001
+          - ADD003
+        email:
+          type: string
+          description: "The email of the firm.\r\n\r\nOnly supported in AUS."
+          nullable: true
+          example: john.smith@law.com
+        abn:
+          type: string
+          description: "For AU: Australian Business Number (ABN) of the firm.\r\n\r\nFor UK: Value-added Tax Number (VAT) of the firm.\r\n\r\nOnly supported in AU and UK."
+          nullable: true
+          example: '1234567890'
+        acn:
+          type: string
+          description: "For AU: Australian Company Number (ACN) of the firm.\r\n\r\nFor UK: Company Registration Number (CRN) of the firm.\r\n\r\nOnly supported in AU and UK."
+          nullable: true
+          example: '1234567890'
+        streetAddress:
+          allOf:
+          - $ref: '#/components/schemas/FirmAddress'
+          description: Street address of the firm.
+          nullable: true
+        mailingAddress:
+          allOf:
+          - $ref: '#/components/schemas/FirmAddress'
+          description: Mailing address of the firm.
+          nullable: true
+        dxAddress:
+          allOf:
+          - $ref: '#/components/schemas/DxAddress'
+          description: "DX address of the firm.\r\n\r\nOnly supported in AUS."
+          nullable: true
+        phone:
+          allOf:
+          - $ref: '#/components/schemas/PhoneNumber'
+          description: Phone number of the firm.
+          nullable: true
+        fax:
+          allOf:
+          - $ref: '#/components/schemas/PhoneNumber'
+          description: Fax number of the firm.
+          nullable: true
+        logo:
+          type: string
+          description: Logo of the firm.
+          nullable: true
+          example: https://example-logo-url.com/image
+        stylingDetails:
+          allOf:
+          - $ref: '#/components/schemas/StylingDetails'
+          description: Styling details of the firm.
+          nullable: true
+        licenceNumbers:
+          type: array
+          items:
+            $ref: '#/components/schemas/LicenceNumber'
+          description: Licence numbers of the firm.
+          nullable: true
+        createdDate:
+          type: string
+          description: The date when the firm was created in UTC.
+          format: date-time
+          nullable: true
+          example: '2024-01-15T10:30:00Z'
+      additionalProperties: false
+    FirmStatusDto:
+      type: object
+      properties:
+        status:
+          allOf:
+          - $ref: '#/components/schemas/FirmAccountStatus'
+          description: The status of the firm account.
+          example: Active
+        statusMessage:
+          type: string
+          description: The status message of the firm. If left blank, an appropriate message is set depending on the status.
+          nullable: true
+      additionalProperties: false
+      description: The status of the firm.
+    DxAddress:
+      type: object
+      properties:
+        number:
+          type: string
+          description: Direct Exchange number (if applicable).
+          nullable: true
+          example: '376'
+        exchange:
+          type: string
+          description: Direct Exchange name.
+          nullable: true
+          example: DX
+        state:
+          type: string
+          description: State, province, or region.
+          nullable: true
+          example: NSW
+      additionalProperties: false
+    ProblemDetails:
+      type: object
+      properties:
+        type:
+          type: string
+          nullable: true
+        title:
+          type: string
+          nullable: true
+        status:
+          type: integer
+          format: int32
+          nullable: true
+        detail:
+          type: string
+          nullable: true
+        instance:
+          type: string
+          nullable: true
+      additionalProperties: {}
+    FirmAddressDto:
+      type: object
+      properties:
+        buildingLevel:
+          type: string
+          description: Building level in address (if applicable).
+          nullable: true
+          example: Level 1
+        unitNumber:
+          type: string
+          description: Unit number in address (if applicable).
+          nullable: true
+          example: '10'
+        unitType:
+          type: string
+          description: Unit type (e.g. Unit,Flat,Villa,Suite,etc.) in address (if applicable).
+          nullable: true
+          example: Suite
+        streetNumber:
+          type: string
+          description: Street number in address.
+          nullable: true
+          example: '100'
+        streetName:
+          type: string
+          description: Street name in address.
+          nullable: true
+          example: Broad
+        streetType:
+          type: string
+          description: Street type (e.g. Street,Road,Avenue,Lane,etc.) in address.
+          nullable: true
+          example: Street
+        addressLine1:
+          type: string
+          description: First line of address.
+          nullable: true
+          example: Level 1/10
+        addressLine2:
+          type: string
+          description: Second line of address (if applicable).
+          nullable: true
+          example: 100 Broad Street
+        city:
+          type: string
+          description: City, district, suburb, town, or village.
+          nullable: true
+          example: Chicago
+        state:
+          type: string
+          description: State, province, or region (if applicable).
+          nullable: true
+          example: IL
+        zipCode:
+          type: string
+          description: Zip or post code.
+          nullable: true
+          example: '60606'
+        county:
+          type: string
+          description: County (if applicable).
+          nullable: true
+          example: ''
+        locality:
+          type: string
+          description: Locality (if applicable).
+          nullable: true
+          example: ''
+        country:
+          type: string
+          description: Country.
+          nullable: true
+          example: United States
+        careOf:
+          type: string
+          description: Care of the addressee (if applicable).
+          nullable: true
+          example: ''
+        poBoxType:
+          type: string
+          description: PO box type in address (if applicable).
+          nullable: true
+          example: ''
+        poBoxNumber:
+          type: string
+          description: PO box Number in address (if applicable).
+          nullable: true
+          example: ''
+      additionalProperties: false
+    StaffDto:
+      type: object
+      properties:
+        userId:
+          type: string
+          description: "Unique identifier of the associated user. Used to map staff member to the specified user id and ignored if left blank.\r\nUse the FirmUsers API to remove a staff/user mapping."
+          nullable: true
+          example: b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2
+        title:
+          type: string
+          description: Staff member's title.
+          nullable: true
+          example: Mr
+        firstName:
+          type: string
+          description: Staff member's first name.
+          nullable: true
+          example: John
+        middleName:
+          type: string
+          description: Staff member's middle name (if applicable).
+          nullable: true
+          example: ''
+        lastName:
+          type: string
+          description: Staff member's last name.
+          nullable: true
+          example: Smith
+        initials:
+          type: string
+          description: Staff member's initials.
+          nullable: true
+          example: JS
+        phone:
+          allOf:
+          - $ref: '#/components/schemas/PhoneNumberDto'
+          description: Staff member's phone number.
+          nullable: true
+        cell:
+          allOf:
+          - $ref: '#/components/schemas/PhoneNumberDto'
+          description: Staff member's cell number.
+          nullable: true
+        email:
+          type: string
+          description: Staff member's email address.
+          nullable: true
+          example: john.smith@brown.com
+        role:
+          type: string
+          description: Staff member's role.
+          nullable: true
+          example: Bookkeeper
+        avatar:
+          type: string
+          description: Staff member's avatar.
+          nullable: true
+          example: https://example-avatar-url.com/image
+        former:
+          type: boolean
+          description: "Whether he/she is a former member. \r\n\r\nCaution: Setting a staff member to former staff will also deregister them from the firm."
+          nullable: true
+          example: false
+        colorFill:
+          type: string
+          description: Staff member's fill color hex code.
+          nullable: true
+          example: '#797d85'
+        colorStroke:
+          type: string
+          description: Staff member's stroke color hex code.
+          nullable: true
+          example: '#64666a'
+      additionalProperties: false
+    FirmUser:
+      type: object
+      properties:
+        id:
+          type: string
+          nullable: true
+        href:
+          type: string
+          nullable: true
+        relation:
+          type: string
+          nullable: true
+        method:
+          type: string
+          default: GET
+          nullable: true
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+        staffId:
+          type: string
+          description: Unique identifier of the staff member.
+          nullable: true
+          example: 750eb5c5-ac0b-7d11-4997-e0ce9d8896c8
+        userId:
+          type: string
+          description: Unique identifier of the user.
+          nullable: true
+          example: b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2
+        isFormerUser:
+          type: boolean
+          description: Returns true if this user is a former user.
+          example: false
+      additionalProperties: false
+  securitySchemes:
+    api-key:
+      type: apiKey
+      name: x-api-key
+      in: header
+    token:
+      type: apiKey
+      name: Authorization
+      in: header
+      x-amazon-apigateway-authtype: cognito_user_pools

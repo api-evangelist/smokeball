@@ -1,0 +1,511 @@
+openapi: 3.0.1
+info:
+  title: Smokeball Activity Codes API
+  version: '1.0'
+  description: REST API for integrating with Smokeball legal practice management software. Supports matters, contacts, documents, time entries, billing, trust accounting, staff, webhooks, and law firm workflows across US, AU, and UK regions. Uses OAuth 2.0 (client credentials) authentication.
+  contact:
+    name: Smokeball Developer Support
+    url: https://docs.smokeball.com/docs/api-docs/1e13a13124aee-introduction
+  x-api-id: smokeball
+  x-audience: external-public
+servers:
+- url: https://api.smokeball.com
+- url: https://api.smokeball.com.au
+- url: https://api.smokeball.co.uk
+- url: https://stagingapi.smokeball.com
+- url: https://stagingapi.smokeball.com.au
+- url: https://stagingapi.smokeball.co.uk
+security:
+- api-key: []
+  token: []
+tags:
+- name: Activity Codes
+paths:
+  /activitycodes/{id}:
+    get:
+      tags:
+      - Activity Codes
+      summary: Get an activity code
+      description: Retrieves a specified activity code.
+      operationId: GetActivityCodeById
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: When request is successful. Returns an 'Activity' object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Activity'
+        '400':
+          description: When an unsupported request is made.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '403':
+          description: When activity code with specified id is not associated with authenticated client.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: When activity code with specified id does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+    put:
+      tags:
+      - Activity Codes
+      summary: Update an activity code
+      description: Updates an activity code.
+      operationId: UpdateActivityCode
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/ActivityDto'
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/ActivityDto'
+          application/*+json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/ActivityDto'
+      responses:
+        '202':
+          description: When request is accepted. Returns a hypermedia 'Link' object of the activity code to be updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Link'
+        '400':
+          description: When an unsupported request is made.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '403':
+          description: When activity code with specified id is not associated with authenticated client.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: When activity code with specified id does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+    delete:
+      tags:
+      - Activity Codes
+      summary: Delete an activity code
+      description: Deletes an activity code.
+      operationId: DeleteActivityCode
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '202':
+          description: When request is accepted. Returns a hypermedia 'Link' object of the activity code to be deleted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Link'
+        '400':
+          description: When an unsupported request is made.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '403':
+          description: When activity code with specified id is not associated with authenticated client.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: When activity code with specified id does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+  /activitycodes:
+    get:
+      tags:
+      - Activity Codes
+      summary: Get activity codes
+      description: Returns a list of activity codes.
+      operationId: GetActivityCodes
+      parameters:
+      - name: Offset
+        in: query
+        schema:
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+          format: int32
+      - name: Limit
+        in: query
+        schema:
+          maximum: 500
+          minimum: 1
+          type: integer
+          format: int32
+      - name: UpdatedSince
+        in: query
+        description: Returns expenses updated since a specified time (.net ticks representation of the UTC datetime).
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: When request is successful. Returns a paged collection of 'ActivityCode' objects.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ActivityPagedCollection'
+        '400':
+          description: When an unsupported request is made.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+    post:
+      tags:
+      - Activity Codes
+      summary: Create an activity code
+      description: Creates an activity code.
+      operationId: CreateActivityCode
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/ActivityDto'
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/ActivityDto'
+          application/*+json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/ActivityDto'
+      responses:
+        '202':
+          description: When request is accepted. Returns a hypermedia 'Link' object of the activity code to be created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Link'
+        '400':
+          description: When an unsupported request is made.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+components:
+  schemas:
+    ActivityRateType:
+      enum:
+      - 0
+      - 1
+      - 2
+      type: integer
+      description: "The activity rate type.\r\n\r\nPossible values: UseDefaultStaffRate = '0', OverrideRateForAllStaff = '1', OverrideRatePerStaff = '2'"
+      format: int32
+    Activity:
+      type: object
+      properties:
+        href:
+          type: string
+          nullable: true
+        relation:
+          type: string
+          nullable: true
+        method:
+          type: string
+          default: GET
+          nullable: true
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+        id:
+          type: string
+          description: Unique identifier of the activity.
+          nullable: true
+          example: 23d2a4bc-8529-462e-8560-dfbf4fa24e49
+        versionId:
+          type: string
+          description: Unique version identifier of the activity.
+          nullable: true
+          example: 23d2a4bc-8529-462e-8560-dfbf4fa24e49
+        updatedByUserId:
+          type: string
+          description: Unique identifier of the user that last updated the activity.
+          nullable: true
+          example: 750eb5c5-ac0b-7d11-4997-e0ce9d8896c8
+        type:
+          allOf:
+          - $ref: '#/components/schemas/EntryType'
+          description: "Type of the activity.\r\n\r\nPossible values: Fixed = '0', Time = '1', Expense = '2'"
+          example: 0
+        description:
+          type: string
+          description: Description of the activity.
+          nullable: true
+          example: Contract review
+        code:
+          type: string
+          description: Code of the activity.
+          nullable: true
+          example: CR
+        isBillable:
+          type: boolean
+          description: True if the activity is billable.
+          example: true
+        rateType:
+          allOf:
+          - $ref: '#/components/schemas/ActivityRateType'
+          description: "The activity rate type.\r\n\r\nPossible values: UseDefaultStaffRate = '0', OverrideRateForAllStaff = '1', OverrideRatePerStaff = '2'"
+          example: 2
+        rate:
+          type: number
+          description: "Rate of the activity in dollars.\r\n\r\nIf set, rate type must be OverrideRateForAllStaff"
+          format: double
+          example: 23.2
+        quantity:
+          type: number
+          description: "Quantity of the activity. This is the default value used when creating an expense or time-based fee.\r\n\r\nFor type 'Expense', this field represents the quantity of the expense in units.\r\nFor type 'Time', this field represents the duration of in minutes, divided by 100,\r\ne.g. for 1 hour duration, quantity is 0.6, which is 60 minutes divided by 100.\r\n\r\nApplies only for 'Time' and 'Expense' types. Not applicable for activity type 'Fixed'."
+          format: double
+          example: 0.6
+        taxInclusive:
+          type: boolean
+          description: "If true, the amount is GST inclusive, otherwise GST exclusive. Only applicable in AU.\r\n\r\nGST inclusive means: Amount exc. GST = Amount - GST, Amount inc. GST = Amount.\r\n\r\nGST exclusive means: Amount exc. GST = Amount, Amount inc. GST = Amount + GST."
+          example: true
+        taxExempt:
+          type: boolean
+          description: Sets tax rate to 0 for the entry (e.g. expense).
+          example: true
+        taxZeroRated:
+          type: boolean
+          description: Indicates the entry is zero-rated for tax purposes. Mutually exclusive with other tax settings.
+          example: false
+        taxOutOfScope:
+          type: boolean
+          description: Indicates the entry is out of scope for tax purposes. Mutually exclusive with other tax settings.
+          example: false
+        isDeleted:
+          type: boolean
+          description: True if the activity is deleted.
+          example: true
+        inputTaxRate:
+          type: number
+          description: Input tax rate of the activity percentage accurate to two decimal places.
+          format: double
+          nullable: true
+          example: 45.63
+        outputTaxRate:
+          type: number
+          description: Output tax rate of the activity percentage accurate to two decimal places.
+          format: double
+          nullable: true
+          example: 45.63
+      additionalProperties: false
+    EntryType:
+      enum:
+      - 0
+      - 1
+      - 2
+      type: integer
+      description: "Type of the activity.\r\n\r\nPossible values: Fixed = '0', Time = '1', Expense = '2'"
+      format: int32
+    Link:
+      type: object
+      properties:
+        id:
+          type: string
+          nullable: true
+        href:
+          type: string
+          nullable: true
+        relation:
+          type: string
+          nullable: true
+        method:
+          type: string
+          default: GET
+          nullable: true
+      additionalProperties: false
+    ActivityPagedCollection:
+      type: object
+      properties:
+        id:
+          type: string
+          nullable: true
+        href:
+          type: string
+          nullable: true
+        relation:
+          type: string
+          nullable: true
+        method:
+          type: string
+          default: GET
+          nullable: true
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/Activity'
+          nullable: true
+        offset:
+          type: integer
+          format: int32
+          nullable: true
+        limit:
+          type: integer
+          format: int32
+          nullable: true
+        size:
+          type: integer
+          format: int64
+        first:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+        previous:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+        next:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+        last:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+      additionalProperties: false
+    ProblemDetails:
+      type: object
+      properties:
+        type:
+          type: string
+          nullable: true
+        title:
+          type: string
+          nullable: true
+        status:
+          type: integer
+          format: int32
+          nullable: true
+        detail:
+          type: string
+          nullable: true
+        instance:
+          type: string
+          nullable: true
+      additionalProperties: {}
+    ActivityDto:
+      type: object
+      properties:
+        updatedByUserId:
+          type: string
+          description: "Unique identifier of the user updating the activity.\r\n\r\nThis field is reserved for server-to-server operations."
+          nullable: true
+          example: 750eb5c5-ac0b-7d11-4997-e0ce9d8896c8
+        type:
+          allOf:
+          - $ref: '#/components/schemas/EntryType'
+          description: "Type of the activity.\r\n\r\nPossible values: Fixed = '0', Time = '1', Expense = '2'"
+          example: 0
+        description:
+          type: string
+          description: Description of the activity.
+          nullable: true
+          example: Review contract
+        code:
+          type: string
+          description: Code of the activity. Cannot be longer than 20 characters.
+          nullable: true
+          example: RC
+        isBillable:
+          type: boolean
+          description: True if the activity is billable.
+          example: false
+        rateType:
+          allOf:
+          - $ref: '#/components/schemas/ActivityRateType'
+          description: "The activity rate type.\r\n            \r\nPossible values: UseDefaultStaffRate = '0', OverrideRateForAllStaff = '1', OverrideRatePerStaff = '2'"
+          example: 0
+        rate:
+          type: number
+          description: "Rate of the activity in dollars.\r\n\r\nIf set, rateType must be OverrideRateForAllStaff"
+          format: double
+          nullable: true
+          example: 23.21
+        quantity:
+          type: number
+          description: "Quantity of the activity. This is the default value used when creating an expense or time-based fee.\r\n\r\nFor type 'Expense', this field represents the quantity of the expense in units.\r\nFor type 'Time', this field represents the duration of in minutes, divided by 100,\r\ne.g. for 1 hour duration, quantity is 0.6, which is 60 minutes divided by 100.\r\n\r\nApplies only for 'Time' and 'Expense' types. Not applicable for activity type 'Fixed'."
+          format: double
+          nullable: true
+          example: 0.6
+        taxInclusive:
+          type: boolean
+          description: "If true, the amount is tax inclusive, otherwise tax exclusive. Only applicable in AU and UK regions.\r\n\r\nTax inclusive means: Amount exc. tax = Amount - Tax, Amount inc. tax = Amount.\r\n\r\nTax exclusive means: Amount exc. tax = Amount, Amount inc. tax = Amount + Tax."
+          example: false
+        taxExempt:
+          type: boolean
+          description: "True if the activity is exempt from tax.\r\n\r\nThis field is mutually exclusive with TaxZeroRated and TaxOutOfScope."
+          example: false
+        taxZeroRated:
+          type: boolean
+          description: "True if the activity is zero-rated for tax purposes. Only supported in UK regions.\r\n\r\nThis field is mutually exclusive with TaxOutOfScope and TaxExempt."
+          example: false
+        taxOutOfScope:
+          type: boolean
+          description: "True if the activity is out of scope for tax purposes. Only supported in UK regions.\r\n\r\nThis field is mutually exclusive with TaxZeroRated and TaxExempt."
+          example: false
+        inputTaxRate:
+          type: number
+          description: "Input tax rate of the activity in a percentage accurate to two decimal places.\r\ne.g: 45.63"
+          format: double
+          nullable: true
+        outputTaxRate:
+          type: number
+          description: "Output tax rate of the activity percentage accurate to two decimal places.\r\ne.g: 45.63"
+          format: double
+          nullable: true
+      additionalProperties: false
+  securitySchemes:
+    api-key:
+      type: apiKey
+      name: x-api-key
+      in: header
+    token:
+      type: apiKey
+      name: Authorization
+      in: header
+      x-amazon-apigateway-authtype: cognito_user_pools

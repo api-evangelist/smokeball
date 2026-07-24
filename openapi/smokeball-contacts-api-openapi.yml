@@ -1,0 +1,2687 @@
+openapi: 3.0.1
+info:
+  title: Smokeball Activity Codes Contacts API
+  version: '1.0'
+  description: REST API for integrating with Smokeball legal practice management software. Supports matters, contacts, documents, time entries, billing, trust accounting, staff, webhooks, and law firm workflows across US, AU, and UK regions. Uses OAuth 2.0 (client credentials) authentication.
+  contact:
+    name: Smokeball Developer Support
+    url: https://docs.smokeball.com/docs/api-docs/1e13a13124aee-introduction
+  x-api-id: smokeball
+  x-audience: external-public
+servers:
+- url: https://api.smokeball.com
+- url: https://api.smokeball.com.au
+- url: https://api.smokeball.co.uk
+- url: https://stagingapi.smokeball.com
+- url: https://stagingapi.smokeball.com.au
+- url: https://stagingapi.smokeball.co.uk
+security:
+- api-key: []
+  token: []
+tags:
+- name: Contacts
+paths:
+  /contacts/{contactId}/relations:
+    get:
+      tags:
+      - Contacts
+      summary: Get contact relations
+      description: Returns a list of relations for a specified contact if associated with the authenticated client.
+      operationId: GetRelations
+      parameters:
+      - name: contactId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: When request is successful. Returns a paged collection of 'Link' objects.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LinkPagedCollection'
+        '403':
+          description: When contact with specified id is not associated with authenticated client.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: When contact with specified id does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+    post:
+      tags:
+      - Contacts
+      summary: Create a contact relation
+      description: Creates a relation for a specified contact.
+      operationId: CreateRelation
+      parameters:
+      - name: contactId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/ContactRelationDto'
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/ContactRelationDto'
+          application/*+json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/ContactRelationDto'
+      responses:
+        '202':
+          description: When request is accepted. Returns a 'Link' object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Link'
+        '400':
+          description: When related contact id is not provided.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '403':
+          description: When contact with specified id is not associated with authenticated client.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: When contact with specified id does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+  /contacts/{contactId}/relations/{relatedContactId}:
+    get:
+      tags:
+      - Contacts
+      summary: Get a contact relation
+      description: Retrieves a relation for a specified contact if associated with the authenticated client.
+      operationId: GetRelationById
+      parameters:
+      - name: contactId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: relatedContactId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: When request is successful. Returns a 'Link' object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Link'
+        '403':
+          description: When contact with specified id is not associated with authenticated client.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: When contact with specified id does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+    put:
+      tags:
+      - Contacts
+      summary: Update a contact relation
+      description: Updates a relation for a specified contact.
+      operationId: UpdateRelation
+      parameters:
+      - name: contactId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: relatedContactId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/ContactRelationDto'
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/ContactRelationDto'
+          application/*+json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/ContactRelationDto'
+      responses:
+        '202':
+          description: When request is accepted. Returns a 'Link' object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Link'
+        '400':
+          description: When an unsupported request is made.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '403':
+          description: When contact with specified id is not associated with authenticated client.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: When contact with specified id does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+    delete:
+      tags:
+      - Contacts
+      summary: Delete a contact relation
+      description: Deletes a relation for a specified contact.
+      operationId: DeleteRelation
+      parameters:
+      - name: contactId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: relatedContactId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '202':
+          description: When request is accepted. Returns a 'Link' object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Link'
+        '403':
+          description: When contact with specified id is not associated with authenticated client.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: When contact with specified id does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+  /contacts:
+    get:
+      tags:
+      - Contacts
+      summary: Get contacts
+      description: Returns a list of contacts.
+      operationId: GetContacts
+      parameters:
+      - name: Offset
+        in: query
+        schema:
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+          format: int32
+      - name: Limit
+        in: query
+        schema:
+          maximum: 500
+          minimum: 1
+          type: integer
+          format: int32
+      - name: UpdatedSince
+        in: query
+        description: Returns contacts updated since a specified time (.net ticks representation of the UTC datetime).
+        schema:
+          type: integer
+          format: int64
+      - name: ExcludeDeletedContacts
+        in: query
+        description: Excludes (filters out) deleted contacts if set to true.
+        schema:
+          type: boolean
+          example: true
+        example: true
+      - name: Type
+        in: query
+        description: "Filters result by one more contact types if set. Returns all contact types by default.\r\nPossible values: Staff, Person, Organisation, GroupOfPeople, Trust"
+        schema:
+          type: array
+          items:
+            type: string
+      - name: Search
+        in: query
+        description: ' Available fields: email, phone, name'
+        schema:
+          type: array
+          items:
+            type: string
+      - name: Sort
+        in: query
+        description: ' Available fields: lastUpdated'
+        schema:
+          type: string
+      - name: Fields
+        in: query
+        description: ' Available fields: passportDetails, deathDetails, citizenshipDetails, utbmsDetails, tags, executionOptions, voiDetails'
+        schema:
+          type: string
+      responses:
+        '200':
+          description: When request is successful. Returns a paged collection of 'Contact' objects.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContactPagedCollection'
+    post:
+      tags:
+      - Contacts
+      summary: Create a contact
+      description: Creates a contact.
+      operationId: CreateContact
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/ContactDto'
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/ContactDto'
+          application/*+json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/ContactDto'
+      responses:
+        '202':
+          description: When request is accepted. Returns a 'Link' object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Link'
+        '400':
+          description: When an unsupported request is made.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '403':
+          description: When the authenticated account does not have access to create contacts.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+  /contacts/{id}:
+    get:
+      tags:
+      - Contacts
+      summary: Get a contact
+      description: Retrieves a specified contact.
+      operationId: GetContactById
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: When request is successful. Returns a 'Contact' object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Contact'
+        '403':
+          description: When contact with specified id is not associated with authenticated client.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: When contact with specified id does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+    put:
+      tags:
+      - Contacts
+      summary: Update a contact
+      description: Updates a specified contact.
+      operationId: UpdateContact
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/ContactDto'
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/ContactDto'
+          application/*+json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/ContactDto'
+      responses:
+        '202':
+          description: When request is accepted. Returns a 'Link' object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Link'
+        '400':
+          description: When an unsupported request is made.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '403':
+          description: When contact with specified id is not associated with authenticated client.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: When contact with specified id does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+    delete:
+      tags:
+      - Contacts
+      summary: Delete a contact
+      description: Deletes a specified contact.
+      operationId: DeleteContact
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '202':
+          description: When request is accepted. Returns a 'Link' object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Link'
+        '403':
+          description: When contact with specified id is not associated with authenticated client.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: When contact with specified id does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+  /contacts/{id}/tags:
+    get:
+      tags:
+      - Contacts
+      summary: Get contact tags
+      description: Retrieves a specified contacts tags.
+      operationId: GetContactTagsById
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: When request is successful. Returns a collection of 'Tag' objects.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagCollection'
+        '403':
+          description: When contact with specified id is not associated with authenticated client.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: When contact with specified id does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+    post:
+      tags:
+      - Contacts
+      summary: Add tags to a contact
+      description: Adds tags to a contact.
+      operationId: AddContactTags
+      parameters:
+      - name: id
+        in: path
+        description: The contact ID
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        description: The list of tags to add
+        content:
+          application/json-patch+json:
+            schema:
+              type: array
+              items:
+                type: string
+          application/json:
+            schema:
+              type: array
+              items:
+                type: string
+          application/*+json:
+            schema:
+              type: array
+              items:
+                type: string
+      responses:
+        '201':
+          description: When request is successful. Returns a hypermedia 'Link' object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Link'
+        '404':
+          description: When contact with specified id does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+  /contacts/{id}/tags/{tagId}:
+    delete:
+      tags:
+      - Contacts
+      summary: Remove tags from a contact
+      description: Removes tags from a contact.
+      operationId: RemoveContactTags
+      parameters:
+      - name: id
+        in: path
+        description: The contact ID
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: tagId
+        in: path
+        description: The tag ID (optional for bulk delete)
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        description: The list of tags for bulk delete
+        content:
+          application/json-patch+json:
+            schema:
+              type: array
+              items:
+                type: string
+          application/json:
+            schema:
+              type: array
+              items:
+                type: string
+          application/*+json:
+            schema:
+              type: array
+              items:
+                type: string
+      responses:
+        '202':
+          description: When request is accepted. Returns a hypermedia 'Link' object of the contact tags.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Link'
+        '400':
+          description: When an unsupported request is made.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: When contact with specified id does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+components:
+  schemas:
+    ContactPagedCollection:
+      type: object
+      properties:
+        id:
+          type: string
+          nullable: true
+        href:
+          type: string
+          nullable: true
+        relation:
+          type: string
+          nullable: true
+        method:
+          type: string
+          default: GET
+          nullable: true
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/Contact'
+          nullable: true
+        offset:
+          type: integer
+          format: int32
+          nullable: true
+        limit:
+          type: integer
+          format: int32
+          nullable: true
+        size:
+          type: integer
+          format: int64
+        first:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+        previous:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+        next:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+        last:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+      additionalProperties: false
+    VoiDetails:
+      type: object
+      properties:
+        isCompleted:
+          type: boolean
+          description: Indicates if VOI has been completed
+          example: true
+        completedDateTime:
+          type: string
+          description: Date and time when VOI was completed
+          format: date-time
+          nullable: true
+          example: '2024-01-15T10:30:00Z'
+        reference:
+          type: string
+          description: Reference number or order ID from the VOI service
+          nullable: true
+          example: '12345678'
+        source:
+          type: string
+          description: Source/provider of the VOI service
+          nullable: true
+          example: InfoTrackID
+        status:
+          type: string
+          description: Current status of the VOI check
+          nullable: true
+          example: Complete
+      additionalProperties: false
+      description: "Verification of Identity (VOI) details\r\n\r\nOnly supported in AU."
+    ExecutionPerson:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Person's full name
+          nullable: true
+          example: John Smith
+        address:
+          allOf:
+          - $ref: '#/components/schemas/Address'
+          description: Person's address
+          nullable: true
+        personType:
+          type: string
+          description: "Person type for execution.\r\n\r\nOnly supported in AU."
+          nullable: true
+          example: Director
+        selectedOfficeHeld:
+          type: string
+          description: Office held by the person.
+          nullable: true
+          example: Director
+        voiDetails:
+          allOf:
+          - $ref: '#/components/schemas/VoiDetails'
+          description: Verification of identity details for this person
+          nullable: true
+      additionalProperties: false
+      description: "Represents an authorized person for organization execution\r\n\r\nOnly supported in AU."
+    DxAddressDto:
+      type: object
+      properties:
+        number:
+          type: string
+          nullable: true
+        exchange:
+          type: string
+          nullable: true
+        state:
+          type: string
+          nullable: true
+      additionalProperties: false
+    AddressDto:
+      type: object
+      properties:
+        careOf:
+          type: string
+          description: Care of the addressee (if applicable).
+          nullable: true
+          example: John Smith
+        buildingLevel:
+          type: string
+          description: Building level in address (if applicable).
+          nullable: true
+          example: Level 1
+        unitNumber:
+          type: string
+          description: Unit number in address (if applicable).
+          nullable: true
+          example: '10'
+        unitType:
+          type: string
+          description: "Unit type in address (if applicable). Accepts custom values.\r\n\r\ne.g. Apartment, Unit, Flat, Villa, Suite."
+          nullable: true
+          example: Suite
+        streetNumber:
+          type: string
+          description: Street number in address.
+          nullable: true
+          example: '100'
+        streetName:
+          type: string
+          description: Street name in address.
+          nullable: true
+          example: Broad
+        streetType:
+          type: string
+          description: "Street type. Accepts custom values.\r\n\r\ne.g. Street, Road, Avenue, Lane."
+          nullable: true
+          example: Street
+        addressLine1:
+          type: string
+          description: "First line of address.\r\n\r\nOnly supported in the US."
+          nullable: true
+          example: Level 1/10
+        addressLine2:
+          type: string
+          description: "Second line of address (if applicable).\r\n\r\nOnly supported in the US."
+          nullable: true
+          example: 100 Broad Street
+        city:
+          type: string
+          description: City, district, suburb, town, or village.
+          nullable: true
+          example: Chicago
+        state:
+          type: string
+          description: State, province, or region.
+          nullable: true
+          example: IL
+        zipCode:
+          type: string
+          description: Zip or post code.
+          nullable: true
+          example: '60606'
+        locality:
+          type: string
+          description: "Locality.\r\n\r\nOnly supported in the UK."
+          nullable: true
+          example: Dunkirk
+        county:
+          type: string
+          description: "County.\r\n\r\nOnly supported in the US and UK."
+          nullable: true
+          example: New York
+        country:
+          type: string
+          description: Country.
+          nullable: true
+          example: United States
+        poBox:
+          allOf:
+          - $ref: '#/components/schemas/PoBoxAddressDto'
+          description: "PO Box details.\r\n\r\nOnly supported in AU."
+          nullable: true
+      additionalProperties: false
+    Address:
+      type: object
+      properties:
+        careOf:
+          type: string
+          description: Care of the addressee (if applicable).
+          nullable: true
+          example: John Smith
+        buildingLevel:
+          type: string
+          description: Building level in address (if applicable).
+          nullable: true
+          example: Level 1
+        unitNumber:
+          type: string
+          description: Unit number in address (if applicable).
+          nullable: true
+          example: '10'
+        unitType:
+          type: string
+          description: "Unit type in address (if applicable). Accepts custom values.\r\n\r\ne.g. Apartment, Unit, Flat, Villa, Suite."
+          nullable: true
+          example: Suite
+        streetNumber:
+          type: string
+          description: Street number in address.
+          nullable: true
+          example: '100'
+        streetName:
+          type: string
+          description: Street name in address.
+          nullable: true
+          example: Broad
+        streetType:
+          type: string
+          description: "Street type. Accepts custom values.\r\n\r\ne.g. Street, Road, Avenue, Lane."
+          nullable: true
+          example: Street
+        addressLine1:
+          type: string
+          description: First line of address.
+          nullable: true
+          example: Level 1/10
+        addressLine2:
+          type: string
+          description: Second line of address (if applicable).
+          nullable: true
+          example: 100 Broad Street
+        city:
+          type: string
+          description: City, district, suburb, town, or village.
+          nullable: true
+          example: Chicago
+        state:
+          type: string
+          description: State, province, or region.
+          nullable: true
+          example: IL
+        zipCode:
+          type: string
+          description: Zip or post code.
+          nullable: true
+          example: '60606'
+        locality:
+          type: string
+          description: "Locality.\r\n\r\nOnly supported in the UK."
+          nullable: true
+          example: Dunkirk
+        county:
+          type: string
+          description: "County.\r\n\r\nOnly supported in the US and UK."
+          nullable: true
+          example: New York
+        country:
+          type: string
+          description: Country.
+          nullable: true
+          example: United States
+        poBox:
+          allOf:
+          - $ref: '#/components/schemas/PoBoxAddress'
+          description: PO Box details (if applicable).
+          nullable: true
+      additionalProperties: false
+    Link:
+      type: object
+      properties:
+        id:
+          type: string
+          nullable: true
+        href:
+          type: string
+          nullable: true
+        relation:
+          type: string
+          nullable: true
+        method:
+          type: string
+          default: GET
+          nullable: true
+      additionalProperties: false
+    GroupOfPeople:
+      type: object
+      properties:
+        people:
+          type: array
+          items:
+            $ref: '#/components/schemas/Link'
+          description: List of contact person hypermedia links.
+          nullable: true
+        residentialAddress:
+          allOf:
+          - $ref: '#/components/schemas/Address'
+          description: Contact group's residential address details.
+          nullable: true
+        mailingAddress:
+          allOf:
+          - $ref: '#/components/schemas/Address'
+          description: "Contact group's mailing address details.\r\n            \r\nOnly supported in the US."
+          nullable: true
+        name:
+          type: string
+          description: Names of the people in the group. Limited to the first 5 names.
+          nullable: true
+          example: John Smith & Jane Citizen
+      additionalProperties: false
+    TrustDto:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Trust's name.
+          nullable: true
+          example: Trinity Trust
+        status:
+          type: string
+          description: "Trust's status.\r\n\r\nStandard values are: as Trustee of, as Trustees of, as Co-Trustees of, as an Individual and as Trustee of, as Successor Trustee of.\r\n\r\nA custom value can be supplied instead."
+          nullable: true
+          example: as Trustee of
+        trustNumber:
+          type: string
+          description: Trust's number.
+          nullable: true
+          example: '12345678'
+        executedDate:
+          type: string
+          description: Date trust was executed.
+          format: date-time
+          nullable: true
+          example: '1980-07-01'
+        phone:
+          allOf:
+          - $ref: '#/components/schemas/PhoneNumberDto'
+          description: Trust's phone details.
+          nullable: true
+        fax:
+          allOf:
+          - $ref: '#/components/schemas/PhoneNumberDto'
+          description: Trust's fax details.
+          nullable: true
+        address:
+          allOf:
+          - $ref: '#/components/schemas/AddressDto'
+          description: Trust's address.
+          nullable: true
+        trustees:
+          type: array
+          items:
+            $ref: '#/components/schemas/TrusteeDto'
+          description: List of trustees.
+          nullable: true
+          example:
+          - Name: John Smith
+            Type: Individual
+          - Name: Smithfield Steel
+            Type: Company
+      additionalProperties: false
+    PhoneNumberDto:
+      type: object
+      properties:
+        areaCode:
+          type: string
+          description: Phone area code.
+          nullable: true
+          example: '555'
+        number:
+          type: string
+          description: Phone number (excluding area code).
+          nullable: true
+          example: '1234567'
+      additionalProperties: false
+    CompanyDto:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Company's name.
+          nullable: true
+          example: Brown LLC
+        type:
+          type: string
+          description: "Company's type.\r\n\r\nPossible values for US: 'Corporation', 'Government Agency', 'Limited Liability Company', 'Sole Proprietor', 'Partnership', 'Not-for-Profit'\r\n\r\nPossible values for AU: 'Company', 'Sole Proprietor', 'Partnership', 'Government Department'\r\n\r\nPossible values for UK: 'Company', 'Sole Trader', 'Partnership', 'Limited Liability Partnership', 'Government Department'"
+          nullable: true
+          example: Corporation
+        phone:
+          allOf:
+          - $ref: '#/components/schemas/PhoneNumberDto'
+          description: Company's phone details.
+          nullable: true
+        fax:
+          allOf:
+          - $ref: '#/components/schemas/PhoneNumberDto'
+          description: Company's fax details.
+          nullable: true
+        email:
+          type: string
+          description: Company's email address.
+          nullable: true
+          example: contact@brown.com
+        website:
+          type: string
+          description: Company's website URL.
+          nullable: true
+          example: https://www.brownllc.com
+        notes:
+          type: string
+          description: Additional notes for company (if applicable).
+          nullable: true
+          example: Recently merged with Cyberdyne Inc.
+        businessAddress:
+          allOf:
+          - $ref: '#/components/schemas/AddressWithDxAddressDto'
+          nullable: true
+        mailingAddress:
+          allOf:
+          - $ref: '#/components/schemas/AddressDto'
+          description: Only applicable for USA.
+          nullable: true
+        abn:
+          type: string
+          description: "For AU: Australian Company Number (ABN) of the company.\r\n\r\nFor UK: Company Registration Number (CRN) of the company.\r\n\r\nOnly supported in AU and UK."
+          nullable: true
+          example: '1234567890'
+        companyNumberType:
+          type: string
+          description: "Company's Australian company number type.\r\n\r\nPossible values: 'ACN', 'ARBN'\r\n\r\nOnly supported in AU."
+          nullable: true
+          example: ACN
+        companyNumber:
+          type: string
+          description: "Company's Australian Company Number.\r\n\r\nOnly supported in AU."
+          nullable: true
+          example: '234567890'
+        doingBusinessAsName:
+          type: string
+          description: "Doing Business As (DBA) name.\r\n            \r\nOnly supported in US."
+          nullable: true
+          example: Brown Holdings
+        tradingAs:
+          type: string
+          description: "Trading As type (e.g. 'Trading As', 'Doing Business As').\r\n            \r\nOnly supported in AU."
+          nullable: true
+          example: Trading As
+        tradingName:
+          type: string
+          description: "Trading name of the organisation.\r\n            \r\nOnly supported in AU and UK."
+          nullable: true
+          example: Brown Trading Co
+        staffIds:
+          type: array
+          items:
+            type: string
+          description: List of Staff IDs for this company.
+          nullable: true
+          example:
+          - 73481c13-b7f8-4610-b221-aaccbf7aaade
+          - 18cd6029-4a9e-4b99-bae5-710a7d79a19b
+        directorIds:
+          type: array
+          items:
+            type: string
+          description: List of Director IDs for this company.
+          nullable: true
+          example:
+          - 73481c13-b7f8-4610-b221-aaccbf7aaade
+          - 18cd6029-4a9e-4b99-bae5-710a7d79a19b
+        executionOptions:
+          allOf:
+          - $ref: '#/components/schemas/ExecutionOptionsDto'
+          description: "Company's execution options for document signing and VOI details.\r\n\r\nOnly supported in AU."
+          nullable: true
+      additionalProperties: false
+    AddressWithDxAddressDto:
+      type: object
+      properties:
+        careOf:
+          type: string
+          description: Care of the addressee (if applicable).
+          nullable: true
+          example: John Smith
+        buildingLevel:
+          type: string
+          description: Building level in address (if applicable).
+          nullable: true
+          example: Level 1
+        unitNumber:
+          type: string
+          description: Unit number in address (if applicable).
+          nullable: true
+          example: '10'
+        unitType:
+          type: string
+          description: "Unit type in address (if applicable). Accepts custom values.\r\n\r\ne.g. Apartment, Unit, Flat, Villa, Suite."
+          nullable: true
+          example: Suite
+        streetNumber:
+          type: string
+          description: Street number in address.
+          nullable: true
+          example: '100'
+        streetName:
+          type: string
+          description: Street name in address.
+          nullable: true
+          example: Broad
+        streetType:
+          type: string
+          description: "Street type. Accepts custom values.\r\n\r\ne.g. Street, Road, Avenue, Lane."
+          nullable: true
+          example: Street
+        addressLine1:
+          type: string
+          description: "First line of address.\r\n\r\nOnly supported in the US."
+          nullable: true
+          example: Level 1/10
+        addressLine2:
+          type: string
+          description: "Second line of address (if applicable).\r\n\r\nOnly supported in the US."
+          nullable: true
+          example: 100 Broad Street
+        city:
+          type: string
+          description: City, district, suburb, town, or village.
+          nullable: true
+          example: Chicago
+        state:
+          type: string
+          description: State, province, or region.
+          nullable: true
+          example: IL
+        zipCode:
+          type: string
+          description: Zip or post code.
+          nullable: true
+          example: '60606'
+        locality:
+          type: string
+          description: "Locality.\r\n\r\nOnly supported in the UK."
+          nullable: true
+          example: Dunkirk
+        county:
+          type: string
+          description: "County.\r\n\r\nOnly supported in the US and UK."
+          nullable: true
+          example: New York
+        country:
+          type: string
+          description: Country.
+          nullable: true
+          example: United States
+        poBox:
+          allOf:
+          - $ref: '#/components/schemas/PoBoxAddressDto'
+          description: "PO Box details.\r\n\r\nOnly supported in AU."
+          nullable: true
+        dxAddress:
+          allOf:
+          - $ref: '#/components/schemas/DxAddressDto'
+          description: DX address of the company (only applicable for AUS).
+          nullable: true
+      additionalProperties: false
+    CitizenshipDetailsDto:
+      type: object
+      properties:
+        countryOfCitizenship:
+          type: string
+          description: Country of citizenship
+          nullable: true
+          example: USA
+        nationality:
+          type: string
+          description: Nationality
+          nullable: true
+          example: American
+        languageOfInterpreter:
+          type: string
+          description: Language of interpreter
+          nullable: true
+          example: French
+      additionalProperties: false
+    ContactDto:
+      type: object
+      properties:
+        externalSystemId:
+          type: string
+          description: External system id for the contact.
+          nullable: true
+          example: EXT01
+        person:
+          allOf:
+          - $ref: '#/components/schemas/PersonDto'
+          description: Contact person details (if applicable).
+          nullable: true
+        company:
+          allOf:
+          - $ref: '#/components/schemas/CompanyDto'
+          description: Contact company details (if applicable).
+          nullable: true
+        trust:
+          allOf:
+          - $ref: '#/components/schemas/TrustDto'
+          description: "Contact trust details (if applicable).\r\n\r\nOnly supported in US."
+          nullable: true
+        groupOfPeople:
+          allOf:
+          - $ref: '#/components/schemas/GroupOfPeopleDto'
+          description: "Contact group details (if applicable).\r\n\r\nOnly supported in US and AU."
+          nullable: true
+        isDeleted:
+          type: boolean
+          description: Contact can be restored by setting this to false.
+          example: false
+      additionalProperties: false
+    PassportDetails:
+      type: object
+      properties:
+        passportNumber:
+          type: string
+          description: Contact person's passport number.
+          nullable: true
+          example: AB123456
+        passportIssueDate:
+          type: string
+          description: Contact person's passport issue date.
+          format: date-time
+          nullable: true
+          example: '2010-08-01'
+        passportExpireDate:
+          type: string
+          description: Contact person's passport expiry date.
+          format: date-time
+          nullable: true
+          example: '2030-08-01'
+        passportIssueCountry:
+          type: string
+          description: Contact person's passport country of issue.
+          nullable: true
+          example: USA
+        passportIssueAuthority:
+          type: string
+          description: "Contact person's passport issuing authority.\r\n            \r\nOnly supported in the UK."
+          nullable: true
+          example: HM Passport Office
+      additionalProperties: false
+    LinkPagedCollection:
+      type: object
+      properties:
+        id:
+          type: string
+          nullable: true
+        href:
+          type: string
+          nullable: true
+        relation:
+          type: string
+          nullable: true
+        method:
+          type: string
+          default: GET
+          nullable: true
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/Link'
+          nullable: true
+        offset:
+          type: integer
+          format: int32
+          nullable: true
+        limit:
+          type: integer
+          format: int32
+          nullable: true
+        size:
+          type: integer
+          format: int64
+        first:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+        previous:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+        next:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+        last:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+      additionalProperties: false
+    Tag:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Identifier of the tag. Role tags do not have an identifier.
+          nullable: true
+        name:
+          type: string
+          description: Name of tag.
+          nullable: true
+        type:
+          type: string
+          description: Type of tag. Accepted values are 'Role' or 'Custom'
+          example: Custom
+      additionalProperties: false
+      description: Represents a tag with an identifier, name, and type.
+    PersonExecutionOptionsDto:
+      type: object
+      properties:
+        poaType:
+          type: string
+          description: "Power of Attorney type.\r\n\r\nPossible values: 'None', 'General', 'Enduring', 'Medical', 'Financial', 'Other', 'Unset'"
+          nullable: true
+          example: Enduring
+        poaDate:
+          type: string
+          description: Date the Power of Attorney was executed
+          format: date-time
+          nullable: true
+          example: '2023-05-15'
+        attorneyName:
+          type: string
+          description: Name of the attorney
+          nullable: true
+          example: Jane Doe
+        address:
+          allOf:
+          - $ref: '#/components/schemas/AddressDto'
+          description: Attorney's address
+          nullable: true
+        poaRegisteredBook:
+          type: string
+          description: Power of Attorney registration book reference
+          nullable: true
+        poaRegisteredNumber:
+          type: string
+          description: Power of Attorney registration number
+          nullable: true
+        executionType:
+          type: string
+          description: "Person execution type.\r\n\r\nPossible values: 'Individual', 'PowerOfAttorney', 'Other', 'Unset', 'None'"
+          nullable: true
+          example: PowerOfAttorney
+      additionalProperties: false
+      description: "Execution options for individual persons (Power of Attorney)\r\n\r\nOnly supported in AU."
+    PersonDto:
+      type: object
+      properties:
+        title:
+          type: string
+          description: "Contact person's title. Accepts custom values.\r\n\r\ne.g. Mr, Mrs, Miss, Honourable, Judge."
+          nullable: true
+          example: Mr
+        firstName:
+          type: string
+          description: Contact person's first name.
+          nullable: true
+          example: John
+        middleName:
+          type: string
+          description: Contact person's middle name (if applicable).
+          nullable: true
+          example: Michael
+        lastName:
+          type: string
+          description: Contact person's last name.
+          nullable: true
+          example: Smith
+        nameSuffix:
+          type: string
+          description: Contact person's name suffix (if applicable).
+          nullable: true
+          example: PhD
+        customName:
+          type: string
+          description: Contact person's custom name to be used in letters (if applicable).
+          nullable: true
+          example: Johnny
+        residentialAddress:
+          allOf:
+          - $ref: '#/components/schemas/AddressDto'
+          description: Contact person's residential address details.
+          nullable: true
+        mailingAddress:
+          allOf:
+          - $ref: '#/components/schemas/AddressDto'
+          description: "Contact person's mailing address details.\r\n\r\nOnly supported in the US."
+          nullable: true
+        phone:
+          allOf:
+          - $ref: '#/components/schemas/PhoneNumberDto'
+          description: Contact person's phone details.
+          nullable: true
+        phone2:
+          allOf:
+          - $ref: '#/components/schemas/PhoneNumberWithExtensionDto'
+          description: Contact person's alternate phone details.
+          nullable: true
+        fax:
+          allOf:
+          - $ref: '#/components/schemas/PhoneNumberDto'
+          description: "Contact person's fax details.\r\n\r\nOnly supported in the US."
+          nullable: true
+        cell:
+          allOf:
+          - $ref: '#/components/schemas/PhoneNumberDto'
+          description: Contact person's mobile details.
+          nullable: true
+        email:
+          type: string
+          description: Contact person's email address.
+          nullable: true
+          example: john.smith@brown.com
+        notes:
+          type: string
+          description: Additional notes about contact (if applicable).
+          nullable: true
+          example: Prefers to answer work phone.
+        occupation:
+          type: string
+          description: Contact person's occupation.
+          nullable: true
+          example: Bookkeeper
+        birthDate:
+          type: string
+          description: Contact person's date of birth.
+          format: date-time
+          nullable: true
+          example: '1980-07-01'
+        birthPlace:
+          type: string
+          description: Contact person's place of birth.
+          nullable: true
+          example: Chicago
+        birthState:
+          type: string
+          description: Contact person's birth state.
+          nullable: true
+          example: Illinois
+        birthCountry:
+          type: string
+          description: Contact person's birth country.
+          nullable: true
+          example: Australia
+        identificationNumberType:
+          type: string
+          description: "Contact person's type of identification.\r\n\r\ne.g. SSN, ITIN\r\n\r\nOnly supported in the US."
+          nullable: true
+          example: SSN
+        identificationNumber:
+          type: string
+          description: "Contact person's identification number.\r\n\r\nOnly supported in the US."
+          nullable: true
+          example: PP123456789
+        passportDetails:
+          allOf:
+          - $ref: '#/components/schemas/PassportDetailsDto'
+          description: Contact person's passport details.
+          nullable: true
+        deathDetails:
+          allOf:
+          - $ref: '#/components/schemas/DeathDetailsDto'
+          description: Contact person's death details.
+          nullable: true
+        gender:
+          type: string
+          description: "Contact person's gender.\r\n\r\nAccepted values - Male, Female, Other as well as any free text."
+          nullable: true
+          example: Male
+        maritalStatus:
+          type: string
+          description: "Contact person's marital status. Accepts custom values.\r\n\r\ne.g. Single, Married, Separated, Divorced, Widowed, De facto."
+          nullable: true
+          example: Single
+        specialNeeds:
+          type: string
+          description: Brief description of an special needs (if applicable).
+          nullable: true
+          example: Wheelchair access
+        birthFirstName:
+          type: string
+          description: Contact person's first name at birth.
+          nullable: true
+          example: James
+        birthMiddleName:
+          type: string
+          description: Contact person's middle name at birth.
+          nullable: true
+          example: Thomas
+        birthLastName:
+          type: string
+          description: Contact person's last name at birth.
+          nullable: true
+          example: Jones
+        previousNames:
+          type: string
+          description: Contact person's previous names.
+          nullable: true
+          example: Jane Smith
+        correctionsReferenceNumber:
+          type: string
+          description: "Contact person's corrections reference number.\r\n\r\nOnly supported in Australia."
+          nullable: true
+        centrelinkReferenceNumber:
+          type: string
+          description: "Contact person's centrelink reference number.\r\n\r\nOnly supported in Australia."
+          nullable: true
+        identificationDetails:
+          allOf:
+          - $ref: '#/components/schemas/IdentificationDetailsDto'
+          description: Contact person's identification details.
+          nullable: true
+        citizenshipDetails:
+          allOf:
+          - $ref: '#/components/schemas/CitizenshipDetailsDto'
+          description: Contact person's citizenship details.
+          nullable: true
+        utbmsDetails:
+          allOf:
+          - $ref: '#/components/schemas/UtbmsDetailsDto'
+          description: "Contact's UTBMS Details\r\n\r\nOnly supported in the US."
+          nullable: true
+        executionOptions:
+          allOf:
+          - $ref: '#/components/schemas/PersonExecutionOptionsDto'
+          description: "Person's execution options including Power of Attorney and VOI details.\r\n\r\nOnly supported in AU."
+          nullable: true
+      additionalProperties: false
+    PassportDetailsDto:
+      type: object
+      properties:
+        passportNumber:
+          type: string
+          description: Contact person's passport number.
+          nullable: true
+          example: AB123456
+        passportIssueDate:
+          type: string
+          description: Contact person's passport issue date.
+          format: date-time
+          nullable: true
+          example: '2010-08-01'
+        passportExpireDate:
+          type: string
+          description: Contact person's passport expiry date.
+          format: date-time
+          nullable: true
+          example: '2030-08-01'
+        passportIssueCountry:
+          type: string
+          description: Contact person's passport country of issue.
+          nullable: true
+          example: USA
+        passportIssueAuthority:
+          type: string
+          description: "Contact person's passport issuing authority.\r\n            \r\nOnly supported in the UK."
+          nullable: true
+          example: HM Passport Office
+      additionalProperties: false
+    DeathDetails:
+      type: object
+      properties:
+        deathDate:
+          type: string
+          description: Contact person's date of death.
+          format: date-time
+          nullable: true
+          example: '2020-08-01'
+        isDeathDateUnknown:
+          type: boolean
+          description: Whether the person's exact date of death is known.
+          example: false
+        deathDateFrom:
+          type: string
+          description: Starting range for person's possible date of death.
+          format: date-time
+          nullable: true
+          example: '2020-08-01'
+        deathDateTo:
+          type: string
+          description: Ending range for person's possible date of death.
+          format: date-time
+          nullable: true
+          example: '2020-08-01'
+        deathPlace:
+          type: string
+          description: Contact person's place of death.
+          nullable: true
+          example: Chicago
+        deathState:
+          type: string
+          description: "Contact person's death state.\r\n            \r\nOnly supported in AU and US."
+          nullable: true
+          example: IL
+        deathCountry:
+          type: string
+          description: Contact person's death country.
+          nullable: true
+          example: USA
+        deathCounty:
+          type: string
+          description: "Contact person's death county.\r\n            \r\nOnly supported in US."
+          nullable: true
+          example: San Bernardino County
+      additionalProperties: false
+    PhoneNumberWithExtension:
+      type: object
+      properties:
+        areaCode:
+          type: string
+          description: "Phone area code.\r\n\r\nOnly supported in the US."
+          nullable: true
+          example: '555'
+        number:
+          type: string
+          description: Phone number (excluding area code).
+          nullable: true
+          example: '1234567'
+        extension:
+          type: string
+          description: Phone number extension.
+          nullable: true
+          example: '103'
+      additionalProperties: false
+    Company:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Company's name.
+          nullable: true
+          example: Brown LLC
+        type:
+          type: string
+          description: "Company's type.\r\n\r\nPossible values for US: 'Corporation', 'Government Agency', 'Limited Liability Company', 'Sole Proprietor', 'Partnership', 'Not-for-Profit'\r\n\r\nPossible values for AU: 'Company', 'Sole Proprietor', 'Partnership', 'Government Department'\r\n\r\nPossible values for UK: 'Company', 'Sole Trader', 'Partnership', 'Limited Liability Partnership', 'Government Department'"
+          nullable: true
+          example: Corporation
+        phone:
+          allOf:
+          - $ref: '#/components/schemas/PhoneNumber'
+          description: Company's phone details.
+          nullable: true
+        fax:
+          allOf:
+          - $ref: '#/components/schemas/PhoneNumber'
+          description: Company's fax details.
+          nullable: true
+        email:
+          type: string
+          description: Company's email address.
+          nullable: true
+          example: contact@brown.com
+        website:
+          type: string
+          description: Company's website URL.
+          nullable: true
+          example: https://www.brownllc.com
+        notes:
+          type: string
+          description: Additional notes for company (if applicable).
+          nullable: true
+          example: Construction company
+        abn:
+          type: string
+          description: "For AU: Australian Company Number (ABN) of the firm.\r\n\r\nFor UK: Company Registration Number (CRN) of the firm.\r\n\r\nOnly supported in AU and UK."
+          nullable: true
+          example: '1234567890'
+        companyNumberType:
+          type: string
+          description: "Company's Australian company number type.\r\n\r\nAccepted values - ACN, ARBN\r\n\r\nOnly supported in AU."
+          nullable: true
+          example: ACN
+        companyNumber:
+          type: string
+          description: "Company's Australian Company Number.\r\n            \r\nOnly supported in AU."
+          nullable: true
+          example: '234567890'
+        doingBusinessAsName:
+          type: string
+          description: "Doing Business As (DBA) name.\r\n            \r\nOnly supported in US."
+          nullable: true
+          example: Brown Holdings
+        tradingAs:
+          type: string
+          description: "Trading As type (e.g. 'Trading As', 'Doing Business As').\r\n            \r\nOnly supported in AU."
+          nullable: true
+          example: Trading As
+        tradingName:
+          type: string
+          description: "Trading name of the organisation.\r\n            \r\nOnly supported in AU and UK."
+          nullable: true
+          example: Brown Trading Co
+        mailingAddress:
+          allOf:
+          - $ref: '#/components/schemas/Address'
+          description: Company's mailing address details.
+          nullable: true
+        businessAddress:
+          allOf:
+          - $ref: '#/components/schemas/AddressWithDxAddress'
+          description: Company's business address details.
+          nullable: true
+        staff:
+          type: array
+          items:
+            $ref: '#/components/schemas/Link'
+          description: Company's staff hypermedia links.
+          nullable: true
+          readOnly: true
+        directors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Link'
+          description: Company's directors hypermedia links.
+          nullable: true
+          readOnly: true
+        staffIds:
+          type: array
+          items:
+            type: string
+          description: Deprecated - use Staff instead. This field may not be supported in future.
+          nullable: true
+          readOnly: true
+        executionOptions:
+          allOf:
+          - $ref: '#/components/schemas/ExecutionOptions'
+          description: "Company's execution options for document signing and VOI details.\r\n\r\nOnly supported in AU."
+          nullable: true
+      additionalProperties: false
+    Trust:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Trust's name.
+          nullable: true
+          example: Trinity Trust
+        status:
+          type: string
+          description: "Trust's status.\r\n\r\nStandard values are: as Trustee of, as Trustees of, as Co-Trustees of, as an Individual and as Trustee of, as Successor Trustee of.\r\nA custom value can be supplied instead."
+          nullable: true
+          example: as Trustee of
+        trustNumber:
+          type: string
+          description: Trust's number.
+          nullable: true
+          example: '12345678'
+        executedDate:
+          type: string
+          description: Date trust was executed.
+          format: date-time
+          nullable: true
+          example: '1980-07-01'
+        phone:
+          allOf:
+          - $ref: '#/components/schemas/PhoneNumber'
+          description: Trust's phone details.
+          nullable: true
+        fax:
+          allOf:
+          - $ref: '#/components/schemas/PhoneNumber'
+          description: Trust's fax details.
+          nullable: true
+        address:
+          allOf:
+          - $ref: '#/components/schemas/Address'
+          description: Trust's address.
+          nullable: true
+        trustees:
+          type: array
+          items:
+            $ref: '#/components/schemas/Trustee'
+          description: List of trustees.
+          nullable: true
+          example:
+          - Name: John Smith
+            Type: Individual
+          - Name: Smithfield Steel
+            Type: Company
+        contacts:
+          type: array
+          items:
+            $ref: '#/components/schemas/Link'
+          description: Trust's contacts hypermedia links.
+          nullable: true
+          readOnly: true
+      additionalProperties: false
+    PersonExecutionOptions:
+      type: object
+      properties:
+        poaType:
+          type: string
+          description: Power of Attorney type.
+          nullable: true
+          example: Enduring
+        poaDate:
+          type: string
+          description: Date the Power of Attorney was executed
+          format: date-time
+          nullable: true
+          example: '2023-05-15'
+        attorneyName:
+          type: string
+          description: Name of the attorney
+          nullable: true
+          example: Jane Doe
+        address:
+          allOf:
+          - $ref: '#/components/schemas/Address'
+          description: Attorney's address
+          nullable: true
+        poaRegisteredBook:
+          type: string
+          description: Power of Attorney registration book reference
+          nullable: true
+        poaRegisteredNumber:
+          type: string
+          description: Power of Attorney registration number
+          nullable: true
+        executionType:
+          type: string
+          description: Person execution type.
+          nullable: true
+          example: PowerOfAttorney
+        poaVoiDetails:
+          allOf:
+          - $ref: '#/components/schemas/VoiDetails'
+          description: Verification of identity details for the attorney (Power of Attorney)
+          nullable: true
+      additionalProperties: false
+      description: "Execution options for individual persons (Power of Attorney)\r\n\r\nOnly supported in AU."
+    Person:
+      type: object
+      properties:
+        title:
+          type: string
+          description: "Contact person's title. Accepts custom values.\r\n\r\ne.g. Mr, Mrs, Miss, Honourable, Judge."
+          nullable: true
+          example: Mr
+        firstName:
+          type: string
+          description: Contact person's first name.
+          nullable: true
+          example: John
+        middleName:
+          type: string
+          description: Contact person's middle name (if applicable).
+          nullable: true
+          example: Michael
+        lastName:
+          type: string
+          description: Contact person's last name.
+          nullable: true
+          example: Smith
+        nameSuffix:
+          type: string
+          description: Contact person's name suffix (if applicable).
+          nullable: true
+          example: PhD
+        customName:
+          type: string
+          description: Contact person's custom name to be used in letters (if applicable).
+          nullable: true
+          example: Johnny
+        residentialAddress:
+          allOf:
+          - $ref: '#/components/schemas/Address'
+          description: Contact person's residential address details.
+          nullable: true
+        mailingAddress:
+          allOf:
+          - $ref: '#/components/schemas/Address'
+          description: "Contact person's mailing address details.\r\n\r\nOnly supported in the US."
+          nullable: true
+        phone:
+          allOf:
+          - $ref: '#/components/schemas/PhoneNumber'
+          description: Contact person's phone details.
+          nullable: true
+        phone2:
+          allOf:
+          - $ref: '#/components/schemas/PhoneNumberWithExtension'
+          description: Contact person's alternate phone details.
+          nullable: true
+        fax:
+          allOf:
+          - $ref: '#/components/schemas/PhoneNumber'
+          description: "Contact person's fax details. \r\n\r\nOnly supported in the US."
+          nullable: true
+        cell:
+          allOf:
+          - $ref: '#/components/schemas/PhoneNumber'
+          description: Contact person's mobile details.
+          nullable: true
+        email:
+          type: string
+          description: Contact person's email address.
+          nullable: true
+          example: john.smith@brown.com
+        notes:
+          type: string
+          description: Additional notes about contact (if applicable).
+          nullable: true
+          example: Prefers to answer work phone.
+        occupation:
+          type: string
+          description: Contact person's occupation.
+          nullable: true
+          example: Bookkeeper
+        gender:
+          type: string
+          description: "Contact person's gender.\r\n\r\nAccepted values - Male, Female, Other as well as any free text."
+          nullable: true
+          example: Male
+        maritalStatus:
+          type: string
+          description: "Contact person's marital status. Accepts custom values.\r\n\r\ne.g. Single, Married, Separated, Divorced, Widowed, De facto."
+          nullable: true
+          example: Single
+        specialNeeds:
+          type: string
+          description: "Brief description of any special needs (if applicable).\r\n\r\nOnly supported in Australia."
+          nullable: true
+          example: Wheelchair access
+        birthDate:
+          type: string
+          description: Contact person's date of birth.
+          format: date-time
+          nullable: true
+          example: '1980-07-01'
+        birthPlace:
+          type: string
+          description: Contact person's place of birth.
+          nullable: true
+          example: Chicago
+        birthState:
+          type: string
+          description: Contact person's birth state.
+          nullable: true
+          example: Illinois
+        birthCountry:
+          type: string
+          description: Contact person's birth country.
+          nullable: true
+          example: USA
+        identificationNumberType:
+          type: string
+          description: Contact person's type of identification.
+          nullable: true
+          example: Passport
+        identificationNumber:
+          type: string
+          description: Contact person's identification number.
+          nullable: true
+          example: PP123456789
+        birthFirstName:
+          type: string
+          description: Contact person's first name at birth.
+          nullable: true
+          example: James
+        birthMiddleName:
+          type: string
+          description: Contact person's middle name at birth.
+          nullable: true
+          example: Thomas
+        birthLastName:
+          type: string
+          description: Contact person's last name at birth.
+          nullable: true
+          example: Jones
+        previousNames:
+          type: string
+          description: Contact person's previous names.
+          nullable: true
+          example: Jane Smith
+        passportDetails:
+          allOf:
+          - $ref: '#/components/schemas/PassportDetails'
+          description: Contact person's passport details.
+          nullable: true
+        deathDetails:
+          allOf:
+          - $ref: '#/components/schemas/DeathDetails'
+          description: Contact person's death details.
+          nullable: true
+        correctionsReferenceNumber:
+          type: string
+          description: "Contact person's corrections reference number.\r\n\r\nOnly supported in Australia."
+          nullable: true
+        centrelinkReferenceNumber:
+          type: string
+          description: "Contact person's centrelink reference number.\r\n\r\nOnly supported in Australia."
+          nullable: true
+        citizenshipDetails:
+          allOf:
+          - $ref: '#/components/schemas/CitizenshipDetails'
+          description: Contact person's citizenship details.
+          nullable: true
+        utbmsDetails:
+          allOf:
+          - $ref: '#/components/schemas/UtbmsDetails'
+          description: "Contact's UTBMS Details.\r\n\r\nOnly supported in the US."
+          nullable: true
+        executionOptions:
+          allOf:
+          - $ref: '#/components/schemas/PersonExecutionOptions'
+          description: "Person's execution options including Power of Attorney and VOI details.\r\n\r\nOnly supported in AU."
+          nullable: true
+        voiDetails:
+          allOf:
+          - $ref: '#/components/schemas/VoiDetails'
+          description: "Person's verification of identity details.\r\n\r\nOnly supported in AU."
+          nullable: true
+      additionalProperties: false
+    IdentificationDetailsDto:
+      type: object
+      properties:
+        alienNumber:
+          type: string
+          description: "Alien number\r\nOnly supported in the US."
+          nullable: true
+        registrationAuthority:
+          type: string
+          description: "Registration authority\r\nOnly supported in the US."
+          nullable: true
+        registrationNumber:
+          type: string
+          description: "Registration number\r\nOnly supported in the US."
+          nullable: true
+        driversLicenseNumber:
+          type: string
+          description: Driver's license number
+          nullable: true
+        driversLicenseState:
+          type: string
+          description: "Driver's licence state\r\n<example>IL</example><example>NSW</example>"
+          nullable: true
+        medicareNumber:
+          type: string
+          description: Medicare number
+          nullable: true
+        nhsNumber:
+          type: string
+          description: "NHS (National Health Service) number\r\nOnly supported in UK."
+          nullable: true
+      additionalProperties: false
+    UtbmsDetailsDto:
+      type: object
+      properties:
+        ledesClientId:
+          type: string
+          description: LEDES client Id
+          nullable: true
+      additionalProperties: false
+      description: Utbms Details
+    UtbmsDetails:
+      type: object
+      properties:
+        ledesClientId:
+          type: string
+          description: LEDES client Id
+          nullable: true
+      additionalProperties: false
+      description: Utbms Details
+    ExecutionOptionsDto:
+      type: object
+      properties:
+        person1:
+          allOf:
+          - $ref: '#/components/schemas/ExecutionPersonDto'
+          description: First authorized person for execution
+          nullable: true
+        person2:
+          allOf:
+          - $ref: '#/components/schemas/ExecutionPersonDto'
+          description: Second authorized person for execution
+          nullable: true
+        executingUnder127:
+          type: boolean
+          description: Indicates if executing under section 127
+          nullable: true
+        executingAuthority:
+          type: string
+          description: Executing authority details
+          nullable: true
+        sealType:
+          type: string
+          description: "Seal type for execution.\r\n\r\nPossible values: 'WithSeal', 'WithoutSeal', 'Unset'"
+          nullable: true
+          example: WithSeal
+        authorisedDepositTakingInstitution:
+          type: boolean
+          description: Indicates if organization is an Authorised Deposit Taking Institution
+          nullable: true
+        poaRegistrationNumber:
+          type: string
+          description: Power of Attorney registration number
+          nullable: true
+        attorneyNames:
+          type: array
+          items:
+            type: string
+          description: List of attorney names
+          nullable: true
+          example:
+          - John Smith
+          - Jane Doe
+        executionType:
+          type: string
+          description: "Execution type.\r\n\r\nPossible values: 'Individual', 'SoleDirector', 'JointDirectors', 'Director', 'Secretary', 'Authorised', 'Other', 'Unset', 'None'"
+          nullable: true
+          example: JointDirectors
+      additionalProperties: false
+      description: "Execution options for organizations (Company, Partnership, Sole Proprietor)\r\n\r\nOnly supported in AU."
+    TagCollection:
+      type: object
+      properties:
+        id:
+          type: string
+          nullable: true
+        href:
+          type: string
+          nullable: true
+        relation:
+          type: string
+          nullable: true
+        method:
+          type: string
+          default: GET
+          nullable: true
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
+          nullable: true
+      additionalProperties: false
+    ExecutionPersonDto:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Person's full name
+          nullable: true
+          example: John Smith
+        address:
+          allOf:
+          - $ref: '#/components/schemas/AddressDto'
+          description: Person's address
+          nullable: true
+        personType:
+          type: string
+          description: "Person type for execution.\r\n\r\nPossible values: 'Director', 'Secretary', 'SoleDirectorAndSecretary', 'AuthorisedSignatory', 'Other', 'Unset'"
+          nullable: true
+          example: Director
+        selectedOfficeHeld:
+          type: string
+          description: "Office held by the person.\r\n\r\nPossible values: 'Director', 'Secretary', 'SoleDirectorAndSecretary', 'Partner', 'AuthorisedRepresentative', 'Other', 'Unset'"
+          nullable: true
+          example: Director
+      additionalProperties: false
+      description: "Represents an authorized person for organization execution\r\n\r\nOnly supported in AU."
+    PhoneNumber:
+      type: object
+      properties:
+        areaCode:
+          type: string
+          description: Phone area code.
+          nullable: true
+          example: '555'
+        number:
+          type: string
+          description: Phone number (excluding area code).
+          nullable: true
+          example: '1234567'
+      additionalProperties: false
+    PoBoxAddress:
+      type: object
+      properties:
+        careOf:
+          type: string
+          description: Care of the addressee (if applicable).
+          nullable: true
+          example: John Smith
+        poBoxType:
+          type: string
+          description: "PO Box type. Accepts custom values.\r\n            \r\ne.g. Care PO, PO Box, Locked Bag, RMS."
+          nullable: true
+          example: Locked Bag
+        poBoxNumber:
+          type: string
+          description: PO Box number.
+          nullable: true
+          example: '12345'
+        city:
+          type: string
+          description: City, district, suburb, town, or village.
+          nullable: true
+          example: Chicago
+        state:
+          type: string
+          description: State, province, or region.
+          nullable: true
+          example: IL
+        zipCode:
+          type: string
+          description: Zip or post code.
+          nullable: true
+          example: '60606'
+      additionalProperties: false
+    PoBoxAddressDto:
+      type: object
+      properties:
+        careOf:
+          type: string
+          description: Care of the addressee (if applicable).
+          nullable: true
+          example: John Smith
+        poBoxType:
+          type: string
+          description: "PO Box type. Accepts custom values.\r\n            \r\ne.g. Care PO, PO Box, Locked Bag, RMS."
+          nullable: true
+          example: Locked Bag
+        poBoxNumber:
+          type: string
+          description: PO Box number.
+          nullable: true
+          example: '12345'
+        city:
+          type: string
+          description: City, district, suburb, town, or village.
+          nullable: true
+          example: Chicago
+        state:
+          type: string
+          description: State, province, or region.
+          nullable: true
+          example: IL
+        zipCode:
+          type: string
+          description: Zip or post code.
+          nullable: true
+          example: '60606'
+      additionalProperties: false
+      description: PO Box address.
+    GroupOfPeopleDto:
+      type: object
+      properties:
+        peopleIds:
+          type: array
+          items:
+            type: string
+          description: List of contact person Ids.
+          nullable: true
+          example:
+          - b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2
+          - 750eb5c5-ac0b-7d11-4997-e0ce9d8896c8
+        residentialAddress:
+          allOf:
+          - $ref: '#/components/schemas/AddressDto'
+          description: Contact group's residential address details.
+          nullable: true
+        mailingAddress:
+          allOf:
+          - $ref: '#/components/schemas/AddressDto'
+          description: "Contact group's mailing address details.\r\n            \r\nOnly supported in the US."
+          nullable: true
+      additionalProperties: false
+    Contact:
+      type: object
+      properties:
+        href:
+          type: string
+          nullable: true
+        relation:
+          type: string
+          nullable: true
+        method:
+          type: string
+          default: GET
+          nullable: true
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+        id:
+          type: string
+          description: Unique identifier of the contact.
+          nullable: true
+          example: b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2
+        externalSystemId:
+          type: string
+          description: External system id for the contact.
+          nullable: true
+          example: EXT01
+        versionId:
+          type: string
+          description: Version id of the record.
+          nullable: true
+          example: 750eb5c5-ac0b-7d11-4997-e0ce9d8896c8
+        person:
+          allOf:
+          - $ref: '#/components/schemas/Person'
+          description: Contact person details (if applicable).
+          nullable: true
+        company:
+          allOf:
+          - $ref: '#/components/schemas/Company'
+          description: Contact company details (if applicable).
+          nullable: true
+        trust:
+          allOf:
+          - $ref: '#/components/schemas/Trust'
+          description: "Contact trust details (if applicable).\r\n\r\nNote that Trust is only supported in the US. It is not available in other regions."
+          nullable: true
+        groupOfPeople:
+          allOf:
+          - $ref: '#/components/schemas/GroupOfPeople'
+          description: Contact group details (if applicable).
+          nullable: true
+        isDeleted:
+          type: boolean
+          description: Returns true if the contact is deleted.
+          example: true
+        lastUpdated:
+          type: integer
+          description: Last updated timestamp.
+          format: int64
+          example: 637847425252027400
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
+          description: Set of contact's tags.
+          nullable: true
+      additionalProperties: false
+    DxAddress:
+      type: object
+      properties:
+        number:
+          type: string
+          description: Direct Exchange number (if applicable).
+          nullable: true
+          example: '376'
+        exchange:
+          type: string
+          description: Direct Exchange name.
+          nullable: true
+          example: DX
+        state:
+          type: string
+          description: State, province, or region.
+          nullable: true
+          example: NSW
+      additionalProperties: false
+    ContactRelationDto:
+      type: object
+      properties:
+        relatedContactId:
+          type: string
+          description: Unique identifier of the related contact.
+          nullable: true
+          example: b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2
+        businessRole:
+          type: string
+          description: "Business role of related contact.\r\n\r\nOnly applicable for companies (not trusts)."
+          nullable: true
+          example: Bookkeeper
+      additionalProperties: false
+    ProblemDetails:
+      type: object
+      properties:
+        type:
+          type: string
+          nullable: true
+        title:
+          type: string
+          nullable: true
+        status:
+          type: integer
+          format: int32
+          nullable: true
+        detail:
+          type: string
+          nullable: true
+        instance:
+          type: string
+          nullable: true
+      additionalProperties: {}
+    TrusteeDto:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Trustee's name.
+          nullable: true
+          example: John Smith
+        type:
+          type: string
+          description: "Type of trustee.\r\n\r\nStandard values are: Company, Individual.\r\n\r\nA custom value can be supplied instead."
+          nullable: true
+          example: Individual
+      additionalProperties: false
+    PhoneNumberWithExtensionDto:
+      type: object
+      properties:
+        areaCode:
+          type: string
+          description: "Phone area code. \r\n\r\nOnly supported in the US."
+          nullable: true
+          example: '555'
+        number:
+          type: string
+          description: Phone number (excluding area code).
+          nullable: true
+          example: '1234567'
+        extension:
+          type: string
+          description: Phone number extension. Accepts numeric characters only.
+          nullable: true
+          example: '103'
+      additionalProperties: false
+    ExecutionOptions:
+      type: object
+      properties:
+        person1:
+          allOf:
+          - $ref: '#/components/schemas/ExecutionPerson'
+          description: First authorized person for execution
+          nullable: true
+        person2:
+          allOf:
+          - $ref: '#/components/schemas/ExecutionPerson'
+          description: Second authorized person for execution
+          nullable: true
+        executingUnder127:
+          type: boolean
+          description: Indicates if executing under section 127
+          nullable: true
+        executingAuthority:
+          type: string
+          description: Executing authority details
+          nullable: true
+        sealType:
+          type: string
+          description: Seal type for execution.
+          nullable: true
+          example: WithSeal
+        authorisedDepositTakingInstitution:
+          type: boolean
+          description: Indicates if organization is an Authorised Deposit Taking Institution
+          nullable: true
+        poaRegistrationNumber:
+          type: string
+          description: Power of Attorney registration number
+          nullable: true
+        attorneyNames:
+          type: array
+          items:
+            type: string
+          description: List of attorney names
+          nullable: true
+        executionType:
+          type: string
+          description: Execution type.
+          nullable: true
+          example: JointDirectors
+      additionalProperties: false
+      description: "Execution options for organizations\r\n\r\nOnly supported in AU."
+    DeathDetailsDto:
+      type: object
+      properties:
+        deathDate:
+          type: string
+          description: Contact person's date of death.
+          format: date-time
+          nullable: true
+          example: '2020-08-01'
+        isDeathDateUnknown:
+          type: boolean
+          description: Whether the person's exact date of death is known.
+          example: false
+        deathDateFrom:
+          type: string
+          description: Starting range for person's possible date of death.
+          format: date-time
+          nullable: true
+          example: '2020-08-01'
+        deathDateTo:
+          type: string
+          description: Ending range for person's possible date of death.
+          format: date-time
+          nullable: true
+          example: '2020-08-01'
+        deathPlace:
+          type: string
+          description: Contact person's place of death.
+          nullable: true
+          example: Chicago
+        deathState:
+          type: string
+          description: "Contact person's death state.\r\n            \r\nOnly supported in AU and US."
+          nullable: true
+          example: IL
+        deathCountry:
+          type: string
+          description: Contact person's death country.
+          nullable: true
+          example: USA
+        deathCounty:
+          type: string
+          description: "Contact person's death county.\r\n            \r\nOnly supported in US."
+          nullable: true
+          example: San Bernardino County
+      additionalProperties: false
+    Trustee:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Trustee's name.
+          nullable: true
+          example: John Smith
+        type:
+          type: string
+          description: "Type of trustee.\r\n\r\nStandard values are: Company, Individual.\r\nA custom value can be supplied instead."
+          nullable: true
+          example: Individual
+      additionalProperties: false
+    AddressWithDxAddress:
+      type: object
+      properties:
+        careOf:
+          type: string
+          description: Care of the addressee (if applicable).
+          nullable: true
+          example: John Smith
+        buildingLevel:
+          type: string
+          description: Building level in address (if applicable).
+          nullable: true
+          example: Level 1
+        unitNumber:
+          type: string
+          description: Unit number in address (if applicable).
+          nullable: true
+          example: '10'
+        unitType:
+          type: string
+          description: "Unit type in address (if applicable). Accepts custom values.\r\n\r\ne.g. Apartment, Unit, Flat, Villa, Suite."
+          nullable: true
+          example: Suite
+        streetNumber:
+          type: string
+          description: Street number in address.
+          nullable: true
+          example: '100'
+        streetName:
+          type: string
+          description: Street name in address.
+          nullable: true
+          example: Broad
+        streetType:
+          type: string
+          description: "Street type. Accepts custom values.\r\n\r\ne.g. Street, Road, Avenue, Lane."
+          nullable: true
+          example: Street
+        addressLine1:
+          type: string
+          description: First line of address.
+          nullable: true
+          example: Level 1/10
+        addressLine2:
+          type: string
+          description: Second line of address (if applicable).
+          nullable: true
+          example: 100 Broad Street
+        city:
+          type: string
+          description: City, district, suburb, town, or village.
+          nullable: true
+          example: Chicago
+        state:
+          type: string
+          description: State, province, or region.
+          nullable: true
+          example: IL
+        zipCode:
+          type: string
+          description: Zip or post code.
+          nullable: true
+          example: '60606'
+        locality:
+          type: string
+          description: "Locality.\r\n\r\nOnly supported in the UK."
+          nullable: true
+          example: Dunkirk
+        county:
+          type: string
+          description: "County.\r\n\r\nOnly supported in the US and UK."
+          nullable: true
+          example: New York
+        country:
+          type: string
+          description: Country.
+          nullable: true
+          example: United States
+        poBox:
+          allOf:
+          - $ref: '#/components/schemas/PoBoxAddress'
+          description: PO Box details (if applicable).
+          nullable: true
+        dxAddress:
+          allOf:
+          - $ref: '#/components/schemas/DxAddress'
+          description: DX address details (only applicable for AUS).
+          nullable: true
+      additionalProperties: false
+    CitizenshipDetails:
+      type: object
+      properties:
+        countryOfCitizenship:
+          type: string
+          description: Country of citizenship
+          nullable: true
+          example: USA
+        nationality:
+          type: string
+          description: Nationality
+          nullable: true
+          example: American
+        languageOfInterpreter:
+          type: string
+          description: Language of interpreter
+          nullable: true
+          example: French
+      additionalProperties: false
+  securitySchemes:
+    api-key:
+      type: apiKey
+      name: x-api-key
+      in: header
+    token:
+      type: apiKey
+      name: Authorization
+      in: header
+      x-amazon-apigateway-authtype: cognito_user_pools

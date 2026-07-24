@@ -1,0 +1,1230 @@
+openapi: 3.0.1
+info:
+  title: Smokeball Activity Codes Tasks API
+  version: '1.0'
+  description: REST API for integrating with Smokeball legal practice management software. Supports matters, contacts, documents, time entries, billing, trust accounting, staff, webhooks, and law firm workflows across US, AU, and UK regions. Uses OAuth 2.0 (client credentials) authentication.
+  contact:
+    name: Smokeball Developer Support
+    url: https://docs.smokeball.com/docs/api-docs/1e13a13124aee-introduction
+  x-api-id: smokeball
+  x-audience: external-public
+servers:
+- url: https://api.smokeball.com
+- url: https://api.smokeball.com.au
+- url: https://api.smokeball.co.uk
+- url: https://stagingapi.smokeball.com
+- url: https://stagingapi.smokeball.com.au
+- url: https://stagingapi.smokeball.co.uk
+security:
+- api-key: []
+  token: []
+tags:
+- name: Tasks
+paths:
+  /tasks/{taskId}/subtasks/{id}:
+    get:
+      tags:
+      - Tasks
+      summary: Get a subtask
+      description: Retrieves a specified subtask.
+      operationId: GetSubTaskById
+      parameters:
+      - name: taskId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: When request is successful. Returns a 'SubTask' object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubTask'
+        '403':
+          description: When subtask with specified id is not associated with authenticated client.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: When subtask with specified task id and subtask id does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+    put:
+      tags:
+      - Tasks
+      summary: Update a subtask
+      description: Updates a specified subtask of a specified task.
+      operationId: UpdateSubTask
+      parameters:
+      - name: taskId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/SubTaskDto'
+              description: Data transfer object for a subtask.
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/SubTaskDto'
+              description: Data transfer object for a subtask.
+          application/*+json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/SubTaskDto'
+              description: Data transfer object for a subtask.
+      responses:
+        '202':
+          description: When request is accepted. Returns a hypermedia 'Link' object of the subtask to be updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Link'
+        '400':
+          description: When an unsupported request is made.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '403':
+          description: When subtask with specified id is not associated with authenticated client.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: When subtask with specified id does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+    delete:
+      tags:
+      - Tasks
+      summary: Delete a subtask
+      description: Deletes a specified subtask of a specified task.
+      operationId: DeleteSubTask
+      parameters:
+      - name: taskId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '202':
+          description: When request is accepted. Returns a hypermedia 'Link' object of the subtask to be deleted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Link'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '403':
+          description: When subtask with specified id is not associated with authenticated client.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: When subtask with specified id does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+  /tasks/{taskId}/subtasks:
+    get:
+      tags:
+      - Tasks
+      summary: Get subtasks
+      description: Returns a list of subtasks for a specified task if associated with the authenticated client.
+      operationId: GetSubTasks
+      parameters:
+      - name: taskId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: When request is successful. Returns a list of 'SubTask' objects.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubTaskCollection'
+        '403':
+          description: When subtask with specified id is not associated with authenticated client.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: When subtask with specified id does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+    post:
+      tags:
+      - Tasks
+      summary: Create a subtask
+      description: Creates a subtask for a specified task.
+      operationId: CreateSubTask
+      parameters:
+      - name: taskId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/SubTaskDto'
+              description: Data transfer object for a subtask.
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/SubTaskDto'
+              description: Data transfer object for a subtask.
+          application/*+json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/SubTaskDto'
+              description: Data transfer object for a subtask.
+      responses:
+        '202':
+          description: When request is accepted. Returns a hypermedia 'Link' object of the subtask to be created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Link'
+        '400':
+          description: When an unsupported request is made.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '403':
+          description: When a subtask cannot be created for the authenticated client.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+  /tasks/{taskId}/documents:
+    get:
+      tags:
+      - Tasks
+      summary: Get task documents
+      description: Returns a list of document links for the specified task, if associated with the authenticated client.
+      operationId: GetTaskDocuments
+      parameters:
+      - name: taskId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: When request is successful. Returns a list of 'Link' objects.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskDocumentCollection'
+        '403':
+          description: When task with specified id is not associated with authenticated client.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: When task with specified id does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+    post:
+      tags:
+      - Tasks
+      summary: Create a task document
+      description: Links the specified document to the specified task.
+      operationId: CreateTaskDocument
+      parameters:
+      - name: taskId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/TaskDocumentDto'
+              description: Data transfer object for a task document.
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/TaskDocumentDto'
+              description: Data transfer object for a task document.
+          application/*+json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/TaskDocumentDto'
+              description: Data transfer object for a task document.
+      responses:
+        '202':
+          description: When request is accepted. Returns a hypermedia 'Link' object of the link to be created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Link'
+        '403':
+          description: When task with specified id is not associated with authenticated client.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: When task with specified task id and/or document id does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+  /tasks/{taskId}/documents/{id}:
+    get:
+      tags:
+      - Tasks
+      summary: Get a task document
+      description: Retrieves the specified task document for the specified task.
+      operationId: GetTaskDocumentById
+      parameters:
+      - name: taskId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: When request is successful. Returns a 'Link' object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskDocument'
+        '403':
+          description: When task with specified id is not associated with authenticated client.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: When task with specified task id and/or document id does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+    delete:
+      tags:
+      - Tasks
+      summary: Delete a task document
+      description: Unlinks the specified document from the specified task.
+      operationId: DeleteTaskDocument
+      parameters:
+      - name: taskId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '202':
+          description: When request is accepted. Returns a hypermedia 'Link' object of the task document to be deleted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Link'
+        '403':
+          description: When task with specified id is not associated with authenticated client.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: When task with specified task id and/or document id does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+  /tasks/{id}:
+    get:
+      tags:
+      - Tasks
+      summary: Get a task
+      description: Retrieves a specified task.
+      operationId: GetTaskById
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: When request is successful. Returns a 'Task' object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+        '403':
+          description: When task with specified id is not associated with authenticated client.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: When task with specified id does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+    put:
+      tags:
+      - Tasks
+      summary: Update a task
+      description: Updates a specified task.
+      operationId: UpdateTask
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/TaskDto'
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/TaskDto'
+          application/*+json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/TaskDto'
+      responses:
+        '202':
+          description: When request is accepted. Returns a hypermedia 'Link' object of the task to be updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Link'
+        '400':
+          description: When an unsupported request is made.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '403':
+          description: When task with specified id is not associated with authenticated client.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: When task with specified id does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+    delete:
+      tags:
+      - Tasks
+      summary: Delete a task
+      description: Deletes a specified task.
+      operationId: DeleteTask
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '202':
+          description: When request is accepted. Returns a hypermedia 'Link' object of the task to be deleted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Link'
+        '403':
+          description: When task with specified id is not associated with authenticated client.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: When task with specified id does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+  /tasks:
+    get:
+      tags:
+      - Tasks
+      summary: Get tasks
+      description: Returns a list of tasks.
+      operationId: GetTasks
+      parameters:
+      - name: Offset
+        in: query
+        schema:
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+          format: int32
+      - name: Limit
+        in: query
+        schema:
+          maximum: 500
+          minimum: 1
+          type: integer
+          format: int32
+      - name: MatterId
+        in: query
+        description: Filter by tasks that are assigned to the specified matter id..
+        schema:
+          type: string
+          example: 1bf55840-cba3-4f8a-8c0f-66082692e493
+        example: 1bf55840-cba3-4f8a-8c0f-66082692e493
+      - name: IsCompleted
+        in: query
+        description: Filter by tasks tasks that have been completed. Leave blank if
+        schema:
+          type: boolean
+          example: true
+        example: true
+      - name: UpdatedSince
+        in: query
+        description: "Filter by tasks updated since a specified time (.net ticks representation of the UTC datetime). Cannot be used in conjunction with `LastUpdated`.\r\n\r\nThis field will not be supported in future, please use LastUpdated instead."
+        schema:
+          type: integer
+          format: int64
+          example: 637873555398585000
+        example: 637873555398585000
+      - name: LastUpdated
+        in: query
+        description: Filter by last updated date of a task. Cannot be used in conjunction with `UpdatedSince`.
+        schema:
+          type: string
+          format: date-time
+          example: '2022-04-23T14:00:00Z'
+        example: '2022-04-23T14:00:00Z'
+      responses:
+        '200':
+          description: When request is successful. Returns a list of 'Task' objects.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskPagedCollection'
+        '403':
+          description: When tasks cannot be returned for the authenticated client.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+    post:
+      tags:
+      - Tasks
+      summary: Create a task
+      description: Creates a task.
+      operationId: CreateTask
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/TaskDto'
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/TaskDto'
+          application/*+json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/TaskDto'
+      responses:
+        '202':
+          description: When request is accepted. Returns a hypermedia 'Link' object of the task to be created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Link'
+        '400':
+          description: When an unsupported request is made.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '403':
+          description: When a task cannot be created for the authenticated client.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+components:
+  schemas:
+    TaskPagedCollection:
+      type: object
+      properties:
+        id:
+          type: string
+          nullable: true
+        href:
+          type: string
+          nullable: true
+        relation:
+          type: string
+          nullable: true
+        method:
+          type: string
+          default: GET
+          nullable: true
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/Task'
+          nullable: true
+        offset:
+          type: integer
+          format: int32
+          nullable: true
+        limit:
+          type: integer
+          format: int32
+          nullable: true
+        size:
+          type: integer
+          format: int64
+        first:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+        previous:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+        next:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+        last:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+      additionalProperties: false
+    SubTaskCollection:
+      type: object
+      properties:
+        id:
+          type: string
+          nullable: true
+        href:
+          type: string
+          nullable: true
+        relation:
+          type: string
+          nullable: true
+        method:
+          type: string
+          default: GET
+          nullable: true
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/SubTask'
+          nullable: true
+      additionalProperties: false
+    SubTaskDto:
+      required:
+      - staffId
+      - subject
+      type: object
+      properties:
+        staffId:
+          minLength: 1
+          type: string
+          description: Unique identifier of the associated staff member creating or updating the subtask.
+          example: 750eb5c5-ac0b-7d11-4997-e0ce9d8896c8
+        completedByStaffId:
+          type: string
+          description: Unique identifier of the associated staff member who completed the subtask.
+          nullable: true
+          example: 750eb5c5-ac0b-7d11-4997-e0ce9d8896c8
+        subject:
+          minLength: 1
+          type: string
+          description: Subject of the subtask.
+          example: Confer with Mary
+        isCompleted:
+          type: boolean
+          description: True when the subtask is completed.
+          example: false
+        completedDate:
+          type: string
+          description: "**Deprecated.** Use `CompletedDateOnly` instead.\n\nCompleted date of the subtask in UTC.\r\nIf not provided and IsCompleted is set to true, the current date will be used."
+          format: date-time
+          nullable: true
+          example: '2020-02-15T13:00:00Z'
+          deprecated: true
+        completedDateOnly:
+          type: string
+          description: "Completed date of the subtask. Takes precendence over CompletedDate if set.\r\nIf not provided and IsCompleted is set to true, the current date will be used.\n\nAny time/timezone information will be discarded\nand only the date portion will be considered."
+          format: date-time
+          nullable: true
+          example: '2020-02-15'
+      additionalProperties: false
+      description: Data transfer object for a subtask.
+    TaskDto:
+      required:
+      - staffId
+      type: object
+      properties:
+        matterId:
+          type: string
+          description: Unique identifier of the matter associated to the task.
+          nullable: true
+          example: 750eb5c5-ac0b-7d11-4997-e0ce9d8896c8
+        staffId:
+          minLength: 1
+          type: string
+          description: Unique identifier of the associated staff member creating or updating the task.
+          example: 750eb5c5-ac0b-7d11-4997-e0ce9d8896c8
+        completedByStaffId:
+          type: string
+          description: Unique identifier of the associated staff member completing the task.
+          nullable: true
+          example: 750eb5c5-ac0b-7d11-4997-e0ce9d8896c8
+        assigneeIds:
+          type: array
+          items:
+            type: string
+          description: Unique identifier(s) of the associated staff member(s) assigned to the task.
+          nullable: true
+        subject:
+          type: string
+          description: The subject - this should be a short description of the task.
+          nullable: true
+          example: Review contract for John Smith
+        note:
+          type: string
+          description: Notes on the task.
+          nullable: true
+          example: Contract needs to be reviewed and discussed with John
+        isCompleted:
+          type: boolean
+          description: True when the task is completed.
+          example: false
+        categories:
+          type: array
+          items:
+            type: string
+          description: Categories for the task.
+          nullable: true
+        completedDate:
+          type: string
+          description: "**Deprecated.** Use `CompletedDateOnly` instead.\n\nCompleted date of the task in UTC.\r\nIf not provided and IsCompleted is set to true, the current date will be used."
+          format: date-time
+          nullable: true
+          example: '2020-02-15T13:00:00Z'
+          deprecated: true
+        completedDateOnly:
+          type: string
+          description: "Completed date of the task. Takes precendence over CompletedDate if set.\r\nIf not provided and IsCompleted is set to true, the current date will be used.\n\nAny time/timezone information will be discarded\nand only the date portion will be considered."
+          format: date-time
+          nullable: true
+          example: '2020-02-15'
+        dueDate:
+          type: string
+          description: '**Deprecated.** Use `DueDateOnly` instead.
+
+
+            Due date of the task in UTC.'
+          format: date-time
+          nullable: true
+          example: '2020-02-15T13:00:00Z'
+          deprecated: true
+        dueDateOnly:
+          type: string
+          description: 'Due date of the task. Takes precendence over DueDate if set.
+
+
+            Any time/timezone information will be discarded
+
+            and only the date portion will be considered.'
+          format: date-time
+          nullable: true
+          example: '2020-02-15'
+        duration:
+          type: string
+          description: Duration of the task in ISO 8601 duration format.
+          nullable: true
+          example: PT4H33M
+      additionalProperties: false
+    TaskDocumentCollection:
+      type: object
+      properties:
+        id:
+          type: string
+          nullable: true
+        href:
+          type: string
+          nullable: true
+        relation:
+          type: string
+          nullable: true
+        method:
+          type: string
+          default: GET
+          nullable: true
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/TaskDocument'
+          nullable: true
+      additionalProperties: false
+    Link:
+      type: object
+      properties:
+        id:
+          type: string
+          nullable: true
+        href:
+          type: string
+          nullable: true
+        relation:
+          type: string
+          nullable: true
+        method:
+          type: string
+          default: GET
+          nullable: true
+      additionalProperties: false
+    Task:
+      type: object
+      properties:
+        id:
+          type: string
+          nullable: true
+        href:
+          type: string
+          nullable: true
+        relation:
+          type: string
+          nullable: true
+        method:
+          type: string
+          default: GET
+          nullable: true
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+        matter:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          description: Matter associated to the task.
+          nullable: true
+        parentTask:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          description: The parent task associated to this task. Id is missing if this task is not a sub task.
+          nullable: true
+        createdBy:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          description: The staff member who created the task.
+          nullable: true
+        completedBy:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          description: The staff member who completed the task.
+          nullable: true
+        lastUpdatedBy:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          description: The staff member who last updated the task.
+          nullable: true
+        assignees:
+          type: array
+          items:
+            $ref: '#/components/schemas/Link'
+          description: The staff member(s) assigned to the task.
+          nullable: true
+        subTasks:
+          type: array
+          items:
+            $ref: '#/components/schemas/Link'
+          description: The tasks associated to the task.
+          nullable: true
+        subject:
+          type: string
+          description: The subject - a short description of the task.
+          nullable: true
+          example: Review contract for John Smith
+        note:
+          type: string
+          description: Notes on the task.
+          nullable: true
+          example: Contract needs to be reviewed and discussed with John
+        categories:
+          type: array
+          items:
+            type: string
+          description: Categories for the task.
+          nullable: true
+        dueDate:
+          type: string
+          description: '**Deprecated.** Use `DueDateOnly` instead.
+
+
+            The due date of the task in UTC.'
+          format: date-time
+          nullable: true
+          example: '2020-02-15T13:00:00Z'
+          deprecated: true
+        dueDateOnly:
+          type: string
+          description: 'The due date of the task.
+
+
+            The time portion will always be set to 00:00:00
+
+            and should be ignored. Only the date portion is relevant.'
+          format: date-time
+          nullable: true
+          example: '2020-02-15T00:00:00'
+        completedDate:
+          type: string
+          description: '**Deprecated.** Use `CompletedDateOnly` instead.
+
+
+            When the task was completed in UTC.'
+          format: date-time
+          nullable: true
+          example: '2020-02-15T13:00:00Z'
+          deprecated: true
+        completedDateOnly:
+          type: string
+          description: 'The date when the task was completed.
+
+
+            The time portion will always be set to 00:00:00
+
+            and should be ignored. Only the date portion is relevant.'
+          format: date-time
+          nullable: true
+          example: '2020-02-15T00:00:00'
+        createdDate:
+          type: string
+          description: '**Deprecated.** Use `CreatedDateOnly` instead.
+
+
+            When the task was created in UTC.'
+          format: date-time
+          nullable: true
+          example: '2020-02-15T13:00:00Z'
+          deprecated: true
+        createdDateOnly:
+          type: string
+          description: 'The date when the task was created.
+
+
+            The time portion will always be set to 00:00:00
+
+            and should be ignored. Only the date portion is relevant.'
+          format: date-time
+          nullable: true
+          example: '2020-02-15T00:00:00'
+        isCompleted:
+          type: boolean
+          description: True when the task is completed.
+          example: false
+        isDeleted:
+          type: boolean
+          description: True when the task is deleted.
+          example: false
+        lastUpdated:
+          type: integer
+          description: Last updated timestamp.
+          format: int64
+          example: 637847425252027400
+        duration:
+          type: string
+          description: Duration of the task in ISO 8601 duration format.
+          nullable: true
+          example: PT4H33M
+      additionalProperties: false
+    TaskDocumentDto:
+      required:
+      - type
+      type: object
+      properties:
+        documentId:
+          type: string
+          description: "Unique identifier of the document (file or memo).\r\n\r\nIf a file, the type must be 0 (File). \r\n\r\nIf a memo, the type must be 2 (Memo).\r\n\r\nThe FormTemplate (1) document type is not currently supported for task document creation."
+          nullable: true
+          example: cf666f06-3ff2-4a41-8c7f-ab5a8bc6a277
+        type:
+          allOf:
+          - $ref: '#/components/schemas/DocumentType'
+          description: "The type of the document.\r\n\r\nPossible values: File = 0, FormTemplate = 1, Memo = 2.\r\n\r\nThe FormTemplate (1) document type is not currently supported for task document creation."
+          example: 0
+      additionalProperties: false
+      description: Data transfer object for a task document.
+    ProblemDetails:
+      type: object
+      properties:
+        type:
+          type: string
+          nullable: true
+        title:
+          type: string
+          nullable: true
+        status:
+          type: integer
+          format: int32
+          nullable: true
+        detail:
+          type: string
+          nullable: true
+        instance:
+          type: string
+          nullable: true
+      additionalProperties: {}
+    TaskDocument:
+      type: object
+      properties:
+        id:
+          type: string
+          nullable: true
+        href:
+          type: string
+          nullable: true
+        relation:
+          type: string
+          nullable: true
+        method:
+          type: string
+          default: GET
+          nullable: true
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+        task:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          description: The associated task.
+          nullable: true
+        type:
+          allOf:
+          - $ref: '#/components/schemas/DocumentType'
+          description: "The type of the document.\r\n\r\nPossible values: File = 0, FormTemplate = 1, Memo = 2."
+          example: 0
+        isDeleted:
+          type: boolean
+          description: True when the task document has been deleted.
+          example: false
+        document:
+          description: Link to the the document.
+          nullable: true
+      additionalProperties: false
+      description: Task document resource.
+    SubTask:
+      type: object
+      properties:
+        id:
+          type: string
+          nullable: true
+        href:
+          type: string
+          nullable: true
+        relation:
+          type: string
+          nullable: true
+        method:
+          type: string
+          default: GET
+          nullable: true
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+        parentTask:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          description: The parent (task) of the subtask.
+          nullable: true
+        createdBy:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          description: The staff member who created the subtask.
+          nullable: true
+        completedBy:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          description: The staff member who completed the subtask.
+          nullable: true
+        lastUpdatedBy:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          description: The staff member who last updated the subtask.
+          nullable: true
+        subject:
+          type: string
+          description: The subject - a short description of the subtask.
+          nullable: true
+          example: Confer with Mary
+        completedDate:
+          type: string
+          description: '**Deprecated.** Use `CompletedDateOnly` instead.
+
+
+            When the subtask was completed in UTC.'
+          format: date-time
+          nullable: true
+          example: '2020-02-15T13:00:00Z'
+          deprecated: true
+        completedDateOnly:
+          type: string
+          description: 'The date when the subtask was completed.
+
+
+            The time portion will always be set to 00:00:00
+
+            and should be ignored. Only the date portion is relevant.'
+          format: date-time
+          nullable: true
+          example: '2020-02-15T00:00:00'
+        createdDate:
+          type: string
+          description: '**Deprecated.** Use `CreatedDateOnly` instead.
+
+
+            When the subtask was created in UTC.'
+          format: date-time
+          nullable: true
+          example: '2020-02-15T13:00:00Z'
+          deprecated: true
+        createdDateOnly:
+          type: string
+          description: 'The date when the subtask was created.
+
+
+            The time portion will always be set to 00:00:00
+
+            and should be ignored. Only the date portion is relevant.'
+          format: date-time
+          nullable: true
+          example: '2020-02-15T00:00:00'
+        isCompleted:
+          type: boolean
+          description: True when the subtask is completed.
+          example: false
+        isDeleted:
+          type: boolean
+          description: True when the subtask is deleted.
+          example: false
+        lastUpdated:
+          type: integer
+          description: Last updated timestamp.
+          format: int64
+          example: 637847425252027400
+      additionalProperties: false
+      description: Subtask resource.
+    DocumentType:
+      enum:
+      - 0
+      - 1
+      - 2
+      type: integer
+      description: "Available document types: \"File = 0\", \"FormTemplate = 1\", \"Memo = 2\" \r\n\r\nThe FormTemplate (1) document type is not currently supported for task document creation."
+      format: int32
+  securitySchemes:
+    api-key:
+      type: apiKey
+      name: x-api-key
+      in: header
+    token:
+      type: apiKey
+      name: Authorization
+      in: header
+      x-amazon-apigateway-authtype: cognito_user_pools

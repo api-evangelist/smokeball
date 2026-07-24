@@ -1,0 +1,563 @@
+openapi: 3.0.1
+info:
+  title: Smokeball Activity Codes Authorization API
+  version: '1.0'
+  description: REST API for integrating with Smokeball legal practice management software. Supports matters, contacts, documents, time entries, billing, trust accounting, staff, webhooks, and law firm workflows across US, AU, and UK regions. Uses OAuth 2.0 (client credentials) authentication.
+  contact:
+    name: Smokeball Developer Support
+    url: https://docs.smokeball.com/docs/api-docs/1e13a13124aee-introduction
+  x-api-id: smokeball
+  x-audience: external-public
+servers:
+- url: https://api.smokeball.com
+- url: https://api.smokeball.com.au
+- url: https://api.smokeball.co.uk
+- url: https://stagingapi.smokeball.com
+- url: https://stagingapi.smokeball.com.au
+- url: https://stagingapi.smokeball.co.uk
+security:
+- api-key: []
+  token: []
+tags:
+- name: Authorization
+paths:
+  /groups:
+    get:
+      tags:
+      - Authorization
+      summary: Get authorization groups
+      description: Retrieves auhorization groups for the firm associated with the authenticated client.
+      operationId: GetGroups
+      responses:
+        '200':
+          description: When request is successful. Returns a list of authorization 'Group' objects.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupPagedCollection'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+    post:
+      tags:
+      - Authorization
+      summary: Create an authorization group
+      description: Creates an authorization group.
+      operationId: CreateGroup
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/CreateGroupDto'
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/CreateGroupDto'
+          application/*+json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/CreateGroupDto'
+      responses:
+        '202':
+          description: When request is accepted. Returns a hypermedia 'Link' object of the authorization group to be created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Link'
+        '400':
+          description: When request is invalid.
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+  /groups/{id}:
+    get:
+      tags:
+      - Authorization
+      summary: Get an authorization group
+      description: Retrieves a specified authorization group.
+      operationId: GetGroup
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: When request is successful. Returns an authorization 'Group' object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Group'
+        '404':
+          description: When authorization group does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+    put:
+      tags:
+      - Authorization
+      summary: Update an authorization group
+      description: Updates a specified authorization group.
+      operationId: UpdateGroup
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/UpdateGroupDto'
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/UpdateGroupDto'
+          application/*+json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/UpdateGroupDto'
+      responses:
+        '202':
+          description: When request is accepted. Returns a hypermedia 'Link' object of the authorization group to be updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Link'
+        '400':
+          description: When request is invalid.
+        '404':
+          description: When authorization group does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+    delete:
+      tags:
+      - Authorization
+      summary: Deletes an authorization group
+      description: Delete an authorization group.
+      operationId: DeleteGroup
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '202':
+          description: When request is accepted. Returns a hypermedia 'Link' object of the authorization group to be deleted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Link'
+        '400':
+          description: When request is invalid.
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+  /policies/{reference}:
+    get:
+      tags:
+      - Authorization
+      summary: Get an authorization policy
+      description: Retrieves a specified authorization policy.
+      operationId: GetPolicy
+      parameters:
+      - name: reference
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: When request is successful. Returns an authorization 'Policy' object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Policy'
+        '404':
+          description: When authorization Policy does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+    put:
+      tags:
+      - Authorization
+      summary: Update an authorization policy
+      description: Updates a specified authorization policy.
+      operationId: UpdatePolicy
+      parameters:
+      - name: reference
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/PolicyDto'
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/PolicyDto'
+          application/*+json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/PolicyDto'
+      responses:
+        '202':
+          description: When request is accepted. Returns a hypermedia 'Link' object of the authorization policy to be updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Link'
+        '400':
+          description: When request is invalid.
+        '404':
+          description: When authorization policy does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+  /policies:
+    post:
+      tags:
+      - Authorization
+      summary: Create an authorization policy
+      description: Creates an authorization policy.
+      operationId: CreatePolicy
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/PolicyDto'
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/PolicyDto'
+          application/*+json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/PolicyDto'
+      responses:
+        '202':
+          description: When request is accepted. Returns a hypermedia 'Link' object of the authorization policy to be created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Link'
+        '400':
+          description: When request is invalid.
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+components:
+  schemas:
+    CreateGroupDto:
+      type: object
+      properties:
+        name:
+          type: string
+          description: "s\r\n            Name of the group."
+          nullable: true
+          example: Administrators
+        principalIds:
+          type: array
+          items:
+            type: string
+          description: Principals that are members of the group. This can be either user ids or other group ids.
+          nullable: true
+          example:
+          - 2595a645-94a2-46be-a60d-8410851a9671
+          - 2595a645-94a2-46be-a60d-8410851a9671
+      additionalProperties: false
+    RuleDto:
+      type: object
+      properties:
+        principalId:
+          type: string
+          description: "Principal id associated to this rule if the rule is associated to a resource based policy. This can be either a user id or a group id.\r\n\r\nThis is null if the policy is a principal based policy."
+          nullable: true
+          example: a7922e80-f833-48f0-8250-c00df1ebbc16
+        resourceId:
+          type: string
+          description: "Resource id associated to this rule if it is a principal based policy. \r\n\r\nFor matter based policies, use `matters/{matterId}` for a single matter or `matters` for all matters.\r\n\r\nThis is null if the associated policy is a resource based policy."
+          nullable: true
+          example: matters/69406c65-309d-4e35-a636-ad145e64770a
+        operation:
+          type: string
+          description: "The operation associated to this rule.\r\n\r\nPossible values: 'Access','Execute'."
+          example: Access
+        type:
+          allOf:
+          - $ref: '#/components/schemas/AuthorizationPolicyType'
+          description: "The type of the rule.\r\n            \r\nPossible values: 'Deny','Allow'."
+      additionalProperties: false
+    Rule:
+      type: object
+      properties:
+        principalId:
+          type: string
+          description: "Principal id associated to this rule if the rule is associated to a resource based policy. This can be either a user id or a group id.\r\n\r\nThis is null if the policy is a principal based policy."
+          nullable: true
+          example: a7922e80-f833-48f0-8250-c00df1ebbc16
+        resourceId:
+          type: string
+          description: "Resource id associated to this rule if it is a principal based policy. \r\n\r\nFor matter based policies, use `matters/{matterId}` for a single matter or `matters` for all matters.\r\n\r\nThis is null if the associated policy is a resource based policy."
+          nullable: true
+          example: matters/69406c65-309d-4e35-a636-ad145e64770a
+        operation:
+          type: string
+          description: "The operation associated to this rule.\r\n\r\nPossible values: 'Access','Execute'."
+          example: Access
+        type:
+          allOf:
+          - $ref: '#/components/schemas/AuthorizationPolicyType'
+          description: "The type of the rule.\r\n            \r\nPossible values: 'Deny','Allow'."
+      additionalProperties: false
+    Policy:
+      type: object
+      properties:
+        href:
+          type: string
+          nullable: true
+        relation:
+          type: string
+          nullable: true
+        method:
+          type: string
+          default: GET
+          nullable: true
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+        id:
+          type: string
+          description: Unique id of the policy.
+          nullable: true
+          example: eb40ac02-383c-49bd-b956-c02cba814215
+        reference:
+          type: string
+          description: Unique reference of the policy.
+          nullable: true
+          example: 31a9caa9-4db7-4a0e-8233-d51254975099
+        principalId:
+          type: string
+          description: "Principal id associated to this policy if it is a principal based policy. This can be either a user id or a group id.\r\n\r\nThis is null if the policy is a resource based policy."
+          nullable: true
+          example: a7922e80-f833-48f0-8250-c00df1ebbc16
+        resourceId:
+          type: string
+          description: "Resource id associated to this policy if it is a resource based policy.\r\n\r\nThis is null if the policy is a principal based policy."
+          nullable: true
+          example: 54171794-5ca3-472b-889a-c03538d8c89a
+        rules:
+          type: array
+          items:
+            $ref: '#/components/schemas/Rule'
+          description: The rules associated to this policy.
+          nullable: true
+      additionalProperties: false
+    PolicyDto:
+      type: object
+      properties:
+        principalId:
+          type: string
+          description: "Principal id associated to this policy if it is a principal based policy. This can be either a user id or a group id.\r\n\r\nThis is null if the policy is a resource based policy."
+          nullable: true
+          example: a7922e80-f833-48f0-8250-c00df1ebbc16
+        resourceId:
+          type: string
+          description: "Resource id associated to this policy if it is a resource based policy.\r\n\r\nThis is null if the policy is a principal based policy."
+          nullable: true
+          example: matters/54171794-5ca3-472b-889a-c03538d8c89a
+        rules:
+          type: array
+          items:
+            $ref: '#/components/schemas/RuleDto'
+          description: The rules associated to this policy.
+          nullable: true
+      additionalProperties: false
+    UpdateGroupDto:
+      type: object
+      properties:
+        principalIds:
+          type: array
+          items:
+            type: string
+          description: Principals that are members of the group. This can be either user ids or other group ids.
+          nullable: true
+          example:
+          - 2595a645-94a2-46be-a60d-8410851a9671
+          - 2595a645-94a2-46be-a60d-8410851a9671
+      additionalProperties: false
+    AuthorizationPolicyType:
+      enum:
+      - 0
+      - 1
+      type: integer
+      format: int32
+    GroupPagedCollection:
+      type: object
+      properties:
+        id:
+          type: string
+          nullable: true
+        href:
+          type: string
+          nullable: true
+        relation:
+          type: string
+          nullable: true
+        method:
+          type: string
+          default: GET
+          nullable: true
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/Group'
+          nullable: true
+        offset:
+          type: integer
+          format: int32
+          nullable: true
+        limit:
+          type: integer
+          format: int32
+          nullable: true
+        size:
+          type: integer
+          format: int64
+        first:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+        previous:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+        next:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+        last:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+      additionalProperties: false
+    Link:
+      type: object
+      properties:
+        id:
+          type: string
+          nullable: true
+        href:
+          type: string
+          nullable: true
+        relation:
+          type: string
+          nullable: true
+        method:
+          type: string
+          default: GET
+          nullable: true
+      additionalProperties: false
+    Group:
+      type: object
+      properties:
+        href:
+          type: string
+          nullable: true
+        relation:
+          type: string
+          nullable: true
+        method:
+          type: string
+          default: GET
+          nullable: true
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+        id:
+          type: string
+          description: Unique identifier of the group.
+          nullable: true
+          example: ed028979-5b64-4f63-82ef-2deef728d852
+        name:
+          type: string
+          description: Name of the group.
+          nullable: true
+          example: Administrators
+        principalIds:
+          type: array
+          items:
+            type: string
+          description: Principals that are members of the group. This can be either user ids or other group ids.
+          nullable: true
+          example:
+          - 2595a645-94a2-46be-a60d-8410851a9671
+          - 2595a645-94a2-46be-a60d-8410851a9671
+        isDeleted:
+          type: boolean
+          description: True when the group is deleted.
+          example: false
+      additionalProperties: false
+    ProblemDetails:
+      type: object
+      properties:
+        type:
+          type: string
+          nullable: true
+        title:
+          type: string
+          nullable: true
+        status:
+          type: integer
+          format: int32
+          nullable: true
+        detail:
+          type: string
+          nullable: true
+        instance:
+          type: string
+          nullable: true
+      additionalProperties: {}
+  securitySchemes:
+    api-key:
+      type: apiKey
+      name: x-api-key
+      in: header
+    token:
+      type: apiKey
+      name: Authorization
+      in: header
+      x-amazon-apigateway-authtype: cognito_user_pools

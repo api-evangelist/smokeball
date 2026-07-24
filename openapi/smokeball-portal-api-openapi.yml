@@ -1,0 +1,349 @@
+openapi: 3.0.1
+info:
+  title: Smokeball Activity Codes Portal API
+  version: '1.0'
+  description: REST API for integrating with Smokeball legal practice management software. Supports matters, contacts, documents, time entries, billing, trust accounting, staff, webhooks, and law firm workflows across US, AU, and UK regions. Uses OAuth 2.0 (client credentials) authentication.
+  contact:
+    name: Smokeball Developer Support
+    url: https://docs.smokeball.com/docs/api-docs/1e13a13124aee-introduction
+  x-api-id: smokeball
+  x-audience: external-public
+servers:
+- url: https://api.smokeball.com
+- url: https://api.smokeball.com.au
+- url: https://api.smokeball.co.uk
+- url: https://stagingapi.smokeball.com
+- url: https://stagingapi.smokeball.com.au
+- url: https://stagingapi.smokeball.co.uk
+security:
+- api-key: []
+  token: []
+tags:
+- name: Portal
+paths:
+  /matters/{matterId}/portal/tasks:
+    post:
+      tags:
+      - Portal
+      summary: Creates a portal task
+      description: Creates a new client portal task associated with the specified matter.
+      operationId: CreatePortalTaskAsync
+      parameters:
+      - name: matterId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/PortalTaskDto'
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/PortalTaskDto'
+          application/*+json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/PortalTaskDto'
+        required: true
+      responses:
+        '202':
+          description: When request is accepted. Returns the id of the task to be created.
+        '400':
+          description: When an unsupported request is made.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '403':
+          description: When the authenticated account does not have access to the matter.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: When matter with specified id does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+  /matters/{matterId}/portal/messages:
+    post:
+      tags:
+      - Portal
+      summary: Sends a portal message
+      description: "Sends a message to the specified contact on the client portal. \r\n\r\nWhen using the Client Credentials grant type, include the UserId header to impersonate\r\nthe lawyer in the firm who is sending the message."
+      operationId: SendPortalMessageAsync
+      parameters:
+      - name: matterId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/PortalMessageDto'
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/PortalMessageDto'
+          application/*+json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/PortalMessageDto'
+      responses:
+        '202':
+          description: When request is accepted.
+        '400':
+          description: When an unsupported request is made.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '403':
+          description: When the authenticated account does not have access to the matter.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: When matter with specified id does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+  /matters/{matterId}/portal/tasks/{taskId}:
+    patch:
+      tags:
+      - Portal
+      summary: Patch a portal task
+      description: Updates a client portal task.
+      operationId: PatchPortalTaskAsync
+      parameters:
+      - name: matterId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: taskId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/PatchPortalTaskDto'
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/PatchPortalTaskDto'
+          application/*+json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/PatchPortalTaskDto'
+      responses:
+        '202':
+          description: When request is accepted. Returns the id of the task to be updated.
+        '400':
+          description: When an unsupported request is made.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '403':
+          description: When the authenticated account does not have access to the matter.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: When matter with specified id does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+components:
+  schemas:
+    PatchPortalTaskDto:
+      type: object
+      properties:
+        externalUserId:
+          type: string
+          description: The optional external user identifier of the external system.
+          nullable: true
+        title:
+          type: string
+          description: The title of the task to be displayed in the UI.
+          nullable: true
+          example: 'Sign: Verification of Identity'
+        url:
+          type: string
+          description: The URL that will be displayed within the task content.
+          nullable: true
+          example: http://www.yourwebsite.com
+        actionText:
+          type: string
+          description: "Optional action text, a single word to describe the action the task relates to. \r\n\r\nDefaults to \"Complete\", but other examples could be \"Sign\" or \"Review\"."
+          nullable: true
+          example: Complete
+        cancelled:
+          type: boolean
+          description: Whether the task is Cancelled
+          nullable: true
+          example: true
+        cancelledText:
+          type: string
+          description: Optional cancelled text, used on the task cancelled screen if provided.
+          nullable: true
+          example: Signing Cancelled!
+        cancelledUrl:
+          type: string
+          description: "Optional cancelled URL, which is a URL that is loaded in the task content body instead of the default cancelled screen if provided.\r\n\r\nThis option overrides CancelledText if provided."
+          nullable: true
+          example: http://www.yourwebsite.com
+        completed:
+          type: boolean
+          description: Whether the task is Completed
+          nullable: true
+          example: true
+        completedText:
+          type: string
+          description: Optional completed text, used on the task success screen if provided.
+          nullable: true
+          example: Signing Complete!
+        completedUrl:
+          type: string
+          description: "Optional completed URL, which is a URL that is loaded in the task content body instead of the default success screen if provided.\r\n\r\nThis option overrides CompletedText if provided."
+          nullable: true
+          example: http://www.yourwebsite.com
+        expired:
+          type: boolean
+          description: Whether the task is Expired
+          nullable: true
+          example: true
+        expiredText:
+          type: string
+          description: Optional expired text, used on the task expired screen if provided.
+          nullable: true
+          example: Signing Expired!
+        expiredUrl:
+          type: string
+          description: "Optional expired URL, which is a URL that is loaded in the task content body instead of the default expired screen if provided.\r\n\r\nThis option overrides ExpiredText if provided."
+          nullable: true
+          example: http://www.yourwebsite.com
+      additionalProperties: false
+    PortalMessageDto:
+      required:
+      - message
+      type: object
+      properties:
+        contactId:
+          type: string
+          description: Unique identifier of the contact.
+          format: uuid
+          example: 93421c6f-40bd-465d-bb95-3b3b5e200e30
+        message:
+          minLength: 1
+          type: string
+        requireMFA:
+          type: boolean
+          description: Whether MFA is required before showing the message content.
+          example: true
+      additionalProperties: false
+    ProblemDetails:
+      type: object
+      properties:
+        type:
+          type: string
+          nullable: true
+        title:
+          type: string
+          nullable: true
+        status:
+          type: integer
+          format: int32
+          nullable: true
+        detail:
+          type: string
+          nullable: true
+        instance:
+          type: string
+          nullable: true
+      additionalProperties: {}
+    PortalTaskDto:
+      required:
+      - externalUserId
+      - title
+      - url
+      type: object
+      properties:
+        contactId:
+          type: string
+          description: Unique identifier of the contact.
+          format: uuid
+          nullable: true
+          example: 93421c6f-40bd-465d-bb95-3b3b5e200e30
+        email:
+          type: string
+          description: Email address of the contact. If provided, this takes precedence over ContactId.
+          nullable: true
+          example: contact@example.com
+        externalUserId:
+          minLength: 1
+          type: string
+          description: The optional external user identifier of the external system.
+        title:
+          minLength: 1
+          type: string
+          description: The title of the task to be displayed in the UI.
+          example: 'Sign: Verification of Identity'
+        url:
+          minLength: 1
+          type: string
+          description: The URL that will be displayed within the task content.
+          example: http://www.yourwebsite.com
+        requireMFA:
+          type: boolean
+          description: Whether MFA is required before showing the task content.
+        optional:
+          type: boolean
+          description: "Whether the task is \"Required\" or \"Optional\".\r\n\r\nOptional tasks appear in a separate section in the UI."
+        actionText:
+          type: string
+          description: "Optional action text, a single word to describe the action the task relates to. \r\n\r\nDefaults to \"Complete\", but other examples could be \"Sign\" or \"Review\"."
+          nullable: true
+          example: Complete
+        completedText:
+          type: string
+          description: Optional completed text, used on the task success screen if provided.
+          nullable: true
+          example: Signing Complete!
+        completedUrl:
+          type: string
+          description: "Optional completed URL, which is a URL that is loaded in the task content body instead of the default success screen if provided.\r\n\r\nThis option overrides CompletedText if provided."
+          nullable: true
+          example: http://www.yourwebsite.com
+      additionalProperties: false
+  securitySchemes:
+    api-key:
+      type: apiKey
+      name: x-api-key
+      in: header
+    token:
+      type: apiKey
+      name: Authorization
+      in: header
+      x-amazon-apigateway-authtype: cognito_user_pools

@@ -1,0 +1,689 @@
+openapi: 3.0.1
+info:
+  title: Smokeball Activity Codes Events API
+  version: '1.0'
+  description: REST API for integrating with Smokeball legal practice management software. Supports matters, contacts, documents, time entries, billing, trust accounting, staff, webhooks, and law firm workflows across US, AU, and UK regions. Uses OAuth 2.0 (client credentials) authentication.
+  contact:
+    name: Smokeball Developer Support
+    url: https://docs.smokeball.com/docs/api-docs/1e13a13124aee-introduction
+  x-api-id: smokeball
+  x-audience: external-public
+servers:
+- url: https://api.smokeball.com
+- url: https://api.smokeball.com.au
+- url: https://api.smokeball.co.uk
+- url: https://stagingapi.smokeball.com
+- url: https://stagingapi.smokeball.com.au
+- url: https://stagingapi.smokeball.co.uk
+security:
+- api-key: []
+  token: []
+tags:
+- name: Events
+paths:
+  /events:
+    get:
+      tags:
+      - Events
+      summary: Get events
+      description: Returns a list of events.
+      operationId: GetEvents
+      parameters:
+      - name: Offset
+        in: query
+        schema:
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+          format: int32
+      - name: Limit
+        in: query
+        schema:
+          maximum: 500
+          minimum: 1
+          type: integer
+          format: int32
+      - name: UpdatedSince
+        in: query
+        description: "Filter by events updated since a specified time.\r\nSupported date formats are ISO YYYY-MM-DDThh:mm:ss or .net ticks representation of the UTC datetime."
+        schema:
+          type: string
+          example: 2000-01-01T20:00:00 OR 630823536000000000
+        example: 2000-01-01T20:00:00 OR 630823536000000000
+      - name: MatterId
+        in: query
+        description: Filter by events assigned to a specific MatterId.
+        schema:
+          type: string
+      - name: ExcludeDeletedEvents
+        in: query
+        description: 'Filter out any events that have been deleted, default: false'
+        schema:
+          type: boolean
+          example: false
+        example: false
+      - name: From
+        in: query
+        description: "Filter events from a specified UTC date and time.\r\nDefaults to the UTC datetime of the request.\r\nDates should be provided in ISO format YYYY-MM-DDThh:mm:ss."
+        schema:
+          type: string
+          format: date-time
+          example: '2000-01-01T20:00:00'
+        example: '2000-01-01T20:00:00'
+      - name: To
+        in: query
+        description: "Filter events to a specified UTC date and time.\r\nIf no datetime is specified all future events will be returned.\r\nDates should be provided in ISO format YYYY-MM-DDThh:mm:ss."
+        schema:
+          type: string
+          format: date-time
+          example: '2000-01-01T20:00:00'
+        example: '2000-01-01T20:00:00'
+      responses:
+        '200':
+          description: When request is successful. Returns a paged collection of 'Event' objects.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventPagedCollection'
+    post:
+      tags:
+      - Events
+      summary: Create event
+      description: Create new event.
+      operationId: CreateEvent
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/EventDto'
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/EventDto'
+          application/*+json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/EventDto'
+      responses:
+        '202':
+          description: When request is accepted. Returns a hypermedia 'Link' object of the event to be created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Link'
+  /events/{eventId}:
+    get:
+      tags:
+      - Events
+      summary: Get an event
+      description: Retrieves a specified event.
+      operationId: GetEventById
+      parameters:
+      - name: eventId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: When request is successful. Returns an 'Event' object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Event'
+        '403':
+          description: When the authenticated account does not access to the event.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: When event with specified id does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+    put:
+      tags:
+      - Events
+      summary: Update event
+      description: Updates event details.
+      operationId: UpdateEvent
+      parameters:
+      - name: eventId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/EventDto'
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/EventDto'
+          application/*+json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/EventDto'
+      responses:
+        '202':
+          description: When request is accepted. Returns a hypermedia 'Link' object of the event to be updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Link'
+        '404':
+          description: When event does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+    delete:
+      tags:
+      - Events
+      summary: Delete event
+      description: Deletes a specified event.
+      operationId: DeleteEvent
+      parameters:
+      - name: eventId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '202':
+          description: When request is accepted. Returns a hypermedia 'Link' object of the event to be deleted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Link'
+        '404':
+          description: When 'Event' does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+  /events/{eventId}/reminders:
+    get:
+      tags:
+      - Events
+      summary: Gets reminders for an event
+      description: Returns the collection of reminders for an event
+      operationId: GetReminders
+      parameters:
+      - name: eventId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: When request is successful. Returns the collection of reminders.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ReminderDto'
+        '403':
+          description: When the authenticated account does not have access to the event.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: When event with specified id does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+    post:
+      tags:
+      - Events
+      summary: Create reminder for an event
+      description: Creates a new reminder for an event.
+      operationId: CreateReminder
+      parameters:
+      - name: eventId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/ReminderDto'
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/ReminderDto'
+          application/*+json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/ReminderDto'
+      responses:
+        '202':
+          description: When request is accepted. Returns a 'Link' object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Link'
+        '403':
+          description: When the authenticated account does not have access to the event.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: When event with specified id does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+  /events/{eventId}/reminders/{reminderId}:
+    put:
+      tags:
+      - Events
+      summary: Update a reminder for an event
+      description: Updates an existing reminder for an event.
+      operationId: UpdateReminder
+      parameters:
+      - name: eventId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: reminderId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/ReminderDto'
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/ReminderDto'
+          application/*+json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/ReminderDto'
+      responses:
+        '202':
+          description: When request is accepted. Returns a 'Link' object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Link'
+        '403':
+          description: When the authenticated account does not have access to the event.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: When event with specified id does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+    delete:
+      tags:
+      - Events
+      summary: Delete reminder for an event
+      description: Deletes a specified event reminder.
+      operationId: DeleteReminder
+      parameters:
+      - name: eventId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: reminderId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '202':
+          description: When request is accepted. Returns a 'Link' object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Link'
+        '403':
+          description: When the authenticated account does not have access to the event.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: When event with specified id does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+components:
+  schemas:
+    EventDto:
+      type: object
+      properties:
+        matterId:
+          type: string
+          description: Matter Id.
+          nullable: true
+          example: b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2
+        subject:
+          type: string
+          description: Subject of event.
+          nullable: true
+          example: Subject
+        description:
+          type: string
+          description: Description of event.
+          nullable: true
+          example: Description
+        location:
+          type: string
+          description: Location of event.
+          nullable: true
+          example: Location
+        allDay:
+          type: boolean
+          description: Whether or not the event is all day.
+          example: false
+        nonBillable:
+          type: boolean
+          description: "Whether or not the event is billable.\r\nNote events with a duration greater than 12 hours automatically become non-billable."
+          example: false
+        type:
+          allOf:
+          - $ref: '#/components/schemas/EventType'
+          description: "The type of the event.\r\n\r\nWe currently support create and updates requests for non recurring events (type = Normal)."
+          nullable: true
+          example: Normal
+        eventType:
+          allOf:
+          - $ref: '#/components/schemas/EventType'
+          description: "**Deprecated.** Use `type` instead.\n\nThe type of the event.\r\n\r\nWe currently support create and updates requests for non recurring events (EventType = 0)."
+          nullable: true
+          example: '0'
+          deprecated: true
+        attendees:
+          type: array
+          items:
+            type: string
+          description: The staff Ids of the attendees of the event.
+          nullable: true
+        externalAttendees:
+          type: array
+          items:
+            type: string
+          description: "The contact Ids of the external or third party attendees of the event.\r\n\r\nThe contacts must be of Person type and must be part of the matter."
+          nullable: true
+        startTime:
+          type: string
+          description: "Start date and time of the event.\r\nSupported date format is ISO YYYY-MM-DDThh:mm:ss.\r\nNote: date and time will correlate with the time zone provided."
+          format: date-time
+          example: '2000-01-01T20:00:00'
+        endTime:
+          type: string
+          description: "End date and time of the event.\r\nSupported date format is ISO YYYY-MM-DDThh:mm:ss.\r\nNote: date and time will correlate with the time zone provided."
+          format: date-time
+          example: '2000-01-01T20:00:00'
+        timeZone:
+          type: string
+          description: "Time zone of the event for determining the start time and end time.\r\nTime zones are expected in the IANA time zone format.\r\nFor a list of valid time zones, see https://nodatime.org/TimeZones."
+          nullable: true
+          example: Australia/Sydney
+        additionalData:
+          type: object
+          additionalProperties:
+            type: string
+            nullable: true
+          description: Collection of key value pairs to update file meta data.
+          nullable: true
+      additionalProperties: false
+    EventPagedCollection:
+      type: object
+      properties:
+        id:
+          type: string
+          nullable: true
+        href:
+          type: string
+          nullable: true
+        relation:
+          type: string
+          nullable: true
+        method:
+          type: string
+          default: GET
+          nullable: true
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/Event'
+          nullable: true
+        offset:
+          type: integer
+          format: int32
+          nullable: true
+        limit:
+          type: integer
+          format: int32
+          nullable: true
+        size:
+          type: integer
+          format: int64
+        first:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+        previous:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+        next:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+        last:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+      additionalProperties: false
+    Link:
+      type: object
+      properties:
+        id:
+          type: string
+          nullable: true
+        href:
+          type: string
+          nullable: true
+        relation:
+          type: string
+          nullable: true
+        method:
+          type: string
+          default: GET
+          nullable: true
+      additionalProperties: false
+    ReminderDto:
+      type: object
+      properties:
+        offset:
+          type: integer
+          format: int32
+        offsetTypeId:
+          type: integer
+          format: int32
+        isAllDayReminder:
+          type: boolean
+        userIds:
+          type: array
+          items:
+            type: string
+          nullable: true
+      additionalProperties: false
+    ProblemDetails:
+      type: object
+      properties:
+        type:
+          type: string
+          nullable: true
+        title:
+          type: string
+          nullable: true
+        status:
+          type: integer
+          format: int32
+          nullable: true
+        detail:
+          type: string
+          nullable: true
+        instance:
+          type: string
+          nullable: true
+      additionalProperties: {}
+    EventType:
+      enum:
+      - Normal
+      - Pattern
+      - Occurrence
+      - ChangedOccurrence
+      - DeletedOccurrence
+      type: string
+      description: "The type of the event.\r\n\r\nPossible values: Non Recurring Event = 0, Recurring Pattern Series = 1, Single Recurring Occurrence = 2, Modified Recurring Occurrence = 3, Deleted Recurring Occurrence = 4"
+    Event:
+      type: object
+      properties:
+        href:
+          type: string
+          nullable: true
+        relation:
+          type: string
+          nullable: true
+        method:
+          type: string
+          default: GET
+          nullable: true
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+        id:
+          type: string
+          description: Unique identifier of the event.
+          nullable: true
+          example: b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2
+        matter:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          description: Hypermedia link of the associated matter.
+          nullable: true
+        attendees:
+          type: array
+          items:
+            $ref: '#/components/schemas/Link'
+          description: Hypermedia link of all the attendees.
+          nullable: true
+        externalAttendees:
+          type: array
+          items:
+            $ref: '#/components/schemas/Link'
+          description: Hypermedia link of all the contacts of the external or third party attendees.
+          nullable: true
+        eventType:
+          allOf:
+          - $ref: '#/components/schemas/EventType'
+          description: "**Deprecated.** Use `type` instead.\n\nThe type of the event.\r\n\r\nPossible values: Non Recurring Event = 0, Recurring Pattern Series = 1, Single Recurring Occurrence = 2, Modified Recurring Occurrence = 3, Deleted Recurring Occurrence = 4"
+          example: '0'
+          deprecated: true
+        type:
+          allOf:
+          - $ref: '#/components/schemas/EventType'
+          description: "The type of the event.\r\n\r\nPossible values: Normal, Pattern, Occurrence, ChangedOccurrence, DeletedOccurrence"
+          example: Normal
+        subject:
+          type: string
+          description: Subject of event.
+          nullable: true
+          example: Subject
+        description:
+          type: string
+          description: Description of event.
+          nullable: true
+          example: Description
+        location:
+          type: string
+          description: Location of event.
+          nullable: true
+          example: Location
+        allDay:
+          type: boolean
+          description: Whether or not the event is all day.
+          example: false
+        nonBillable:
+          type: boolean
+          description: "Whether or not the event is billable.\r\nNote events with a duration greater than 12 hours automatically become non-billable."
+          example: false
+        startTime:
+          type: string
+          description: "Start date and time of the event.\r\nSupported date format is ISO YYYY-MM-DDThh:mm:ss.\r\nNote: date and time will correlate with the time zone provided."
+          format: date-time
+          example: '2000-01-01T20:00:00'
+        endTime:
+          type: string
+          description: "End date and time of the event.\r\nSupported date format is ISO YYYY-MM-DDThh:mm:ss.\r\nNote: date and time will correlate with the time zone provided."
+          format: date-time
+          example: '2000-01-01T20:00:00'
+        timeZone:
+          type: string
+          description: "Time zone of the event for determining the start time and end time.\r\nTime zones will be in the IANA time zone format."
+          nullable: true
+          example: Australia/Sydney
+        lastUpdated:
+          type: string
+          description: "The last date and time the event was updated.\r\nSupported date format is ISO YYYY-MM-DDThh:mm:ss."
+          format: date-time
+          example: '2000-01-01T20:00:00'
+        additionalData:
+          type: object
+          additionalProperties:
+            type: string
+            nullable: true
+          description: Any additional data provided for the event.
+          nullable: true
+        isDeleted:
+          type: boolean
+          description: Whether the event has been deleted.
+          example: false
+      additionalProperties: false
+  securitySchemes:
+    api-key:
+      type: apiKey
+      name: x-api-key
+      in: header
+    token:
+      type: apiKey
+      name: Authorization
+      in: header
+      x-amazon-apigateway-authtype: cognito_user_pools

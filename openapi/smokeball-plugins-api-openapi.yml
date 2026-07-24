@@ -1,0 +1,909 @@
+openapi: 3.0.1
+info:
+  title: Smokeball Activity Codes Plugins API
+  version: '1.0'
+  description: REST API for integrating with Smokeball legal practice management software. Supports matters, contacts, documents, time entries, billing, trust accounting, staff, webhooks, and law firm workflows across US, AU, and UK regions. Uses OAuth 2.0 (client credentials) authentication.
+  contact:
+    name: Smokeball Developer Support
+    url: https://docs.smokeball.com/docs/api-docs/1e13a13124aee-introduction
+  x-api-id: smokeball
+  x-audience: external-public
+servers:
+- url: https://api.smokeball.com
+- url: https://api.smokeball.com.au
+- url: https://api.smokeball.co.uk
+- url: https://stagingapi.smokeball.com
+- url: https://stagingapi.smokeball.com.au
+- url: https://stagingapi.smokeball.co.uk
+security:
+- api-key: []
+  token: []
+tags:
+- name: Plugins
+paths:
+  /plugins/{pluginId}:
+    get:
+      tags:
+      - Plugins
+      summary: Get a plugin
+      description: Returns the plugin.
+      operationId: GetPlugin
+      parameters:
+      - name: pluginId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: When request is successful. Returns a 'Plugin' object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Plugin'
+        '404':
+          description: When plugin with specified id does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+    put:
+      tags:
+      - Plugins
+      summary: Update existing plugin
+      description: Updates a plugin with the specified plugin details.
+      operationId: UpdatePluginAsync
+      parameters:
+      - name: pluginId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/PluginDto'
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/PluginDto'
+          application/*+json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/PluginDto'
+      responses:
+        '202':
+          description: When request is accepted. Returns a 'Link' object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Link'
+        '400':
+          description: When an unsupported request is made.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '403':
+          description: When the authenticated account does not have access to update plugins.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: When plugin with specified id does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+    delete:
+      tags:
+      - Plugins
+      summary: Delete existing plugin
+      description: Deletes an existing plugin by id.
+      operationId: DeletePluginAsync
+      parameters:
+      - name: pluginId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '202':
+          description: When request is accepted. Returns a 'Link' object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Link'
+        '400':
+          description: When an unsupported request is made.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '403':
+          description: When the authenticated account does not have access to delete plugins.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: When plugin with specified id does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+  /plugins:
+    get:
+      tags:
+      - Plugins
+      summary: Get plugins
+      description: Returns existing plugins.
+      operationId: GetPlugins
+      parameters:
+      - name: Offset
+        in: query
+        schema:
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+          format: int32
+      - name: Limit
+        in: query
+        schema:
+          maximum: 500
+          minimum: 1
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: When request is successful. Returns a paged collection of 'Plugin' objects.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PluginPagedCollection'
+    post:
+      tags:
+      - Plugins
+      summary: Create a new plugin
+      description: Creates a new plugin with the specified plugin details.
+      operationId: CreatePluginAsync
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/PluginDto'
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/PluginDto'
+          application/*+json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/PluginDto'
+      responses:
+        '202':
+          description: When request is accepted. Returns a 'Link' object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Link'
+        '400':
+          description: When an unsupported request is made.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '403':
+          description: When the authenticated account does not have access to create plugins.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: When required resources are not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+  /plugins/{pluginId}/url:
+    post:
+      tags:
+      - Plugins
+      summary: Request plugin URL
+      description: "Requests a secure URL from the plugin's endpoint for invoking the plugin.\r\nAccepts additional key/value pairs to pass to the plugin endpoint.\r\nReserved keys (AccountId, UserId, UserEmail, MatterId, AppId, EmbedToken) cannot be included in AdditionalData."
+      operationId: RequestPluginUrlAsync
+      parameters:
+      - name: pluginId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/PluginUrlRequestDto'
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/PluginUrlRequestDto'
+          application/*+json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/PluginUrlRequestDto'
+      responses:
+        '200':
+          description: When request is successful. Returns the plugin URL.
+          content:
+            application/json:
+              schema:
+                type: string
+        '400':
+          description: When plugin does not return a valid URL or reserved keys are used.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '401':
+          description: When request is not authenticated with client credentials.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: When plugin with specified id does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+  /plugins/{pluginId}/subscriptions/{id}:
+    get:
+      tags:
+      - Plugins
+      summary: Get a plugin subscription
+      description: Returns the plugin subscription.
+      operationId: GetPluginSubscription
+      parameters:
+      - name: pluginId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: When request is successful. Returns a 'PluginSubscription' object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PluginSubscription'
+        '400':
+          description: When an unsupported request is made.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '403':
+          description: When the authenticated account does not have access to the plugin subscription.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: When plugin subscription with specified id does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+    delete:
+      tags:
+      - Plugins
+      summary: Unsubscribes account from plugin
+      description: Unsubscribes an account from the specified plugin.
+      operationId: DeletePluginSubscriptionAsync
+      parameters:
+      - name: pluginId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '202':
+          description: When request is accepted. Returns a 'Link' object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Link'
+        '400':
+          description: When an unsupported request is made.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '403':
+          description: When the authenticated account does not have access to unsubscribe from plugins.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: When plugin subscription with specified id does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+  /plugins/{pluginId}/subscriptions:
+    get:
+      tags:
+      - Plugins
+      summary: Get plugin subscriptions
+      description: Returns plugin subscriptions for the account.
+      operationId: GetPluginSubscriptions
+      parameters:
+      - name: pluginId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: Offset
+        in: query
+        schema:
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+          format: int32
+      - name: Limit
+        in: query
+        schema:
+          maximum: 500
+          minimum: 1
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: When request is successful. Returns a paged collection of 'PluginSubscription' objects.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PluginSubscriptionPagedCollection'
+        '400':
+          description: When an unsupported request is made.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '403':
+          description: When the authenticated account does not have access to plugin subscriptions.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: When required resources are not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+    post:
+      tags:
+      - Plugins
+      summary: Subscribe account to plugin
+      description: Subscribes an account with the specified plugin.
+      operationId: CreatePluginSubscriptionAsync
+      parameters:
+      - name: pluginId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '202':
+          description: When request is accepted. Returns a 'Link' object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Link'
+        '400':
+          description: When an unsupported request is made.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '403':
+          description: When the authenticated account does not have access to subscribe to plugins.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: When plugin with specified id does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+components:
+  schemas:
+    PluginType:
+      enum:
+      - Button
+      - Tab
+      type: string
+      description: The type of component the plugin should represent.
+    PluginVersionDto:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the plugin.
+          nullable: true
+        description:
+          type: string
+          description: A description of the plugin.
+          nullable: true
+        placement:
+          type: string
+          description: "A placement key representing where the plugin should be rendered in the UI.\r\n\r\nPlacement key must correspond to the type of the plugin.\r\n\r\nRefer to documentation for valid placement keys."
+          nullable: true
+        requestEndpointUrl:
+          type: string
+          description: "The url that is called to request the plugin endpoint.\r\n\r\nWhen a user views a plugin, we request the url to view securely through your backend.\r\n\r\nMatter and user information is passed to the endpoint through POST body, and the endpoint is expected to return a JSON object containing a url field.\r\nThe plugin will then load the URL and display it to the user."
+          nullable: true
+        attributes:
+          allOf:
+          - $ref: '#/components/schemas/PluginAttributes'
+          description: Visual attributes associated to this plugin.
+          nullable: true
+        availability:
+          allOf:
+          - $ref: '#/components/schemas/PluginAvailability'
+          description: Optional settings for determining the availability of a plugin.
+          nullable: true
+      additionalProperties: false
+    PluginSubscriptionPagedCollection:
+      type: object
+      properties:
+        id:
+          type: string
+          nullable: true
+        href:
+          type: string
+          nullable: true
+        relation:
+          type: string
+          nullable: true
+        method:
+          type: string
+          default: GET
+          nullable: true
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/PluginSubscription'
+          nullable: true
+        offset:
+          type: integer
+          format: int32
+          nullable: true
+        limit:
+          type: integer
+          format: int32
+          nullable: true
+        size:
+          type: integer
+          format: int64
+        first:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+        previous:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+        next:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+        last:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+      additionalProperties: false
+    Plugin:
+      type: object
+      properties:
+        id:
+          type: string
+          nullable: true
+        href:
+          type: string
+          nullable: true
+        relation:
+          type: string
+          nullable: true
+        method:
+          type: string
+          default: GET
+          nullable: true
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+        externalId:
+          type: string
+          description: Optional id provided by the external system that owns this plugin.
+          nullable: true
+        application:
+          allOf:
+          - $ref: '#/components/schemas/PluginApplication'
+          description: The application that the plugin should be rendered in.
+        type:
+          allOf:
+          - $ref: '#/components/schemas/PluginType'
+          description: The type of component the plugin should represent.
+        version:
+          allOf:
+          - $ref: '#/components/schemas/PluginVersion'
+          description: Current version of the plugin.
+          nullable: true
+        lastUpdated:
+          type: integer
+          description: Last updated timestamp.
+          format: int64
+          example: 637847425252027400
+        createdDate:
+          type: string
+          description: Plugin created date in UTC.
+          format: date-time
+          example: '2020-02-15T00:00:00Z'
+        lastUpdatedDate:
+          type: string
+          description: Plugin last updated date in UTC.
+          format: date-time
+          example: '2020-02-15T00:00:00Z'
+        key:
+          type: string
+          description: Signing key of the plugin to verify integrity of requesting secure URLs.
+          nullable: true
+        additionalData:
+          type: object
+          additionalProperties: {}
+          description: Collection of plugin meta data as KeyValuePair(string, object).
+          nullable: true
+      additionalProperties: false
+    PluginSubscription:
+      type: object
+      properties:
+        href:
+          type: string
+          nullable: true
+        relation:
+          type: string
+          nullable: true
+        method:
+          type: string
+          default: GET
+          nullable: true
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+        id:
+          type: string
+          description: Unique identifier of the subscription.
+          nullable: true
+          example: b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2
+        pluginId:
+          type: string
+          description: Unique identifier of the plugin.
+          nullable: true
+          example: b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2
+        pluginVersionId:
+          type: string
+          description: Unique identifier of the plugin version. Can be null.
+          nullable: true
+          example: b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2
+        createdDate:
+          type: string
+          description: Plugin subscription created date in UTC.
+          format: date-time
+          example: '2020-02-15T00:00:00Z'
+        lastUpdatedDate:
+          type: string
+          description: Plugin subscription last updated date in UTC.
+          format: date-time
+          example: '2020-02-15T00:00:00Z'
+        isDisabled:
+          type: boolean
+          description: True when the subscription is disabled (the plugin will not function for the user).
+      additionalProperties: false
+    PluginPagedCollection:
+      type: object
+      properties:
+        id:
+          type: string
+          nullable: true
+        href:
+          type: string
+          nullable: true
+        relation:
+          type: string
+          nullable: true
+        method:
+          type: string
+          default: GET
+          nullable: true
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/Plugin'
+          nullable: true
+        offset:
+          type: integer
+          format: int32
+          nullable: true
+        limit:
+          type: integer
+          format: int32
+          nullable: true
+        size:
+          type: integer
+          format: int64
+        first:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+        previous:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+        next:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+        last:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+      additionalProperties: false
+    PluginPage:
+      type: object
+      properties:
+        title:
+          type: string
+          description: "Optional: The title of the page rendered by the plugin (where applicable).\r\nIf not specified, the name of the plugin will be used."
+          nullable: true
+        width:
+          type: integer
+          description: "Optional: The width of the page rendered by the plugin (where applicable).\r\nIf not specified, a default width will be used."
+          format: int32
+        height:
+          type: integer
+          description: "Optional: The height of the page rendered by the plugin (where applicable).\r\nIf not specified, a default width will be used."
+          format: int32
+        useDefaultBrowser:
+          type: boolean
+          description: "Optional: Override browser behavior.\r\nWhen true, loads the endpoint in the internal browser (where applicable)."
+      additionalProperties: false
+    PluginDto:
+      type: object
+      properties:
+        externalId:
+          type: string
+          description: Optional id provided by the external system that owns this plugin.
+          nullable: true
+        application:
+          allOf:
+          - $ref: '#/components/schemas/PluginApplication'
+          description: The application that the plugin should be rendered in.
+        type:
+          allOf:
+          - $ref: '#/components/schemas/PluginType'
+          description: The type of component the plugin should represent.
+        version:
+          allOf:
+          - $ref: '#/components/schemas/PluginVersionDto'
+          description: Current version of the plugin.
+          nullable: true
+        key:
+          type: string
+          description: "Signing key of the plugin to verify integrity of requesting secure URLs.\r\nOnly available to set on Plugin creation."
+          nullable: true
+        additionalData:
+          type: object
+          additionalProperties: {}
+          description: Collection of KeyValuePair(string, object) to update Plugin meta data.
+          nullable: true
+      additionalProperties: false
+    Link:
+      type: object
+      properties:
+        id:
+          type: string
+          nullable: true
+        href:
+          type: string
+          nullable: true
+        relation:
+          type: string
+          nullable: true
+        method:
+          type: string
+          default: GET
+          nullable: true
+      additionalProperties: false
+    PluginUrlRequestDto:
+      type: object
+      properties:
+        matterId:
+          type: string
+          description: The matter id associated with the request, if applicable.
+          nullable: true
+          example: 0c5a2296-9e02-4c58-bd14-b7467d4c9bcb
+        additionalData:
+          type: object
+          additionalProperties: {}
+          description: "Additional key/value pairs to pass to the plugin endpoint.\r\nReserved keys (AccountId, UserId, UserEmail, MatterId) will be rejected."
+          nullable: true
+      additionalProperties: false
+    PluginVersion:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier of the plugin version.
+          nullable: true
+        pluginId:
+          type: string
+          description: The plugin id this version is associated to.
+          nullable: true
+        versionNumber:
+          type: integer
+          description: The associated version number.
+          format: int32
+        name:
+          type: string
+          description: The name of the plugin.
+          nullable: true
+        description:
+          type: string
+          description: A description of the plugin.
+          nullable: true
+        placement:
+          type: string
+          description: "A placement key representing where the plugin should be rendered in the UI.\r\nPlacement key must correspond to the type of the plugin.\r\nRefer to documentation for valid placement keys."
+          nullable: true
+        requestEndpointUrl:
+          type: string
+          description: "The url that is called to request the plugin endpoint.\r\n\r\nWhen a user views a plugin, we request the url to view securely through your backend.\r\n\r\nMatter and user information is passed to the endpoint through POST body, and the endpoint is expected to return a JSON object containing a url field.\r\nThe plugin will then load the URL and display it to the user."
+          nullable: true
+        attributes:
+          allOf:
+          - $ref: '#/components/schemas/PluginAttributes'
+          description: Visual attributes associated to this plugin.
+          nullable: true
+        availability:
+          allOf:
+          - $ref: '#/components/schemas/PluginAvailability'
+          description: 'Optional: Settings for determining the availability of a plugin.'
+          nullable: true
+        createdDate:
+          type: string
+          description: Plugin version created date in UTC
+          format: date-time
+          example: '2020-02-15T00:00:00Z'
+        lastUpdatedDate:
+          type: string
+          description: Plugin version last updated date in UTC
+          format: date-time
+          example: '2020-02-15T00:00:00Z'
+      additionalProperties: false
+    ProblemDetails:
+      type: object
+      properties:
+        type:
+          type: string
+          nullable: true
+        title:
+          type: string
+          nullable: true
+        status:
+          type: integer
+          format: int32
+          nullable: true
+        detail:
+          type: string
+          nullable: true
+        instance:
+          type: string
+          nullable: true
+      additionalProperties: {}
+    PluginAvailability:
+      type: object
+      properties:
+        matterTypeIds:
+          type: array
+          items:
+            type: string
+          description: "Optional matter types applicable for the plugin.\r\n\r\nPlugin is applicable for all matter types if this is left empty."
+          nullable: true
+      additionalProperties: false
+    PluginApplication:
+      enum:
+      - Native
+      - Web
+      - Archie
+      type: string
+      description: The application that the plugin should be rendered in.
+    PluginAttributes:
+      type: object
+      properties:
+        text:
+          type: string
+          description: The text to be rendered on the plugin component (where applicable).
+          nullable: true
+        icon:
+          type: string
+          description: "The Icon to be rendered on the plugin component (where applicable).\r\nRefer to documentation for a full list of icons."
+          nullable: true
+        color:
+          type: string
+          description: The hex color code to be rendered on the plugin component (where applicable).
+          nullable: true
+        tooltip:
+          type: string
+          description: 'Optional: The tooltip to display on component hover (where applicable).'
+          nullable: true
+        page:
+          allOf:
+          - $ref: '#/components/schemas/PluginPage'
+          description: Page attributes for the plugin (where applicable).
+          nullable: true
+      additionalProperties: false
+  securitySchemes:
+    api-key:
+      type: apiKey
+      name: x-api-key
+      in: header
+    token:
+      type: apiKey
+      name: Authorization
+      in: header
+      x-amazon-apigateway-authtype: cognito_user_pools

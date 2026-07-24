@@ -1,0 +1,302 @@
+openapi: 3.0.1
+info:
+  title: Smokeball Activity Codes Users API
+  version: '1.0'
+  description: REST API for integrating with Smokeball legal practice management software. Supports matters, contacts, documents, time entries, billing, trust accounting, staff, webhooks, and law firm workflows across US, AU, and UK regions. Uses OAuth 2.0 (client credentials) authentication.
+  contact:
+    name: Smokeball Developer Support
+    url: https://docs.smokeball.com/docs/api-docs/1e13a13124aee-introduction
+  x-api-id: smokeball
+  x-audience: external-public
+servers:
+- url: https://api.smokeball.com
+- url: https://api.smokeball.com.au
+- url: https://api.smokeball.co.uk
+- url: https://stagingapi.smokeball.com
+- url: https://stagingapi.smokeball.com.au
+- url: https://stagingapi.smokeball.co.uk
+security:
+- api-key: []
+  token: []
+tags:
+- name: Users
+paths:
+  /users/{id}:
+    get:
+      tags:
+      - Users
+      summary: Get a user
+      description: Retrieves a specified user.
+      operationId: GetUserByIdAsync
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: When request is successful. Returns a 'User' object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          description: When an unsupported request is made.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '403':
+          description: When user with specified id is not associated with authenticated client.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: When user with specified id does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+    delete:
+      tags:
+      - Users
+      summary: Remove a user
+      description: "Removes a user.\r\n            \r\nUser must belong to the specified account."
+      operationId: DeleteUserAsync
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '202':
+          description: When request is accepted. Returns a hypermedia 'Link' object of the user to be removed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Link'
+        '400':
+          description: When an unsupported request is made.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '403':
+          description: When the user is not associated to the specified account.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+  /users:
+    post:
+      tags:
+      - Users
+      summary: Create a user
+      description: "Creates a user.\r\n\r\nSends an email with a generated password if the password is missing."
+      operationId: CreateUserAsync
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/UserDto'
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/UserDto'
+          application/*+json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/UserDto'
+      responses:
+        '202':
+          description: When request is accepted. Returns a hypermedia 'Link' object of the user to be created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Link'
+        '400':
+          description: When user or password validation fails.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+  /users/{id}/invite:
+    post:
+      tags:
+      - Users
+      summary: Resend a user invitation
+      description: "Resends an invitation email with a temporary password for the specified user.\r\n\r\nThe user must exist and belong to the specified account when specifying id.\r\nOptionally invite a user using a email address instead of user id. Use a default id of all zeros when posting email address payload.\r\nEmail address invites are only available to client credential grants."
+      operationId: InviteUserAsync
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/InviteUserDto'
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/InviteUserDto'
+          application/*+json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/InviteUserDto'
+      responses:
+        '202':
+          description: When request is accepted. Returns a hypermedia 'Link' object of the user to be invited.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Link'
+        '400':
+          description: When an unsupported request is made.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '403':
+          description: When the user is not associated to the specified account.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+components:
+  schemas:
+    InviteUserDto:
+      required:
+      - email
+      type: object
+      properties:
+        email:
+          minLength: 1
+          type: string
+          description: Invite user by email address.
+      additionalProperties: false
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+          nullable: true
+        href:
+          type: string
+          nullable: true
+        relation:
+          type: string
+          nullable: true
+        method:
+          type: string
+          default: GET
+          nullable: true
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+        userId:
+          type: string
+          description: Unique identifier of the user.
+          nullable: true
+          example: 23d2a4bc-8529-462e-8560-dfbf4fa24e49
+        email:
+          type: string
+          description: Email address of the user.
+          nullable: true
+          example: user@domain.com
+        isInternal:
+          type: boolean
+          description: Returns true if the user is flagged as an internal user.
+          example: true
+        bypassMfa:
+          type: boolean
+          description: Returns true if multi-factor authentication is bypassed for the user.
+          example: true
+      additionalProperties: false
+    UserDto:
+      required:
+      - email
+      type: object
+      properties:
+        email:
+          minLength: 1
+          type: string
+          description: Email address of the user.
+          example: user@domain.com
+        password:
+          type: string
+          description: "Password for the user.\r\n\r\nPassword must include atleast one lowercase character, uppercase character, numeric character as well as a special character."
+          nullable: true
+        expireAfterDays:
+          type: integer
+          description: Expire after the specified days. Must be left blank for users that do not expire.
+          format: int32
+          nullable: true
+          example: 7
+        isInternal:
+          type: boolean
+          description: "Creates the user as an internal user.\r\n\r\nInternal users are excluded from billing and license counts.\r\n\r\nUse this option for testing, background services, or other non-customer-facing purposes."
+          example: true
+        bypassMfa:
+          type: boolean
+          description: "Bypasses multi-factor authentication for the user.\r\n\r\nWhen enabled, the user will not be prompted for two factor authentication during login."
+          example: true
+      additionalProperties: false
+    Link:
+      type: object
+      properties:
+        id:
+          type: string
+          nullable: true
+        href:
+          type: string
+          nullable: true
+        relation:
+          type: string
+          nullable: true
+        method:
+          type: string
+          default: GET
+          nullable: true
+      additionalProperties: false
+    ProblemDetails:
+      type: object
+      properties:
+        type:
+          type: string
+          nullable: true
+        title:
+          type: string
+          nullable: true
+        status:
+          type: integer
+          format: int32
+          nullable: true
+        detail:
+          type: string
+          nullable: true
+        instance:
+          type: string
+          nullable: true
+      additionalProperties: {}
+  securitySchemes:
+    api-key:
+      type: apiKey
+      name: x-api-key
+      in: header
+    token:
+      type: apiKey
+      name: Authorization
+      in: header
+      x-amazon-apigateway-authtype: cognito_user_pools

@@ -1,0 +1,397 @@
+openapi: 3.0.1
+info:
+  title: Smokeball Activity Codes Relationships API
+  version: '1.0'
+  description: REST API for integrating with Smokeball legal practice management software. Supports matters, contacts, documents, time entries, billing, trust accounting, staff, webhooks, and law firm workflows across US, AU, and UK regions. Uses OAuth 2.0 (client credentials) authentication.
+  contact:
+    name: Smokeball Developer Support
+    url: https://docs.smokeball.com/docs/api-docs/1e13a13124aee-introduction
+  x-api-id: smokeball
+  x-audience: external-public
+servers:
+- url: https://api.smokeball.com
+- url: https://api.smokeball.com.au
+- url: https://api.smokeball.co.uk
+- url: https://stagingapi.smokeball.com
+- url: https://stagingapi.smokeball.com.au
+- url: https://stagingapi.smokeball.co.uk
+security:
+- api-key: []
+  token: []
+tags:
+- name: Relationships
+paths:
+  /matters/{matterId}/roles/{roleId}/relationships:
+    get:
+      tags:
+      - Relationships
+      summary: Get relationships on a matter
+      description: Returns associated relationships for a specified matter and role group.
+      operationId: GetRelationshipsOnRole
+      parameters:
+      - name: matterId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: roleId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: When request is successful. Returns a 'MatterRelationships' object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MatterRelationships'
+        '404':
+          description: When the specified matter or role group does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+    post:
+      tags:
+      - Relationships
+      summary: Add relationship to a role
+      description: Appends a new relationship with an existing role in the specified matter.
+      operationId: AddAnotherRelationshipToRole
+      parameters:
+      - name: matterId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: roleId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: Version
+        in: header
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/RelationshipDto'
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/RelationshipDto'
+          application/*+json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/RelationshipDto'
+      responses:
+        '202':
+          description: When request is accepted. Returns a hypermedia 'Link' object of the relationship to be created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Link'
+        '400':
+          description: When an invalid relationship is provided for the specified role.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: When the specified matter or role does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+  /matters/{matterId}/roles/{roleId}/relationships/{id}:
+    get:
+      tags:
+      - Relationships
+      summary: Get relationship on a role
+      description: Returns a relationship with a specified role in a matter.
+      operationId: GetRelationshipOnRole
+      parameters:
+      - name: matterId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: roleId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: When request is successful. Returns a 'Relationship' object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Relationship'
+        '404':
+          description: When the specified matter, role group or role (within the specified role group) does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+    put:
+      tags:
+      - Relationships
+      summary: Update a relationship
+      description: Updates a specified relationship on a matter.
+      operationId: UpdateRelationship
+      parameters:
+      - name: matterId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: roleId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/RelationshipDto'
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/RelationshipDto'
+          application/*+json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/RelationshipDto'
+      responses:
+        '202':
+          description: When request is accepted. Returns a hypermedia 'Link' object of the relationship to be updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Link'
+        '404':
+          description: When the specified matter, role or relationship does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+    delete:
+      tags:
+      - Relationships
+      summary: Remove relationship from a role in a matter.
+      description: Removes a relationship from a role in a matter.
+      operationId: RemoveRelationshipFromRole
+      parameters:
+      - name: matterId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: roleId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: Version
+        in: header
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '202':
+          description: When request is accepted. Returns a hypermedia 'Link' object of the relationship to be deleted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Link'
+        '404':
+          description: When matter, role or relationship does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+components:
+  schemas:
+    Link:
+      type: object
+      properties:
+        id:
+          type: string
+          nullable: true
+        href:
+          type: string
+          nullable: true
+        relation:
+          type: string
+          nullable: true
+        method:
+          type: string
+          default: GET
+          nullable: true
+      additionalProperties: false
+    MatterRelationships:
+      type: object
+      properties:
+        id:
+          type: string
+          nullable: true
+        href:
+          type: string
+          nullable: true
+        relation:
+          type: string
+          nullable: true
+        method:
+          type: string
+          default: GET
+          nullable: true
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+        versionId:
+          type: string
+          description: Version id of the record.
+          nullable: true
+          example: 832e778f-83df-454a-b344-768a862a7e67
+        relationships:
+          type: array
+          items:
+            $ref: '#/components/schemas/Relationship'
+          description: List of associated relationships.
+          nullable: true
+      additionalProperties: false
+    ProblemDetails:
+      type: object
+      properties:
+        type:
+          type: string
+          nullable: true
+        title:
+          type: string
+          nullable: true
+        status:
+          type: integer
+          format: int32
+          nullable: true
+        detail:
+          type: string
+          nullable: true
+        instance:
+          type: string
+          nullable: true
+      additionalProperties: {}
+    RelationshipDto:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the relationship.
+          nullable: true
+          example: Provider
+        displayName:
+          type: string
+          description: Display Name of the relationship.
+          nullable: true
+          example: Medical Provider
+        contactId:
+          type: string
+          description: Unique identifier of the contact.
+          nullable: true
+          example: c85d28cb-a760-4627-aa59-0a853c2e65ed
+        representativeIds:
+          type: array
+          items:
+            type: string
+          description: List of associated representative contact ids.
+          nullable: true
+          example:
+          - 776e778f-83df-454a-b344-768a862a7e67
+        isMatterItemRequired:
+          type: boolean
+          description: Boolean flag indicating if a matter item is required.
+      additionalProperties: false
+    Relationship:
+      type: object
+      properties:
+        href:
+          type: string
+          nullable: true
+        relation:
+          type: string
+          nullable: true
+        method:
+          type: string
+          default: GET
+          nullable: true
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+        id:
+          type: string
+          description: Unique identifier of the relationship.
+          nullable: true
+          example: 009f778f-83df-454a-b344-768a862a7e55
+        name:
+          type: string
+          description: Name of the relationship.
+          nullable: true
+          example: Solicitor
+        contact:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          description: Hypermedia link of the associated contact.
+          nullable: true
+        representatives:
+          type: array
+          items:
+            $ref: '#/components/schemas/Link'
+          description: List of hypermedia links of the associated representatives.
+          nullable: true
+      additionalProperties: false
+  securitySchemes:
+    api-key:
+      type: apiKey
+      name: x-api-key
+      in: header
+    token:
+      type: apiKey
+      name: Authorization
+      in: header
+      x-amazon-apigateway-authtype: cognito_user_pools

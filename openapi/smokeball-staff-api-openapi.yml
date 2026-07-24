@@ -1,0 +1,545 @@
+openapi: 3.0.1
+info:
+  title: Smokeball Activity Codes Staff API
+  version: '1.0'
+  description: REST API for integrating with Smokeball legal practice management software. Supports matters, contacts, documents, time entries, billing, trust accounting, staff, webhooks, and law firm workflows across US, AU, and UK regions. Uses OAuth 2.0 (client credentials) authentication.
+  contact:
+    name: Smokeball Developer Support
+    url: https://docs.smokeball.com/docs/api-docs/1e13a13124aee-introduction
+  x-api-id: smokeball
+  x-audience: external-public
+servers:
+- url: https://api.smokeball.com
+- url: https://api.smokeball.com.au
+- url: https://api.smokeball.co.uk
+- url: https://stagingapi.smokeball.com
+- url: https://stagingapi.smokeball.com.au
+- url: https://stagingapi.smokeball.co.uk
+security:
+- api-key: []
+  token: []
+tags:
+- name: Staff
+paths:
+  /staff:
+    get:
+      tags:
+      - Staff
+      summary: Search firm staff members
+      description: Retrieves a paginated list of staff members (filtered based on search parameters provided) in the firm associated with the authenticated client.
+      operationId: GetStaff
+      parameters:
+      - name: Offset
+        in: query
+        schema:
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+          format: int32
+      - name: Limit
+        in: query
+        schema:
+          maximum: 500
+          minimum: 1
+          type: integer
+          format: int32
+      - name: Search
+        in: query
+        description: ' Available fields: email, name'
+        schema:
+          type: array
+          items:
+            type: string
+      - name: Fields
+        in: query
+        description: ' Available fields: rate'
+        schema:
+          type: string
+      responses:
+        '200':
+          description: When request is successful. Returns a paged collection of 'Staff' objects.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StaffPagedCollection'
+    post:
+      tags:
+      - Staff
+      summary: Create firm staff member
+      description: Creates a staff member in the firm associated with the authenticated client.
+      operationId: CreateStaff
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/StaffDto'
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/StaffDto'
+          application/*+json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/StaffDto'
+      responses:
+        '202':
+          description: When request is accepted. Returns a hypermedia 'Link' object of the staff member to be created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Link'
+        '400':
+          description: When request is invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+  /staff/{id}:
+    get:
+      tags:
+      - Staff
+      summary: Get firm staff member
+      description: Retrieves a staff member (based on staff id parameter provided) in the firm associated with the authenticated client.
+      operationId: GetStaffById
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: When request is successful. Returns a 'Staff' object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Staff'
+        '400':
+          description: When staff id parameter invalid or not provided.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: When staff member does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+    put:
+      tags:
+      - Staff
+      summary: Update firm staff member
+      description: Updates a staff member in the firm associated with the authenticated client.
+      operationId: UpdateStaff
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/StaffDto'
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/StaffDto'
+          application/*+json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/StaffDto'
+      responses:
+        '202':
+          description: When request is accepted. Returns a hypermedia 'Link' object of the staff member to be updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Link'
+        '404':
+          description: When staff member does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+    delete:
+      tags:
+      - Staff
+      summary: Deletes a firm staff member
+      description: "Sets the staff member from the firm associated with the authenticated client as a former staff member.\r\n\r\nThe staff member is set as a former staff member and if they are a user, becomes a former user. User access is also disabled."
+      operationId: DeleteStaff
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '202':
+          description: When request is accepted. Returns a hypermedia 'Link' object of the staff member to be deleted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Link'
+        '404':
+          description: When staff member does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+components:
+  schemas:
+    OutOfOffice:
+      type: object
+      properties:
+        startDate:
+          type: string
+          description: Out-of-office start date.
+          format: date-time
+        endDate:
+          type: string
+          description: Out-of-office end date.
+          format: date-time
+      additionalProperties: false
+    Staff:
+      type: object
+      properties:
+        href:
+          type: string
+          nullable: true
+        relation:
+          type: string
+          nullable: true
+        method:
+          type: string
+          default: GET
+          nullable: true
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+        id:
+          type: string
+          description: Unique identifier of the staff member.
+          nullable: true
+          example: b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2
+        versionId:
+          type: string
+          description: Version id of the record.
+          nullable: true
+          example: 750eb5c5-ac0b-7d11-4997-e0ce9d8896c8
+        title:
+          type: string
+          description: Staff member's title.
+          nullable: true
+          example: Mr
+        firstName:
+          type: string
+          description: Staff member's first name.
+          nullable: true
+          example: John
+        middleName:
+          type: string
+          description: Staff member's middle name (if applicable).
+          nullable: true
+          example: ''
+        lastName:
+          type: string
+          description: Staff member's last name.
+          nullable: true
+          example: Smith
+        initials:
+          type: string
+          description: Staff member's initials.
+          nullable: true
+          example: JS
+        phone:
+          allOf:
+          - $ref: '#/components/schemas/PhoneNumber'
+          description: Staff member's phone details.
+          nullable: true
+        cell:
+          allOf:
+          - $ref: '#/components/schemas/PhoneNumber'
+          description: Staff member's mobile details.
+          nullable: true
+        email:
+          type: string
+          description: Staff member's email address.
+          nullable: true
+          example: john.smith@brown.com
+        role:
+          type: string
+          description: Staff member's role.
+          nullable: true
+          example: Bookkeeper
+        rate:
+          type: number
+          description: Staff member's hourly rate in dollars.
+          format: double
+          nullable: true
+          example: 150
+        avatar:
+          type: string
+          description: Staff member's avatar.
+          nullable: true
+          example: https://example-avatar-url.com/image
+        former:
+          type: boolean
+          description: Whether he/she is a former member.
+          example: false
+        enabled:
+          type: boolean
+          description: Whether staff member is enabled.
+          example: true
+        userId:
+          type: string
+          description: Staff member's User Id, if enabled.
+          nullable: true
+          example: 14b5dd57-3681-420e-a483-4823424eef45
+        colorFill:
+          type: string
+          description: Staff member's fill color hex code.
+          nullable: true
+          example: '#797d85'
+        colorStroke:
+          type: string
+          description: Staff member's stroke color hex code.
+          nullable: true
+          example: '#64666a'
+        licenceNumbers:
+          type: array
+          items:
+            $ref: '#/components/schemas/LicenceNumber'
+          description: Licence numbers of the staff member.
+          nullable: true
+        outOfOffice:
+          allOf:
+          - $ref: '#/components/schemas/OutOfOffice'
+          description: Staff member's Out-of-office period, if enabled.
+          nullable: true
+      additionalProperties: false
+    PhoneNumber:
+      type: object
+      properties:
+        areaCode:
+          type: string
+          description: Phone area code.
+          nullable: true
+          example: '555'
+        number:
+          type: string
+          description: Phone number (excluding area code).
+          nullable: true
+          example: '1234567'
+      additionalProperties: false
+    StaffDto:
+      type: object
+      properties:
+        userId:
+          type: string
+          description: "Unique identifier of the associated user. Used to map staff member to the specified user id and ignored if left blank.\r\nUse the FirmUsers API to remove a staff/user mapping."
+          nullable: true
+          example: b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2
+        title:
+          type: string
+          description: Staff member's title.
+          nullable: true
+          example: Mr
+        firstName:
+          type: string
+          description: Staff member's first name.
+          nullable: true
+          example: John
+        middleName:
+          type: string
+          description: Staff member's middle name (if applicable).
+          nullable: true
+          example: ''
+        lastName:
+          type: string
+          description: Staff member's last name.
+          nullable: true
+          example: Smith
+        initials:
+          type: string
+          description: Staff member's initials.
+          nullable: true
+          example: JS
+        phone:
+          allOf:
+          - $ref: '#/components/schemas/PhoneNumberDto'
+          description: Staff member's phone number.
+          nullable: true
+        cell:
+          allOf:
+          - $ref: '#/components/schemas/PhoneNumberDto'
+          description: Staff member's cell number.
+          nullable: true
+        email:
+          type: string
+          description: Staff member's email address.
+          nullable: true
+          example: john.smith@brown.com
+        role:
+          type: string
+          description: Staff member's role.
+          nullable: true
+          example: Bookkeeper
+        avatar:
+          type: string
+          description: Staff member's avatar.
+          nullable: true
+          example: https://example-avatar-url.com/image
+        former:
+          type: boolean
+          description: "Whether he/she is a former member. \r\n\r\nCaution: Setting a staff member to former staff will also deregister them from the firm."
+          nullable: true
+          example: false
+        colorFill:
+          type: string
+          description: Staff member's fill color hex code.
+          nullable: true
+          example: '#797d85'
+        colorStroke:
+          type: string
+          description: Staff member's stroke color hex code.
+          nullable: true
+          example: '#64666a'
+      additionalProperties: false
+    Link:
+      type: object
+      properties:
+        id:
+          type: string
+          nullable: true
+        href:
+          type: string
+          nullable: true
+        relation:
+          type: string
+          nullable: true
+        method:
+          type: string
+          default: GET
+          nullable: true
+      additionalProperties: false
+    PhoneNumberDto:
+      type: object
+      properties:
+        areaCode:
+          type: string
+          description: Phone area code.
+          nullable: true
+          example: '555'
+        number:
+          type: string
+          description: Phone number (excluding area code).
+          nullable: true
+          example: '1234567'
+      additionalProperties: false
+    ProblemDetails:
+      type: object
+      properties:
+        type:
+          type: string
+          nullable: true
+        title:
+          type: string
+          nullable: true
+        status:
+          type: integer
+          format: int32
+          nullable: true
+        detail:
+          type: string
+          nullable: true
+        instance:
+          type: string
+          nullable: true
+      additionalProperties: {}
+    LicenceNumber:
+      type: object
+      properties:
+        state:
+          type: string
+          description: State associated to the licence.
+          nullable: true
+          example: IL
+        type:
+          type: string
+          description: Type of the licence.
+          nullable: true
+          example: ''
+        number:
+          type: string
+          description: Licence number.
+          nullable: true
+      additionalProperties: false
+    StaffPagedCollection:
+      type: object
+      properties:
+        id:
+          type: string
+          nullable: true
+        href:
+          type: string
+          nullable: true
+        relation:
+          type: string
+          nullable: true
+        method:
+          type: string
+          default: GET
+          nullable: true
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/Staff'
+          nullable: true
+        offset:
+          type: integer
+          format: int32
+          nullable: true
+        limit:
+          type: integer
+          format: int32
+          nullable: true
+        size:
+          type: integer
+          format: int64
+        first:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+        previous:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+        next:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+        last:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+      additionalProperties: false
+  securitySchemes:
+    api-key:
+      type: apiKey
+      name: x-api-key
+      in: header
+    token:
+      type: apiKey
+      name: Authorization
+      in: header
+      x-amazon-apigateway-authtype: cognito_user_pools

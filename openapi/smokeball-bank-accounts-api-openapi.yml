@@ -1,0 +1,1171 @@
+openapi: 3.0.1
+info:
+  title: Smokeball Activity Codes Bank Accounts API
+  version: '1.0'
+  description: REST API for integrating with Smokeball legal practice management software. Supports matters, contacts, documents, time entries, billing, trust accounting, staff, webhooks, and law firm workflows across US, AU, and UK regions. Uses OAuth 2.0 (client credentials) authentication.
+  contact:
+    name: Smokeball Developer Support
+    url: https://docs.smokeball.com/docs/api-docs/1e13a13124aee-introduction
+  x-api-id: smokeball
+  x-audience: external-public
+servers:
+- url: https://api.smokeball.com
+- url: https://api.smokeball.com.au
+- url: https://api.smokeball.co.uk
+- url: https://stagingapi.smokeball.com
+- url: https://stagingapi.smokeball.com.au
+- url: https://stagingapi.smokeball.co.uk
+security:
+- api-key: []
+  token: []
+tags:
+- name: Bank Accounts
+paths:
+  /bankaccounts/{id}:
+    get:
+      tags:
+      - Bank Accounts
+      summary: Get a bank account
+      description: Retrieves a specified bank account.
+      operationId: GetBankAccountById
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: When request is successful. Returns a 'BankAccount' object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankAccount'
+        '400':
+          description: When an unsupported request is made.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '403':
+          description: When bank account with specified id is not associated with authenticated client.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: When bank account with specified id does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+  /bankaccounts:
+    get:
+      tags:
+      - Bank Accounts
+      summary: Get bank accounts
+      description: Returns a list of bank accounts.
+      operationId: GetBankAccounts
+      parameters:
+      - name: type
+        in: query
+        schema:
+          type: string
+      - name: matterId
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: When request is successful. Returns a collection of 'BankAccount' objects.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankAccountCollection'
+        '400':
+          description: When an unsupported request is made.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+  /bankaccounts/{id}/matter-balances:
+    get:
+      tags:
+      - Bank Accounts
+      summary: Get bank account matter balances
+      description: Returns a list of bank account matter balances.
+      operationId: GetBankAccountMatterBalances
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: Offset
+        in: query
+        schema:
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+          format: int32
+      - name: Limit
+        in: query
+        schema:
+          maximum: 500
+          minimum: 1
+          type: integer
+          format: int32
+      - name: LastUpdated
+        in: query
+        description: Returns items updated since the specified date and time.
+        schema:
+          type: string
+          format: date-time
+          example: '2022-04-23T14:00:00Z'
+        example: '2022-04-23T14:00:00Z'
+      - name: MatterId
+        in: query
+        description: Filters items by the specified matter ID.
+        schema:
+          type: string
+          example: da4e7fd1-5394-4ca9-b1c6-e18c4e2bf262
+        example: da4e7fd1-5394-4ca9-b1c6-e18c4e2bf262
+      responses:
+        '200':
+          description: When request is successful. Returns a collection of 'BankAccountMatterBalance' objects.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankAccountMatterBalancePagedCollection'
+        '400':
+          description: When an unsupported request is made.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+  /bankaccounts/{id}/protected-balances/{protectionId}:
+    get:
+      tags:
+      - Bank Accounts
+      summary: Get a protected bank account balance
+      description: Retrieves a specified protected account balance record.
+      operationId: GetProtectedAccountBalanceById
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: protectionId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: When request is successful. Returns a 'ProtectedAccountBalance' object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProtectedAccountBalance'
+        '400':
+          description: When an unsupported request is made.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '403':
+          description: When protected balance record is not associated with authenticated client.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: When protected balance record does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+  /bankaccounts/{id}/protect-funds:
+    post:
+      tags:
+      - Bank Accounts
+      summary: Protect bank account funds
+      description: Protects funds in a trust bank account. Only trust accounts are supported.
+      operationId: ProtectFundsAsync
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/ProtectFundsDto'
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/ProtectFundsDto'
+          application/*+json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/ProtectFundsDto'
+      responses:
+        '202':
+          description: When request is accepted. Returns a hypermedia 'Link' object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Link'
+        '400':
+          description: When an unsupported request is made.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '403':
+          description: When bank account is not associated with authenticated client.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: When bank account does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+  /bankaccounts/{id}/unprotect-funds/{protectionId}:
+    post:
+      tags:
+      - Bank Accounts
+      summary: Unprotect bank account funds
+      description: Unprotects funds in a trust bank account. Only trust accounts are supported.
+      operationId: UnprotectFundsAsync
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: protectionId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/UnprotectFundsDto'
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/UnprotectFundsDto'
+          application/*+json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/UnprotectFundsDto'
+      responses:
+        '202':
+          description: When request is accepted. Returns a hypermedia 'Link' object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Link'
+        '400':
+          description: When an unsupported request is made.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '403':
+          description: When bank account is not associated with authenticated client.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: When bank account or protection record does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+  /bankaccounts/{id}/requisitions:
+    post:
+      tags:
+      - Bank Accounts
+      summary: Create a requisition
+      description: "Creates a requisition against a trust account and supports the account approval workflow.\r\n\r\nWhether the requisition requires approval depends on the trust account configuration:\r\n- If approvals are enabled, firm owners can create requisitions without approval, while all other users require approval.\r\n- If approvals are disabled, the requisition is automatically approved upon creation."
+      operationId: CreateRequisitionAsync
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/RequisitionDto'
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/RequisitionDto'
+          application/*+json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/RequisitionDto'
+      responses:
+        '202':
+          description: When request is accepted. Returns requisition status and balances.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Requisition'
+        '400':
+          description: When an unsupported request is made.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '403':
+          description: When bank account is not associated with authenticated client or client credentials are used.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: When bank account does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+  /bankaccounts/{bankAccountId}/transactions:
+    get:
+      tags:
+      - Bank Accounts
+      summary: Get transactions
+      description: Retrieves a specified bank accounts transaction.
+      operationId: GetTransactions
+      parameters:
+      - name: bankAccountId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: Offset
+        in: query
+        schema:
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+          format: int32
+      - name: Limit
+        in: query
+        schema:
+          maximum: 500
+          minimum: 1
+          type: integer
+          format: int32
+      - name: LastUpdated
+        in: query
+        description: Returns items updated since the specified date and time.
+        schema:
+          type: string
+          format: date-time
+          example: '2022-04-23T14:00:00Z'
+        example: '2022-04-23T14:00:00Z'
+      - name: MatterId
+        in: query
+        description: Filters items by the specified matter ID.
+        schema:
+          type: string
+          example: da4e7fd1-5394-4ca9-b1c6-e18c4e2bf262
+        example: da4e7fd1-5394-4ca9-b1c6-e18c4e2bf262
+      responses:
+        '200':
+          description: When request is successful. Returns a 'Transaction' object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transaction'
+        '400':
+          description: When an unsupported request is made.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '403':
+          description: When transaction with specified id is not associated with authenticated client.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: When transaction with specified id does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+    post:
+      tags:
+      - Bank Accounts
+      summary: Create a transaction
+      description: Creates a transaction.
+      operationId: CreateTransactionForBankAccount
+      parameters:
+      - name: bankAccountId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/TransactionDto'
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/TransactionDto'
+          application/*+json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/TransactionDto'
+      responses:
+        '202':
+          description: When request is accepted. Returns a hypermedia 'Link' object of the transaction to be created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Link'
+        '400':
+          description: When an unsupported request is made.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '403':
+          description: When transaction with specified id is not associated with authenticated client.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: When transaction with specified id does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+  /bankaccounts/{bankAccountId}/transactions/{id}:
+    get:
+      tags:
+      - Bank Accounts
+      summary: Get a transaction
+      description: Retrieves a specified bank account transaction.
+      operationId: GetTransactionById
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: bankAccountId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: When request is successful. Returns a 'Transaction' object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transaction'
+        '400':
+          description: When an unsupported request is made.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '403':
+          description: When transaction with specified id is not associated with authenticated client.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: When transaction with specified id does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+components:
+  schemas:
+    AccountState:
+      enum:
+      - 0
+      - 1
+      type: integer
+      format: int32
+    Requisition:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Requisition ID if requisition requires approval.
+          nullable: true
+          example: 18c05819-c321-4907-800c-d5a608729c5a
+        status:
+          type: string
+          description: Status of the requisition (e.g., Pending, Approved).
+          example: Approved
+        protectedBalance:
+          type: number
+          description: Protected balance after the requisition.
+          format: double
+          example: 1000
+        availableBalance:
+          type: number
+          description: Available balance after the requisition.
+          format: double
+          example: 5000
+        totalBalance:
+          type: number
+          description: Total balance after the requisition.
+          format: double
+          example: 6000
+        pdfPaymentDetail:
+          type: string
+          description: Link to the PDF payment detail document.
+          nullable: true
+      additionalProperties: false
+    Transaction:
+      type: object
+      properties:
+        href:
+          type: string
+          nullable: true
+        relation:
+          type: string
+          nullable: true
+        method:
+          type: string
+          default: GET
+          nullable: true
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+        id:
+          type: string
+          description: Unique identifier of the transaction.
+          nullable: true
+          example: 64818ee0-c7b4-46ec-862e-514d8b29540a
+        payorName:
+          type: string
+          description: The name of the associated contact.
+          nullable: true
+          example: John Smith
+        matter:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          description: The associated matter.
+          nullable: true
+        payor:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          description: The associated contact that paid the funds.
+          nullable: true
+        bankAccount:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          description: The bank account where the transaction took place.
+          nullable: true
+        type:
+          type: string
+          description: "The type of the transaction.\r\n\r\nPossible values:\r\n    Deposit, DepositReversal, InvoicePayment, InvoicePaymentReversal, \r\n    VendorPayment, VendorPaymentReversal Transfer, \r\n    BankFees, BankFeesReversal, Interest, InterestReversal."
+          nullable: true
+          example: Deposit
+        amount:
+          type: number
+          description: The amount of the transaction in dollars. Limited to 2 decimal places (cents).
+          format: double
+          example: 102.65
+        enteredDate:
+          type: string
+          description: Date the transaction was entered.
+          format: date-time
+        effectiveDate:
+          type: string
+          description: Date the transaction took effect.
+          format: date-time
+        reference:
+          type: string
+          description: Reference for the transaction.
+          nullable: true
+        reason:
+          type: string
+          description: Reason for the transaction.
+          nullable: true
+        description:
+          type: string
+          description: Description of the transaction.
+          nullable: true
+        note:
+          type: string
+          description: Note for the transaction (for internal use).
+          nullable: true
+        reversed:
+          type: boolean
+          description: True if this transaction has been reversed.
+          example: true
+        reversedToTransaction:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          description: The transaction that was created as a result of reversing this transaction.
+          nullable: true
+        reversedFromTransaction:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          description: The transaction that was recversed to create this transaction.
+          nullable: true
+      additionalProperties: false
+    ProtectedAccountBalance:
+      type: object
+      properties:
+        href:
+          type: string
+          nullable: true
+        relation:
+          type: string
+          nullable: true
+        method:
+          type: string
+          default: GET
+          nullable: true
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+        id:
+          type: string
+          description: Unique identifier of the protection record.
+          nullable: true
+          example: p1
+        bankAccount:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          description: The bank account where the protection was applied.
+          nullable: true
+        matter:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          description: The associated matter.
+          nullable: true
+        contact:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          description: The associated contact (US only).
+          nullable: true
+        amount:
+          type: number
+          description: The amount protected in dollars. Limited to 2 decimal places (cents).
+          format: double
+          example: 100.5
+        reason:
+          type: string
+          description: Reason for protecting the funds.
+          nullable: true
+          example: Court order requiring protection of funds
+        effectiveDate:
+          type: string
+          description: Date the protection took effect.
+          format: date-time
+          example: '2024-01-15T00:00:00Z'
+        timestamp:
+          type: string
+          description: Timestamp when the protection was created.
+          format: date-time
+          example: '2024-01-15T10:30:00Z'
+        isProtected:
+          type: boolean
+          description: True if the funds are currently protected.
+          example: true
+        userId:
+          type: string
+          description: Unique identifier of the user who protected the funds.
+          nullable: true
+          example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+        unprotectingUserId:
+          type: string
+          description: Unique identifier of the user who unprotected the funds (if applicable).
+          nullable: true
+          example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+        lastUpdated:
+          type: string
+          description: Timestamp when the protection was last updated (e.g. protected or unprotected).
+          format: date-time
+          example: '2024-01-15T10:30:00Z'
+      additionalProperties: false
+    BankAccountContactBalance:
+      type: object
+      properties:
+        matter:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          description: The associated matter.
+          nullable: true
+        contact:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          description: The associated contact.
+          nullable: true
+        balance:
+          type: number
+          description: The balance belonging for the specified matter contact.
+          format: double
+          example: 1000
+        protectedBalance:
+          type: number
+          description: The protected balance for the specified matter and contact.
+          format: double
+          example: 1000
+        availableBalance:
+          type: number
+          description: "The available balance for the specified matter and contact.\r\n            \r\nThis value is calculated as the total balance minus the protected balance."
+          format: double
+          example: 1000
+        lastUpdated:
+          type: string
+          description: Date and time that the balance was last updated.
+          format: date-time
+          nullable: true
+      additionalProperties: false
+    TransactionDto:
+      type: object
+      properties:
+        matterId:
+          type: string
+          description: Unique identifier of the associated matter.
+          nullable: true
+          example: da4e7fd1-5394-4ca9-b1c6-e18c4e2bf262
+        payorId:
+          type: string
+          description: Unique identifier of the associated contact.
+          nullable: true
+        type:
+          type: string
+          description: "The type of the transaction.\r\n\r\nPossible values: Deposit."
+          nullable: true
+          example: Deposit
+        amount:
+          type: number
+          description: The amount of the transaction in dollars. Limited to 2 decimal places (cents).
+          format: double
+          example: 102.65
+        effectiveDate:
+          type: string
+          description: Date of the transaction.
+          format: date-time
+        reference:
+          type: string
+          description: Reference for the transaction.
+          nullable: true
+        reason:
+          type: string
+          description: Reason for the transaction.
+          nullable: true
+        description:
+          type: string
+          description: Description of the transaction.
+          nullable: true
+        note:
+          type: string
+          description: Note for the transaction (for internal use).
+          nullable: true
+      additionalProperties: false
+    UnprotectFundsDto:
+      type: object
+      properties:
+        amount:
+          minimum: 0.01
+          type: number
+          description: "The amount to unprotect in dollars. Limited to 2 decimal places (cents).\r\n            \r\nThis value must exactly match the originally protected amount.\r\nPartial unprotect is not supported - the full protected amount must be unprotected.\r\n            \r\nIf not specified, the full protected amount will be unprotected automatically.\r\nSpecifying this value provides validation to ensure you're unprotecting the expected amount."
+          format: double
+          nullable: true
+          example: 50.25
+      additionalProperties: false
+    BankAccountMatterBalance:
+      type: object
+      properties:
+        matter:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          description: The associated matter.
+          nullable: true
+        balance:
+          type: number
+          description: The balance belonging for the specified matter.
+          format: double
+          example: 1000
+        protectedBalance:
+          type: number
+          description: The protected balance for the specified matter.
+          format: double
+          example: 1000
+        availableBalance:
+          type: number
+          description: "The available balance for the specified matter.\r\n            \r\nThis value is calculated as the total balance minus the protected balance."
+          format: double
+          example: 1000
+        unpresentedChequesBalance:
+          type: number
+          description: "Balance of the unpresented cheques for this matter. A cheque is considered \r\nunpresented if the related transaction has not been reconciled. If this balance is not zero,\r\nsome actions on the matter are restricted (e.g. closing or cancelling the matter)."
+          format: double
+          example: 0
+        lastUpdated:
+          type: string
+          description: Date and time that the balance was last updated.
+          format: date-time
+          nullable: true
+      additionalProperties: false
+    Link:
+      type: object
+      properties:
+        id:
+          type: string
+          nullable: true
+        href:
+          type: string
+          nullable: true
+        relation:
+          type: string
+          nullable: true
+        method:
+          type: string
+          default: GET
+          nullable: true
+      additionalProperties: false
+    ProblemDetails:
+      type: object
+      properties:
+        type:
+          type: string
+          nullable: true
+        title:
+          type: string
+          nullable: true
+        status:
+          type: integer
+          format: int32
+          nullable: true
+        detail:
+          type: string
+          nullable: true
+        instance:
+          type: string
+          nullable: true
+      additionalProperties: {}
+    RequisitionDto:
+      required:
+      - amount
+      - matterId
+      - payeeId
+      - source
+      type: object
+      properties:
+        matterId:
+          minLength: 1
+          type: string
+          description: Unique identifier of the associated matter. Required.
+          example: da4e7fd1-5394-4ca9-b1c6-e18c4e2bf262
+        approverUserId:
+          type: string
+          description: "Approver user ID.\r\n\r\nCannot be the same user ID as the user making the requisition request. If provided, must be a valid user ID in the system.\r\n\r\nOptional. If not provided, default approver will be used."
+          nullable: true
+          example: 18c05819-c321-4907-800c-d5a608729c5a
+        payorId:
+          type: string
+          description: Unique identifier of the Payor/Contact ID. Required in US region only.
+          nullable: true
+          example: 18c05819-c321-4907-800c-d5a608729c5a
+        payeeId:
+          minLength: 1
+          type: string
+          description: Unique identifier of the person or organisation being paid. Required.
+          example: 18c05819-c321-4907-800c-d5a608729c5a
+        source:
+          minLength: 1
+          type: string
+          description: "Payment source. Required.\r\nPossible values:\r\n- \"Bank Transfer\" - always available\r\n- \"Bank Check\" - available in AU and UK only\r\n- \"Trust Check\" - available in AU and UK only\r\n- \"Direct Debit\" - available in AU and UK only\r\n- \"Check\" - available in US only"
+          example: Bank Transfer
+        reference:
+          type: string
+          description: Payment reference.
+          nullable: true
+          example: REF123456
+        amount:
+          minimum: 0.01
+          type: number
+          description: The payment amount in dollars. Limited to 2 decimal places (cents).
+          format: double
+          example: 100.5
+        effectiveDate:
+          type: string
+          description: Date of requisition.
+          format: date-time
+        accountName:
+          type: string
+          description: Account name. Required when Source is an electronic payment ('Bank Transfer' or 'Direct Debit') and transfer is expected to be via Direct Deposit (provide AccountName, BSB, and AccountNumber).
+          nullable: true
+          example: John Doe
+        bsb:
+          type: string
+          description: BSB (Bank State Branch). Required when Source is an electronic payment ('Bank Transfer' or 'Direct Debit') and transfer is expected to be via Direct Deposit (provide AccountName, BSB, and AccountNumber).
+          nullable: true
+          example: '123456'
+        accountNumber:
+          type: string
+          description: Account number. Required when Source is an electronic payment ('Bank Transfer' or 'Direct Debit') and transfer is expected to be via Direct Deposit (provide AccountName, BSB, and AccountNumber).
+          nullable: true
+          example: '12345678'
+        organizationOrCompanyName:
+          type: string
+          description: Organization or company name. Required when Source is an electronic payment ('Bank Transfer' or 'Direct Debit') and transfer is expected to be via BPAY (provide OrganizationOrCompanyName, BillerCode, and BillerReference).
+          nullable: true
+          example: ACME Corporation
+        billerCode:
+          type: string
+          description: Biller code. Required when Source is an electronic payment ('Bank Transfer' or 'Direct Debit') and transfer is expected to be via BPAY (provide OrganizationOrCompanyName, BillerCode, and BillerReference).
+          nullable: true
+          example: '12345'
+        billerReference:
+          type: string
+          description: Biller reference. Required when Source is an electronic payment ('Bank Transfer' or 'Direct Debit') and transfer is expected to be via BPAY (provide OrganizationOrCompanyName, BillerCode, and BillerReference).
+          nullable: true
+          example: REF123456
+        reason:
+          type: string
+          description: Reason for the payment. Free format string.
+          nullable: true
+          example: Payment for services rendered
+        internalNote:
+          type: string
+          description: Internal note. Free format string.
+          nullable: true
+          example: Internal note about this payment
+      additionalProperties: false
+    BankAccount:
+      type: object
+      properties:
+        href:
+          type: string
+          nullable: true
+        relation:
+          type: string
+          nullable: true
+        method:
+          type: string
+          default: GET
+          nullable: true
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+        id:
+          type: string
+          description: Unique identifier of the bank account.
+          nullable: true
+          example: b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2
+        type:
+          type: string
+          description: The type of the bank account (Operating, Trust, Credit, ControlledMoney).
+          example: Trust
+        status:
+          allOf:
+          - $ref: '#/components/schemas/AccountState'
+          description: The status of the account (Open, Closed).
+        matter:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          description: "The Matter associated to the account. \r\n\r\nApplies to 'ControlledMoney' accounts only."
+          nullable: true
+        accountType:
+          type: integer
+          description: "The type of the bank account (Operating = 0, Trust = 1, Credit = 2, ControlledMoney = 3).\r\n\r\nThis field is deprecated and scheduled for removal - use the Type field instead."
+          format: int32
+          example: 0
+        accountName:
+          type: string
+          description: Account Name.
+          nullable: true
+          example: John Smith
+        accountNumber:
+          type: string
+          description: Account Number.
+          nullable: true
+          example: '10436489'
+        bankName:
+          type: string
+          description: Bank Name.
+          nullable: true
+          example: Commonwealth Bank
+        branchNumber:
+          type: string
+          description: Branch Number.
+          nullable: true
+          example: '062201'
+        branchName:
+          type: string
+          description: Branch Name.
+          nullable: true
+          example: Sydney
+        balance:
+          type: number
+          description: Total balance of the bank account.
+          format: double
+          example: 1000
+        contactBalances:
+          type: array
+          items:
+            $ref: '#/components/schemas/BankAccountContactBalance'
+          description: "List of contact balances.\r\n\r\nIf balances are stored by matter, not by contact, then there can be\r\na contact balance with no contact id. In this case, MatterBalances are used instead.\r\n\r\nOnly supported in US."
+          nullable: true
+        matterBalances:
+          type: array
+          items:
+            $ref: '#/components/schemas/BankAccountMatterBalance'
+          description: "List of matter balances.\r\n\r\nA matter balance will be equal to the sum of all contact balances with the same MatterId."
+          nullable: true
+      additionalProperties: false
+    BankAccountCollection:
+      type: object
+      properties:
+        id:
+          type: string
+          nullable: true
+        href:
+          type: string
+          nullable: true
+        relation:
+          type: string
+          nullable: true
+        method:
+          type: string
+          default: GET
+          nullable: true
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/BankAccount'
+          nullable: true
+      additionalProperties: false
+    BankAccountMatterBalancePagedCollection:
+      type: object
+      properties:
+        id:
+          type: string
+          nullable: true
+        href:
+          type: string
+          nullable: true
+        relation:
+          type: string
+          nullable: true
+        method:
+          type: string
+          default: GET
+          nullable: true
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/BankAccountMatterBalance'
+          nullable: true
+        offset:
+          type: integer
+          format: int32
+          nullable: true
+        limit:
+          type: integer
+          format: int32
+          nullable: true
+        size:
+          type: integer
+          format: int64
+        first:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+        previous:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+        next:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+        last:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+      additionalProperties: false
+    ProtectFundsDto:
+      required:
+      - amount
+      - effectiveDate
+      - matterId
+      type: object
+      properties:
+        matterId:
+          minLength: 1
+          type: string
+          description: Unique identifier of the associated matter. Required.
+          example: da4e7fd1-5394-4ca9-b1c6-e18c4e2bf262
+        contactId:
+          type: string
+          description: Unique identifier of the associated contact. Required in US only.
+          nullable: true
+          example: 18c05819-c321-4907-800c-d5a608729c5a
+        reason:
+          type: string
+          description: Reason for protecting the funds.
+          nullable: true
+          example: Court order requiring protection of funds
+        effectiveDate:
+          type: string
+          description: Date of protecting the funds.
+          format: date-time
+        amount:
+          minimum: 0.01
+          type: number
+          description: The amount to protect in dollars. Limited to 2 decimal places (cents).
+          format: double
+          example: 100.5
+      additionalProperties: false
+  securitySchemes:
+    api-key:
+      type: apiKey
+      name: x-api-key
+      in: header
+    token:
+      type: apiKey
+      name: Authorization
+      in: header
+      x-amazon-apigateway-authtype: cognito_user_pools

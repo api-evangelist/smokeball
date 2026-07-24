@@ -1,0 +1,449 @@
+openapi: 3.0.1
+info:
+  title: Smokeball Activity Codes Webhooks API
+  version: '1.0'
+  description: REST API for integrating with Smokeball legal practice management software. Supports matters, contacts, documents, time entries, billing, trust accounting, staff, webhooks, and law firm workflows across US, AU, and UK regions. Uses OAuth 2.0 (client credentials) authentication.
+  contact:
+    name: Smokeball Developer Support
+    url: https://docs.smokeball.com/docs/api-docs/1e13a13124aee-introduction
+  x-api-id: smokeball
+  x-audience: external-public
+servers:
+- url: https://api.smokeball.com
+- url: https://api.smokeball.com.au
+- url: https://api.smokeball.co.uk
+- url: https://stagingapi.smokeball.com
+- url: https://stagingapi.smokeball.com.au
+- url: https://stagingapi.smokeball.co.uk
+security:
+- api-key: []
+  token: []
+tags:
+- name: Webhooks
+paths:
+  /webhooks/types:
+    get:
+      tags:
+      - Webhooks
+      summary: Get event types
+      description: Returns the available webhook event types.
+      operationId: GetEventTypes
+      responses:
+        '200':
+          description: When request is successful. Returns the available event types.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StringCollection'
+        '400':
+          description: When an unsupported request is made.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+  /webhooks:
+    get:
+      tags:
+      - Webhooks
+      summary: Get webhook subscriptions
+      description: Returns existing webhook subscriptions.
+      operationId: GetSubscriptions
+      parameters:
+      - name: Offset
+        in: query
+        schema:
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+          format: int32
+      - name: Limit
+        in: query
+        schema:
+          maximum: 500
+          minimum: 1
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: When request is successful. Returns existing webhook subscriptions.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebhookSubscriptionPagedCollection'
+        '400':
+          description: When an unsupported request is made.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+    post:
+      tags:
+      - Webhooks
+      summary: Create new webhook subscription
+      description: Creates a new webhook subscription with the specified subscription details.
+      operationId: CreateSubscription
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/WebhookSubscriptionDto'
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/WebhookSubscriptionDto'
+          application/*+json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/WebhookSubscriptionDto'
+      responses:
+        '200':
+          description: When request is successful. Returns the new webhook subscriptions.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebhookSubscription'
+        '400':
+          description: When an unsupported request is made.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+  /webhooks/{id}:
+    get:
+      tags:
+      - Webhooks
+      summary: Get a webhook subscription
+      description: Returns the webhook subscription.
+      operationId: GetSubscription
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: When request is successful. Returns the webhook subscriptions.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebhookSubscription'
+        '400':
+          description: When an unsupported request is made.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+    put:
+      tags:
+      - Webhooks
+      summary: Update a webhook subscription
+      description: Updates a webhook subscription with the specified subscription details.
+      operationId: UpdateSubscription
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/WebhookSubscriptionDto'
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/WebhookSubscriptionDto'
+          application/*+json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/WebhookSubscriptionDto'
+      responses:
+        '200':
+          description: When request is successful. Returns updated webhook subscriptions.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebhookSubscription'
+        '400':
+          description: When an unsupported request is made.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '403':
+          description: When webhook subscription with specified id is not associated with authenticated client.
+        '404':
+          description: When the webhook subscription is not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+    delete:
+      tags:
+      - Webhooks
+      summary: Deletes a webhook subscription
+      description: Deletes and unsubscribes from the specified webhook subscription.
+      operationId: DeleteSubscription
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: When request is successful. Deletes the webhook subscription.
+        '400':
+          description: When an unsupported request is made.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+  /webhooks/{id}/notify:
+    post:
+      tags:
+      - Webhooks
+      summary: Notify a webhook subscription
+      description: "Notifies a webhook subscription with a 'noop' event type.\r\n            \r\nUsed for testing purposes."
+      operationId: Notify
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: When request is successful. Notifies the webhook subscription.
+        '400':
+          description: When an unsupported request is made.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+components:
+  schemas:
+    WebhookSubscriptionDto:
+      type: object
+      properties:
+        key:
+          type: string
+          description: Unique key used for creating signature header in webhook notification requests.
+          nullable: true
+          example: da4e7fd1-5394-4ca9-b1c6-e18c4e2bf262
+        name:
+          type: string
+          description: Name or description of the webhook subscription.
+          nullable: true
+          example: Listen to matter and contact changes
+        eventTypes:
+          type: array
+          items:
+            type: string
+          description: The event types that the webhook subscription should be subscribed to.
+          nullable: true
+          example:
+          - matter.updated
+          - contact.created
+        eventNotificationUrl:
+          type: string
+          description: The uri to notify when an event has occurred.
+          nullable: true
+          example: http://yourdomain.com/notify
+      additionalProperties: false
+    WebhookSubscription:
+      type: object
+      properties:
+        id:
+          type: string
+          nullable: true
+        href:
+          type: string
+          nullable: true
+        relation:
+          type: string
+          nullable: true
+        method:
+          type: string
+          default: GET
+          nullable: true
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+        accountId:
+          type: string
+          description: Unique identifier of the associated account.
+          nullable: true
+          example: da4e7fd1-5394-4ca9-b1c6-e18c4e2bf262
+        name:
+          type: string
+          description: Name or description of the subscription.
+          nullable: true
+          example: Listen to matter and contact changes
+        eventTypes:
+          type: array
+          items:
+            type: string
+          description: The event types that the webhook subscription is subscribed to.
+          nullable: true
+          example:
+          - matter.updated
+          - contact.created
+        eventNotificationUrl:
+          type: string
+          description: The uri to notify when an event has occurred.
+          nullable: true
+          example: http://yourdomain.com/notify
+        createdDateUtc:
+          type: string
+          description: The webhook subscription creation date.
+          format: date-time
+          example: '2022-04-23T14:00:00Z'
+        updatedDateUtc:
+          type: string
+          description: The webhook subscription last updated date.
+          format: date-time
+          example: '2022-04-23T14:00:00Z'
+        lastUpdated:
+          type: integer
+          description: Last updated timestamp
+          format: int64
+          example: 637847425252027400
+      additionalProperties: false
+    Link:
+      type: object
+      properties:
+        id:
+          type: string
+          nullable: true
+        href:
+          type: string
+          nullable: true
+        relation:
+          type: string
+          nullable: true
+        method:
+          type: string
+          default: GET
+          nullable: true
+      additionalProperties: false
+    ProblemDetails:
+      type: object
+      properties:
+        type:
+          type: string
+          nullable: true
+        title:
+          type: string
+          nullable: true
+        status:
+          type: integer
+          format: int32
+          nullable: true
+        detail:
+          type: string
+          nullable: true
+        instance:
+          type: string
+          nullable: true
+      additionalProperties: {}
+    StringCollection:
+      type: object
+      properties:
+        id:
+          type: string
+          nullable: true
+        href:
+          type: string
+          nullable: true
+        relation:
+          type: string
+          nullable: true
+        method:
+          type: string
+          default: GET
+          nullable: true
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+        value:
+          type: array
+          items:
+            type: string
+          nullable: true
+      additionalProperties: false
+    WebhookSubscriptionPagedCollection:
+      type: object
+      properties:
+        id:
+          type: string
+          nullable: true
+        href:
+          type: string
+          nullable: true
+        relation:
+          type: string
+          nullable: true
+        method:
+          type: string
+          default: GET
+          nullable: true
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/WebhookSubscription'
+          nullable: true
+        offset:
+          type: integer
+          format: int32
+          nullable: true
+        limit:
+          type: integer
+          format: int32
+          nullable: true
+        size:
+          type: integer
+          format: int64
+        first:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+        previous:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+        next:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+        last:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+      additionalProperties: false
+  securitySchemes:
+    api-key:
+      type: apiKey
+      name: x-api-key
+      in: header
+    token:
+      type: apiKey
+      name: Authorization
+      in: header
+      x-amazon-apigateway-authtype: cognito_user_pools

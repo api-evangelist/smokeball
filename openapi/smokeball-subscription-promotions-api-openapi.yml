@@ -1,0 +1,607 @@
+openapi: 3.0.1
+info:
+  title: Smokeball Activity Codes Subscription Promotions API
+  version: '1.0'
+  description: REST API for integrating with Smokeball legal practice management software. Supports matters, contacts, documents, time entries, billing, trust accounting, staff, webhooks, and law firm workflows across US, AU, and UK regions. Uses OAuth 2.0 (client credentials) authentication.
+  contact:
+    name: Smokeball Developer Support
+    url: https://docs.smokeball.com/docs/api-docs/1e13a13124aee-introduction
+  x-api-id: smokeball
+  x-audience: external-public
+servers:
+- url: https://api.smokeball.com
+- url: https://api.smokeball.com.au
+- url: https://api.smokeball.co.uk
+- url: https://stagingapi.smokeball.com
+- url: https://stagingapi.smokeball.com.au
+- url: https://stagingapi.smokeball.co.uk
+security:
+- api-key: []
+  token: []
+tags:
+- name: Subscription Promotions
+paths:
+  /subscriptions/promotions:
+    get:
+      tags:
+      - Subscription Promotions
+      summary: Get all promotions
+      description: Returns all available promotions with their eligibility criteria and benefits.
+      operationId: GetPromotions
+      parameters:
+      - name: Offset
+        in: query
+        schema:
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+          format: int32
+      - name: Limit
+        in: query
+        schema:
+          maximum: 500
+          minimum: 1
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: When request is successful. Returns a paged collection of 'SubscriptionPromotion' objects.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubscriptionPromotionPagedCollection'
+        '500':
+          description: When an error occurs while retrieving promotions.
+      x-excluded: true
+  /subscriptions/promotions/{id}:
+    get:
+      tags:
+      - Subscription Promotions
+      summary: Get promotion
+      description: Retrieves detailed information for a specific promotion.
+      operationId: GetPromotion
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: When request is successful. Returns a 'SubscriptionPromotion' object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubscriptionPromotion'
+        '400':
+          description: When an unsupported request is made.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '500':
+          description: When an error occurs while retrieving promotion.
+      x-excluded: true
+  /subscriptions/{subscriptionId}/promotions/{id}:
+    post:
+      tags:
+      - Subscription Promotions
+      summary: Apply promotion to subscription
+      description: "Applies a promotion to a subscription.\r\n\r\nImportant considerations:\r\n* Some promotions may have redemption limits per subscription\r\n* Some promotions may have duration limits\r\n* Signup promotions cannot be applied to an existing subscription\r\n* Trial promotions are tied to a single tier or add-on"
+      operationId: ApplyPromotionAsync
+      parameters:
+      - name: subscriptionId
+        in: path
+        description: The unique identifier of the subscription
+        required: true
+        schema:
+          type: string
+      - name: id
+        in: path
+        description: The identifier of the promotion to apply
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '202':
+          description: When request is accepted. Returns a 'Link' object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Link'
+        '400':
+          description: When an unsupported request is made.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: When subscription or promotion with specified id does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '500':
+          description: When an error occurs while applying promotion.
+      x-excluded: true
+    delete:
+      tags:
+      - Subscription Promotions
+      summary: Remove promotion from subscription
+      description: Removes a promotion from a subscription.
+      operationId: RemovePromotionAsync
+      parameters:
+      - name: subscriptionId
+        in: path
+        description: The unique identifier of the subscription
+        required: true
+        schema:
+          type: string
+      - name: id
+        in: path
+        description: The identifier of the promotion to remove
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '202':
+          description: When request is accepted. Returns a 'Link' object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Link'
+        '400':
+          description: When an unsupported request is made.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: When subscription or promotion with specified id does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '500':
+          description: When an error occurs while removing promotion.
+      x-excluded: true
+components:
+  schemas:
+    Price:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The internal price id.
+          nullable: true
+        externalPriceId:
+          type: string
+          description: The external price id.
+          nullable: true
+        default:
+          type: boolean
+          description: Returns `true` if the price is the default price.
+          example: true
+        active:
+          type: boolean
+          description: Returns `true` if the Price is active.
+          example: true
+        type:
+          type: string
+          description: The type of price.
+          example: Recurring
+        name:
+          type: string
+          description: The price display name.
+          nullable: true
+          example: '"$109 per user/month"'
+        amount:
+          type: number
+          description: The per user amount for this pricing option for the specified interval (in cents).
+          format: double
+          nullable: true
+          example: 5900
+        interval:
+          type: string
+          description: Recurring payment interval type.
+          example: Monthly
+      additionalProperties: false
+    PromotionCode:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier of the promotion code.
+          nullable: true
+          example: promo_code_1234
+        name:
+          type: string
+          description: Display name of the promotion code.
+          nullable: true
+          example: SUMMER2024
+        description:
+          type: string
+          description: The description of the promotion code.
+          nullable: true
+          example: 100% discount!
+        code:
+          type: string
+          description: The actual code that customers can use.
+          nullable: true
+          example: SUMMER2024
+        active:
+          type: boolean
+          description: Whether this promotion code is currently active.
+        minimumAmount:
+          type: integer
+          description: Minimum amount in cents required to apply this promotion code.
+          format: int64
+          nullable: true
+          example: 5000
+        firstTimeCustomersOnly:
+          type: boolean
+          description: Whether this code can only be used by first-time customers.
+        limit:
+          type: integer
+          description: "Maximum number of times this code can be used.\r\nNull means unlimited uses."
+          format: int64
+          nullable: true
+          example: 100
+        createdDate:
+          type: string
+          description: When the promotion code was created.
+          format: date-time
+          example: '2024-01-15T10:00:00Z'
+        expiratonDate:
+          type: string
+          description: "When the promotion code expires.\r\nNull if the code does not expire."
+          format: date-time
+          nullable: true
+          example: '2024-12-31T23:59:59Z'
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+          description: Additional metadata associated with the promotion code.
+          nullable: true
+      additionalProperties: false
+    AddOn:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier of the add-on.
+          format: uuid
+          example: b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2
+        href:
+          type: string
+          nullable: true
+        relation:
+          type: string
+          nullable: true
+        method:
+          type: string
+          default: GET
+          nullable: true
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+        smokeballId:
+          type: string
+          description: "Unique Smokeball identifier of the add-on. \r\n\r\nThis identifier convenience purposes only and should not be used to interact with the subscriptions API."
+          nullable: true
+        productSuite:
+          type: string
+          description: The product suite that this add-on belongs to.
+          nullable: true
+        name:
+          type: string
+          description: The display name of the add-on.
+          nullable: true
+          example: Intake
+        description:
+          type: string
+          description: "The description of the add-on.\r\n\r\nCan be used to describe the add-on to a customer."
+          nullable: true
+        trialPeriodDays:
+          type: integer
+          description: "The number of days the add-on can be trialed for.\r\n\r\nCannot be trialed if zero or missing."
+          format: int32
+          nullable: true
+        prices:
+          type: array
+          items:
+            $ref: '#/components/schemas/Price'
+          description: The price options for the add-on.
+          nullable: true
+        createdDate:
+          type: string
+          description: The created date of the add-on.
+          format: date-time
+          example: '2022-04-23T14:00:00Z'
+        updatedDate:
+          type: string
+          description: The updated date of the add-on.
+          format: date-time
+          example: '2022-04-23T14:00:00Z'
+      additionalProperties: false
+    Link:
+      type: object
+      properties:
+        id:
+          type: string
+          nullable: true
+        href:
+          type: string
+          nullable: true
+        relation:
+          type: string
+          nullable: true
+        method:
+          type: string
+          default: GET
+          nullable: true
+      additionalProperties: false
+    SubscriptionPromotion:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier of the promotion.
+          format: uuid
+          example: b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2
+        href:
+          type: string
+          nullable: true
+        relation:
+          type: string
+          nullable: true
+        method:
+          type: string
+          default: GET
+          nullable: true
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+        productSuite:
+          type: string
+          description: The product suite that this promotion belongs to.
+          nullable: true
+        tiers:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tier'
+          description: "List of tiers this promotion can be applied to.\r\nIf tiers and add-ons are both empty, the promotion can be applied to any tier or add-on."
+          nullable: true
+        addOns:
+          type: array
+          items:
+            $ref: '#/components/schemas/AddOn'
+          description: "List of add-ons this promotion can be applied to.\r\nIf tiers and add-ons are both empty, the promotion can be applied to any tier or add-on."
+          nullable: true
+        usage:
+          type: array
+          items:
+            type: string
+            description: "The usage context of a promotion.\r\n\r\nThe context can be used by apps to determine how and when to apply a promotion."
+          description: "Intended usage type for this promotion.\r\n\r\n* Manual - Promotion can be applied manually at any time (with a code).\r\n\r\n* Trial - The promotion can be used for trialing tiers or add-ons.\r\n\r\n* CancelRetention - The promotion can be used when the user is trying to cancel their subscription.\r\n\r\n* DowngradeRetention - The promotion can be used when the user is trying to downgrade their subscription.\r\n\r\n* Signup - The promotion can be used on sign up."
+          nullable: true
+        name:
+          type: string
+          description: Display name of the promotion.
+          nullable: true
+          example: Summer Sale 2024
+        description:
+          type: string
+          description: Description of the promotion.
+          nullable: true
+          example: Summer Sale 2024
+        durationDays:
+          type: integer
+          description: "Number of days the promotion applies for.\r\n\r\nFor example, if the promotion is a trial promotion, how many days the associated tier or add-on will be trialed for."
+          format: int64
+          nullable: true
+          example: 7
+        amountOff:
+          type: integer
+          description: "Fixed amount off (in cents).\r\nOnly one of AmountOff or PercentOff will be set."
+          format: int64
+          nullable: true
+          example: 2000
+        percentOff:
+          type: number
+          description: "Percentage discount.\r\nOnly one of AmountOff or PercentOff will be set."
+          format: double
+          nullable: true
+          example: 20.5
+        active:
+          type: boolean
+          description: Whether the promotion is currently valid and can be applied.
+        numUsed:
+          type: integer
+          description: Number of times this promotion has been used.
+          format: int64
+          example: 42
+        createdDate:
+          type: string
+          description: When the promotion was created.
+          format: date-time
+          example: '2024-01-15T10:00:00Z'
+        expirationDate:
+          type: string
+          description: "When the promotion expires.\r\nNull if the promotion does not expire."
+          format: date-time
+          nullable: true
+          example: '2024-12-31T23:59:59Z'
+        codes:
+          type: array
+          items:
+            $ref: '#/components/schemas/PromotionCode'
+          description: List of promotion codes associated with this promotion.
+          nullable: true
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+          description: Additional metadata associated with the promotion code.
+          nullable: true
+        isPersistent:
+          type: boolean
+          description: "Whether the promotion persists across tier switches.\r\n\r\nFor example, if a BILL only promotion is applied to the subscription and the firm upgrades to BOOST, the Promotion should be deactivated.\r\n\r\n* If the promotion is non-persistent, it should be removed completely.\r\n\r\n* If the promotion is persistent and the firm reverts back to BILL at a later date, the promotion should automatically be reactivated."
+        isFree:
+          type: boolean
+          description: Whether this promotion makes the targeted tier or add-on free.
+        deleted:
+          type: boolean
+          description: Whether this promotion has been deleted.
+          nullable: true
+      additionalProperties: false
+    SubscriptionPromotionPagedCollection:
+      type: object
+      properties:
+        id:
+          type: string
+          nullable: true
+        href:
+          type: string
+          nullable: true
+        relation:
+          type: string
+          nullable: true
+        method:
+          type: string
+          default: GET
+          nullable: true
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/SubscriptionPromotion'
+          nullable: true
+        offset:
+          type: integer
+          format: int32
+          nullable: true
+        limit:
+          type: integer
+          format: int32
+          nullable: true
+        size:
+          type: integer
+          format: int64
+        first:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+        previous:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+        next:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+        last:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+      additionalProperties: false
+    ProblemDetails:
+      type: object
+      properties:
+        type:
+          type: string
+          nullable: true
+        title:
+          type: string
+          nullable: true
+        status:
+          type: integer
+          format: int32
+          nullable: true
+        detail:
+          type: string
+          nullable: true
+        instance:
+          type: string
+          nullable: true
+      additionalProperties: {}
+    Tier:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier of the tier.
+          format: uuid
+          example: b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2
+        href:
+          type: string
+          nullable: true
+        relation:
+          type: string
+          nullable: true
+        method:
+          type: string
+          default: GET
+          nullable: true
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+        smokeballId:
+          type: string
+          description: "Unique Smokeball identifier of the tier. \r\n\r\nThis identifier convenience purposes only and should not be used to interact with the subscriptions API."
+          nullable: true
+        productSuite:
+          type: string
+          description: The product suite that this tier belongs to.
+          nullable: true
+        name:
+          type: string
+          description: The display name of the tier.
+          nullable: true
+          example: Intake
+        description:
+          type: string
+          description: "The description of the tier.\r\n\r\nCan be used to describe the tier to a customer."
+          nullable: true
+        trialPeriodDays:
+          type: integer
+          description: "The number of days the tier can be trialed for.\r\n\r\nCannot be trialed if zero or missing."
+          format: int32
+          nullable: true
+        prices:
+          type: array
+          items:
+            $ref: '#/components/schemas/Price'
+          description: The price options for the tier.
+          nullable: true
+        createdDate:
+          type: string
+          description: The created date of the tier.
+          format: date-time
+          example: '2022-04-23T14:00:00Z'
+        updatedDate:
+          type: string
+          description: The updated date of the tier.
+          format: date-time
+          example: '2022-04-23T14:00:00Z'
+      additionalProperties: false
+  securitySchemes:
+    api-key:
+      type: apiKey
+      name: x-api-key
+      in: header
+    token:
+      type: apiKey
+      name: Authorization
+      in: header
+      x-amazon-apigateway-authtype: cognito_user_pools

@@ -1,0 +1,2981 @@
+openapi: 3.0.1
+info:
+  title: Smokeball Activity Codes Subscriptions API
+  version: '1.0'
+  description: REST API for integrating with Smokeball legal practice management software. Supports matters, contacts, documents, time entries, billing, trust accounting, staff, webhooks, and law firm workflows across US, AU, and UK regions. Uses OAuth 2.0 (client credentials) authentication.
+  contact:
+    name: Smokeball Developer Support
+    url: https://docs.smokeball.com/docs/api-docs/1e13a13124aee-introduction
+  x-api-id: smokeball
+  x-audience: external-public
+servers:
+- url: https://api.smokeball.com
+- url: https://api.smokeball.com.au
+- url: https://api.smokeball.co.uk
+- url: https://stagingapi.smokeball.com
+- url: https://stagingapi.smokeball.com.au
+- url: https://stagingapi.smokeball.co.uk
+security:
+- api-key: []
+  token: []
+tags:
+- name: Subscriptions
+paths:
+  /subscriptions/addons:
+    get:
+      tags:
+      - Subscriptions
+      summary: Get all add-ons
+      description: "Returns a list of all available add-ons with their features and pricing.\r\n\r\nUse this endpoint to display the complete catalog of available add-ons."
+      responses:
+        '200':
+          description: When request is successful. Returns a collection of 'AddOn' objects.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddOnCollection'
+        '500':
+          description: When an error occurs while retrieving add-ons.
+      x-excluded: true
+  /subscriptions/addons/{id}:
+    get:
+      tags:
+      - Subscriptions
+      summary: Get an add-on
+      description: "Returns the specified product add-on with its features and pricing.\r\n\r\nUse this endpoint to retreive add-on information when only an id is available."
+      operationId: GetAddOnAsync
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: When request is successful. Returns an 'AddOn' object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddOn'
+        '404':
+          description: When add-on with specified id does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '500':
+          description: When an error occurs while retrieving add-ons.
+      x-excluded: true
+  /{id}:
+    post:
+      tags:
+      - Subscriptions
+      summary: Add add-on
+      description: "Adds a specific add-on to a subscription.\r\n\r\nImportant considerations:\r\n* Add-ons must be compatible with the subscription's current tier\r\n* Billing will be prorated for the remaining period"
+      parameters:
+      - name: subscriptionId
+        in: query
+        description: The unique identifier of the subscription
+        schema:
+          type: string
+      - name: id
+        in: path
+        description: The identifier of the add-on to add
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '202':
+          description: When request is accepted. Returns a 'Link' object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Link'
+        '400':
+          description: When an unsupported request is made.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: When subscription or add-on with specified id does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '500':
+          description: When an error occurs while adding the add-on.
+      x-excluded: true
+    delete:
+      tags:
+      - Subscriptions
+      summary: Remove add-on
+      description: "Removes a specific add-on from a subscription.\r\n\r\nImportant considerations:\r\n* Billing will be prorated\r\n* Dependent add-ons may also be removed"
+      parameters:
+      - name: subscriptionId
+        in: query
+        description: The unique identifier of the subscription
+        schema:
+          type: string
+      - name: id
+        in: path
+        description: The identifier of the add-on to remove
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '202':
+          description: When request is accepted. Returns a 'Link' object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Link'
+        '400':
+          description: When an unsupported request is made.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: When subscription or add-on with specified id does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '500':
+          description: When an error occurs while removing the add-on.
+      x-excluded: true
+  /subscriptions/{subscriptionId}/charges:
+    get:
+      tags:
+      - Subscriptions
+      operationId: GetSubscriptionUsageCharges
+      parameters:
+      - name: subscriptionId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: From
+        in: query
+        description: Optional start date used to filter usage charges by created date.
+        schema:
+          type: string
+          format: date-time
+          example: '2022-04-01T00:00:00Z'
+        example: '2022-04-01T00:00:00Z'
+      - name: To
+        in: query
+        description: Optional end date used to filter usage charges by created date.
+        schema:
+          type: string
+          format: date-time
+          example: '2022-04-30T23:59:59Z'
+        example: '2022-04-30T23:59:59Z'
+      - name: Status
+        in: query
+        description: "Optional usage charge status filter.\r\n            \r\nPossible values: Pending, Succeeded, Failed, Canceled, Refunded."
+        schema:
+          type: string
+      - name: MatterId
+        in: query
+        description: Optional matter id used to filter usage charges.
+        schema:
+          type: string
+          example: '123456'
+        example: '123456'
+      - name: UserId
+        in: query
+        description: Optional user id used to filter usage charges.
+        schema:
+          type: string
+          example: 3f44b470-5d39-41d0-a1ef-96e09e0eb5bb
+        example: 3f44b470-5d39-41d0-a1ef-96e09e0eb5bb
+      - name: ProductId
+        in: query
+        description: Optional internal product id used to filter usage charges.
+        schema:
+          type: string
+          example: 6b07d1fc-a7ea-4da7-966f-eaa971f0e72c
+        example: 6b07d1fc-a7ea-4da7-966f-eaa971f0e72c
+      - name: Offset
+        in: query
+        schema:
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+          format: int32
+      - name: Limit
+        in: query
+        schema:
+          maximum: 500
+          minimum: 1
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChargePagedCollection'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+      x-excluded: true
+  /subscriptions/{subscriptionId}/usages/{usageId}/charges:
+    get:
+      tags:
+      - Subscriptions
+      operationId: GetUsageCharges
+      parameters:
+      - name: subscriptionId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: usageId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: From
+        in: query
+        description: Optional start date used to filter usage charges by created date.
+        schema:
+          type: string
+          format: date-time
+          example: '2022-04-01T00:00:00Z'
+        example: '2022-04-01T00:00:00Z'
+      - name: To
+        in: query
+        description: Optional end date used to filter usage charges by created date.
+        schema:
+          type: string
+          format: date-time
+          example: '2022-04-30T23:59:59Z'
+        example: '2022-04-30T23:59:59Z'
+      - name: Status
+        in: query
+        description: "Optional usage charge status filter.\r\n            \r\nPossible values: Pending, Succeeded, Failed, Canceled, Refunded."
+        schema:
+          type: string
+      - name: MatterId
+        in: query
+        description: Optional matter id used to filter usage charges.
+        schema:
+          type: string
+          example: '123456'
+        example: '123456'
+      - name: UserId
+        in: query
+        description: Optional user id used to filter usage charges.
+        schema:
+          type: string
+          example: 3f44b470-5d39-41d0-a1ef-96e09e0eb5bb
+        example: 3f44b470-5d39-41d0-a1ef-96e09e0eb5bb
+      - name: ProductId
+        in: query
+        description: Optional internal product id used to filter usage charges.
+        schema:
+          type: string
+          example: 6b07d1fc-a7ea-4da7-966f-eaa971f0e72c
+        example: 6b07d1fc-a7ea-4da7-966f-eaa971f0e72c
+      - name: Offset
+        in: query
+        schema:
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+          format: int32
+      - name: Limit
+        in: query
+        schema:
+          maximum: 500
+          minimum: 1
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChargePagedCollection'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+      x-excluded: true
+    post:
+      tags:
+      - Subscriptions
+      operationId: CreateUsageChargeAsync
+      parameters:
+      - name: subscriptionId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: usageId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/CreateUsageChargeRequest'
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/CreateUsageChargeRequest'
+          application/*+json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/CreateUsageChargeRequest'
+      responses:
+        '202':
+          description: Accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Link'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+      x-excluded: true
+  /subscriptions/{subscriptionId}/charges/{id}:
+    get:
+      tags:
+      - Subscriptions
+      operationId: GetUsageCharge
+      parameters:
+      - name: subscriptionId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Charge'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+      x-excluded: true
+  /subscriptions/{subscriptionId}/charges/{id}/cancel:
+    post:
+      tags:
+      - Subscriptions
+      operationId: CancelUsageChargeAsync
+      parameters:
+      - name: subscriptionId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/CancelUsageChargeRequest'
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/CancelUsageChargeRequest'
+          application/*+json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/CancelUsageChargeRequest'
+      responses:
+        '202':
+          description: Accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Link'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+      x-excluded: true
+  /subscriptions/invoices:
+    get:
+      tags:
+      - Subscriptions
+      summary: Get subscription invoices
+      description: "Retrieves invoices for the account.\r\n            \r\nInvoices are returned sorted by creation date with the most recent invoices appearing first."
+      operationId: GetSubscriptionInvoicesAsync
+      parameters:
+      - name: Offset
+        in: query
+        schema:
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+          format: int32
+      - name: Limit
+        in: query
+        schema:
+          maximum: 500
+          minimum: 1
+          type: integer
+          format: int32
+      - name: From
+        in: query
+        description: Search for invoices created on or after From (inclusive lower bound).
+        schema:
+          type: string
+          format: date-time
+      - name: To
+        in: query
+        description: Search for invoices created on or before To (inclusive upper bound).
+        schema:
+          type: string
+          format: date-time
+      - name: SubscriptionId
+        in: query
+        description: Search for invoices belonging to the specified internal subscription id.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: When request is successful. Returns a collection of 'SubscriptionInvoice' objects.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubscriptionInvoicePagedCollection'
+        '404':
+          description: When subscription with specified id does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '500':
+          description: When an error occurs while retrieving the subscription invoices.
+      x-excluded: true
+  /subscriptions/{subscriptionId}/invoices:
+    get:
+      tags:
+      - Subscriptions
+      summary: Get subscription invoices
+      description: "DEPRECATED - Use GET /subscriptions/invoices instead.\r\n\r\nRetrieves invoices for the specified subscription.\r\n            \r\nInvoices are returned sorted by creation date with the most recent invoices appearing first."
+      operationId: GetSubscriptionInvoicesBackgroundsCompatibleAsync
+      parameters:
+      - name: subscriptionId
+        in: path
+        description: The unique identifier of the subscription
+        required: true
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: The maximum number of invoices to return.
+        schema:
+          type: integer
+          format: int32
+          default: 10
+      responses:
+        '200':
+          description: When request is successful. Returns a collection of 'SubscriptionInvoice' objects.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubscriptionInvoiceCollection'
+        '404':
+          description: When subscription with specified id does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '500':
+          description: When an error occurs while retrieving the subscription invoices.
+      x-excluded: true
+  /subscriptions/invoices/{invoiceId}/download:
+    get:
+      tags:
+      - Subscriptions
+      summary: Download invoice PDF
+      description: Streams the invoice PDF retrieved from the payment provider as an attachment.
+      operationId: DownloadInvoiceAsync
+      parameters:
+      - name: invoiceId
+        in: path
+        description: The unique identifier of the invoice
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: When request is successful. Returns the invoice PDF.
+        '404':
+          description: When the subscription or invoice does not exist, or the invoice has no PDF available (for example, draft invoices).
+          content:
+            application/pdf:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '500':
+          description: When an error occurs while downloading the invoice.
+      x-excluded: true
+  /subscriptions/invoices/{invoiceId}/url:
+    get:
+      tags:
+      - Subscriptions
+      summary: Get invoice download URL
+      description: Returns a URL that can be used to download the invoice PDF directly from the payment provider.
+      operationId: GetInvoiceDownloadUrlAsync
+      parameters:
+      - name: invoiceId
+        in: path
+        description: The unique identifier of the invoice
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: When request is successful. Returns an 'InvoiceDownloadUrl' object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvoiceDownloadUrl'
+        '404':
+          description: When the subscription or invoice does not exist, or the invoice has no PDF available (for example, draft invoices).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '500':
+          description: When an error occurs while retrieving the invoice URL.
+      x-excluded: true
+  /subscriptions:
+    get:
+      tags:
+      - Subscriptions
+      summary: Get subscriptions
+      description: "Returns a list of all available subscriptions with their current status and details.\r\n\r\nThe response includes:\r\n* Subscription IDs\r\n* Current tier\r\n* Active add-ons\r\n* Subscription status"
+      operationId: GetSubscriptions
+      responses:
+        '200':
+          description: When request is successful. Returns a collection of 'Subscription' objects.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubscriptionCollection'
+        '500':
+          description: When an error occurs while retrieving subscriptions.
+      x-excluded: true
+  /subscriptions/{id}:
+    get:
+      tags:
+      - Subscriptions
+      summary: Get subscription
+      description: "Retrieves detailed information for a specific subscription.\r\n\r\nThe response includes:\r\n* Current tier\r\n* Active add-ons\r\n* Subscription status"
+      operationId: GetSubscription
+      parameters:
+      - name: id
+        in: path
+        description: The unique identifier of the subscription
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: When request is successful. Returns a 'Subscription' object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Subscription'
+        '404':
+          description: When subscription with specified id does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '500':
+          description: When an error occurs while retrieving the subscription.
+      x-excluded: true
+    patch:
+      tags:
+      - Subscriptions
+      summary: Update subscription
+      description: "Updates a subscriptions tiers, add-ons, or interval.\r\n\r\nImportant considerations:\r\n* Updates cannot be made to canceled subscriptions\r\n* Billing will be prorated for the remaining period\r\n* Existing add-ons may need to be re-validated\r\n* Some features may be disabled if not available in new tier or add-ons"
+      operationId: UpdateSubscriptionAsync
+      parameters:
+      - name: id
+        in: path
+        description: The unique identifier of the subscription to update
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: The subscription update request
+        content:
+          application/json-patch+json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/UpdateSubscriptionRequest'
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/UpdateSubscriptionRequest'
+          application/*+json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/UpdateSubscriptionRequest'
+      responses:
+        '202':
+          description: When request is accepted. Returns a 'Link' object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Link'
+        '400':
+          description: When an unsupported request is made.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: When subscription with specified id does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '500':
+          description: When an error occurs while updating the subscription.
+      x-excluded: true
+  /subscriptions/settings:
+    get:
+      tags:
+      - Subscriptions
+      summary: Get subscription settings
+      description: Retrieves settings for a subscription.
+      operationId: GetSubscriptionSettings
+      responses:
+        '200':
+          description: When request is successful. Returns a 'SubscriptionSettings' object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubscriptionSettings'
+        '404':
+          description: When subscription with specified id does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+      x-excluded: true
+    patch:
+      tags:
+      - Subscriptions
+      summary: Patch subscription settings
+      description: Updates settings for a subscription.
+      operationId: PatchSubscriptionSettingsAsync
+      requestBody:
+        description: The subscription settings patch payload
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/SubscriptionSettingsDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SubscriptionSettingsDto'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/SubscriptionSettingsDto'
+      responses:
+        '202':
+          description: When request is accepted. Returns a 'Link' object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Link'
+        '400':
+          description: When an unsupported request is made.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: When subscription with specified id does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+      x-excluded: true
+  /subscriptions/{id}/promotions:
+    get:
+      tags:
+      - Subscriptions
+      summary: Get subscription promotions
+      description: Retrieves promotions available for the specified subscription.
+      operationId: GetSubscriptionPromotions
+      parameters:
+      - name: id
+        in: path
+        description: The unique identifier of the subscription
+        required: true
+        schema:
+          type: string
+      - name: Offset
+        in: query
+        schema:
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+          format: int32
+      - name: Limit
+        in: query
+        schema:
+          maximum: 500
+          minimum: 1
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: When request is successful. Returns a paged collection of 'SubscriptionPromotion' objects.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubscriptionPromotionPagedCollection'
+        '404':
+          description: When subscription with specified id does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '500':
+          description: When an error occurs while retrieving the subscription promotions.
+      x-excluded: true
+  /subscriptions/{id}/changes:
+    get:
+      tags:
+      - Subscriptions
+      summary: Get subscription changes
+      description: Returns a log of changes made to the subscription through the API.
+      operationId: GetSubscriptionChangesAsync
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: Offset
+        in: query
+        schema:
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+          format: int32
+      - name: Limit
+        in: query
+        schema:
+          maximum: 500
+          minimum: 1
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: When request is successful. Returns a paged collection of 'SubscriptionAudit' objects.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubscriptionAuditPagedCollection'
+        '500':
+          description: When an error occurs while retrieving subscription changes.
+      x-excluded: true
+  /subscriptions/{id}/preview:
+    post:
+      tags:
+      - Subscriptions
+      summary: Preview upcoming subscription charges
+      description: Returns a preview of upcoming subscription charges or refunds for any specified update to subscriptions tiers, add-ons, or interval.
+      operationId: PreviewSubscriptionUpdateAsync
+      parameters:
+      - name: id
+        in: path
+        description: The unique identifier of the subscription
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: The subscription upcoming request
+        content:
+          application/json-patch+json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/PreviewSubscriptionRequest'
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/PreviewSubscriptionRequest'
+          application/*+json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/PreviewSubscriptionRequest'
+      responses:
+        '200':
+          description: When request is successful. Returns a 'SubscriptionPreview' object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubscriptionPreview'
+        '400':
+          description: When an unsupported request is made.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: When subscription with specified id does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '500':
+          description: When an error occurs while updating the subscription.
+      x-excluded: true
+  /subscriptions/{id}/cancel:
+    patch:
+      tags:
+      - Subscriptions
+      summary: Cancel subscription
+      description: "Cancels a subscription using the supplied cancellation request.\r\n\r\nSupported cancellation types:\r\n* PeriodEnd - Cancel subscription at the end of the billing cycle\r\n* Immediate - Cancel subscription immediately\r\n* Date - Cancel at specified 'CancelAt' date\r\n\r\nIf not supplied, PeriodEnd is used and the subscription is cancelled at the end of the billing cycle.\r\n\r\nDefault behaviour:\r\n* If the subscription is trialing a tier, the tier is reverted to the previous tier at the end of the trials duration. This is only supported with PeriodEnd CancellationType.\r\n* If the subscription is trialing add-on(s), the add-on is removed at the end of the trials duration. This is only supported with PeriodEnd CancellationType.\r\n\r\nImportant considerations:\r\n* If 'cancelSubscription' is specified and set to 'true', the default behaviour specified above is ignored and the cancellation is applied directly on the subscription."
+      operationId: CancelSubscriptionAsync
+      parameters:
+      - name: id
+        in: path
+        description: The unique identifier of the subscription
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/CancelSubscriptionRequest'
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/CancelSubscriptionRequest'
+          application/*+json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/CancelSubscriptionRequest'
+      responses:
+        '200':
+          description: When request is successful. Returns a 'CancellationResponse' object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CancellationResponse'
+        '400':
+          description: When an unsupported request is made.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: When subscription with specified id does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '500':
+          description: When an error occurs while canceling the subscription.
+      x-excluded: true
+  /subscriptions/{id}/resume:
+    patch:
+      tags:
+      - Subscriptions
+      summary: Resume subscription
+      description: "Resumes a subscription that is pending cancellation or is already canceled.\r\n\r\nIf the subscription is in a CANCELED state:\r\n * An immediate charge for the subscription amount will be trigered.\r\n * If the charge is unsuccessful, the subscription will be moved to PASTDUE status until a charge is successful.\r\n * If all charge retry attempts fail, the subscription will be become CANCELED once again.\r\nIf the subscription is in the PENDING cancellation state:\r\n * The existing billing cycle will remain in place"
+      operationId: ResumeSubscriptionAsync
+      parameters:
+      - name: id
+        in: path
+        description: The unique identifier of the subscription
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/ResumeSubscriptionRequest'
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/ResumeSubscriptionRequest'
+          application/*+json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/ResumeSubscriptionRequest'
+      responses:
+        '202':
+          description: When request is accepted. Returns a 'Link' object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Link'
+        '400':
+          description: When an unsupported request is made.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: When subscription with specified id does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '500':
+          description: When an error occurs while resuming the subscription.
+      x-excluded: true
+  /subscriptions/tiers:
+    get:
+      tags:
+      - Subscriptions
+      summary: Get all tiers
+      description: "Returns a list of all available product tiers with their features and pricing.\r\n\r\nUse this endpoint to:\r\n* Display available tiers to customers\r\n* Show pricing information"
+      responses:
+        '200':
+          description: Successfully retrieved the list of product tiers
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Tier'
+        '500':
+          description: Internal server error occurred while retrieving tiers
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+      x-excluded: true
+  /subscriptions/tiers/{id}:
+    get:
+      tags:
+      - Subscriptions
+      summary: Get a tier
+      description: "Returns the specified product tier with its features and pricing.\r\n\r\nUse this endpoint to retreive tier information when only an id is available."
+      operationId: GetTierAsync
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: Successfully retrieved the list of product tiers
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Tier'
+        '500':
+          description: Internal server error occurred while retrieving tiers
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+      x-excluded: true
+  /subscriptions/tiers/{id}/addons:
+    get:
+      tags:
+      - Subscriptions
+      summary: Get tier add-ons
+      description: "Lists all available add-ons for a specific product tier.\r\n\r\nThe response includes:\r\n* Add-on details and pricing\r\n* Compatibility information\r\n* Usage limits\r\n* Dependencies or prerequisites\r\n\r\nUse this endpoint to show customers which add-ons are available for their tier."
+      parameters:
+      - name: id
+        in: path
+        description: The identifier of the product tier
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: Successfully retrieved the list of available add-ons
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AddOn'
+        '404':
+          description: Tier not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '500':
+          description: Internal server error occurred while retrieving add-ons
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+      x-excluded: true
+  /subscriptions/{subscriptionId}/tiers/{id}:
+    patch:
+      tags:
+      - Subscriptions
+      summary: Switch product tier
+      description: "Changes a subscription's product tier to the specified tier.\r\n\r\nImportant considerations:\r\n* Tier changes take effect immediately\r\n* Billing will be prorated for the remaining period\r\n* Existing add-ons may need to be re-validated\r\n* Some features may be disabled if not available in new tier"
+      parameters:
+      - name: subscriptionId
+        in: path
+        description: The unique identifier of the subscription to update
+        required: true
+        schema:
+          type: string
+      - name: id
+        in: path
+        description: The identifier of the target product tier
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/SetSubscriptionTierRequest'
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/SetSubscriptionTierRequest'
+          application/*+json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/SetSubscriptionTierRequest'
+      responses:
+        '200':
+          description: Successfully switched the product tier
+        '202':
+          description: Accepted
+        '404':
+          description: Subscription or tier not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '500':
+          description: Internal server error occurred while switching tiers
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+      x-excluded: true
+  /subscriptions/usages:
+    get:
+      tags:
+      - Subscriptions
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsageCollection'
+      x-excluded: true
+  /subscriptions/usages/{id}:
+    get:
+      tags:
+      - Subscriptions
+      operationId: GetUsageAsync
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Usage'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+      x-excluded: true
+  /subscriptions/{subscriptionId}/usages/{id}:
+    post:
+      tags:
+      - Subscriptions
+      parameters:
+      - name: subscriptionId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/SubscribeUsageRequest'
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/SubscribeUsageRequest'
+          application/*+json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/SubscribeUsageRequest'
+      responses:
+        '202':
+          description: Accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Link'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+      x-excluded: true
+    delete:
+      tags:
+      - Subscriptions
+      parameters:
+      - name: subscriptionId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '202':
+          description: Accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Link'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+      x-excluded: true
+components:
+  schemas:
+    TaxRateBehavior:
+      enum:
+      - 0
+      - 1
+      type: integer
+      description: The behavior set on Tax Rate.
+      format: int32
+    SmokeballProductType:
+      enum:
+      - 0
+      - 1
+      - 2
+      - 3
+      type: integer
+      format: int32
+    SubscriptionInvoicePagedCollection:
+      type: object
+      properties:
+        id:
+          type: string
+          nullable: true
+        href:
+          type: string
+          nullable: true
+        relation:
+          type: string
+          nullable: true
+        method:
+          type: string
+          default: GET
+          nullable: true
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/SubscriptionInvoice'
+          nullable: true
+        offset:
+          type: integer
+          format: int32
+          nullable: true
+        limit:
+          type: integer
+          format: int32
+          nullable: true
+        size:
+          type: integer
+          format: int64
+        first:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+        previous:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+        next:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+        last:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+      additionalProperties: false
+    ChargePagedCollection:
+      type: object
+      properties:
+        id:
+          type: string
+          nullable: true
+        href:
+          type: string
+          nullable: true
+        relation:
+          type: string
+          nullable: true
+        method:
+          type: string
+          default: GET
+          nullable: true
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/Charge'
+          nullable: true
+        offset:
+          type: integer
+          format: int32
+          nullable: true
+        limit:
+          type: integer
+          format: int32
+          nullable: true
+        size:
+          type: integer
+          format: int64
+        first:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+        previous:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+        next:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+        last:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+      additionalProperties: false
+    SubscriptionInvoice:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The unique identifier of the invoice.
+          nullable: true
+        number:
+          type: string
+          description: The human-readable invoice number (e.g. ABC-001).
+          nullable: true
+        status:
+          type: string
+          description: The invoice status.
+          example: Paid
+        description:
+          type: string
+          description: The invoice description.
+          nullable: true
+        total:
+          type: integer
+          description: The total amount for the invoice.
+          format: int64
+          example: 1899
+        subTotal:
+          type: integer
+          description: The payment subtotal amount.
+          format: int64
+          example: 1000
+        tax:
+          type: integer
+          description: The payment tax amount.
+          format: int64
+          example: 100
+        preTaxCredit:
+          type: integer
+          description: Total pre-tax credits applied to this payment.
+          format: int64
+          example: 200
+        lineItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/SubscriptionInvoiceLineItem'
+          description: The line items associated to the invoice.
+          nullable: true
+        createdDate:
+          type: string
+          description: The created date of the invoice.
+          format: date-time
+          example: '2022-04-23T14:00:00Z'
+      additionalProperties: false
+    Link:
+      type: object
+      properties:
+        id:
+          type: string
+          nullable: true
+        href:
+          type: string
+          nullable: true
+        relation:
+          type: string
+          nullable: true
+        method:
+          type: string
+          default: GET
+          nullable: true
+      additionalProperties: false
+    SubscriptionCollection:
+      type: object
+      properties:
+        id:
+          type: string
+          nullable: true
+        href:
+          type: string
+          nullable: true
+        relation:
+          type: string
+          nullable: true
+        method:
+          type: string
+          default: GET
+          nullable: true
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/Subscription'
+          nullable: true
+      additionalProperties: false
+    ProductPriceMeter:
+      type: object
+      properties:
+        externalMeterId:
+          type: string
+          description: The external meter id to incur charges.
+          nullable: true
+        eventName:
+          type: string
+          description: The meter event name used to record usage.
+          nullable: true
+      additionalProperties: false
+    CancellationResponse:
+      type: object
+      properties:
+        preview:
+          type: boolean
+          description: True if this is a cancellation preview.
+        cancellationType:
+          type: string
+          description: "The subscription cancellation type.\r\n\r\n* None - No cancellation type has been set.\r\n\r\n* PeriodEnd - Cancel subscription at the end of the billing cycle.\r\n\r\n* Immediate - Cancel subscription immediately.\r\n\r\n* Date - Cancel at specified date - see 'CancelAt'."
+        cancellationBehaviour:
+          type: string
+          description: "The subscription cancellation behaviour.\r\n\r\n* Cancel - Standard behaviour. The subscription will be canceled as normal.\r\n\r\n* CancelTrials - Any trials applied to the subscription will be canceled."
+        cancelAt:
+          type: string
+          description: The date the subscription will be cancelled.
+          format: date-time
+          nullable: true
+        reason:
+          type: string
+          description: The reason for cancellation.
+          nullable: true
+        tier:
+          allOf:
+          - $ref: '#/components/schemas/Tier'
+          description: The tier that will be set at the as a result of the cancellation.
+          nullable: true
+        addOns:
+          type: array
+          items:
+            $ref: '#/components/schemas/AddOn'
+          description: The add-ons that will be set at the as a result of the cancellation.
+          nullable: true
+      additionalProperties: false
+    CancelUsageChargeRequest:
+      type: object
+      properties:
+        reason:
+          type: string
+          nullable: true
+      additionalProperties: false
+    SetSubscriptionTierRequest:
+      type: object
+      properties:
+        promotionId:
+          type: string
+          description: Optional Promotion ID. If the provided promotion id does not exist, the request will fail.
+          nullable: true
+        interval:
+          type: string
+          description: "Optional billing interval/pricing option.\r\n\r\nIf no interval is provided then the default pricing option will be used.\r\n\r\nIf the interval is provided but does not exist, the request will fail."
+          nullable: true
+          example: Monthly
+        reason:
+          type: string
+          description: Optional reason for changing the subscription tier.
+          nullable: true
+      additionalProperties: false
+    SubscriptionAuditPagedCollection:
+      type: object
+      properties:
+        id:
+          type: string
+          nullable: true
+        href:
+          type: string
+          nullable: true
+        relation:
+          type: string
+          nullable: true
+        method:
+          type: string
+          default: GET
+          nullable: true
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/SubscriptionAudit'
+          nullable: true
+        offset:
+          type: integer
+          format: int32
+          nullable: true
+        limit:
+          type: integer
+          format: int32
+          nullable: true
+        size:
+          type: integer
+          format: int64
+        first:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+        previous:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+        next:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+        last:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+      additionalProperties: false
+    SubscriptionPreview:
+      type: object
+      properties:
+        immediateProrationPayment:
+          allOf:
+          - $ref: '#/components/schemas/InvoicePreview'
+          description: The prorated invoice preview for subscription changes that take effect immediately.
+          nullable: true
+          example: 3
+        nextBillingCyclePayment:
+          allOf:
+          - $ref: '#/components/schemas/InvoicePreview'
+          description: The preview of the next full billing cycle invoice for the updated subscription.
+          nullable: true
+          example: 3
+        quantity:
+          type: integer
+          description: The number of users on the subscription.
+          format: int64
+          nullable: true
+          example: 3
+        taxRates:
+          type: array
+          items:
+            $ref: '#/components/schemas/TaxRate'
+          description: The current active tax rate.
+          nullable: true
+      additionalProperties: false
+    TaxRate:
+      type: object
+      properties:
+        externalId:
+          type: string
+          nullable: true
+        name:
+          type: string
+          nullable: true
+        description:
+          type: string
+          nullable: true
+        country:
+          type: string
+          nullable: true
+        state:
+          type: string
+          nullable: true
+        rate:
+          type: number
+          format: double
+        behaviour:
+          allOf:
+          - $ref: '#/components/schemas/TaxRateBehavior'
+          description: The behavior set on Tax Rate.
+        createdDate:
+          type: string
+          format: date-time
+      additionalProperties: false
+    PreviewSubscriptionRequest:
+      type: object
+      properties:
+        tierId:
+          type: string
+          description: "Optional tier id subscription update to preview.\r\n\r\nAn error is thrown if the supplied or existing add-ons are not valid for the supplied tier id."
+          format: uuid
+          nullable: true
+          example: 8d074e85-4d95-4d9a-8a63-187719470d49
+        addOnIds:
+          type: array
+          items:
+            type: string
+            format: uuid
+          description: "Optional add-on ids subscription update to preview.\r\n\r\nAn error is thrown if the supplied or existing add-ons are not valid for the existing or supplied tier id."
+          nullable: true
+        promotionIds:
+          type: array
+          items:
+            type: string
+          description: Optional promotion ids subscription update to preview.
+          nullable: true
+        interval:
+          type: string
+          description: "Optional billing interval/pricing option change in subscription tier to preview.\r\n\r\nIf an interval is not supplied and a tier id is supplied, the default interval option for the supplied tier will be used.\r\n\r\nIf an interval is supplied but a tier is not supplied, the existing tier is used and the interval is changed."
+          nullable: true
+          example: Monthly
+      additionalProperties: false
+    Usage:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier of the usage product.
+          format: uuid
+          example: b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2
+        href:
+          type: string
+          nullable: true
+        relation:
+          type: string
+          nullable: true
+        method:
+          type: string
+          default: GET
+          nullable: true
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+        smokeballId:
+          type: string
+          description: Unique Smokeball identifier of the usage product.
+          nullable: true
+        productSuite:
+          type: string
+          description: The product suite that this usage product belongs to.
+          nullable: true
+        iconIdentifier:
+          type: string
+          description: Icon identifier for the product.
+          nullable: true
+        name:
+          type: string
+          description: The display name of the usage product.
+          nullable: true
+        description:
+          type: string
+          description: The description of the usage product.
+          nullable: true
+        trialPeriodDays:
+          type: integer
+          description: The number of days the usage product can be trialed for.
+          format: int64
+          nullable: true
+        prices:
+          type: array
+          items:
+            $ref: '#/components/schemas/Price'
+          description: The chargeable metered price options for the usage product.
+          nullable: true
+        createdDate:
+          type: string
+          description: The created date of the usage product.
+          format: date-time
+        updatedDate:
+          type: string
+          description: The updated date of the usage product.
+          format: date-time
+      additionalProperties: false
+    CreateUsageChargeRequest:
+      required:
+      - priceId
+      type: object
+      properties:
+        priceId:
+          type: string
+          description: The price to charge for this usage product.
+          format: uuid
+        matterId:
+          type: string
+          description: The matter id associated with the usage charge.
+          nullable: true
+        description:
+          type: string
+          description: The description associated with the usage charge.
+          nullable: true
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+          description: Optional metadata associated with the usage charge.
+          nullable: true
+      additionalProperties: false
+    InvoicePreviewLineItem:
+      type: object
+      properties:
+        product:
+          allOf:
+          - $ref: '#/components/schemas/Product'
+          description: "The tier or add-on this item is associated to.\r\n\r\nReturns nothing if the product is not known by our system."
+          nullable: true
+        description:
+          type: string
+          description: Description of this line item.
+          nullable: true
+        interval:
+          type: string
+          description: Recurring payment interval type.
+        amount:
+          type: integer
+          description: The amount charged for this line item.
+          format: int64
+          example: 109
+        tax:
+          type: integer
+          description: The tax amount in this line item.
+          format: int64
+          example: 10.9
+        preTaxCredit:
+          type: integer
+          description: Pre-tax credits applied to this line item.
+          format: int64
+          example: 200
+      additionalProperties: false
+    SubscribeUsageRequest:
+      type: object
+      properties:
+        defaultPaymentMethodId:
+          type: string
+          description: Public id of the payment method to set as the default for the usage subscription.
+          format: uuid
+          nullable: true
+      additionalProperties: false
+    SubscriptionSettings:
+      type: object
+      properties:
+        href:
+          type: string
+          nullable: true
+        relation:
+          type: string
+          nullable: true
+        method:
+          type: string
+          default: GET
+          nullable: true
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+        id:
+          type: string
+          description: The Smokeball firm id.
+          nullable: true
+        createExpensesFromUsageCharges:
+          type: boolean
+          description: Whether usage charges should create expenses/disbursements.
+        usageAccessPermission:
+          type: string
+          description: "Controls which staff at a firm can use Usage-based Products.\r\nMissing settings should be treated as Finance.Subscriptions.Entities.UsageAccessPermission.All."
+        usageAccessSelectedUserIds:
+          type: array
+          items:
+            type: string
+          description: "Staff user ids granted access when Finance.Subscriptions.Api.Resources.SubscriptionSettings.UsageAccessPermission\r\nis Finance.Subscriptions.Entities.UsageAccessPermission.SelectedUsersAndFirmOwners."
+          nullable: true
+        updatedDate:
+          type: string
+          description: The date the settings were last updated.
+          format: date-time
+          nullable: true
+        updatedByUserId:
+          type: string
+          description: The user id that last updated the settings.
+          nullable: true
+      additionalProperties: false
+      description: Settings for an account's subscription behavior.
+    Price:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The internal price id.
+          nullable: true
+        externalPriceId:
+          type: string
+          description: The external price id.
+          nullable: true
+        default:
+          type: boolean
+          description: Returns `true` if the price is the default price.
+          example: true
+        active:
+          type: boolean
+          description: Returns `true` if the Price is active.
+          example: true
+        type:
+          type: string
+          description: The type of price.
+          example: Recurring
+        name:
+          type: string
+          description: The price display name.
+          nullable: true
+          example: '"$109 per user/month"'
+        amount:
+          type: number
+          description: The per user amount for this pricing option for the specified interval (in cents).
+          format: double
+          nullable: true
+          example: 5900
+        interval:
+          type: string
+          description: Recurring payment interval type.
+          example: Monthly
+      additionalProperties: false
+    SubscriptionInvoiceLineItem:
+      type: object
+      properties:
+        product:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          description: "The tier or add-on this item is associated to.\r\n\r\nReturns nothing if the product is not known by our system."
+          nullable: true
+        description:
+          type: string
+          description: Description of this line item.
+          nullable: true
+        interval:
+          type: string
+          description: Recurring payment interval type.
+        amount:
+          type: integer
+          description: The amount charged for this line item.
+          format: int64
+          example: 109
+        tax:
+          type: integer
+          description: The tax amount in this line item.
+          format: int64
+          example: 10.9
+        preTaxCredit:
+          type: integer
+          description: Any credit amount on this line item.
+          format: int64
+          example: 200
+        quantity:
+          type: integer
+          description: The number of users for this line item.
+          format: int64
+          nullable: true
+          example: 3
+      additionalProperties: false
+    SubscriptionType:
+      enum:
+      - 0
+      - 1
+      type: integer
+      format: int32
+    Metadata:
+      type: object
+      properties:
+        key:
+          type: string
+          nullable: true
+        value:
+          type: string
+          nullable: true
+      additionalProperties: false
+    UsageCollection:
+      type: object
+      properties:
+        id:
+          type: string
+          nullable: true
+        href:
+          type: string
+          nullable: true
+        relation:
+          type: string
+          nullable: true
+        method:
+          type: string
+          default: GET
+          nullable: true
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/Usage'
+          nullable: true
+      additionalProperties: false
+    SubscriptionPromotion:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier of the promotion.
+          format: uuid
+          example: b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2
+        href:
+          type: string
+          nullable: true
+        relation:
+          type: string
+          nullable: true
+        method:
+          type: string
+          default: GET
+          nullable: true
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+        productSuite:
+          type: string
+          description: The product suite that this promotion belongs to.
+          nullable: true
+        tiers:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tier'
+          description: "List of tiers this promotion can be applied to.\r\nIf tiers and add-ons are both empty, the promotion can be applied to any tier or add-on."
+          nullable: true
+        addOns:
+          type: array
+          items:
+            $ref: '#/components/schemas/AddOn'
+          description: "List of add-ons this promotion can be applied to.\r\nIf tiers and add-ons are both empty, the promotion can be applied to any tier or add-on."
+          nullable: true
+        usage:
+          type: array
+          items:
+            type: string
+            description: "The usage context of a promotion.\r\n\r\nThe context can be used by apps to determine how and when to apply a promotion."
+          description: "Intended usage type for this promotion.\r\n\r\n* Manual - Promotion can be applied manually at any time (with a code).\r\n\r\n* Trial - The promotion can be used for trialing tiers or add-ons.\r\n\r\n* CancelRetention - The promotion can be used when the user is trying to cancel their subscription.\r\n\r\n* DowngradeRetention - The promotion can be used when the user is trying to downgrade their subscription.\r\n\r\n* Signup - The promotion can be used on sign up."
+          nullable: true
+        name:
+          type: string
+          description: Display name of the promotion.
+          nullable: true
+          example: Summer Sale 2024
+        description:
+          type: string
+          description: Description of the promotion.
+          nullable: true
+          example: Summer Sale 2024
+        durationDays:
+          type: integer
+          description: "Number of days the promotion applies for.\r\n\r\nFor example, if the promotion is a trial promotion, how many days the associated tier or add-on will be trialed for."
+          format: int64
+          nullable: true
+          example: 7
+        amountOff:
+          type: integer
+          description: "Fixed amount off (in cents).\r\nOnly one of AmountOff or PercentOff will be set."
+          format: int64
+          nullable: true
+          example: 2000
+        percentOff:
+          type: number
+          description: "Percentage discount.\r\nOnly one of AmountOff or PercentOff will be set."
+          format: double
+          nullable: true
+          example: 20.5
+        active:
+          type: boolean
+          description: Whether the promotion is currently valid and can be applied.
+        numUsed:
+          type: integer
+          description: Number of times this promotion has been used.
+          format: int64
+          example: 42
+        createdDate:
+          type: string
+          description: When the promotion was created.
+          format: date-time
+          example: '2024-01-15T10:00:00Z'
+        expirationDate:
+          type: string
+          description: "When the promotion expires.\r\nNull if the promotion does not expire."
+          format: date-time
+          nullable: true
+          example: '2024-12-31T23:59:59Z'
+        codes:
+          type: array
+          items:
+            $ref: '#/components/schemas/PromotionCode'
+          description: List of promotion codes associated with this promotion.
+          nullable: true
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+          description: Additional metadata associated with the promotion code.
+          nullable: true
+        isPersistent:
+          type: boolean
+          description: "Whether the promotion persists across tier switches.\r\n\r\nFor example, if a BILL only promotion is applied to the subscription and the firm upgrades to BOOST, the Promotion should be deactivated.\r\n\r\n* If the promotion is non-persistent, it should be removed completely.\r\n\r\n* If the promotion is persistent and the firm reverts back to BILL at a later date, the promotion should automatically be reactivated."
+        isFree:
+          type: boolean
+          description: Whether this promotion makes the targeted tier or add-on free.
+        deleted:
+          type: boolean
+          description: Whether this promotion has been deleted.
+          nullable: true
+      additionalProperties: false
+    ProblemDetails:
+      type: object
+      properties:
+        type:
+          type: string
+          nullable: true
+        title:
+          type: string
+          nullable: true
+        status:
+          type: integer
+          format: int32
+          nullable: true
+        detail:
+          type: string
+          nullable: true
+        instance:
+          type: string
+          nullable: true
+      additionalProperties: {}
+    SubscriptionInvoiceCollection:
+      type: object
+      properties:
+        id:
+          type: string
+          nullable: true
+        href:
+          type: string
+          nullable: true
+        relation:
+          type: string
+          nullable: true
+        method:
+          type: string
+          default: GET
+          nullable: true
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/SubscriptionInvoice'
+          nullable: true
+      additionalProperties: false
+    SubscriptionSettingsDto:
+      type: object
+      properties:
+        createExpensesFromUsageCharges:
+          type: boolean
+          description: Whether usage charges should create expenses/disbursements.
+        usageAccessPermission:
+          type: string
+          description: "Controls which staff at a firm can use Usage-based Products.\r\nMissing settings should be treated as Finance.Subscriptions.Entities.UsageAccessPermission.All."
+        usageAccessSelectedUserIds:
+          type: array
+          items:
+            type: string
+          description: "User ids granted access when Finance.Subscriptions.Api.Models.SubscriptionSettingsDto.UsageAccessPermission\r\nis Finance.Subscriptions.Entities.UsageAccessPermission.SelectedUsersAndFirmOwners."
+          nullable: true
+      additionalProperties: false
+      description: Subscription settings patch payload.
+    SubscriptionDiscount:
+      type: object
+      properties:
+        promotion:
+          allOf:
+          - $ref: '#/components/schemas/SubscriptionPromotion'
+          description: The promotion associated with the discount.
+          nullable: true
+        activationDate:
+          type: string
+          description: The date the discount was activated.
+          format: date-time
+          nullable: true
+        expirationDate:
+          type: string
+          description: The date the discount will expire.
+          format: date-time
+          nullable: true
+      additionalProperties: false
+    UpdateSubscriptionRequest:
+      type: object
+      properties:
+        tierId:
+          type: string
+          description: "Optional tier id to subscribe to.\r\n\r\nAn error is thrown if the supplied or existing add-ons are not valid for the supplied tier id."
+          format: uuid
+          nullable: true
+          example: 8d074e85-4d95-4d9a-8a63-187719470d49
+        addOnIds:
+          type: array
+          items:
+            type: string
+            format: uuid
+          description: "Optional add-on ids to subscribe to.\r\n\r\nAn error is thrown if the supplied or existing add-ons are not valid for the existing or supplied tier id."
+          nullable: true
+        interval:
+          type: string
+          description: "Optional billing interval/pricing option to use when setting subscription tier.\r\n\r\nIf an interval is not supplied then the default interval option will be used.\r\n\r\nIf an interval is supplied but a tier is not supplied, the existing tier is used and the interval is changed."
+          nullable: true
+          example: Monthly
+        reason:
+          type: string
+          description: Optional reason for changing the subscription tier.
+          nullable: true
+      additionalProperties: false
+    Subscription:
+      type: object
+      properties:
+        href:
+          type: string
+          nullable: true
+        relation:
+          type: string
+          nullable: true
+        method:
+          type: string
+          default: GET
+          nullable: true
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+        id:
+          type: string
+          description: Unique identifier of the subscription.
+          nullable: true
+          example: b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2
+        type:
+          allOf:
+          - $ref: '#/components/schemas/SubscriptionType'
+          description: The kind of subscription represented by this resource.
+        productSuite:
+          type: string
+          description: The product suite of the subscription.
+          nullable: true
+        tier:
+          allOf:
+          - $ref: '#/components/schemas/Tier'
+          description: '''Tier'' product that the subscription is subscribed to.'
+          nullable: true
+        trialingTier:
+          allOf:
+          - $ref: '#/components/schemas/TrialingTier'
+          description: "'Tier' product that the subscription is currently trialing.\r\n\r\nReturns nothing if no tiers are being trialed."
+          nullable: true
+        addOns:
+          type: array
+          items:
+            $ref: '#/components/schemas/AddOn'
+          description: List of 'AddOn' products that the subscription is subscribed to.
+          nullable: true
+        usages:
+          type: array
+          items:
+            $ref: '#/components/schemas/Usage'
+          description: List of 'Usage' products that the subscription is subscribed to.
+          nullable: true
+        discounts:
+          type: array
+          items:
+            $ref: '#/components/schemas/SubscriptionDiscount'
+          description: List of Discounts (promotions) applied to the subscription.
+          nullable: true
+        status:
+          type: string
+          description: "Current status of the subscription.\r\n\r\nIf missing, then the firm does not have a platform subscription.\r\n\r\nPossible values: Trialing, Active, Canceled, PastDue, Unpaid, Incomplete, IncompleteExpired."
+          nullable: true
+        interval:
+          type: string
+          description: "Current billing interval of the subscription. \r\n\r\nDerived from the tiers billing interval. Returns 'None' if a tier is not associated to this subscription.\r\n\r\nCurrently only Monthly and Yearly are supported.\r\n\r\nPossible values: None, Daily, Weekly, Monthly, Yearly."
+          nullable: true
+        quantity:
+          type: integer
+          description: The number of user licenses for this subscription.
+          format: int64
+          nullable: true
+          example: 3
+        createdDate:
+          type: string
+          description: The created date of the subscription.
+          format: date-time
+          nullable: true
+          example: '2022-04-23T14:00:00Z'
+        trialStatus:
+          type: string
+          description: "The trial status of the subscription.\r\n\r\n* None - The subscription is not trialing a tier or add-on.\r\n\r\n* Trialing - The subscription is in its trial phase (on signup) or a promotion is applied and a tier or add-on is being trialed."
+          nullable: true
+        trialPeriodStartDate:
+          type: string
+          description: "The trial period start date of the subscription.\r\n\r\nUsed in conjuction with the trial period end date to determine if the subscription is currently in trial mode.\r\n\r\nNull if the subscription is not in trial mode."
+          format: date-time
+          nullable: true
+          example: '2022-04-23T14:00:00Z'
+        trialPeriodEndDate:
+          type: string
+          description: "The trial period end date of the subscription.\r\n\r\nUsed in conjuction with the trial period start date to determine if the subscription is currently in trial mode.\r\n\r\nNull if the subscription is not in trial mode."
+          format: date-time
+          nullable: true
+          example: '2022-04-23T14:00:00Z'
+        currentPeriodStartDate:
+          type: string
+          description: The start date of the subscription.
+          format: date-time
+          nullable: true
+          example: '2022-04-23T14:00:00Z'
+        currentPeriodEndDate:
+          type: string
+          description: The end date of the subscription.
+          format: date-time
+          nullable: true
+          example: '2022-04-23T14:00:00Z'
+        cancellationStatus:
+          type: string
+          description: "The cancellation status of the subscription.\r\n\r\n* None - The subscription is not canceled and no cancelation requests have been made.\r\n            \r\n* Pending - The subscription has been canceled and will be canceled at a later date.\r\n            \r\n* Canceled - The subscription has been canceled.\r\n\r\nPossible values: None, Pending, Canceled."
+          nullable: true
+        cancellationType:
+          type: string
+          description: "Represents the most recent cancellation type for the subscription.\r\n\r\nThis can be used alongside the CanceledAt and CancelAt properties to determine the cancellation status and timing.\r\n\r\n* PeriodEnd - Subscription will be canceled at the end of the billing cycle.\r\n\r\n* Immediate - Subscription was canceled immediatly. \r\n\r\n* Date - If not already canceled, the subscription will be canceled at the 'CancelAt' date.\r\n\r\nPossible values: PeriodEnd, Immediate, Date."
+          nullable: true
+          example: PeriodEnd
+        canceledAt:
+          type: string
+          description: "If the subscription has been canceled, the date of that cancellation.\r\n\r\nOtherwise, the date of the cancel request."
+          format: date-time
+          nullable: true
+          example: '2024-12-01T09:00:00Z'
+        cancelAt:
+          type: string
+          description: A date in the future at which the subscription will automatically get canceled and the status will change to 'Canceled'.
+          format: date-time
+          nullable: true
+          example: '2025-04-23T14:00:00Z'
+      additionalProperties: false
+    CancelSubscriptionRequest:
+      type: object
+      properties:
+        cancellationType:
+          type: string
+          description: "The subscription cancellation type.\r\n\r\n* None - No cancellation type has been set.\r\n\r\n* PeriodEnd - Cancel subscription at the end of the billing cycle.\r\n\r\n* Immediate - Cancel subscription immediately.\r\n\r\n* Date - Cancel at specified date - see 'CancelAt'."
+        cancelAt:
+          type: string
+          description: "Optional date used to cancel at the supplied date. Will only be used if CancellationType is set to 'Date'.\r\n\r\nIf set to a date before the current period ends, this will cause a proration if prorations have been enabled.\r\n\r\nIf set during a future period, this will always cause a proration for that period."
+          format: date-time
+          nullable: true
+        cancelSubscription:
+          type: boolean
+          description: Optional flag to force cancellation of the subscription instead of applying default cancellation behaviour.
+          nullable: true
+        reason:
+          type: string
+          description: Optional reason for cancellation of the subscription.
+          nullable: true
+        preview:
+          type: boolean
+          description: "Optional flag to preview cancellation request. \r\n\r\nIf 'true', the Subscription is not cancelled and the CancellationType and CancellationDate are returned."
+          example: true
+      additionalProperties: false
+    InvoiceDownloadUrl:
+      type: object
+      properties:
+        url:
+          type: string
+          description: A URL to a downloadable PDF of the invoice from the payment provider.
+          nullable: true
+      additionalProperties: false
+    TrialingTier:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier of the tier.
+          format: uuid
+          example: b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2
+        href:
+          type: string
+          nullable: true
+        relation:
+          type: string
+          nullable: true
+        method:
+          type: string
+          default: GET
+          nullable: true
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+        smokeballId:
+          type: string
+          description: "Unique Smokeball identifier of the tier. \r\n\r\nThis identifier convenience purposes only and should not be used to interact with the subscriptions API."
+          nullable: true
+        productSuite:
+          type: string
+          description: The product suite that this tier belongs to.
+          nullable: true
+        name:
+          type: string
+          description: The display name of the tier.
+          nullable: true
+          example: Intake
+        description:
+          type: string
+          description: "The description of the tier.\r\n\r\nCan be used to describe the tier to a customer."
+          nullable: true
+        trialPeriodDays:
+          type: integer
+          description: "The number of days the tier can be trialed for.\r\n\r\nCannot be trialed if zero or missing."
+          format: int32
+          nullable: true
+        prices:
+          type: array
+          items:
+            $ref: '#/components/schemas/Price'
+          description: The price options for the tier.
+          nullable: true
+        createdDate:
+          type: string
+          description: The created date of the tier.
+          format: date-time
+          example: '2022-04-23T14:00:00Z'
+        updatedDate:
+          type: string
+          description: The updated date of the tier.
+          format: date-time
+          example: '2022-04-23T14:00:00Z'
+        cancellationStatus:
+          type: string
+          description: "The cancellation status of the trial.\r\n\r\n* None - The trial has not been canceled. If a payment method is added to the subscription, the trial product(s) will be applied to the subscription at expiration.\r\n            \r\n* Pending -  The trial has been canceled. The trial product(s) will not be applied to the subscription at expiration.\r\n\r\nPossible values: None, Pending."
+          nullable: true
+        activationDate:
+          type: string
+          description: The date the trial was activated.
+          format: date-time
+          nullable: true
+        expirationDate:
+          type: string
+          description: The date the trial will expire.
+          format: date-time
+          nullable: true
+      additionalProperties: false
+    PromotionCode:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier of the promotion code.
+          nullable: true
+          example: promo_code_1234
+        name:
+          type: string
+          description: Display name of the promotion code.
+          nullable: true
+          example: SUMMER2024
+        description:
+          type: string
+          description: The description of the promotion code.
+          nullable: true
+          example: 100% discount!
+        code:
+          type: string
+          description: The actual code that customers can use.
+          nullable: true
+          example: SUMMER2024
+        active:
+          type: boolean
+          description: Whether this promotion code is currently active.
+        minimumAmount:
+          type: integer
+          description: Minimum amount in cents required to apply this promotion code.
+          format: int64
+          nullable: true
+          example: 5000
+        firstTimeCustomersOnly:
+          type: boolean
+          description: Whether this code can only be used by first-time customers.
+        limit:
+          type: integer
+          description: "Maximum number of times this code can be used.\r\nNull means unlimited uses."
+          format: int64
+          nullable: true
+          example: 100
+        createdDate:
+          type: string
+          description: When the promotion code was created.
+          format: date-time
+          example: '2024-01-15T10:00:00Z'
+        expiratonDate:
+          type: string
+          description: "When the promotion code expires.\r\nNull if the code does not expire."
+          format: date-time
+          nullable: true
+          example: '2024-12-31T23:59:59Z'
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+          description: Additional metadata associated with the promotion code.
+          nullable: true
+      additionalProperties: false
+    InvoicePreview:
+      type: object
+      properties:
+        dueDate:
+          type: string
+          description: The date when the payment is due.
+          format: date-time
+          nullable: true
+          example: '2022-04-23T14:00:00Z'
+        total:
+          type: integer
+          description: The payment total amount.
+          format: int64
+          example: 1899
+        subTotal:
+          type: integer
+          description: The payment subtotal amount.
+          format: int64
+          example: 1000
+        tax:
+          type: integer
+          description: The payment tax amount.
+          format: int64
+          example: 100
+        preTaxCredit:
+          type: integer
+          description: Total pre-tax credits applied to this payment.
+          format: int64
+          example: 200
+        previewLineItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/InvoicePreviewLineItem'
+          description: The invoice line items showing breakdown of charges.
+          nullable: true
+      additionalProperties: false
+    AddOn:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier of the add-on.
+          format: uuid
+          example: b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2
+        href:
+          type: string
+          nullable: true
+        relation:
+          type: string
+          nullable: true
+        method:
+          type: string
+          default: GET
+          nullable: true
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+        smokeballId:
+          type: string
+          description: "Unique Smokeball identifier of the add-on. \r\n\r\nThis identifier convenience purposes only and should not be used to interact with the subscriptions API."
+          nullable: true
+        productSuite:
+          type: string
+          description: The product suite that this add-on belongs to.
+          nullable: true
+        name:
+          type: string
+          description: The display name of the add-on.
+          nullable: true
+          example: Intake
+        description:
+          type: string
+          description: "The description of the add-on.\r\n\r\nCan be used to describe the add-on to a customer."
+          nullable: true
+        trialPeriodDays:
+          type: integer
+          description: "The number of days the add-on can be trialed for.\r\n\r\nCannot be trialed if zero or missing."
+          format: int32
+          nullable: true
+        prices:
+          type: array
+          items:
+            $ref: '#/components/schemas/Price'
+          description: The price options for the add-on.
+          nullable: true
+        createdDate:
+          type: string
+          description: The created date of the add-on.
+          format: date-time
+          example: '2022-04-23T14:00:00Z'
+        updatedDate:
+          type: string
+          description: The updated date of the add-on.
+          format: date-time
+          example: '2022-04-23T14:00:00Z'
+      additionalProperties: false
+    AddOnCollection:
+      type: object
+      properties:
+        id:
+          type: string
+          nullable: true
+        href:
+          type: string
+          nullable: true
+        relation:
+          type: string
+          nullable: true
+        method:
+          type: string
+          default: GET
+          nullable: true
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/AddOn'
+          nullable: true
+      additionalProperties: false
+    ProductPrice:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The id of the Price.
+          nullable: true
+        externalPriceId:
+          type: string
+          description: The external Price id.
+          nullable: true
+        active:
+          type: boolean
+          description: Returns `true` if the Price is active.
+        default:
+          type: boolean
+          description: Returns `true` if the Price is the default price.
+        type:
+          type: string
+          description: The Price type (e.g. recurring)
+        name:
+          type: string
+          description: The Price display name e.g. "$109 per user/month"
+          nullable: true
+        amount:
+          type: number
+          description: The per user amount for this pricing option for the specified interval.
+          format: double
+          nullable: true
+        interval:
+          type: string
+          description: The interval of the Price.
+        meter:
+          allOf:
+          - $ref: '#/components/schemas/ProductPriceMeter'
+          description: Usage-based metering details.
+          nullable: true
+        metadata:
+          type: array
+          items:
+            $ref: '#/components/schemas/Metadata'
+          description: The metadata of the Price.
+          nullable: true
+      additionalProperties: false
+    ResumeSubscriptionRequest:
+      type: object
+      additionalProperties: false
+    SubscriptionPromotionPagedCollection:
+      type: object
+      properties:
+        id:
+          type: string
+          nullable: true
+        href:
+          type: string
+          nullable: true
+        relation:
+          type: string
+          nullable: true
+        method:
+          type: string
+          default: GET
+          nullable: true
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/SubscriptionPromotion'
+          nullable: true
+        offset:
+          type: integer
+          format: int32
+          nullable: true
+        limit:
+          type: integer
+          format: int32
+          nullable: true
+        size:
+          type: integer
+          format: int64
+        first:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+        previous:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+        next:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+        last:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+      additionalProperties: false
+    Product:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The id of the Product.
+          nullable: true
+        smokeballId:
+          type: string
+          description: The Smokeball id. For example the tier or add-on id.
+          nullable: true
+          example: SMK001
+        source:
+          type: string
+          description: Source of the promotion (e.g. Stripe).
+          nullable: true
+        externalProductId:
+          type: string
+          description: The external id of the Product.
+          nullable: true
+        smokeballProductType:
+          allOf:
+          - $ref: '#/components/schemas/SmokeballProductType'
+          description: The type of the Product (Tier or AddOn)
+        productSuite:
+          type: string
+          description: The suite that the Product belongs to.
+          nullable: true
+        iconIdentifier:
+          type: string
+          description: Opaque icon identifier of the product.
+          nullable: true
+        name:
+          type: string
+          description: The name of the Product.
+          nullable: true
+        description:
+          type: string
+          description: The description of the Product.
+          nullable: true
+        trialPeriodDays:
+          type: integer
+          description: "If the product is trialable, how many days it will be trialed for.\r\n\r\nNote: This will return null or 0 if the product is not trialable."
+          format: int64
+          nullable: true
+        created:
+          type: string
+          description: The created date of the Product.
+          format: date-time
+        updated:
+          type: string
+          description: The updated date of the Product.
+          format: date-time
+        prices:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductPrice'
+          description: The prices of the Product (e.g. Monthly or Yearly).
+          nullable: true
+        metadata:
+          type: array
+          items:
+            $ref: '#/components/schemas/Metadata'
+          description: The metadata of the Product.
+          nullable: true
+        testEnvironment:
+          type: boolean
+          description: Returns `true` if this Product is from the Test environment.
+        active:
+          type: boolean
+          description: Returns `true` if this Product is active.
+        isDeleted:
+          type: boolean
+          description: Returns `true` if this Product has been deleted.
+      additionalProperties: false
+    Tier:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier of the tier.
+          format: uuid
+          example: b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2
+        href:
+          type: string
+          nullable: true
+        relation:
+          type: string
+          nullable: true
+        method:
+          type: string
+          default: GET
+          nullable: true
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+        smokeballId:
+          type: string
+          description: "Unique Smokeball identifier of the tier. \r\n\r\nThis identifier convenience purposes only and should not be used to interact with the subscriptions API."
+          nullable: true
+        productSuite:
+          type: string
+          description: The product suite that this tier belongs to.
+          nullable: true
+        name:
+          type: string
+          description: The display name of the tier.
+          nullable: true
+          example: Intake
+        description:
+          type: string
+          description: "The description of the tier.\r\n\r\nCan be used to describe the tier to a customer."
+          nullable: true
+        trialPeriodDays:
+          type: integer
+          description: "The number of days the tier can be trialed for.\r\n\r\nCannot be trialed if zero or missing."
+          format: int32
+          nullable: true
+        prices:
+          type: array
+          items:
+            $ref: '#/components/schemas/Price'
+          description: The price options for the tier.
+          nullable: true
+        createdDate:
+          type: string
+          description: The created date of the tier.
+          format: date-time
+          example: '2022-04-23T14:00:00Z'
+        updatedDate:
+          type: string
+          description: The updated date of the tier.
+          format: date-time
+          example: '2022-04-23T14:00:00Z'
+      additionalProperties: false
+    Charge:
+      type: object
+      properties:
+        href:
+          type: string
+          nullable: true
+        relation:
+          type: string
+          nullable: true
+        method:
+          type: string
+          default: GET
+          nullable: true
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          nullable: true
+        id:
+          type: string
+          description: Unique identifier of the usage charge.
+          nullable: true
+          example: b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2
+        externalId:
+          type: string
+          description: The external usage charge id.
+          nullable: true
+        externalAdjustmentId:
+          type: string
+          description: The external adjustment id created when the usage charge is canceled.
+          nullable: true
+        expenseId:
+          type: string
+          description: The Billing expense id created for the usage charge.
+          nullable: true
+        subscriptionId:
+          type: string
+          description: The subscription id.
+          nullable: true
+        accountId:
+          type: string
+          description: The Smokeball firm id.
+          nullable: true
+        userId:
+          type: string
+          description: The user id that created the usage charge.
+          nullable: true
+        productId:
+          type: string
+          description: The product id.
+          nullable: true
+        priceId:
+          type: string
+          description: The internal price id.
+          nullable: true
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+          description: Caller-supplied metadata associated with the charge.
+          nullable: true
+        matterId:
+          type: string
+          description: The matter id associated with the usage charge.
+          nullable: true
+        description:
+          type: string
+          description: The description associated with the usage charge.
+          nullable: true
+        supplierTransactionId:
+          type: string
+          description: The supplier transaction id associated with the usage charge.
+          nullable: true
+        supplierTransactionAmount:
+          type: number
+          description: The supplier transaction amount associated with the usage charge.
+          format: double
+          nullable: true
+        amount:
+          type: number
+          description: The total customer billing amount for the usage charge, in dollars.
+          format: double
+          nullable: true
+        quantity:
+          type: integer
+          description: The usage quantity recorded for the charge.
+          format: int64
+          example: 1
+        status:
+          type: string
+          description: "The usage charge status.\r\n\r\n* Pending\r\n\r\n* Succeeded\r\n\r\n* Failed\r\n\r\n* Canceled\r\n\r\n* Refunded"
+        failureReason:
+          type: string
+          description: The reason the usage charge failed.
+          nullable: true
+        createdDate:
+          type: string
+          description: The created date of the usage charge.
+          format: date-time
+          example: '2022-04-23T14:00:00Z'
+        updatedDate:
+          type: string
+          description: The updated date of the usage charge.
+          format: date-time
+          example: '2022-04-23T14:00:00Z'
+        occurredDate:
+          type: string
+          description: The date the usage occurred.
+          format: date-time
+          example: '2022-04-23T14:00:00Z'
+      additionalProperties: false
+    SubscriptionAudit:
+      type: object
+      properties:
+        type:
+          type: string
+          description: "The subscription change type.\r\n\r\n* Updated\r\n\r\n* AddOnAdded\r\n\r\n* AddOnRemoved\r\n\r\n* PromotionApplied\r\n\r\n* PromotionRemoved\r\n\r\n* Canceled\r\n\r\n* Resumed\r\n\r\n* PaymentMethodAdded\r\n\r\n* PaymentMethodRemoved\r\n\r\n* PaymentMethodSetAsDefault\r\n\r\n* QuantityUpdated\r\n\r\n* Created\r\n\r\n* Advanced"
+        accountId:
+          type: string
+          description: The Smokeball firm id.
+          nullable: true
+        subscriptionId:
+          type: string
+          description: The subscription id.
+          nullable: true
+        name:
+          type: string
+          description: Name of the field that was changed or the type of change that was made
+          nullable: true
+          example: '"TierId", "AddOnIds", "PromotionId", "PaymentMethodIds", "Interval", "Quantity"'
+        value:
+          type: string
+          description: The value of the change, which can be a string representation of the new value or a JSON object for complex changes.
+          nullable: true
+        timestamp:
+          type: string
+          description: The timestamp of the change.
+          format: date-time
+      additionalProperties: false
+  securitySchemes:
+    api-key:
+      type: apiKey
+      name: x-api-key
+      in: header
+    token:
+      type: apiKey
+      name: Authorization
+      in: header
+      x-amazon-apigateway-authtype: cognito_user_pools

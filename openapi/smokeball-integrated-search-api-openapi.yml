@@ -1,0 +1,56 @@
+openapi: 3.0.1
+info:
+  title: Smokeball Activity Codes Integrated Search API
+  version: '1.0'
+  description: REST API for integrating with Smokeball legal practice management software. Supports matters, contacts, documents, time entries, billing, trust accounting, staff, webhooks, and law firm workflows across US, AU, and UK regions. Uses OAuth 2.0 (client credentials) authentication.
+  contact:
+    name: Smokeball Developer Support
+    url: https://docs.smokeball.com/docs/api-docs/1e13a13124aee-introduction
+  x-api-id: smokeball
+  x-audience: external-public
+servers:
+- url: https://api.smokeball.com
+- url: https://api.smokeball.com.au
+- url: https://api.smokeball.co.uk
+- url: https://stagingapi.smokeball.com
+- url: https://stagingapi.smokeball.com.au
+- url: https://stagingapi.smokeball.co.uk
+security:
+- api-key: []
+  token: []
+tags:
+- name: Integrated Search
+paths:
+  /matters/{matterId}/integrated-search/mapping:
+    get:
+      tags:
+      - Integrated Search
+      summary: Get mapping
+      description: "Retrieves integrated search mapping data associated with the authenticated client.\r\n            \r\nUses the integrated search provider used by the firm (e.g. InfoTrack)."
+      operationId: GetMappingAsync
+      parameters:
+      - name: matterId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: When request is successful. Returns a 'Mapping' object.
+          content:
+            application/json:
+              schema: {}
+        '400':
+          description: When matter type could not be found for the supplied matter id.
+components:
+  securitySchemes:
+    api-key:
+      type: apiKey
+      name: x-api-key
+      in: header
+    token:
+      type: apiKey
+      name: Authorization
+      in: header
+      x-amazon-apigateway-authtype: cognito_user_pools
