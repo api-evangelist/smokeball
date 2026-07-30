@@ -5,7 +5,20 @@ description: Legal practice management software with a REST API for managing mat
   The API follows REST principles, accepts JSON, returns JSON, and supports OAuth
   2.0 authentication. Available in US, AU, and UK regions.
 type: Index
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: paid
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Paid · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/smokeball.png
 url: https://raw.githubusercontent.com/api-evangelist/smokeball/refs/heads/main/apis.yml
 created: '2026-06-13'
 modified: '2026-06-13'
@@ -21,42 +34,891 @@ tags:
   - Trust Accounting
   - Time Tracking
 apis:
-  - aid: smokeball:smokeball-api
-    name: Smokeball API
-    description: REST API for integrating with Smokeball legal practice management
-      software, supporting matters, contacts, documents, time entries, billing, trust
-      accounting, staff, webhooks, and law firm workflows across US, AU, and UK regions.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://docs.smokeball.com/docs/api-docs/1e13a13124aee-introduction
-    baseURL: https://api.smokeball.com
-    tags:
-      - Legal
-      - Matters
-      - Contacts
-      - Documents
-      - Billing
-      - Webhooks
-    properties:
-      - type: Documentation
-        url: https://docs.smokeball.com/docs/api-docs/1e13a13124aee-introduction
-      - type: Authentication
-        url: https://docs.smokeball.com/docs/api-docs/authentication
-      - type: RateLimits
-        url: https://smokeball.mintlify.app/docs/api-docs/vj4jovpoopdov-rate-limits
-      - type: GitHubOrg
-        url: https://github.com/smokeballdev
-      - type: GitHubRepository
-        url: https://github.com/smokeballdev/api-docs
-      - type: OpenAPI
-        url: https://docs.smokeball.com/openapi.json
-      - type: OpenAPI
-        url: openapi/smokeball-smokeball-api-openapi.yml
-      - type: JSONSchema
-        url: json-schema/smokeball-schemas.json
-      - type: JSONLDContext
-        url: json-ld/smokeball-context.jsonld
-      - type: Vocabulary
-        url: vocabulary/smokeball-vocabulary.yml
+- aid: smokeball:smokeball-activity-codes-api
+  name: Smokeball Activity Codes API
+  description: The Activity Codes API from Smokeball — 2 operation(s) for activity codes.
+  humanURL: https://docs.smokeball.com/docs/api-docs/1e13a13124aee-introduction
+  baseURL: https://api.smokeball.com
+  tags:
+  - Activity Codes
+  properties:
+  - type: OpenAPI
+    url: openapi/smokeball-activity-codes-api-openapi.yml
+  - type: Documentation
+    url: https://docs.smokeball.com/docs/api-docs/1e13a13124aee-introduction
+  - type: Authentication
+    url: https://docs.smokeball.com/docs/api-docs/authentication
+  - type: RateLimits
+    url: https://smokeball.mintlify.app/docs/api-docs/vj4jovpoopdov-rate-limits
+  - type: GitHubOrg
+    url: https://github.com/smokeballdev
+  - type: GitHubRepository
+    url: https://github.com/smokeballdev/api-docs
+  - type: JSONSchema
+    url: json-schema/smokeball-schemas.json
+  - type: JSONLDContext
+    url: json-ld/smokeball-context.jsonld
+  - type: Vocabulary
+    url: vocabulary/smokeball-vocabulary.yml
+- aid: smokeball:smokeball-authorization-api
+  name: Smokeball Authorization API
+  description: The Authorization API from Smokeball — 4 operation(s) for authorization.
+  humanURL: https://docs.smokeball.com/docs/api-docs/1e13a13124aee-introduction
+  baseURL: https://api.smokeball.com
+  tags:
+  - Authorization
+  properties:
+  - type: OpenAPI
+    url: openapi/smokeball-authorization-api-openapi.yml
+  - type: Documentation
+    url: https://docs.smokeball.com/docs/api-docs/1e13a13124aee-introduction
+  - type: Authentication
+    url: https://docs.smokeball.com/docs/api-docs/authentication
+  - type: RateLimits
+    url: https://smokeball.mintlify.app/docs/api-docs/vj4jovpoopdov-rate-limits
+  - type: GitHubOrg
+    url: https://github.com/smokeballdev
+  - type: GitHubRepository
+    url: https://github.com/smokeballdev/api-docs
+  - type: JSONSchema
+    url: json-schema/smokeball-schemas.json
+  - type: JSONLDContext
+    url: json-ld/smokeball-context.jsonld
+  - type: Vocabulary
+    url: vocabulary/smokeball-vocabulary.yml
+- aid: smokeball:smokeball-bank-accounts-api
+  name: Smokeball Bank Accounts API
+  description: The Bank Accounts API from Smokeball — 9 operation(s) for bank accounts.
+  humanURL: https://docs.smokeball.com/docs/api-docs/1e13a13124aee-introduction
+  baseURL: https://api.smokeball.com
+  tags:
+  - Bank Accounts
+  properties:
+  - type: OpenAPI
+    url: openapi/smokeball-bank-accounts-api-openapi.yml
+  - type: Documentation
+    url: https://docs.smokeball.com/docs/api-docs/1e13a13124aee-introduction
+  - type: Authentication
+    url: https://docs.smokeball.com/docs/api-docs/authentication
+  - type: RateLimits
+    url: https://smokeball.mintlify.app/docs/api-docs/vj4jovpoopdov-rate-limits
+  - type: GitHubOrg
+    url: https://github.com/smokeballdev
+  - type: GitHubRepository
+    url: https://github.com/smokeballdev/api-docs
+  - type: JSONSchema
+    url: json-schema/smokeball-schemas.json
+  - type: JSONLDContext
+    url: json-ld/smokeball-context.jsonld
+  - type: Vocabulary
+    url: vocabulary/smokeball-vocabulary.yml
+- aid: smokeball:smokeball-contacts-api
+  name: Smokeball Contacts API
+  description: The Contacts API from Smokeball — 6 operation(s) for contacts.
+  humanURL: https://docs.smokeball.com/docs/api-docs/1e13a13124aee-introduction
+  baseURL: https://api.smokeball.com
+  tags:
+  - Contacts
+  properties:
+  - type: OpenAPI
+    url: openapi/smokeball-contacts-api-openapi.yml
+  - type: Documentation
+    url: https://docs.smokeball.com/docs/api-docs/1e13a13124aee-introduction
+  - type: Authentication
+    url: https://docs.smokeball.com/docs/api-docs/authentication
+  - type: RateLimits
+    url: https://smokeball.mintlify.app/docs/api-docs/vj4jovpoopdov-rate-limits
+  - type: GitHubOrg
+    url: https://github.com/smokeballdev
+  - type: GitHubRepository
+    url: https://github.com/smokeballdev/api-docs
+  - type: JSONSchema
+    url: json-schema/smokeball-schemas.json
+  - type: JSONLDContext
+    url: json-ld/smokeball-context.jsonld
+  - type: Vocabulary
+    url: vocabulary/smokeball-vocabulary.yml
+- aid: smokeball:smokeball-events-api
+  name: Smokeball Events API
+  description: The Events API from Smokeball — 4 operation(s) for events.
+  humanURL: https://docs.smokeball.com/docs/api-docs/1e13a13124aee-introduction
+  baseURL: https://api.smokeball.com
+  tags:
+  - Events
+  properties:
+  - type: OpenAPI
+    url: openapi/smokeball-events-api-openapi.yml
+  - type: Documentation
+    url: https://docs.smokeball.com/docs/api-docs/1e13a13124aee-introduction
+  - type: Authentication
+    url: https://docs.smokeball.com/docs/api-docs/authentication
+  - type: RateLimits
+    url: https://smokeball.mintlify.app/docs/api-docs/vj4jovpoopdov-rate-limits
+  - type: GitHubOrg
+    url: https://github.com/smokeballdev
+  - type: GitHubRepository
+    url: https://github.com/smokeballdev/api-docs
+  - type: JSONSchema
+    url: json-schema/smokeball-schemas.json
+  - type: JSONLDContext
+    url: json-ld/smokeball-context.jsonld
+  - type: Vocabulary
+    url: vocabulary/smokeball-vocabulary.yml
+- aid: smokeball:smokeball-expenses-api
+  name: Smokeball Expenses API
+  description: The Expenses API from Smokeball — 2 operation(s) for expenses.
+  humanURL: https://docs.smokeball.com/docs/api-docs/1e13a13124aee-introduction
+  baseURL: https://api.smokeball.com
+  tags:
+  - Expenses
+  properties:
+  - type: OpenAPI
+    url: openapi/smokeball-expenses-api-openapi.yml
+  - type: Documentation
+    url: https://docs.smokeball.com/docs/api-docs/1e13a13124aee-introduction
+  - type: Authentication
+    url: https://docs.smokeball.com/docs/api-docs/authentication
+  - type: RateLimits
+    url: https://smokeball.mintlify.app/docs/api-docs/vj4jovpoopdov-rate-limits
+  - type: GitHubOrg
+    url: https://github.com/smokeballdev
+  - type: GitHubRepository
+    url: https://github.com/smokeballdev/api-docs
+  - type: JSONSchema
+    url: json-schema/smokeball-schemas.json
+  - type: JSONLDContext
+    url: json-ld/smokeball-context.jsonld
+  - type: Vocabulary
+    url: vocabulary/smokeball-vocabulary.yml
+- aid: smokeball:smokeball-fees-api
+  name: Smokeball Fees API
+  description: The Fees API from Smokeball — 2 operation(s) for fees.
+  humanURL: https://docs.smokeball.com/docs/api-docs/1e13a13124aee-introduction
+  baseURL: https://api.smokeball.com
+  tags:
+  - Fees
+  properties:
+  - type: OpenAPI
+    url: openapi/smokeball-fees-api-openapi.yml
+  - type: Documentation
+    url: https://docs.smokeball.com/docs/api-docs/1e13a13124aee-introduction
+  - type: Authentication
+    url: https://docs.smokeball.com/docs/api-docs/authentication
+  - type: RateLimits
+    url: https://smokeball.mintlify.app/docs/api-docs/vj4jovpoopdov-rate-limits
+  - type: GitHubOrg
+    url: https://github.com/smokeballdev
+  - type: GitHubRepository
+    url: https://github.com/smokeballdev/api-docs
+  - type: JSONSchema
+    url: json-schema/smokeball-schemas.json
+  - type: JSONLDContext
+    url: json-ld/smokeball-context.jsonld
+  - type: Vocabulary
+    url: vocabulary/smokeball-vocabulary.yml
+- aid: smokeball:smokeball-files-api
+  name: Smokeball Files API
+  description: The Files API from Smokeball — 8 operation(s) for files.
+  humanURL: https://docs.smokeball.com/docs/api-docs/1e13a13124aee-introduction
+  baseURL: https://api.smokeball.com
+  tags:
+  - Files
+  properties:
+  - type: OpenAPI
+    url: openapi/smokeball-files-api-openapi.yml
+  - type: Documentation
+    url: https://docs.smokeball.com/docs/api-docs/1e13a13124aee-introduction
+  - type: Authentication
+    url: https://docs.smokeball.com/docs/api-docs/authentication
+  - type: RateLimits
+    url: https://smokeball.mintlify.app/docs/api-docs/vj4jovpoopdov-rate-limits
+  - type: GitHubOrg
+    url: https://github.com/smokeballdev
+  - type: GitHubRepository
+    url: https://github.com/smokeballdev/api-docs
+  - type: JSONSchema
+    url: json-schema/smokeball-schemas.json
+  - type: JSONLDContext
+    url: json-ld/smokeball-context.jsonld
+  - type: Vocabulary
+    url: vocabulary/smokeball-vocabulary.yml
+- aid: smokeball:smokeball-firm-api
+  name: Smokeball Firm API
+  description: The Firm API from Smokeball — 3 operation(s) for firm.
+  humanURL: https://docs.smokeball.com/docs/api-docs/1e13a13124aee-introduction
+  baseURL: https://api.smokeball.com
+  tags:
+  - Firm
+  properties:
+  - type: OpenAPI
+    url: openapi/smokeball-firm-api-openapi.yml
+  - type: Documentation
+    url: https://docs.smokeball.com/docs/api-docs/1e13a13124aee-introduction
+  - type: Authentication
+    url: https://docs.smokeball.com/docs/api-docs/authentication
+  - type: RateLimits
+    url: https://smokeball.mintlify.app/docs/api-docs/vj4jovpoopdov-rate-limits
+  - type: GitHubOrg
+    url: https://github.com/smokeballdev
+  - type: GitHubRepository
+    url: https://github.com/smokeballdev/api-docs
+  - type: JSONSchema
+    url: json-schema/smokeball-schemas.json
+  - type: JSONLDContext
+    url: json-ld/smokeball-context.jsonld
+  - type: Vocabulary
+    url: vocabulary/smokeball-vocabulary.yml
+- aid: smokeball:smokeball-folders-api
+  name: Smokeball Folders API
+  description: The Folders API from Smokeball — 4 operation(s) for folders.
+  humanURL: https://docs.smokeball.com/docs/api-docs/1e13a13124aee-introduction
+  baseURL: https://api.smokeball.com
+  tags:
+  - Folders
+  properties:
+  - type: OpenAPI
+    url: openapi/smokeball-folders-api-openapi.yml
+  - type: Documentation
+    url: https://docs.smokeball.com/docs/api-docs/1e13a13124aee-introduction
+  - type: Authentication
+    url: https://docs.smokeball.com/docs/api-docs/authentication
+  - type: RateLimits
+    url: https://smokeball.mintlify.app/docs/api-docs/vj4jovpoopdov-rate-limits
+  - type: GitHubOrg
+    url: https://github.com/smokeballdev
+  - type: GitHubRepository
+    url: https://github.com/smokeballdev/api-docs
+  - type: JSONSchema
+    url: json-schema/smokeball-schemas.json
+  - type: JSONLDContext
+    url: json-ld/smokeball-context.jsonld
+  - type: Vocabulary
+    url: vocabulary/smokeball-vocabulary.yml
+- aid: smokeball:smokeball-intake-api
+  name: Smokeball Intake API
+  description: The Intake API from Smokeball — 3 operation(s) for intake.
+  humanURL: https://docs.smokeball.com/docs/api-docs/1e13a13124aee-introduction
+  baseURL: https://api.smokeball.com
+  tags:
+  - Intake
+  properties:
+  - type: OpenAPI
+    url: openapi/smokeball-intake-api-openapi.yml
+  - type: Documentation
+    url: https://docs.smokeball.com/docs/api-docs/1e13a13124aee-introduction
+  - type: Authentication
+    url: https://docs.smokeball.com/docs/api-docs/authentication
+  - type: RateLimits
+    url: https://smokeball.mintlify.app/docs/api-docs/vj4jovpoopdov-rate-limits
+  - type: GitHubOrg
+    url: https://github.com/smokeballdev
+  - type: GitHubRepository
+    url: https://github.com/smokeballdev/api-docs
+  - type: JSONSchema
+    url: json-schema/smokeball-schemas.json
+  - type: JSONLDContext
+    url: json-ld/smokeball-context.jsonld
+  - type: Vocabulary
+    url: vocabulary/smokeball-vocabulary.yml
+- aid: smokeball:smokeball-integrated-search-api
+  name: Smokeball Integrated Search API
+  description: The Integrated Search API from Smokeball — 1 operation(s) for integrated search.
+  humanURL: https://docs.smokeball.com/docs/api-docs/1e13a13124aee-introduction
+  baseURL: https://api.smokeball.com
+  tags:
+  - Integrated Search
+  properties:
+  - type: OpenAPI
+    url: openapi/smokeball-integrated-search-api-openapi.yml
+  - type: Documentation
+    url: https://docs.smokeball.com/docs/api-docs/1e13a13124aee-introduction
+  - type: Authentication
+    url: https://docs.smokeball.com/docs/api-docs/authentication
+  - type: RateLimits
+    url: https://smokeball.mintlify.app/docs/api-docs/vj4jovpoopdov-rate-limits
+  - type: GitHubOrg
+    url: https://github.com/smokeballdev
+  - type: GitHubRepository
+    url: https://github.com/smokeballdev/api-docs
+  - type: JSONSchema
+    url: json-schema/smokeball-schemas.json
+  - type: JSONLDContext
+    url: json-ld/smokeball-context.jsonld
+  - type: Vocabulary
+    url: vocabulary/smokeball-vocabulary.yml
+- aid: smokeball:smokeball-invoices-api
+  name: Smokeball Invoices API
+  description: The Invoices API from Smokeball — 3 operation(s) for invoices.
+  humanURL: https://docs.smokeball.com/docs/api-docs/1e13a13124aee-introduction
+  baseURL: https://api.smokeball.com
+  tags:
+  - Invoices
+  properties:
+  - type: OpenAPI
+    url: openapi/smokeball-invoices-api-openapi.yml
+  - type: Documentation
+    url: https://docs.smokeball.com/docs/api-docs/1e13a13124aee-introduction
+  - type: Authentication
+    url: https://docs.smokeball.com/docs/api-docs/authentication
+  - type: RateLimits
+    url: https://smokeball.mintlify.app/docs/api-docs/vj4jovpoopdov-rate-limits
+  - type: GitHubOrg
+    url: https://github.com/smokeballdev
+  - type: GitHubRepository
+    url: https://github.com/smokeballdev/api-docs
+  - type: JSONSchema
+    url: json-schema/smokeball-schemas.json
+  - type: JSONLDContext
+    url: json-ld/smokeball-context.jsonld
+  - type: Vocabulary
+    url: vocabulary/smokeball-vocabulary.yml
+- aid: smokeball:smokeball-layout-designs-api
+  name: Smokeball Layout Designs API
+  description: The Layout Designs API from Smokeball — 2 operation(s) for layout designs.
+  humanURL: https://docs.smokeball.com/docs/api-docs/1e13a13124aee-introduction
+  baseURL: https://api.smokeball.com
+  tags:
+  - Layout Designs
+  properties:
+  - type: OpenAPI
+    url: openapi/smokeball-layout-designs-api-openapi.yml
+  - type: Documentation
+    url: https://docs.smokeball.com/docs/api-docs/1e13a13124aee-introduction
+  - type: Authentication
+    url: https://docs.smokeball.com/docs/api-docs/authentication
+  - type: RateLimits
+    url: https://smokeball.mintlify.app/docs/api-docs/vj4jovpoopdov-rate-limits
+  - type: GitHubOrg
+    url: https://github.com/smokeballdev
+  - type: GitHubRepository
+    url: https://github.com/smokeballdev/api-docs
+  - type: JSONSchema
+    url: json-schema/smokeball-schemas.json
+  - type: JSONLDContext
+    url: json-ld/smokeball-context.jsonld
+  - type: Vocabulary
+    url: vocabulary/smokeball-vocabulary.yml
+- aid: smokeball:smokeball-layout-matter-items-api
+  name: Smokeball Layout Matter Items API
+  description: The Layout Matter Items API from Smokeball — 3 operation(s) for layout matter items.
+  humanURL: https://docs.smokeball.com/docs/api-docs/1e13a13124aee-introduction
+  baseURL: https://api.smokeball.com
+  tags:
+  - Layout Matter Items
+  properties:
+  - type: OpenAPI
+    url: openapi/smokeball-layout-matter-items-api-openapi.yml
+  - type: Documentation
+    url: https://docs.smokeball.com/docs/api-docs/1e13a13124aee-introduction
+  - type: Authentication
+    url: https://docs.smokeball.com/docs/api-docs/authentication
+  - type: RateLimits
+    url: https://smokeball.mintlify.app/docs/api-docs/vj4jovpoopdov-rate-limits
+  - type: GitHubOrg
+    url: https://github.com/smokeballdev
+  - type: GitHubRepository
+    url: https://github.com/smokeballdev/api-docs
+  - type: JSONSchema
+    url: json-schema/smokeball-schemas.json
+  - type: JSONLDContext
+    url: json-ld/smokeball-context.jsonld
+  - type: Vocabulary
+    url: vocabulary/smokeball-vocabulary.yml
+- aid: smokeball:smokeball-matter-items-api
+  name: Smokeball Matter Items API
+  description: The Matter Items API from Smokeball — 2 operation(s) for matter items.
+  humanURL: https://docs.smokeball.com/docs/api-docs/1e13a13124aee-introduction
+  baseURL: https://api.smokeball.com
+  tags:
+  - Matter Items
+  properties:
+  - type: OpenAPI
+    url: openapi/smokeball-matter-items-api-openapi.yml
+  - type: Documentation
+    url: https://docs.smokeball.com/docs/api-docs/1e13a13124aee-introduction
+  - type: Authentication
+    url: https://docs.smokeball.com/docs/api-docs/authentication
+  - type: RateLimits
+    url: https://smokeball.mintlify.app/docs/api-docs/vj4jovpoopdov-rate-limits
+  - type: GitHubOrg
+    url: https://github.com/smokeballdev
+  - type: GitHubRepository
+    url: https://github.com/smokeballdev/api-docs
+  - type: JSONSchema
+    url: json-schema/smokeball-schemas.json
+  - type: JSONLDContext
+    url: json-ld/smokeball-context.jsonld
+  - type: Vocabulary
+    url: vocabulary/smokeball-vocabulary.yml
+- aid: smokeball:smokeball-matter-types-api
+  name: Smokeball Matter Types API
+  description: The Matter Types API from Smokeball — 3 operation(s) for matter types.
+  humanURL: https://docs.smokeball.com/docs/api-docs/1e13a13124aee-introduction
+  baseURL: https://api.smokeball.com
+  tags:
+  - Matter Types
+  properties:
+  - type: OpenAPI
+    url: openapi/smokeball-matter-types-api-openapi.yml
+  - type: Documentation
+    url: https://docs.smokeball.com/docs/api-docs/1e13a13124aee-introduction
+  - type: Authentication
+    url: https://docs.smokeball.com/docs/api-docs/authentication
+  - type: RateLimits
+    url: https://smokeball.mintlify.app/docs/api-docs/vj4jovpoopdov-rate-limits
+  - type: GitHubOrg
+    url: https://github.com/smokeballdev
+  - type: GitHubRepository
+    url: https://github.com/smokeballdev/api-docs
+  - type: JSONSchema
+    url: json-schema/smokeball-schemas.json
+  - type: JSONLDContext
+    url: json-ld/smokeball-context.jsonld
+  - type: Vocabulary
+    url: vocabulary/smokeball-vocabulary.yml
+- aid: smokeball:smokeball-matters-api
+  name: Smokeball Matters API
+  description: The Matters API from Smokeball — 6 operation(s) for matters.
+  humanURL: https://docs.smokeball.com/docs/api-docs/1e13a13124aee-introduction
+  baseURL: https://api.smokeball.com
+  tags:
+  - Matters
+  properties:
+  - type: OpenAPI
+    url: openapi/smokeball-matters-api-openapi.yml
+  - type: Documentation
+    url: https://docs.smokeball.com/docs/api-docs/1e13a13124aee-introduction
+  - type: Authentication
+    url: https://docs.smokeball.com/docs/api-docs/authentication
+  - type: RateLimits
+    url: https://smokeball.mintlify.app/docs/api-docs/vj4jovpoopdov-rate-limits
+  - type: GitHubOrg
+    url: https://github.com/smokeballdev
+  - type: GitHubRepository
+    url: https://github.com/smokeballdev/api-docs
+  - type: JSONSchema
+    url: json-schema/smokeball-schemas.json
+  - type: JSONLDContext
+    url: json-ld/smokeball-context.jsonld
+  - type: Vocabulary
+    url: vocabulary/smokeball-vocabulary.yml
+- aid: smokeball:smokeball-memos-api
+  name: Smokeball Memos API
+  description: The Memos API from Smokeball — 2 operation(s) for memos.
+  humanURL: https://docs.smokeball.com/docs/api-docs/1e13a13124aee-introduction
+  baseURL: https://api.smokeball.com
+  tags:
+  - Memos
+  properties:
+  - type: OpenAPI
+    url: openapi/smokeball-memos-api-openapi.yml
+  - type: Documentation
+    url: https://docs.smokeball.com/docs/api-docs/1e13a13124aee-introduction
+  - type: Authentication
+    url: https://docs.smokeball.com/docs/api-docs/authentication
+  - type: RateLimits
+    url: https://smokeball.mintlify.app/docs/api-docs/vj4jovpoopdov-rate-limits
+  - type: GitHubOrg
+    url: https://github.com/smokeballdev
+  - type: GitHubRepository
+    url: https://github.com/smokeballdev/api-docs
+  - type: JSONSchema
+    url: json-schema/smokeball-schemas.json
+  - type: JSONLDContext
+    url: json-ld/smokeball-context.jsonld
+  - type: Vocabulary
+    url: vocabulary/smokeball-vocabulary.yml
+- aid: smokeball:smokeball-notifications-api
+  name: Smokeball Notifications API
+  description: The Notifications API from Smokeball — 2 operation(s) for notifications.
+  humanURL: https://docs.smokeball.com/docs/api-docs/1e13a13124aee-introduction
+  baseURL: https://api.smokeball.com
+  tags:
+  - Notifications
+  properties:
+  - type: OpenAPI
+    url: openapi/smokeball-notifications-api-openapi.yml
+  - type: Documentation
+    url: https://docs.smokeball.com/docs/api-docs/1e13a13124aee-introduction
+  - type: Authentication
+    url: https://docs.smokeball.com/docs/api-docs/authentication
+  - type: RateLimits
+    url: https://smokeball.mintlify.app/docs/api-docs/vj4jovpoopdov-rate-limits
+  - type: GitHubOrg
+    url: https://github.com/smokeballdev
+  - type: GitHubRepository
+    url: https://github.com/smokeballdev/api-docs
+  - type: JSONSchema
+    url: json-schema/smokeball-schemas.json
+  - type: JSONLDContext
+    url: json-ld/smokeball-context.jsonld
+  - type: Vocabulary
+    url: vocabulary/smokeball-vocabulary.yml
+- aid: smokeball:smokeball-plugins-api
+  name: Smokeball Plugins API
+  description: The Plugins API from Smokeball — 5 operation(s) for plugins.
+  humanURL: https://docs.smokeball.com/docs/api-docs/1e13a13124aee-introduction
+  baseURL: https://api.smokeball.com
+  tags:
+  - Plugins
+  properties:
+  - type: OpenAPI
+    url: openapi/smokeball-plugins-api-openapi.yml
+  - type: Documentation
+    url: https://docs.smokeball.com/docs/api-docs/1e13a13124aee-introduction
+  - type: Authentication
+    url: https://docs.smokeball.com/docs/api-docs/authentication
+  - type: RateLimits
+    url: https://smokeball.mintlify.app/docs/api-docs/vj4jovpoopdov-rate-limits
+  - type: GitHubOrg
+    url: https://github.com/smokeballdev
+  - type: GitHubRepository
+    url: https://github.com/smokeballdev/api-docs
+  - type: JSONSchema
+    url: json-schema/smokeball-schemas.json
+  - type: JSONLDContext
+    url: json-ld/smokeball-context.jsonld
+  - type: Vocabulary
+    url: vocabulary/smokeball-vocabulary.yml
+- aid: smokeball:smokeball-portal-api
+  name: Smokeball Portal API
+  description: The Portal API from Smokeball — 3 operation(s) for portal.
+  humanURL: https://docs.smokeball.com/docs/api-docs/1e13a13124aee-introduction
+  baseURL: https://api.smokeball.com
+  tags:
+  - Portal
+  properties:
+  - type: OpenAPI
+    url: openapi/smokeball-portal-api-openapi.yml
+  - type: Documentation
+    url: https://docs.smokeball.com/docs/api-docs/1e13a13124aee-introduction
+  - type: Authentication
+    url: https://docs.smokeball.com/docs/api-docs/authentication
+  - type: RateLimits
+    url: https://smokeball.mintlify.app/docs/api-docs/vj4jovpoopdov-rate-limits
+  - type: GitHubOrg
+    url: https://github.com/smokeballdev
+  - type: GitHubRepository
+    url: https://github.com/smokeballdev/api-docs
+  - type: JSONSchema
+    url: json-schema/smokeball-schemas.json
+  - type: JSONLDContext
+    url: json-ld/smokeball-context.jsonld
+  - type: Vocabulary
+    url: vocabulary/smokeball-vocabulary.yml
+- aid: smokeball:smokeball-referral-types-api
+  name: Smokeball Referral Types API
+  description: The Referral Types API from Smokeball — 2 operation(s) for referral types.
+  humanURL: https://docs.smokeball.com/docs/api-docs/1e13a13124aee-introduction
+  baseURL: https://api.smokeball.com
+  tags:
+  - Referral Types
+  properties:
+  - type: OpenAPI
+    url: openapi/smokeball-referral-types-api-openapi.yml
+  - type: Documentation
+    url: https://docs.smokeball.com/docs/api-docs/1e13a13124aee-introduction
+  - type: Authentication
+    url: https://docs.smokeball.com/docs/api-docs/authentication
+  - type: RateLimits
+    url: https://smokeball.mintlify.app/docs/api-docs/vj4jovpoopdov-rate-limits
+  - type: GitHubOrg
+    url: https://github.com/smokeballdev
+  - type: GitHubRepository
+    url: https://github.com/smokeballdev/api-docs
+  - type: JSONSchema
+    url: json-schema/smokeball-schemas.json
+  - type: JSONLDContext
+    url: json-ld/smokeball-context.jsonld
+  - type: Vocabulary
+    url: vocabulary/smokeball-vocabulary.yml
+- aid: smokeball:smokeball-relationships-api
+  name: Smokeball Relationships API
+  description: The Relationships API from Smokeball — 2 operation(s) for relationships.
+  humanURL: https://docs.smokeball.com/docs/api-docs/1e13a13124aee-introduction
+  baseURL: https://api.smokeball.com
+  tags:
+  - Relationships
+  properties:
+  - type: OpenAPI
+    url: openapi/smokeball-relationships-api-openapi.yml
+  - type: Documentation
+    url: https://docs.smokeball.com/docs/api-docs/1e13a13124aee-introduction
+  - type: Authentication
+    url: https://docs.smokeball.com/docs/api-docs/authentication
+  - type: RateLimits
+    url: https://smokeball.mintlify.app/docs/api-docs/vj4jovpoopdov-rate-limits
+  - type: GitHubOrg
+    url: https://github.com/smokeballdev
+  - type: GitHubRepository
+    url: https://github.com/smokeballdev/api-docs
+  - type: JSONSchema
+    url: json-schema/smokeball-schemas.json
+  - type: JSONLDContext
+    url: json-ld/smokeball-context.jsonld
+  - type: Vocabulary
+    url: vocabulary/smokeball-vocabulary.yml
+- aid: smokeball:smokeball-roles-api
+  name: Smokeball Roles API
+  description: The Roles API from Smokeball — 2 operation(s) for roles.
+  humanURL: https://docs.smokeball.com/docs/api-docs/1e13a13124aee-introduction
+  baseURL: https://api.smokeball.com
+  tags:
+  - Roles
+  properties:
+  - type: OpenAPI
+    url: openapi/smokeball-roles-api-openapi.yml
+  - type: Documentation
+    url: https://docs.smokeball.com/docs/api-docs/1e13a13124aee-introduction
+  - type: Authentication
+    url: https://docs.smokeball.com/docs/api-docs/authentication
+  - type: RateLimits
+    url: https://smokeball.mintlify.app/docs/api-docs/vj4jovpoopdov-rate-limits
+  - type: GitHubOrg
+    url: https://github.com/smokeballdev
+  - type: GitHubRepository
+    url: https://github.com/smokeballdev/api-docs
+  - type: JSONSchema
+    url: json-schema/smokeball-schemas.json
+  - type: JSONLDContext
+    url: json-ld/smokeball-context.jsonld
+  - type: Vocabulary
+    url: vocabulary/smokeball-vocabulary.yml
+- aid: smokeball:smokeball-search-api
+  name: Smokeball Search API
+  description: The Search API from Smokeball — 1 operation(s) for search.
+  humanURL: https://docs.smokeball.com/docs/api-docs/1e13a13124aee-introduction
+  baseURL: https://api.smokeball.com
+  tags:
+  - Search
+  properties:
+  - type: OpenAPI
+    url: openapi/smokeball-search-api-openapi.yml
+  - type: Documentation
+    url: https://docs.smokeball.com/docs/api-docs/1e13a13124aee-introduction
+  - type: Authentication
+    url: https://docs.smokeball.com/docs/api-docs/authentication
+  - type: RateLimits
+    url: https://smokeball.mintlify.app/docs/api-docs/vj4jovpoopdov-rate-limits
+  - type: GitHubOrg
+    url: https://github.com/smokeballdev
+  - type: GitHubRepository
+    url: https://github.com/smokeballdev/api-docs
+  - type: JSONSchema
+    url: json-schema/smokeball-schemas.json
+  - type: JSONLDContext
+    url: json-ld/smokeball-context.jsonld
+  - type: Vocabulary
+    url: vocabulary/smokeball-vocabulary.yml
+- aid: smokeball:smokeball-staff-api
+  name: Smokeball Staff API
+  description: The Staff API from Smokeball — 2 operation(s) for staff.
+  humanURL: https://docs.smokeball.com/docs/api-docs/1e13a13124aee-introduction
+  baseURL: https://api.smokeball.com
+  tags:
+  - Staff
+  properties:
+  - type: OpenAPI
+    url: openapi/smokeball-staff-api-openapi.yml
+  - type: Documentation
+    url: https://docs.smokeball.com/docs/api-docs/1e13a13124aee-introduction
+  - type: Authentication
+    url: https://docs.smokeball.com/docs/api-docs/authentication
+  - type: RateLimits
+    url: https://smokeball.mintlify.app/docs/api-docs/vj4jovpoopdov-rate-limits
+  - type: GitHubOrg
+    url: https://github.com/smokeballdev
+  - type: GitHubRepository
+    url: https://github.com/smokeballdev/api-docs
+  - type: JSONSchema
+    url: json-schema/smokeball-schemas.json
+  - type: JSONLDContext
+    url: json-ld/smokeball-context.jsonld
+  - type: Vocabulary
+    url: vocabulary/smokeball-vocabulary.yml
+- aid: smokeball:smokeball-stages-api
+  name: Smokeball Stages API
+  description: The Stages API from Smokeball — 5 operation(s) for stages.
+  humanURL: https://docs.smokeball.com/docs/api-docs/1e13a13124aee-introduction
+  baseURL: https://api.smokeball.com
+  tags:
+  - Stages
+  properties:
+  - type: OpenAPI
+    url: openapi/smokeball-stages-api-openapi.yml
+  - type: Documentation
+    url: https://docs.smokeball.com/docs/api-docs/1e13a13124aee-introduction
+  - type: Authentication
+    url: https://docs.smokeball.com/docs/api-docs/authentication
+  - type: RateLimits
+    url: https://smokeball.mintlify.app/docs/api-docs/vj4jovpoopdov-rate-limits
+  - type: GitHubOrg
+    url: https://github.com/smokeballdev
+  - type: GitHubRepository
+    url: https://github.com/smokeballdev/api-docs
+  - type: JSONSchema
+    url: json-schema/smokeball-schemas.json
+  - type: JSONLDContext
+    url: json-ld/smokeball-context.jsonld
+  - type: Vocabulary
+    url: vocabulary/smokeball-vocabulary.yml
+- aid: smokeball:smokeball-subscription-payments-api
+  name: Smokeball Subscription Payments API
+  description: The Subscription Payments API from Smokeball — 4 operation(s) for subscription payments.
+  humanURL: https://docs.smokeball.com/docs/api-docs/1e13a13124aee-introduction
+  baseURL: https://api.smokeball.com
+  tags:
+  - Subscription Payments
+  properties:
+  - type: OpenAPI
+    url: openapi/smokeball-subscription-payments-api-openapi.yml
+  - type: Documentation
+    url: https://docs.smokeball.com/docs/api-docs/1e13a13124aee-introduction
+  - type: Authentication
+    url: https://docs.smokeball.com/docs/api-docs/authentication
+  - type: RateLimits
+    url: https://smokeball.mintlify.app/docs/api-docs/vj4jovpoopdov-rate-limits
+  - type: GitHubOrg
+    url: https://github.com/smokeballdev
+  - type: GitHubRepository
+    url: https://github.com/smokeballdev/api-docs
+  - type: JSONSchema
+    url: json-schema/smokeball-schemas.json
+  - type: JSONLDContext
+    url: json-ld/smokeball-context.jsonld
+  - type: Vocabulary
+    url: vocabulary/smokeball-vocabulary.yml
+- aid: smokeball:smokeball-subscription-promotions-api
+  name: Smokeball Subscription Promotions API
+  description: >-
+    The Subscription Promotions API from Smokeball — 3 operation(s) for subscription promotions.
+  humanURL: https://docs.smokeball.com/docs/api-docs/1e13a13124aee-introduction
+  baseURL: https://api.smokeball.com
+  tags:
+  - Subscription Promotions
+  properties:
+  - type: OpenAPI
+    url: openapi/smokeball-subscription-promotions-api-openapi.yml
+  - type: Documentation
+    url: https://docs.smokeball.com/docs/api-docs/1e13a13124aee-introduction
+  - type: Authentication
+    url: https://docs.smokeball.com/docs/api-docs/authentication
+  - type: RateLimits
+    url: https://smokeball.mintlify.app/docs/api-docs/vj4jovpoopdov-rate-limits
+  - type: GitHubOrg
+    url: https://github.com/smokeballdev
+  - type: GitHubRepository
+    url: https://github.com/smokeballdev/api-docs
+  - type: JSONSchema
+    url: json-schema/smokeball-schemas.json
+  - type: JSONLDContext
+    url: json-ld/smokeball-context.jsonld
+  - type: Vocabulary
+    url: vocabulary/smokeball-vocabulary.yml
+- aid: smokeball:smokeball-subscriptions-api
+  name: Smokeball Subscriptions API
+  description: The Subscriptions API from Smokeball — 26 operation(s) for subscriptions.
+  humanURL: https://docs.smokeball.com/docs/api-docs/1e13a13124aee-introduction
+  baseURL: https://api.smokeball.com
+  tags:
+  - Subscriptions
+  properties:
+  - type: OpenAPI
+    url: openapi/smokeball-subscriptions-api-openapi.yml
+  - type: Documentation
+    url: https://docs.smokeball.com/docs/api-docs/1e13a13124aee-introduction
+  - type: Authentication
+    url: https://docs.smokeball.com/docs/api-docs/authentication
+  - type: RateLimits
+    url: https://smokeball.mintlify.app/docs/api-docs/vj4jovpoopdov-rate-limits
+  - type: GitHubOrg
+    url: https://github.com/smokeballdev
+  - type: GitHubRepository
+    url: https://github.com/smokeballdev/api-docs
+  - type: JSONSchema
+    url: json-schema/smokeball-schemas.json
+  - type: JSONLDContext
+    url: json-ld/smokeball-context.jsonld
+  - type: Vocabulary
+    url: vocabulary/smokeball-vocabulary.yml
+- aid: smokeball:smokeball-tasks-api
+  name: Smokeball Tasks API
+  description: The Tasks API from Smokeball — 6 operation(s) for tasks.
+  humanURL: https://docs.smokeball.com/docs/api-docs/1e13a13124aee-introduction
+  baseURL: https://api.smokeball.com
+  tags:
+  - Tasks
+  properties:
+  - type: OpenAPI
+    url: openapi/smokeball-tasks-api-openapi.yml
+  - type: Documentation
+    url: https://docs.smokeball.com/docs/api-docs/1e13a13124aee-introduction
+  - type: Authentication
+    url: https://docs.smokeball.com/docs/api-docs/authentication
+  - type: RateLimits
+    url: https://smokeball.mintlify.app/docs/api-docs/vj4jovpoopdov-rate-limits
+  - type: GitHubOrg
+    url: https://github.com/smokeballdev
+  - type: GitHubRepository
+    url: https://github.com/smokeballdev/api-docs
+  - type: JSONSchema
+    url: json-schema/smokeball-schemas.json
+  - type: JSONLDContext
+    url: json-ld/smokeball-context.jsonld
+  - type: Vocabulary
+    url: vocabulary/smokeball-vocabulary.yml
+- aid: smokeball:smokeball-users-api
+  name: Smokeball Users API
+  description: The Users API from Smokeball — 3 operation(s) for users.
+  humanURL: https://docs.smokeball.com/docs/api-docs/1e13a13124aee-introduction
+  baseURL: https://api.smokeball.com
+  tags:
+  - Users
+  properties:
+  - type: OpenAPI
+    url: openapi/smokeball-users-api-openapi.yml
+  - type: Documentation
+    url: https://docs.smokeball.com/docs/api-docs/1e13a13124aee-introduction
+  - type: Authentication
+    url: https://docs.smokeball.com/docs/api-docs/authentication
+  - type: RateLimits
+    url: https://smokeball.mintlify.app/docs/api-docs/vj4jovpoopdov-rate-limits
+  - type: GitHubOrg
+    url: https://github.com/smokeballdev
+  - type: GitHubRepository
+    url: https://github.com/smokeballdev/api-docs
+  - type: JSONSchema
+    url: json-schema/smokeball-schemas.json
+  - type: JSONLDContext
+    url: json-ld/smokeball-context.jsonld
+  - type: Vocabulary
+    url: vocabulary/smokeball-vocabulary.yml
+- aid: smokeball:smokeball-webhooks-api
+  name: Smokeball Webhooks API
+  description: The Webhooks API from Smokeball — 4 operation(s) for webhooks.
+  humanURL: https://docs.smokeball.com/docs/api-docs/1e13a13124aee-introduction
+  baseURL: https://api.smokeball.com
+  tags:
+  - Webhooks
+  properties:
+  - type: OpenAPI
+    url: openapi/smokeball-webhooks-api-openapi.yml
+  - type: Documentation
+    url: https://docs.smokeball.com/docs/api-docs/1e13a13124aee-introduction
+  - type: Authentication
+    url: https://docs.smokeball.com/docs/api-docs/authentication
+  - type: RateLimits
+    url: https://smokeball.mintlify.app/docs/api-docs/vj4jovpoopdov-rate-limits
+  - type: GitHubOrg
+    url: https://github.com/smokeballdev
+  - type: GitHubRepository
+    url: https://github.com/smokeballdev/api-docs
+  - type: JSONSchema
+    url: json-schema/smokeball-schemas.json
+  - type: JSONLDContext
+    url: json-ld/smokeball-context.jsonld
+  - type: Vocabulary
+    url: vocabulary/smokeball-vocabulary.yml
 common:
   - type: AgenticAccess
     url: agentic-access/smokeball-agentic-access.yml
