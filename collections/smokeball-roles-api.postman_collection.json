@@ -1,0 +1,1037 @@
+{
+  "item": [
+    {
+      "id": "de4e08dc-a8bf-425e-a2bb-8ccc65eb67ce",
+      "name": "Roles",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8d424213-428a-4bd2-a031-3395f9a6cd9f",
+          "name": "Get roles on a matter",
+          "request": {
+            "name": "Get roles on a matter",
+            "description": {
+              "content": "Returns associated roles for a specified matter.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "matters",
+                ":matterId",
+                "roles"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "matterId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c8bce7d8-f5fc-41b1-94f5-135f1c567569",
+              "name": "When request is successful. Returns a 'MatterRoles' object.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "matters",
+                    ":matterId",
+                    "roles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "matterId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"href\": \"string\",\n  \"relation\": \"string\",\n  \"method\": \"GET\",\n  \"self\": {\n    \"id\": \"string\",\n    \"href\": \"string\",\n    \"relation\": \"string\",\n    \"method\": \"GET\"\n  },\n  \"versionId\": \"832e778f-83df-454a-b344-768a862a7e67\",\n  \"matterId\": \"b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2\",\n  \"roles\": [\n    {\n      \"href\": \"string\",\n      \"relation\": \"string\",\n      \"method\": \"GET\",\n      \"self\": {\n        \"id\": \"string\",\n        \"href\": \"string\",\n        \"relation\": \"string\",\n        \"method\": \"GET\"\n      },\n      \"id\": \"009f778f-83df-454a-b344-768a862a7e55\",\n      \"name\": \"Client\",\n      \"contact\": {\n        \"id\": \"string\",\n        \"href\": \"string\",\n        \"relation\": \"string\",\n        \"method\": \"GET\"\n      },\n      \"roleDescription\": \"Head Honcho\",\n      \"description\": \"The person for whom I am working\",\n      \"representatives\": [\n        {\n          \"id\": \"string\",\n          \"href\": \"string\",\n          \"relation\": \"string\",\n          \"method\": \"GET\"\n        },\n        {\n          \"id\": \"string\",\n          \"href\": \"string\",\n          \"relation\": \"string\",\n          \"method\": \"GET\"\n        }\n      ],\n      \"relationships\": [\n        {\n          \"href\": \"string\",\n          \"relation\": \"string\",\n          \"method\": \"GET\",\n          \"self\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"href\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"relation\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"method\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"id\": \"009f778f-83df-454a-b344-768a862a7e55\",\n          \"name\": \"Solicitor\",\n          \"contact\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"href\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"relation\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"method\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"representatives\": [\n            {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"href\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"relation\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"method\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"href\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"relation\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"method\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        },\n        {\n          \"href\": \"string\",\n          \"relation\": \"string\",\n          \"method\": \"GET\",\n          \"self\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"href\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"relation\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"method\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"id\": \"009f778f-83df-454a-b344-768a862a7e55\",\n          \"name\": \"Solicitor\",\n          \"contact\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"href\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"relation\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"method\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"representatives\": [\n            {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"href\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"relation\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"method\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"href\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"relation\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"method\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        }\n      ],\n      \"isClient\": false,\n      \"isOtherSide\": false\n    },\n    {\n      \"href\": \"string\",\n      \"relation\": \"string\",\n      \"method\": \"GET\",\n      \"self\": {\n        \"id\": \"string\",\n        \"href\": \"string\",\n        \"relation\": \"string\",\n        \"method\": \"GET\"\n      },\n      \"id\": \"009f778f-83df-454a-b344-768a862a7e55\",\n      \"name\": \"Client\",\n      \"contact\": {\n        \"id\": \"string\",\n        \"href\": \"string\",\n        \"relation\": \"string\",\n        \"method\": \"GET\"\n      },\n      \"roleDescription\": \"Head Honcho\",\n      \"description\": \"The person for whom I am working\",\n      \"representatives\": [\n        {\n          \"id\": \"string\",\n          \"href\": \"string\",\n          \"relation\": \"string\",\n          \"method\": \"GET\"\n        },\n        {\n          \"id\": \"string\",\n          \"href\": \"string\",\n          \"relation\": \"string\",\n          \"method\": \"GET\"\n        }\n      ],\n      \"relationships\": [\n        {\n          \"href\": \"string\",\n          \"relation\": \"string\",\n          \"method\": \"GET\",\n          \"self\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"href\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"relation\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"method\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"id\": \"009f778f-83df-454a-b344-768a862a7e55\",\n          \"name\": \"Solicitor\",\n          \"contact\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"href\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"relation\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"method\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"representatives\": [\n            {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"href\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"relation\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"method\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"href\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"relation\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"method\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        },\n        {\n          \"href\": \"string\",\n          \"relation\": \"string\",\n          \"method\": \"GET\",\n          \"self\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"href\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"relation\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"method\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"id\": \"009f778f-83df-454a-b344-768a862a7e55\",\n          \"name\": \"Solicitor\",\n          \"contact\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"href\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"relation\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"method\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"representatives\": [\n            {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"href\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"relation\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"method\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"href\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"relation\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"method\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        }\n      ],\n      \"isClient\": false,\n      \"isOtherSide\": false\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "32b24df5-0ece-4917-a8f3-5570705dcff6",
+              "name": "When the specified matter does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "matters",
+                    ":matterId",
+                    "roles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "matterId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 8749,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a9fcde2d-9c70-4692-ab55-4e04d741a996",
+          "name": "Add role to a matter",
+          "request": {
+            "name": "Add role to a matter",
+            "description": {
+              "content": "Appends a new role in the specified matter.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "matters",
+                ":matterId",
+                "roles"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "matterId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "key": "Version",
+                "value": "<integer>",
+                "description": ""
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"displayName\": \"<string>\",\n  \"description\": \"<string>\",\n  \"contactId\": \"<string>\",\n  \"representativeIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"isMatterItemRequired\": \"<boolean>\",\n  \"relationships\": [\n    {\n      \"name\": \"<string>\",\n      \"displayName\": \"<string>\",\n      \"contactId\": \"<string>\",\n      \"representativeIds\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"isMatterItemRequired\": \"<boolean>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"displayName\": \"<string>\",\n      \"contactId\": \"<string>\",\n      \"representativeIds\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"isMatterItemRequired\": \"<boolean>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c4d72074-8893-4eda-ad62-5bf41e4585d4",
+              "name": "When request is accepted. Returns a hypermedia 'Link' object of the role to be created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "matters",
+                    ":matterId",
+                    "roles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "matterId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "Version",
+                    "value": "<integer>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Provider\",\n  \"displayName\": \"Medical Provider\",\n  \"description\": \"Client\",\n  \"contactId\": \"c85d28cb-a760-4627-aa59-0a853c2e65ed\",\n  \"representativeIds\": [\n    \"776e778f-83df-454a-b344-768a862a7e67\"\n  ],\n  \"isMatterItemRequired\": \"<boolean>\",\n  \"relationships\": [\n    {\n      \"name\": \"Provider\",\n      \"displayName\": \"Medical Provider\",\n      \"contactId\": \"c85d28cb-a760-4627-aa59-0a853c2e65ed\",\n      \"representativeIds\": [\n        \"776e778f-83df-454a-b344-768a862a7e67\"\n      ],\n      \"isMatterItemRequired\": \"<boolean>\"\n    },\n    {\n      \"name\": \"Provider\",\n      \"displayName\": \"Medical Provider\",\n      \"contactId\": \"c85d28cb-a760-4627-aa59-0a853c2e65ed\",\n      \"representativeIds\": [\n        \"776e778f-83df-454a-b344-768a862a7e67\"\n      ],\n      \"isMatterItemRequired\": \"<boolean>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"href\": \"string\",\n  \"relation\": \"string\",\n  \"method\": \"GET\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e218b9f9-004e-4b39-9778-6b246a2a2361",
+              "name": "When an invalid role is provided for the specified matter.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "matters",
+                    ":matterId",
+                    "roles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "matterId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "Version",
+                    "value": "<integer>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Provider\",\n  \"displayName\": \"Medical Provider\",\n  \"description\": \"Client\",\n  \"contactId\": \"c85d28cb-a760-4627-aa59-0a853c2e65ed\",\n  \"representativeIds\": [\n    \"776e778f-83df-454a-b344-768a862a7e67\"\n  ],\n  \"isMatterItemRequired\": \"<boolean>\",\n  \"relationships\": [\n    {\n      \"name\": \"Provider\",\n      \"displayName\": \"Medical Provider\",\n      \"contactId\": \"c85d28cb-a760-4627-aa59-0a853c2e65ed\",\n      \"representativeIds\": [\n        \"776e778f-83df-454a-b344-768a862a7e67\"\n      ],\n      \"isMatterItemRequired\": \"<boolean>\"\n    },\n    {\n      \"name\": \"Provider\",\n      \"displayName\": \"Medical Provider\",\n      \"contactId\": \"c85d28cb-a760-4627-aa59-0a853c2e65ed\",\n      \"representativeIds\": [\n        \"776e778f-83df-454a-b344-768a862a7e67\"\n      ],\n      \"isMatterItemRequired\": \"<boolean>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 8749,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3679ffac-1c9b-45e1-a9f5-d19c176ce74d",
+              "name": "When the specified matter does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "matters",
+                    ":matterId",
+                    "roles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "matterId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "Version",
+                    "value": "<integer>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Provider\",\n  \"displayName\": \"Medical Provider\",\n  \"description\": \"Client\",\n  \"contactId\": \"c85d28cb-a760-4627-aa59-0a853c2e65ed\",\n  \"representativeIds\": [\n    \"776e778f-83df-454a-b344-768a862a7e67\"\n  ],\n  \"isMatterItemRequired\": \"<boolean>\",\n  \"relationships\": [\n    {\n      \"name\": \"Provider\",\n      \"displayName\": \"Medical Provider\",\n      \"contactId\": \"c85d28cb-a760-4627-aa59-0a853c2e65ed\",\n      \"representativeIds\": [\n        \"776e778f-83df-454a-b344-768a862a7e67\"\n      ],\n      \"isMatterItemRequired\": \"<boolean>\"\n    },\n    {\n      \"name\": \"Provider\",\n      \"displayName\": \"Medical Provider\",\n      \"contactId\": \"c85d28cb-a760-4627-aa59-0a853c2e65ed\",\n      \"representativeIds\": [\n        \"776e778f-83df-454a-b344-768a862a7e67\"\n      ],\n      \"isMatterItemRequired\": \"<boolean>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 8749,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "752eff01-3ab0-4518-893a-ee38e0425876",
+          "name": "Get role on a matter",
+          "request": {
+            "name": "Get role on a matter",
+            "description": {
+              "content": "Returns a role in a specified matter.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "matters",
+                ":matterId",
+                "roles",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "matterId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b1df3bb2-eb83-473c-b083-98cf7e441cb3",
+              "name": "When request is successful. Returns a 'Role' object.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "matters",
+                    ":matterId",
+                    "roles",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "matterId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"href\": \"string\",\n  \"relation\": \"string\",\n  \"method\": \"GET\",\n  \"self\": {\n    \"id\": \"string\",\n    \"href\": \"string\",\n    \"relation\": \"string\",\n    \"method\": \"GET\"\n  },\n  \"id\": \"009f778f-83df-454a-b344-768a862a7e55\",\n  \"name\": \"Client\",\n  \"contact\": {\n    \"id\": \"string\",\n    \"href\": \"string\",\n    \"relation\": \"string\",\n    \"method\": \"GET\"\n  },\n  \"roleDescription\": \"Head Honcho\",\n  \"description\": \"The person for whom I am working\",\n  \"representatives\": [\n    {\n      \"id\": \"string\",\n      \"href\": \"string\",\n      \"relation\": \"string\",\n      \"method\": \"GET\"\n    },\n    {\n      \"id\": \"string\",\n      \"href\": \"string\",\n      \"relation\": \"string\",\n      \"method\": \"GET\"\n    }\n  ],\n  \"relationships\": [\n    {\n      \"href\": \"string\",\n      \"relation\": \"string\",\n      \"method\": \"GET\",\n      \"self\": {\n        \"id\": \"string\",\n        \"href\": \"string\",\n        \"relation\": \"string\",\n        \"method\": \"GET\"\n      },\n      \"id\": \"009f778f-83df-454a-b344-768a862a7e55\",\n      \"name\": \"Solicitor\",\n      \"contact\": {\n        \"id\": \"string\",\n        \"href\": \"string\",\n        \"relation\": \"string\",\n        \"method\": \"GET\"\n      },\n      \"representatives\": [\n        {\n          \"id\": \"string\",\n          \"href\": \"string\",\n          \"relation\": \"string\",\n          \"method\": \"GET\"\n        },\n        {\n          \"id\": \"string\",\n          \"href\": \"string\",\n          \"relation\": \"string\",\n          \"method\": \"GET\"\n        }\n      ]\n    },\n    {\n      \"href\": \"string\",\n      \"relation\": \"string\",\n      \"method\": \"GET\",\n      \"self\": {\n        \"id\": \"string\",\n        \"href\": \"string\",\n        \"relation\": \"string\",\n        \"method\": \"GET\"\n      },\n      \"id\": \"009f778f-83df-454a-b344-768a862a7e55\",\n      \"name\": \"Solicitor\",\n      \"contact\": {\n        \"id\": \"string\",\n        \"href\": \"string\",\n        \"relation\": \"string\",\n        \"method\": \"GET\"\n      },\n      \"representatives\": [\n        {\n          \"id\": \"string\",\n          \"href\": \"string\",\n          \"relation\": \"string\",\n          \"method\": \"GET\"\n        },\n        {\n          \"id\": \"string\",\n          \"href\": \"string\",\n          \"relation\": \"string\",\n          \"method\": \"GET\"\n        }\n      ]\n    }\n  ],\n  \"isClient\": false,\n  \"isOtherSide\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fdaba8e8-9586-401d-9e55-f3b05b80f878",
+              "name": "When the specified matter does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "matters",
+                    ":matterId",
+                    "roles",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "matterId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 8749,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f434fb11-7e0d-49e1-bf74-00923cbf748a",
+          "name": "Update role on a matter",
+          "request": {
+            "name": "Update role on a matter",
+            "description": {
+              "content": "Updates a specified role on a matter.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "matters",
+                ":matterId",
+                "roles",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "matterId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"displayName\": \"<string>\",\n  \"description\": \"<string>\",\n  \"contactId\": \"<string>\",\n  \"representativeIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"isMatterItemRequired\": \"<boolean>\",\n  \"relationships\": [\n    {\n      \"name\": \"<string>\",\n      \"displayName\": \"<string>\",\n      \"contactId\": \"<string>\",\n      \"representativeIds\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"isMatterItemRequired\": \"<boolean>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"displayName\": \"<string>\",\n      \"contactId\": \"<string>\",\n      \"representativeIds\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"isMatterItemRequired\": \"<boolean>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a73a53d6-5931-4c12-a642-bed3152a34bf",
+              "name": "When request is accepted. Returns a hypermedia 'Link' object of the role to be updated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "matters",
+                    ":matterId",
+                    "roles",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "matterId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Provider\",\n  \"displayName\": \"Medical Provider\",\n  \"description\": \"Client\",\n  \"contactId\": \"c85d28cb-a760-4627-aa59-0a853c2e65ed\",\n  \"representativeIds\": [\n    \"776e778f-83df-454a-b344-768a862a7e67\"\n  ],\n  \"isMatterItemRequired\": \"<boolean>\",\n  \"relationships\": [\n    {\n      \"name\": \"Provider\",\n      \"displayName\": \"Medical Provider\",\n      \"contactId\": \"c85d28cb-a760-4627-aa59-0a853c2e65ed\",\n      \"representativeIds\": [\n        \"776e778f-83df-454a-b344-768a862a7e67\"\n      ],\n      \"isMatterItemRequired\": \"<boolean>\"\n    },\n    {\n      \"name\": \"Provider\",\n      \"displayName\": \"Medical Provider\",\n      \"contactId\": \"c85d28cb-a760-4627-aa59-0a853c2e65ed\",\n      \"representativeIds\": [\n        \"776e778f-83df-454a-b344-768a862a7e67\"\n      ],\n      \"isMatterItemRequired\": \"<boolean>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"href\": \"string\",\n  \"relation\": \"string\",\n  \"method\": \"GET\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a4eb917f-ce5f-46b8-a40e-c1af2e4e9513",
+              "name": "When the specified matter does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "matters",
+                    ":matterId",
+                    "roles",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "matterId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Provider\",\n  \"displayName\": \"Medical Provider\",\n  \"description\": \"Client\",\n  \"contactId\": \"c85d28cb-a760-4627-aa59-0a853c2e65ed\",\n  \"representativeIds\": [\n    \"776e778f-83df-454a-b344-768a862a7e67\"\n  ],\n  \"isMatterItemRequired\": \"<boolean>\",\n  \"relationships\": [\n    {\n      \"name\": \"Provider\",\n      \"displayName\": \"Medical Provider\",\n      \"contactId\": \"c85d28cb-a760-4627-aa59-0a853c2e65ed\",\n      \"representativeIds\": [\n        \"776e778f-83df-454a-b344-768a862a7e67\"\n      ],\n      \"isMatterItemRequired\": \"<boolean>\"\n    },\n    {\n      \"name\": \"Provider\",\n      \"displayName\": \"Medical Provider\",\n      \"contactId\": \"c85d28cb-a760-4627-aa59-0a853c2e65ed\",\n      \"representativeIds\": [\n        \"776e778f-83df-454a-b344-768a862a7e67\"\n      ],\n      \"isMatterItemRequired\": \"<boolean>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 8749,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0c7243bf-373c-4ec6-ae97-54ddbf82b17b",
+          "name": "Remove role from a matter",
+          "request": {
+            "name": "Remove role from a matter",
+            "description": {
+              "content": "Removes a specified role from a matter.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "matters",
+                ":matterId",
+                "roles",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "matterId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "key": "Version",
+                "value": "<integer>",
+                "description": ""
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "59062947-bb73-4dc7-9e45-01d859da2bbe",
+              "name": "When request is accepted. Returns a hypermedia 'Link' object of the role to be deleted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "matters",
+                    ":matterId",
+                    "roles",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "matterId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "Version",
+                    "value": "<integer>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"href\": \"string\",\n  \"relation\": \"string\",\n  \"method\": \"GET\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f7326e61-9e4c-4bb7-9088-e7c58af49713",
+              "name": "When matter does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "matters",
+                    ":matterId",
+                    "roles",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "matterId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "Version",
+                    "value": "<integer>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 8749,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.smokeball.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "246ccf9c-9743-4e95-87b3-899f816266f7",
+    "name": "Smokeball Activity Codes Roles API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for integrating with Smokeball legal practice management software. Supports matters, contacts, documents, time entries, billing, trust accounting, staff, webhooks, and law firm workflows across US, AU, and UK regions. Uses OAuth 2.0 (client credentials) authentication.\n\nContact Support:\n Name: Smokeball Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

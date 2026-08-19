@@ -1,0 +1,232 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Smokeball Activity Codes Folders API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-api-key",
+      "value": "{{x-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Folders",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get folders/files under root folder",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.smokeball.com/matters/:matterId/documents/folders",
+            "params": [
+              {
+                "name": "matterId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "Offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "Limit",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns a list of sub folders and files under the root folder of a matter."
+        },
+        {
+          "info": {
+            "name": "Create a folder",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.smokeball.com/matters/:matterId/documents/folders",
+            "params": [
+              {
+                "name": "matterId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new folder under the specified matter."
+        },
+        {
+          "info": {
+            "name": "Get folders/files under a folder",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.smokeball.com/matters/:matterId/documents/folders/:folderId",
+            "params": [
+              {
+                "name": "matterId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "folderId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "Offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "Limit",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns a list of sub folders and files under a specified folder of a matter."
+        },
+        {
+          "info": {
+            "name": "Update a folder",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.smokeball.com/matters/:matterId/documents/folders/:folderId",
+            "params": [
+              {
+                "name": "matterId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "folderId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a folder belonging to the specified matter."
+        },
+        {
+          "info": {
+            "name": "Patch a folder",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.smokeball.com/matters/:matterId/documents/folders/:folderId",
+            "params": [
+              {
+                "name": "matterId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "folderId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a folder belonging to the specified matter."
+        },
+        {
+          "info": {
+            "name": "Delete a folder",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.smokeball.com/matters/:matterId/documents/folders/:folderId",
+            "params": [
+              {
+                "name": "matterId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "folderId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deletes a folder belonging to the specified matter."
+        },
+        {
+          "info": {
+            "name": "Get folder path hierarchy",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.smokeball.com/matters/:matterId/documents/folders/:folderId/path",
+            "params": [
+              {
+                "name": "matterId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "folderId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the full folder hierarchy (path) as a collection ordered from the root folder down to the supplied folder.\r\n\r\nThe root folder is not included in the response."
+        },
+        {
+          "info": {
+            "name": "Get folder history on a matter",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.smokeball.com/matters/:matterId/documents/folders/:folderId/history",
+            "params": [
+              {
+                "name": "matterId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "folderId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns a list of history entries for the specified folder."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

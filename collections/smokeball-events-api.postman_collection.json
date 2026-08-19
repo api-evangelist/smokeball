@@ -1,0 +1,1775 @@
+{
+  "item": [
+    {
+      "id": "37bde6f5-a77c-41b6-ae93-abfbf94205e4",
+      "name": "Events",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "6c4d198e-21ad-4b01-8d06-6404afad37ec",
+          "name": "Get events",
+          "request": {
+            "name": "Get events",
+            "description": {
+              "content": "Returns a list of events.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "events"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "Offset",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "Limit",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "UpdatedSince",
+                  "value": "<string>",
+                  "description": "Filter by events updated since a specified time.\r\nSupported date formats are ISO YYYY-MM-DDThh:mm:ss or .net ticks representation of the UTC datetime."
+                },
+                {
+                  "disabled": false,
+                  "key": "MatterId",
+                  "value": "<string>",
+                  "description": "Filter by events assigned to a specific MatterId."
+                },
+                {
+                  "disabled": false,
+                  "key": "ExcludeDeletedEvents",
+                  "value": "<boolean>",
+                  "description": "Filter out any events that have been deleted, default: false"
+                },
+                {
+                  "disabled": false,
+                  "key": "From",
+                  "value": "<dateTime>",
+                  "description": "Filter events from a specified UTC date and time.\r\nDefaults to the UTC datetime of the request.\r\nDates should be provided in ISO format YYYY-MM-DDThh:mm:ss."
+                },
+                {
+                  "disabled": false,
+                  "key": "To",
+                  "value": "<dateTime>",
+                  "description": "Filter events to a specified UTC date and time.\r\nIf no datetime is specified all future events will be returned.\r\nDates should be provided in ISO format YYYY-MM-DDThh:mm:ss."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "bcd2dd57-7102-4ba6-8b6d-1993c6610ba3",
+              "name": "When request is successful. Returns a paged collection of 'Event' objects.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "Offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "Limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "UpdatedSince",
+                      "value": "2000-01-01T20:00:00 OR 630823536000000000"
+                    },
+                    {
+                      "key": "MatterId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ExcludeDeletedEvents",
+                      "value": "false"
+                    },
+                    {
+                      "key": "From",
+                      "value": "2000-01-01T20:00:00"
+                    },
+                    {
+                      "key": "To",
+                      "value": "2000-01-01T20:00:00"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"href\": \"string\",\n  \"relation\": \"string\",\n  \"method\": \"GET\",\n  \"self\": {\n    \"id\": \"string\",\n    \"href\": \"string\",\n    \"relation\": \"string\",\n    \"method\": \"GET\"\n  },\n  \"value\": [\n    {\n      \"href\": \"string\",\n      \"relation\": \"string\",\n      \"method\": \"GET\",\n      \"self\": {\n        \"id\": \"string\",\n        \"href\": \"string\",\n        \"relation\": \"string\",\n        \"method\": \"GET\"\n      },\n      \"id\": \"b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2\",\n      \"matter\": {\n        \"id\": \"string\",\n        \"href\": \"string\",\n        \"relation\": \"string\",\n        \"method\": \"GET\"\n      },\n      \"attendees\": [\n        {\n          \"id\": \"string\",\n          \"href\": \"string\",\n          \"relation\": \"string\",\n          \"method\": \"GET\"\n        },\n        {\n          \"id\": \"string\",\n          \"href\": \"string\",\n          \"relation\": \"string\",\n          \"method\": \"GET\"\n        }\n      ],\n      \"externalAttendees\": [\n        {\n          \"id\": \"string\",\n          \"href\": \"string\",\n          \"relation\": \"string\",\n          \"method\": \"GET\"\n        },\n        {\n          \"id\": \"string\",\n          \"href\": \"string\",\n          \"relation\": \"string\",\n          \"method\": \"GET\"\n        }\n      ],\n      \"eventType\": \"DeletedOccurrence\",\n      \"type\": \"Normal\",\n      \"subject\": \"Subject\",\n      \"description\": \"Description\",\n      \"location\": \"Location\",\n      \"allDay\": false,\n      \"nonBillable\": false,\n      \"startTime\": \"2000-01-01T20:00:00\",\n      \"endTime\": \"2000-01-01T20:00:00\",\n      \"timeZone\": \"Australia/Sydney\",\n      \"lastUpdated\": \"2000-01-01T20:00:00\",\n      \"additionalData\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\",\n        \"key_2\": \"string\"\n      },\n      \"isDeleted\": false\n    },\n    {\n      \"href\": \"string\",\n      \"relation\": \"string\",\n      \"method\": \"GET\",\n      \"self\": {\n        \"id\": \"string\",\n        \"href\": \"string\",\n        \"relation\": \"string\",\n        \"method\": \"GET\"\n      },\n      \"id\": \"b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2\",\n      \"matter\": {\n        \"id\": \"string\",\n        \"href\": \"string\",\n        \"relation\": \"string\",\n        \"method\": \"GET\"\n      },\n      \"attendees\": [\n        {\n          \"id\": \"string\",\n          \"href\": \"string\",\n          \"relation\": \"string\",\n          \"method\": \"GET\"\n        },\n        {\n          \"id\": \"string\",\n          \"href\": \"string\",\n          \"relation\": \"string\",\n          \"method\": \"GET\"\n        }\n      ],\n      \"externalAttendees\": [\n        {\n          \"id\": \"string\",\n          \"href\": \"string\",\n          \"relation\": \"string\",\n          \"method\": \"GET\"\n        },\n        {\n          \"id\": \"string\",\n          \"href\": \"string\",\n          \"relation\": \"string\",\n          \"method\": \"GET\"\n        }\n      ],\n      \"eventType\": \"Occurrence\",\n      \"type\": \"Normal\",\n      \"subject\": \"Subject\",\n      \"description\": \"Description\",\n      \"location\": \"Location\",\n      \"allDay\": false,\n      \"nonBillable\": false,\n      \"startTime\": \"2000-01-01T20:00:00\",\n      \"endTime\": \"2000-01-01T20:00:00\",\n      \"timeZone\": \"Australia/Sydney\",\n      \"lastUpdated\": \"2000-01-01T20:00:00\",\n      \"additionalData\": {\n        \"key_0\": \"string\"\n      },\n      \"isDeleted\": false\n    }\n  ],\n  \"offset\": 8890,\n  \"limit\": 9398,\n  \"size\": 3609,\n  \"first\": {\n    \"id\": \"string\",\n    \"href\": \"string\",\n    \"relation\": \"string\",\n    \"method\": \"GET\"\n  },\n  \"previous\": {\n    \"id\": \"string\",\n    \"href\": \"string\",\n    \"relation\": \"string\",\n    \"method\": \"GET\"\n  },\n  \"next\": {\n    \"id\": \"string\",\n    \"href\": \"string\",\n    \"relation\": \"string\",\n    \"method\": \"GET\"\n  },\n  \"last\": {\n    \"id\": \"string\",\n    \"href\": \"string\",\n    \"relation\": \"string\",\n    \"method\": \"GET\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d682351e-73c7-43ab-906a-ecd2d2b4a689",
+          "name": "Create event",
+          "request": {
+            "name": "Create event",
+            "description": {
+              "content": "Create new event.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "events"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"matterId\": \"<string>\",\n  \"subject\": \"<string>\",\n  \"description\": \"<string>\",\n  \"location\": \"<string>\",\n  \"allDay\": \"<boolean>\",\n  \"nonBillable\": \"<boolean>\",\n  \"type\": \"<string>\",\n  \"eventType\": \"<string>\",\n  \"attendees\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"externalAttendees\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"startTime\": \"<dateTime>\",\n  \"endTime\": \"<dateTime>\",\n  \"timeZone\": \"<string>\",\n  \"additionalData\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "829e736a-f5e3-4396-8c5d-ebe72c940b42",
+              "name": "When request is accepted. Returns a hypermedia 'Link' object of the event to be created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"matterId\": \"b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2\",\n  \"subject\": \"Subject\",\n  \"description\": \"Description\",\n  \"location\": \"Location\",\n  \"allDay\": false,\n  \"nonBillable\": false,\n  \"type\": \"Normal\",\n  \"eventType\": \"<string>\",\n  \"attendees\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"externalAttendees\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"startTime\": \"2000-01-01T20:00:00\",\n  \"endTime\": \"2000-01-01T20:00:00\",\n  \"timeZone\": \"Australia/Sydney\",\n  \"additionalData\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"href\": \"string\",\n  \"relation\": \"string\",\n  \"method\": \"GET\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a1f47727-830b-4121-a6d4-a7b5acf27cd3",
+          "name": "Get an event",
+          "request": {
+            "name": "Get an event",
+            "description": {
+              "content": "Retrieves a specified event.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "events",
+                ":eventId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "eventId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "87745df9-765d-4e63-b9d0-aa2c37c08a9c",
+              "name": "When request is successful. Returns an 'Event' object.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "events",
+                    ":eventId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "eventId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"href\": \"string\",\n  \"relation\": \"string\",\n  \"method\": \"GET\",\n  \"self\": {\n    \"id\": \"string\",\n    \"href\": \"string\",\n    \"relation\": \"string\",\n    \"method\": \"GET\"\n  },\n  \"id\": \"b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2\",\n  \"matter\": {\n    \"id\": \"string\",\n    \"href\": \"string\",\n    \"relation\": \"string\",\n    \"method\": \"GET\"\n  },\n  \"attendees\": [\n    {\n      \"id\": \"string\",\n      \"href\": \"string\",\n      \"relation\": \"string\",\n      \"method\": \"GET\"\n    },\n    {\n      \"id\": \"string\",\n      \"href\": \"string\",\n      \"relation\": \"string\",\n      \"method\": \"GET\"\n    }\n  ],\n  \"externalAttendees\": [\n    {\n      \"id\": \"string\",\n      \"href\": \"string\",\n      \"relation\": \"string\",\n      \"method\": \"GET\"\n    },\n    {\n      \"id\": \"string\",\n      \"href\": \"string\",\n      \"relation\": \"string\",\n      \"method\": \"GET\"\n    }\n  ],\n  \"eventType\": \"<string>\",\n  \"type\": \"Normal\",\n  \"subject\": \"Subject\",\n  \"description\": \"Description\",\n  \"location\": \"Location\",\n  \"allDay\": false,\n  \"nonBillable\": false,\n  \"startTime\": \"2000-01-01T20:00:00\",\n  \"endTime\": \"2000-01-01T20:00:00\",\n  \"timeZone\": \"Australia/Sydney\",\n  \"lastUpdated\": \"2000-01-01T20:00:00\",\n  \"additionalData\": {\n    \"key_0\": \"string\"\n  },\n  \"isDeleted\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "080d91e1-bdf3-494f-b3dd-dd660e43e7bd",
+              "name": "When the authenticated account does not access to the event.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "events",
+                    ":eventId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "eventId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 8880,\n  \"detail\": \"string\",\n  \"instance\": \"string\",\n  \"key_0\": {},\n  \"key_1\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "da08633f-c437-4766-aa49-fe3bed57a847",
+              "name": "When event with specified id does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "events",
+                    ":eventId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "eventId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 8880,\n  \"detail\": \"string\",\n  \"instance\": \"string\",\n  \"key_0\": {},\n  \"key_1\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3d7a0775-ab73-4de6-8d1e-ba03e83fbd22",
+          "name": "Update event",
+          "request": {
+            "name": "Update event",
+            "description": {
+              "content": "Updates event details.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "events",
+                ":eventId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "eventId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"matterId\": \"<string>\",\n  \"subject\": \"<string>\",\n  \"description\": \"<string>\",\n  \"location\": \"<string>\",\n  \"allDay\": \"<boolean>\",\n  \"nonBillable\": \"<boolean>\",\n  \"type\": \"<string>\",\n  \"eventType\": \"<string>\",\n  \"attendees\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"externalAttendees\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"startTime\": \"<dateTime>\",\n  \"endTime\": \"<dateTime>\",\n  \"timeZone\": \"<string>\",\n  \"additionalData\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e1a2858f-7dbe-4082-b4b8-a610d51fb3ac",
+              "name": "When request is accepted. Returns a hypermedia 'Link' object of the event to be updated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "events",
+                    ":eventId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "eventId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"matterId\": \"b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2\",\n  \"subject\": \"Subject\",\n  \"description\": \"Description\",\n  \"location\": \"Location\",\n  \"allDay\": false,\n  \"nonBillable\": false,\n  \"type\": \"Normal\",\n  \"eventType\": \"<string>\",\n  \"attendees\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"externalAttendees\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"startTime\": \"2000-01-01T20:00:00\",\n  \"endTime\": \"2000-01-01T20:00:00\",\n  \"timeZone\": \"Australia/Sydney\",\n  \"additionalData\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"href\": \"string\",\n  \"relation\": \"string\",\n  \"method\": \"GET\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ca185d09-a97b-4ae3-a6f8-1b6c997a07b9",
+              "name": "When event does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "events",
+                    ":eventId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "eventId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"matterId\": \"b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2\",\n  \"subject\": \"Subject\",\n  \"description\": \"Description\",\n  \"location\": \"Location\",\n  \"allDay\": false,\n  \"nonBillable\": false,\n  \"type\": \"Normal\",\n  \"eventType\": \"<string>\",\n  \"attendees\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"externalAttendees\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"startTime\": \"2000-01-01T20:00:00\",\n  \"endTime\": \"2000-01-01T20:00:00\",\n  \"timeZone\": \"Australia/Sydney\",\n  \"additionalData\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 8880,\n  \"detail\": \"string\",\n  \"instance\": \"string\",\n  \"key_0\": {},\n  \"key_1\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "63a19a90-5b21-4aba-8935-429bdcaf66cc",
+          "name": "Delete event",
+          "request": {
+            "name": "Delete event",
+            "description": {
+              "content": "Deletes a specified event.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "events",
+                ":eventId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "eventId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9c7b1766-a9b8-46f1-9251-f5f88fdb8030",
+              "name": "When request is accepted. Returns a hypermedia 'Link' object of the event to be deleted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "events",
+                    ":eventId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "eventId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"href\": \"string\",\n  \"relation\": \"string\",\n  \"method\": \"GET\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4f9132a9-98e6-40a8-992a-4d277e8532dc",
+              "name": "When 'Event' does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "events",
+                    ":eventId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "eventId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 8880,\n  \"detail\": \"string\",\n  \"instance\": \"string\",\n  \"key_0\": {},\n  \"key_1\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9d896705-b17c-4234-9d6e-49b0f16ec302",
+          "name": "Gets reminders for an event",
+          "request": {
+            "name": "Gets reminders for an event",
+            "description": {
+              "content": "Returns the collection of reminders for an event",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "events",
+                ":eventId",
+                "reminders"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "eventId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d1abd8e8-a2df-4139-9718-86290cdef1dd",
+              "name": "When request is successful. Returns the collection of reminders.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "events",
+                    ":eventId",
+                    "reminders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "eventId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"offset\": 4262,\n    \"offsetTypeId\": 3979,\n    \"isAllDayReminder\": false,\n    \"userIds\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  {\n    \"offset\": 6476,\n    \"offsetTypeId\": 4620,\n    \"isAllDayReminder\": true,\n    \"userIds\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "31871310-0ee6-4094-87a6-c25e1e3b5f19",
+              "name": "When the authenticated account does not have access to the event.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "events",
+                    ":eventId",
+                    "reminders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "eventId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 8880,\n  \"detail\": \"string\",\n  \"instance\": \"string\",\n  \"key_0\": {},\n  \"key_1\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "82d92741-eaa3-4710-b3fc-1b0b0a6bddfa",
+              "name": "When event with specified id does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "events",
+                    ":eventId",
+                    "reminders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "eventId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 8880,\n  \"detail\": \"string\",\n  \"instance\": \"string\",\n  \"key_0\": {},\n  \"key_1\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "06470801-29a8-4ccb-b883-8e18337d67ce",
+          "name": "Create reminder for an event",
+          "request": {
+            "name": "Create reminder for an event",
+            "description": {
+              "content": "Creates a new reminder for an event.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "events",
+                ":eventId",
+                "reminders"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "eventId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"offset\": \"<integer>\",\n  \"offsetTypeId\": \"<integer>\",\n  \"isAllDayReminder\": \"<boolean>\",\n  \"userIds\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c53a42bd-3a86-4527-98a7-678a533e3317",
+              "name": "When request is accepted. Returns a 'Link' object.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "events",
+                    ":eventId",
+                    "reminders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "eventId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"offset\": \"<integer>\",\n  \"offsetTypeId\": \"<integer>\",\n  \"isAllDayReminder\": \"<boolean>\",\n  \"userIds\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"href\": \"string\",\n  \"relation\": \"string\",\n  \"method\": \"GET\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4187845b-7aff-44fd-acb7-8bcf6153f62d",
+              "name": "When the authenticated account does not have access to the event.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "events",
+                    ":eventId",
+                    "reminders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "eventId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"offset\": \"<integer>\",\n  \"offsetTypeId\": \"<integer>\",\n  \"isAllDayReminder\": \"<boolean>\",\n  \"userIds\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 8880,\n  \"detail\": \"string\",\n  \"instance\": \"string\",\n  \"key_0\": {},\n  \"key_1\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e7a658df-53ec-447b-a6bf-c23375b0febe",
+              "name": "When event with specified id does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "events",
+                    ":eventId",
+                    "reminders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "eventId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"offset\": \"<integer>\",\n  \"offsetTypeId\": \"<integer>\",\n  \"isAllDayReminder\": \"<boolean>\",\n  \"userIds\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 8880,\n  \"detail\": \"string\",\n  \"instance\": \"string\",\n  \"key_0\": {},\n  \"key_1\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3c85a2f7-08a0-4ff8-abc7-906b5ff5e439",
+          "name": "Update a reminder for an event",
+          "request": {
+            "name": "Update a reminder for an event",
+            "description": {
+              "content": "Updates an existing reminder for an event.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "events",
+                ":eventId",
+                "reminders",
+                ":reminderId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "eventId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "reminderId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"offset\": \"<integer>\",\n  \"offsetTypeId\": \"<integer>\",\n  \"isAllDayReminder\": \"<boolean>\",\n  \"userIds\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "59d39a0f-db67-4744-850d-93c8e95223a5",
+              "name": "When request is accepted. Returns a 'Link' object.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "events",
+                    ":eventId",
+                    "reminders",
+                    ":reminderId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "eventId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "reminderId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"offset\": \"<integer>\",\n  \"offsetTypeId\": \"<integer>\",\n  \"isAllDayReminder\": \"<boolean>\",\n  \"userIds\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"href\": \"string\",\n  \"relation\": \"string\",\n  \"method\": \"GET\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7ef4cc35-8398-4036-916a-a6d862431ecd",
+              "name": "When the authenticated account does not have access to the event.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "events",
+                    ":eventId",
+                    "reminders",
+                    ":reminderId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "eventId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "reminderId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"offset\": \"<integer>\",\n  \"offsetTypeId\": \"<integer>\",\n  \"isAllDayReminder\": \"<boolean>\",\n  \"userIds\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 8880,\n  \"detail\": \"string\",\n  \"instance\": \"string\",\n  \"key_0\": {},\n  \"key_1\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1a298524-ec2c-48e3-8f9b-5dbd4fe028e0",
+              "name": "When event with specified id does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "events",
+                    ":eventId",
+                    "reminders",
+                    ":reminderId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "eventId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "reminderId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"offset\": \"<integer>\",\n  \"offsetTypeId\": \"<integer>\",\n  \"isAllDayReminder\": \"<boolean>\",\n  \"userIds\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 8880,\n  \"detail\": \"string\",\n  \"instance\": \"string\",\n  \"key_0\": {},\n  \"key_1\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0aa4db00-25c1-47d2-8926-c0d566196611",
+          "name": "Delete reminder for an event",
+          "request": {
+            "name": "Delete reminder for an event",
+            "description": {
+              "content": "Deletes a specified event reminder.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "events",
+                ":eventId",
+                "reminders",
+                ":reminderId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "eventId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "reminderId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a72d2f81-f045-496b-b7c6-78cf73a655c1",
+              "name": "When request is accepted. Returns a 'Link' object.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "events",
+                    ":eventId",
+                    "reminders",
+                    ":reminderId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "eventId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "reminderId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"href\": \"string\",\n  \"relation\": \"string\",\n  \"method\": \"GET\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cb94afea-a9ea-45d0-ad63-ac85d12c128d",
+              "name": "When the authenticated account does not have access to the event.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "events",
+                    ":eventId",
+                    "reminders",
+                    ":reminderId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "eventId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "reminderId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 8880,\n  \"detail\": \"string\",\n  \"instance\": \"string\",\n  \"key_0\": {},\n  \"key_1\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1901a645-9c02-4486-ae6d-776c7bf25a74",
+              "name": "When event with specified id does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "events",
+                    ":eventId",
+                    "reminders",
+                    ":reminderId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "eventId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "reminderId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 8880,\n  \"detail\": \"string\",\n  \"instance\": \"string\",\n  \"key_0\": {},\n  \"key_1\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.smokeball.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "d2f9ec03-ad5b-41f7-9360-b302ba54a352",
+    "name": "Smokeball Activity Codes Events API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for integrating with Smokeball legal practice management software. Supports matters, contacts, documents, time entries, billing, trust accounting, staff, webhooks, and law firm workflows across US, AU, and UK regions. Uses OAuth 2.0 (client credentials) authentication.\n\nContact Support:\n Name: Smokeball Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

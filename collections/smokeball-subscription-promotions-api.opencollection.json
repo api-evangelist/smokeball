@@ -1,0 +1,117 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Smokeball Activity Codes Subscription Promotions API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-api-key",
+      "value": "{{x-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Subscription Promotions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get all promotions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.smokeball.com/subscriptions/promotions",
+            "params": [
+              {
+                "name": "Offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "Limit",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns all available promotions with their eligibility criteria and benefits."
+        },
+        {
+          "info": {
+            "name": "Get promotion",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.smokeball.com/subscriptions/promotions/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieves detailed information for a specific promotion."
+        },
+        {
+          "info": {
+            "name": "Apply promotion to subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.smokeball.com/subscriptions/:subscriptionId/promotions/:id",
+            "params": [
+              {
+                "name": "subscriptionId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the subscription"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The identifier of the promotion to apply"
+              }
+            ]
+          },
+          "docs": "Applies a promotion to a subscription.\r\n\r\nImportant considerations:\r\n* Some promotions may have redemption limits per subscription\r\n* Some promotions may have duration limits\r\n* Signup promotions cannot be applied to an existing subscription\r\n* Trial promotions are tied to a single tier or add-on"
+        },
+        {
+          "info": {
+            "name": "Remove promotion from subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.smokeball.com/subscriptions/:subscriptionId/promotions/:id",
+            "params": [
+              {
+                "name": "subscriptionId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the subscription"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The identifier of the promotion to remove"
+              }
+            ]
+          },
+          "docs": "Removes a promotion from a subscription."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

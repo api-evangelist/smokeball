@@ -1,0 +1,1522 @@
+{
+  "item": [
+    {
+      "id": "0d5ec12b-6457-4c38-b0c7-94628b9dfec1",
+      "name": "Authorization",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a9911343-d9c9-4088-a59b-4fecaf16c6c4",
+          "name": "Get authorization groups",
+          "request": {
+            "name": "Get authorization groups",
+            "description": {
+              "content": "Retrieves auhorization groups for the firm associated with the authenticated client.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "groups"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8ca0d69d-074f-407e-b6e1-d2bdaf6b3cdb",
+              "name": "When request is successful. Returns a list of authorization 'Group' objects.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "groups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"href\": \"string\",\n  \"relation\": \"string\",\n  \"method\": \"GET\",\n  \"self\": {\n    \"id\": \"string\",\n    \"href\": \"string\",\n    \"relation\": \"string\",\n    \"method\": \"GET\"\n  },\n  \"value\": [\n    {\n      \"href\": \"string\",\n      \"relation\": \"string\",\n      \"method\": \"GET\",\n      \"self\": {\n        \"id\": \"string\",\n        \"href\": \"string\",\n        \"relation\": \"string\",\n        \"method\": \"GET\"\n      },\n      \"id\": \"ed028979-5b64-4f63-82ef-2deef728d852\",\n      \"name\": \"Administrators\",\n      \"principalIds\": [\n        \"2595a645-94a2-46be-a60d-8410851a9671\",\n        \"2595a645-94a2-46be-a60d-8410851a9671\"\n      ],\n      \"isDeleted\": false\n    },\n    {\n      \"href\": \"string\",\n      \"relation\": \"string\",\n      \"method\": \"GET\",\n      \"self\": {\n        \"id\": \"string\",\n        \"href\": \"string\",\n        \"relation\": \"string\",\n        \"method\": \"GET\"\n      },\n      \"id\": \"ed028979-5b64-4f63-82ef-2deef728d852\",\n      \"name\": \"Administrators\",\n      \"principalIds\": [\n        \"2595a645-94a2-46be-a60d-8410851a9671\",\n        \"2595a645-94a2-46be-a60d-8410851a9671\"\n      ],\n      \"isDeleted\": false\n    }\n  ],\n  \"offset\": 341,\n  \"limit\": 8468,\n  \"size\": 8621,\n  \"first\": {\n    \"id\": \"string\",\n    \"href\": \"string\",\n    \"relation\": \"string\",\n    \"method\": \"GET\"\n  },\n  \"previous\": {\n    \"id\": \"string\",\n    \"href\": \"string\",\n    \"relation\": \"string\",\n    \"method\": \"GET\"\n  },\n  \"next\": {\n    \"id\": \"string\",\n    \"href\": \"string\",\n    \"relation\": \"string\",\n    \"method\": \"GET\"\n  },\n  \"last\": {\n    \"id\": \"string\",\n    \"href\": \"string\",\n    \"relation\": \"string\",\n    \"method\": \"GET\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "528dd1ca-7d99-4e1f-a268-a4e124c03f35",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "groups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 3321,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ad689c33-eadf-444b-ab0c-4e8af3ec8182",
+          "name": "Create an authorization group",
+          "request": {
+            "name": "Create an authorization group",
+            "description": {
+              "content": "Creates an authorization group.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "groups"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"principalIds\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d681252c-ac81-4c09-9815-70bb4b66081f",
+              "name": "When request is accepted. Returns a hypermedia 'Link' object of the authorization group to be created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "groups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Administrators\",\n  \"principalIds\": [\n    \"2595a645-94a2-46be-a60d-8410851a9671\",\n    \"2595a645-94a2-46be-a60d-8410851a9671\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"href\": \"string\",\n  \"relation\": \"string\",\n  \"method\": \"GET\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "68824e9f-1c40-41ce-90f1-d5815bc16e46",
+              "name": "When request is invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "groups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Administrators\",\n  \"principalIds\": [\n    \"2595a645-94a2-46be-a60d-8410851a9671\",\n    \"2595a645-94a2-46be-a60d-8410851a9671\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1fba9aa0-d5bf-4cc9-a8f6-815a392df355",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "groups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Administrators\",\n  \"principalIds\": [\n    \"2595a645-94a2-46be-a60d-8410851a9671\",\n    \"2595a645-94a2-46be-a60d-8410851a9671\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 3321,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "16ac4b5e-9e26-4803-9c87-7a1bd8ec719c",
+          "name": "Get an authorization group",
+          "request": {
+            "name": "Get an authorization group",
+            "description": {
+              "content": "Retrieves a specified authorization group.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "groups",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "73126120-14d5-451c-9df9-2ae8197cea1e",
+              "name": "When request is successful. Returns an authorization 'Group' object.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "groups",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"href\": \"string\",\n  \"relation\": \"string\",\n  \"method\": \"GET\",\n  \"self\": {\n    \"id\": \"string\",\n    \"href\": \"string\",\n    \"relation\": \"string\",\n    \"method\": \"GET\"\n  },\n  \"id\": \"ed028979-5b64-4f63-82ef-2deef728d852\",\n  \"name\": \"Administrators\",\n  \"principalIds\": [\n    \"2595a645-94a2-46be-a60d-8410851a9671\",\n    \"2595a645-94a2-46be-a60d-8410851a9671\"\n  ],\n  \"isDeleted\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1019cf1f-8443-49d8-bd1f-5ff1fd470dd5",
+              "name": "When authorization group does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "groups",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 3321,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2c803de6-7bed-46d6-8459-ffc39a419894",
+          "name": "Update an authorization group",
+          "request": {
+            "name": "Update an authorization group",
+            "description": {
+              "content": "Updates a specified authorization group.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "groups",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"principalIds\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "63e4ca3d-b051-44b2-9c8f-a3a070b2e33a",
+              "name": "When request is accepted. Returns a hypermedia 'Link' object of the authorization group to be updated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "groups",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"principalIds\": [\n    \"2595a645-94a2-46be-a60d-8410851a9671\",\n    \"2595a645-94a2-46be-a60d-8410851a9671\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"href\": \"string\",\n  \"relation\": \"string\",\n  \"method\": \"GET\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "50835931-ab38-458b-b6d7-bc7fb15dafe9",
+              "name": "When request is invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "groups",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"principalIds\": [\n    \"2595a645-94a2-46be-a60d-8410851a9671\",\n    \"2595a645-94a2-46be-a60d-8410851a9671\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6825899c-519c-4951-b265-44eb4e5050ad",
+              "name": "When authorization group does not exist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "groups",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"principalIds\": [\n    \"2595a645-94a2-46be-a60d-8410851a9671\",\n    \"2595a645-94a2-46be-a60d-8410851a9671\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 3321,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5755011b-0202-4674-a5db-3655e37c7f62",
+          "name": "Deletes an authorization group",
+          "request": {
+            "name": "Deletes an authorization group",
+            "description": {
+              "content": "Delete an authorization group.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "groups",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9aa14fc8-a53b-487b-95f5-455a4ec01c4a",
+              "name": "When request is accepted. Returns a hypermedia 'Link' object of the authorization group to be deleted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "groups",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"href\": \"string\",\n  \"relation\": \"string\",\n  \"method\": \"GET\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ea5f5d8d-53d9-4016-8191-1bd0faf11d7b",
+              "name": "When request is invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "groups",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "404d98af-586c-47cb-b218-c4933c432d5b",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "groups",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 3321,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "910155f4-a34d-4ae7-afe3-8df103dd63b6",
+          "name": "Get an authorization policy",
+          "request": {
+            "name": "Get an authorization policy",
+            "description": {
+              "content": "Retrieves a specified authorization policy.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "policies",
+                ":reference"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "reference",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1cfcb331-b1d7-41c7-9a62-c9f8db8ce617",
+              "name": "When request is successful. Returns an authorization 'Policy' object.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "policies",
+                    ":reference"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "reference",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"href\": \"string\",\n  \"relation\": \"string\",\n  \"method\": \"GET\",\n  \"self\": {\n    \"id\": \"string\",\n    \"href\": \"string\",\n    \"relation\": \"string\",\n    \"method\": \"GET\"\n  },\n  \"id\": \"eb40ac02-383c-49bd-b956-c02cba814215\",\n  \"reference\": \"31a9caa9-4db7-4a0e-8233-d51254975099\",\n  \"principalId\": \"a7922e80-f833-48f0-8250-c00df1ebbc16\",\n  \"resourceId\": \"54171794-5ca3-472b-889a-c03538d8c89a\",\n  \"rules\": [\n    {\n      \"principalId\": \"a7922e80-f833-48f0-8250-c00df1ebbc16\",\n      \"resourceId\": \"matters/69406c65-309d-4e35-a636-ad145e64770a\",\n      \"operation\": \"Access\",\n      \"type\": 0\n    },\n    {\n      \"principalId\": \"a7922e80-f833-48f0-8250-c00df1ebbc16\",\n      \"resourceId\": \"matters/69406c65-309d-4e35-a636-ad145e64770a\",\n      \"operation\": \"Access\",\n      \"type\": 0\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c39550d7-69f8-4199-974a-a07e9854ee5a",
+              "name": "When authorization Policy does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "policies",
+                    ":reference"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "reference",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 3321,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7d60ab4f-af12-4296-b49b-17c0c6b5d596",
+          "name": "Update an authorization policy",
+          "request": {
+            "name": "Update an authorization policy",
+            "description": {
+              "content": "Updates a specified authorization policy.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "policies",
+                ":reference"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "reference",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"principalId\": \"<string>\",\n  \"resourceId\": \"<string>\",\n  \"rules\": [\n    {\n      \"principalId\": \"<string>\",\n      \"resourceId\": \"<string>\",\n      \"operation\": \"<string>\",\n      \"type\": \"<integer>\"\n    },\n    {\n      \"principalId\": \"<string>\",\n      \"resourceId\": \"<string>\",\n      \"operation\": \"<string>\",\n      \"type\": \"<integer>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d555dc84-e4e2-41d9-891c-f30b020daddc",
+              "name": "When request is accepted. Returns a hypermedia 'Link' object of the authorization policy to be updated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "policies",
+                    ":reference"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "reference",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"principalId\": \"a7922e80-f833-48f0-8250-c00df1ebbc16\",\n  \"resourceId\": \"matters/54171794-5ca3-472b-889a-c03538d8c89a\",\n  \"rules\": [\n    {\n      \"principalId\": \"a7922e80-f833-48f0-8250-c00df1ebbc16\",\n      \"resourceId\": \"matters/69406c65-309d-4e35-a636-ad145e64770a\",\n      \"operation\": \"Access\",\n      \"type\": \"<integer>\"\n    },\n    {\n      \"principalId\": \"a7922e80-f833-48f0-8250-c00df1ebbc16\",\n      \"resourceId\": \"matters/69406c65-309d-4e35-a636-ad145e64770a\",\n      \"operation\": \"Access\",\n      \"type\": \"<integer>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"href\": \"string\",\n  \"relation\": \"string\",\n  \"method\": \"GET\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f42b0f72-c39d-4b6e-98c6-693cb6093d5d",
+              "name": "When request is invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "policies",
+                    ":reference"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "reference",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"principalId\": \"a7922e80-f833-48f0-8250-c00df1ebbc16\",\n  \"resourceId\": \"matters/54171794-5ca3-472b-889a-c03538d8c89a\",\n  \"rules\": [\n    {\n      \"principalId\": \"a7922e80-f833-48f0-8250-c00df1ebbc16\",\n      \"resourceId\": \"matters/69406c65-309d-4e35-a636-ad145e64770a\",\n      \"operation\": \"Access\",\n      \"type\": \"<integer>\"\n    },\n    {\n      \"principalId\": \"a7922e80-f833-48f0-8250-c00df1ebbc16\",\n      \"resourceId\": \"matters/69406c65-309d-4e35-a636-ad145e64770a\",\n      \"operation\": \"Access\",\n      \"type\": \"<integer>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8b04888a-052c-48a4-bc53-886c78bdd681",
+              "name": "When authorization policy does not exist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "policies",
+                    ":reference"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "reference",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"principalId\": \"a7922e80-f833-48f0-8250-c00df1ebbc16\",\n  \"resourceId\": \"matters/54171794-5ca3-472b-889a-c03538d8c89a\",\n  \"rules\": [\n    {\n      \"principalId\": \"a7922e80-f833-48f0-8250-c00df1ebbc16\",\n      \"resourceId\": \"matters/69406c65-309d-4e35-a636-ad145e64770a\",\n      \"operation\": \"Access\",\n      \"type\": \"<integer>\"\n    },\n    {\n      \"principalId\": \"a7922e80-f833-48f0-8250-c00df1ebbc16\",\n      \"resourceId\": \"matters/69406c65-309d-4e35-a636-ad145e64770a\",\n      \"operation\": \"Access\",\n      \"type\": \"<integer>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 3321,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5c3d5752-3fdd-4dd5-aa78-c0bfbe812aa0",
+          "name": "Create an authorization policy",
+          "request": {
+            "name": "Create an authorization policy",
+            "description": {
+              "content": "Creates an authorization policy.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "policies"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"principalId\": \"<string>\",\n  \"resourceId\": \"<string>\",\n  \"rules\": [\n    {\n      \"principalId\": \"<string>\",\n      \"resourceId\": \"<string>\",\n      \"operation\": \"<string>\",\n      \"type\": \"<integer>\"\n    },\n    {\n      \"principalId\": \"<string>\",\n      \"resourceId\": \"<string>\",\n      \"operation\": \"<string>\",\n      \"type\": \"<integer>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e413c5ee-fb39-47fd-9d57-a578170cdcd9",
+              "name": "When request is accepted. Returns a hypermedia 'Link' object of the authorization policy to be created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "policies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"principalId\": \"a7922e80-f833-48f0-8250-c00df1ebbc16\",\n  \"resourceId\": \"matters/54171794-5ca3-472b-889a-c03538d8c89a\",\n  \"rules\": [\n    {\n      \"principalId\": \"a7922e80-f833-48f0-8250-c00df1ebbc16\",\n      \"resourceId\": \"matters/69406c65-309d-4e35-a636-ad145e64770a\",\n      \"operation\": \"Access\",\n      \"type\": \"<integer>\"\n    },\n    {\n      \"principalId\": \"a7922e80-f833-48f0-8250-c00df1ebbc16\",\n      \"resourceId\": \"matters/69406c65-309d-4e35-a636-ad145e64770a\",\n      \"operation\": \"Access\",\n      \"type\": \"<integer>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"href\": \"string\",\n  \"relation\": \"string\",\n  \"method\": \"GET\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "caf6595e-02b2-4567-8fc4-9a21d78c33fd",
+              "name": "When request is invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "policies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"principalId\": \"a7922e80-f833-48f0-8250-c00df1ebbc16\",\n  \"resourceId\": \"matters/54171794-5ca3-472b-889a-c03538d8c89a\",\n  \"rules\": [\n    {\n      \"principalId\": \"a7922e80-f833-48f0-8250-c00df1ebbc16\",\n      \"resourceId\": \"matters/69406c65-309d-4e35-a636-ad145e64770a\",\n      \"operation\": \"Access\",\n      \"type\": \"<integer>\"\n    },\n    {\n      \"principalId\": \"a7922e80-f833-48f0-8250-c00df1ebbc16\",\n      \"resourceId\": \"matters/69406c65-309d-4e35-a636-ad145e64770a\",\n      \"operation\": \"Access\",\n      \"type\": \"<integer>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "0d8e3982-f0ed-455e-8117-ce3a6ab651a1",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "policies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"principalId\": \"a7922e80-f833-48f0-8250-c00df1ebbc16\",\n  \"resourceId\": \"matters/54171794-5ca3-472b-889a-c03538d8c89a\",\n  \"rules\": [\n    {\n      \"principalId\": \"a7922e80-f833-48f0-8250-c00df1ebbc16\",\n      \"resourceId\": \"matters/69406c65-309d-4e35-a636-ad145e64770a\",\n      \"operation\": \"Access\",\n      \"type\": \"<integer>\"\n    },\n    {\n      \"principalId\": \"a7922e80-f833-48f0-8250-c00df1ebbc16\",\n      \"resourceId\": \"matters/69406c65-309d-4e35-a636-ad145e64770a\",\n      \"operation\": \"Access\",\n      \"type\": \"<integer>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 3321,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.smokeball.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "285c8ff4-f48e-418c-8951-e7ed2b93f3bd",
+    "name": "Smokeball Activity Codes Authorization API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for integrating with Smokeball legal practice management software. Supports matters, contacts, documents, time entries, billing, trust accounting, staff, webhooks, and law firm workflows across US, AU, and UK regions. Uses OAuth 2.0 (client credentials) authentication.\n\nContact Support:\n Name: Smokeball Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,1283 @@
+{
+  "item": [
+    {
+      "id": "988020f1-03bc-4144-b009-80c0aae9b436",
+      "name": "Firm",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c3dcdb5f-15f0-4f89-b4b8-0b195febe2c7",
+          "name": "Get firm",
+          "request": {
+            "name": "Get firm",
+            "description": {
+              "content": "Retrieves the details of the firm associated with the authenticated client.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "firm"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "68de80c2-bed3-4211-877f-274955fca497",
+              "name": "When request is successful. Returns a 'Firm' object.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "firm"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"href\": \"string\",\n  \"relation\": \"string\",\n  \"method\": \"GET\",\n  \"self\": {\n    \"id\": \"string\",\n    \"href\": \"string\",\n    \"relation\": \"string\",\n    \"method\": \"GET\"\n  },\n  \"id\": \"f4ff1eff-b7fe-4d46-4e46-01d985838d76\",\n  \"versionId\": \"750eb5c5-ac0b-7d11-4997-e0ce9d8896c8\",\n  \"owner\": \"Smokeball\",\n  \"name\": \"Brown LLC\",\n  \"status\": {\n    \"status\": \"Active\",\n    \"statusMessage\": \"string\"\n  },\n  \"productId\": \"SMK001\",\n  \"addOnIds\": [\n    \"ADD001\",\n    \"ADD003\"\n  ],\n  \"email\": \"john.smith@law.com\",\n  \"abn\": \"1234567890\",\n  \"acn\": \"1234567890\",\n  \"streetAddress\": {\n    \"buildingLevel\": \"Level 1\",\n    \"unitNumber\": \"10\",\n    \"unitType\": \"Suite\",\n    \"streetNumber\": \"100\",\n    \"streetName\": \"Broad\",\n    \"streetType\": \"Street\",\n    \"addressLine1\": \"Level 1/10\",\n    \"addressLine2\": \"100 Broad Street\",\n    \"city\": \"Chicago\",\n    \"state\": \"IL\",\n    \"zipCode\": \"60606\",\n    \"county\": \"Berkshire\",\n    \"locality\": \"Windsor\",\n    \"country\": \"United States\",\n    \"careOf\": \"\",\n    \"poBoxType\": \"\",\n    \"poBoxNumber\": \"\"\n  },\n  \"mailingAddress\": {\n    \"buildingLevel\": \"Level 1\",\n    \"unitNumber\": \"10\",\n    \"unitType\": \"Suite\",\n    \"streetNumber\": \"100\",\n    \"streetName\": \"Broad\",\n    \"streetType\": \"Street\",\n    \"addressLine1\": \"Level 1/10\",\n    \"addressLine2\": \"100 Broad Street\",\n    \"city\": \"Chicago\",\n    \"state\": \"IL\",\n    \"zipCode\": \"60606\",\n    \"county\": \"Berkshire\",\n    \"locality\": \"Windsor\",\n    \"country\": \"United States\",\n    \"careOf\": \"\",\n    \"poBoxType\": \"\",\n    \"poBoxNumber\": \"\"\n  },\n  \"dxAddress\": {\n    \"number\": \"376\",\n    \"exchange\": \"DX\",\n    \"state\": \"NSW\"\n  },\n  \"phone\": {\n    \"areaCode\": \"555\",\n    \"number\": \"1234567\"\n  },\n  \"fax\": {\n    \"areaCode\": \"555\",\n    \"number\": \"1234567\"\n  },\n  \"logo\": \"https://example-logo-url.com/image\",\n  \"stylingDetails\": {\n    \"primaryColorHexCode\": \"#FF000000\",\n    \"secondaryColorHexCode\": \"#FF000000\",\n    \"fontFamilyName\": \"Open Sans\"\n  },\n  \"licenceNumbers\": [\n    {\n      \"state\": \"IL\",\n      \"type\": \"\",\n      \"number\": \"string\"\n    },\n    {\n      \"state\": \"IL\",\n      \"type\": \"\",\n      \"number\": \"string\"\n    }\n  ],\n  \"createdDate\": \"2024-01-15T10:30:00Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0036cf65-4f24-4104-b2de-d47c66f56e2d",
+              "name": "When firm does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "firm"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 2081,\n  \"detail\": \"string\",\n  \"instance\": \"string\",\n  \"key_0\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "246773db-0134-4df0-9b4f-39ba03b94df0",
+          "name": "Update firm",
+          "request": {
+            "name": "Update firm",
+            "description": {
+              "content": "Updates firm details for the current authenticated client.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "firm"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"productId\": \"<string>\",\n  \"addOnIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"name\": \"<string>\",\n  \"email\": \"<string>\",\n  \"abn\": \"<string>\",\n  \"acn\": \"<string>\",\n  \"streetAddress\": {\n    \"buildingLevel\": \"<string>\",\n    \"unitNumber\": \"<string>\",\n    \"unitType\": \"<string>\",\n    \"streetNumber\": \"<string>\",\n    \"streetName\": \"<string>\",\n    \"streetType\": \"<string>\",\n    \"addressLine1\": \"<string>\",\n    \"addressLine2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"zipCode\": \"<string>\",\n    \"county\": \"<string>\",\n    \"locality\": \"<string>\",\n    \"country\": \"<string>\",\n    \"careOf\": \"<string>\",\n    \"poBoxType\": \"<string>\",\n    \"poBoxNumber\": \"<string>\"\n  },\n  \"mailingAddress\": {\n    \"buildingLevel\": \"<string>\",\n    \"unitNumber\": \"<string>\",\n    \"unitType\": \"<string>\",\n    \"streetNumber\": \"<string>\",\n    \"streetName\": \"<string>\",\n    \"streetType\": \"<string>\",\n    \"addressLine1\": \"<string>\",\n    \"addressLine2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"zipCode\": \"<string>\",\n    \"county\": \"<string>\",\n    \"locality\": \"<string>\",\n    \"country\": \"<string>\",\n    \"careOf\": \"<string>\",\n    \"poBoxType\": \"<string>\",\n    \"poBoxNumber\": \"<string>\"\n  },\n  \"dxAddress\": {\n    \"number\": \"<string>\",\n    \"exchange\": \"<string>\",\n    \"state\": \"<string>\"\n  },\n  \"phone\": {\n    \"areaCode\": \"<string>\",\n    \"number\": \"<string>\"\n  },\n  \"fax\": {\n    \"areaCode\": \"<string>\",\n    \"number\": \"<string>\"\n  },\n  \"status\": {\n    \"status\": \"<string>\",\n    \"statusMessage\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "80ae9414-4113-4bf4-a455-a0d5fcefa117",
+              "name": "When request is accepted. Returns a hypermedia 'Link' object of the firm to be updated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "firm"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"productId\": \"SMK001\",\n  \"addOnIds\": [\n    \"ADD01\",\n    \"ADD003\"\n  ],\n  \"name\": \"Brown LLC\",\n  \"email\": \"john.smith@law.com\",\n  \"abn\": \"1234567890\",\n  \"acn\": \"1234567890\",\n  \"streetAddress\": {\n    \"buildingLevel\": \"Level 1\",\n    \"unitNumber\": \"10\",\n    \"unitType\": \"Suite\",\n    \"streetNumber\": \"100\",\n    \"streetName\": \"Broad\",\n    \"streetType\": \"Street\",\n    \"addressLine1\": \"Level 1/10\",\n    \"addressLine2\": \"100 Broad Street\",\n    \"city\": \"Chicago\",\n    \"state\": \"IL\",\n    \"zipCode\": \"60606\",\n    \"county\": \"\",\n    \"locality\": \"\",\n    \"country\": \"United States\",\n    \"careOf\": \"\",\n    \"poBoxType\": \"\",\n    \"poBoxNumber\": \"\"\n  },\n  \"mailingAddress\": {\n    \"buildingLevel\": \"Level 1\",\n    \"unitNumber\": \"10\",\n    \"unitType\": \"Suite\",\n    \"streetNumber\": \"100\",\n    \"streetName\": \"Broad\",\n    \"streetType\": \"Street\",\n    \"addressLine1\": \"Level 1/10\",\n    \"addressLine2\": \"100 Broad Street\",\n    \"city\": \"Chicago\",\n    \"state\": \"IL\",\n    \"zipCode\": \"60606\",\n    \"county\": \"\",\n    \"locality\": \"\",\n    \"country\": \"United States\",\n    \"careOf\": \"\",\n    \"poBoxType\": \"\",\n    \"poBoxNumber\": \"\"\n  },\n  \"dxAddress\": {\n    \"number\": \"376\",\n    \"exchange\": \"DX\",\n    \"state\": \"NSW\"\n  },\n  \"phone\": {\n    \"areaCode\": \"555\",\n    \"number\": \"1234567\"\n  },\n  \"fax\": {\n    \"areaCode\": \"555\",\n    \"number\": \"1234567\"\n  },\n  \"status\": {\n    \"status\": \"Active\",\n    \"statusMessage\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"href\": \"string\",\n  \"relation\": \"string\",\n  \"method\": \"GET\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a7843f04-8bbe-4d00-b6ec-58c0d33b8afd",
+              "name": "When firm does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "firm"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"productId\": \"SMK001\",\n  \"addOnIds\": [\n    \"ADD01\",\n    \"ADD003\"\n  ],\n  \"name\": \"Brown LLC\",\n  \"email\": \"john.smith@law.com\",\n  \"abn\": \"1234567890\",\n  \"acn\": \"1234567890\",\n  \"streetAddress\": {\n    \"buildingLevel\": \"Level 1\",\n    \"unitNumber\": \"10\",\n    \"unitType\": \"Suite\",\n    \"streetNumber\": \"100\",\n    \"streetName\": \"Broad\",\n    \"streetType\": \"Street\",\n    \"addressLine1\": \"Level 1/10\",\n    \"addressLine2\": \"100 Broad Street\",\n    \"city\": \"Chicago\",\n    \"state\": \"IL\",\n    \"zipCode\": \"60606\",\n    \"county\": \"\",\n    \"locality\": \"\",\n    \"country\": \"United States\",\n    \"careOf\": \"\",\n    \"poBoxType\": \"\",\n    \"poBoxNumber\": \"\"\n  },\n  \"mailingAddress\": {\n    \"buildingLevel\": \"Level 1\",\n    \"unitNumber\": \"10\",\n    \"unitType\": \"Suite\",\n    \"streetNumber\": \"100\",\n    \"streetName\": \"Broad\",\n    \"streetType\": \"Street\",\n    \"addressLine1\": \"Level 1/10\",\n    \"addressLine2\": \"100 Broad Street\",\n    \"city\": \"Chicago\",\n    \"state\": \"IL\",\n    \"zipCode\": \"60606\",\n    \"county\": \"\",\n    \"locality\": \"\",\n    \"country\": \"United States\",\n    \"careOf\": \"\",\n    \"poBoxType\": \"\",\n    \"poBoxNumber\": \"\"\n  },\n  \"dxAddress\": {\n    \"number\": \"376\",\n    \"exchange\": \"DX\",\n    \"state\": \"NSW\"\n  },\n  \"phone\": {\n    \"areaCode\": \"555\",\n    \"number\": \"1234567\"\n  },\n  \"fax\": {\n    \"areaCode\": \"555\",\n    \"number\": \"1234567\"\n  },\n  \"status\": {\n    \"status\": \"Active\",\n    \"statusMessage\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 2081,\n  \"detail\": \"string\",\n  \"instance\": \"string\",\n  \"key_0\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fcaf555f-f343-43e9-ae25-f72aa683d1ee",
+          "name": "Create firm",
+          "request": {
+            "name": "Create firm",
+            "description": {
+              "content": "Creates a firm for the current authenticated client and registers an existing user as a staff member and firm owner.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "firm"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"productId\": \"<string>\",\n  \"addOnIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"name\": \"<string>\",\n  \"email\": \"<string>\",\n  \"abn\": \"<string>\",\n  \"acn\": \"<string>\",\n  \"streetAddress\": {\n    \"buildingLevel\": \"<string>\",\n    \"unitNumber\": \"<string>\",\n    \"unitType\": \"<string>\",\n    \"streetNumber\": \"<string>\",\n    \"streetName\": \"<string>\",\n    \"streetType\": \"<string>\",\n    \"addressLine1\": \"<string>\",\n    \"addressLine2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"zipCode\": \"<string>\",\n    \"county\": \"<string>\",\n    \"locality\": \"<string>\",\n    \"country\": \"<string>\",\n    \"careOf\": \"<string>\",\n    \"poBoxType\": \"<string>\",\n    \"poBoxNumber\": \"<string>\"\n  },\n  \"mailingAddress\": {\n    \"buildingLevel\": \"<string>\",\n    \"unitNumber\": \"<string>\",\n    \"unitType\": \"<string>\",\n    \"streetNumber\": \"<string>\",\n    \"streetName\": \"<string>\",\n    \"streetType\": \"<string>\",\n    \"addressLine1\": \"<string>\",\n    \"addressLine2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"zipCode\": \"<string>\",\n    \"county\": \"<string>\",\n    \"locality\": \"<string>\",\n    \"country\": \"<string>\",\n    \"careOf\": \"<string>\",\n    \"poBoxType\": \"<string>\",\n    \"poBoxNumber\": \"<string>\"\n  },\n  \"dxAddress\": {\n    \"number\": \"<string>\",\n    \"exchange\": \"<string>\",\n    \"state\": \"<string>\"\n  },\n  \"phone\": {\n    \"areaCode\": \"<string>\",\n    \"number\": \"<string>\"\n  },\n  \"fax\": {\n    \"areaCode\": \"<string>\",\n    \"number\": \"<string>\"\n  },\n  \"isInternal\": \"<boolean>\",\n  \"staff\": {\n    \"userId\": \"<string>\",\n    \"title\": \"<string>\",\n    \"firstName\": \"<string>\",\n    \"middleName\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"initials\": \"<string>\",\n    \"phone\": {\n      \"areaCode\": \"<string>\",\n      \"number\": \"<string>\"\n    },\n    \"cell\": {\n      \"areaCode\": \"<string>\",\n      \"number\": \"<string>\"\n    },\n    \"email\": \"<string>\",\n    \"role\": \"<string>\",\n    \"avatar\": \"<string>\",\n    \"former\": \"<boolean>\",\n    \"colorFill\": \"<string>\",\n    \"colorStroke\": \"<string>\"\n  },\n  \"subscription\": {\n    \"productSuite\": \"<string>\",\n    \"promotionId\": \"<string>\",\n    \"interval\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "42c3d50f-c199-4b2b-9542-8f680b1c84af",
+              "name": "When request is accepted. Returns a hypermedia 'Link' object of the firm to be created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "firm"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"productId\": \"SMK001\",\n  \"addOnIds\": [\n    \"ADD01\",\n    \"ADD003\"\n  ],\n  \"name\": \"Brown LLC\",\n  \"email\": \"john.smith@law.com\",\n  \"abn\": \"1234567890\",\n  \"acn\": \"1234567890\",\n  \"streetAddress\": {\n    \"buildingLevel\": \"Level 1\",\n    \"unitNumber\": \"10\",\n    \"unitType\": \"Suite\",\n    \"streetNumber\": \"100\",\n    \"streetName\": \"Broad\",\n    \"streetType\": \"Street\",\n    \"addressLine1\": \"Level 1/10\",\n    \"addressLine2\": \"100 Broad Street\",\n    \"city\": \"Chicago\",\n    \"state\": \"IL\",\n    \"zipCode\": \"60606\",\n    \"county\": \"\",\n    \"locality\": \"\",\n    \"country\": \"United States\",\n    \"careOf\": \"\",\n    \"poBoxType\": \"\",\n    \"poBoxNumber\": \"\"\n  },\n  \"mailingAddress\": {\n    \"buildingLevel\": \"Level 1\",\n    \"unitNumber\": \"10\",\n    \"unitType\": \"Suite\",\n    \"streetNumber\": \"100\",\n    \"streetName\": \"Broad\",\n    \"streetType\": \"Street\",\n    \"addressLine1\": \"Level 1/10\",\n    \"addressLine2\": \"100 Broad Street\",\n    \"city\": \"Chicago\",\n    \"state\": \"IL\",\n    \"zipCode\": \"60606\",\n    \"county\": \"\",\n    \"locality\": \"\",\n    \"country\": \"United States\",\n    \"careOf\": \"\",\n    \"poBoxType\": \"\",\n    \"poBoxNumber\": \"\"\n  },\n  \"dxAddress\": {\n    \"number\": \"376\",\n    \"exchange\": \"DX\",\n    \"state\": \"NSW\"\n  },\n  \"phone\": {\n    \"areaCode\": \"555\",\n    \"number\": \"1234567\"\n  },\n  \"fax\": {\n    \"areaCode\": \"555\",\n    \"number\": \"1234567\"\n  },\n  \"isInternal\": false,\n  \"staff\": {\n    \"userId\": \"b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2\",\n    \"title\": \"Mr\",\n    \"firstName\": \"John\",\n    \"middleName\": \"\",\n    \"lastName\": \"Smith\",\n    \"initials\": \"JS\",\n    \"phone\": {\n      \"areaCode\": \"555\",\n      \"number\": \"1234567\"\n    },\n    \"cell\": {\n      \"areaCode\": \"555\",\n      \"number\": \"1234567\"\n    },\n    \"email\": \"john.smith@brown.com\",\n    \"role\": \"Bookkeeper\",\n    \"avatar\": \"https://example-avatar-url.com/image\",\n    \"former\": false,\n    \"colorFill\": \"#797d85\",\n    \"colorStroke\": \"#64666a\"\n  },\n  \"subscription\": {\n    \"productSuite\": \"<string>\",\n    \"promotionId\": \"<string>\",\n    \"interval\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"href\": \"string\",\n  \"relation\": \"string\",\n  \"method\": \"GET\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0951c298-e76e-46ef-ba63-3ab8cf45a8d3",
+              "name": "When staff user does not exist or is already associated with another firm.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "firm"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"productId\": \"SMK001\",\n  \"addOnIds\": [\n    \"ADD01\",\n    \"ADD003\"\n  ],\n  \"name\": \"Brown LLC\",\n  \"email\": \"john.smith@law.com\",\n  \"abn\": \"1234567890\",\n  \"acn\": \"1234567890\",\n  \"streetAddress\": {\n    \"buildingLevel\": \"Level 1\",\n    \"unitNumber\": \"10\",\n    \"unitType\": \"Suite\",\n    \"streetNumber\": \"100\",\n    \"streetName\": \"Broad\",\n    \"streetType\": \"Street\",\n    \"addressLine1\": \"Level 1/10\",\n    \"addressLine2\": \"100 Broad Street\",\n    \"city\": \"Chicago\",\n    \"state\": \"IL\",\n    \"zipCode\": \"60606\",\n    \"county\": \"\",\n    \"locality\": \"\",\n    \"country\": \"United States\",\n    \"careOf\": \"\",\n    \"poBoxType\": \"\",\n    \"poBoxNumber\": \"\"\n  },\n  \"mailingAddress\": {\n    \"buildingLevel\": \"Level 1\",\n    \"unitNumber\": \"10\",\n    \"unitType\": \"Suite\",\n    \"streetNumber\": \"100\",\n    \"streetName\": \"Broad\",\n    \"streetType\": \"Street\",\n    \"addressLine1\": \"Level 1/10\",\n    \"addressLine2\": \"100 Broad Street\",\n    \"city\": \"Chicago\",\n    \"state\": \"IL\",\n    \"zipCode\": \"60606\",\n    \"county\": \"\",\n    \"locality\": \"\",\n    \"country\": \"United States\",\n    \"careOf\": \"\",\n    \"poBoxType\": \"\",\n    \"poBoxNumber\": \"\"\n  },\n  \"dxAddress\": {\n    \"number\": \"376\",\n    \"exchange\": \"DX\",\n    \"state\": \"NSW\"\n  },\n  \"phone\": {\n    \"areaCode\": \"555\",\n    \"number\": \"1234567\"\n  },\n  \"fax\": {\n    \"areaCode\": \"555\",\n    \"number\": \"1234567\"\n  },\n  \"isInternal\": false,\n  \"staff\": {\n    \"userId\": \"b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2\",\n    \"title\": \"Mr\",\n    \"firstName\": \"John\",\n    \"middleName\": \"\",\n    \"lastName\": \"Smith\",\n    \"initials\": \"JS\",\n    \"phone\": {\n      \"areaCode\": \"555\",\n      \"number\": \"1234567\"\n    },\n    \"cell\": {\n      \"areaCode\": \"555\",\n      \"number\": \"1234567\"\n    },\n    \"email\": \"john.smith@brown.com\",\n    \"role\": \"Bookkeeper\",\n    \"avatar\": \"https://example-avatar-url.com/image\",\n    \"former\": false,\n    \"colorFill\": \"#797d85\",\n    \"colorStroke\": \"#64666a\"\n  },\n  \"subscription\": {\n    \"productSuite\": \"<string>\",\n    \"promotionId\": \"<string>\",\n    \"interval\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 2081,\n  \"detail\": \"string\",\n  \"instance\": \"string\",\n  \"key_0\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0f09216a-ffc6-4cba-b11d-997937a94cb6",
+              "name": "When an unsupported request is made.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "firm"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"productId\": \"SMK001\",\n  \"addOnIds\": [\n    \"ADD01\",\n    \"ADD003\"\n  ],\n  \"name\": \"Brown LLC\",\n  \"email\": \"john.smith@law.com\",\n  \"abn\": \"1234567890\",\n  \"acn\": \"1234567890\",\n  \"streetAddress\": {\n    \"buildingLevel\": \"Level 1\",\n    \"unitNumber\": \"10\",\n    \"unitType\": \"Suite\",\n    \"streetNumber\": \"100\",\n    \"streetName\": \"Broad\",\n    \"streetType\": \"Street\",\n    \"addressLine1\": \"Level 1/10\",\n    \"addressLine2\": \"100 Broad Street\",\n    \"city\": \"Chicago\",\n    \"state\": \"IL\",\n    \"zipCode\": \"60606\",\n    \"county\": \"\",\n    \"locality\": \"\",\n    \"country\": \"United States\",\n    \"careOf\": \"\",\n    \"poBoxType\": \"\",\n    \"poBoxNumber\": \"\"\n  },\n  \"mailingAddress\": {\n    \"buildingLevel\": \"Level 1\",\n    \"unitNumber\": \"10\",\n    \"unitType\": \"Suite\",\n    \"streetNumber\": \"100\",\n    \"streetName\": \"Broad\",\n    \"streetType\": \"Street\",\n    \"addressLine1\": \"Level 1/10\",\n    \"addressLine2\": \"100 Broad Street\",\n    \"city\": \"Chicago\",\n    \"state\": \"IL\",\n    \"zipCode\": \"60606\",\n    \"county\": \"\",\n    \"locality\": \"\",\n    \"country\": \"United States\",\n    \"careOf\": \"\",\n    \"poBoxType\": \"\",\n    \"poBoxNumber\": \"\"\n  },\n  \"dxAddress\": {\n    \"number\": \"376\",\n    \"exchange\": \"DX\",\n    \"state\": \"NSW\"\n  },\n  \"phone\": {\n    \"areaCode\": \"555\",\n    \"number\": \"1234567\"\n  },\n  \"fax\": {\n    \"areaCode\": \"555\",\n    \"number\": \"1234567\"\n  },\n  \"isInternal\": false,\n  \"staff\": {\n    \"userId\": \"b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2\",\n    \"title\": \"Mr\",\n    \"firstName\": \"John\",\n    \"middleName\": \"\",\n    \"lastName\": \"Smith\",\n    \"initials\": \"JS\",\n    \"phone\": {\n      \"areaCode\": \"555\",\n      \"number\": \"1234567\"\n    },\n    \"cell\": {\n      \"areaCode\": \"555\",\n      \"number\": \"1234567\"\n    },\n    \"email\": \"john.smith@brown.com\",\n    \"role\": \"Bookkeeper\",\n    \"avatar\": \"https://example-avatar-url.com/image\",\n    \"former\": false,\n    \"colorFill\": \"#797d85\",\n    \"colorStroke\": \"#64666a\"\n  },\n  \"subscription\": {\n    \"productSuite\": \"<string>\",\n    \"promotionId\": \"<string>\",\n    \"interval\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 2081,\n  \"detail\": \"string\",\n  \"instance\": \"string\",\n  \"key_0\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7a38f2f6-fd40-4797-92ae-8d71d0ce12ba",
+          "name": "Get firm user mappings",
+          "request": {
+            "name": "Get firm user mappings",
+            "description": {
+              "content": "Retrieves a list of user mappings in the firm associated with the authenticated client.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "firmusers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fef4f1e1-2546-4a2f-933c-9daedaf5a900",
+              "name": "When request is successful. Returns an array of one or more 'FirmUser' objects.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "firmusers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"href\": \"string\",\n    \"relation\": \"string\",\n    \"method\": \"GET\",\n    \"self\": {\n      \"id\": \"string\",\n      \"href\": \"string\",\n      \"relation\": \"string\",\n      \"method\": \"GET\"\n    },\n    \"staffId\": \"750eb5c5-ac0b-7d11-4997-e0ce9d8896c8\",\n    \"userId\": \"b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2\",\n    \"isFormerUser\": false\n  },\n  {\n    \"id\": \"string\",\n    \"href\": \"string\",\n    \"relation\": \"string\",\n    \"method\": \"GET\",\n    \"self\": {\n      \"id\": \"string\",\n      \"href\": \"string\",\n      \"relation\": \"string\",\n      \"method\": \"GET\"\n    },\n    \"staffId\": \"750eb5c5-ac0b-7d11-4997-e0ce9d8896c8\",\n    \"userId\": \"b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2\",\n    \"isFormerUser\": false\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "01ca99f7-4b52-4c11-a91c-65ef954173e3",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "firmusers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 2081,\n  \"detail\": \"string\",\n  \"instance\": \"string\",\n  \"key_0\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "96439303-3bbe-4010-a95d-830c64e064b3",
+          "name": "Get firm user mapping",
+          "request": {
+            "name": "Get firm user mapping",
+            "description": {
+              "content": "Retrieves a user mapping (based on staff or user id parameter provided) in the firm associated with the authenticated client.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "firmusers",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fe742cf5-6c02-4eb4-b910-69d6cc8aae45",
+              "name": "When request is successful. Returns a 'FirmUser' object.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "firmusers",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"href\": \"string\",\n  \"relation\": \"string\",\n  \"method\": \"GET\",\n  \"self\": {\n    \"id\": \"string\",\n    \"href\": \"string\",\n    \"relation\": \"string\",\n    \"method\": \"GET\"\n  },\n  \"staffId\": \"750eb5c5-ac0b-7d11-4997-e0ce9d8896c8\",\n  \"userId\": \"b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2\",\n  \"isFormerUser\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ee06a24e-7cc1-4b72-8d24-50626b725ace",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "firmusers",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 2081,\n  \"detail\": \"string\",\n  \"instance\": \"string\",\n  \"key_0\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1cc8a8d5-0dd5-4d80-aa00-a9eb67240aff",
+          "name": "Update firm user mapping",
+          "request": {
+            "name": "Update firm user mapping",
+            "description": {
+              "content": "Updates a user mapping in the firm associated with the authenticated client.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "firmusers",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userId\": \"<string>\",\n  \"staffId\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2c8a9212-d334-441f-bfe6-ea6e199fd197",
+              "name": "When request is accepted. Returns a hypermedia 'Link' object of the user to be updated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "firmusers",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"userId\": \"b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2\",\n  \"staffId\": \"750eb5c5-ac0b-7d11-4997-e0ce9d8896c8\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"href\": \"string\",\n  \"relation\": \"string\",\n  \"method\": \"GET\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cf10789f-5543-43d5-90d7-c1fef1aa3a3e",
+              "name": "When staff or user has not been provided.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "firmusers",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"userId\": \"b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2\",\n  \"staffId\": \"750eb5c5-ac0b-7d11-4997-e0ce9d8896c8\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 2081,\n  \"detail\": \"string\",\n  \"instance\": \"string\",\n  \"key_0\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a6f6a1ec-ff71-4d93-9ed4-2cbc110dbcb1",
+              "name": "When staff does not belong to the firm.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "firmusers",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"userId\": \"b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2\",\n  \"staffId\": \"750eb5c5-ac0b-7d11-4997-e0ce9d8896c8\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 2081,\n  \"detail\": \"string\",\n  \"instance\": \"string\",\n  \"key_0\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5b360451-7dc4-4936-8891-d02c9380c417",
+              "name": "When 'FirmUser' does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "firmusers",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"userId\": \"b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2\",\n  \"staffId\": \"750eb5c5-ac0b-7d11-4997-e0ce9d8896c8\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 2081,\n  \"detail\": \"string\",\n  \"instance\": \"string\",\n  \"key_0\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8e1ab47a-c982-4190-9ed5-a8a914c69056",
+          "name": "Delete firm user mapping",
+          "request": {
+            "name": "Delete firm user mapping",
+            "description": {
+              "content": "Removes the user from the firm associated with the authenticated client.\r\n\r\nThe staff member is set as a former staff member and a former user. User access is also disabled.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "firmusers",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5c738a10-e520-41a7-8519-fd4709ed730c",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "firmusers",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"href\": \"string\",\n  \"relation\": \"string\",\n  \"method\": \"GET\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "21ded64d-b436-42c5-8773-9cb74314f63f",
+              "name": "When request is accepted. Returns a hypermedia 'Link' object of the user to be deleted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "firmusers",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f250b4ab-f2c9-4456-963c-f495d456e4a2",
+              "name": "When 'FirmUser' object does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "firmusers",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 2081,\n  \"detail\": \"string\",\n  \"instance\": \"string\",\n  \"key_0\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.smokeball.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "0a79a096-275b-4f9c-9026-6ca49ae8d3ec",
+    "name": "Smokeball Activity Codes Firm API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for integrating with Smokeball legal practice management software. Supports matters, contacts, documents, time entries, billing, trust accounting, staff, webhooks, and law firm workflows across US, AU, and UK regions. Uses OAuth 2.0 (client credentials) authentication.\n\nContact Support:\n Name: Smokeball Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

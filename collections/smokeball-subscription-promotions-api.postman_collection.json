@@ -1,0 +1,984 @@
+{
+  "item": [
+    {
+      "id": "7f657f64-000b-4729-9815-0d8218ac7398",
+      "name": "Subscription Promotions",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a9e99116-a575-4732-979a-0fb81847b7e9",
+          "name": "Get all promotions",
+          "request": {
+            "name": "Get all promotions",
+            "description": {
+              "content": "Returns all available promotions with their eligibility criteria and benefits.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "subscriptions",
+                "promotions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "Offset",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "Limit",
+                  "value": "<integer>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9ab91a1b-1606-4ad2-9459-05844052e18e",
+              "name": "When request is successful. Returns a paged collection of 'SubscriptionPromotion' objects.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions",
+                    "promotions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "Offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "Limit",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"href\": \"string\",\n  \"relation\": \"string\",\n  \"method\": \"GET\",\n  \"self\": {\n    \"id\": \"string\",\n    \"href\": \"string\",\n    \"relation\": \"string\",\n    \"method\": \"GET\"\n  },\n  \"value\": [\n    {\n      \"id\": \"b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2\",\n      \"href\": \"string\",\n      \"relation\": \"string\",\n      \"method\": \"GET\",\n      \"self\": {\n        \"id\": \"string\",\n        \"href\": \"string\",\n        \"relation\": \"string\",\n        \"method\": \"GET\"\n      },\n      \"productSuite\": \"string\",\n      \"tiers\": [\n        {\n          \"id\": \"b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2\",\n          \"href\": \"string\",\n          \"relation\": \"string\",\n          \"method\": \"GET\",\n          \"self\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"href\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"relation\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"method\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"smokeballId\": \"string\",\n          \"productSuite\": \"string\",\n          \"name\": \"Intake\",\n          \"description\": \"string\",\n          \"trialPeriodDays\": 7180,\n          \"prices\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"createdDate\": \"2022-04-23T14:00:00Z\",\n          \"updatedDate\": \"2022-04-23T14:00:00Z\"\n        },\n        {\n          \"id\": \"b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2\",\n          \"href\": \"string\",\n          \"relation\": \"string\",\n          \"method\": \"GET\",\n          \"self\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"href\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"relation\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"method\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"smokeballId\": \"string\",\n          \"productSuite\": \"string\",\n          \"name\": \"Intake\",\n          \"description\": \"string\",\n          \"trialPeriodDays\": 219,\n          \"prices\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"createdDate\": \"2022-04-23T14:00:00Z\",\n          \"updatedDate\": \"2022-04-23T14:00:00Z\"\n        }\n      ],\n      \"addOns\": [\n        {\n          \"id\": \"b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2\",\n          \"href\": \"string\",\n          \"relation\": \"string\",\n          \"method\": \"GET\",\n          \"self\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"href\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"relation\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"method\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"smokeballId\": \"string\",\n          \"productSuite\": \"string\",\n          \"name\": \"Intake\",\n          \"description\": \"string\",\n          \"trialPeriodDays\": 6604,\n          \"prices\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"createdDate\": \"2022-04-23T14:00:00Z\",\n          \"updatedDate\": \"2022-04-23T14:00:00Z\"\n        },\n        {\n          \"id\": \"b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2\",\n          \"href\": \"string\",\n          \"relation\": \"string\",\n          \"method\": \"GET\",\n          \"self\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"href\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"relation\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"method\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"smokeballId\": \"string\",\n          \"productSuite\": \"string\",\n          \"name\": \"Intake\",\n          \"description\": \"string\",\n          \"trialPeriodDays\": 3295,\n          \"prices\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"createdDate\": \"2022-04-23T14:00:00Z\",\n          \"updatedDate\": \"2022-04-23T14:00:00Z\"\n        }\n      ],\n      \"usage\": [\n        \"string\",\n        \"string\"\n      ],\n      \"name\": \"Summer Sale 2024\",\n      \"description\": \"Summer Sale 2024\",\n      \"durationDays\": 7,\n      \"amountOff\": 2000,\n      \"percentOff\": 20.5,\n      \"active\": true,\n      \"numUsed\": 42,\n      \"createdDate\": \"2024-01-15T10:00:00Z\",\n      \"expirationDate\": \"2024-12-31T23:59:59Z\",\n      \"codes\": [\n        {\n          \"id\": \"promo_code_1234\",\n          \"name\": \"SUMMER2024\",\n          \"description\": \"100% discount!\",\n          \"code\": \"SUMMER2024\",\n          \"active\": false,\n          \"minimumAmount\": 5000,\n          \"firstTimeCustomersOnly\": false,\n          \"limit\": 100,\n          \"createdDate\": \"2024-01-15T10:00:00Z\",\n          \"expiratonDate\": \"2024-12-31T23:59:59Z\",\n          \"metadata\": {\n            \"key_0\": \"string\"\n          }\n        },\n        {\n          \"id\": \"promo_code_1234\",\n          \"name\": \"SUMMER2024\",\n          \"description\": \"100% discount!\",\n          \"code\": \"SUMMER2024\",\n          \"active\": true,\n          \"minimumAmount\": 5000,\n          \"firstTimeCustomersOnly\": false,\n          \"limit\": 100,\n          \"createdDate\": \"2024-01-15T10:00:00Z\",\n          \"expiratonDate\": \"2024-12-31T23:59:59Z\",\n          \"metadata\": {\n            \"key_0\": \"string\",\n            \"key_1\": \"string\"\n          }\n        }\n      ],\n      \"metadata\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      },\n      \"isPersistent\": false,\n      \"isFree\": false,\n      \"deleted\": true\n    },\n    {\n      \"id\": \"b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2\",\n      \"href\": \"string\",\n      \"relation\": \"string\",\n      \"method\": \"GET\",\n      \"self\": {\n        \"id\": \"string\",\n        \"href\": \"string\",\n        \"relation\": \"string\",\n        \"method\": \"GET\"\n      },\n      \"productSuite\": \"string\",\n      \"tiers\": [\n        {\n          \"id\": \"b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2\",\n          \"href\": \"string\",\n          \"relation\": \"string\",\n          \"method\": \"GET\",\n          \"self\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"href\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"relation\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"method\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"smokeballId\": \"string\",\n          \"productSuite\": \"string\",\n          \"name\": \"Intake\",\n          \"description\": \"string\",\n          \"trialPeriodDays\": 8141,\n          \"prices\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"createdDate\": \"2022-04-23T14:00:00Z\",\n          \"updatedDate\": \"2022-04-23T14:00:00Z\"\n        },\n        {\n          \"id\": \"b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2\",\n          \"href\": \"string\",\n          \"relation\": \"string\",\n          \"method\": \"GET\",\n          \"self\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"href\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"relation\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"method\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"smokeballId\": \"string\",\n          \"productSuite\": \"string\",\n          \"name\": \"Intake\",\n          \"description\": \"string\",\n          \"trialPeriodDays\": 4541,\n          \"prices\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"createdDate\": \"2022-04-23T14:00:00Z\",\n          \"updatedDate\": \"2022-04-23T14:00:00Z\"\n        }\n      ],\n      \"addOns\": [\n        {\n          \"id\": \"b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2\",\n          \"href\": \"string\",\n          \"relation\": \"string\",\n          \"method\": \"GET\",\n          \"self\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"href\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"relation\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"method\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"smokeballId\": \"string\",\n          \"productSuite\": \"string\",\n          \"name\": \"Intake\",\n          \"description\": \"string\",\n          \"trialPeriodDays\": 963,\n          \"prices\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"createdDate\": \"2022-04-23T14:00:00Z\",\n          \"updatedDate\": \"2022-04-23T14:00:00Z\"\n        },\n        {\n          \"id\": \"b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2\",\n          \"href\": \"string\",\n          \"relation\": \"string\",\n          \"method\": \"GET\",\n          \"self\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"href\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"relation\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"method\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"smokeballId\": \"string\",\n          \"productSuite\": \"string\",\n          \"name\": \"Intake\",\n          \"description\": \"string\",\n          \"trialPeriodDays\": 6228,\n          \"prices\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"createdDate\": \"2022-04-23T14:00:00Z\",\n          \"updatedDate\": \"2022-04-23T14:00:00Z\"\n        }\n      ],\n      \"usage\": [\n        \"string\",\n        \"string\"\n      ],\n      \"name\": \"Summer Sale 2024\",\n      \"description\": \"Summer Sale 2024\",\n      \"durationDays\": 7,\n      \"amountOff\": 2000,\n      \"percentOff\": 20.5,\n      \"active\": true,\n      \"numUsed\": 42,\n      \"createdDate\": \"2024-01-15T10:00:00Z\",\n      \"expirationDate\": \"2024-12-31T23:59:59Z\",\n      \"codes\": [\n        {\n          \"id\": \"promo_code_1234\",\n          \"name\": \"SUMMER2024\",\n          \"description\": \"100% discount!\",\n          \"code\": \"SUMMER2024\",\n          \"active\": true,\n          \"minimumAmount\": 5000,\n          \"firstTimeCustomersOnly\": false,\n          \"limit\": 100,\n          \"createdDate\": \"2024-01-15T10:00:00Z\",\n          \"expiratonDate\": \"2024-12-31T23:59:59Z\",\n          \"metadata\": {\n            \"key_0\": \"string\"\n          }\n        },\n        {\n          \"id\": \"promo_code_1234\",\n          \"name\": \"SUMMER2024\",\n          \"description\": \"100% discount!\",\n          \"code\": \"SUMMER2024\",\n          \"active\": false,\n          \"minimumAmount\": 5000,\n          \"firstTimeCustomersOnly\": false,\n          \"limit\": 100,\n          \"createdDate\": \"2024-01-15T10:00:00Z\",\n          \"expiratonDate\": \"2024-12-31T23:59:59Z\",\n          \"metadata\": {\n            \"key_0\": \"string\",\n            \"key_1\": \"string\"\n          }\n        }\n      ],\n      \"metadata\": {\n        \"key_0\": \"string\"\n      },\n      \"isPersistent\": true,\n      \"isFree\": true,\n      \"deleted\": false\n    }\n  ],\n  \"offset\": 9361,\n  \"limit\": 9336,\n  \"size\": 8246,\n  \"first\": {\n    \"id\": \"string\",\n    \"href\": \"string\",\n    \"relation\": \"string\",\n    \"method\": \"GET\"\n  },\n  \"previous\": {\n    \"id\": \"string\",\n    \"href\": \"string\",\n    \"relation\": \"string\",\n    \"method\": \"GET\"\n  },\n  \"next\": {\n    \"id\": \"string\",\n    \"href\": \"string\",\n    \"relation\": \"string\",\n    \"method\": \"GET\"\n  },\n  \"last\": {\n    \"id\": \"string\",\n    \"href\": \"string\",\n    \"relation\": \"string\",\n    \"method\": \"GET\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "877fca15-04c8-465f-afea-d9dcfb204368",
+              "name": "When an error occurs while retrieving promotions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions",
+                    "promotions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "Offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "Limit",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a9d7e8e0-127b-414f-ae02-e4016fa49565",
+          "name": "Get promotion",
+          "request": {
+            "name": "Get promotion",
+            "description": {
+              "content": "Retrieves detailed information for a specific promotion.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "subscriptions",
+                "promotions",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "905e1551-88a8-433b-94b0-95379d91f1e7",
+              "name": "When request is successful. Returns a 'SubscriptionPromotion' object.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions",
+                    "promotions",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2\",\n  \"href\": \"string\",\n  \"relation\": \"string\",\n  \"method\": \"GET\",\n  \"self\": {\n    \"id\": \"string\",\n    \"href\": \"string\",\n    \"relation\": \"string\",\n    \"method\": \"GET\"\n  },\n  \"productSuite\": \"string\",\n  \"tiers\": [\n    {\n      \"id\": \"b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2\",\n      \"href\": \"string\",\n      \"relation\": \"string\",\n      \"method\": \"GET\",\n      \"self\": {\n        \"id\": \"string\",\n        \"href\": \"string\",\n        \"relation\": \"string\",\n        \"method\": \"GET\"\n      },\n      \"smokeballId\": \"string\",\n      \"productSuite\": \"string\",\n      \"name\": \"Intake\",\n      \"description\": \"string\",\n      \"trialPeriodDays\": 1240,\n      \"prices\": [\n        {\n          \"id\": \"string\",\n          \"externalPriceId\": \"string\",\n          \"default\": true,\n          \"active\": true,\n          \"type\": \"Recurring\",\n          \"name\": \"\\\"$109 per user/month\\\"\",\n          \"amount\": 5900,\n          \"interval\": \"Monthly\"\n        },\n        {\n          \"id\": \"string\",\n          \"externalPriceId\": \"string\",\n          \"default\": true,\n          \"active\": true,\n          \"type\": \"Recurring\",\n          \"name\": \"\\\"$109 per user/month\\\"\",\n          \"amount\": 5900,\n          \"interval\": \"Monthly\"\n        }\n      ],\n      \"createdDate\": \"2022-04-23T14:00:00Z\",\n      \"updatedDate\": \"2022-04-23T14:00:00Z\"\n    },\n    {\n      \"id\": \"b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2\",\n      \"href\": \"string\",\n      \"relation\": \"string\",\n      \"method\": \"GET\",\n      \"self\": {\n        \"id\": \"string\",\n        \"href\": \"string\",\n        \"relation\": \"string\",\n        \"method\": \"GET\"\n      },\n      \"smokeballId\": \"string\",\n      \"productSuite\": \"string\",\n      \"name\": \"Intake\",\n      \"description\": \"string\",\n      \"trialPeriodDays\": 5005,\n      \"prices\": [\n        {\n          \"id\": \"string\",\n          \"externalPriceId\": \"string\",\n          \"default\": true,\n          \"active\": true,\n          \"type\": \"Recurring\",\n          \"name\": \"\\\"$109 per user/month\\\"\",\n          \"amount\": 5900,\n          \"interval\": \"Monthly\"\n        },\n        {\n          \"id\": \"string\",\n          \"externalPriceId\": \"string\",\n          \"default\": true,\n          \"active\": true,\n          \"type\": \"Recurring\",\n          \"name\": \"\\\"$109 per user/month\\\"\",\n          \"amount\": 5900,\n          \"interval\": \"Monthly\"\n        }\n      ],\n      \"createdDate\": \"2022-04-23T14:00:00Z\",\n      \"updatedDate\": \"2022-04-23T14:00:00Z\"\n    }\n  ],\n  \"addOns\": [\n    {\n      \"id\": \"b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2\",\n      \"href\": \"string\",\n      \"relation\": \"string\",\n      \"method\": \"GET\",\n      \"self\": {\n        \"id\": \"string\",\n        \"href\": \"string\",\n        \"relation\": \"string\",\n        \"method\": \"GET\"\n      },\n      \"smokeballId\": \"string\",\n      \"productSuite\": \"string\",\n      \"name\": \"Intake\",\n      \"description\": \"string\",\n      \"trialPeriodDays\": 9868,\n      \"prices\": [\n        {\n          \"id\": \"string\",\n          \"externalPriceId\": \"string\",\n          \"default\": true,\n          \"active\": true,\n          \"type\": \"Recurring\",\n          \"name\": \"\\\"$109 per user/month\\\"\",\n          \"amount\": 5900,\n          \"interval\": \"Monthly\"\n        },\n        {\n          \"id\": \"string\",\n          \"externalPriceId\": \"string\",\n          \"default\": true,\n          \"active\": true,\n          \"type\": \"Recurring\",\n          \"name\": \"\\\"$109 per user/month\\\"\",\n          \"amount\": 5900,\n          \"interval\": \"Monthly\"\n        }\n      ],\n      \"createdDate\": \"2022-04-23T14:00:00Z\",\n      \"updatedDate\": \"2022-04-23T14:00:00Z\"\n    },\n    {\n      \"id\": \"b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2\",\n      \"href\": \"string\",\n      \"relation\": \"string\",\n      \"method\": \"GET\",\n      \"self\": {\n        \"id\": \"string\",\n        \"href\": \"string\",\n        \"relation\": \"string\",\n        \"method\": \"GET\"\n      },\n      \"smokeballId\": \"string\",\n      \"productSuite\": \"string\",\n      \"name\": \"Intake\",\n      \"description\": \"string\",\n      \"trialPeriodDays\": 7342,\n      \"prices\": [\n        {\n          \"id\": \"string\",\n          \"externalPriceId\": \"string\",\n          \"default\": true,\n          \"active\": true,\n          \"type\": \"Recurring\",\n          \"name\": \"\\\"$109 per user/month\\\"\",\n          \"amount\": 5900,\n          \"interval\": \"Monthly\"\n        },\n        {\n          \"id\": \"string\",\n          \"externalPriceId\": \"string\",\n          \"default\": true,\n          \"active\": true,\n          \"type\": \"Recurring\",\n          \"name\": \"\\\"$109 per user/month\\\"\",\n          \"amount\": 5900,\n          \"interval\": \"Monthly\"\n        }\n      ],\n      \"createdDate\": \"2022-04-23T14:00:00Z\",\n      \"updatedDate\": \"2022-04-23T14:00:00Z\"\n    }\n  ],\n  \"usage\": [\n    \"string\",\n    \"string\"\n  ],\n  \"name\": \"Summer Sale 2024\",\n  \"description\": \"Summer Sale 2024\",\n  \"durationDays\": 7,\n  \"amountOff\": 2000,\n  \"percentOff\": 20.5,\n  \"active\": false,\n  \"numUsed\": 42,\n  \"createdDate\": \"2024-01-15T10:00:00Z\",\n  \"expirationDate\": \"2024-12-31T23:59:59Z\",\n  \"codes\": [\n    {\n      \"id\": \"promo_code_1234\",\n      \"name\": \"SUMMER2024\",\n      \"description\": \"100% discount!\",\n      \"code\": \"SUMMER2024\",\n      \"active\": true,\n      \"minimumAmount\": 5000,\n      \"firstTimeCustomersOnly\": false,\n      \"limit\": 100,\n      \"createdDate\": \"2024-01-15T10:00:00Z\",\n      \"expiratonDate\": \"2024-12-31T23:59:59Z\",\n      \"metadata\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      }\n    },\n    {\n      \"id\": \"promo_code_1234\",\n      \"name\": \"SUMMER2024\",\n      \"description\": \"100% discount!\",\n      \"code\": \"SUMMER2024\",\n      \"active\": false,\n      \"minimumAmount\": 5000,\n      \"firstTimeCustomersOnly\": true,\n      \"limit\": 100,\n      \"createdDate\": \"2024-01-15T10:00:00Z\",\n      \"expiratonDate\": \"2024-12-31T23:59:59Z\",\n      \"metadata\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      }\n    }\n  ],\n  \"metadata\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\",\n    \"key_2\": \"string\",\n    \"key_3\": \"string\",\n    \"key_4\": \"string\"\n  },\n  \"isPersistent\": true,\n  \"isFree\": false,\n  \"deleted\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7520f5c0-b815-4ae7-876f-ff7e7c6ace05",
+              "name": "When an unsupported request is made.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions",
+                    "promotions",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 9923,\n  \"detail\": \"string\",\n  \"instance\": \"string\",\n  \"key_0\": {},\n  \"key_1\": {},\n  \"key_2\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "92493ab7-0575-4c80-8fed-e9af79344865",
+              "name": "When an error occurs while retrieving promotion.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions",
+                    "promotions",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b8b24567-bd30-42bb-a5f0-029a143f28e9",
+          "name": "Apply promotion to subscription",
+          "request": {
+            "name": "Apply promotion to subscription",
+            "description": {
+              "content": "Applies a promotion to a subscription.\r\n\r\nImportant considerations:\r\n* Some promotions may have redemption limits per subscription\r\n* Some promotions may have duration limits\r\n* Signup promotions cannot be applied to an existing subscription\r\n* Trial promotions are tied to a single tier or add-on",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "subscriptions",
+                ":subscriptionId",
+                "promotions",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "subscriptionId",
+                  "description": "(Required) The unique identifier of the subscription"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) The identifier of the promotion to apply"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "48fce294-8df1-456d-8177-ab3c9a28d3f6",
+              "name": "When request is accepted. Returns a 'Link' object.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions",
+                    ":subscriptionId",
+                    "promotions",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriptionId",
+                      "description": "(Required) The unique identifier of the subscription"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The identifier of the promotion to apply"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"href\": \"string\",\n  \"relation\": \"string\",\n  \"method\": \"GET\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6e8e0955-53ac-47fe-b6cf-67d47a36e7af",
+              "name": "When an unsupported request is made.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions",
+                    ":subscriptionId",
+                    "promotions",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriptionId",
+                      "description": "(Required) The unique identifier of the subscription"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The identifier of the promotion to apply"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 9923,\n  \"detail\": \"string\",\n  \"instance\": \"string\",\n  \"key_0\": {},\n  \"key_1\": {},\n  \"key_2\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "efcac7e4-c44e-4209-a7bd-27191b24833a",
+              "name": "When subscription or promotion with specified id does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions",
+                    ":subscriptionId",
+                    "promotions",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriptionId",
+                      "description": "(Required) The unique identifier of the subscription"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The identifier of the promotion to apply"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 9923,\n  \"detail\": \"string\",\n  \"instance\": \"string\",\n  \"key_0\": {},\n  \"key_1\": {},\n  \"key_2\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3a9bc570-6783-482d-9175-545e7f169ea5",
+              "name": "When an error occurs while applying promotion.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions",
+                    ":subscriptionId",
+                    "promotions",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriptionId",
+                      "description": "(Required) The unique identifier of the subscription"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The identifier of the promotion to apply"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2a95e369-7fed-4a57-aed9-e71747b1155a",
+          "name": "Remove promotion from subscription",
+          "request": {
+            "name": "Remove promotion from subscription",
+            "description": {
+              "content": "Removes a promotion from a subscription.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "subscriptions",
+                ":subscriptionId",
+                "promotions",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "subscriptionId",
+                  "description": "(Required) The unique identifier of the subscription"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) The identifier of the promotion to remove"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "62ac05c0-0094-4ed3-b52b-38669a370d60",
+              "name": "When request is accepted. Returns a 'Link' object.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions",
+                    ":subscriptionId",
+                    "promotions",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriptionId",
+                      "description": "(Required) The unique identifier of the subscription"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The identifier of the promotion to remove"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"href\": \"string\",\n  \"relation\": \"string\",\n  \"method\": \"GET\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1025dd8a-e264-4347-808f-f76e1e3f5ea9",
+              "name": "When an unsupported request is made.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions",
+                    ":subscriptionId",
+                    "promotions",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriptionId",
+                      "description": "(Required) The unique identifier of the subscription"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The identifier of the promotion to remove"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 9923,\n  \"detail\": \"string\",\n  \"instance\": \"string\",\n  \"key_0\": {},\n  \"key_1\": {},\n  \"key_2\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1b699d9c-50fa-4881-afff-15a14c5d6a21",
+              "name": "When subscription or promotion with specified id does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions",
+                    ":subscriptionId",
+                    "promotions",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriptionId",
+                      "description": "(Required) The unique identifier of the subscription"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The identifier of the promotion to remove"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 9923,\n  \"detail\": \"string\",\n  \"instance\": \"string\",\n  \"key_0\": {},\n  \"key_1\": {},\n  \"key_2\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1162dc47-003d-4ff5-8cf8-6e932ab3d7a4",
+              "name": "When an error occurs while removing promotion.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions",
+                    ":subscriptionId",
+                    "promotions",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriptionId",
+                      "description": "(Required) The unique identifier of the subscription"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The identifier of the promotion to remove"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.smokeball.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "f6fb7f67-2846-4443-aba6-e0c49e1130bb",
+    "name": "Smokeball Activity Codes Subscription Promotions API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for integrating with Smokeball legal practice management software. Supports matters, contacts, documents, time entries, billing, trust accounting, staff, webhooks, and law firm workflows across US, AU, and UK regions. Uses OAuth 2.0 (client credentials) authentication.\n\nContact Support:\n Name: Smokeball Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

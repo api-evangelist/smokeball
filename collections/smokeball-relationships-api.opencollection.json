@@ -1,0 +1,176 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Smokeball Activity Codes Relationships API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-api-key",
+      "value": "{{x-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Relationships",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get relationships on a matter",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.smokeball.com/matters/:matterId/roles/:roleId/relationships",
+            "params": [
+              {
+                "name": "matterId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "roleId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns associated relationships for a specified matter and role group."
+        },
+        {
+          "info": {
+            "name": "Add relationship to a role",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.smokeball.com/matters/:matterId/roles/:roleId/relationships",
+            "headers": [
+              {
+                "name": "Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "matterId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "roleId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Appends a new relationship with an existing role in the specified matter."
+        },
+        {
+          "info": {
+            "name": "Get relationship on a role",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.smokeball.com/matters/:matterId/roles/:roleId/relationships/:id",
+            "params": [
+              {
+                "name": "matterId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "roleId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns a relationship with a specified role in a matter."
+        },
+        {
+          "info": {
+            "name": "Update a relationship",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.smokeball.com/matters/:matterId/roles/:roleId/relationships/:id",
+            "params": [
+              {
+                "name": "matterId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "roleId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a specified relationship on a matter."
+        },
+        {
+          "info": {
+            "name": "Remove relationship from a role in a matter.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.smokeball.com/matters/:matterId/roles/:roleId/relationships/:id",
+            "headers": [
+              {
+                "name": "Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "matterId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "roleId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Removes a relationship from a role in a matter."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

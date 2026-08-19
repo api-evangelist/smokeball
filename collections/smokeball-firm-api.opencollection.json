@@ -1,0 +1,136 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Smokeball Activity Codes Firm API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-api-key",
+      "value": "{{x-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Firm",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get firm",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.smokeball.com/firm"
+          },
+          "docs": "Retrieves the details of the firm associated with the authenticated client."
+        },
+        {
+          "info": {
+            "name": "Create firm",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.smokeball.com/firm",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a firm for the current authenticated client and registers an existing user as a staff member and firm owner."
+        },
+        {
+          "info": {
+            "name": "Update firm",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.smokeball.com/firm",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates firm details for the current authenticated client."
+        },
+        {
+          "info": {
+            "name": "Get firm user mappings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.smokeball.com/firmusers"
+          },
+          "docs": "Retrieves a list of user mappings in the firm associated with the authenticated client."
+        },
+        {
+          "info": {
+            "name": "Get firm user mapping",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.smokeball.com/firmusers/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieves a user mapping (based on staff or user id parameter provided) in the firm associated with the authenticated client."
+        },
+        {
+          "info": {
+            "name": "Update firm user mapping",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.smokeball.com/firmusers/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a user mapping in the firm associated with the authenticated client."
+        },
+        {
+          "info": {
+            "name": "Delete firm user mapping",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.smokeball.com/firmusers/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Removes the user from the firm associated with the authenticated client.\r\n\r\nThe staff member is set as a former staff member and a former user. User access is also disabled."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

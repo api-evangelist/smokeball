@@ -1,0 +1,363 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Smokeball Activity Codes Files API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-api-key",
+      "value": "{{x-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Files",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get files on a matter",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.smokeball.com/matters/:matterId/documents/files",
+            "params": [
+              {
+                "name": "matterId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "Offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "Limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "Cursor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "Sort",
+                "value": "",
+                "type": "query",
+                "description": " Available fields: dateCreated"
+              },
+              {
+                "name": "Search",
+                "value": "",
+                "type": "query",
+                "description": " Available fields: query, fileExtension"
+              }
+            ]
+          },
+          "docs": "Returns a list of files associated with a matter. \r\nDefaults to ascending order of date created, i.e. oldest first, unless sort option is supplied.\r\nCustom sorting and searching options does not apply to cursor-based pagination."
+        },
+        {
+          "info": {
+            "name": "Add file to a matter",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.smokeball.com/matters/:matterId/documents/files",
+            "params": [
+              {
+                "name": "matterId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Uploads a new file for the specified matter."
+        },
+        {
+          "info": {
+            "name": "Get a file",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.smokeball.com/matters/:matterId/documents/files/:fileId",
+            "params": [
+              {
+                "name": "fileId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "matterId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieves a specified file."
+        },
+        {
+          "info": {
+            "name": "Upload/update version or metadata of a file",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.smokeball.com/matters/:matterId/documents/files/:fileId",
+            "params": [
+              {
+                "name": "matterId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "fileId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the metadata for a file or uploads a new version of the file"
+        },
+        {
+          "info": {
+            "name": "Patch a file",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.smokeball.com/matters/:matterId/documents/files/:fileId",
+            "params": [
+              {
+                "name": "matterId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "fileId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the metadata for a file or uploads a new version of the file"
+        },
+        {
+          "info": {
+            "name": "Delete a file",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.smokeball.com/matters/:matterId/documents/files/:fileId",
+            "params": [
+              {
+                "name": "matterId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "fileId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deletes a specified matter file."
+        },
+        {
+          "info": {
+            "name": "Get download url for a file",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.smokeball.com/matters/:matterId/documents/files/:fileId/download",
+            "params": [
+              {
+                "name": "matterId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "fileId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "versionId",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieves download details for a specified matter file."
+        },
+        {
+          "info": {
+            "name": "Get upload url for a file",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.smokeball.com/matters/:matterId/documents/files/:fileId/upload",
+            "params": [
+              {
+                "name": "matterId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "fileId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieves upload details for a specified matter file."
+        },
+        {
+          "info": {
+            "name": "Get file history on a matter",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.smokeball.com/matters/:matterId/documents/files/:fileId/history",
+            "params": [
+              {
+                "name": "matterId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "fileId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns a list of history entries for the specified file"
+        },
+        {
+          "info": {
+            "name": "Add files to a matter",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.smokeball.com/matters/:matterId/documents/files/bulk",
+            "params": [
+              {
+                "name": "matterId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Uploads a batch of files for the specified matter. Used for data migrations."
+        },
+        {
+          "info": {
+            "name": "Get preview info for a file",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.smokeball.com/matters/:matterId/documents/files/:fileId/preview",
+            "params": [
+              {
+                "name": "matterId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "fileId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns info to preview a file."
+        },
+        {
+          "info": {
+            "name": "Create a preview request",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.smokeball.com/matters/:matterId/documents/files/:fileId/preview",
+            "params": [
+              {
+                "name": "matterId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "fileId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Creates a preview for the specified file."
+        },
+        {
+          "info": {
+            "name": "Get preview info for a file by document version",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.smokeball.com/matters/:matterId/documents/files/:fileId/preview/:documentVersionId",
+            "params": [
+              {
+                "name": "matterId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "fileId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "documentVersionId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns info to preview a file by document version."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,155 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Smokeball Activity Codes Stages API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-api-key",
+      "value": "{{x-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Stages",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get stage to matter mappings in the firm",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.smokeball.com/stages",
+            "params": [
+              {
+                "name": "Offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "Limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "UpdatedSince",
+                "value": "",
+                "type": "query",
+                "description": "Returns items updated since a specified time (.net ticks representation of the UTC datetime)."
+              },
+              {
+                "name": "LastUpdated",
+                "value": "",
+                "type": "query",
+                "description": "Deprecated, use updatedSince\r\nReturns items updated since a specified time."
+              }
+            ]
+          },
+          "docs": "Returns a list of stage to matter mappings in the firm."
+        },
+        {
+          "info": {
+            "name": "Get a matter stage information",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.smokeball.com/matters/:matterId/stages",
+            "params": [
+              {
+                "name": "matterId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the specified matters stage information."
+        },
+        {
+          "info": {
+            "name": "Get stage sets for the firm",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.smokeball.com/stagesets",
+            "params": [
+              {
+                "name": "Offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "Limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "UpdatedSince",
+                "value": "",
+                "type": "query",
+                "description": "Returns items updated since a specified time (.net ticks representation of the UTC datetime)."
+              },
+              {
+                "name": "LastUpdated",
+                "value": "",
+                "type": "query",
+                "description": "Deprecated, use updatedSince\r\nReturns items updated since a specified time."
+              }
+            ]
+          },
+          "docs": "Returns a list of stage sets for the firm."
+        },
+        {
+          "info": {
+            "name": "Get a stage set",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.smokeball.com/stagesets/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the specified stage set."
+        },
+        {
+          "info": {
+            "name": "Get a stage on a stage set",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.smokeball.com/stagesets/:stageSetId/stages/:id",
+            "params": [
+              {
+                "name": "stageSetId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Return the specified stage on the stage set."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

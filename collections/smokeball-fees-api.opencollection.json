@@ -1,0 +1,182 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Smokeball Activity Codes Fees API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-api-key",
+      "value": "{{x-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Fees",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get fees",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.smokeball.com/matters/:matterId/fees",
+            "params": [
+              {
+                "name": "matterId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "Offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "Limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "UpdatedSince",
+                "value": "",
+                "type": "query",
+                "description": "Returns fees updated since a specified time (.net ticks representation of the UTC datetime)."
+              }
+            ]
+          },
+          "docs": "Returns a list of fees for the specified matter."
+        },
+        {
+          "info": {
+            "name": "Create a fee",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.smokeball.com/matters/:matterId/fees",
+            "params": [
+              {
+                "name": "matterId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a fee for the specified matter."
+        },
+        {
+          "info": {
+            "name": "Get a fee",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.smokeball.com/matters/:matterId/fees/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "matterId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieves a specified fee."
+        },
+        {
+          "info": {
+            "name": "Update a fee",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.smokeball.com/matters/:matterId/fees/:id",
+            "params": [
+              {
+                "name": "matterId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a fee for the specified matter."
+        },
+        {
+          "info": {
+            "name": "Patch a fee",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.smokeball.com/matters/:matterId/fees/:id",
+            "params": [
+              {
+                "name": "matterId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Patches a fee for the specified matter."
+        },
+        {
+          "info": {
+            "name": "Delete a fee",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.smokeball.com/matters/:matterId/fees/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "matterId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deletes a fee."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

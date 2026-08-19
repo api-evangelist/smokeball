@@ -1,0 +1,852 @@
+{
+  "item": [
+    {
+      "id": "51a1dbd1-2436-4d2c-aae6-d8105cc2660d",
+      "name": "Staff",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8694f6c5-69fe-4c43-9358-846405e768b0",
+          "name": "Search firm staff members",
+          "request": {
+            "name": "Search firm staff members",
+            "description": {
+              "content": "Retrieves a paginated list of staff members (filtered based on search parameters provided) in the firm associated with the authenticated client.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "staff"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "Offset",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "Limit",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "Search",
+                  "value": "<string>",
+                  "description": " Available fields: email, name"
+                },
+                {
+                  "disabled": false,
+                  "key": "Search",
+                  "value": "<string>",
+                  "description": " Available fields: email, name"
+                },
+                {
+                  "disabled": false,
+                  "key": "Fields",
+                  "value": "<string>",
+                  "description": " Available fields: rate"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a02ac9c3-d49b-48c0-865b-c29b6ba6cb88",
+              "name": "When request is successful. Returns a paged collection of 'Staff' objects.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "staff"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "Offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "Limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "Search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "Search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "Fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"href\": \"string\",\n  \"relation\": \"string\",\n  \"method\": \"GET\",\n  \"self\": {\n    \"id\": \"string\",\n    \"href\": \"string\",\n    \"relation\": \"string\",\n    \"method\": \"GET\"\n  },\n  \"value\": [\n    {\n      \"href\": \"string\",\n      \"relation\": \"string\",\n      \"method\": \"GET\",\n      \"self\": {\n        \"id\": \"string\",\n        \"href\": \"string\",\n        \"relation\": \"string\",\n        \"method\": \"GET\"\n      },\n      \"id\": \"b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2\",\n      \"versionId\": \"750eb5c5-ac0b-7d11-4997-e0ce9d8896c8\",\n      \"title\": \"Mr\",\n      \"firstName\": \"John\",\n      \"middleName\": \"\",\n      \"lastName\": \"Smith\",\n      \"initials\": \"JS\",\n      \"phone\": {\n        \"areaCode\": \"555\",\n        \"number\": \"1234567\"\n      },\n      \"cell\": {\n        \"areaCode\": \"555\",\n        \"number\": \"1234567\"\n      },\n      \"email\": \"john.smith@brown.com\",\n      \"role\": \"Bookkeeper\",\n      \"rate\": 150,\n      \"avatar\": \"https://example-avatar-url.com/image\",\n      \"former\": false,\n      \"enabled\": true,\n      \"userId\": \"14b5dd57-3681-420e-a483-4823424eef45\",\n      \"colorFill\": \"#797d85\",\n      \"colorStroke\": \"#64666a\",\n      \"licenceNumbers\": [\n        {\n          \"state\": \"IL\",\n          \"type\": \"\",\n          \"number\": \"string\"\n        },\n        {\n          \"state\": \"IL\",\n          \"type\": \"\",\n          \"number\": \"string\"\n        }\n      ],\n      \"outOfOffice\": {\n        \"startDate\": \"2005-12-09T08:27:42.486Z\",\n        \"endDate\": \"1998-06-05T09:37:22.490Z\"\n      }\n    },\n    {\n      \"href\": \"string\",\n      \"relation\": \"string\",\n      \"method\": \"GET\",\n      \"self\": {\n        \"id\": \"string\",\n        \"href\": \"string\",\n        \"relation\": \"string\",\n        \"method\": \"GET\"\n      },\n      \"id\": \"b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2\",\n      \"versionId\": \"750eb5c5-ac0b-7d11-4997-e0ce9d8896c8\",\n      \"title\": \"Mr\",\n      \"firstName\": \"John\",\n      \"middleName\": \"\",\n      \"lastName\": \"Smith\",\n      \"initials\": \"JS\",\n      \"phone\": {\n        \"areaCode\": \"555\",\n        \"number\": \"1234567\"\n      },\n      \"cell\": {\n        \"areaCode\": \"555\",\n        \"number\": \"1234567\"\n      },\n      \"email\": \"john.smith@brown.com\",\n      \"role\": \"Bookkeeper\",\n      \"rate\": 150,\n      \"avatar\": \"https://example-avatar-url.com/image\",\n      \"former\": false,\n      \"enabled\": true,\n      \"userId\": \"14b5dd57-3681-420e-a483-4823424eef45\",\n      \"colorFill\": \"#797d85\",\n      \"colorStroke\": \"#64666a\",\n      \"licenceNumbers\": [\n        {\n          \"state\": \"IL\",\n          \"type\": \"\",\n          \"number\": \"string\"\n        },\n        {\n          \"state\": \"IL\",\n          \"type\": \"\",\n          \"number\": \"string\"\n        }\n      ],\n      \"outOfOffice\": {\n        \"startDate\": \"2011-10-31T04:24:08.732Z\",\n        \"endDate\": \"1989-07-10T08:51:00.770Z\"\n      }\n    }\n  ],\n  \"offset\": 4525,\n  \"limit\": 9062,\n  \"size\": 8663,\n  \"first\": {\n    \"id\": \"string\",\n    \"href\": \"string\",\n    \"relation\": \"string\",\n    \"method\": \"GET\"\n  },\n  \"previous\": {\n    \"id\": \"string\",\n    \"href\": \"string\",\n    \"relation\": \"string\",\n    \"method\": \"GET\"\n  },\n  \"next\": {\n    \"id\": \"string\",\n    \"href\": \"string\",\n    \"relation\": \"string\",\n    \"method\": \"GET\"\n  },\n  \"last\": {\n    \"id\": \"string\",\n    \"href\": \"string\",\n    \"relation\": \"string\",\n    \"method\": \"GET\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5d18c588-0cee-477e-8ae9-7955cc1d44c8",
+          "name": "Create firm staff member",
+          "request": {
+            "name": "Create firm staff member",
+            "description": {
+              "content": "Creates a staff member in the firm associated with the authenticated client.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "staff"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userId\": \"<string>\",\n  \"title\": \"<string>\",\n  \"firstName\": \"<string>\",\n  \"middleName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"initials\": \"<string>\",\n  \"phone\": {\n    \"areaCode\": \"<string>\",\n    \"number\": \"<string>\"\n  },\n  \"cell\": {\n    \"areaCode\": \"<string>\",\n    \"number\": \"<string>\"\n  },\n  \"email\": \"<string>\",\n  \"role\": \"<string>\",\n  \"avatar\": \"<string>\",\n  \"former\": \"<boolean>\",\n  \"colorFill\": \"<string>\",\n  \"colorStroke\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3c2f81c9-85a1-4711-b6f6-9fa6332b5534",
+              "name": "When request is accepted. Returns a hypermedia 'Link' object of the staff member to be created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "staff"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"userId\": \"b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2\",\n  \"title\": \"Mr\",\n  \"firstName\": \"John\",\n  \"middleName\": \"\",\n  \"lastName\": \"Smith\",\n  \"initials\": \"JS\",\n  \"phone\": {\n    \"areaCode\": \"555\",\n    \"number\": \"1234567\"\n  },\n  \"cell\": {\n    \"areaCode\": \"555\",\n    \"number\": \"1234567\"\n  },\n  \"email\": \"john.smith@brown.com\",\n  \"role\": \"Bookkeeper\",\n  \"avatar\": \"https://example-avatar-url.com/image\",\n  \"former\": false,\n  \"colorFill\": \"#797d85\",\n  \"colorStroke\": \"#64666a\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"href\": \"string\",\n  \"relation\": \"string\",\n  \"method\": \"GET\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5394e89f-697b-4b77-8322-041f5386bd50",
+              "name": "When request is invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "staff"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"userId\": \"b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2\",\n  \"title\": \"Mr\",\n  \"firstName\": \"John\",\n  \"middleName\": \"\",\n  \"lastName\": \"Smith\",\n  \"initials\": \"JS\",\n  \"phone\": {\n    \"areaCode\": \"555\",\n    \"number\": \"1234567\"\n  },\n  \"cell\": {\n    \"areaCode\": \"555\",\n    \"number\": \"1234567\"\n  },\n  \"email\": \"john.smith@brown.com\",\n  \"role\": \"Bookkeeper\",\n  \"avatar\": \"https://example-avatar-url.com/image\",\n  \"former\": false,\n  \"colorFill\": \"#797d85\",\n  \"colorStroke\": \"#64666a\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 5059,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d4809111-4803-4eed-917c-074213a65bcd",
+          "name": "Get firm staff member",
+          "request": {
+            "name": "Get firm staff member",
+            "description": {
+              "content": "Retrieves a staff member (based on staff id parameter provided) in the firm associated with the authenticated client.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "staff",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "203433a5-eb54-451b-b9f1-1ca1cd7df1db",
+              "name": "When request is successful. Returns a 'Staff' object.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "staff",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"href\": \"string\",\n  \"relation\": \"string\",\n  \"method\": \"GET\",\n  \"self\": {\n    \"id\": \"string\",\n    \"href\": \"string\",\n    \"relation\": \"string\",\n    \"method\": \"GET\"\n  },\n  \"id\": \"b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2\",\n  \"versionId\": \"750eb5c5-ac0b-7d11-4997-e0ce9d8896c8\",\n  \"title\": \"Mr\",\n  \"firstName\": \"John\",\n  \"middleName\": \"\",\n  \"lastName\": \"Smith\",\n  \"initials\": \"JS\",\n  \"phone\": {\n    \"areaCode\": \"555\",\n    \"number\": \"1234567\"\n  },\n  \"cell\": {\n    \"areaCode\": \"555\",\n    \"number\": \"1234567\"\n  },\n  \"email\": \"john.smith@brown.com\",\n  \"role\": \"Bookkeeper\",\n  \"rate\": 150,\n  \"avatar\": \"https://example-avatar-url.com/image\",\n  \"former\": false,\n  \"enabled\": true,\n  \"userId\": \"14b5dd57-3681-420e-a483-4823424eef45\",\n  \"colorFill\": \"#797d85\",\n  \"colorStroke\": \"#64666a\",\n  \"licenceNumbers\": [\n    {\n      \"state\": \"IL\",\n      \"type\": \"\",\n      \"number\": \"string\"\n    },\n    {\n      \"state\": \"IL\",\n      \"type\": \"\",\n      \"number\": \"string\"\n    }\n  ],\n  \"outOfOffice\": {\n    \"startDate\": \"1960-02-09T21:31:42.895Z\",\n    \"endDate\": \"1961-02-20T21:22:18.027Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8d1fc9ca-f38c-486d-a169-0f1359f65039",
+              "name": "When staff id parameter invalid or not provided.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "staff",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 5059,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "59675a9d-08c5-40e0-8933-878315fae738",
+              "name": "When staff member does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "staff",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 5059,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d5dd49cf-a52c-4eed-8bb9-62a68322183a",
+          "name": "Update firm staff member",
+          "request": {
+            "name": "Update firm staff member",
+            "description": {
+              "content": "Updates a staff member in the firm associated with the authenticated client.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "staff",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userId\": \"<string>\",\n  \"title\": \"<string>\",\n  \"firstName\": \"<string>\",\n  \"middleName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"initials\": \"<string>\",\n  \"phone\": {\n    \"areaCode\": \"<string>\",\n    \"number\": \"<string>\"\n  },\n  \"cell\": {\n    \"areaCode\": \"<string>\",\n    \"number\": \"<string>\"\n  },\n  \"email\": \"<string>\",\n  \"role\": \"<string>\",\n  \"avatar\": \"<string>\",\n  \"former\": \"<boolean>\",\n  \"colorFill\": \"<string>\",\n  \"colorStroke\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "22a84daa-4c28-4926-8e20-720353fb2a26",
+              "name": "When request is accepted. Returns a hypermedia 'Link' object of the staff member to be updated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "staff",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"userId\": \"b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2\",\n  \"title\": \"Mr\",\n  \"firstName\": \"John\",\n  \"middleName\": \"\",\n  \"lastName\": \"Smith\",\n  \"initials\": \"JS\",\n  \"phone\": {\n    \"areaCode\": \"555\",\n    \"number\": \"1234567\"\n  },\n  \"cell\": {\n    \"areaCode\": \"555\",\n    \"number\": \"1234567\"\n  },\n  \"email\": \"john.smith@brown.com\",\n  \"role\": \"Bookkeeper\",\n  \"avatar\": \"https://example-avatar-url.com/image\",\n  \"former\": false,\n  \"colorFill\": \"#797d85\",\n  \"colorStroke\": \"#64666a\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"href\": \"string\",\n  \"relation\": \"string\",\n  \"method\": \"GET\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9897d82c-9afa-4924-a45b-8abe2ae48f87",
+              "name": "When staff member does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "staff",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"userId\": \"b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2\",\n  \"title\": \"Mr\",\n  \"firstName\": \"John\",\n  \"middleName\": \"\",\n  \"lastName\": \"Smith\",\n  \"initials\": \"JS\",\n  \"phone\": {\n    \"areaCode\": \"555\",\n    \"number\": \"1234567\"\n  },\n  \"cell\": {\n    \"areaCode\": \"555\",\n    \"number\": \"1234567\"\n  },\n  \"email\": \"john.smith@brown.com\",\n  \"role\": \"Bookkeeper\",\n  \"avatar\": \"https://example-avatar-url.com/image\",\n  \"former\": false,\n  \"colorFill\": \"#797d85\",\n  \"colorStroke\": \"#64666a\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 5059,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3f7ed6bf-08f4-4ca4-90a3-96aba22a0393",
+          "name": "Deletes a firm staff member",
+          "request": {
+            "name": "Deletes a firm staff member",
+            "description": {
+              "content": "Sets the staff member from the firm associated with the authenticated client as a former staff member.\r\n\r\nThe staff member is set as a former staff member and if they are a user, becomes a former user. User access is also disabled.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "staff",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4eebbc1e-b131-434d-9371-cacd9e8da498",
+              "name": "When request is accepted. Returns a hypermedia 'Link' object of the staff member to be deleted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "staff",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"href\": \"string\",\n  \"relation\": \"string\",\n  \"method\": \"GET\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "eaa08fe5-dbc3-44ec-9bb4-4abffe424a3d",
+              "name": "When staff member does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "staff",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 5059,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.smokeball.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "c9536275-e6fb-4a81-91f4-73fc3a031014",
+    "name": "Smokeball Activity Codes Staff API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for integrating with Smokeball legal practice management software. Supports matters, contacts, documents, time entries, billing, trust accounting, staff, webhooks, and law firm workflows across US, AU, and UK regions. Uses OAuth 2.0 (client credentials) authentication.\n\nContact Support:\n Name: Smokeball Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

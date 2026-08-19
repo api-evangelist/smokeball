@@ -1,0 +1,227 @@
+{
+  "item": [
+    {
+      "id": "10641cf0-e205-4ef1-a11e-f565ad44afe5",
+      "name": "Search",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7ee14d19-dceb-4f64-9ce7-c3677902371a",
+          "name": "Search files with advanced filters",
+          "request": {
+            "name": "Search files with advanced filters",
+            "description": {
+              "content": "Performs a full-account file search and returns files matching the provided query, paging options and filters.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "search",
+                "files"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "Offset",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "Limit",
+                  "value": "<integer>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"<string>\",\n  \"filters\": {\n    \"searchFields\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"includeFileExtensions\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"excludeFileExtensions\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"authorIds\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"contactIds\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3b9678d8-5380-4b0a-b89f-362eeb6eec62",
+              "name": "Returns the matching files.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "search",
+                    "files"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "Offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "Limit",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": \"contract\",\n  \"filters\": {\n    \"searchFields\": [\n      \"Name\",\n      \"Content\"\n    ],\n    \"includeFileExtensions\": [\n      \"pdf\",\n      \"docx\"\n    ],\n    \"excludeFileExtensions\": [\n      \"tmp\",\n      \"bak\"\n    ],\n    \"authorIds\": [\n      \"750eb5c5-ac0b-7d11-4997-e0ce9d8896c8\"\n    ],\n    \"contactIds\": [\n      \"b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2\"\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "913ad6b1-c5b9-4f13-846c-41bc3129db86",
+              "name": "When request body fields are invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "search",
+                    "files"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "Offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "Limit",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": \"contract\",\n  \"filters\": {\n    \"searchFields\": [\n      \"Name\",\n      \"Content\"\n    ],\n    \"includeFileExtensions\": [\n      \"pdf\",\n      \"docx\"\n    ],\n    \"excludeFileExtensions\": [\n      \"tmp\",\n      \"bak\"\n    ],\n    \"authorIds\": [\n      \"750eb5c5-ac0b-7d11-4997-e0ce9d8896c8\"\n    ],\n    \"contactIds\": [\n      \"b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2\"\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.smokeball.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "5751fd0d-a3a7-488d-81d2-a74bcf799580",
+    "name": "Smokeball Activity Codes Search API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for integrating with Smokeball legal practice management software. Supports matters, contacts, documents, time entries, billing, trust accounting, staff, webhooks, and law firm workflows across US, AU, and UK regions. Uses OAuth 2.0 (client credentials) authentication.\n\nContact Support:\n Name: Smokeball Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

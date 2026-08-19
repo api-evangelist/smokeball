@@ -1,0 +1,113 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Smokeball Activity Codes Invoices API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-api-key",
+      "value": "{{x-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Invoices",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get invoices",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.smokeball.com/matters/:matterId/invoices",
+            "params": [
+              {
+                "name": "matterId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the matter that the invoice belongs to."
+              },
+              {
+                "name": "LastUpdated",
+                "value": "2022-04-23T14:00:00Z",
+                "type": "query",
+                "description": "Returns items updated since the specified date and time."
+              },
+              {
+                "name": "UpdatedSince",
+                "value": "",
+                "type": "query",
+                "description": "Returns items updated since a specified time (.net ticks representation of the UTC datetime)."
+              },
+              {
+                "name": "Offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "Limit",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns a list of invoices for the specified matter."
+        },
+        {
+          "info": {
+            "name": "Get an invoice",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.smokeball.com/matters/:matterId/invoices/:invoiceId",
+            "params": [
+              {
+                "name": "matterId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "invoiceId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieves a specified invoice."
+        },
+        {
+          "info": {
+            "name": "Get download url for an invoice",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.smokeball.com/matters/:matterId/invoices/:invoiceId/download",
+            "params": [
+              {
+                "name": "matterId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "invoiceId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieves download details for a specified invoice."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

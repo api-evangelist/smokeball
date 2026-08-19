@@ -1,0 +1,341 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Smokeball Activity Codes Contacts API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-api-key",
+      "value": "{{x-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Contacts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get contact relations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.smokeball.com/contacts/:contactId/relations",
+            "params": [
+              {
+                "name": "contactId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns a list of relations for a specified contact if associated with the authenticated client."
+        },
+        {
+          "info": {
+            "name": "Create a contact relation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.smokeball.com/contacts/:contactId/relations",
+            "params": [
+              {
+                "name": "contactId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a relation for a specified contact."
+        },
+        {
+          "info": {
+            "name": "Get a contact relation",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.smokeball.com/contacts/:contactId/relations/:relatedContactId",
+            "params": [
+              {
+                "name": "contactId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "relatedContactId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieves a relation for a specified contact if associated with the authenticated client."
+        },
+        {
+          "info": {
+            "name": "Update a contact relation",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.smokeball.com/contacts/:contactId/relations/:relatedContactId",
+            "params": [
+              {
+                "name": "contactId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "relatedContactId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a relation for a specified contact."
+        },
+        {
+          "info": {
+            "name": "Delete a contact relation",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.smokeball.com/contacts/:contactId/relations/:relatedContactId",
+            "params": [
+              {
+                "name": "contactId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "relatedContactId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deletes a relation for a specified contact."
+        },
+        {
+          "info": {
+            "name": "Get contacts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.smokeball.com/contacts",
+            "params": [
+              {
+                "name": "Offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "Limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "UpdatedSince",
+                "value": "",
+                "type": "query",
+                "description": "Returns contacts updated since a specified time (.net ticks representation of the UTC datetime)."
+              },
+              {
+                "name": "ExcludeDeletedContacts",
+                "value": "true",
+                "type": "query",
+                "description": "Excludes (filters out) deleted contacts if set to true."
+              },
+              {
+                "name": "Type",
+                "value": "",
+                "type": "query",
+                "description": "Filters result by one more contact types if set. Returns all contact types by default.\r\nPossible values: Staff, Person, Organisation, GroupOfPeople, Trust"
+              },
+              {
+                "name": "Search",
+                "value": "",
+                "type": "query",
+                "description": " Available fields: email, phone, name"
+              },
+              {
+                "name": "Sort",
+                "value": "",
+                "type": "query",
+                "description": " Available fields: lastUpdated"
+              },
+              {
+                "name": "Fields",
+                "value": "",
+                "type": "query",
+                "description": " Available fields: passportDetails, deathDetails, citizenshipDetails, utbmsDetails, tags, executionOptions, voiDetails"
+              }
+            ]
+          },
+          "docs": "Returns a list of contacts."
+        },
+        {
+          "info": {
+            "name": "Create a contact",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.smokeball.com/contacts",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a contact."
+        },
+        {
+          "info": {
+            "name": "Get a contact",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.smokeball.com/contacts/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieves a specified contact."
+        },
+        {
+          "info": {
+            "name": "Update a contact",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.smokeball.com/contacts/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a specified contact."
+        },
+        {
+          "info": {
+            "name": "Delete a contact",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.smokeball.com/contacts/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deletes a specified contact."
+        },
+        {
+          "info": {
+            "name": "Get contact tags",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.smokeball.com/contacts/:id/tags",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieves a specified contacts tags."
+        },
+        {
+          "info": {
+            "name": "Add tags to a contact",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.smokeball.com/contacts/:id/tags",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The contact ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds tags to a contact."
+        },
+        {
+          "info": {
+            "name": "Remove tags from a contact",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.smokeball.com/contacts/:id/tags/:tagId",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The contact ID"
+              },
+              {
+                "name": "tagId",
+                "value": "",
+                "type": "path",
+                "description": "The tag ID (optional for bulk delete)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Removes tags from a contact."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

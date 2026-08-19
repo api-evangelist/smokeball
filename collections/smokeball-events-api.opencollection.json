@@ -1,0 +1,242 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Smokeball Activity Codes Events API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-api-key",
+      "value": "{{x-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Events",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.smokeball.com/events",
+            "params": [
+              {
+                "name": "Offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "Limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "UpdatedSince",
+                "value": "2000-01-01T20:00:00 OR 630823536000000000",
+                "type": "query",
+                "description": "Filter by events updated since a specified time.\r\nSupported date formats are ISO YYYY-MM-DDThh:mm:ss or .net ticks representation of the UTC datetime."
+              },
+              {
+                "name": "MatterId",
+                "value": "",
+                "type": "query",
+                "description": "Filter by events assigned to a specific MatterId."
+              },
+              {
+                "name": "ExcludeDeletedEvents",
+                "value": "false",
+                "type": "query",
+                "description": "Filter out any events that have been deleted, default: false"
+              },
+              {
+                "name": "From",
+                "value": "2000-01-01T20:00:00",
+                "type": "query",
+                "description": "Filter events from a specified UTC date and time.\r\nDefaults to the UTC datetime of the request.\r\nDates should be provided in ISO format YYYY-MM-DDThh:mm:ss."
+              },
+              {
+                "name": "To",
+                "value": "2000-01-01T20:00:00",
+                "type": "query",
+                "description": "Filter events to a specified UTC date and time.\r\nIf no datetime is specified all future events will be returned.\r\nDates should be provided in ISO format YYYY-MM-DDThh:mm:ss."
+              }
+            ]
+          },
+          "docs": "Returns a list of events."
+        },
+        {
+          "info": {
+            "name": "Create event",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.smokeball.com/events",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create new event."
+        },
+        {
+          "info": {
+            "name": "Get an event",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.smokeball.com/events/:eventId",
+            "params": [
+              {
+                "name": "eventId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieves a specified event."
+        },
+        {
+          "info": {
+            "name": "Update event",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.smokeball.com/events/:eventId",
+            "params": [
+              {
+                "name": "eventId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates event details."
+        },
+        {
+          "info": {
+            "name": "Delete event",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.smokeball.com/events/:eventId",
+            "params": [
+              {
+                "name": "eventId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deletes a specified event."
+        },
+        {
+          "info": {
+            "name": "Gets reminders for an event",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.smokeball.com/events/:eventId/reminders",
+            "params": [
+              {
+                "name": "eventId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the collection of reminders for an event"
+        },
+        {
+          "info": {
+            "name": "Create reminder for an event",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.smokeball.com/events/:eventId/reminders",
+            "params": [
+              {
+                "name": "eventId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new reminder for an event."
+        },
+        {
+          "info": {
+            "name": "Update a reminder for an event",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.smokeball.com/events/:eventId/reminders/:reminderId",
+            "params": [
+              {
+                "name": "eventId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "reminderId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing reminder for an event."
+        },
+        {
+          "info": {
+            "name": "Delete reminder for an event",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.smokeball.com/events/:eventId/reminders/:reminderId",
+            "params": [
+              {
+                "name": "eventId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "reminderId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deletes a specified event reminder."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

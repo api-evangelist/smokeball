@@ -1,0 +1,856 @@
+{
+  "item": [
+    {
+      "id": "4351f9b1-d2ee-45ca-8925-b023044b182b",
+      "name": "Invoices",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ef08f38b-76e8-4885-bcef-bfbe2789f98c",
+          "name": "Get invoices",
+          "request": {
+            "name": "Get invoices",
+            "description": {
+              "content": "Returns a list of invoices for the specified matter.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "matters",
+                ":matterId",
+                "invoices"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "LastUpdated",
+                  "value": "<dateTime>",
+                  "description": "Returns items updated since the specified date and time."
+                },
+                {
+                  "disabled": false,
+                  "key": "UpdatedSince",
+                  "value": "<long>",
+                  "description": "Returns items updated since a specified time (.net ticks representation of the UTC datetime)."
+                },
+                {
+                  "disabled": false,
+                  "key": "Offset",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "Limit",
+                  "value": "<integer>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "matterId",
+                  "description": "(Required) The unique identifier of the matter that the invoice belongs to."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "481ab863-32ee-4843-ab12-cad4ff93670e",
+              "name": "When request is successful. Returns a paged collection of 'Invoice' objects.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "matters",
+                    ":matterId",
+                    "invoices"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "LastUpdated",
+                      "value": "2022-04-23T14:00:00Z"
+                    },
+                    {
+                      "key": "UpdatedSince",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "Offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "Limit",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "matterId",
+                      "description": "(Required) The unique identifier of the matter that the invoice belongs to."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"href\": \"string\",\n  \"relation\": \"string\",\n  \"method\": \"GET\",\n  \"self\": {\n    \"id\": \"string\",\n    \"href\": \"string\",\n    \"relation\": \"string\",\n    \"method\": \"GET\"\n  },\n  \"value\": [\n    {\n      \"href\": \"string\",\n      \"relation\": \"string\",\n      \"method\": \"GET\",\n      \"self\": {\n        \"id\": \"string\",\n        \"href\": \"string\",\n        \"relation\": \"string\",\n        \"method\": \"GET\"\n      },\n      \"id\": \"16567e88-784c-470e-8952-e5a70fe2eb0c\",\n      \"versionId\": \"39ffde97-eeeb-4747-bb8f-7c7c10b3c985\",\n      \"matter\": {\n        \"id\": \"string\",\n        \"href\": \"string\",\n        \"relation\": \"string\",\n        \"method\": \"GET\"\n      },\n      \"matterId\": \"6398a045-509e-49a2-9268-bb8231fa9340\",\n      \"lastUpdatedByUserId\": \"5fc5ee85-6643-4623-b019-a0dccceafe47\",\n      \"description\": \"Services provided.\",\n      \"status\": 0,\n      \"invoiceNumber\": 10001,\n      \"invoiceTitle\": \"My First Invoice\",\n      \"invoiceTitleLine2\": \"Subtitle\",\n      \"issuedDate\": \"2022-09-16T00:00:00+00:00\",\n      \"dueDate\": \"2022-09-25T00:00:00+00:00\",\n      \"paidDate\": \"2022-09-20T00:00:00+00:00\",\n      \"discount\": {\n        \"type\": 0,\n        \"fixedDiscount\": 100,\n        \"percentage\": 10,\n        \"description\": \"Friend of the Firm\"\n      },\n      \"surcharge\": {\n        \"type\": 1,\n        \"fixedSurcharge\": 100,\n        \"percentage\": 3423.5516047184856,\n        \"description\": \"Late Payment Fee\",\n        \"applyTo\": 1\n      },\n      \"debtors\": [\n        {\n          \"contact\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"href\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"relation\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"method\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        {\n          \"contact\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"href\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"relation\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"method\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      ],\n      \"entries\": [\n        {\n          \"id\": \"string\",\n          \"versionId\": \"string\",\n          \"type\": 1\n        },\n        {\n          \"id\": \"string\",\n          \"versionId\": \"string\",\n          \"type\": 2\n        }\n      ],\n      \"waived\": false,\n      \"invoiceTotals\": {\n        \"paid\": 100,\n        \"billed\": 200,\n        \"unpaid\": 100,\n        \"unpaidExcInterest\": 100,\n        \"writtenOff\": 0,\n        \"waived\": 0,\n        \"discount\": 0,\n        \"total\": 100,\n        \"tax\": 10,\n        \"interest\": 0,\n        \"feeTotal\": 100,\n        \"writtenOffFeeTotal\": 100,\n        \"expenseTotal\": 100,\n        \"writtenOffExpenseTotal\": 180\n      }\n    },\n    {\n      \"href\": \"string\",\n      \"relation\": \"string\",\n      \"method\": \"GET\",\n      \"self\": {\n        \"id\": \"string\",\n        \"href\": \"string\",\n        \"relation\": \"string\",\n        \"method\": \"GET\"\n      },\n      \"id\": \"16567e88-784c-470e-8952-e5a70fe2eb0c\",\n      \"versionId\": \"39ffde97-eeeb-4747-bb8f-7c7c10b3c985\",\n      \"matter\": {\n        \"id\": \"string\",\n        \"href\": \"string\",\n        \"relation\": \"string\",\n        \"method\": \"GET\"\n      },\n      \"matterId\": \"6398a045-509e-49a2-9268-bb8231fa9340\",\n      \"lastUpdatedByUserId\": \"5fc5ee85-6643-4623-b019-a0dccceafe47\",\n      \"description\": \"Services provided.\",\n      \"status\": 0,\n      \"invoiceNumber\": 10001,\n      \"invoiceTitle\": \"My First Invoice\",\n      \"invoiceTitleLine2\": \"Subtitle\",\n      \"issuedDate\": \"2022-09-16T00:00:00+00:00\",\n      \"dueDate\": \"2022-09-25T00:00:00+00:00\",\n      \"paidDate\": \"2022-09-20T00:00:00+00:00\",\n      \"discount\": {\n        \"type\": 0,\n        \"fixedDiscount\": 100,\n        \"percentage\": 10,\n        \"description\": \"Friend of the Firm\"\n      },\n      \"surcharge\": {\n        \"type\": 1,\n        \"fixedSurcharge\": 100,\n        \"percentage\": 2853.4973402257324,\n        \"description\": \"Late Payment Fee\",\n        \"applyTo\": 1\n      },\n      \"debtors\": [\n        {\n          \"contact\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"href\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"relation\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"method\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        {\n          \"contact\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"href\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"relation\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"method\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      ],\n      \"entries\": [\n        {\n          \"id\": \"string\",\n          \"versionId\": \"string\",\n          \"type\": 2\n        },\n        {\n          \"id\": \"string\",\n          \"versionId\": \"string\",\n          \"type\": 1\n        }\n      ],\n      \"waived\": false,\n      \"invoiceTotals\": {\n        \"paid\": 100,\n        \"billed\": 200,\n        \"unpaid\": 100,\n        \"unpaidExcInterest\": 100,\n        \"writtenOff\": 0,\n        \"waived\": 0,\n        \"discount\": 0,\n        \"total\": 100,\n        \"tax\": 10,\n        \"interest\": 0,\n        \"feeTotal\": 100,\n        \"writtenOffFeeTotal\": 100,\n        \"expenseTotal\": 100,\n        \"writtenOffExpenseTotal\": 180\n      }\n    }\n  ],\n  \"offset\": 2558,\n  \"limit\": 5751,\n  \"size\": 953,\n  \"first\": {\n    \"id\": \"string\",\n    \"href\": \"string\",\n    \"relation\": \"string\",\n    \"method\": \"GET\"\n  },\n  \"previous\": {\n    \"id\": \"string\",\n    \"href\": \"string\",\n    \"relation\": \"string\",\n    \"method\": \"GET\"\n  },\n  \"next\": {\n    \"id\": \"string\",\n    \"href\": \"string\",\n    \"relation\": \"string\",\n    \"method\": \"GET\"\n  },\n  \"last\": {\n    \"id\": \"string\",\n    \"href\": \"string\",\n    \"relation\": \"string\",\n    \"method\": \"GET\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "deffa5ac-4590-4253-bf4c-e76c2a4d4b13",
+              "name": "When an unsupported request is made.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "matters",
+                    ":matterId",
+                    "invoices"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "LastUpdated",
+                      "value": "2022-04-23T14:00:00Z"
+                    },
+                    {
+                      "key": "UpdatedSince",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "Offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "Limit",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "matterId",
+                      "description": "(Required) The unique identifier of the matter that the invoice belongs to."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 7036,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6931f5e6-2879-418c-be38-02133f0e9efe",
+          "name": "Get an invoice",
+          "request": {
+            "name": "Get an invoice",
+            "description": {
+              "content": "Retrieves a specified invoice.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "matters",
+                ":matterId",
+                "invoices",
+                ":invoiceId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "matterId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "invoiceId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "77278610-e03b-4dd2-adae-5ed62d9071a1",
+              "name": "When request is successful. Returns a 'Invoice' object.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "matters",
+                    ":matterId",
+                    "invoices",
+                    ":invoiceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "matterId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "invoiceId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"href\": \"string\",\n  \"relation\": \"string\",\n  \"method\": \"GET\",\n  \"self\": {\n    \"id\": \"string\",\n    \"href\": \"string\",\n    \"relation\": \"string\",\n    \"method\": \"GET\"\n  },\n  \"id\": \"16567e88-784c-470e-8952-e5a70fe2eb0c\",\n  \"versionId\": \"39ffde97-eeeb-4747-bb8f-7c7c10b3c985\",\n  \"matter\": {\n    \"id\": \"string\",\n    \"href\": \"string\",\n    \"relation\": \"string\",\n    \"method\": \"GET\"\n  },\n  \"matterId\": \"6398a045-509e-49a2-9268-bb8231fa9340\",\n  \"lastUpdatedByUserId\": \"5fc5ee85-6643-4623-b019-a0dccceafe47\",\n  \"description\": \"Services provided.\",\n  \"status\": 0,\n  \"invoiceNumber\": 10001,\n  \"invoiceTitle\": \"My First Invoice\",\n  \"invoiceTitleLine2\": \"Subtitle\",\n  \"issuedDate\": \"2022-09-16T00:00:00+00:00\",\n  \"dueDate\": \"2022-09-25T00:00:00+00:00\",\n  \"paidDate\": \"2022-09-20T00:00:00+00:00\",\n  \"discount\": {\n    \"type\": 0,\n    \"fixedDiscount\": 100,\n    \"percentage\": 10,\n    \"description\": \"Friend of the Firm\"\n  },\n  \"surcharge\": {\n    \"type\": 1,\n    \"fixedSurcharge\": 100,\n    \"percentage\": 2333.6429624250964,\n    \"description\": \"Late Payment Fee\",\n    \"applyTo\": 1\n  },\n  \"debtors\": [\n    {\n      \"contact\": {\n        \"id\": \"string\",\n        \"href\": \"string\",\n        \"relation\": \"string\",\n        \"method\": \"GET\"\n      }\n    },\n    {\n      \"contact\": {\n        \"id\": \"string\",\n        \"href\": \"string\",\n        \"relation\": \"string\",\n        \"method\": \"GET\"\n      }\n    }\n  ],\n  \"entries\": [\n    {\n      \"id\": \"string\",\n      \"versionId\": \"string\",\n      \"type\": 2\n    },\n    {\n      \"id\": \"string\",\n      \"versionId\": \"string\",\n      \"type\": 2\n    }\n  ],\n  \"waived\": false,\n  \"invoiceTotals\": {\n    \"paid\": 100,\n    \"billed\": 200,\n    \"unpaid\": 100,\n    \"unpaidExcInterest\": 100,\n    \"writtenOff\": 0,\n    \"waived\": 0,\n    \"discount\": 0,\n    \"total\": 100,\n    \"tax\": 10,\n    \"interest\": 0,\n    \"feeTotal\": 100,\n    \"writtenOffFeeTotal\": 100,\n    \"expenseTotal\": 100,\n    \"writtenOffExpenseTotal\": 180\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c336e14e-841a-461a-b31d-7cf033328d6a",
+              "name": "When an unsupported request is made.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "matters",
+                    ":matterId",
+                    "invoices",
+                    ":invoiceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "matterId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "invoiceId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 7036,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f8dc9d9c-dd1e-40bb-9e6e-1d9a0597b53b",
+              "name": "When invoice with specified id is not associated with authenticated client or matter.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "matters",
+                    ":matterId",
+                    "invoices",
+                    ":invoiceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "matterId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "invoiceId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 7036,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a43a3d7a-8f05-43b7-91ce-0fa874b0f4bb",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "matters",
+                    ":matterId",
+                    "invoices",
+                    ":invoiceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "matterId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "invoiceId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 7036,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b82ee4f7-4159-494c-bd61-bb15de0e1372",
+          "name": "Get download url for an invoice",
+          "request": {
+            "name": "Get download url for an invoice",
+            "description": {
+              "content": "Retrieves download details for a specified invoice.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "matters",
+                ":matterId",
+                "invoices",
+                ":invoiceId",
+                "download"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "matterId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "invoiceId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6058dc55-ccd2-49e9-8a12-78ff168dab25",
+              "name": "When request is successful. Returns an 'InvoiceFileInfo' object.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "matters",
+                    ":matterId",
+                    "invoices",
+                    ":invoiceId",
+                    "download"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "matterId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "invoiceId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"invoiceId\": \"b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2\",\n  \"versionId\": \"b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2\",\n  \"downloadUrl\": \"\",\n  \"expiry\": \"2022-04-23T14:30:00Z\",\n  \"status\": \"Draft\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5e777c68-02ae-486d-b7f3-b6ab385f2204",
+              "name": "When an unsupported request is made.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "matters",
+                    ":matterId",
+                    "invoices",
+                    ":invoiceId",
+                    "download"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "matterId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "invoiceId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 7036,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "25ead42c-b189-4de1-b62e-bb1bc2e8668c",
+              "name": "When the requested file does not belong to the account making the request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "matters",
+                    ":matterId",
+                    "invoices",
+                    ":invoiceId",
+                    "download"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "matterId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "invoiceId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 7036,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6933d04f-8dbe-4d73-9dd5-7a193883d356",
+              "name": "When invoice with the specified id does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "matters",
+                    ":matterId",
+                    "invoices",
+                    ":invoiceId",
+                    "download"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "matterId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "invoiceId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 7036,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.smokeball.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "bce99026-208e-4bf9-ab37-0ac367319330",
+    "name": "Smokeball Activity Codes Invoices API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for integrating with Smokeball legal practice management software. Supports matters, contacts, documents, time entries, billing, trust accounting, staff, webhooks, and law firm workflows across US, AU, and UK regions. Uses OAuth 2.0 (client credentials) authentication.\n\nContact Support:\n Name: Smokeball Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

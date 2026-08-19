@@ -1,0 +1,3304 @@
+{
+  "item": [
+    {
+      "id": "dbeb4f77-1d23-470a-8f1b-1b11126762da",
+      "name": "Matters",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "da3b403c-61c2-4377-8d11-e3830bd3125a",
+          "name": "Get the archive for a matter",
+          "request": {
+            "name": "Get the archive for a matter",
+            "description": {
+              "content": "Retrieves an archive for a matter.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "matters",
+                ":matterId",
+                "archive"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "matterId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "948ae671-ac97-4dec-971e-fe752dc784d3",
+              "name": "When request is successful. Returns an 'Archive' object.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "matters",
+                    ":matterId",
+                    "archive"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "matterId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"href\": \"string\",\n  \"relation\": \"string\",\n  \"method\": \"GET\",\n  \"self\": {\n    \"id\": \"string\",\n    \"href\": \"string\",\n    \"relation\": \"string\",\n    \"method\": \"GET\"\n  },\n  \"id\": \"f489b750-544e-4aa7-962e-f388b775bc14\",\n  \"archivedDate\": \"2022-04-23T14:00:00Z\",\n  \"archiveBoxNumber\": \"24\",\n  \"archiveComments\": \"Lot 1\",\n  \"archivedLocation\": \"Box\",\n  \"destroyDate\": \"2022-04-29T14:00:00Z\",\n  \"isArchived\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6c92c5b8-b37b-4406-88a0-631dfee416e5",
+              "name": "When the specified matter's archive does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "matters",
+                    ":matterId",
+                    "archive"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "matterId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 5350,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9d450473-f19a-42ce-95a3-d859c3f9e5dc",
+          "name": "Update an archive for a matter.",
+          "request": {
+            "name": "Update an archive for a matter.",
+            "description": {
+              "content": "Updates a specified matter's archive",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "matters",
+                ":matterId",
+                "archive"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "matterId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"isArchived\": \"<boolean>\",\n  \"archivedDate\": \"<dateTime>\",\n  \"archiveBoxNumber\": \"<string>\",\n  \"archiveComments\": \"<string>\",\n  \"archivedLocation\": \"<string>\",\n  \"destroyDate\": \"<dateTime>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "98137ee8-c9f0-431f-af68-f059c1b8a2f2",
+              "name": "When request is accepted. Returns a 'Link' object.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "matters",
+                    ":matterId",
+                    "archive"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "matterId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"isArchived\": true,\n  \"archivedDate\": \"2022-04-23T14:00:00Z\",\n  \"archiveBoxNumber\": \"24\",\n  \"archiveComments\": \"Lot 1\",\n  \"archivedLocation\": \"Box\",\n  \"destroyDate\": \"2022-04-29T14:00:00Z\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"href\": \"string\",\n  \"relation\": \"string\",\n  \"method\": \"GET\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b4ea2c36-674c-4534-92c3-b3bc68cfbfb7",
+              "name": "When an unsupported request is made.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "matters",
+                    ":matterId",
+                    "archive"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "matterId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"isArchived\": true,\n  \"archivedDate\": \"2022-04-23T14:00:00Z\",\n  \"archiveBoxNumber\": \"24\",\n  \"archiveComments\": \"Lot 1\",\n  \"archivedLocation\": \"Box\",\n  \"destroyDate\": \"2022-04-29T14:00:00Z\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 5350,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "af7fb575-21e0-4605-80fa-cca98f1fcad7",
+          "name": "Patch an archive for a matter",
+          "request": {
+            "name": "Patch an archive for a matter",
+            "description": {
+              "content": "Updates a specified matter's archive with patch operations.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "matters",
+                ":matterId",
+                "archive"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "matterId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"isArchived\": \"<boolean>\",\n  \"archivedDate\": \"<dateTime>\",\n  \"archiveBoxNumber\": \"<string>\",\n  \"archiveComments\": \"<string>\",\n  \"archivedLocation\": \"<string>\",\n  \"destroyDate\": \"<dateTime>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a917f092-fef8-4206-a4d7-222dba102be1",
+              "name": "When request is accepted. Returns a 'Link' object.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "matters",
+                    ":matterId",
+                    "archive"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "matterId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"isArchived\": true,\n  \"archivedDate\": \"2022-04-23T14:00:00Z\",\n  \"archiveBoxNumber\": \"24\",\n  \"archiveComments\": \"Lot 1\",\n  \"archivedLocation\": \"Box\",\n  \"destroyDate\": \"2022-04-29T14:00:00Z\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"href\": \"string\",\n  \"relation\": \"string\",\n  \"method\": \"GET\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5449502e-b55a-4c5b-8380-fb7bfac95073",
+              "name": "When an unsupported request is made.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "matters",
+                    ":matterId",
+                    "archive"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "matterId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"isArchived\": true,\n  \"archivedDate\": \"2022-04-23T14:00:00Z\",\n  \"archiveBoxNumber\": \"24\",\n  \"archiveComments\": \"Lot 1\",\n  \"archivedLocation\": \"Box\",\n  \"destroyDate\": \"2022-04-29T14:00:00Z\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 5350,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "05e94138-a283-4934-967c-ce0d2eb82232",
+          "name": "Get matter billing configuration",
+          "request": {
+            "name": "Get matter billing configuration",
+            "description": {
+              "content": "Retrieves the billing configuration for the specified matter.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "matters",
+                ":matterId",
+                "billingconfiguration"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "matterId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7a54d277-2fb7-4d7a-95b4-25aa9a4435d6",
+              "name": "When request is successful. Returns a 'BillingConfiguration' object.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "matters",
+                    ":matterId",
+                    "billingconfiguration"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "matterId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"href\": \"string\",\n  \"relation\": \"string\",\n  \"method\": \"GET\",\n  \"self\": {\n    \"id\": \"string\",\n    \"href\": \"string\",\n    \"relation\": \"string\",\n    \"method\": \"GET\"\n  },\n  \"versionId\": \"750eb5c5-ac0b-7d11-4997-e0ce9d8896c8\",\n  \"billingType\": 1,\n  \"amount\": 142.31,\n  \"disbursementAmount\": 160,\n  \"contingencyAmount\": 32,\n  \"debtors\": [\n    {\n      \"id\": \"string\",\n      \"href\": \"string\",\n      \"relation\": \"string\",\n      \"method\": \"GET\"\n    },\n    {\n      \"id\": \"string\",\n      \"href\": \"string\",\n      \"relation\": \"string\",\n      \"method\": \"GET\"\n    }\n  ],\n  \"rateSetId\": \"100558\",\n  \"isUtbmsEnabled\": true,\n  \"ledesFirmId\": \"100558\",\n  \"ledesMatterId\": \"100558\",\n  \"ledesClientMatterId\": \"100558\",\n  \"ledesTimekeeperClassificationType\": 0\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6fefcd53-a3e2-4624-a756-4cac49f7af95",
+              "name": "When an unsupported request is made.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "matters",
+                    ":matterId",
+                    "billingconfiguration"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "matterId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 5350,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b4b97fab-c5c7-4cc6-a6a1-57fa35a955fe",
+              "name": "When the matter is not associated with the authenticated client.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "matters",
+                    ":matterId",
+                    "billingconfiguration"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "matterId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 5350,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "24de1e2b-57ca-4a67-a871-9b0dc7d97ff9",
+              "name": "When the specified matter does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "matters",
+                    ":matterId",
+                    "billingconfiguration"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "matterId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 5350,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9e4f5a56-cdbd-40ef-9c05-e5d3823a6d04",
+          "name": "Update matter billing configuration",
+          "request": {
+            "name": "Update matter billing configuration",
+            "description": {
+              "content": "Updates the billing configuration for the specified matter.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "matters",
+                ":matterId",
+                "billingconfiguration"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "matterId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"billingType\": \"<integer>\",\n  \"amount\": \"<double>\",\n  \"contingencyAmount\": \"<double>\",\n  \"disbursementAmount\": \"<double>\",\n  \"debtorIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"isUtbmsEnabled\": \"<boolean>\",\n  \"ledesFirmId\": \"<string>\",\n  \"ledesMatterId\": \"<string>\",\n  \"ledesClientMatterId\": \"<string>\",\n  \"ledesTimekeeperClassificationType\": \"<integer>\",\n  \"rateSetId\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "823da1e3-7c8e-4ae2-9eae-69aa3165ca3b",
+              "name": "When request is accepted. Returns a hypermedia 'Link' object of the billing configuration to be updated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "matters",
+                    ":matterId",
+                    "billingconfiguration"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "matterId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"billingType\": 1,\n  \"amount\": 142.31,\n  \"contingencyAmount\": 32,\n  \"disbursementAmount\": 520.67,\n  \"debtorIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"isUtbmsEnabled\": true,\n  \"ledesFirmId\": \"100558\",\n  \"ledesMatterId\": \"100558\",\n  \"ledesClientMatterId\": \"100558\",\n  \"ledesTimekeeperClassificationType\": 0,\n  \"rateSetId\": \"100558\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"href\": \"string\",\n  \"relation\": \"string\",\n  \"method\": \"GET\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "65e06aad-ef8f-430a-b904-cb2927f2b7a6",
+              "name": "When an unsupported request is made.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "matters",
+                    ":matterId",
+                    "billingconfiguration"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "matterId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"billingType\": 1,\n  \"amount\": 142.31,\n  \"contingencyAmount\": 32,\n  \"disbursementAmount\": 520.67,\n  \"debtorIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"isUtbmsEnabled\": true,\n  \"ledesFirmId\": \"100558\",\n  \"ledesMatterId\": \"100558\",\n  \"ledesClientMatterId\": \"100558\",\n  \"ledesTimekeeperClassificationType\": 0,\n  \"rateSetId\": \"100558\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 5350,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5721d10f-1e09-4d26-80fe-3c9606612bfd",
+              "name": "When matter with specified id is not associated with authenticated client.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "matters",
+                    ":matterId",
+                    "billingconfiguration"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "matterId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"billingType\": 1,\n  \"amount\": 142.31,\n  \"contingencyAmount\": 32,\n  \"disbursementAmount\": 520.67,\n  \"debtorIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"isUtbmsEnabled\": true,\n  \"ledesFirmId\": \"100558\",\n  \"ledesMatterId\": \"100558\",\n  \"ledesClientMatterId\": \"100558\",\n  \"ledesTimekeeperClassificationType\": 0,\n  \"rateSetId\": \"100558\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 5350,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a2c560cc-e3c4-44bf-98c0-eeddbeba0cbc",
+              "name": "When the specified matter does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "matters",
+                    ":matterId",
+                    "billingconfiguration"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "matterId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"billingType\": 1,\n  \"amount\": 142.31,\n  \"contingencyAmount\": 32,\n  \"disbursementAmount\": 520.67,\n  \"debtorIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"isUtbmsEnabled\": true,\n  \"ledesFirmId\": \"100558\",\n  \"ledesMatterId\": \"100558\",\n  \"ledesClientMatterId\": \"100558\",\n  \"ledesTimekeeperClassificationType\": 0,\n  \"rateSetId\": \"100558\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 5350,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "332bbd62-5015-490a-87d9-ec84cd0d4fca",
+          "name": "Get matters",
+          "request": {
+            "name": "Get matters",
+            "description": {
+              "content": "Returns a list of matters. To return leads, set the `isLead` search option to true.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "matters"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "Offset",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "Limit",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "Search",
+                  "value": "<string>",
+                  "description": "Filter matters by specified search term.\r\nThis field is wide reaching, it is used to search by clients, othersides, description and matter numbers."
+                },
+                {
+                  "disabled": false,
+                  "key": "MatterTypeId",
+                  "value": "<string>",
+                  "description": "Filter by matter type identifier."
+                },
+                {
+                  "disabled": false,
+                  "key": "ContactId",
+                  "value": "<string>",
+                  "description": "Filter by the contact identifier."
+                },
+                {
+                  "disabled": false,
+                  "key": "Status",
+                  "value": "<string>",
+                  "description": "Filter by current status of the matter.\r\n\r\nPossible values: Open, Pending, Closed, Deleted or Cancelled."
+                },
+                {
+                  "disabled": false,
+                  "key": "Status",
+                  "value": "<string>",
+                  "description": "Filter by current status of the matter.\r\n\r\nPossible values: Open, Pending, Closed, Deleted or Cancelled."
+                },
+                {
+                  "disabled": false,
+                  "key": "IsLead",
+                  "value": "<boolean>",
+                  "description": "Boolean flag to return 'Leads'. This is false by default.\r\n\r\nA Lead is a potential matter that has not yet been converted to a full matter. The data structure of a lead is similar to a matter, but with some small variances."
+                },
+                {
+                  "disabled": false,
+                  "key": "Type",
+                  "value": "<string>",
+                  "description": "Type of matter to search for. This is set to Matters by default. \r\n            \r\nA Lead is a potential matter that has not yet been converted to a full matter. The data structure of a lead is similar to a matter, but with some small variances.\r\n            \r\nPossible values: \"Matters\", \"Leads\", \"Matters,Leads\"."
+                },
+                {
+                  "disabled": false,
+                  "key": "UpdatedSince",
+                  "value": "<long>",
+                  "description": "Filter by matters updated since a specified time (.net ticks representation of the UTC datetime). Cannot be used in conjunction with `LastUpdated`.\r\n\r\nThis field will not be supported in future, please use LastUpdated instead."
+                },
+                {
+                  "disabled": false,
+                  "key": "LastUpdated",
+                  "value": "<dateTime>",
+                  "description": "Filter by last updated date of matter. Cannot be used in conjunction with `UpdatedSince`."
+                },
+                {
+                  "disabled": false,
+                  "key": "Sort",
+                  "value": "<string>",
+                  "description": " Available fields: status, lastUpdated"
+                },
+                {
+                  "disabled": false,
+                  "key": "Fields",
+                  "value": "<string>",
+                  "description": " Available fields: items, tags"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b8695566-1c60-4d4f-9dca-70eac2e13c41",
+              "name": "When request is successful. Returns a paged collection of 'Matter' objects.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "matters"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "Offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "Limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "Search",
+                      "value": "Bob"
+                    },
+                    {
+                      "key": "MatterTypeId",
+                      "value": "009f778f-83df-454a-b344-768a862a7e55"
+                    },
+                    {
+                      "key": "ContactId",
+                      "value": "7fdbdd5b-0f5e-4095-af9e-ae5b055325c7"
+                    },
+                    {
+                      "key": "Status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "Status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "IsLead",
+                      "value": "true"
+                    },
+                    {
+                      "key": "Type",
+                      "value": "Leads"
+                    },
+                    {
+                      "key": "UpdatedSince",
+                      "value": "637873555398585000"
+                    },
+                    {
+                      "key": "LastUpdated",
+                      "value": "2022-04-23T14:00:00Z"
+                    },
+                    {
+                      "key": "Sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "Fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"href\": \"string\",\n  \"relation\": \"string\",\n  \"method\": \"GET\",\n  \"self\": {\n    \"id\": \"string\",\n    \"href\": \"string\",\n    \"relation\": \"string\",\n    \"method\": \"GET\"\n  },\n  \"value\": [\n    {\n      \"href\": \"string\",\n      \"relation\": \"string\",\n      \"method\": \"GET\",\n      \"self\": {\n        \"id\": \"string\",\n        \"href\": \"string\",\n        \"relation\": \"string\",\n        \"method\": \"GET\"\n      },\n      \"id\": \"b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2\",\n      \"externalSystemId\": \"EXT01\",\n      \"versionId\": \"637771038395217729\",\n      \"number\": \"FUS-124\",\n      \"title\": \"AM-0323-0005 - Smith - Sale - Jones\",\n      \"matterType\": {\n        \"id\": \"string\",\n        \"href\": \"string\",\n        \"relation\": \"string\",\n        \"method\": \"GET\"\n      },\n      \"clients\": [\n        {\n          \"id\": \"string\",\n          \"href\": \"string\",\n          \"relation\": \"string\",\n          \"method\": \"GET\"\n        },\n        {\n          \"id\": \"string\",\n          \"href\": \"string\",\n          \"relation\": \"string\",\n          \"method\": \"GET\"\n        }\n      ],\n      \"otherSides\": [\n        {\n          \"id\": \"string\",\n          \"href\": \"string\",\n          \"relation\": \"string\",\n          \"method\": \"GET\"\n        },\n        {\n          \"id\": \"string\",\n          \"href\": \"string\",\n          \"relation\": \"string\",\n          \"method\": \"GET\"\n        }\n      ],\n      \"description\": \"This is a brief description for the matter\",\n      \"status\": \"Open\",\n      \"personResponsible\": {\n        \"id\": \"string\",\n        \"href\": \"string\",\n        \"relation\": \"string\",\n        \"method\": \"GET\"\n      },\n      \"personAssisting\": {\n        \"id\": \"string\",\n        \"href\": \"string\",\n        \"relation\": \"string\",\n        \"method\": \"GET\"\n      },\n      \"personAssistingStaffs\": [\n        {\n          \"id\": \"string\",\n          \"href\": \"string\",\n          \"relation\": \"string\",\n          \"method\": \"GET\"\n        },\n        {\n          \"id\": \"string\",\n          \"href\": \"string\",\n          \"relation\": \"string\",\n          \"method\": \"GET\"\n        }\n      ],\n      \"originatingStaff\": {\n        \"id\": \"string\",\n        \"href\": \"string\",\n        \"relation\": \"string\",\n        \"method\": \"GET\"\n      },\n      \"originatingStaffs\": [\n        {\n          \"id\": \"string\",\n          \"href\": \"string\",\n          \"relation\": \"string\",\n          \"method\": \"GET\"\n        },\n        {\n          \"id\": \"string\",\n          \"href\": \"string\",\n          \"relation\": \"string\",\n          \"method\": \"GET\"\n        }\n      ],\n      \"splitOriginatingStaffSettings\": {\n        \"isEnabled\": true,\n        \"splitMatterStaffs\": [\n          {\n            \"matterStaffId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"matterStaffRatio\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"matterStaffId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"matterStaffRatio\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"splitMethod\": \"string\",\n        \"remainderStaffId\": \"string\"\n      },\n      \"supervisor\": {\n        \"id\": \"string\",\n        \"href\": \"string\",\n        \"relation\": \"string\",\n        \"method\": \"GET\"\n      },\n      \"clientCode\": \"Client A\",\n      \"openedDate\": \"2022-04-23T14:00:00Z\",\n      \"closedDate\": \"2022-04-23T14:00:00Z\",\n      \"leadOpenedDate\": \"2022-04-23T14:00:00Z\",\n      \"leadClosedDate\": \"2022-04-23T14:00:00Z\",\n      \"leadClosedReason\": \"No longer interested\",\n      \"isLead\": false,\n      \"branch\": {\n        \"id\": \"string\",\n        \"href\": \"string\",\n        \"relation\": \"string\",\n        \"method\": \"GET\"\n      },\n      \"branchProviderId\": \"Smokeball\",\n      \"referralType\": \"string\",\n      \"referrer\": {\n        \"id\": \"string\",\n        \"href\": \"string\",\n        \"relation\": \"string\",\n        \"method\": \"GET\"\n      },\n      \"referralAgreementFeeType\": \"string\",\n      \"referralAgreementFee\": 17.47150755252558,\n      \"referralAgreementFeeComment\": \"string\",\n      \"items\": {\n        \"key_0\": [\n          {\n            \"type\": \"role or layout\",\n            \"id\": \"009f778f-83df-454a-b344-768a862a7e55\",\n            \"name\": \"Vendor\",\n            \"subItems\": {\n              \"key_0\": [\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              ],\n              \"key_1\": [\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              ]\n            }\n          },\n          {\n            \"type\": \"role or layout\",\n            \"id\": \"009f778f-83df-454a-b344-768a862a7e55\",\n            \"name\": \"Vendor\",\n            \"subItems\": {\n              \"key_0\": [\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              ]\n            }\n          }\n        ],\n        \"key_1\": [\n          {\n            \"type\": \"role or layout\",\n            \"id\": \"009f778f-83df-454a-b344-768a862a7e55\",\n            \"name\": \"Vendor\",\n            \"subItems\": {\n              \"key_0\": [\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              ],\n              \"key_1\": [\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              ],\n              \"key_2\": [\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              ],\n              \"key_3\": [\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              ]\n            }\n          },\n          {\n            \"type\": \"role or layout\",\n            \"id\": \"009f778f-83df-454a-b344-768a862a7e55\",\n            \"name\": \"Vendor\",\n            \"subItems\": {\n              \"key_0\": [\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              ],\n              \"key_1\": [\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              ]\n            }\n          }\n        ]\n      },\n      \"tags\": [\n        {\n          \"href\": \"string\",\n          \"relation\": \"string\",\n          \"method\": \"GET\",\n          \"self\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"href\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"relation\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"method\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"id\": \"a15086f5-4da7-4271-8fea-b24d479ced2b\",\n          \"type\": \"Staff\",\n          \"name\": \"\",\n          \"color\": \"Light Blue\",\n          \"staff\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"href\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"relation\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"method\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        {\n          \"href\": \"string\",\n          \"relation\": \"string\",\n          \"method\": \"GET\",\n          \"self\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"href\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"relation\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"method\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"id\": \"a15086f5-4da7-4271-8fea-b24d479ced2b\",\n          \"type\": \"Staff\",\n          \"name\": \"\",\n          \"color\": \"Light Blue\",\n          \"staff\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"href\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"relation\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"method\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      ]\n    },\n    {\n      \"href\": \"string\",\n      \"relation\": \"string\",\n      \"method\": \"GET\",\n      \"self\": {\n        \"id\": \"string\",\n        \"href\": \"string\",\n        \"relation\": \"string\",\n        \"method\": \"GET\"\n      },\n      \"id\": \"b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2\",\n      \"externalSystemId\": \"EXT01\",\n      \"versionId\": \"637771038395217729\",\n      \"number\": \"FUS-124\",\n      \"title\": \"AM-0323-0005 - Smith - Sale - Jones\",\n      \"matterType\": {\n        \"id\": \"string\",\n        \"href\": \"string\",\n        \"relation\": \"string\",\n        \"method\": \"GET\"\n      },\n      \"clients\": [\n        {\n          \"id\": \"string\",\n          \"href\": \"string\",\n          \"relation\": \"string\",\n          \"method\": \"GET\"\n        },\n        {\n          \"id\": \"string\",\n          \"href\": \"string\",\n          \"relation\": \"string\",\n          \"method\": \"GET\"\n        }\n      ],\n      \"otherSides\": [\n        {\n          \"id\": \"string\",\n          \"href\": \"string\",\n          \"relation\": \"string\",\n          \"method\": \"GET\"\n        },\n        {\n          \"id\": \"string\",\n          \"href\": \"string\",\n          \"relation\": \"string\",\n          \"method\": \"GET\"\n        }\n      ],\n      \"description\": \"This is a brief description for the matter\",\n      \"status\": \"Open\",\n      \"personResponsible\": {\n        \"id\": \"string\",\n        \"href\": \"string\",\n        \"relation\": \"string\",\n        \"method\": \"GET\"\n      },\n      \"personAssisting\": {\n        \"id\": \"string\",\n        \"href\": \"string\",\n        \"relation\": \"string\",\n        \"method\": \"GET\"\n      },\n      \"personAssistingStaffs\": [\n        {\n          \"id\": \"string\",\n          \"href\": \"string\",\n          \"relation\": \"string\",\n          \"method\": \"GET\"\n        },\n        {\n          \"id\": \"string\",\n          \"href\": \"string\",\n          \"relation\": \"string\",\n          \"method\": \"GET\"\n        }\n      ],\n      \"originatingStaff\": {\n        \"id\": \"string\",\n        \"href\": \"string\",\n        \"relation\": \"string\",\n        \"method\": \"GET\"\n      },\n      \"originatingStaffs\": [\n        {\n          \"id\": \"string\",\n          \"href\": \"string\",\n          \"relation\": \"string\",\n          \"method\": \"GET\"\n        },\n        {\n          \"id\": \"string\",\n          \"href\": \"string\",\n          \"relation\": \"string\",\n          \"method\": \"GET\"\n        }\n      ],\n      \"splitOriginatingStaffSettings\": {\n        \"isEnabled\": true,\n        \"splitMatterStaffs\": [\n          {\n            \"matterStaffId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"matterStaffRatio\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"matterStaffId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"matterStaffRatio\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"splitMethod\": \"string\",\n        \"remainderStaffId\": \"string\"\n      },\n      \"supervisor\": {\n        \"id\": \"string\",\n        \"href\": \"string\",\n        \"relation\": \"string\",\n        \"method\": \"GET\"\n      },\n      \"clientCode\": \"Client A\",\n      \"openedDate\": \"2022-04-23T14:00:00Z\",\n      \"closedDate\": \"2022-04-23T14:00:00Z\",\n      \"leadOpenedDate\": \"2022-04-23T14:00:00Z\",\n      \"leadClosedDate\": \"2022-04-23T14:00:00Z\",\n      \"leadClosedReason\": \"No longer interested\",\n      \"isLead\": false,\n      \"branch\": {\n        \"id\": \"string\",\n        \"href\": \"string\",\n        \"relation\": \"string\",\n        \"method\": \"GET\"\n      },\n      \"branchProviderId\": \"Smokeball\",\n      \"referralType\": \"string\",\n      \"referrer\": {\n        \"id\": \"string\",\n        \"href\": \"string\",\n        \"relation\": \"string\",\n        \"method\": \"GET\"\n      },\n      \"referralAgreementFeeType\": \"string\",\n      \"referralAgreementFee\": 796.5395403814912,\n      \"referralAgreementFeeComment\": \"string\",\n      \"items\": {\n        \"key_0\": [\n          {\n            \"type\": \"role or layout\",\n            \"id\": \"009f778f-83df-454a-b344-768a862a7e55\",\n            \"name\": \"Vendor\",\n            \"subItems\": {\n              \"key_0\": [\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              ]\n            }\n          },\n          {\n            \"type\": \"role or layout\",\n            \"id\": \"009f778f-83df-454a-b344-768a862a7e55\",\n            \"name\": \"Vendor\",\n            \"subItems\": {\n              \"key_0\": [\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              ],\n              \"key_1\": [\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              ],\n              \"key_2\": [\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              ]\n            }\n          }\n        ],\n        \"key_1\": [\n          {\n            \"type\": \"role or layout\",\n            \"id\": \"009f778f-83df-454a-b344-768a862a7e55\",\n            \"name\": \"Vendor\",\n            \"subItems\": {\n              \"key_0\": [\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              ],\n              \"key_1\": [\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              ],\n              \"key_2\": [\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              ]\n            }\n          },\n          {\n            \"type\": \"role or layout\",\n            \"id\": \"009f778f-83df-454a-b344-768a862a7e55\",\n            \"name\": \"Vendor\",\n            \"subItems\": {\n              \"key_0\": [\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              ],\n              \"key_1\": [\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              ]\n            }\n          }\n        ],\n        \"key_2\": [\n          {\n            \"type\": \"role or layout\",\n            \"id\": \"009f778f-83df-454a-b344-768a862a7e55\",\n            \"name\": \"Vendor\",\n            \"subItems\": {\n              \"key_0\": [\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              ]\n            }\n          },\n          {\n            \"type\": \"role or layout\",\n            \"id\": \"009f778f-83df-454a-b344-768a862a7e55\",\n            \"name\": \"Vendor\",\n            \"subItems\": {\n              \"key_0\": [\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              ],\n              \"key_1\": [\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              ]\n            }\n          }\n        ]\n      },\n      \"tags\": [\n        {\n          \"href\": \"string\",\n          \"relation\": \"string\",\n          \"method\": \"GET\",\n          \"self\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"href\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"relation\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"method\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"id\": \"a15086f5-4da7-4271-8fea-b24d479ced2b\",\n          \"type\": \"Staff\",\n          \"name\": \"\",\n          \"color\": \"Light Blue\",\n          \"staff\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"href\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"relation\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"method\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        {\n          \"href\": \"string\",\n          \"relation\": \"string\",\n          \"method\": \"GET\",\n          \"self\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"href\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"relation\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"method\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"id\": \"a15086f5-4da7-4271-8fea-b24d479ced2b\",\n          \"type\": \"Staff\",\n          \"name\": \"\",\n          \"color\": \"Light Blue\",\n          \"staff\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"href\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"relation\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"method\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      ]\n    }\n  ],\n  \"offset\": 2686,\n  \"limit\": 2081,\n  \"size\": 2880,\n  \"first\": {\n    \"id\": \"string\",\n    \"href\": \"string\",\n    \"relation\": \"string\",\n    \"method\": \"GET\"\n  },\n  \"previous\": {\n    \"id\": \"string\",\n    \"href\": \"string\",\n    \"relation\": \"string\",\n    \"method\": \"GET\"\n  },\n  \"next\": {\n    \"id\": \"string\",\n    \"href\": \"string\",\n    \"relation\": \"string\",\n    \"method\": \"GET\"\n  },\n  \"last\": {\n    \"id\": \"string\",\n    \"href\": \"string\",\n    \"relation\": \"string\",\n    \"method\": \"GET\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "96a207db-ce58-48dc-a83d-fc51315ec596",
+          "name": "Create a matter",
+          "request": {
+            "name": "Create a matter",
+            "description": {
+              "content": "Creates a new matter.\r\n            \r\nNote: This endpoint can also be used to create a `Lead`.\r\n\r\nWhen creating a `Lead` you MUST remember to set a valid lead specific `matterTypeId` field (see field description below for more details) and set the `isLead` field to true.\r\n\r\nThe `clientRole` and `otherSideRole` are optional and cannot be identical. They will be set to the default role(s) for the specified matter type - if not provided.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "matters"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"externalSystemId\": \"<string>\",\n  \"number\": \"<string>\",\n  \"matterTypeId\": \"<string>\",\n  \"clientIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"otherSideIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"branchId\": \"<string>\",\n  \"branchProviderId\": \"<string>\",\n  \"clientRole\": \"<string>\",\n  \"otherSideRole\": \"<string>\",\n  \"description\": \"<string>\",\n  \"status\": \"<string>\",\n  \"openedDate\": \"<dateTime>\",\n  \"closedDate\": \"<dateTime>\",\n  \"leadOpenedDate\": \"<dateTime>\",\n  \"leadClosedDate\": \"<dateTime>\",\n  \"leadClosedReason\": \"<string>\",\n  \"referralType\": \"<string>\",\n  \"referrerId\": \"<string>\",\n  \"referralAgreementFeeType\": \"<string>\",\n  \"referralAgreementFee\": \"<double>\",\n  \"referralAgreementFeeComment\": \"<string>\",\n  \"personResponsibleStaffId\": \"<string>\",\n  \"personAssistingStaffId\": \"<string>\",\n  \"personAssistingStaffIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"originatingStaffId\": \"<string>\",\n  \"originatingStaffIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"splitOriginatingStaffSettings\": {\n    \"isEnabled\": \"<boolean>\",\n    \"splitMatterStaffs\": [\n      {\n        \"matterStaffId\": \"<string>\",\n        \"matterStaffRatio\": \"<long>\"\n      },\n      {\n        \"matterStaffId\": \"<string>\",\n        \"matterStaffRatio\": \"<long>\"\n      }\n    ],\n    \"splitMethod\": \"<string>\",\n    \"remainderStaffId\": \"<string>\"\n  },\n  \"supervisorStaffId\": \"<string>\",\n  \"clientCode\": \"<string>\",\n  \"isLead\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1690cbcb-e3a9-4acf-8f53-c22ee02e669e",
+              "name": "When request is accepted. Returns a hypermedia 'Link' object of the matter to be created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "matters"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"externalSystemId\": \"EXT01\",\n  \"number\": \"FUS-124\",\n  \"matterTypeId\": \"009f778f-83df-454a-b344-768a862a7e55\",\n  \"clientIds\": [\n    \"832e778f-83df-454a-b344-768a862a7e67\"\n  ],\n  \"otherSideIds\": [\n    \"776e778f-83df-454a-b344-768a862a6e58\"\n  ],\n  \"branchId\": \"dd4e4381-b6a0-4c64-8feb-e8ea8016ea42\",\n  \"branchProviderId\": \"Smokeball\",\n  \"clientRole\": \"Buyer\",\n  \"otherSideRole\": \"Seller\",\n  \"description\": \"This is a brief description for the matter\",\n  \"status\": \"Open\",\n  \"openedDate\": \"2022-04-23T14:00:00Z\",\n  \"closedDate\": \"2022-04-23T14:00:00Z\",\n  \"leadOpenedDate\": \"2022-04-23T14:00:00Z\",\n  \"leadClosedDate\": \"2022-04-23T14:00:00Z\",\n  \"leadClosedReason\": \"No longer interested\",\n  \"referralType\": \"Google\",\n  \"referrerId\": \"97bbe49f-6460-4bfc-b287-34ddfdbb81ef\",\n  \"referralAgreementFeeType\": \"<string>\",\n  \"referralAgreementFee\": \"<double>\",\n  \"referralAgreementFeeComment\": \"<string>\",\n  \"personResponsibleStaffId\": \"c85d28cb-a760-4627-aa59-0a853c2e65ed\",\n  \"personAssistingStaffId\": \"c85d28cb-a760-4627-aa59-0a853c2e65ed\",\n  \"personAssistingStaffIds\": [\n    \"c85d28cb-a760-4627-aa59-0a853c2e65ed\"\n  ],\n  \"originatingStaffId\": \"c85d28cb-a760-4627-aa59-0a853c2e65ed\",\n  \"originatingStaffIds\": [\n    \"c85d28cb-a760-4627-aa59-0a853c2e65ed\"\n  ],\n  \"splitOriginatingStaffSettings\": {\n    \"isEnabled\": \"<boolean>\",\n    \"splitMatterStaffs\": [\n      {\n        \"matterStaffId\": \"<string>\",\n        \"matterStaffRatio\": \"<long>\"\n      },\n      {\n        \"matterStaffId\": \"<string>\",\n        \"matterStaffRatio\": \"<long>\"\n      }\n    ],\n    \"splitMethod\": \"<string>\",\n    \"remainderStaffId\": \"<string>\"\n  },\n  \"supervisorStaffId\": \"c85d28cb-a760-4627-aa59-0a853c2e65ed\",\n  \"clientCode\": \"Client A\",\n  \"isLead\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"href\": \"string\",\n  \"relation\": \"string\",\n  \"method\": \"GET\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "25846988-928d-4a12-beb6-696b05b8a993",
+              "name": "When an unsupported request is made or a mandatory field - i.e. client, matter type, status - is not provided.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "matters"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"externalSystemId\": \"EXT01\",\n  \"number\": \"FUS-124\",\n  \"matterTypeId\": \"009f778f-83df-454a-b344-768a862a7e55\",\n  \"clientIds\": [\n    \"832e778f-83df-454a-b344-768a862a7e67\"\n  ],\n  \"otherSideIds\": [\n    \"776e778f-83df-454a-b344-768a862a6e58\"\n  ],\n  \"branchId\": \"dd4e4381-b6a0-4c64-8feb-e8ea8016ea42\",\n  \"branchProviderId\": \"Smokeball\",\n  \"clientRole\": \"Buyer\",\n  \"otherSideRole\": \"Seller\",\n  \"description\": \"This is a brief description for the matter\",\n  \"status\": \"Open\",\n  \"openedDate\": \"2022-04-23T14:00:00Z\",\n  \"closedDate\": \"2022-04-23T14:00:00Z\",\n  \"leadOpenedDate\": \"2022-04-23T14:00:00Z\",\n  \"leadClosedDate\": \"2022-04-23T14:00:00Z\",\n  \"leadClosedReason\": \"No longer interested\",\n  \"referralType\": \"Google\",\n  \"referrerId\": \"97bbe49f-6460-4bfc-b287-34ddfdbb81ef\",\n  \"referralAgreementFeeType\": \"<string>\",\n  \"referralAgreementFee\": \"<double>\",\n  \"referralAgreementFeeComment\": \"<string>\",\n  \"personResponsibleStaffId\": \"c85d28cb-a760-4627-aa59-0a853c2e65ed\",\n  \"personAssistingStaffId\": \"c85d28cb-a760-4627-aa59-0a853c2e65ed\",\n  \"personAssistingStaffIds\": [\n    \"c85d28cb-a760-4627-aa59-0a853c2e65ed\"\n  ],\n  \"originatingStaffId\": \"c85d28cb-a760-4627-aa59-0a853c2e65ed\",\n  \"originatingStaffIds\": [\n    \"c85d28cb-a760-4627-aa59-0a853c2e65ed\"\n  ],\n  \"splitOriginatingStaffSettings\": {\n    \"isEnabled\": \"<boolean>\",\n    \"splitMatterStaffs\": [\n      {\n        \"matterStaffId\": \"<string>\",\n        \"matterStaffRatio\": \"<long>\"\n      },\n      {\n        \"matterStaffId\": \"<string>\",\n        \"matterStaffRatio\": \"<long>\"\n      }\n    ],\n    \"splitMethod\": \"<string>\",\n    \"remainderStaffId\": \"<string>\"\n  },\n  \"supervisorStaffId\": \"c85d28cb-a760-4627-aa59-0a853c2e65ed\",\n  \"clientCode\": \"Client A\",\n  \"isLead\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 5350,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cd952cd6-1f96-4fdd-9cd2-bbec2405e114",
+          "name": "Get a matter",
+          "request": {
+            "name": "Get a matter",
+            "description": {
+              "content": "Retrieves a specified matter.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "matters",
+                ":matterId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "matterId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7e46fda2-611a-410c-aa8b-c8e6eacbe91f",
+              "name": "When request is successful. Returns a 'Matter' object.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "matters",
+                    ":matterId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "matterId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"href\": \"string\",\n  \"relation\": \"string\",\n  \"method\": \"GET\",\n  \"self\": {\n    \"id\": \"string\",\n    \"href\": \"string\",\n    \"relation\": \"string\",\n    \"method\": \"GET\"\n  },\n  \"id\": \"b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2\",\n  \"externalSystemId\": \"EXT01\",\n  \"versionId\": \"637771038395217729\",\n  \"number\": \"FUS-124\",\n  \"title\": \"AM-0323-0005 - Smith - Sale - Jones\",\n  \"matterType\": {\n    \"id\": \"string\",\n    \"href\": \"string\",\n    \"relation\": \"string\",\n    \"method\": \"GET\"\n  },\n  \"clients\": [\n    {\n      \"id\": \"string\",\n      \"href\": \"string\",\n      \"relation\": \"string\",\n      \"method\": \"GET\"\n    },\n    {\n      \"id\": \"string\",\n      \"href\": \"string\",\n      \"relation\": \"string\",\n      \"method\": \"GET\"\n    }\n  ],\n  \"otherSides\": [\n    {\n      \"id\": \"string\",\n      \"href\": \"string\",\n      \"relation\": \"string\",\n      \"method\": \"GET\"\n    },\n    {\n      \"id\": \"string\",\n      \"href\": \"string\",\n      \"relation\": \"string\",\n      \"method\": \"GET\"\n    }\n  ],\n  \"description\": \"This is a brief description for the matter\",\n  \"status\": \"Open\",\n  \"personResponsible\": {\n    \"id\": \"string\",\n    \"href\": \"string\",\n    \"relation\": \"string\",\n    \"method\": \"GET\"\n  },\n  \"personAssisting\": {\n    \"id\": \"string\",\n    \"href\": \"string\",\n    \"relation\": \"string\",\n    \"method\": \"GET\"\n  },\n  \"personAssistingStaffs\": [\n    {\n      \"id\": \"string\",\n      \"href\": \"string\",\n      \"relation\": \"string\",\n      \"method\": \"GET\"\n    },\n    {\n      \"id\": \"string\",\n      \"href\": \"string\",\n      \"relation\": \"string\",\n      \"method\": \"GET\"\n    }\n  ],\n  \"originatingStaff\": {\n    \"id\": \"string\",\n    \"href\": \"string\",\n    \"relation\": \"string\",\n    \"method\": \"GET\"\n  },\n  \"originatingStaffs\": [\n    {\n      \"id\": \"string\",\n      \"href\": \"string\",\n      \"relation\": \"string\",\n      \"method\": \"GET\"\n    },\n    {\n      \"id\": \"string\",\n      \"href\": \"string\",\n      \"relation\": \"string\",\n      \"method\": \"GET\"\n    }\n  ],\n  \"splitOriginatingStaffSettings\": {\n    \"isEnabled\": false,\n    \"splitMatterStaffs\": [\n      {\n        \"matterStaffId\": \"string\",\n        \"matterStaffRatio\": 5035\n      },\n      {\n        \"matterStaffId\": \"string\",\n        \"matterStaffRatio\": 5794\n      }\n    ],\n    \"splitMethod\": \"string\",\n    \"remainderStaffId\": \"string\"\n  },\n  \"supervisor\": {\n    \"id\": \"string\",\n    \"href\": \"string\",\n    \"relation\": \"string\",\n    \"method\": \"GET\"\n  },\n  \"clientCode\": \"Client A\",\n  \"openedDate\": \"2022-04-23T14:00:00Z\",\n  \"closedDate\": \"2022-04-23T14:00:00Z\",\n  \"leadOpenedDate\": \"2022-04-23T14:00:00Z\",\n  \"leadClosedDate\": \"2022-04-23T14:00:00Z\",\n  \"leadClosedReason\": \"No longer interested\",\n  \"isLead\": false,\n  \"branch\": {\n    \"id\": \"string\",\n    \"href\": \"string\",\n    \"relation\": \"string\",\n    \"method\": \"GET\"\n  },\n  \"branchProviderId\": \"Smokeball\",\n  \"referralType\": \"string\",\n  \"referrer\": {\n    \"id\": \"string\",\n    \"href\": \"string\",\n    \"relation\": \"string\",\n    \"method\": \"GET\"\n  },\n  \"referralAgreementFeeType\": \"string\",\n  \"referralAgreementFee\": 9906.938053289514,\n  \"referralAgreementFeeComment\": \"string\",\n  \"items\": {\n    \"key_0\": [\n      {\n        \"type\": \"role or layout\",\n        \"id\": \"009f778f-83df-454a-b344-768a862a7e55\",\n        \"name\": \"Vendor\",\n        \"subItems\": {\n          \"key_0\": [\n            {\n              \"value\": \"<Circular reference to #/components/schemas/IMatterItem detected>\"\n            },\n            {\n              \"value\": \"<Circular reference to #/components/schemas/IMatterItem detected>\"\n            }\n          ]\n        }\n      },\n      {\n        \"type\": \"role or layout\",\n        \"id\": \"009f778f-83df-454a-b344-768a862a7e55\",\n        \"name\": \"Vendor\",\n        \"subItems\": {\n          \"key_0\": [\n            {\n              \"value\": \"<Circular reference to #/components/schemas/IMatterItem detected>\"\n            },\n            {\n              \"value\": \"<Circular reference to #/components/schemas/IMatterItem detected>\"\n            }\n          ],\n          \"key_1\": [\n            {\n              \"value\": \"<Circular reference to #/components/schemas/IMatterItem detected>\"\n            },\n            {\n              \"value\": \"<Circular reference to #/components/schemas/IMatterItem detected>\"\n            }\n          ]\n        }\n      }\n    ],\n    \"key_1\": [\n      {\n        \"type\": \"role or layout\",\n        \"id\": \"009f778f-83df-454a-b344-768a862a7e55\",\n        \"name\": \"Vendor\",\n        \"subItems\": {\n          \"key_0\": [\n            {\n              \"value\": \"<Circular reference to #/components/schemas/IMatterItem detected>\"\n            },\n            {\n              \"value\": \"<Circular reference to #/components/schemas/IMatterItem detected>\"\n            }\n          ],\n          \"key_1\": [\n            {\n              \"value\": \"<Circular reference to #/components/schemas/IMatterItem detected>\"\n            },\n            {\n              \"value\": \"<Circular reference to #/components/schemas/IMatterItem detected>\"\n            }\n          ]\n        }\n      },\n      {\n        \"type\": \"role or layout\",\n        \"id\": \"009f778f-83df-454a-b344-768a862a7e55\",\n        \"name\": \"Vendor\",\n        \"subItems\": {\n          \"key_0\": [\n            {\n              \"value\": \"<Circular reference to #/components/schemas/IMatterItem detected>\"\n            },\n            {\n              \"value\": \"<Circular reference to #/components/schemas/IMatterItem detected>\"\n            }\n          ]\n        }\n      }\n    ]\n  },\n  \"tags\": [\n    {\n      \"href\": \"string\",\n      \"relation\": \"string\",\n      \"method\": \"GET\",\n      \"self\": {\n        \"id\": \"string\",\n        \"href\": \"string\",\n        \"relation\": \"string\",\n        \"method\": \"GET\"\n      },\n      \"id\": \"a15086f5-4da7-4271-8fea-b24d479ced2b\",\n      \"type\": \"Staff\",\n      \"name\": \"\",\n      \"color\": \"Light Blue\",\n      \"staff\": {\n        \"id\": \"string\",\n        \"href\": \"string\",\n        \"relation\": \"string\",\n        \"method\": \"GET\"\n      }\n    },\n    {\n      \"href\": \"string\",\n      \"relation\": \"string\",\n      \"method\": \"GET\",\n      \"self\": {\n        \"id\": \"string\",\n        \"href\": \"string\",\n        \"relation\": \"string\",\n        \"method\": \"GET\"\n      },\n      \"id\": \"a15086f5-4da7-4271-8fea-b24d479ced2b\",\n      \"type\": \"Staff\",\n      \"name\": \"\",\n      \"color\": \"Light Blue\",\n      \"staff\": {\n        \"id\": \"string\",\n        \"href\": \"string\",\n        \"relation\": \"string\",\n        \"method\": \"GET\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "92086b9a-fbf7-4ff6-af87-3e19cff6d064",
+              "name": "When the authenticated account does not have access to the matter.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "matters",
+                    ":matterId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "matterId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 5350,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "320f0154-50eb-4f27-a44b-94ce7e531f5f",
+              "name": "When matter with specified id does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "matters",
+                    ":matterId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "matterId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 5350,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5a95fc3e-b40c-47f1-975c-c263a449bb8e",
+          "name": "Update a matter",
+          "request": {
+            "name": "Update a matter",
+            "description": {
+              "content": "Updates a specified matter.\r\n            \r\nThe following actions are currently not supported:\r\n            \r\n- `clientIds` cannot be modified\r\n            \r\n- `otherSideIds` cannot be modified\r\n\r\n-  `Matter` cannot be converted back to `Lead`",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "matters",
+                ":matterId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "matterId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"externalSystemId\": \"<string>\",\n  \"number\": \"<string>\",\n  \"matterTypeId\": \"<string>\",\n  \"clientIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"otherSideIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"branchId\": \"<string>\",\n  \"branchProviderId\": \"<string>\",\n  \"clientRole\": \"<string>\",\n  \"otherSideRole\": \"<string>\",\n  \"description\": \"<string>\",\n  \"status\": \"<string>\",\n  \"openedDate\": \"<dateTime>\",\n  \"closedDate\": \"<dateTime>\",\n  \"leadOpenedDate\": \"<dateTime>\",\n  \"leadClosedDate\": \"<dateTime>\",\n  \"leadClosedReason\": \"<string>\",\n  \"referralType\": \"<string>\",\n  \"referrerId\": \"<string>\",\n  \"referralAgreementFeeType\": \"<string>\",\n  \"referralAgreementFee\": \"<double>\",\n  \"referralAgreementFeeComment\": \"<string>\",\n  \"personResponsibleStaffId\": \"<string>\",\n  \"personAssistingStaffId\": \"<string>\",\n  \"personAssistingStaffIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"originatingStaffId\": \"<string>\",\n  \"originatingStaffIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"splitOriginatingStaffSettings\": {\n    \"isEnabled\": \"<boolean>\",\n    \"splitMatterStaffs\": [\n      {\n        \"matterStaffId\": \"<string>\",\n        \"matterStaffRatio\": \"<long>\"\n      },\n      {\n        \"matterStaffId\": \"<string>\",\n        \"matterStaffRatio\": \"<long>\"\n      }\n    ],\n    \"splitMethod\": \"<string>\",\n    \"remainderStaffId\": \"<string>\"\n  },\n  \"supervisorStaffId\": \"<string>\",\n  \"clientCode\": \"<string>\",\n  \"isLead\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c88c38d8-7e1d-4eb8-bb4c-abf320b96ca7",
+              "name": "When request is accepted. Returns a hypermedia 'Link' object of the matter to be updated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "matters",
+                    ":matterId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "matterId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"externalSystemId\": \"EXT01\",\n  \"number\": \"FUS-124\",\n  \"matterTypeId\": \"009f778f-83df-454a-b344-768a862a7e55\",\n  \"clientIds\": [\n    \"832e778f-83df-454a-b344-768a862a7e67\"\n  ],\n  \"otherSideIds\": [\n    \"776e778f-83df-454a-b344-768a862a6e58\"\n  ],\n  \"branchId\": \"dd4e4381-b6a0-4c64-8feb-e8ea8016ea42\",\n  \"branchProviderId\": \"Smokeball\",\n  \"clientRole\": \"Buyer\",\n  \"otherSideRole\": \"Seller\",\n  \"description\": \"This is a brief description for the matter\",\n  \"status\": \"Open\",\n  \"openedDate\": \"2022-04-23T14:00:00Z\",\n  \"closedDate\": \"2022-04-23T14:00:00Z\",\n  \"leadOpenedDate\": \"2022-04-23T14:00:00Z\",\n  \"leadClosedDate\": \"2022-04-23T14:00:00Z\",\n  \"leadClosedReason\": \"No longer interested\",\n  \"referralType\": \"Google\",\n  \"referrerId\": \"97bbe49f-6460-4bfc-b287-34ddfdbb81ef\",\n  \"referralAgreementFeeType\": \"<string>\",\n  \"referralAgreementFee\": \"<double>\",\n  \"referralAgreementFeeComment\": \"<string>\",\n  \"personResponsibleStaffId\": \"c85d28cb-a760-4627-aa59-0a853c2e65ed\",\n  \"personAssistingStaffId\": \"c85d28cb-a760-4627-aa59-0a853c2e65ed\",\n  \"personAssistingStaffIds\": [\n    \"c85d28cb-a760-4627-aa59-0a853c2e65ed\"\n  ],\n  \"originatingStaffId\": \"c85d28cb-a760-4627-aa59-0a853c2e65ed\",\n  \"originatingStaffIds\": [\n    \"c85d28cb-a760-4627-aa59-0a853c2e65ed\"\n  ],\n  \"splitOriginatingStaffSettings\": {\n    \"isEnabled\": \"<boolean>\",\n    \"splitMatterStaffs\": [\n      {\n        \"matterStaffId\": \"<string>\",\n        \"matterStaffRatio\": \"<long>\"\n      },\n      {\n        \"matterStaffId\": \"<string>\",\n        \"matterStaffRatio\": \"<long>\"\n      }\n    ],\n    \"splitMethod\": \"<string>\",\n    \"remainderStaffId\": \"<string>\"\n  },\n  \"supervisorStaffId\": \"c85d28cb-a760-4627-aa59-0a853c2e65ed\",\n  \"clientCode\": \"Client A\",\n  \"isLead\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"href\": \"string\",\n  \"relation\": \"string\",\n  \"method\": \"GET\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8b1bd6e3-68dd-4383-a70e-1dabc8f81266",
+              "name": "When an unsupported request is made.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "matters",
+                    ":matterId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "matterId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"externalSystemId\": \"EXT01\",\n  \"number\": \"FUS-124\",\n  \"matterTypeId\": \"009f778f-83df-454a-b344-768a862a7e55\",\n  \"clientIds\": [\n    \"832e778f-83df-454a-b344-768a862a7e67\"\n  ],\n  \"otherSideIds\": [\n    \"776e778f-83df-454a-b344-768a862a6e58\"\n  ],\n  \"branchId\": \"dd4e4381-b6a0-4c64-8feb-e8ea8016ea42\",\n  \"branchProviderId\": \"Smokeball\",\n  \"clientRole\": \"Buyer\",\n  \"otherSideRole\": \"Seller\",\n  \"description\": \"This is a brief description for the matter\",\n  \"status\": \"Open\",\n  \"openedDate\": \"2022-04-23T14:00:00Z\",\n  \"closedDate\": \"2022-04-23T14:00:00Z\",\n  \"leadOpenedDate\": \"2022-04-23T14:00:00Z\",\n  \"leadClosedDate\": \"2022-04-23T14:00:00Z\",\n  \"leadClosedReason\": \"No longer interested\",\n  \"referralType\": \"Google\",\n  \"referrerId\": \"97bbe49f-6460-4bfc-b287-34ddfdbb81ef\",\n  \"referralAgreementFeeType\": \"<string>\",\n  \"referralAgreementFee\": \"<double>\",\n  \"referralAgreementFeeComment\": \"<string>\",\n  \"personResponsibleStaffId\": \"c85d28cb-a760-4627-aa59-0a853c2e65ed\",\n  \"personAssistingStaffId\": \"c85d28cb-a760-4627-aa59-0a853c2e65ed\",\n  \"personAssistingStaffIds\": [\n    \"c85d28cb-a760-4627-aa59-0a853c2e65ed\"\n  ],\n  \"originatingStaffId\": \"c85d28cb-a760-4627-aa59-0a853c2e65ed\",\n  \"originatingStaffIds\": [\n    \"c85d28cb-a760-4627-aa59-0a853c2e65ed\"\n  ],\n  \"splitOriginatingStaffSettings\": {\n    \"isEnabled\": \"<boolean>\",\n    \"splitMatterStaffs\": [\n      {\n        \"matterStaffId\": \"<string>\",\n        \"matterStaffRatio\": \"<long>\"\n      },\n      {\n        \"matterStaffId\": \"<string>\",\n        \"matterStaffRatio\": \"<long>\"\n      }\n    ],\n    \"splitMethod\": \"<string>\",\n    \"remainderStaffId\": \"<string>\"\n  },\n  \"supervisorStaffId\": \"c85d28cb-a760-4627-aa59-0a853c2e65ed\",\n  \"clientCode\": \"Client A\",\n  \"isLead\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 5350,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "55bf0cd4-327f-4e4c-a2d1-368819cab27c",
+              "name": "When the authenticated account does not have access to the matter.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "matters",
+                    ":matterId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "matterId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"externalSystemId\": \"EXT01\",\n  \"number\": \"FUS-124\",\n  \"matterTypeId\": \"009f778f-83df-454a-b344-768a862a7e55\",\n  \"clientIds\": [\n    \"832e778f-83df-454a-b344-768a862a7e67\"\n  ],\n  \"otherSideIds\": [\n    \"776e778f-83df-454a-b344-768a862a6e58\"\n  ],\n  \"branchId\": \"dd4e4381-b6a0-4c64-8feb-e8ea8016ea42\",\n  \"branchProviderId\": \"Smokeball\",\n  \"clientRole\": \"Buyer\",\n  \"otherSideRole\": \"Seller\",\n  \"description\": \"This is a brief description for the matter\",\n  \"status\": \"Open\",\n  \"openedDate\": \"2022-04-23T14:00:00Z\",\n  \"closedDate\": \"2022-04-23T14:00:00Z\",\n  \"leadOpenedDate\": \"2022-04-23T14:00:00Z\",\n  \"leadClosedDate\": \"2022-04-23T14:00:00Z\",\n  \"leadClosedReason\": \"No longer interested\",\n  \"referralType\": \"Google\",\n  \"referrerId\": \"97bbe49f-6460-4bfc-b287-34ddfdbb81ef\",\n  \"referralAgreementFeeType\": \"<string>\",\n  \"referralAgreementFee\": \"<double>\",\n  \"referralAgreementFeeComment\": \"<string>\",\n  \"personResponsibleStaffId\": \"c85d28cb-a760-4627-aa59-0a853c2e65ed\",\n  \"personAssistingStaffId\": \"c85d28cb-a760-4627-aa59-0a853c2e65ed\",\n  \"personAssistingStaffIds\": [\n    \"c85d28cb-a760-4627-aa59-0a853c2e65ed\"\n  ],\n  \"originatingStaffId\": \"c85d28cb-a760-4627-aa59-0a853c2e65ed\",\n  \"originatingStaffIds\": [\n    \"c85d28cb-a760-4627-aa59-0a853c2e65ed\"\n  ],\n  \"splitOriginatingStaffSettings\": {\n    \"isEnabled\": \"<boolean>\",\n    \"splitMatterStaffs\": [\n      {\n        \"matterStaffId\": \"<string>\",\n        \"matterStaffRatio\": \"<long>\"\n      },\n      {\n        \"matterStaffId\": \"<string>\",\n        \"matterStaffRatio\": \"<long>\"\n      }\n    ],\n    \"splitMethod\": \"<string>\",\n    \"remainderStaffId\": \"<string>\"\n  },\n  \"supervisorStaffId\": \"c85d28cb-a760-4627-aa59-0a853c2e65ed\",\n  \"clientCode\": \"Client A\",\n  \"isLead\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 5350,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1eee67f1-757a-4305-8439-1073f9938e32",
+              "name": "When matter with specified id does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "matters",
+                    ":matterId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "matterId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"externalSystemId\": \"EXT01\",\n  \"number\": \"FUS-124\",\n  \"matterTypeId\": \"009f778f-83df-454a-b344-768a862a7e55\",\n  \"clientIds\": [\n    \"832e778f-83df-454a-b344-768a862a7e67\"\n  ],\n  \"otherSideIds\": [\n    \"776e778f-83df-454a-b344-768a862a6e58\"\n  ],\n  \"branchId\": \"dd4e4381-b6a0-4c64-8feb-e8ea8016ea42\",\n  \"branchProviderId\": \"Smokeball\",\n  \"clientRole\": \"Buyer\",\n  \"otherSideRole\": \"Seller\",\n  \"description\": \"This is a brief description for the matter\",\n  \"status\": \"Open\",\n  \"openedDate\": \"2022-04-23T14:00:00Z\",\n  \"closedDate\": \"2022-04-23T14:00:00Z\",\n  \"leadOpenedDate\": \"2022-04-23T14:00:00Z\",\n  \"leadClosedDate\": \"2022-04-23T14:00:00Z\",\n  \"leadClosedReason\": \"No longer interested\",\n  \"referralType\": \"Google\",\n  \"referrerId\": \"97bbe49f-6460-4bfc-b287-34ddfdbb81ef\",\n  \"referralAgreementFeeType\": \"<string>\",\n  \"referralAgreementFee\": \"<double>\",\n  \"referralAgreementFeeComment\": \"<string>\",\n  \"personResponsibleStaffId\": \"c85d28cb-a760-4627-aa59-0a853c2e65ed\",\n  \"personAssistingStaffId\": \"c85d28cb-a760-4627-aa59-0a853c2e65ed\",\n  \"personAssistingStaffIds\": [\n    \"c85d28cb-a760-4627-aa59-0a853c2e65ed\"\n  ],\n  \"originatingStaffId\": \"c85d28cb-a760-4627-aa59-0a853c2e65ed\",\n  \"originatingStaffIds\": [\n    \"c85d28cb-a760-4627-aa59-0a853c2e65ed\"\n  ],\n  \"splitOriginatingStaffSettings\": {\n    \"isEnabled\": \"<boolean>\",\n    \"splitMatterStaffs\": [\n      {\n        \"matterStaffId\": \"<string>\",\n        \"matterStaffRatio\": \"<long>\"\n      },\n      {\n        \"matterStaffId\": \"<string>\",\n        \"matterStaffRatio\": \"<long>\"\n      }\n    ],\n    \"splitMethod\": \"<string>\",\n    \"remainderStaffId\": \"<string>\"\n  },\n  \"supervisorStaffId\": \"c85d28cb-a760-4627-aa59-0a853c2e65ed\",\n  \"clientCode\": \"Client A\",\n  \"isLead\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 5350,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4b649148-f34d-4b78-b4a0-72c1f648f335",
+          "name": "Patch a matter",
+          "request": {
+            "name": "Patch a matter",
+            "description": {
+              "content": "Patches a specified matter.\r\n            \r\nNote: This endpoint can also be used to update a `Lead`, convert `Lead` to `Matter` and change the `Lead`/`Matter` type.\r\n            \r\nSee `Matters` documentation for more details on how to use this.\r\n\r\nThe following actions are not supported:\r\n\r\n- `items` cannot be updated where either `clientIds` and/or `otherSideIds` are being updated\r\n            \r\n- `items` cannot be updated when converting a `Lead` to `Matter` or changing the `Lead`/`Matter` type\r\n            \r\n- `clientRole` cannot be updated, unless converting a `Lead` to `Matter` or changing the `Lead`/`Matter` type\r\n            \r\n- `Matter` cannot be converted back to `Lead`\r\n            \r\n- `splitOriginatingStaffSettings` cannot be updated without also providing `originatingStaffIds` in the same PATCH request\r\n            \r\n- `personAssistingStaffIds` cannot contain `personAssistingStaffId`\r\n            \r\n- `originatingStaffIds` cannot contain `originatingStaffId`\r\n            \r\n- If split originating staff settings are enabled, `originatingStaffIds` and `originatingStaffId` cannot be updated\r\n            \r\n- When updating via `items`, client role items and their sub-items must contain at least one item (cannot be empty), while non-client role items and their sub-items can be empty arrays to remove all items",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "matters",
+                ":matterId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "matterId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"externalSystemId\": \"<string>\",\n  \"number\": \"<string>\",\n  \"matterTypeId\": \"<string>\",\n  \"description\": \"<string>\",\n  \"status\": \"<string>\",\n  \"dateOpened\": \"<dateTime>\",\n  \"openedDate\": \"<dateTime>\",\n  \"closedDate\": \"<dateTime>\",\n  \"leadOpenedDate\": \"<dateTime>\",\n  \"leadClosedDate\": \"<dateTime>\",\n  \"leadClosedReason\": \"<string>\",\n  \"referralType\": \"<string>\",\n  \"referrerId\": \"<string>\",\n  \"referralAgreementFeeType\": \"<string>\",\n  \"referralAgreementFee\": \"<double>\",\n  \"referralAgreementFeeComment\": \"<string>\",\n  \"personResponsibleStaffId\": \"<string>\",\n  \"personAssistingStaffId\": \"<string>\",\n  \"personAssistingStaffIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"originatingStaffId\": \"<string>\",\n  \"originatingStaffIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"splitOriginatingStaffSettings\": {\n    \"isEnabled\": \"<boolean>\",\n    \"splitMatterStaffs\": [\n      {\n        \"matterStaffId\": \"<string>\",\n        \"matterStaffRatio\": \"<long>\"\n      },\n      {\n        \"matterStaffId\": \"<string>\",\n        \"matterStaffRatio\": \"<long>\"\n      }\n    ],\n    \"splitMethod\": \"<string>\",\n    \"remainderStaffId\": \"<string>\"\n  },\n  \"supervisorStaffId\": \"<string>\",\n  \"clientCode\": \"<string>\",\n  \"branchId\": \"<string>\",\n  \"branchProviderId\": \"<string>\",\n  \"clientRole\": \"<string>\",\n  \"isLead\": \"<boolean>\",\n  \"clientIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"otherSideIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"items\": {\n    \"key_0\": [\n      {\n        \"id\": \"<string>\",\n        \"contactId\": \"<string>\",\n        \"contact\": {\n          \"id\": \"<string>\"\n        },\n        \"roleDescription\": \"<string>\",\n        \"description\": \"<string>\",\n        \"subItems\": {\n          \"key_0\": [\n            {\n              \"value\": \"<Circular reference to #/components/schemas/MatterItemDto detected>\"\n            },\n            {\n              \"value\": \"<Circular reference to #/components/schemas/MatterItemDto detected>\"\n            }\n          ],\n          \"key_1\": [\n            {\n              \"value\": \"<Circular reference to #/components/schemas/MatterItemDto detected>\"\n            },\n            {\n              \"value\": \"<Circular reference to #/components/schemas/MatterItemDto detected>\"\n            }\n          ]\n        }\n      },\n      {\n        \"id\": \"<string>\",\n        \"contactId\": \"<string>\",\n        \"contact\": {\n          \"id\": \"<string>\"\n        },\n        \"roleDescription\": \"<string>\",\n        \"description\": \"<string>\",\n        \"subItems\": {\n          \"key_0\": [\n            {\n              \"value\": \"<Circular reference to #/components/schemas/MatterItemDto detected>\"\n            },\n            {\n              \"value\": \"<Circular reference to #/components/schemas/MatterItemDto detected>\"\n            }\n          ],\n          \"key_1\": [\n            {\n              \"value\": \"<Circular reference to #/components/schemas/MatterItemDto detected>\"\n            },\n            {\n              \"value\": \"<Circular reference to #/components/schemas/MatterItemDto detected>\"\n            }\n          ]\n        }\n      }\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "51f107fa-fdd4-4b1f-ae4c-1b71c6a931e3",
+              "name": "When request is accepted. Returns a hypermedia 'Link' object of the matter to be patched.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "matters",
+                    ":matterId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "matterId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"externalSystemId\": \"EXT01\",\n  \"number\": \"FUS-124\",\n  \"matterTypeId\": \"009f778f-83df-454a-b344-768a862a7e55\",\n  \"description\": \"This is a brief description for the matter\",\n  \"status\": \"Open\",\n  \"dateOpened\": \"2022-04-23T14:00:00Z\",\n  \"openedDate\": \"2022-04-23T14:00:00Z\",\n  \"closedDate\": \"2022-04-23T14:00:00Z\",\n  \"leadOpenedDate\": \"2022-04-23T14:00:00Z\",\n  \"leadClosedDate\": \"2022-04-23T14:00:00Z\",\n  \"leadClosedReason\": \"No longer interested\",\n  \"referralType\": \"Google\",\n  \"referrerId\": \"97bbe49f-6460-4bfc-b287-34ddfdbb81ef\",\n  \"referralAgreementFeeType\": \"<string>\",\n  \"referralAgreementFee\": \"<double>\",\n  \"referralAgreementFeeComment\": \"<string>\",\n  \"personResponsibleStaffId\": \"c85d28cb-a760-4627-aa59-0a853c2e65ed\",\n  \"personAssistingStaffId\": \"c85d28cb-a760-4627-aa59-0a853c2e65ed\",\n  \"personAssistingStaffIds\": [\n    \"c85d28cb-a760-4627-aa59-0a853c2e65ed\"\n  ],\n  \"originatingStaffId\": \"c85d28cb-a760-4627-aa59-0a853c2e65ed\",\n  \"originatingStaffIds\": [\n    \"c85d28cb-a760-4627-aa59-0a853c2e65ed\"\n  ],\n  \"splitOriginatingStaffSettings\": {\n    \"isEnabled\": \"<boolean>\",\n    \"splitMatterStaffs\": [\n      {\n        \"matterStaffId\": \"<string>\",\n        \"matterStaffRatio\": \"<long>\"\n      },\n      {\n        \"matterStaffId\": \"<string>\",\n        \"matterStaffRatio\": \"<long>\"\n      }\n    ],\n    \"splitMethod\": \"<string>\",\n    \"remainderStaffId\": \"<string>\"\n  },\n  \"supervisorStaffId\": \"c85d28cb-a760-4627-aa59-0a853c2e65ed\",\n  \"clientCode\": \"Client A\",\n  \"branchId\": \"c85d28cb-a760-4627-aa59-0a853c2e65ed\",\n  \"branchProviderId\": \"c85d28cb-a760-4627-aa59-0a853c2e65ed\",\n  \"clientRole\": \"Buyer\",\n  \"isLead\": false,\n  \"clientIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"otherSideIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"items\": {\n    \"key_0\": [\n      {\n        \"id\": \"009f778f-83df-454a-b344-768a862a7e55\",\n        \"contactId\": \"c85d28cb-a760-4627-aa59-0a853c2e65ed\",\n        \"contact\": {\n          \"id\": \"009f778f-83df-454a-b344-768a862a7e55\"\n        },\n        \"roleDescription\": \"<string>\",\n        \"description\": \"<string>\",\n        \"subItems\": {\n          \"key_0\": [\n            {\n              \"value\": \"<Circular reference to #/components/schemas/MatterItemDto detected>\"\n            },\n            {\n              \"value\": \"<Circular reference to #/components/schemas/MatterItemDto detected>\"\n            }\n          ]\n        }\n      },\n      {\n        \"id\": \"009f778f-83df-454a-b344-768a862a7e55\",\n        \"contactId\": \"c85d28cb-a760-4627-aa59-0a853c2e65ed\",\n        \"contact\": {\n          \"id\": \"009f778f-83df-454a-b344-768a862a7e55\"\n        },\n        \"roleDescription\": \"<string>\",\n        \"description\": \"<string>\",\n        \"subItems\": {\n          \"key_0\": [\n            {\n              \"value\": \"<Circular reference to #/components/schemas/MatterItemDto detected>\"\n            },\n            {\n              \"value\": \"<Circular reference to #/components/schemas/MatterItemDto detected>\"\n            }\n          ],\n          \"key_1\": [\n            {\n              \"value\": \"<Circular reference to #/components/schemas/MatterItemDto detected>\"\n            },\n            {\n              \"value\": \"<Circular reference to #/components/schemas/MatterItemDto detected>\"\n            }\n          ]\n        }\n      }\n    ],\n    \"key_1\": [\n      {\n        \"id\": \"009f778f-83df-454a-b344-768a862a7e55\",\n        \"contactId\": \"c85d28cb-a760-4627-aa59-0a853c2e65ed\",\n        \"contact\": {\n          \"id\": \"009f778f-83df-454a-b344-768a862a7e55\"\n        },\n        \"roleDescription\": \"<string>\",\n        \"description\": \"<string>\",\n        \"subItems\": {\n          \"key_0\": [\n            {\n              \"value\": \"<Circular reference to #/components/schemas/MatterItemDto detected>\"\n            },\n            {\n              \"value\": \"<Circular reference to #/components/schemas/MatterItemDto detected>\"\n            }\n          ],\n          \"key_1\": [\n            {\n              \"value\": \"<Circular reference to #/components/schemas/MatterItemDto detected>\"\n            },\n            {\n              \"value\": \"<Circular reference to #/components/schemas/MatterItemDto detected>\"\n            }\n          ],\n          \"key_2\": [\n            {\n              \"value\": \"<Circular reference to #/components/schemas/MatterItemDto detected>\"\n            },\n            {\n              \"value\": \"<Circular reference to #/components/schemas/MatterItemDto detected>\"\n            }\n          ]\n        }\n      },\n      {\n        \"id\": \"009f778f-83df-454a-b344-768a862a7e55\",\n        \"contactId\": \"c85d28cb-a760-4627-aa59-0a853c2e65ed\",\n        \"contact\": {\n          \"id\": \"009f778f-83df-454a-b344-768a862a7e55\"\n        },\n        \"roleDescription\": \"<string>\",\n        \"description\": \"<string>\",\n        \"subItems\": {\n          \"key_0\": [\n            {\n              \"value\": \"<Circular reference to #/components/schemas/MatterItemDto detected>\"\n            },\n            {\n              \"value\": \"<Circular reference to #/components/schemas/MatterItemDto detected>\"\n            }\n          ]\n        }\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"href\": \"string\",\n  \"relation\": \"string\",\n  \"method\": \"GET\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8488ecaf-d84e-4a71-9372-134c03fc7332",
+              "name": "When an unsupported request is made.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "matters",
+                    ":matterId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "matterId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"externalSystemId\": \"EXT01\",\n  \"number\": \"FUS-124\",\n  \"matterTypeId\": \"009f778f-83df-454a-b344-768a862a7e55\",\n  \"description\": \"This is a brief description for the matter\",\n  \"status\": \"Open\",\n  \"dateOpened\": \"2022-04-23T14:00:00Z\",\n  \"openedDate\": \"2022-04-23T14:00:00Z\",\n  \"closedDate\": \"2022-04-23T14:00:00Z\",\n  \"leadOpenedDate\": \"2022-04-23T14:00:00Z\",\n  \"leadClosedDate\": \"2022-04-23T14:00:00Z\",\n  \"leadClosedReason\": \"No longer interested\",\n  \"referralType\": \"Google\",\n  \"referrerId\": \"97bbe49f-6460-4bfc-b287-34ddfdbb81ef\",\n  \"referralAgreementFeeType\": \"<string>\",\n  \"referralAgreementFee\": \"<double>\",\n  \"referralAgreementFeeComment\": \"<string>\",\n  \"personResponsibleStaffId\": \"c85d28cb-a760-4627-aa59-0a853c2e65ed\",\n  \"personAssistingStaffId\": \"c85d28cb-a760-4627-aa59-0a853c2e65ed\",\n  \"personAssistingStaffIds\": [\n    \"c85d28cb-a760-4627-aa59-0a853c2e65ed\"\n  ],\n  \"originatingStaffId\": \"c85d28cb-a760-4627-aa59-0a853c2e65ed\",\n  \"originatingStaffIds\": [\n    \"c85d28cb-a760-4627-aa59-0a853c2e65ed\"\n  ],\n  \"splitOriginatingStaffSettings\": {\n    \"isEnabled\": \"<boolean>\",\n    \"splitMatterStaffs\": [\n      {\n        \"matterStaffId\": \"<string>\",\n        \"matterStaffRatio\": \"<long>\"\n      },\n      {\n        \"matterStaffId\": \"<string>\",\n        \"matterStaffRatio\": \"<long>\"\n      }\n    ],\n    \"splitMethod\": \"<string>\",\n    \"remainderStaffId\": \"<string>\"\n  },\n  \"supervisorStaffId\": \"c85d28cb-a760-4627-aa59-0a853c2e65ed\",\n  \"clientCode\": \"Client A\",\n  \"branchId\": \"c85d28cb-a760-4627-aa59-0a853c2e65ed\",\n  \"branchProviderId\": \"c85d28cb-a760-4627-aa59-0a853c2e65ed\",\n  \"clientRole\": \"Buyer\",\n  \"isLead\": false,\n  \"clientIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"otherSideIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"items\": {\n    \"key_0\": [\n      {\n        \"id\": \"009f778f-83df-454a-b344-768a862a7e55\",\n        \"contactId\": \"c85d28cb-a760-4627-aa59-0a853c2e65ed\",\n        \"contact\": {\n          \"id\": \"009f778f-83df-454a-b344-768a862a7e55\"\n        },\n        \"roleDescription\": \"<string>\",\n        \"description\": \"<string>\",\n        \"subItems\": {\n          \"key_0\": [\n            {\n              \"value\": \"<Circular reference to #/components/schemas/MatterItemDto detected>\"\n            },\n            {\n              \"value\": \"<Circular reference to #/components/schemas/MatterItemDto detected>\"\n            }\n          ]\n        }\n      },\n      {\n        \"id\": \"009f778f-83df-454a-b344-768a862a7e55\",\n        \"contactId\": \"c85d28cb-a760-4627-aa59-0a853c2e65ed\",\n        \"contact\": {\n          \"id\": \"009f778f-83df-454a-b344-768a862a7e55\"\n        },\n        \"roleDescription\": \"<string>\",\n        \"description\": \"<string>\",\n        \"subItems\": {\n          \"key_0\": [\n            {\n              \"value\": \"<Circular reference to #/components/schemas/MatterItemDto detected>\"\n            },\n            {\n              \"value\": \"<Circular reference to #/components/schemas/MatterItemDto detected>\"\n            }\n          ],\n          \"key_1\": [\n            {\n              \"value\": \"<Circular reference to #/components/schemas/MatterItemDto detected>\"\n            },\n            {\n              \"value\": \"<Circular reference to #/components/schemas/MatterItemDto detected>\"\n            }\n          ]\n        }\n      }\n    ],\n    \"key_1\": [\n      {\n        \"id\": \"009f778f-83df-454a-b344-768a862a7e55\",\n        \"contactId\": \"c85d28cb-a760-4627-aa59-0a853c2e65ed\",\n        \"contact\": {\n          \"id\": \"009f778f-83df-454a-b344-768a862a7e55\"\n        },\n        \"roleDescription\": \"<string>\",\n        \"description\": \"<string>\",\n        \"subItems\": {\n          \"key_0\": [\n            {\n              \"value\": \"<Circular reference to #/components/schemas/MatterItemDto detected>\"\n            },\n            {\n              \"value\": \"<Circular reference to #/components/schemas/MatterItemDto detected>\"\n            }\n          ],\n          \"key_1\": [\n            {\n              \"value\": \"<Circular reference to #/components/schemas/MatterItemDto detected>\"\n            },\n            {\n              \"value\": \"<Circular reference to #/components/schemas/MatterItemDto detected>\"\n            }\n          ],\n          \"key_2\": [\n            {\n              \"value\": \"<Circular reference to #/components/schemas/MatterItemDto detected>\"\n            },\n            {\n              \"value\": \"<Circular reference to #/components/schemas/MatterItemDto detected>\"\n            }\n          ]\n        }\n      },\n      {\n        \"id\": \"009f778f-83df-454a-b344-768a862a7e55\",\n        \"contactId\": \"c85d28cb-a760-4627-aa59-0a853c2e65ed\",\n        \"contact\": {\n          \"id\": \"009f778f-83df-454a-b344-768a862a7e55\"\n        },\n        \"roleDescription\": \"<string>\",\n        \"description\": \"<string>\",\n        \"subItems\": {\n          \"key_0\": [\n            {\n              \"value\": \"<Circular reference to #/components/schemas/MatterItemDto detected>\"\n            },\n            {\n              \"value\": \"<Circular reference to #/components/schemas/MatterItemDto detected>\"\n            }\n          ]\n        }\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 5350,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "71ad8b4a-c310-4959-a8cb-e0b7b8f7d811",
+              "name": "When the authenticated account does not have access to the matter.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "matters",
+                    ":matterId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "matterId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"externalSystemId\": \"EXT01\",\n  \"number\": \"FUS-124\",\n  \"matterTypeId\": \"009f778f-83df-454a-b344-768a862a7e55\",\n  \"description\": \"This is a brief description for the matter\",\n  \"status\": \"Open\",\n  \"dateOpened\": \"2022-04-23T14:00:00Z\",\n  \"openedDate\": \"2022-04-23T14:00:00Z\",\n  \"closedDate\": \"2022-04-23T14:00:00Z\",\n  \"leadOpenedDate\": \"2022-04-23T14:00:00Z\",\n  \"leadClosedDate\": \"2022-04-23T14:00:00Z\",\n  \"leadClosedReason\": \"No longer interested\",\n  \"referralType\": \"Google\",\n  \"referrerId\": \"97bbe49f-6460-4bfc-b287-34ddfdbb81ef\",\n  \"referralAgreementFeeType\": \"<string>\",\n  \"referralAgreementFee\": \"<double>\",\n  \"referralAgreementFeeComment\": \"<string>\",\n  \"personResponsibleStaffId\": \"c85d28cb-a760-4627-aa59-0a853c2e65ed\",\n  \"personAssistingStaffId\": \"c85d28cb-a760-4627-aa59-0a853c2e65ed\",\n  \"personAssistingStaffIds\": [\n    \"c85d28cb-a760-4627-aa59-0a853c2e65ed\"\n  ],\n  \"originatingStaffId\": \"c85d28cb-a760-4627-aa59-0a853c2e65ed\",\n  \"originatingStaffIds\": [\n    \"c85d28cb-a760-4627-aa59-0a853c2e65ed\"\n  ],\n  \"splitOriginatingStaffSettings\": {\n    \"isEnabled\": \"<boolean>\",\n    \"splitMatterStaffs\": [\n      {\n        \"matterStaffId\": \"<string>\",\n        \"matterStaffRatio\": \"<long>\"\n      },\n      {\n        \"matterStaffId\": \"<string>\",\n        \"matterStaffRatio\": \"<long>\"\n      }\n    ],\n    \"splitMethod\": \"<string>\",\n    \"remainderStaffId\": \"<string>\"\n  },\n  \"supervisorStaffId\": \"c85d28cb-a760-4627-aa59-0a853c2e65ed\",\n  \"clientCode\": \"Client A\",\n  \"branchId\": \"c85d28cb-a760-4627-aa59-0a853c2e65ed\",\n  \"branchProviderId\": \"c85d28cb-a760-4627-aa59-0a853c2e65ed\",\n  \"clientRole\": \"Buyer\",\n  \"isLead\": false,\n  \"clientIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"otherSideIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"items\": {\n    \"key_0\": [\n      {\n        \"id\": \"009f778f-83df-454a-b344-768a862a7e55\",\n        \"contactId\": \"c85d28cb-a760-4627-aa59-0a853c2e65ed\",\n        \"contact\": {\n          \"id\": \"009f778f-83df-454a-b344-768a862a7e55\"\n        },\n        \"roleDescription\": \"<string>\",\n        \"description\": \"<string>\",\n        \"subItems\": {\n          \"key_0\": [\n            {\n              \"value\": \"<Circular reference to #/components/schemas/MatterItemDto detected>\"\n            },\n            {\n              \"value\": \"<Circular reference to #/components/schemas/MatterItemDto detected>\"\n            }\n          ]\n        }\n      },\n      {\n        \"id\": \"009f778f-83df-454a-b344-768a862a7e55\",\n        \"contactId\": \"c85d28cb-a760-4627-aa59-0a853c2e65ed\",\n        \"contact\": {\n          \"id\": \"009f778f-83df-454a-b344-768a862a7e55\"\n        },\n        \"roleDescription\": \"<string>\",\n        \"description\": \"<string>\",\n        \"subItems\": {\n          \"key_0\": [\n            {\n              \"value\": \"<Circular reference to #/components/schemas/MatterItemDto detected>\"\n            },\n            {\n              \"value\": \"<Circular reference to #/components/schemas/MatterItemDto detected>\"\n            }\n          ],\n          \"key_1\": [\n            {\n              \"value\": \"<Circular reference to #/components/schemas/MatterItemDto detected>\"\n            },\n            {\n              \"value\": \"<Circular reference to #/components/schemas/MatterItemDto detected>\"\n            }\n          ]\n        }\n      }\n    ],\n    \"key_1\": [\n      {\n        \"id\": \"009f778f-83df-454a-b344-768a862a7e55\",\n        \"contactId\": \"c85d28cb-a760-4627-aa59-0a853c2e65ed\",\n        \"contact\": {\n          \"id\": \"009f778f-83df-454a-b344-768a862a7e55\"\n        },\n        \"roleDescription\": \"<string>\",\n        \"description\": \"<string>\",\n        \"subItems\": {\n          \"key_0\": [\n            {\n              \"value\": \"<Circular reference to #/components/schemas/MatterItemDto detected>\"\n            },\n            {\n              \"value\": \"<Circular reference to #/components/schemas/MatterItemDto detected>\"\n            }\n          ],\n          \"key_1\": [\n            {\n              \"value\": \"<Circular reference to #/components/schemas/MatterItemDto detected>\"\n            },\n            {\n              \"value\": \"<Circular reference to #/components/schemas/MatterItemDto detected>\"\n            }\n          ],\n          \"key_2\": [\n            {\n              \"value\": \"<Circular reference to #/components/schemas/MatterItemDto detected>\"\n            },\n            {\n              \"value\": \"<Circular reference to #/components/schemas/MatterItemDto detected>\"\n            }\n          ]\n        }\n      },\n      {\n        \"id\": \"009f778f-83df-454a-b344-768a862a7e55\",\n        \"contactId\": \"c85d28cb-a760-4627-aa59-0a853c2e65ed\",\n        \"contact\": {\n          \"id\": \"009f778f-83df-454a-b344-768a862a7e55\"\n        },\n        \"roleDescription\": \"<string>\",\n        \"description\": \"<string>\",\n        \"subItems\": {\n          \"key_0\": [\n            {\n              \"value\": \"<Circular reference to #/components/schemas/MatterItemDto detected>\"\n            },\n            {\n              \"value\": \"<Circular reference to #/components/schemas/MatterItemDto detected>\"\n            }\n          ]\n        }\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 5350,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "46f7b659-9bd4-4bed-bab0-f062f66f057b",
+              "name": "When matter with specified id does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "matters",
+                    ":matterId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "matterId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"externalSystemId\": \"EXT01\",\n  \"number\": \"FUS-124\",\n  \"matterTypeId\": \"009f778f-83df-454a-b344-768a862a7e55\",\n  \"description\": \"This is a brief description for the matter\",\n  \"status\": \"Open\",\n  \"dateOpened\": \"2022-04-23T14:00:00Z\",\n  \"openedDate\": \"2022-04-23T14:00:00Z\",\n  \"closedDate\": \"2022-04-23T14:00:00Z\",\n  \"leadOpenedDate\": \"2022-04-23T14:00:00Z\",\n  \"leadClosedDate\": \"2022-04-23T14:00:00Z\",\n  \"leadClosedReason\": \"No longer interested\",\n  \"referralType\": \"Google\",\n  \"referrerId\": \"97bbe49f-6460-4bfc-b287-34ddfdbb81ef\",\n  \"referralAgreementFeeType\": \"<string>\",\n  \"referralAgreementFee\": \"<double>\",\n  \"referralAgreementFeeComment\": \"<string>\",\n  \"personResponsibleStaffId\": \"c85d28cb-a760-4627-aa59-0a853c2e65ed\",\n  \"personAssistingStaffId\": \"c85d28cb-a760-4627-aa59-0a853c2e65ed\",\n  \"personAssistingStaffIds\": [\n    \"c85d28cb-a760-4627-aa59-0a853c2e65ed\"\n  ],\n  \"originatingStaffId\": \"c85d28cb-a760-4627-aa59-0a853c2e65ed\",\n  \"originatingStaffIds\": [\n    \"c85d28cb-a760-4627-aa59-0a853c2e65ed\"\n  ],\n  \"splitOriginatingStaffSettings\": {\n    \"isEnabled\": \"<boolean>\",\n    \"splitMatterStaffs\": [\n      {\n        \"matterStaffId\": \"<string>\",\n        \"matterStaffRatio\": \"<long>\"\n      },\n      {\n        \"matterStaffId\": \"<string>\",\n        \"matterStaffRatio\": \"<long>\"\n      }\n    ],\n    \"splitMethod\": \"<string>\",\n    \"remainderStaffId\": \"<string>\"\n  },\n  \"supervisorStaffId\": \"c85d28cb-a760-4627-aa59-0a853c2e65ed\",\n  \"clientCode\": \"Client A\",\n  \"branchId\": \"c85d28cb-a760-4627-aa59-0a853c2e65ed\",\n  \"branchProviderId\": \"c85d28cb-a760-4627-aa59-0a853c2e65ed\",\n  \"clientRole\": \"Buyer\",\n  \"isLead\": false,\n  \"clientIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"otherSideIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"items\": {\n    \"key_0\": [\n      {\n        \"id\": \"009f778f-83df-454a-b344-768a862a7e55\",\n        \"contactId\": \"c85d28cb-a760-4627-aa59-0a853c2e65ed\",\n        \"contact\": {\n          \"id\": \"009f778f-83df-454a-b344-768a862a7e55\"\n        },\n        \"roleDescription\": \"<string>\",\n        \"description\": \"<string>\",\n        \"subItems\": {\n          \"key_0\": [\n            {\n              \"value\": \"<Circular reference to #/components/schemas/MatterItemDto detected>\"\n            },\n            {\n              \"value\": \"<Circular reference to #/components/schemas/MatterItemDto detected>\"\n            }\n          ]\n        }\n      },\n      {\n        \"id\": \"009f778f-83df-454a-b344-768a862a7e55\",\n        \"contactId\": \"c85d28cb-a760-4627-aa59-0a853c2e65ed\",\n        \"contact\": {\n          \"id\": \"009f778f-83df-454a-b344-768a862a7e55\"\n        },\n        \"roleDescription\": \"<string>\",\n        \"description\": \"<string>\",\n        \"subItems\": {\n          \"key_0\": [\n            {\n              \"value\": \"<Circular reference to #/components/schemas/MatterItemDto detected>\"\n            },\n            {\n              \"value\": \"<Circular reference to #/components/schemas/MatterItemDto detected>\"\n            }\n          ],\n          \"key_1\": [\n            {\n              \"value\": \"<Circular reference to #/components/schemas/MatterItemDto detected>\"\n            },\n            {\n              \"value\": \"<Circular reference to #/components/schemas/MatterItemDto detected>\"\n            }\n          ]\n        }\n      }\n    ],\n    \"key_1\": [\n      {\n        \"id\": \"009f778f-83df-454a-b344-768a862a7e55\",\n        \"contactId\": \"c85d28cb-a760-4627-aa59-0a853c2e65ed\",\n        \"contact\": {\n          \"id\": \"009f778f-83df-454a-b344-768a862a7e55\"\n        },\n        \"roleDescription\": \"<string>\",\n        \"description\": \"<string>\",\n        \"subItems\": {\n          \"key_0\": [\n            {\n              \"value\": \"<Circular reference to #/components/schemas/MatterItemDto detected>\"\n            },\n            {\n              \"value\": \"<Circular reference to #/components/schemas/MatterItemDto detected>\"\n            }\n          ],\n          \"key_1\": [\n            {\n              \"value\": \"<Circular reference to #/components/schemas/MatterItemDto detected>\"\n            },\n            {\n              \"value\": \"<Circular reference to #/components/schemas/MatterItemDto detected>\"\n            }\n          ],\n          \"key_2\": [\n            {\n              \"value\": \"<Circular reference to #/components/schemas/MatterItemDto detected>\"\n            },\n            {\n              \"value\": \"<Circular reference to #/components/schemas/MatterItemDto detected>\"\n            }\n          ]\n        }\n      },\n      {\n        \"id\": \"009f778f-83df-454a-b344-768a862a7e55\",\n        \"contactId\": \"c85d28cb-a760-4627-aa59-0a853c2e65ed\",\n        \"contact\": {\n          \"id\": \"009f778f-83df-454a-b344-768a862a7e55\"\n        },\n        \"roleDescription\": \"<string>\",\n        \"description\": \"<string>\",\n        \"subItems\": {\n          \"key_0\": [\n            {\n              \"value\": \"<Circular reference to #/components/schemas/MatterItemDto detected>\"\n            },\n            {\n              \"value\": \"<Circular reference to #/components/schemas/MatterItemDto detected>\"\n            }\n          ]\n        }\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 5350,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0af8b1cf-386b-408e-b122-d2c390b99de1",
+          "name": "Delete a matter",
+          "request": {
+            "name": "Delete a matter",
+            "description": {
+              "content": "Deletes a specified matter.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "matters",
+                ":matterId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "matterId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a8f7d7f5-e9aa-4f74-9a75-27682ffbe23c",
+              "name": "When request is accepted. Returns a hypermedia 'Link' object of the matter to be deleted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "matters",
+                    ":matterId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "matterId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"href\": \"string\",\n  \"relation\": \"string\",\n  \"method\": \"GET\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1f5d3298-dda5-4b8a-8f63-46a489485798",
+              "name": "When an unsupported request is made.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "matters",
+                    ":matterId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "matterId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 5350,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7c06994d-ac72-4a49-92e7-10d904fe5320",
+              "name": "When the authenticated account does not have access to the matter.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "matters",
+                    ":matterId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "matterId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 5350,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "34072371-e130-4abe-8f02-6fc93845b857",
+              "name": "When matter with specified id does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "matters",
+                    ":matterId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "matterId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 5350,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ec6cbe7b-092c-4204-8765-831460a76102",
+          "name": "Get matter tags",
+          "request": {
+            "name": "Get matter tags",
+            "description": {},
+            "url": {
+              "path": [
+                "matters",
+                ":matterId",
+                "tags"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "matterId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6fc6245a-fcc4-4a6f-9a7a-fb0301e816f5",
+              "name": "When request is successful. Returns a collection of 'MatterTag' objects.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "matters",
+                    ":matterId",
+                    "tags"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "matterId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"href\": \"string\",\n  \"relation\": \"string\",\n  \"method\": \"GET\",\n  \"self\": {\n    \"id\": \"string\",\n    \"href\": \"string\",\n    \"relation\": \"string\",\n    \"method\": \"GET\"\n  },\n  \"value\": [\n    {\n      \"href\": \"string\",\n      \"relation\": \"string\",\n      \"method\": \"GET\",\n      \"self\": {\n        \"id\": \"string\",\n        \"href\": \"string\",\n        \"relation\": \"string\",\n        \"method\": \"GET\"\n      },\n      \"id\": \"a15086f5-4da7-4271-8fea-b24d479ced2b\",\n      \"type\": \"Staff\",\n      \"name\": \"\",\n      \"color\": \"Light Blue\",\n      \"staff\": {\n        \"id\": \"string\",\n        \"href\": \"string\",\n        \"relation\": \"string\",\n        \"method\": \"GET\"\n      }\n    },\n    {\n      \"href\": \"string\",\n      \"relation\": \"string\",\n      \"method\": \"GET\",\n      \"self\": {\n        \"id\": \"string\",\n        \"href\": \"string\",\n        \"relation\": \"string\",\n        \"method\": \"GET\"\n      },\n      \"id\": \"a15086f5-4da7-4271-8fea-b24d479ced2b\",\n      \"type\": \"Staff\",\n      \"name\": \"\",\n      \"color\": \"Light Blue\",\n      \"staff\": {\n        \"id\": \"string\",\n        \"href\": \"string\",\n        \"relation\": \"string\",\n        \"method\": \"GET\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7cf25336-be95-4f10-8374-d3cfe9745d17",
+              "name": "When matter with specified id is not associated with authenticated client.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "matters",
+                    ":matterId",
+                    "tags"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "matterId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 5350,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9d973296-2608-4191-b4be-4b2337d4d498",
+              "name": "When matter with specified id does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "matters",
+                    ":matterId",
+                    "tags"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "matterId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 5350,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6f4d5150-07b4-4343-b819-e68050d110f7",
+          "name": "Add tags to a matter",
+          "request": {
+            "name": "Add tags to a matter",
+            "description": {},
+            "url": {
+              "path": [
+                "matters",
+                ":matterId",
+                "tags"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "matterId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"color\": \"<string>\",\n    \"type\": \"<string>\"\n  },\n  {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"color\": \"<string>\",\n    \"type\": \"<string>\"\n  }\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "122c9340-be72-4a69-a3b4-8be23559cc96",
+              "name": "When request is successful. Returns a 'Link' object.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "matters",
+                    ":matterId",
+                    "tags"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "matterId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"color\": \"<string>\",\n    \"type\": \"Staff\"\n  },\n  {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"color\": \"<string>\",\n    \"type\": \"Staff\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"href\": \"string\",\n  \"relation\": \"string\",\n  \"method\": \"GET\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ce6a113e-9512-4511-9d15-c64ca61f3d98",
+              "name": "When an unsupported request is made.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "matters",
+                    ":matterId",
+                    "tags"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "matterId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"color\": \"<string>\",\n    \"type\": \"Staff\"\n  },\n  {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"color\": \"<string>\",\n    \"type\": \"Staff\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 5350,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e8e9368f-c517-4918-a732-43975c7fa34d",
+              "name": "When matter with specified id does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "matters",
+                    ":matterId",
+                    "tags"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "matterId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"color\": \"<string>\",\n    \"type\": \"Staff\"\n  },\n  {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"color\": \"<string>\",\n    \"type\": \"Staff\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 5350,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d3454da8-e17a-457a-8db9-2151d9c30654",
+          "name": "Remove tags from a matter",
+          "request": {
+            "name": "Remove tags from a matter",
+            "description": {
+              "content": "Removes the tag from the matter without deleting from the account.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "matters",
+                ":matterId",
+                "tags",
+                ":tagId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "matterId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "tagId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"color\": \"<string>\",\n    \"type\": \"<string>\"\n  },\n  {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"color\": \"<string>\",\n    \"type\": \"<string>\"\n  }\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "117ff6fa-bb95-4f5f-a8b6-a608b32a6394",
+              "name": "When request is accepted. Returns a 'Link' object.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "matters",
+                    ":matterId",
+                    "tags",
+                    ":tagId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "matterId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "tagId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"color\": \"<string>\",\n    \"type\": \"Staff\"\n  },\n  {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"color\": \"<string>\",\n    \"type\": \"Staff\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"href\": \"string\",\n  \"relation\": \"string\",\n  \"method\": \"GET\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7ed1eabc-0f9d-40d9-8ef5-d2d9b34dce90",
+              "name": "When an unsupported request is made.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "matters",
+                    ":matterId",
+                    "tags",
+                    ":tagId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "matterId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "tagId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"color\": \"<string>\",\n    \"type\": \"Staff\"\n  },\n  {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"color\": \"<string>\",\n    \"type\": \"Staff\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 5350,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c0632401-2cda-43fc-a4d7-7e0235f624ff",
+              "name": "When matter with specified id is not associated with authenticated client.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "matters",
+                    ":matterId",
+                    "tags",
+                    ":tagId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "matterId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "tagId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"color\": \"<string>\",\n    \"type\": \"Staff\"\n  },\n  {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"color\": \"<string>\",\n    \"type\": \"Staff\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 5350,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "98978c8a-40c5-4dff-93a8-6b2d114b9bce",
+              "name": "When matter with specified id does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "matters",
+                    ":matterId",
+                    "tags",
+                    ":tagId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "matterId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "tagId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"color\": \"<string>\",\n    \"type\": \"Staff\"\n  },\n  {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"color\": \"<string>\",\n    \"type\": \"Staff\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 5350,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.smokeball.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "76e9009d-5231-42df-b04b-a4edaa2f93b6",
+    "name": "Smokeball Activity Codes Matters API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for integrating with Smokeball legal practice management software. Supports matters, contacts, documents, time entries, billing, trust accounting, staff, webhooks, and law firm workflows across US, AU, and UK regions. Uses OAuth 2.0 (client credentials) authentication.\n\nContact Support:\n Name: Smokeball Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

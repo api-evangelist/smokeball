@@ -1,0 +1,131 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Smokeball Activity Codes Intake API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-api-key",
+      "value": "{{x-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Intake",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get intake forms for a matter type",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.smokeball.com/intake/forms",
+            "params": [
+              {
+                "name": "matterTypeId",
+                "value": "",
+                "type": "query",
+                "description": "The matter type to filter forms by."
+              },
+              {
+                "name": "Offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "Limit",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get intake forms for a matter type"
+        },
+        {
+          "info": {
+            "name": "Get intake submissions for a matter",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.smokeball.com/intake/:matterId/submissions",
+            "params": [
+              {
+                "name": "matterId",
+                "value": "",
+                "type": "path",
+                "description": "The matter to filter submissions by."
+              },
+              {
+                "name": "Offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "Limit",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get intake submissions for a matter"
+        },
+        {
+          "info": {
+            "name": "Create an intake submission for a matter",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.smokeball.com/intake/:matterId/submissions",
+            "params": [
+              {
+                "name": "matterId",
+                "value": "",
+                "type": "path",
+                "description": "Matter to associate the submission with."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create an intake submission for a matter"
+        },
+        {
+          "info": {
+            "name": "Get an intake submission",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.smokeball.com/intake/:matterId/submissions/:submissionId",
+            "params": [
+              {
+                "name": "submissionId",
+                "value": "",
+                "type": "path",
+                "description": "The intake submission identifier."
+              },
+              {
+                "name": "matterId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get an intake submission"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,239 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Smokeball Activity Codes Layout Matter Items API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-api-key",
+      "value": "{{x-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Layout Matter Items",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get layouts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.smokeball.com/matters/:matterId/layouts",
+            "params": [
+              {
+                "name": "matterId",
+                "value": "",
+                "type": "path",
+                "description": "Matter Id"
+              }
+            ]
+          },
+          "docs": "Returns a collection of layout items on a specified matter."
+        },
+        {
+          "info": {
+            "name": "Add a new layout",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.smokeball.com/matters/:matterId/layouts",
+            "params": [
+              {
+                "name": "matterId",
+                "value": "",
+                "type": "path",
+                "description": "Matter ID"
+              },
+              {
+                "name": "skipFieldValidation",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds a new layout matter item to a matter."
+        },
+        {
+          "info": {
+            "name": "Get a layout",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.smokeball.com/matters/:matterId/layouts/:itemId",
+            "params": [
+              {
+                "name": "matterId",
+                "value": "",
+                "type": "path",
+                "description": "Matter Id"
+              },
+              {
+                "name": "itemId",
+                "value": "",
+                "type": "path",
+                "description": "Layout item Id"
+              }
+            ]
+          },
+          "docs": "Retrieves a layout item on a specified matter."
+        },
+        {
+          "info": {
+            "name": "Merge a layout",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.smokeball.com/matters/:matterId/layouts/:itemId",
+            "params": [
+              {
+                "name": "matterId",
+                "value": "",
+                "type": "path",
+                "description": "Matter ID"
+              },
+              {
+                "name": "itemId",
+                "value": "",
+                "type": "path",
+                "description": "Matter item Id"
+              },
+              {
+                "name": "skipFieldValidation",
+                "value": "",
+                "type": "query",
+                "description": "Used to skip the field validation, may be needed for Smokeball data split migrations"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Merges layout data."
+        },
+        {
+          "info": {
+            "name": "Remove a layout",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.smokeball.com/matters/:matterId/layouts/:itemId",
+            "params": [
+              {
+                "name": "matterId",
+                "value": "",
+                "type": "path",
+                "description": "Matter ID"
+              },
+              {
+                "name": "itemId",
+                "value": "",
+                "type": "path",
+                "description": "Layout matter item ID to remove"
+              }
+            ]
+          },
+          "docs": "Removes a layout matter item from a matter."
+        },
+        {
+          "info": {
+            "name": "Get layout contacts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.smokeball.com/matters/:matterId/layouts/:itemId/contacts",
+            "params": [
+              {
+                "name": "matterId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "itemId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns a list of contacts on a specified layout."
+        },
+        {
+          "info": {
+            "name": "Add a contact to a layout",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.smokeball.com/matters/:matterId/layouts/:itemId/contacts",
+            "params": [
+              {
+                "name": "matterId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "itemId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds a new contact on a specified layout."
+        },
+        {
+          "info": {
+            "name": "Remove a contact from a layout",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.smokeball.com/matters/:matterId/layouts/:itemId/contacts",
+            "params": [
+              {
+                "name": "matterId",
+                "value": "",
+                "type": "path",
+                "description": "Matter Id"
+              },
+              {
+                "name": "itemId",
+                "value": "",
+                "type": "path",
+                "description": "ItemId of the layout"
+              },
+              {
+                "name": "key",
+                "value": "",
+                "type": "query",
+                "description": "Layout contact key identifying the contact to remove."
+              }
+            ]
+          },
+          "docs": "Removes a contact from a specified layout, deleting the associated role or relationship from the matter."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

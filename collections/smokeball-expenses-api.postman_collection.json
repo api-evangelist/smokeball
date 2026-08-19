@@ -1,0 +1,1701 @@
+{
+  "item": [
+    {
+      "id": "9f67ae71-decc-4260-87f1-8f5120d2a29e",
+      "name": "Expenses",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8b87b633-02c1-4279-b1b1-7a80cef88df6",
+          "name": "Get expenses",
+          "request": {
+            "name": "Get expenses",
+            "description": {
+              "content": "Returns a list of expenses for the specified matter.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "matters",
+                ":matterId",
+                "expenses"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "Offset",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "Limit",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "UpdatedSince",
+                  "value": "<long>",
+                  "description": "Returns expenses updated since a specified time (.net ticks representation of the UTC datetime)."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "matterId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d67496fd-349f-4ba6-b613-1895eae9a307",
+              "name": "When request is successful. Returns a paged collection of 'Expense' objects.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "matters",
+                    ":matterId",
+                    "expenses"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "Offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "Limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "UpdatedSince",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "matterId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"href\": \"string\",\n  \"relation\": \"string\",\n  \"method\": \"GET\",\n  \"self\": {\n    \"id\": \"string\",\n    \"href\": \"string\",\n    \"relation\": \"string\",\n    \"method\": \"GET\"\n  },\n  \"value\": [\n    {\n      \"id\": \"string\",\n      \"href\": \"string\",\n      \"relation\": \"string\",\n      \"method\": \"GET\",\n      \"self\": {\n        \"id\": \"string\",\n        \"href\": \"string\",\n        \"relation\": \"string\",\n        \"method\": \"GET\"\n      },\n      \"versionId\": \"23d2a4bc-8529-462e-8560-dfbf4fa24e49\",\n      \"createdByUserId\": \"8a7f40ea-4123-4ebe-bb05-e9b4b666e706\",\n      \"staff\": {\n        \"id\": \"string\",\n        \"href\": \"string\",\n        \"relation\": \"string\",\n        \"method\": \"GET\"\n      },\n      \"matter\": {\n        \"id\": \"string\",\n        \"href\": \"string\",\n        \"relation\": \"string\",\n        \"method\": \"GET\"\n      },\n      \"invoice\": {\n        \"id\": \"string\",\n        \"href\": \"string\",\n        \"relation\": \"string\",\n        \"method\": \"GET\"\n      },\n      \"staffId\": \"string\",\n      \"matterId\": \"string\",\n      \"invoiceId\": \"fdb766bc-eb20-4bc1-9417-08b51a7b2286\",\n      \"origin\": \"string\",\n      \"activityCode\": \"PRT\",\n      \"utbmsTaskCode\": \"E101\",\n      \"subject\": \"Review contract\",\n      \"description\": \"Print documents\",\n      \"expenseDate\": \"1983-02-28T14:57:34.126Z\",\n      \"costType\": \"Hard\",\n      \"quantity\": 3,\n      \"price\": 350.32,\n      \"amount\": 900.21,\n      \"amountExcTax\": 810.01,\n      \"amountIncTax\": 900.21,\n      \"tax\": 90,\n      \"outputTax\": 85,\n      \"taxInclusive\": false,\n      \"taxZeroRated\": false,\n      \"taxOutOfScope\": false,\n      \"taxExempt\": false,\n      \"finalized\": false,\n      \"isWrittenOff\": false,\n      \"isBillable\": false,\n      \"isInvoicedExternally\": false,\n      \"isDeleted\": false\n    },\n    {\n      \"id\": \"string\",\n      \"href\": \"string\",\n      \"relation\": \"string\",\n      \"method\": \"GET\",\n      \"self\": {\n        \"id\": \"string\",\n        \"href\": \"string\",\n        \"relation\": \"string\",\n        \"method\": \"GET\"\n      },\n      \"versionId\": \"23d2a4bc-8529-462e-8560-dfbf4fa24e49\",\n      \"createdByUserId\": \"8a7f40ea-4123-4ebe-bb05-e9b4b666e706\",\n      \"staff\": {\n        \"id\": \"string\",\n        \"href\": \"string\",\n        \"relation\": \"string\",\n        \"method\": \"GET\"\n      },\n      \"matter\": {\n        \"id\": \"string\",\n        \"href\": \"string\",\n        \"relation\": \"string\",\n        \"method\": \"GET\"\n      },\n      \"invoice\": {\n        \"id\": \"string\",\n        \"href\": \"string\",\n        \"relation\": \"string\",\n        \"method\": \"GET\"\n      },\n      \"staffId\": \"string\",\n      \"matterId\": \"string\",\n      \"invoiceId\": \"fdb766bc-eb20-4bc1-9417-08b51a7b2286\",\n      \"origin\": \"string\",\n      \"activityCode\": \"PRT\",\n      \"utbmsTaskCode\": \"E101\",\n      \"subject\": \"Review contract\",\n      \"description\": \"Print documents\",\n      \"expenseDate\": \"2004-03-24T22:20:52.154Z\",\n      \"costType\": \"Hard\",\n      \"quantity\": 3,\n      \"price\": 350.32,\n      \"amount\": 900.21,\n      \"amountExcTax\": 810.01,\n      \"amountIncTax\": 900.21,\n      \"tax\": 90,\n      \"outputTax\": 85,\n      \"taxInclusive\": false,\n      \"taxZeroRated\": false,\n      \"taxOutOfScope\": false,\n      \"taxExempt\": false,\n      \"finalized\": false,\n      \"isWrittenOff\": false,\n      \"isBillable\": false,\n      \"isInvoicedExternally\": false,\n      \"isDeleted\": false\n    }\n  ],\n  \"offset\": 3670,\n  \"limit\": 2827,\n  \"size\": 3099,\n  \"first\": {\n    \"id\": \"string\",\n    \"href\": \"string\",\n    \"relation\": \"string\",\n    \"method\": \"GET\"\n  },\n  \"previous\": {\n    \"id\": \"string\",\n    \"href\": \"string\",\n    \"relation\": \"string\",\n    \"method\": \"GET\"\n  },\n  \"next\": {\n    \"id\": \"string\",\n    \"href\": \"string\",\n    \"relation\": \"string\",\n    \"method\": \"GET\"\n  },\n  \"last\": {\n    \"id\": \"string\",\n    \"href\": \"string\",\n    \"relation\": \"string\",\n    \"method\": \"GET\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "93efaa54-9b48-4af3-a998-eba5cf0653de",
+              "name": "When an unsupported request is made.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "matters",
+                    ":matterId",
+                    "expenses"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "Offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "Limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "UpdatedSince",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "matterId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 7463,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d84f6e7b-e913-4545-bab2-17530d6f443a",
+          "name": "Create an expense",
+          "request": {
+            "name": "Create an expense",
+            "description": {
+              "content": "Creates an expense for the specified matter.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "matters",
+                ":matterId",
+                "expenses"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "matterId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"updatedByUserId\": \"<string>\",\n  \"staffId\": \"<string>\",\n  \"invoiceId\": \"<string>\",\n  \"expenseDate\": \"<dateTime>\",\n  \"activityCode\": \"<string>\",\n  \"subject\": \"<string>\",\n  \"description\": \"<string>\",\n  \"costType\": \"<string>\",\n  \"quantity\": \"<double>\",\n  \"price\": \"<double>\",\n  \"tax\": \"<double>\",\n  \"outputTax\": \"<double>\",\n  \"taxInclusive\": \"<boolean>\",\n  \"taxZeroRated\": \"<boolean>\",\n  \"taxOutOfScope\": \"<boolean>\",\n  \"taxExempt\": \"<boolean>\",\n  \"finalized\": \"<boolean>\",\n  \"isWrittenOff\": \"<boolean>\",\n  \"isBillable\": \"<boolean>\",\n  \"isInvoicedExternally\": \"<boolean>\",\n  \"assignToFirmOwner\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "df62ff49-6a2b-42fb-9d75-28272b6cdd56",
+              "name": "When request is accepted. Returns a hypermedia 'Link' object of the expense to be created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "matters",
+                    ":matterId",
+                    "expenses"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "matterId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"updatedByUserId\": \"750eb5c5-ac0b-7d11-4997-e0ce9d8896c8\",\n  \"staffId\": \"47efff74-3e4b-45b3-bddf-affc6649db0b\",\n  \"invoiceId\": \"fdb766bc-eb20-4bc1-9417-08b51a7b2286\",\n  \"expenseDate\": \"<dateTime>\",\n  \"activityCode\": \"PRT\",\n  \"subject\": \"Review contract\",\n  \"description\": \"Print documents\",\n  \"costType\": \"Hard\",\n  \"quantity\": 3,\n  \"price\": 350.32,\n  \"tax\": 90,\n  \"outputTax\": 85,\n  \"taxInclusive\": false,\n  \"taxZeroRated\": false,\n  \"taxOutOfScope\": false,\n  \"taxExempt\": false,\n  \"finalized\": false,\n  \"isWrittenOff\": false,\n  \"isBillable\": false,\n  \"isInvoicedExternally\": false,\n  \"assignToFirmOwner\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"href\": \"string\",\n  \"relation\": \"string\",\n  \"method\": \"GET\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e0959b13-8867-4278-ada4-3840b0641a22",
+              "name": "When an unsupported request is made.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "matters",
+                    ":matterId",
+                    "expenses"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "matterId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"updatedByUserId\": \"750eb5c5-ac0b-7d11-4997-e0ce9d8896c8\",\n  \"staffId\": \"47efff74-3e4b-45b3-bddf-affc6649db0b\",\n  \"invoiceId\": \"fdb766bc-eb20-4bc1-9417-08b51a7b2286\",\n  \"expenseDate\": \"<dateTime>\",\n  \"activityCode\": \"PRT\",\n  \"subject\": \"Review contract\",\n  \"description\": \"Print documents\",\n  \"costType\": \"Hard\",\n  \"quantity\": 3,\n  \"price\": 350.32,\n  \"tax\": 90,\n  \"outputTax\": 85,\n  \"taxInclusive\": false,\n  \"taxZeroRated\": false,\n  \"taxOutOfScope\": false,\n  \"taxExempt\": false,\n  \"finalized\": false,\n  \"isWrittenOff\": false,\n  \"isBillable\": false,\n  \"isInvoicedExternally\": false,\n  \"assignToFirmOwner\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 7463,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f1a66dac-cee2-44a6-b5a4-753248b7bdcd",
+          "name": "Get an expense",
+          "request": {
+            "name": "Get an expense",
+            "description": {
+              "content": "Retrieves a specified expense.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "matters",
+                ":matterId",
+                "expenses",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "matterId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b16fd064-dbed-49a6-ac12-e1ee7ce011b8",
+              "name": "When request is successful. Returns an 'Expense' object.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "matters",
+                    ":matterId",
+                    "expenses",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "matterId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"href\": \"string\",\n  \"relation\": \"string\",\n  \"method\": \"GET\",\n  \"self\": {\n    \"id\": \"string\",\n    \"href\": \"string\",\n    \"relation\": \"string\",\n    \"method\": \"GET\"\n  },\n  \"versionId\": \"23d2a4bc-8529-462e-8560-dfbf4fa24e49\",\n  \"createdByUserId\": \"8a7f40ea-4123-4ebe-bb05-e9b4b666e706\",\n  \"staff\": {\n    \"id\": \"string\",\n    \"href\": \"string\",\n    \"relation\": \"string\",\n    \"method\": \"GET\"\n  },\n  \"matter\": {\n    \"id\": \"string\",\n    \"href\": \"string\",\n    \"relation\": \"string\",\n    \"method\": \"GET\"\n  },\n  \"invoice\": {\n    \"id\": \"string\",\n    \"href\": \"string\",\n    \"relation\": \"string\",\n    \"method\": \"GET\"\n  },\n  \"staffId\": \"string\",\n  \"matterId\": \"string\",\n  \"invoiceId\": \"fdb766bc-eb20-4bc1-9417-08b51a7b2286\",\n  \"origin\": \"string\",\n  \"activityCode\": \"PRT\",\n  \"utbmsTaskCode\": \"E101\",\n  \"subject\": \"Review contract\",\n  \"description\": \"Print documents\",\n  \"expenseDate\": \"1994-08-10T22:56:57.441Z\",\n  \"costType\": \"Hard\",\n  \"quantity\": 3,\n  \"price\": 350.32,\n  \"amount\": 900.21,\n  \"amountExcTax\": 810.01,\n  \"amountIncTax\": 900.21,\n  \"tax\": 90,\n  \"outputTax\": 85,\n  \"taxInclusive\": false,\n  \"taxZeroRated\": false,\n  \"taxOutOfScope\": false,\n  \"taxExempt\": false,\n  \"finalized\": false,\n  \"isWrittenOff\": false,\n  \"isBillable\": false,\n  \"isInvoicedExternally\": false,\n  \"isDeleted\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "05f1b9d7-f902-4174-9ac1-27173c34a4fd",
+              "name": "When an unsupported request is made.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "matters",
+                    ":matterId",
+                    "expenses",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "matterId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 7463,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "95d27d43-d7e2-40c2-bec6-69de91254cd1",
+              "name": "When expense with specified id is not associated with authenticated client.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "matters",
+                    ":matterId",
+                    "expenses",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "matterId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 7463,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4a3b4abf-fe7f-44d2-ac1d-8a57d4bb50e7",
+              "name": "When expense with specified id does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "matters",
+                    ":matterId",
+                    "expenses",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "matterId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 7463,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4d84b47d-5a42-4581-ad26-ea51dae7be52",
+          "name": "Update an expense",
+          "request": {
+            "name": "Update an expense",
+            "description": {
+              "content": "Updates an expense for the specified matter.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "matters",
+                ":matterId",
+                "expenses",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "matterId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"updatedByUserId\": \"<string>\",\n  \"staffId\": \"<string>\",\n  \"invoiceId\": \"<string>\",\n  \"expenseDate\": \"<dateTime>\",\n  \"activityCode\": \"<string>\",\n  \"subject\": \"<string>\",\n  \"description\": \"<string>\",\n  \"costType\": \"<string>\",\n  \"quantity\": \"<double>\",\n  \"price\": \"<double>\",\n  \"tax\": \"<double>\",\n  \"outputTax\": \"<double>\",\n  \"taxInclusive\": \"<boolean>\",\n  \"taxZeroRated\": \"<boolean>\",\n  \"taxOutOfScope\": \"<boolean>\",\n  \"taxExempt\": \"<boolean>\",\n  \"finalized\": \"<boolean>\",\n  \"isWrittenOff\": \"<boolean>\",\n  \"isBillable\": \"<boolean>\",\n  \"isInvoicedExternally\": \"<boolean>\",\n  \"assignToFirmOwner\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "bfb61531-af8e-4648-969e-63b721d9fe60",
+              "name": "When request is accepted. Returns a hypermedia 'Link' object of the expense to be updated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "matters",
+                    ":matterId",
+                    "expenses",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "matterId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"updatedByUserId\": \"750eb5c5-ac0b-7d11-4997-e0ce9d8896c8\",\n  \"staffId\": \"47efff74-3e4b-45b3-bddf-affc6649db0b\",\n  \"invoiceId\": \"fdb766bc-eb20-4bc1-9417-08b51a7b2286\",\n  \"expenseDate\": \"<dateTime>\",\n  \"activityCode\": \"PRT\",\n  \"subject\": \"Review contract\",\n  \"description\": \"Print documents\",\n  \"costType\": \"Hard\",\n  \"quantity\": 3,\n  \"price\": 350.32,\n  \"tax\": 90,\n  \"outputTax\": 85,\n  \"taxInclusive\": false,\n  \"taxZeroRated\": false,\n  \"taxOutOfScope\": false,\n  \"taxExempt\": false,\n  \"finalized\": false,\n  \"isWrittenOff\": false,\n  \"isBillable\": false,\n  \"isInvoicedExternally\": false,\n  \"assignToFirmOwner\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"href\": \"string\",\n  \"relation\": \"string\",\n  \"method\": \"GET\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a920e858-b61c-4d50-91b9-47c5d85ebf64",
+              "name": "When an unsupported request is made.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "matters",
+                    ":matterId",
+                    "expenses",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "matterId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"updatedByUserId\": \"750eb5c5-ac0b-7d11-4997-e0ce9d8896c8\",\n  \"staffId\": \"47efff74-3e4b-45b3-bddf-affc6649db0b\",\n  \"invoiceId\": \"fdb766bc-eb20-4bc1-9417-08b51a7b2286\",\n  \"expenseDate\": \"<dateTime>\",\n  \"activityCode\": \"PRT\",\n  \"subject\": \"Review contract\",\n  \"description\": \"Print documents\",\n  \"costType\": \"Hard\",\n  \"quantity\": 3,\n  \"price\": 350.32,\n  \"tax\": 90,\n  \"outputTax\": 85,\n  \"taxInclusive\": false,\n  \"taxZeroRated\": false,\n  \"taxOutOfScope\": false,\n  \"taxExempt\": false,\n  \"finalized\": false,\n  \"isWrittenOff\": false,\n  \"isBillable\": false,\n  \"isInvoicedExternally\": false,\n  \"assignToFirmOwner\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 7463,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f47c20f9-c620-412c-8d14-8561e7cd20d3",
+              "name": "When expense with specified id is not associated with authenticated client.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "matters",
+                    ":matterId",
+                    "expenses",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "matterId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"updatedByUserId\": \"750eb5c5-ac0b-7d11-4997-e0ce9d8896c8\",\n  \"staffId\": \"47efff74-3e4b-45b3-bddf-affc6649db0b\",\n  \"invoiceId\": \"fdb766bc-eb20-4bc1-9417-08b51a7b2286\",\n  \"expenseDate\": \"<dateTime>\",\n  \"activityCode\": \"PRT\",\n  \"subject\": \"Review contract\",\n  \"description\": \"Print documents\",\n  \"costType\": \"Hard\",\n  \"quantity\": 3,\n  \"price\": 350.32,\n  \"tax\": 90,\n  \"outputTax\": 85,\n  \"taxInclusive\": false,\n  \"taxZeroRated\": false,\n  \"taxOutOfScope\": false,\n  \"taxExempt\": false,\n  \"finalized\": false,\n  \"isWrittenOff\": false,\n  \"isBillable\": false,\n  \"isInvoicedExternally\": false,\n  \"assignToFirmOwner\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 7463,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "de868dd8-9ce6-48ff-a67e-378d4ba8dbac",
+              "name": "When expense with specified id does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "matters",
+                    ":matterId",
+                    "expenses",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "matterId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"updatedByUserId\": \"750eb5c5-ac0b-7d11-4997-e0ce9d8896c8\",\n  \"staffId\": \"47efff74-3e4b-45b3-bddf-affc6649db0b\",\n  \"invoiceId\": \"fdb766bc-eb20-4bc1-9417-08b51a7b2286\",\n  \"expenseDate\": \"<dateTime>\",\n  \"activityCode\": \"PRT\",\n  \"subject\": \"Review contract\",\n  \"description\": \"Print documents\",\n  \"costType\": \"Hard\",\n  \"quantity\": 3,\n  \"price\": 350.32,\n  \"tax\": 90,\n  \"outputTax\": 85,\n  \"taxInclusive\": false,\n  \"taxZeroRated\": false,\n  \"taxOutOfScope\": false,\n  \"taxExempt\": false,\n  \"finalized\": false,\n  \"isWrittenOff\": false,\n  \"isBillable\": false,\n  \"isInvoicedExternally\": false,\n  \"assignToFirmOwner\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 7463,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "95e7a14b-6f7c-4118-987e-c580acdb34f6",
+          "name": "Patch an expense",
+          "request": {
+            "name": "Patch an expense",
+            "description": {
+              "content": "Patches an expense for the specified matter.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "matters",
+                ":matterId",
+                "expenses",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "matterId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"updatedByUserId\": \"<string>\",\n  \"staffId\": \"<string>\",\n  \"invoiceId\": \"<string>\",\n  \"expenseDate\": \"<dateTime>\",\n  \"activityCode\": \"<string>\",\n  \"subject\": \"<string>\",\n  \"description\": \"<string>\",\n  \"costType\": \"<string>\",\n  \"quantity\": \"<double>\",\n  \"price\": \"<double>\",\n  \"tax\": \"<double>\",\n  \"outputTax\": \"<double>\",\n  \"taxInclusive\": \"<boolean>\",\n  \"taxZeroRated\": \"<boolean>\",\n  \"taxOutOfScope\": \"<boolean>\",\n  \"taxExempt\": \"<boolean>\",\n  \"finalized\": \"<boolean>\",\n  \"isWrittenOff\": \"<boolean>\",\n  \"isBillable\": \"<boolean>\",\n  \"isInvoicedExternally\": \"<boolean>\",\n  \"assignToFirmOwner\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "008b46c6-9712-40a6-9469-eb3af7a7f481",
+              "name": "When request is accepted. Returns a hypermedia 'Link' object of the expense to be patched.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "matters",
+                    ":matterId",
+                    "expenses",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "matterId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"updatedByUserId\": \"750eb5c5-ac0b-7d11-4997-e0ce9d8896c8\",\n  \"staffId\": \"47efff74-3e4b-45b3-bddf-affc6649db0b\",\n  \"invoiceId\": \"fdb766bc-eb20-4bc1-9417-08b51a7b2286\",\n  \"expenseDate\": \"<dateTime>\",\n  \"activityCode\": \"PRT\",\n  \"subject\": \"Review contract\",\n  \"description\": \"Print documents\",\n  \"costType\": \"Hard\",\n  \"quantity\": 3,\n  \"price\": 350.32,\n  \"tax\": 90,\n  \"outputTax\": 85,\n  \"taxInclusive\": false,\n  \"taxZeroRated\": false,\n  \"taxOutOfScope\": false,\n  \"taxExempt\": false,\n  \"finalized\": false,\n  \"isWrittenOff\": false,\n  \"isBillable\": false,\n  \"isInvoicedExternally\": false,\n  \"assignToFirmOwner\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"href\": \"string\",\n  \"relation\": \"string\",\n  \"method\": \"GET\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f96eb481-54bc-4965-8200-71f31459e3c3",
+              "name": "When an unsupported request is made.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "matters",
+                    ":matterId",
+                    "expenses",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "matterId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"updatedByUserId\": \"750eb5c5-ac0b-7d11-4997-e0ce9d8896c8\",\n  \"staffId\": \"47efff74-3e4b-45b3-bddf-affc6649db0b\",\n  \"invoiceId\": \"fdb766bc-eb20-4bc1-9417-08b51a7b2286\",\n  \"expenseDate\": \"<dateTime>\",\n  \"activityCode\": \"PRT\",\n  \"subject\": \"Review contract\",\n  \"description\": \"Print documents\",\n  \"costType\": \"Hard\",\n  \"quantity\": 3,\n  \"price\": 350.32,\n  \"tax\": 90,\n  \"outputTax\": 85,\n  \"taxInclusive\": false,\n  \"taxZeroRated\": false,\n  \"taxOutOfScope\": false,\n  \"taxExempt\": false,\n  \"finalized\": false,\n  \"isWrittenOff\": false,\n  \"isBillable\": false,\n  \"isInvoicedExternally\": false,\n  \"assignToFirmOwner\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 7463,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "70c0738a-7eee-419c-b531-2f03aa1eb1f2",
+              "name": "When expense with specified id is not associated with authenticated client.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "matters",
+                    ":matterId",
+                    "expenses",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "matterId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"updatedByUserId\": \"750eb5c5-ac0b-7d11-4997-e0ce9d8896c8\",\n  \"staffId\": \"47efff74-3e4b-45b3-bddf-affc6649db0b\",\n  \"invoiceId\": \"fdb766bc-eb20-4bc1-9417-08b51a7b2286\",\n  \"expenseDate\": \"<dateTime>\",\n  \"activityCode\": \"PRT\",\n  \"subject\": \"Review contract\",\n  \"description\": \"Print documents\",\n  \"costType\": \"Hard\",\n  \"quantity\": 3,\n  \"price\": 350.32,\n  \"tax\": 90,\n  \"outputTax\": 85,\n  \"taxInclusive\": false,\n  \"taxZeroRated\": false,\n  \"taxOutOfScope\": false,\n  \"taxExempt\": false,\n  \"finalized\": false,\n  \"isWrittenOff\": false,\n  \"isBillable\": false,\n  \"isInvoicedExternally\": false,\n  \"assignToFirmOwner\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 7463,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "342577a4-2b5f-4dc2-b5cb-e744da23e86c",
+              "name": "When expense with specified id does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "matters",
+                    ":matterId",
+                    "expenses",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "matterId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"updatedByUserId\": \"750eb5c5-ac0b-7d11-4997-e0ce9d8896c8\",\n  \"staffId\": \"47efff74-3e4b-45b3-bddf-affc6649db0b\",\n  \"invoiceId\": \"fdb766bc-eb20-4bc1-9417-08b51a7b2286\",\n  \"expenseDate\": \"<dateTime>\",\n  \"activityCode\": \"PRT\",\n  \"subject\": \"Review contract\",\n  \"description\": \"Print documents\",\n  \"costType\": \"Hard\",\n  \"quantity\": 3,\n  \"price\": 350.32,\n  \"tax\": 90,\n  \"outputTax\": 85,\n  \"taxInclusive\": false,\n  \"taxZeroRated\": false,\n  \"taxOutOfScope\": false,\n  \"taxExempt\": false,\n  \"finalized\": false,\n  \"isWrittenOff\": false,\n  \"isBillable\": false,\n  \"isInvoicedExternally\": false,\n  \"assignToFirmOwner\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 7463,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b70c2518-ed2d-421d-b2c1-7b6466e3caf8",
+          "name": "Delete an expense",
+          "request": {
+            "name": "Delete an expense",
+            "description": {
+              "content": "Deletes an expense.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "matters",
+                ":matterId",
+                "expenses",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "matterId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e98bfab4-c756-427a-a4e4-2c0a0b4f4eae",
+              "name": "When request is accepted. Returns a hypermedia 'Link' object of the expense to be deleted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "matters",
+                    ":matterId",
+                    "expenses",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "matterId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"href\": \"string\",\n  \"relation\": \"string\",\n  \"method\": \"GET\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "157e998b-3e79-4401-b03b-74f51d340097",
+              "name": "When an unsupported request is made.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "matters",
+                    ":matterId",
+                    "expenses",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "matterId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 7463,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2b211980-f3bb-4d3c-a189-bb09e2968c4b",
+              "name": "When expense with specified id is not associated with authenticated client.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "matters",
+                    ":matterId",
+                    "expenses",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "matterId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 7463,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d9c146b6-b394-4f5e-a814-542459d4889a",
+              "name": "When expense with specified id does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "matters",
+                    ":matterId",
+                    "expenses",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "matterId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 7463,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.smokeball.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "64974992-37a5-451f-8566-caf7cb69c2ff",
+    "name": "Smokeball Activity Codes Expenses API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for integrating with Smokeball legal practice management software. Supports matters, contacts, documents, time entries, billing, trust accounting, staff, webhooks, and law firm workflows across US, AU, and UK regions. Uses OAuth 2.0 (client credentials) authentication.\n\nContact Support:\n Name: Smokeball Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

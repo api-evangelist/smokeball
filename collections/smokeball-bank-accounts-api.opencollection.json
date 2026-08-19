@@ -1,0 +1,286 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Smokeball Activity Codes Bank Accounts API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-api-key",
+      "value": "{{x-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Bank Accounts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get a bank account",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.smokeball.com/bankaccounts/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieves a specified bank account."
+        },
+        {
+          "info": {
+            "name": "Get bank accounts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.smokeball.com/bankaccounts",
+            "params": [
+              {
+                "name": "type",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "matterId",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns a list of bank accounts."
+        },
+        {
+          "info": {
+            "name": "Get bank account matter balances",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.smokeball.com/bankaccounts/:id/matter-balances",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "Offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "Limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "LastUpdated",
+                "value": "2022-04-23T14:00:00Z",
+                "type": "query",
+                "description": "Returns items updated since the specified date and time."
+              },
+              {
+                "name": "MatterId",
+                "value": "da4e7fd1-5394-4ca9-b1c6-e18c4e2bf262",
+                "type": "query",
+                "description": "Filters items by the specified matter ID."
+              }
+            ]
+          },
+          "docs": "Returns a list of bank account matter balances."
+        },
+        {
+          "info": {
+            "name": "Get a protected bank account balance",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.smokeball.com/bankaccounts/:id/protected-balances/:protectionId",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "protectionId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieves a specified protected account balance record."
+        },
+        {
+          "info": {
+            "name": "Protect bank account funds",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.smokeball.com/bankaccounts/:id/protect-funds",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Protects funds in a trust bank account. Only trust accounts are supported."
+        },
+        {
+          "info": {
+            "name": "Unprotect bank account funds",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.smokeball.com/bankaccounts/:id/unprotect-funds/:protectionId",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "protectionId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Unprotects funds in a trust bank account. Only trust accounts are supported."
+        },
+        {
+          "info": {
+            "name": "Create a requisition",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.smokeball.com/bankaccounts/:id/requisitions",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a requisition against a trust account and supports the account approval workflow.\r\n\r\nWhether the requisition requires approval depends on the trust account configuration:\r\n- If approvals are enabled, firm owners can create requisitions without approval, while all other users require approval.\r\n- If approvals are disabled, the requisition is automatically approved upon creation."
+        },
+        {
+          "info": {
+            "name": "Get transactions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.smokeball.com/bankaccounts/:bankAccountId/transactions",
+            "params": [
+              {
+                "name": "bankAccountId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "Offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "Limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "LastUpdated",
+                "value": "2022-04-23T14:00:00Z",
+                "type": "query",
+                "description": "Returns items updated since the specified date and time."
+              },
+              {
+                "name": "MatterId",
+                "value": "da4e7fd1-5394-4ca9-b1c6-e18c4e2bf262",
+                "type": "query",
+                "description": "Filters items by the specified matter ID."
+              }
+            ]
+          },
+          "docs": "Retrieves a specified bank accounts transaction."
+        },
+        {
+          "info": {
+            "name": "Create a transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.smokeball.com/bankaccounts/:bankAccountId/transactions",
+            "params": [
+              {
+                "name": "bankAccountId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a transaction."
+        },
+        {
+          "info": {
+            "name": "Get a transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.smokeball.com/bankaccounts/:bankAccountId/transactions/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "bankAccountId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieves a specified bank account transaction."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,1701 @@
+{
+  "item": [
+    {
+      "id": "e0a365e4-2c05-48a8-95ff-110012c7d042",
+      "name": "Fees",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9200589d-7b7d-478a-af64-d0203f202870",
+          "name": "Get fees",
+          "request": {
+            "name": "Get fees",
+            "description": {
+              "content": "Returns a list of fees for the specified matter.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "matters",
+                ":matterId",
+                "fees"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "Offset",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "Limit",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "UpdatedSince",
+                  "value": "<long>",
+                  "description": "Returns fees updated since a specified time (.net ticks representation of the UTC datetime)."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "matterId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1a5a2287-3c0a-48b3-8868-e405f32c2bfe",
+              "name": "When request is successful. Returns a paged collection of 'Fee' objects.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "matters",
+                    ":matterId",
+                    "fees"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "Offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "Limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "UpdatedSince",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "matterId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"href\": \"string\",\n  \"relation\": \"string\",\n  \"method\": \"GET\",\n  \"self\": {\n    \"id\": \"string\",\n    \"href\": \"string\",\n    \"relation\": \"string\",\n    \"method\": \"GET\"\n  },\n  \"value\": [\n    {\n      \"href\": \"string\",\n      \"relation\": \"string\",\n      \"method\": \"GET\",\n      \"self\": {\n        \"id\": \"string\",\n        \"href\": \"string\",\n        \"relation\": \"string\",\n        \"method\": \"GET\"\n      },\n      \"id\": \"b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2\",\n      \"versionId\": \"750eb5c5-ac0b-7d11-4997-e0ce9d8896c8\",\n      \"matter\": {\n        \"id\": \"string\",\n        \"href\": \"string\",\n        \"relation\": \"string\",\n        \"method\": \"GET\"\n      },\n      \"staff\": {\n        \"id\": \"string\",\n        \"href\": \"string\",\n        \"relation\": \"string\",\n        \"method\": \"GET\"\n      },\n      \"matterId\": \"string\",\n      \"staffId\": \"string\",\n      \"createdByUserId\": \"750eb5c5-ac0b-7d11-4997-e0ce9d8896c8\",\n      \"createdDate\": \"2026-04-13T11:00:00Z\",\n      \"lastUpdatedByUserId\": \"750eb5c5-ac0b-7d11-4997-e0ce9d8896c8\",\n      \"invoiceId\": \"750eb5c5-ac0b-7d11-4997-e0ce9d8896c8\",\n      \"activityCode\": \"PRT\",\n      \"utbmsTaskCode\": \"L110\",\n      \"subject\": \"Review contract\",\n      \"description\": \"Print documents\",\n      \"feeDate\": \"1962-07-07T16:24:03.328Z\",\n      \"feeType\": 0,\n      \"finalized\": false,\n      \"isInvoicedExternally\": false,\n      \"isWrittenOff\": false,\n      \"isBillable\": false,\n      \"tax\": 35,\n      \"taxInclusive\": false,\n      \"taxExempt\": false,\n      \"taxOutOfScope\": false,\n      \"duration\": 60,\n      \"durationWorked\": 50,\n      \"rate\": 350,\n      \"amount\": 350,\n      \"amountExcTax\": 315,\n      \"amountIncTax\": 350,\n      \"billableAmountExcTax\": 315,\n      \"billableTax\": 35,\n      \"isDeleted\": false,\n      \"sourceItems\": [\n        {\n          \"id\": \"string\",\n          \"href\": \"string\",\n          \"relation\": \"string\",\n          \"method\": \"GET\",\n          \"self\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"href\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"relation\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"method\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"description\": \"string\",\n          \"duration\": 1971,\n          \"isBillable\": true\n        },\n        {\n          \"id\": \"string\",\n          \"href\": \"string\",\n          \"relation\": \"string\",\n          \"method\": \"GET\",\n          \"self\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"href\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"relation\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"method\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"description\": \"string\",\n          \"duration\": 8095,\n          \"isBillable\": true\n        }\n      ],\n      \"createdFromActivityId\": \"504b9f77-20c7-4dee-8227-d3007c8f6cea\"\n    },\n    {\n      \"href\": \"string\",\n      \"relation\": \"string\",\n      \"method\": \"GET\",\n      \"self\": {\n        \"id\": \"string\",\n        \"href\": \"string\",\n        \"relation\": \"string\",\n        \"method\": \"GET\"\n      },\n      \"id\": \"b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2\",\n      \"versionId\": \"750eb5c5-ac0b-7d11-4997-e0ce9d8896c8\",\n      \"matter\": {\n        \"id\": \"string\",\n        \"href\": \"string\",\n        \"relation\": \"string\",\n        \"method\": \"GET\"\n      },\n      \"staff\": {\n        \"id\": \"string\",\n        \"href\": \"string\",\n        \"relation\": \"string\",\n        \"method\": \"GET\"\n      },\n      \"matterId\": \"string\",\n      \"staffId\": \"string\",\n      \"createdByUserId\": \"750eb5c5-ac0b-7d11-4997-e0ce9d8896c8\",\n      \"createdDate\": \"2026-04-13T11:00:00Z\",\n      \"lastUpdatedByUserId\": \"750eb5c5-ac0b-7d11-4997-e0ce9d8896c8\",\n      \"invoiceId\": \"750eb5c5-ac0b-7d11-4997-e0ce9d8896c8\",\n      \"activityCode\": \"PRT\",\n      \"utbmsTaskCode\": \"L110\",\n      \"subject\": \"Review contract\",\n      \"description\": \"Print documents\",\n      \"feeDate\": \"1977-08-15T17:45:54.456Z\",\n      \"feeType\": 0,\n      \"finalized\": false,\n      \"isInvoicedExternally\": false,\n      \"isWrittenOff\": false,\n      \"isBillable\": false,\n      \"tax\": 35,\n      \"taxInclusive\": false,\n      \"taxExempt\": false,\n      \"taxOutOfScope\": false,\n      \"duration\": 60,\n      \"durationWorked\": 50,\n      \"rate\": 350,\n      \"amount\": 350,\n      \"amountExcTax\": 315,\n      \"amountIncTax\": 350,\n      \"billableAmountExcTax\": 315,\n      \"billableTax\": 35,\n      \"isDeleted\": false,\n      \"sourceItems\": [\n        {\n          \"id\": \"string\",\n          \"href\": \"string\",\n          \"relation\": \"string\",\n          \"method\": \"GET\",\n          \"self\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"href\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"relation\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"method\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"description\": \"string\",\n          \"duration\": 5979,\n          \"isBillable\": false\n        },\n        {\n          \"id\": \"string\",\n          \"href\": \"string\",\n          \"relation\": \"string\",\n          \"method\": \"GET\",\n          \"self\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"href\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"relation\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"method\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"description\": \"string\",\n          \"duration\": 7144,\n          \"isBillable\": false\n        }\n      ],\n      \"createdFromActivityId\": \"504b9f77-20c7-4dee-8227-d3007c8f6cea\"\n    }\n  ],\n  \"offset\": 4044,\n  \"limit\": 849,\n  \"size\": 7728,\n  \"first\": {\n    \"id\": \"string\",\n    \"href\": \"string\",\n    \"relation\": \"string\",\n    \"method\": \"GET\"\n  },\n  \"previous\": {\n    \"id\": \"string\",\n    \"href\": \"string\",\n    \"relation\": \"string\",\n    \"method\": \"GET\"\n  },\n  \"next\": {\n    \"id\": \"string\",\n    \"href\": \"string\",\n    \"relation\": \"string\",\n    \"method\": \"GET\"\n  },\n  \"last\": {\n    \"id\": \"string\",\n    \"href\": \"string\",\n    \"relation\": \"string\",\n    \"method\": \"GET\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "98401578-15f4-41ff-8e8a-a39974a0ed88",
+              "name": "When an unsupported request is made.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "matters",
+                    ":matterId",
+                    "fees"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "Offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "Limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "UpdatedSince",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "matterId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 4044,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "97e88fe8-ad58-4b01-b05c-78d9cb5b2982",
+          "name": "Create a fee",
+          "request": {
+            "name": "Create a fee",
+            "description": {
+              "content": "Creates a fee for the specified matter.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "matters",
+                ":matterId",
+                "fees"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "matterId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"feeDate\": \"<dateTime>\",\n  \"subject\": \"<string>\",\n  \"updatedByUserId\": \"<string>\",\n  \"staffId\": \"<string>\",\n  \"invoiceId\": \"<string>\",\n  \"activityCode\": \"<string>\",\n  \"feeType\": \"<integer>\",\n  \"description\": \"<string>\",\n  \"duration\": \"<long>\",\n  \"durationWorked\": \"<long>\",\n  \"rate\": \"<double>\",\n  \"tax\": \"<double>\",\n  \"taxInclusive\": \"<boolean>\",\n  \"taxExempt\": \"<boolean>\",\n  \"taxOutOfScope\": \"<boolean>\",\n  \"finalized\": \"<boolean>\",\n  \"isWrittenOff\": \"<boolean>\",\n  \"isBillable\": \"<boolean>\",\n  \"isInvoicedExternally\": \"<boolean>\",\n  \"sourceItems\": [\n    {\n      \"description\": \"<string>\",\n      \"duration\": \"<long>\",\n      \"isBillable\": \"<boolean>\"\n    },\n    {\n      \"description\": \"<string>\",\n      \"duration\": \"<long>\",\n      \"isBillable\": \"<boolean>\"\n    }\n  ],\n  \"createdFromActivityId\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c8150439-2f26-448c-b484-5191f8dad8a2",
+              "name": "When request is accepted. Returns a hypermedia 'Link' object of the fee to be created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "matters",
+                    ":matterId",
+                    "fees"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "matterId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"feeDate\": \"<dateTime>\",\n  \"subject\": \"Review contract\",\n  \"updatedByUserId\": \"750eb5c5-ac0b-7d11-4997-e0ce9d8896c8\",\n  \"staffId\": \"750eb5c5-ac0b-7d11-4997-e0ce9d8896c8\",\n  \"invoiceId\": \"750eb5c5-ac0b-7d11-4997-e0ce9d8896c8\",\n  \"activityCode\": \"PRT\",\n  \"feeType\": 0,\n  \"description\": \"Print documents\",\n  \"duration\": 60,\n  \"durationWorked\": 50,\n  \"rate\": 350,\n  \"tax\": 35,\n  \"taxInclusive\": false,\n  \"taxExempt\": false,\n  \"taxOutOfScope\": false,\n  \"finalized\": false,\n  \"isWrittenOff\": false,\n  \"isBillable\": false,\n  \"isInvoicedExternally\": false,\n  \"sourceItems\": [\n    {\n      \"description\": \"Print document\",\n      \"duration\": 5,\n      \"isBillable\": false\n    },\n    {\n      \"description\": \"Print document\",\n      \"duration\": 5,\n      \"isBillable\": false\n    }\n  ],\n  \"createdFromActivityId\": \"504b9f77-20c7-4dee-8227-d3007c8f6cea\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"href\": \"string\",\n  \"relation\": \"string\",\n  \"method\": \"GET\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "05221cb3-49ec-4d05-b062-7a651fe133fe",
+              "name": "When an unsupported request is made.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "matters",
+                    ":matterId",
+                    "fees"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "matterId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"feeDate\": \"<dateTime>\",\n  \"subject\": \"Review contract\",\n  \"updatedByUserId\": \"750eb5c5-ac0b-7d11-4997-e0ce9d8896c8\",\n  \"staffId\": \"750eb5c5-ac0b-7d11-4997-e0ce9d8896c8\",\n  \"invoiceId\": \"750eb5c5-ac0b-7d11-4997-e0ce9d8896c8\",\n  \"activityCode\": \"PRT\",\n  \"feeType\": 0,\n  \"description\": \"Print documents\",\n  \"duration\": 60,\n  \"durationWorked\": 50,\n  \"rate\": 350,\n  \"tax\": 35,\n  \"taxInclusive\": false,\n  \"taxExempt\": false,\n  \"taxOutOfScope\": false,\n  \"finalized\": false,\n  \"isWrittenOff\": false,\n  \"isBillable\": false,\n  \"isInvoicedExternally\": false,\n  \"sourceItems\": [\n    {\n      \"description\": \"Print document\",\n      \"duration\": 5,\n      \"isBillable\": false\n    },\n    {\n      \"description\": \"Print document\",\n      \"duration\": 5,\n      \"isBillable\": false\n    }\n  ],\n  \"createdFromActivityId\": \"504b9f77-20c7-4dee-8227-d3007c8f6cea\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 4044,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "97c01ad8-c247-4931-abcb-ff20a46ddfbe",
+          "name": "Get a fee",
+          "request": {
+            "name": "Get a fee",
+            "description": {
+              "content": "Retrieves a specified fee.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "matters",
+                ":matterId",
+                "fees",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "matterId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "681aad88-a3cd-4a73-9371-502fa0f3014f",
+              "name": "When request is successful. Returns a 'Fee' object.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "matters",
+                    ":matterId",
+                    "fees",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "matterId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"href\": \"string\",\n  \"relation\": \"string\",\n  \"method\": \"GET\",\n  \"self\": {\n    \"id\": \"string\",\n    \"href\": \"string\",\n    \"relation\": \"string\",\n    \"method\": \"GET\"\n  },\n  \"id\": \"b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2\",\n  \"versionId\": \"750eb5c5-ac0b-7d11-4997-e0ce9d8896c8\",\n  \"matter\": {\n    \"id\": \"string\",\n    \"href\": \"string\",\n    \"relation\": \"string\",\n    \"method\": \"GET\"\n  },\n  \"staff\": {\n    \"id\": \"string\",\n    \"href\": \"string\",\n    \"relation\": \"string\",\n    \"method\": \"GET\"\n  },\n  \"matterId\": \"string\",\n  \"staffId\": \"string\",\n  \"createdByUserId\": \"750eb5c5-ac0b-7d11-4997-e0ce9d8896c8\",\n  \"createdDate\": \"2026-04-13T11:00:00Z\",\n  \"lastUpdatedByUserId\": \"750eb5c5-ac0b-7d11-4997-e0ce9d8896c8\",\n  \"invoiceId\": \"750eb5c5-ac0b-7d11-4997-e0ce9d8896c8\",\n  \"activityCode\": \"PRT\",\n  \"utbmsTaskCode\": \"L110\",\n  \"subject\": \"Review contract\",\n  \"description\": \"Print documents\",\n  \"feeDate\": \"1990-08-21T15:15:21.511Z\",\n  \"feeType\": 0,\n  \"finalized\": false,\n  \"isInvoicedExternally\": false,\n  \"isWrittenOff\": false,\n  \"isBillable\": false,\n  \"tax\": 35,\n  \"taxInclusive\": false,\n  \"taxExempt\": false,\n  \"taxOutOfScope\": false,\n  \"duration\": 60,\n  \"durationWorked\": 50,\n  \"rate\": 350,\n  \"amount\": 350,\n  \"amountExcTax\": 315,\n  \"amountIncTax\": 350,\n  \"billableAmountExcTax\": 315,\n  \"billableTax\": 35,\n  \"isDeleted\": false,\n  \"sourceItems\": [\n    {\n      \"id\": \"string\",\n      \"href\": \"string\",\n      \"relation\": \"string\",\n      \"method\": \"GET\",\n      \"self\": {\n        \"id\": \"string\",\n        \"href\": \"string\",\n        \"relation\": \"string\",\n        \"method\": \"GET\"\n      },\n      \"description\": \"string\",\n      \"duration\": 2282,\n      \"isBillable\": true\n    },\n    {\n      \"id\": \"string\",\n      \"href\": \"string\",\n      \"relation\": \"string\",\n      \"method\": \"GET\",\n      \"self\": {\n        \"id\": \"string\",\n        \"href\": \"string\",\n        \"relation\": \"string\",\n        \"method\": \"GET\"\n      },\n      \"description\": \"string\",\n      \"duration\": 3854,\n      \"isBillable\": false\n    }\n  ],\n  \"createdFromActivityId\": \"504b9f77-20c7-4dee-8227-d3007c8f6cea\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0bf01b98-f90d-40f2-952b-7b32f05c8dc9",
+              "name": "When an unsupported request is made.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "matters",
+                    ":matterId",
+                    "fees",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "matterId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 4044,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8e7a3c34-2815-4251-b709-1f812abf13e3",
+              "name": "When fee with specified id is not associated with authenticated client.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "matters",
+                    ":matterId",
+                    "fees",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "matterId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 4044,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "498c94f3-8712-4643-a693-07ec62d8cba9",
+              "name": "When fee with specified id does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "matters",
+                    ":matterId",
+                    "fees",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "matterId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 4044,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9dd4060b-00cc-4035-b104-49bd6ea1f923",
+          "name": "Update a fee",
+          "request": {
+            "name": "Update a fee",
+            "description": {
+              "content": "Updates a fee for the specified matter.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "matters",
+                ":matterId",
+                "fees",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "matterId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"feeDate\": \"<dateTime>\",\n  \"subject\": \"<string>\",\n  \"updatedByUserId\": \"<string>\",\n  \"staffId\": \"<string>\",\n  \"invoiceId\": \"<string>\",\n  \"activityCode\": \"<string>\",\n  \"feeType\": \"<integer>\",\n  \"description\": \"<string>\",\n  \"duration\": \"<long>\",\n  \"durationWorked\": \"<long>\",\n  \"rate\": \"<double>\",\n  \"tax\": \"<double>\",\n  \"taxInclusive\": \"<boolean>\",\n  \"taxExempt\": \"<boolean>\",\n  \"taxOutOfScope\": \"<boolean>\",\n  \"finalized\": \"<boolean>\",\n  \"isWrittenOff\": \"<boolean>\",\n  \"isBillable\": \"<boolean>\",\n  \"isInvoicedExternally\": \"<boolean>\",\n  \"sourceItems\": [\n    {\n      \"description\": \"<string>\",\n      \"duration\": \"<long>\",\n      \"isBillable\": \"<boolean>\"\n    },\n    {\n      \"description\": \"<string>\",\n      \"duration\": \"<long>\",\n      \"isBillable\": \"<boolean>\"\n    }\n  ],\n  \"createdFromActivityId\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ddebaa40-6968-4819-bc2d-028342294cd1",
+              "name": "When request is accepted. Returns a hypermedia 'Link' object of the fee to be updated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "matters",
+                    ":matterId",
+                    "fees",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "matterId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"feeDate\": \"<dateTime>\",\n  \"subject\": \"Review contract\",\n  \"updatedByUserId\": \"750eb5c5-ac0b-7d11-4997-e0ce9d8896c8\",\n  \"staffId\": \"750eb5c5-ac0b-7d11-4997-e0ce9d8896c8\",\n  \"invoiceId\": \"750eb5c5-ac0b-7d11-4997-e0ce9d8896c8\",\n  \"activityCode\": \"PRT\",\n  \"feeType\": 0,\n  \"description\": \"Print documents\",\n  \"duration\": 60,\n  \"durationWorked\": 50,\n  \"rate\": 350,\n  \"tax\": 35,\n  \"taxInclusive\": false,\n  \"taxExempt\": false,\n  \"taxOutOfScope\": false,\n  \"finalized\": false,\n  \"isWrittenOff\": false,\n  \"isBillable\": false,\n  \"isInvoicedExternally\": false,\n  \"sourceItems\": [\n    {\n      \"description\": \"Print document\",\n      \"duration\": 5,\n      \"isBillable\": false\n    },\n    {\n      \"description\": \"Print document\",\n      \"duration\": 5,\n      \"isBillable\": false\n    }\n  ],\n  \"createdFromActivityId\": \"504b9f77-20c7-4dee-8227-d3007c8f6cea\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"href\": \"string\",\n  \"relation\": \"string\",\n  \"method\": \"GET\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1f1d264e-8f92-4681-b76c-93b65e3d1063",
+              "name": "When an unsupported request is made.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "matters",
+                    ":matterId",
+                    "fees",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "matterId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"feeDate\": \"<dateTime>\",\n  \"subject\": \"Review contract\",\n  \"updatedByUserId\": \"750eb5c5-ac0b-7d11-4997-e0ce9d8896c8\",\n  \"staffId\": \"750eb5c5-ac0b-7d11-4997-e0ce9d8896c8\",\n  \"invoiceId\": \"750eb5c5-ac0b-7d11-4997-e0ce9d8896c8\",\n  \"activityCode\": \"PRT\",\n  \"feeType\": 0,\n  \"description\": \"Print documents\",\n  \"duration\": 60,\n  \"durationWorked\": 50,\n  \"rate\": 350,\n  \"tax\": 35,\n  \"taxInclusive\": false,\n  \"taxExempt\": false,\n  \"taxOutOfScope\": false,\n  \"finalized\": false,\n  \"isWrittenOff\": false,\n  \"isBillable\": false,\n  \"isInvoicedExternally\": false,\n  \"sourceItems\": [\n    {\n      \"description\": \"Print document\",\n      \"duration\": 5,\n      \"isBillable\": false\n    },\n    {\n      \"description\": \"Print document\",\n      \"duration\": 5,\n      \"isBillable\": false\n    }\n  ],\n  \"createdFromActivityId\": \"504b9f77-20c7-4dee-8227-d3007c8f6cea\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 4044,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "19a79967-e089-4b96-87e2-7abb0c561b3c",
+              "name": "When fee with specified id is not associated with authenticated client.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "matters",
+                    ":matterId",
+                    "fees",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "matterId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"feeDate\": \"<dateTime>\",\n  \"subject\": \"Review contract\",\n  \"updatedByUserId\": \"750eb5c5-ac0b-7d11-4997-e0ce9d8896c8\",\n  \"staffId\": \"750eb5c5-ac0b-7d11-4997-e0ce9d8896c8\",\n  \"invoiceId\": \"750eb5c5-ac0b-7d11-4997-e0ce9d8896c8\",\n  \"activityCode\": \"PRT\",\n  \"feeType\": 0,\n  \"description\": \"Print documents\",\n  \"duration\": 60,\n  \"durationWorked\": 50,\n  \"rate\": 350,\n  \"tax\": 35,\n  \"taxInclusive\": false,\n  \"taxExempt\": false,\n  \"taxOutOfScope\": false,\n  \"finalized\": false,\n  \"isWrittenOff\": false,\n  \"isBillable\": false,\n  \"isInvoicedExternally\": false,\n  \"sourceItems\": [\n    {\n      \"description\": \"Print document\",\n      \"duration\": 5,\n      \"isBillable\": false\n    },\n    {\n      \"description\": \"Print document\",\n      \"duration\": 5,\n      \"isBillable\": false\n    }\n  ],\n  \"createdFromActivityId\": \"504b9f77-20c7-4dee-8227-d3007c8f6cea\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 4044,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2f756439-3f54-48b2-96a5-ff830cb4991f",
+              "name": "When fee with specified id does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "matters",
+                    ":matterId",
+                    "fees",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "matterId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"feeDate\": \"<dateTime>\",\n  \"subject\": \"Review contract\",\n  \"updatedByUserId\": \"750eb5c5-ac0b-7d11-4997-e0ce9d8896c8\",\n  \"staffId\": \"750eb5c5-ac0b-7d11-4997-e0ce9d8896c8\",\n  \"invoiceId\": \"750eb5c5-ac0b-7d11-4997-e0ce9d8896c8\",\n  \"activityCode\": \"PRT\",\n  \"feeType\": 0,\n  \"description\": \"Print documents\",\n  \"duration\": 60,\n  \"durationWorked\": 50,\n  \"rate\": 350,\n  \"tax\": 35,\n  \"taxInclusive\": false,\n  \"taxExempt\": false,\n  \"taxOutOfScope\": false,\n  \"finalized\": false,\n  \"isWrittenOff\": false,\n  \"isBillable\": false,\n  \"isInvoicedExternally\": false,\n  \"sourceItems\": [\n    {\n      \"description\": \"Print document\",\n      \"duration\": 5,\n      \"isBillable\": false\n    },\n    {\n      \"description\": \"Print document\",\n      \"duration\": 5,\n      \"isBillable\": false\n    }\n  ],\n  \"createdFromActivityId\": \"504b9f77-20c7-4dee-8227-d3007c8f6cea\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 4044,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5d339335-939d-4b76-a7ae-5b6ae9f380f8",
+          "name": "Patch a fee",
+          "request": {
+            "name": "Patch a fee",
+            "description": {
+              "content": "Patches a fee for the specified matter.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "matters",
+                ":matterId",
+                "fees",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "matterId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"feeDate\": \"<dateTime>\",\n  \"subject\": \"<string>\",\n  \"updatedByUserId\": \"<string>\",\n  \"staffId\": \"<string>\",\n  \"invoiceId\": \"<string>\",\n  \"activityCode\": \"<string>\",\n  \"feeType\": \"<integer>\",\n  \"description\": \"<string>\",\n  \"duration\": \"<long>\",\n  \"durationWorked\": \"<long>\",\n  \"rate\": \"<double>\",\n  \"tax\": \"<double>\",\n  \"taxInclusive\": \"<boolean>\",\n  \"taxExempt\": \"<boolean>\",\n  \"taxOutOfScope\": \"<boolean>\",\n  \"finalized\": \"<boolean>\",\n  \"isWrittenOff\": \"<boolean>\",\n  \"isBillable\": \"<boolean>\",\n  \"isInvoicedExternally\": \"<boolean>\",\n  \"sourceItems\": [\n    {\n      \"description\": \"<string>\",\n      \"duration\": \"<long>\",\n      \"isBillable\": \"<boolean>\"\n    },\n    {\n      \"description\": \"<string>\",\n      \"duration\": \"<long>\",\n      \"isBillable\": \"<boolean>\"\n    }\n  ],\n  \"createdFromActivityId\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "35808857-2e4e-4d01-ae2c-d619de9ccf71",
+              "name": "When request is accepted. Returns a hypermedia 'Link' object of the fee to be patched.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "matters",
+                    ":matterId",
+                    "fees",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "matterId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"feeDate\": \"<dateTime>\",\n  \"subject\": \"Review contract\",\n  \"updatedByUserId\": \"750eb5c5-ac0b-7d11-4997-e0ce9d8896c8\",\n  \"staffId\": \"750eb5c5-ac0b-7d11-4997-e0ce9d8896c8\",\n  \"invoiceId\": \"750eb5c5-ac0b-7d11-4997-e0ce9d8896c8\",\n  \"activityCode\": \"PRT\",\n  \"feeType\": 0,\n  \"description\": \"Print documents\",\n  \"duration\": 60,\n  \"durationWorked\": 50,\n  \"rate\": 350,\n  \"tax\": 35,\n  \"taxInclusive\": false,\n  \"taxExempt\": false,\n  \"taxOutOfScope\": false,\n  \"finalized\": false,\n  \"isWrittenOff\": false,\n  \"isBillable\": false,\n  \"isInvoicedExternally\": false,\n  \"sourceItems\": [\n    {\n      \"description\": \"Print document\",\n      \"duration\": 5,\n      \"isBillable\": false\n    },\n    {\n      \"description\": \"Print document\",\n      \"duration\": 5,\n      \"isBillable\": false\n    }\n  ],\n  \"createdFromActivityId\": \"504b9f77-20c7-4dee-8227-d3007c8f6cea\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"href\": \"string\",\n  \"relation\": \"string\",\n  \"method\": \"GET\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b8895046-865e-424c-9ec8-5d91fb990c19",
+              "name": "When an unsupported request is made.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "matters",
+                    ":matterId",
+                    "fees",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "matterId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"feeDate\": \"<dateTime>\",\n  \"subject\": \"Review contract\",\n  \"updatedByUserId\": \"750eb5c5-ac0b-7d11-4997-e0ce9d8896c8\",\n  \"staffId\": \"750eb5c5-ac0b-7d11-4997-e0ce9d8896c8\",\n  \"invoiceId\": \"750eb5c5-ac0b-7d11-4997-e0ce9d8896c8\",\n  \"activityCode\": \"PRT\",\n  \"feeType\": 0,\n  \"description\": \"Print documents\",\n  \"duration\": 60,\n  \"durationWorked\": 50,\n  \"rate\": 350,\n  \"tax\": 35,\n  \"taxInclusive\": false,\n  \"taxExempt\": false,\n  \"taxOutOfScope\": false,\n  \"finalized\": false,\n  \"isWrittenOff\": false,\n  \"isBillable\": false,\n  \"isInvoicedExternally\": false,\n  \"sourceItems\": [\n    {\n      \"description\": \"Print document\",\n      \"duration\": 5,\n      \"isBillable\": false\n    },\n    {\n      \"description\": \"Print document\",\n      \"duration\": 5,\n      \"isBillable\": false\n    }\n  ],\n  \"createdFromActivityId\": \"504b9f77-20c7-4dee-8227-d3007c8f6cea\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 4044,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c3dcb8bd-1a64-4f9b-b454-424221fefb50",
+              "name": "When fee with specified id is not associated with authenticated client.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "matters",
+                    ":matterId",
+                    "fees",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "matterId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"feeDate\": \"<dateTime>\",\n  \"subject\": \"Review contract\",\n  \"updatedByUserId\": \"750eb5c5-ac0b-7d11-4997-e0ce9d8896c8\",\n  \"staffId\": \"750eb5c5-ac0b-7d11-4997-e0ce9d8896c8\",\n  \"invoiceId\": \"750eb5c5-ac0b-7d11-4997-e0ce9d8896c8\",\n  \"activityCode\": \"PRT\",\n  \"feeType\": 0,\n  \"description\": \"Print documents\",\n  \"duration\": 60,\n  \"durationWorked\": 50,\n  \"rate\": 350,\n  \"tax\": 35,\n  \"taxInclusive\": false,\n  \"taxExempt\": false,\n  \"taxOutOfScope\": false,\n  \"finalized\": false,\n  \"isWrittenOff\": false,\n  \"isBillable\": false,\n  \"isInvoicedExternally\": false,\n  \"sourceItems\": [\n    {\n      \"description\": \"Print document\",\n      \"duration\": 5,\n      \"isBillable\": false\n    },\n    {\n      \"description\": \"Print document\",\n      \"duration\": 5,\n      \"isBillable\": false\n    }\n  ],\n  \"createdFromActivityId\": \"504b9f77-20c7-4dee-8227-d3007c8f6cea\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 4044,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e3e000d6-fe6d-476a-9765-6b444eeea876",
+              "name": "When fee with specified id does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "matters",
+                    ":matterId",
+                    "fees",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "matterId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"feeDate\": \"<dateTime>\",\n  \"subject\": \"Review contract\",\n  \"updatedByUserId\": \"750eb5c5-ac0b-7d11-4997-e0ce9d8896c8\",\n  \"staffId\": \"750eb5c5-ac0b-7d11-4997-e0ce9d8896c8\",\n  \"invoiceId\": \"750eb5c5-ac0b-7d11-4997-e0ce9d8896c8\",\n  \"activityCode\": \"PRT\",\n  \"feeType\": 0,\n  \"description\": \"Print documents\",\n  \"duration\": 60,\n  \"durationWorked\": 50,\n  \"rate\": 350,\n  \"tax\": 35,\n  \"taxInclusive\": false,\n  \"taxExempt\": false,\n  \"taxOutOfScope\": false,\n  \"finalized\": false,\n  \"isWrittenOff\": false,\n  \"isBillable\": false,\n  \"isInvoicedExternally\": false,\n  \"sourceItems\": [\n    {\n      \"description\": \"Print document\",\n      \"duration\": 5,\n      \"isBillable\": false\n    },\n    {\n      \"description\": \"Print document\",\n      \"duration\": 5,\n      \"isBillable\": false\n    }\n  ],\n  \"createdFromActivityId\": \"504b9f77-20c7-4dee-8227-d3007c8f6cea\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 4044,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0414307b-59c9-4915-9184-e51c9d17a5c7",
+          "name": "Delete a fee",
+          "request": {
+            "name": "Delete a fee",
+            "description": {
+              "content": "Deletes a fee.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "matters",
+                ":matterId",
+                "fees",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "matterId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "62d4bade-2a75-4107-833d-ccd55cac9566",
+              "name": "When request is accepted. Returns a hypermedia 'Link' object of the fee to be deleted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "matters",
+                    ":matterId",
+                    "fees",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "matterId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"href\": \"string\",\n  \"relation\": \"string\",\n  \"method\": \"GET\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "33c774b2-0c9e-49b5-922f-c9ab3136ccf7",
+              "name": "When an unsupported request is made.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "matters",
+                    ":matterId",
+                    "fees",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "matterId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 4044,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4bd90d73-1ca9-4f53-9022-0714b633c516",
+              "name": "When fee with specified id is not associated with authenticated client.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "matters",
+                    ":matterId",
+                    "fees",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "matterId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 4044,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ae08c244-9a1b-473d-9348-9f95f7e90c04",
+              "name": "When fee with specified id does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "matters",
+                    ":matterId",
+                    "fees",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "matterId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 4044,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.smokeball.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "9f2886d7-d9d6-4b07-9c57-99d0e52da591",
+    "name": "Smokeball Activity Codes Fees API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for integrating with Smokeball legal practice management software. Supports matters, contacts, documents, time entries, billing, trust accounting, staff, webhooks, and law firm workflows across US, AU, and UK regions. Uses OAuth 2.0 (client credentials) authentication.\n\nContact Support:\n Name: Smokeball Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

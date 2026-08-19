@@ -1,0 +1,771 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Smokeball Activity Codes Subscriptions API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-api-key",
+      "value": "{{x-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Subscriptions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get all add-ons",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.smokeball.com/subscriptions/addons"
+          },
+          "docs": "Returns a list of all available add-ons with their features and pricing.\r\n\r\nUse this endpoint to display the complete catalog of available add-ons."
+        },
+        {
+          "info": {
+            "name": "Get an add-on",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.smokeball.com/subscriptions/addons/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the specified product add-on with its features and pricing.\r\n\r\nUse this endpoint to retreive add-on information when only an id is available."
+        },
+        {
+          "info": {
+            "name": "Add add-on",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.smokeball.com/:id",
+            "params": [
+              {
+                "name": "subscriptionId",
+                "value": "",
+                "type": "query",
+                "description": "The unique identifier of the subscription"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The identifier of the add-on to add"
+              }
+            ]
+          },
+          "docs": "Adds a specific add-on to a subscription.\r\n\r\nImportant considerations:\r\n* Add-ons must be compatible with the subscription's current tier\r\n* Billing will be prorated for the remaining period"
+        },
+        {
+          "info": {
+            "name": "Remove add-on",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.smokeball.com/:id",
+            "params": [
+              {
+                "name": "subscriptionId",
+                "value": "",
+                "type": "query",
+                "description": "The unique identifier of the subscription"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The identifier of the add-on to remove"
+              }
+            ]
+          },
+          "docs": "Removes a specific add-on from a subscription.\r\n\r\nImportant considerations:\r\n* Billing will be prorated\r\n* Dependent add-ons may also be removed"
+        },
+        {
+          "info": {
+            "name": "GetSubscriptionUsageCharges",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.smokeball.com/subscriptions/:subscriptionId/charges",
+            "params": [
+              {
+                "name": "subscriptionId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "From",
+                "value": "2022-04-01T00:00:00Z",
+                "type": "query",
+                "description": "Optional start date used to filter usage charges by created date."
+              },
+              {
+                "name": "To",
+                "value": "2022-04-30T23:59:59Z",
+                "type": "query",
+                "description": "Optional end date used to filter usage charges by created date."
+              },
+              {
+                "name": "Status",
+                "value": "",
+                "type": "query",
+                "description": "Optional usage charge status filter.\r\n            \r\nPossible values: Pending, Succeeded, Failed, Canceled, Refunded."
+              },
+              {
+                "name": "MatterId",
+                "value": "123456",
+                "type": "query",
+                "description": "Optional matter id used to filter usage charges."
+              },
+              {
+                "name": "UserId",
+                "value": "3f44b470-5d39-41d0-a1ef-96e09e0eb5bb",
+                "type": "query",
+                "description": "Optional user id used to filter usage charges."
+              },
+              {
+                "name": "ProductId",
+                "value": "6b07d1fc-a7ea-4da7-966f-eaa971f0e72c",
+                "type": "query",
+                "description": "Optional internal product id used to filter usage charges."
+              },
+              {
+                "name": "Offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "Limit",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "GetUsageCharges",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.smokeball.com/subscriptions/:subscriptionId/usages/:usageId/charges",
+            "params": [
+              {
+                "name": "subscriptionId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "usageId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "From",
+                "value": "2022-04-01T00:00:00Z",
+                "type": "query",
+                "description": "Optional start date used to filter usage charges by created date."
+              },
+              {
+                "name": "To",
+                "value": "2022-04-30T23:59:59Z",
+                "type": "query",
+                "description": "Optional end date used to filter usage charges by created date."
+              },
+              {
+                "name": "Status",
+                "value": "",
+                "type": "query",
+                "description": "Optional usage charge status filter.\r\n            \r\nPossible values: Pending, Succeeded, Failed, Canceled, Refunded."
+              },
+              {
+                "name": "MatterId",
+                "value": "123456",
+                "type": "query",
+                "description": "Optional matter id used to filter usage charges."
+              },
+              {
+                "name": "UserId",
+                "value": "3f44b470-5d39-41d0-a1ef-96e09e0eb5bb",
+                "type": "query",
+                "description": "Optional user id used to filter usage charges."
+              },
+              {
+                "name": "ProductId",
+                "value": "6b07d1fc-a7ea-4da7-966f-eaa971f0e72c",
+                "type": "query",
+                "description": "Optional internal product id used to filter usage charges."
+              },
+              {
+                "name": "Offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "Limit",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "CreateUsageChargeAsync",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.smokeball.com/subscriptions/:subscriptionId/usages/:usageId/charges",
+            "params": [
+              {
+                "name": "subscriptionId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "usageId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "GetUsageCharge",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.smokeball.com/subscriptions/:subscriptionId/charges/:id",
+            "params": [
+              {
+                "name": "subscriptionId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "CancelUsageChargeAsync",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.smokeball.com/subscriptions/:subscriptionId/charges/:id/cancel",
+            "params": [
+              {
+                "name": "subscriptionId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "Get subscription invoices",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.smokeball.com/subscriptions/invoices",
+            "params": [
+              {
+                "name": "Offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "Limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "From",
+                "value": "",
+                "type": "query",
+                "description": "Search for invoices created on or after From (inclusive lower bound)."
+              },
+              {
+                "name": "To",
+                "value": "",
+                "type": "query",
+                "description": "Search for invoices created on or before To (inclusive upper bound)."
+              },
+              {
+                "name": "SubscriptionId",
+                "value": "",
+                "type": "query",
+                "description": "Search for invoices belonging to the specified internal subscription id."
+              }
+            ]
+          },
+          "docs": "Retrieves invoices for the account.\r\n            \r\nInvoices are returned sorted by creation date with the most recent invoices appearing first."
+        },
+        {
+          "info": {
+            "name": "Get subscription invoices",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.smokeball.com/subscriptions/:subscriptionId/invoices",
+            "params": [
+              {
+                "name": "subscriptionId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the subscription"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of invoices to return."
+              }
+            ]
+          },
+          "docs": "DEPRECATED - Use GET /subscriptions/invoices instead.\r\n\r\nRetrieves invoices for the specified subscription.\r\n            \r\nInvoices are returned sorted by creation date with the most recent invoices appearing first."
+        },
+        {
+          "info": {
+            "name": "Download invoice PDF",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.smokeball.com/subscriptions/invoices/:invoiceId/download",
+            "params": [
+              {
+                "name": "invoiceId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the invoice"
+              }
+            ]
+          },
+          "docs": "Streams the invoice PDF retrieved from the payment provider as an attachment."
+        },
+        {
+          "info": {
+            "name": "Get invoice download URL",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.smokeball.com/subscriptions/invoices/:invoiceId/url",
+            "params": [
+              {
+                "name": "invoiceId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the invoice"
+              }
+            ]
+          },
+          "docs": "Returns a URL that can be used to download the invoice PDF directly from the payment provider."
+        },
+        {
+          "info": {
+            "name": "Get subscriptions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.smokeball.com/subscriptions"
+          },
+          "docs": "Returns a list of all available subscriptions with their current status and details.\r\n\r\nThe response includes:\r\n* Subscription IDs\r\n* Current tier\r\n* Active add-ons\r\n* Subscription status"
+        },
+        {
+          "info": {
+            "name": "Get subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.smokeball.com/subscriptions/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the subscription"
+              }
+            ]
+          },
+          "docs": "Retrieves detailed information for a specific subscription.\r\n\r\nThe response includes:\r\n* Current tier\r\n* Active add-ons\r\n* Subscription status"
+        },
+        {
+          "info": {
+            "name": "Update subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.smokeball.com/subscriptions/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the subscription to update"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a subscriptions tiers, add-ons, or interval.\r\n\r\nImportant considerations:\r\n* Updates cannot be made to canceled subscriptions\r\n* Billing will be prorated for the remaining period\r\n* Existing add-ons may need to be re-validated\r\n* Some features may be disabled if not available in new tier or add-ons"
+        },
+        {
+          "info": {
+            "name": "Get subscription settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.smokeball.com/subscriptions/settings"
+          },
+          "docs": "Retrieves settings for a subscription."
+        },
+        {
+          "info": {
+            "name": "Patch subscription settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.smokeball.com/subscriptions/settings",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates settings for a subscription."
+        },
+        {
+          "info": {
+            "name": "Get subscription promotions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.smokeball.com/subscriptions/:id/promotions",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the subscription"
+              },
+              {
+                "name": "Offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "Limit",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieves promotions available for the specified subscription."
+        },
+        {
+          "info": {
+            "name": "Get subscription changes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.smokeball.com/subscriptions/:id/changes",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "Offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "Limit",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns a log of changes made to the subscription through the API."
+        },
+        {
+          "info": {
+            "name": "Preview upcoming subscription charges",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.smokeball.com/subscriptions/:id/preview",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the subscription"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns a preview of upcoming subscription charges or refunds for any specified update to subscriptions tiers, add-ons, or interval."
+        },
+        {
+          "info": {
+            "name": "Cancel subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.smokeball.com/subscriptions/:id/cancel",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the subscription"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Cancels a subscription using the supplied cancellation request.\r\n\r\nSupported cancellation types:\r\n* PeriodEnd - Cancel subscription at the end of the billing cycle\r\n* Immediate - Cancel subscription immediately\r\n* Date - Cancel at specified 'CancelAt' date\r\n\r\nIf not supplied, PeriodEnd is used and the subscription is cancelled at the end of the billing cycle.\r\n\r\nDefault behaviour:\r\n* If the subscription is trialing a tier, the tier is reverted to the previous tier at the end of the trials durati"
+        },
+        {
+          "info": {
+            "name": "Resume subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.smokeball.com/subscriptions/:id/resume",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the subscription"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Resumes a subscription that is pending cancellation or is already canceled.\r\n\r\nIf the subscription is in a CANCELED state:\r\n * An immediate charge for the subscription amount will be trigered.\r\n * If the charge is unsuccessful, the subscription will be moved to PASTDUE status until a charge is successful.\r\n * If all charge retry attempts fail, the subscription will be become CANCELED once again.\r\nIf the subscription is in the PENDING cancellation state:\r\n * The existing billing cycle will remain"
+        },
+        {
+          "info": {
+            "name": "Get all tiers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.smokeball.com/subscriptions/tiers"
+          },
+          "docs": "Returns a list of all available product tiers with their features and pricing.\r\n\r\nUse this endpoint to:\r\n* Display available tiers to customers\r\n* Show pricing information"
+        },
+        {
+          "info": {
+            "name": "Get a tier",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.smokeball.com/subscriptions/tiers/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the specified product tier with its features and pricing.\r\n\r\nUse this endpoint to retreive tier information when only an id is available."
+        },
+        {
+          "info": {
+            "name": "Get tier add-ons",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.smokeball.com/subscriptions/tiers/:id/addons",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The identifier of the product tier"
+              }
+            ]
+          },
+          "docs": "Lists all available add-ons for a specific product tier.\r\n\r\nThe response includes:\r\n* Add-on details and pricing\r\n* Compatibility information\r\n* Usage limits\r\n* Dependencies or prerequisites\r\n\r\nUse this endpoint to show customers which add-ons are available for their tier."
+        },
+        {
+          "info": {
+            "name": "Switch product tier",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.smokeball.com/subscriptions/:subscriptionId/tiers/:id",
+            "params": [
+              {
+                "name": "subscriptionId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the subscription to update"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The identifier of the target product tier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Changes a subscription's product tier to the specified tier.\r\n\r\nImportant considerations:\r\n* Tier changes take effect immediately\r\n* Billing will be prorated for the remaining period\r\n* Existing add-ons may need to be re-validated\r\n* Some features may be disabled if not available in new tier"
+        },
+        {
+          "info": {
+            "name": "GET /subscriptions/usages",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.smokeball.com/subscriptions/usages"
+          }
+        },
+        {
+          "info": {
+            "name": "GetUsageAsync",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.smokeball.com/subscriptions/usages/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "POST /subscriptions/{subscriptionId}/usages/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.smokeball.com/subscriptions/:subscriptionId/usages/:id",
+            "params": [
+              {
+                "name": "subscriptionId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "DELETE /subscriptions/{subscriptionId}/usages/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.smokeball.com/subscriptions/:subscriptionId/usages/:id",
+            "params": [
+              {
+                "name": "subscriptionId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

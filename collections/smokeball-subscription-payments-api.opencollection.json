@@ -1,0 +1,202 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Smokeball Activity Codes Subscription Payments API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-api-key",
+      "value": "{{x-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Subscription Payments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get all customer payment methods",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.smokeball.com/subscriptions/paymentmethods",
+            "params": [
+              {
+                "name": "Offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "Limit",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns all payment methods attached to the current account's payment customer."
+        },
+        {
+          "info": {
+            "name": "Add payment method",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.smokeball.com/subscriptions/paymentmethods",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds a new payment method to the account.\r\n\r\nImportant notes:\r\n* Can optionally set as default payment method for the entire account\r\n* Can force immediate charge for overdue invoices for all active subscriptions\r\n* Payment information format depends on payment system"
+        },
+        {
+          "info": {
+            "name": "Get payment methods",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.smokeball.com/subscriptions/:subscriptionId/paymentmethods",
+            "params": [
+              {
+                "name": "subscriptionId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the subscription"
+              },
+              {
+                "name": "Offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "Limit",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns the payment methods actively set on the specified subscription."
+        },
+        {
+          "info": {
+            "name": "Add payment method",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.smokeball.com/subscriptions/:subscriptionId/paymentmethods",
+            "params": [
+              {
+                "name": "subscriptionId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the subscription"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds a new payment method to the account and sets it for the specified subscription \r\n\r\nImportant notes:\r\n* Can optionally set as default payment method for the entire account, or the specified subscription\r\n* Can force immediate charge for overdue invoices for the specified subscription\r\n* Payment information format depends on payment system"
+        },
+        {
+          "info": {
+            "name": "UpdateSubscriptionPaymentMethodAsync",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.smokeball.com/subscriptions/:subscriptionId/paymentmethods",
+            "params": [
+              {
+                "name": "subscriptionId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "Get payment method",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.smokeball.com/subscriptions/:subscriptionId/paymentmethods/:id",
+            "params": [
+              {
+                "name": "subscriptionId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the subscription"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the payment method"
+              }
+            ]
+          },
+          "docs": "Returns a specific payment method associated with a subscription."
+        },
+        {
+          "info": {
+            "name": "Remove payment method",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.smokeball.com/subscriptions/:subscriptionId/paymentmethods/:id",
+            "params": [
+              {
+                "name": "subscriptionId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the subscription"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the payment method to remove"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Removes a payment method from a subscription.\r\n\r\nImportant notes:\r\n* Can optionally specify a new default payment method\r\n* Removing default without replacement may cause subscription to go OVERDUE"
+        },
+        {
+          "info": {
+            "name": "Get supported payment systems",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.smokeball.com/subscriptions/paymentsystems"
+          },
+          "docs": "Returns all supported payment systems and their supported payment method types.\r\nCurrently supports:\r\n* STRIPE with CREDIT_CARD payment type"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

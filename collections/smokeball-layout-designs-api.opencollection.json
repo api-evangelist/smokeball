@@ -1,0 +1,80 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Smokeball Activity Codes Layout Designs API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-api-key",
+      "value": "{{x-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Layout Designs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get layout designs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.smokeball.com/layouts",
+            "params": [
+              {
+                "name": "Offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "Limit",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns a list of layout designs."
+        },
+        {
+          "info": {
+            "name": "Get a layout design",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.smokeball.com/layouts/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Layout design Id"
+              },
+              {
+                "name": "matterTypeId",
+                "value": "",
+                "type": "query",
+                "description": "Matter type identifier (optional)"
+              },
+              {
+                "name": "state",
+                "value": "",
+                "type": "query",
+                "description": "State identifier (optional)"
+              }
+            ]
+          },
+          "docs": "Retrieves a specified layout design."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
