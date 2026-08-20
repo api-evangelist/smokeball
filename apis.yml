@@ -144,6 +144,8 @@ apis:
   humanURL: https://docs.smokeball.com/docs/api-docs/1e13a13124aee-introduction
   baseURL: https://api.smokeball.com
   tags:
+  - Event
+  tags_raw:
   - Events
   properties:
   - type: OpenAPI
@@ -222,6 +224,8 @@ apis:
   humanURL: https://docs.smokeball.com/docs/api-docs/1e13a13124aee-introduction
   baseURL: https://api.smokeball.com
   tags:
+  - File
+  tags_raw:
   - Files
   properties:
   - type: OpenAPI
@@ -534,6 +538,8 @@ apis:
   humanURL: https://docs.smokeball.com/docs/api-docs/1e13a13124aee-introduction
   baseURL: https://api.smokeball.com
   tags:
+  - Notification
+  tags_raw:
   - Notifications
   properties:
   - type: OpenAPI
@@ -821,6 +827,8 @@ apis:
   humanURL: https://docs.smokeball.com/docs/api-docs/1e13a13124aee-introduction
   baseURL: https://api.smokeball.com
   tags:
+  - Subscription
+  tags_raw:
   - Subscriptions
   properties:
   - type: OpenAPI
@@ -847,6 +855,8 @@ apis:
   humanURL: https://docs.smokeball.com/docs/api-docs/1e13a13124aee-introduction
   baseURL: https://api.smokeball.com
   tags:
+  - Task
+  tags_raw:
   - Tasks
   properties:
   - type: OpenAPI
@@ -873,6 +883,8 @@ apis:
   humanURL: https://docs.smokeball.com/docs/api-docs/1e13a13124aee-introduction
   baseURL: https://api.smokeball.com
   tags:
+  - User
+  tags_raw:
   - Users
   properties:
   - type: OpenAPI
@@ -899,6 +911,8 @@ apis:
   humanURL: https://docs.smokeball.com/docs/api-docs/1e13a13124aee-introduction
   baseURL: https://api.smokeball.com
   tags:
+  - Webhook
+  tags_raw:
   - Webhooks
   properties:
   - type: OpenAPI
