@@ -13,10 +13,7 @@
   "feeds": [
     {
       "source": "https://www.smokeball.com/blog/rss.xml",
-      "feed_url": "https://www.smokeball.com/blog/rss.xml",
-      "title": "",
-      "saved": 0,
-      "method": "feed"
+      "error": "HTTPError"
     },
     {
       "source": "https://www.linkedin.com/company/smokeball-legal-software",
@@ -24,12 +21,12 @@
     },
     {
       "source": "https://www.smokeball.com/blog",
-      "feed_url": "https://www.smokeball.com/blog/rss.xml",
+      "feed_url": "https://www.smokeball.com/blog",
       "title": "",
       "saved": 0,
-      "method": "discovered"
+      "method": "none"
     }
   ],
   "post_count": 51,
-  "fetched": "2026-08-15T12:11:08Z"
+  "fetched": "2026-08-22T20:20:02Z"
 }
