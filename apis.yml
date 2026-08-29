@@ -5,6 +5,19 @@ description: Legal practice management software with a REST API for managing mat
   The API follows REST principles, accepts JSON, returns JSON, and supports OAuth
   2.0 authentication. Available in US, AU, and UK regions.
 type: Index
+deliveryModel:
+  model: unknown
+  open_source: unknown
+  commercial: true
+  callable_host: true
+  label: Delivery model not determined — needs a product licence on record
+  confidence: low
+  source:
+  - openapi
+  - pricing
+  - repository-unlicensed
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: paid
   onboarding: self-serve
@@ -934,6 +947,11 @@ apis:
   - type: Vocabulary
     url: vocabulary/smokeball-vocabulary.yml
 common:
+  - type: CapabilityMap
+    url: capabilities/smokeball-capability-edges.yml
+    name: Smokeball Business Capability Map
+  - type: IssueTracker
+    url: https://github.com/smokeballdev/api-docs/issues
   - type: AgenticAccess
     url: agentic-access/smokeball-agentic-access.yml
   - type: DomainSecurity
