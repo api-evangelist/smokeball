@@ -39,6 +39,16 @@ modified: '2026-06-13'
 specificationVersion: '0.23'
 tags:
   - Legal
+  - Law Firms
+  - Practice Management
+  - Matter
+  - Contacts
+  - Documents
+  - Billing
+  - Trust Accounting
+  - Time Tracking
+tags_raw:
+  - Legal
   - Law Firm
   - Practice Management
   - Matters
@@ -500,6 +510,8 @@ apis:
   humanURL: https://docs.smokeball.com/docs/api-docs/1e13a13124aee-introduction
   baseURL: https://api.smokeball.com
   tags:
+  - Matter
+  tags_raw:
   - Matters
   properties:
   - type: OpenAPI
