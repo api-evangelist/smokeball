@@ -11,8 +11,19 @@ capability_model:
   attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
     CC BY 4.0
   notice: NOTICE
-edge_count: 6
+edge_count: 8
 edges:
+- tag: Authorization
+  spec_file: smokeball-authorization-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.8
+  evidence: 'GET /groups  GetGroups  Get authorization groups; POST /policies  CreatePolicy  Create an
+    authorization policy; schemas: Rule, AuthorizationPolicyType'
+  reason: Operations manage authorization groups, policies and rules — i.e. access-control administration
+    for the application, which is Identity & Access Management.
+  recovered_from: sweep-20260829T005356Z-edges.json
 - tag: Webhooks
   spec_file: smokeball-webhooks-api-openapi.yml
   capability_id: BC-4270.80
@@ -63,6 +74,17 @@ edges:
   reason: Full CRUD over the contact master including person/company details, identification details,
     relationships and tags — this is client/contact master data stewardship, i.e. Customer Data Management.
     Some residual ambiguity because contacts here include non-client parties.
+- tag: Staff
+  spec_file: smokeball-staff-api-openapi.yml
+  capability_id: BC-300.70
+  capability_id_l1: BC-300
+  capability_name: HR Operations Management
+  confidence: 0.7
+  evidence: 'POST /staff  CreateStaff  Create firm staff member; schemas: StaffDto, LicenceNumber, OutOfOffice'
+  reason: Full CRUD over firm staff member records including licence numbers and out-of-office, i.e. maintenance
+    of employee master records — HR Operations. Not talent acquisition or comp/benefits; no payroll or
+    hiring operations present, hence 0.7 rather than higher.
+  recovered_from: sweep-20260829T005356Z-edges.json
 - tag: Subscriptions
   spec_file: smokeball-subscriptions-api-openapi.yml
   capability_id: BC-4240
