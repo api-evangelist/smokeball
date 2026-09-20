@@ -1,0 +1,76 @@
+slug: smokeball
+provider: Smokeball
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Healthcare Providers
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 6
+edges:
+- tag: Webhooks
+  spec_file: smokeball-webhooks-api-openapi.yml
+  capability_id: BC-4270.80
+  capability_id_l1: BC-4270
+  capability_name: Webhook & Event Subscription Management
+  confidence: 0.8
+  evidence: '''Get event types'', ''Create new webhook subscription'', ''Notify a webhook subscription'';
+    schema WebhookSubscriptionPagedCollection'
+  reason: Manages the lifecycle of outbound webhook subscriptions and their event types, which is exactly
+    the Webhook & Event Subscription Management sub-capability offered in the candidate list.
+- tag: Invoices
+  spec_file: smokeball-invoices-api-openapi.yml
+  capability_id: BC-200.30
+  capability_id_l1: BC-200
+  capability_name: Accounts Receivable Management
+  confidence: 0.75
+  evidence: 'GET /matters/{matterId}/invoices  GetInvoices  Get invoices; schemas: Invoice, Debtor, InvoiceStatus,
+    InvoiceTotals, Discount, Surcharge'
+  reason: Customer (client) invoicing with debtors, totals, discounts and invoice status maps to Accounts
+    Receivable Management; read-only surface keeps confidence below 0.8.
+- tag: Matters
+  spec_file: smokeball-matters-api-openapi.yml
+  capability_id: BC-150.50
+  capability_id_l1: BC-150
+  capability_name: Legal Operations Management
+  confidence: 0.75
+  evidence: POST /matters  CreateMatter  Create a matter; GET /matters/{matterId}/billingconfiguration  Get
+    matter billing configuration
+  reason: Full lifecycle management of legal matters including archiving, tagging and billing configuration
+    is matter management, the core of Legal Operations Management.
+- tag: Subscription Payments
+  spec_file: smokeball-subscription-payments-api-openapi.yml
+  capability_id: BC-4250.40
+  capability_id_l1: BC-4250
+  capability_name: Payment Collection & Dunning
+  confidence: 0.75
+  evidence: POST /subscriptions/paymentmethods  AddPaymentMethodAsync  Add payment method
+  reason: Manages customer payment methods and supported payment systems against subscriptions — payment-method
+    management within subscription billing.
+- tag: Contacts
+  spec_file: smokeball-contacts-api-openapi.yml
+  capability_id: BC-420.10
+  capability_id_l1: BC-420
+  capability_name: Customer Data Management
+  confidence: 0.7
+  evidence: POST /contacts "Create a contact", GET /contacts/{contactId}/relations "Get contact relations",
+    POST /contacts/{id}/tags "Add tags to a contact"; schemas ContactDto, Company, IdentificationDetailsDto
+  reason: Full CRUD over the contact master including person/company details, identification details,
+    relationships and tags — this is client/contact master data stewardship, i.e. Customer Data Management.
+    Some residual ambiguity because contacts here include non-client parties.
+- tag: Subscriptions
+  spec_file: smokeball-subscriptions-api-openapi.yml
+  capability_id: BC-4240
+  capability_id_l1: BC-4240
+  capability_name: Subscription Lifecycle Management
+  confidence: 0.7
+  evidence: 'schemas: CancelSubscriptionRequest, ResumeSubscriptionRequest, SetSubscriptionTierRequest,
+    AddOn; ops ''Add add-on'', ''GetSubscriptionUsageCharges'', ''Get subscription invoices'''
+  reason: Operations manage the vendor's own SaaS subscriptions — add-ons, tiers, cancel/resume — plus
+    usage charges and invoices. Core is subscription lifecycle (BC-4240) though the charge/invoice endpoints
+    spill into subscription billing (BC-4250), so no L2 asserted.
