@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Smokeball Activity Codes Webhooks API
+  title: Smokeball Webhooks API
   version: '1.0'
   description: REST API for integrating with Smokeball legal practice management software. Supports matters, contacts, documents, time entries, billing, trust accounting, staff, webhooks, and law firm workflows across US, AU, and UK regions. Uses OAuth 2.0 (client credentials) authentication.
   contact:
@@ -214,7 +214,10 @@ paths:
       tags:
       - Webhooks
       summary: Notify a webhook subscription
-      description: "Notifies a webhook subscription with a 'noop' event type.\r\n            \r\nUsed for testing purposes."
+      description: 'Notifies a webhook subscription with a ''noop'' event type.
+
+
+        Used for testing purposes.'
       operationId: Notify
       parameters:
       - name: id
@@ -233,77 +236,77 @@ paths:
                 $ref: '#/components/schemas/ProblemDetails'
 components:
   schemas:
-    WebhookSubscriptionDto:
+    Link:
       type: object
       properties:
-        key:
-          type: string
-          description: Unique key used for creating signature header in webhook notification requests.
-          nullable: true
-          example: da4e7fd1-5394-4ca9-b1c6-e18c4e2bf262
-        name:
-          type: string
-          description: Name or description of the webhook subscription.
-          nullable: true
-          example: Listen to matter and contact changes
-        eventTypes:
-          type: array
-          items:
-            type: string
-          description: The event types that the webhook subscription should be subscribed to.
-          nullable: true
-          example:
-          - matter.updated
-          - contact.created
-        eventNotificationUrl:
-          type: string
-          description: The uri to notify when an event has occurred.
-          nullable: true
-          example: http://yourdomain.com/notify
+        id:
+          type:
+          - string
+          - 'null'
+        href:
+          type:
+          - string
+          - 'null'
+        relation:
+          type:
+          - string
+          - 'null'
+        method:
+          type:
+          - string
+          - 'null'
+          default: GET
       additionalProperties: false
     WebhookSubscription:
       type: object
       properties:
         id:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         href:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         relation:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         method:
-          type: string
+          type:
+          - string
+          - 'null'
           default: GET
-          nullable: true
         self:
           allOf:
           - $ref: '#/components/schemas/Link'
-          nullable: true
         accountId:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Unique identifier of the associated account.
-          nullable: true
           example: da4e7fd1-5394-4ca9-b1c6-e18c4e2bf262
         name:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Name or description of the subscription.
-          nullable: true
           example: Listen to matter and contact changes
         eventTypes:
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             type: string
           description: The event types that the webhook subscription is subscribed to.
-          nullable: true
           example:
           - matter.updated
           - contact.created
         eventNotificationUrl:
-          type: string
+          type:
+          - string
+          - 'null'
           description: The uri to notify when an event has occurred.
-          nullable: true
           example: http://yourdomain.com/notify
         createdDateUtc:
           type: string
@@ -321,122 +324,148 @@ components:
           format: int64
           example: 637847425252027400
       additionalProperties: false
-    Link:
-      type: object
-      properties:
-        id:
-          type: string
-          nullable: true
-        href:
-          type: string
-          nullable: true
-        relation:
-          type: string
-          nullable: true
-        method:
-          type: string
-          default: GET
-          nullable: true
-      additionalProperties: false
-    ProblemDetails:
-      type: object
-      properties:
-        type:
-          type: string
-          nullable: true
-        title:
-          type: string
-          nullable: true
-        status:
-          type: integer
-          format: int32
-          nullable: true
-        detail:
-          type: string
-          nullable: true
-        instance:
-          type: string
-          nullable: true
-      additionalProperties: {}
     StringCollection:
       type: object
       properties:
         id:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         href:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         relation:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         method:
-          type: string
+          type:
+          - string
+          - 'null'
           default: GET
-          nullable: true
         self:
           allOf:
           - $ref: '#/components/schemas/Link'
-          nullable: true
         value:
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             type: string
-          nullable: true
+      additionalProperties: false
+    WebhookSubscriptionDto:
+      type: object
+      properties:
+        key:
+          type:
+          - string
+          - 'null'
+          description: Unique key used for creating signature header in webhook notification requests.
+          example: da4e7fd1-5394-4ca9-b1c6-e18c4e2bf262
+        name:
+          type:
+          - string
+          - 'null'
+          description: Name or description of the webhook subscription.
+          example: Listen to matter and contact changes
+        eventTypes:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+          description: The event types that the webhook subscription should be subscribed to.
+          example:
+          - matter.updated
+          - contact.created
+        eventNotificationUrl:
+          type:
+          - string
+          - 'null'
+          description: The uri to notify when an event has occurred.
+          example: http://yourdomain.com/notify
       additionalProperties: false
     WebhookSubscriptionPagedCollection:
       type: object
       properties:
         id:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         href:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         relation:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         method:
-          type: string
+          type:
+          - string
+          - 'null'
           default: GET
-          nullable: true
         self:
           allOf:
           - $ref: '#/components/schemas/Link'
-          nullable: true
         value:
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             $ref: '#/components/schemas/WebhookSubscription'
-          nullable: true
         offset:
-          type: integer
+          type:
+          - integer
+          - 'null'
           format: int32
-          nullable: true
         limit:
-          type: integer
+          type:
+          - integer
+          - 'null'
           format: int32
-          nullable: true
         size:
           type: integer
           format: int64
         first:
           allOf:
           - $ref: '#/components/schemas/Link'
-          nullable: true
         previous:
           allOf:
           - $ref: '#/components/schemas/Link'
-          nullable: true
         next:
           allOf:
           - $ref: '#/components/schemas/Link'
-          nullable: true
         last:
           allOf:
           - $ref: '#/components/schemas/Link'
-          nullable: true
       additionalProperties: false
+    ProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        instance:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
   securitySchemes:
     api-key:
       type: apiKey

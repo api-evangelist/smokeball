@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Smokeball Activity Codes Events API
+  title: Smokeball Events API
   version: '1.0'
   description: REST API for integrating with Smokeball legal practice management software. Supports matters, contacts, documents, time entries, billing, trust accounting, staff, webhooks, and law firm workflows across US, AU, and UK regions. Uses OAuth 2.0 (client credentials) authentication.
   contact:
@@ -45,7 +45,9 @@ paths:
           format: int32
       - name: UpdatedSince
         in: query
-        description: "Filter by events updated since a specified time.\r\nSupported date formats are ISO YYYY-MM-DDThh:mm:ss or .net ticks representation of the UTC datetime."
+        description: 'Filter by events updated since a specified time.
+
+          Supported date formats are ISO YYYY-MM-DDThh:mm:ss or .net ticks representation of the UTC datetime.'
         schema:
           type: string
           example: 2000-01-01T20:00:00 OR 630823536000000000
@@ -64,7 +66,11 @@ paths:
         example: false
       - name: From
         in: query
-        description: "Filter events from a specified UTC date and time.\r\nDefaults to the UTC datetime of the request.\r\nDates should be provided in ISO format YYYY-MM-DDThh:mm:ss."
+        description: 'Filter events from a specified UTC date and time.
+
+          Defaults to the UTC datetime of the request.
+
+          Dates should be provided in ISO format YYYY-MM-DDThh:mm:ss.'
         schema:
           type: string
           format: date-time
@@ -72,7 +78,11 @@ paths:
         example: '2000-01-01T20:00:00'
       - name: To
         in: query
-        description: "Filter events to a specified UTC date and time.\r\nIf no datetime is specified all future events will be returned.\r\nDates should be provided in ISO format YYYY-MM-DDThh:mm:ss."
+        description: 'Filter events to a specified UTC date and time.
+
+          If no datetime is specified all future events will be returned.
+
+          Dates should be provided in ISO format YYYY-MM-DDThh:mm:ss.'
         schema:
           type: string
           format: date-time
@@ -377,28 +387,53 @@ paths:
                 $ref: '#/components/schemas/ProblemDetails'
 components:
   schemas:
+    Link:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+        href:
+          type:
+          - string
+          - 'null'
+        relation:
+          type:
+          - string
+          - 'null'
+        method:
+          type:
+          - string
+          - 'null'
+          default: GET
+      additionalProperties: false
     EventDto:
       type: object
       properties:
         matterId:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Matter Id.
-          nullable: true
           example: b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2
         subject:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Subject of event.
-          nullable: true
           example: Subject
         description:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Description of event.
-          nullable: true
           example: Description
         location:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Location of event.
-          nullable: true
           example: Location
         allDay:
           type: boolean
@@ -406,125 +441,289 @@ components:
           example: false
         nonBillable:
           type: boolean
-          description: "Whether or not the event is billable.\r\nNote events with a duration greater than 12 hours automatically become non-billable."
+          description: 'Whether or not the event is billable.
+
+            Note events with a duration greater than 12 hours automatically become non-billable.'
           example: false
         type:
           allOf:
           - $ref: '#/components/schemas/EventType'
-          description: "The type of the event.\r\n\r\nWe currently support create and updates requests for non recurring events (type = Normal)."
-          nullable: true
+          description: 'The type of the event.
+
+
+            We currently support create and updates requests for non recurring events (type = Normal).'
           example: Normal
         eventType:
           allOf:
           - $ref: '#/components/schemas/EventType'
-          description: "**Deprecated.** Use `type` instead.\n\nThe type of the event.\r\n\r\nWe currently support create and updates requests for non recurring events (EventType = 0)."
-          nullable: true
+          description: '**Deprecated.** Use `type` instead.
+
+
+            The type of the event.
+
+
+            We currently support create and updates requests for non recurring events (EventType = 0).'
           example: '0'
           deprecated: true
         attendees:
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             type: string
           description: The staff Ids of the attendees of the event.
-          nullable: true
         externalAttendees:
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             type: string
-          description: "The contact Ids of the external or third party attendees of the event.\r\n\r\nThe contacts must be of Person type and must be part of the matter."
-          nullable: true
+          description: 'The contact Ids of the external or third party attendees of the event.
+
+
+            The contacts must be of Person type and must be part of the matter.'
         startTime:
           type: string
-          description: "Start date and time of the event.\r\nSupported date format is ISO YYYY-MM-DDThh:mm:ss.\r\nNote: date and time will correlate with the time zone provided."
+          description: 'Start date and time of the event.
+
+            Supported date format is ISO YYYY-MM-DDThh:mm:ss.
+
+            Note: date and time will correlate with the time zone provided.'
           format: date-time
           example: '2000-01-01T20:00:00'
         endTime:
           type: string
-          description: "End date and time of the event.\r\nSupported date format is ISO YYYY-MM-DDThh:mm:ss.\r\nNote: date and time will correlate with the time zone provided."
+          description: 'End date and time of the event.
+
+            Supported date format is ISO YYYY-MM-DDThh:mm:ss.
+
+            Note: date and time will correlate with the time zone provided.'
           format: date-time
           example: '2000-01-01T20:00:00'
         timeZone:
-          type: string
-          description: "Time zone of the event for determining the start time and end time.\r\nTime zones are expected in the IANA time zone format.\r\nFor a list of valid time zones, see https://nodatime.org/TimeZones."
-          nullable: true
+          type:
+          - string
+          - 'null'
+          description: 'Time zone of the event for determining the start time and end time.
+
+            Time zones are expected in the IANA time zone format.
+
+            For a list of valid time zones, see https://nodatime.org/TimeZones.'
           example: Australia/Sydney
         additionalData:
-          type: object
+          type:
+          - object
+          - 'null'
           additionalProperties:
-            type: string
-            nullable: true
+            type:
+            - string
+            - 'null'
           description: Collection of key value pairs to update file meta data.
-          nullable: true
       additionalProperties: false
     EventPagedCollection:
       type: object
       properties:
         id:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         href:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         relation:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         method:
-          type: string
+          type:
+          - string
+          - 'null'
           default: GET
-          nullable: true
         self:
           allOf:
           - $ref: '#/components/schemas/Link'
-          nullable: true
         value:
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             $ref: '#/components/schemas/Event'
-          nullable: true
         offset:
-          type: integer
+          type:
+          - integer
+          - 'null'
           format: int32
-          nullable: true
         limit:
-          type: integer
+          type:
+          - integer
+          - 'null'
           format: int32
-          nullable: true
         size:
           type: integer
           format: int64
         first:
           allOf:
           - $ref: '#/components/schemas/Link'
-          nullable: true
         previous:
           allOf:
           - $ref: '#/components/schemas/Link'
-          nullable: true
         next:
           allOf:
           - $ref: '#/components/schemas/Link'
-          nullable: true
         last:
           allOf:
           - $ref: '#/components/schemas/Link'
-          nullable: true
       additionalProperties: false
-    Link:
+    EventType:
+      enum:
+      - Normal
+      - Pattern
+      - Occurrence
+      - ChangedOccurrence
+      - DeletedOccurrence
+      type: string
+      description: 'The type of the event.
+
+
+        Possible values: Non Recurring Event = 0, Recurring Pattern Series = 1, Single Recurring Occurrence = 2, Modified Recurring Occurrence = 3, Deleted Recurring Occurrence = 4'
+    Event:
       type: object
       properties:
-        id:
-          type: string
-          nullable: true
         href:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         relation:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         method:
-          type: string
+          type:
+          - string
+          - 'null'
           default: GET
-          nullable: true
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+        id:
+          type:
+          - string
+          - 'null'
+          description: Unique identifier of the event.
+          example: b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2
+        matter:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          description: Hypermedia link of the associated matter.
+        attendees:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/Link'
+          description: Hypermedia link of all the attendees.
+        externalAttendees:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/Link'
+          description: Hypermedia link of all the contacts of the external or third party attendees.
+        eventType:
+          allOf:
+          - $ref: '#/components/schemas/EventType'
+          description: '**Deprecated.** Use `type` instead.
+
+
+            The type of the event.
+
+
+            Possible values: Non Recurring Event = 0, Recurring Pattern Series = 1, Single Recurring Occurrence = 2, Modified Recurring Occurrence = 3, Deleted Recurring Occurrence = 4'
+          example: '0'
+          deprecated: true
+        type:
+          allOf:
+          - $ref: '#/components/schemas/EventType'
+          description: 'The type of the event.
+
+
+            Possible values: Normal, Pattern, Occurrence, ChangedOccurrence, DeletedOccurrence'
+          example: Normal
+        subject:
+          type:
+          - string
+          - 'null'
+          description: Subject of event.
+          example: Subject
+        description:
+          type:
+          - string
+          - 'null'
+          description: Description of event.
+          example: Description
+        location:
+          type:
+          - string
+          - 'null'
+          description: Location of event.
+          example: Location
+        allDay:
+          type: boolean
+          description: Whether or not the event is all day.
+          example: false
+        nonBillable:
+          type: boolean
+          description: 'Whether or not the event is billable.
+
+            Note events with a duration greater than 12 hours automatically become non-billable.'
+          example: false
+        startTime:
+          type: string
+          description: 'Start date and time of the event.
+
+            Supported date format is ISO YYYY-MM-DDThh:mm:ss.
+
+            Note: date and time will correlate with the time zone provided.'
+          format: date-time
+          example: '2000-01-01T20:00:00'
+        endTime:
+          type: string
+          description: 'End date and time of the event.
+
+            Supported date format is ISO YYYY-MM-DDThh:mm:ss.
+
+            Note: date and time will correlate with the time zone provided.'
+          format: date-time
+          example: '2000-01-01T20:00:00'
+        timeZone:
+          type:
+          - string
+          - 'null'
+          description: 'Time zone of the event for determining the start time and end time.
+
+            Time zones will be in the IANA time zone format.'
+          example: Australia/Sydney
+        lastUpdated:
+          type: string
+          description: 'The last date and time the event was updated.
+
+            Supported date format is ISO YYYY-MM-DDThh:mm:ss.'
+          format: date-time
+          example: '2000-01-01T20:00:00'
+        additionalData:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+          description: Any additional data provided for the event.
+        isDeleted:
+          type: boolean
+          description: Whether the event has been deleted.
+          example: false
       additionalProperties: false
     ReminderDto:
       type: object
@@ -538,145 +737,37 @@ components:
         isAllDayReminder:
           type: boolean
         userIds:
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             type: string
-          nullable: true
       additionalProperties: false
     ProblemDetails:
       type: object
       properties:
         type:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         title:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         status:
-          type: integer
+          type:
+          - integer
+          - 'null'
           format: int32
-          nullable: true
         detail:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         instance:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
       additionalProperties: {}
-    EventType:
-      enum:
-      - Normal
-      - Pattern
-      - Occurrence
-      - ChangedOccurrence
-      - DeletedOccurrence
-      type: string
-      description: "The type of the event.\r\n\r\nPossible values: Non Recurring Event = 0, Recurring Pattern Series = 1, Single Recurring Occurrence = 2, Modified Recurring Occurrence = 3, Deleted Recurring Occurrence = 4"
-    Event:
-      type: object
-      properties:
-        href:
-          type: string
-          nullable: true
-        relation:
-          type: string
-          nullable: true
-        method:
-          type: string
-          default: GET
-          nullable: true
-        self:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-          nullable: true
-        id:
-          type: string
-          description: Unique identifier of the event.
-          nullable: true
-          example: b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2
-        matter:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-          description: Hypermedia link of the associated matter.
-          nullable: true
-        attendees:
-          type: array
-          items:
-            $ref: '#/components/schemas/Link'
-          description: Hypermedia link of all the attendees.
-          nullable: true
-        externalAttendees:
-          type: array
-          items:
-            $ref: '#/components/schemas/Link'
-          description: Hypermedia link of all the contacts of the external or third party attendees.
-          nullable: true
-        eventType:
-          allOf:
-          - $ref: '#/components/schemas/EventType'
-          description: "**Deprecated.** Use `type` instead.\n\nThe type of the event.\r\n\r\nPossible values: Non Recurring Event = 0, Recurring Pattern Series = 1, Single Recurring Occurrence = 2, Modified Recurring Occurrence = 3, Deleted Recurring Occurrence = 4"
-          example: '0'
-          deprecated: true
-        type:
-          allOf:
-          - $ref: '#/components/schemas/EventType'
-          description: "The type of the event.\r\n\r\nPossible values: Normal, Pattern, Occurrence, ChangedOccurrence, DeletedOccurrence"
-          example: Normal
-        subject:
-          type: string
-          description: Subject of event.
-          nullable: true
-          example: Subject
-        description:
-          type: string
-          description: Description of event.
-          nullable: true
-          example: Description
-        location:
-          type: string
-          description: Location of event.
-          nullable: true
-          example: Location
-        allDay:
-          type: boolean
-          description: Whether or not the event is all day.
-          example: false
-        nonBillable:
-          type: boolean
-          description: "Whether or not the event is billable.\r\nNote events with a duration greater than 12 hours automatically become non-billable."
-          example: false
-        startTime:
-          type: string
-          description: "Start date and time of the event.\r\nSupported date format is ISO YYYY-MM-DDThh:mm:ss.\r\nNote: date and time will correlate with the time zone provided."
-          format: date-time
-          example: '2000-01-01T20:00:00'
-        endTime:
-          type: string
-          description: "End date and time of the event.\r\nSupported date format is ISO YYYY-MM-DDThh:mm:ss.\r\nNote: date and time will correlate with the time zone provided."
-          format: date-time
-          example: '2000-01-01T20:00:00'
-        timeZone:
-          type: string
-          description: "Time zone of the event for determining the start time and end time.\r\nTime zones will be in the IANA time zone format."
-          nullable: true
-          example: Australia/Sydney
-        lastUpdated:
-          type: string
-          description: "The last date and time the event was updated.\r\nSupported date format is ISO YYYY-MM-DDThh:mm:ss."
-          format: date-time
-          example: '2000-01-01T20:00:00'
-        additionalData:
-          type: object
-          additionalProperties:
-            type: string
-            nullable: true
-          description: Any additional data provided for the event.
-          nullable: true
-        isDeleted:
-          type: boolean
-          description: Whether the event has been deleted.
-          example: false
-      additionalProperties: false
   securitySchemes:
     api-key:
       type: apiKey

@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Smokeball Activity Codes Layout Designs API
+  title: Smokeball Layout Designs API
   version: '1.0'
   description: REST API for integrating with Smokeball legal practice management software. Supports matters, contacts, documents, time entries, billing, trust accounting, staff, webhooks, and law firm workflows across US, AU, and UK regions. Uses OAuth 2.0 (client credentials) authentication.
   contact:
@@ -89,77 +89,26 @@ paths:
                 $ref: '#/components/schemas/ProblemDetails'
 components:
   schemas:
-    LayoutDesignInfoPagedCollection:
-      type: object
-      properties:
-        id:
-          type: string
-          nullable: true
-        href:
-          type: string
-          nullable: true
-        relation:
-          type: string
-          nullable: true
-        method:
-          type: string
-          default: GET
-          nullable: true
-        self:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-          nullable: true
-        value:
-          type: array
-          items:
-            $ref: '#/components/schemas/LayoutDesignInfo'
-          nullable: true
-        offset:
-          type: integer
-          format: int32
-          nullable: true
-        limit:
-          type: integer
-          format: int32
-          nullable: true
-        size:
-          type: integer
-          format: int64
-        first:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-          nullable: true
-        previous:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-          nullable: true
-        next:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-          nullable: true
-        last:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-          nullable: true
-      additionalProperties: false
     LayoutDesignField:
       type: object
       properties:
         name:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Name (mapping) of the layout design field.
-          nullable: true
           example: PinAndLotSizes[]/AccountNumber
         type:
           type: string
-          description: "Type of the layout design field.\r\n            \r\nPossible values: 'Text','Combobox','Checkbox','Date','Role','Number'.\r\n            \r\n'Role' type can represent a matter role (for a top-level layout item) or a matter relationship (for a sublayout item)."
+          description: "Type of the layout design field.\n            \nPossible values: 'Text','Combobox','Checkbox','Date','Role','Number'.\n            \n'Role' type can represent a matter role (for a top-level layout item) or a matter relationship (for a sublayout item)."
           example: Combobox
         possibleValues:
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             type: string
           description: List of possible values (e.g. for Combobox field).
-          nullable: true
           example:
           - Residence
           - Commercial
@@ -170,48 +119,57 @@ components:
       type: object
       properties:
         id:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         href:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         relation:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         method:
-          type: string
+          type:
+          - string
+          - 'null'
           default: GET
-          nullable: true
       additionalProperties: false
     LayoutDesignInfo:
       type: object
       properties:
         id:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         href:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         relation:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         method:
-          type: string
+          type:
+          - string
+          - 'null'
           default: GET
-          nullable: true
         self:
           allOf:
           - $ref: '#/components/schemas/Link'
-          nullable: true
         versionId:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Version id of the layout design.
-          nullable: true
           example: 763c3857-2ed9-4c5d-bee0-c48d48a7543e
         name:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Name of the layout design.
-          nullable: true
           example: Case Details
         lastUpdated:
           type: integer
@@ -223,51 +181,61 @@ components:
       type: object
       properties:
         type:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         title:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         status:
-          type: integer
+          type:
+          - integer
+          - 'null'
           format: int32
-          nullable: true
         detail:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         instance:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
       additionalProperties: {}
     LayoutDesign:
       type: object
       properties:
         id:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         href:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         relation:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         method:
-          type: string
+          type:
+          - string
+          - 'null'
           default: GET
-          nullable: true
         self:
           allOf:
           - $ref: '#/components/schemas/Link'
-          nullable: true
         versionId:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Version id of the layout design.
-          nullable: true
           example: 763c3857-2ed9-4c5d-bee0-c48d48a7543e
         name:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Name of the layout design.
-          nullable: true
           example: Case Details
         lastUpdated:
           type: integer
@@ -275,16 +243,73 @@ components:
           format: int64
           example: 637847425252027400
         description:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Brief description of the layout design.
-          nullable: true
           example: Property and title details
         fields:
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             $ref: '#/components/schemas/LayoutDesignField'
           description: Collection of layout design fields.
-          nullable: true
+      additionalProperties: false
+    LayoutDesignInfoPagedCollection:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+        href:
+          type:
+          - string
+          - 'null'
+        relation:
+          type:
+          - string
+          - 'null'
+        method:
+          type:
+          - string
+          - 'null'
+          default: GET
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+        value:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/LayoutDesignInfo'
+        offset:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        limit:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        size:
+          type: integer
+          format: int64
+        first:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+        previous:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+        next:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+        last:
+          allOf:
+          - $ref: '#/components/schemas/Link'
       additionalProperties: false
   securitySchemes:
     api-key:

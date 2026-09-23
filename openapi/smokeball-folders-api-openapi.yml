@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Smokeball Activity Codes Folders API
+  title: Smokeball Folders API
   version: '1.0'
   description: REST API for integrating with Smokeball legal practice management software. Supports matters, contacts, documents, time entries, billing, trust accounting, staff, webhooks, and law firm workflows across US, AU, and UK regions. Uses OAuth 2.0 (client credentials) authentication.
   contact:
@@ -285,7 +285,10 @@ paths:
       tags:
       - Folders
       summary: Get folder path hierarchy
-      description: "Returns the full folder hierarchy (path) as a collection ordered from the root folder down to the supplied folder.\r\n\r\nThe root folder is not included in the response."
+      description: 'Returns the full folder hierarchy (path) as a collection ordered from the root folder down to the supplied folder.
+
+
+        The root folder is not included in the response.'
       operationId: GetFolderPath
       parameters:
       - name: matterId
@@ -350,428 +353,73 @@ paths:
                 $ref: '#/components/schemas/ProblemDetails'
 components:
   schemas:
-    FileFolderLogEntry:
-      type: object
-      properties:
-        href:
-          type: string
-          nullable: true
-        relation:
-          type: string
-          nullable: true
-        method:
-          type: string
-          default: GET
-          nullable: true
-        self:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-          nullable: true
-        id:
-          type: string
-          description: Unique identifier of this log entry.
-          nullable: true
-          example: 3f2b1f2a-1d5f-48a4-8f3c-7a7a3c2b5e1a
-        type:
-          type: string
-          description: The type of entity this log entry refers to.
-          example: File
-        changeType:
-          type: string
-          description: The type of change that occurred.
-          example: Move
-        timestamp:
-          type: string
-          description: When the client recorded the action (UTC).
-          format: date-time
-          example: '2025-08-27T04:12:45Z'
-        file:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-          description: Link to the file affected by this entry (only populated when Type is File).
-          nullable: true
-        folder:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-          description: Link to the folder affected by this entry (only populated when Type is Folder).
-          nullable: true
-        oldName:
-          type: string
-          description: Old name prior to a rename operation (when applicable).
-          nullable: true
-          example: Draft Response
-        newName:
-          type: string
-          description: New name after a rename operation (when applicable).
-          nullable: true
-          example: Final Response
-        oldMatterId:
-          type: string
-          description: Previous matter identifier (for move/copy across matters).
-          nullable: true
-          example: f9e1a9d5-1d2b-4bd2-9a72-6a6e7b5c2f01
-        newMatterId:
-          type: string
-          description: New matter identifier (for move/copy across matters).
-          nullable: true
-          example: 1c0b8a31-0a05-4601-8b87-2d7b1d0caa9a
-        oldFolderId:
-          type: string
-          description: Previous folder identifier (for move within/between matters).
-          nullable: true
-          example: 6a5c3b2e-0f1e-4c7e-90e2-2ad3c3e8b0b9
-        newFolderId:
-          type: string
-          description: New folder identifier (for move within/between matters).
-          nullable: true
-          example: 9b7a2c4d-2e1f-4b6a-8e01-1f2a3b4c5d6e
-        copySourceFileId:
-          type: string
-          description: For copy operations, the source file's identifier when copying a file.
-          nullable: true
-          example: bb3a6c1d-1e2f-4a7b-9c01-0d9a8c7b6e5f
-        copySourceFolderId:
-          type: string
-          description: For copy operations, the source folder's identifier when copying a folder.
-          nullable: true
-          example: aa2b5c1e-7f8a-4d9e-8c01-1a2b3c4d5e6f
-        documentVersionId:
-          type: string
-          description: "Identifier of the document version involved (only for version replace/revert scenarios).\r\nCan be used to download particular file versions."
-          nullable: true
-          example: 2d97e267-0618-4822-a515-281cd4f31ae8-72324ca30d263b32bb38a481cc5f7a0b
-        userId:
-          type: string
-          description: The user who is responsible for this change.
-          nullable: true
-      additionalProperties: false
-      description: Represents a single file/folder activity (rename, move, delete, etc.).
-    FolderListingPagedCollection:
-      type: object
-      properties:
-        id:
-          type: string
-          nullable: true
-        href:
-          type: string
-          nullable: true
-        relation:
-          type: string
-          nullable: true
-        method:
-          type: string
-          default: GET
-          nullable: true
-        self:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-          nullable: true
-        value:
-          type: array
-          items:
-            $ref: '#/components/schemas/FolderListing'
-          nullable: true
-        offset:
-          type: integer
-          format: int32
-          nullable: true
-        limit:
-          type: integer
-          format: int32
-          nullable: true
-        size:
-          type: integer
-          format: int64
-        first:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-          nullable: true
-        previous:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-          nullable: true
-        next:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-          nullable: true
-        last:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-          nullable: true
-        parentId:
-          type: string
-          description: Unique identifier of the parent folder
-          nullable: true
-          example: 750eb5c5-ac0b-7d11-4997-e0ce9d8896c8
-        name:
-          type: string
-          description: Name of the folder
-          nullable: true
-          example: Property Documents
-      additionalProperties: false
-    FolderDto:
-      required:
-      - name
-      type: object
-      properties:
-        name:
-          maxLength: 256
-          minLength: 1
-          type: string
-          description: Name of the folder
-          example: Property Documents
-        parentFolderId:
-          type: string
-          description: Unique identifier of the parent folder
-          nullable: true
-          example: b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2
-        userId:
-          type: string
-          description: Unique identifier of the user modifying the folder. If null it will fallback to the authenticated user
-          nullable: true
-          example: 750eb5c5-ac0b-7d11-4997-e0ce9d8896c8
-      additionalProperties: false
-    FileFolderLogEntryCollection:
-      type: object
-      properties:
-        id:
-          type: string
-          nullable: true
-        href:
-          type: string
-          nullable: true
-        relation:
-          type: string
-          nullable: true
-        method:
-          type: string
-          default: GET
-          nullable: true
-        self:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-          nullable: true
-        value:
-          type: array
-          items:
-            $ref: '#/components/schemas/FileFolderLogEntry'
-          nullable: true
-      additionalProperties: false
-    Link:
-      type: object
-      properties:
-        id:
-          type: string
-          nullable: true
-        href:
-          type: string
-          nullable: true
-        relation:
-          type: string
-          nullable: true
-        method:
-          type: string
-          default: GET
-          nullable: true
-      additionalProperties: false
-    FolderPathSegment:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Unique identifier of the folder
-          nullable: true
-          example: b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2
-        name:
-          type: string
-          description: Name of the folder
-          nullable: true
-          example: Property Documents
-        parentId:
-          type: string
-          description: Unique identifier of the parent folder
-          nullable: true
-          example: 750eb5c5-ac0b-7d11-4997-e0ce9d8896c8
-        depth:
-          type: integer
-          description: "The depth of the folder in the folder path hierarchy.\r\n\r\n0 indicates the root folder, 1 indicates a direct child of that folder, and so on."
-          format: int32
-          example: 2
-      additionalProperties: false
-    ProblemDetails:
-      type: object
-      properties:
-        type:
-          type: string
-          nullable: true
-        title:
-          type: string
-          nullable: true
-        status:
-          type: integer
-          format: int32
-          nullable: true
-        detail:
-          type: string
-          nullable: true
-        instance:
-          type: string
-          nullable: true
-      additionalProperties: {}
-    FolderPathSegmentCollection:
-      type: object
-      properties:
-        id:
-          type: string
-          nullable: true
-        href:
-          type: string
-          nullable: true
-        relation:
-          type: string
-          nullable: true
-        method:
-          type: string
-          default: GET
-          nullable: true
-        self:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-          nullable: true
-        value:
-          type: array
-          items:
-            $ref: '#/components/schemas/FolderPathSegment'
-          nullable: true
-      additionalProperties: false
-    Folder:
-      type: object
-      properties:
-        href:
-          type: string
-          nullable: true
-        relation:
-          type: string
-          nullable: true
-        method:
-          type: string
-          default: GET
-          nullable: true
-        self:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-          nullable: true
-        id:
-          type: string
-          description: Unique identifier of the folder
-          nullable: true
-          example: b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2
-        parentId:
-          type: string
-          description: Unique identifier of the parent folder
-          nullable: true
-          example: 750eb5c5-ac0b-7d11-4997-e0ce9d8896c8
-        name:
-          type: string
-          description: Name of the folder
-          nullable: true
-          example: Property Documents
-      additionalProperties: false
-    FolderListing:
-      type: object
-      properties:
-        id:
-          type: string
-          nullable: true
-        href:
-          type: string
-          nullable: true
-        relation:
-          type: string
-          nullable: true
-        method:
-          type: string
-          default: GET
-          nullable: true
-        self:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-          nullable: true
-        folders:
-          type: array
-          items:
-            $ref: '#/components/schemas/Folder'
-          description: List of folders
-          nullable: true
-          readOnly: true
-        files:
-          type: array
-          items:
-            $ref: '#/components/schemas/File'
-          description: List of files
-          nullable: true
-          readOnly: true
-      additionalProperties: false
     File:
       type: object
       properties:
         href:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         relation:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         method:
-          type: string
+          type:
+          - string
+          - 'null'
           default: GET
-          nullable: true
         self:
           allOf:
           - $ref: '#/components/schemas/Link'
-          nullable: true
         id:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Unique identifier of the file.
-          nullable: true
           example: b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2
         versionId:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Unique identifier of the file's current version.
-          nullable: true
         folder:
           allOf:
           - $ref: '#/components/schemas/Link'
           description: Hypermedia link of the folder to which the file belongs.
-          nullable: true
         matter:
           allOf:
           - $ref: '#/components/schemas/Link'
           description: Hypermedia link of the matter to which the file belongs.
-          nullable: true
         name:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Name of the file, excluding file extension.
-          nullable: true
           example: court filing
         fileExtension:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Extension of the file.
-          nullable: true
           example: .pdf
         ownerId:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Unique identifier of the user who created/uploaded this file.
-          nullable: true
           example: 750eb5c5-ac0b-7d11-4997-e0ce9d8896c8
         to:
-          type: string
+          type:
+          - string
+          - 'null'
           description: The 'To' or recipients' email address (only applicable for email files).
-          nullable: true
           example: recipient@email.com
         from:
-          type: string
+          type:
+          - string
+          - 'null'
           description: The 'From' or sender's email address (only applicable for email files).
-          nullable: true
           example: sender@email.com
         dateCreated:
           type: string
@@ -792,13 +440,12 @@ components:
           allOf:
           - $ref: '#/components/schemas/Link'
           description: Hypermedia link to the download details of the file.
-          nullable: true
         additionalData:
-          type: object
-          additionalProperties:
-            nullable: true
+          type:
+          - object
+          - 'null'
+          additionalProperties: {}
           description: Collection of file meta data as KeyValuePair(string, object).
-          nullable: true
         isFavorite:
           type: boolean
           description: Flag indicating whether this file is a favorite
@@ -818,6 +465,420 @@ components:
           type: boolean
           description: Flag indicating whether the file has been deleted.
           example: false
+      additionalProperties: false
+    Link:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+        href:
+          type:
+          - string
+          - 'null'
+        relation:
+          type:
+          - string
+          - 'null'
+        method:
+          type:
+          - string
+          - 'null'
+          default: GET
+      additionalProperties: false
+    FileFolderLogEntry:
+      type: object
+      properties:
+        href:
+          type:
+          - string
+          - 'null'
+        relation:
+          type:
+          - string
+          - 'null'
+        method:
+          type:
+          - string
+          - 'null'
+          default: GET
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+        id:
+          type:
+          - string
+          - 'null'
+          description: Unique identifier of this log entry.
+          example: 3f2b1f2a-1d5f-48a4-8f3c-7a7a3c2b5e1a
+        type:
+          type: string
+          description: The type of entity this log entry refers to.
+          example: File
+        changeType:
+          type: string
+          description: The type of change that occurred.
+          example: Move
+        timestamp:
+          type: string
+          description: When the client recorded the action (UTC).
+          format: date-time
+          example: '2025-08-27T04:12:45Z'
+        file:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          description: Link to the file affected by this entry (only populated when Type is File).
+        folder:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          description: Link to the folder affected by this entry (only populated when Type is Folder).
+        oldName:
+          type:
+          - string
+          - 'null'
+          description: Old name prior to a rename operation (when applicable).
+          example: Draft Response
+        newName:
+          type:
+          - string
+          - 'null'
+          description: New name after a rename operation (when applicable).
+          example: Final Response
+        oldMatterId:
+          type:
+          - string
+          - 'null'
+          description: Previous matter identifier (for move/copy across matters).
+          example: f9e1a9d5-1d2b-4bd2-9a72-6a6e7b5c2f01
+        newMatterId:
+          type:
+          - string
+          - 'null'
+          description: New matter identifier (for move/copy across matters).
+          example: 1c0b8a31-0a05-4601-8b87-2d7b1d0caa9a
+        oldFolderId:
+          type:
+          - string
+          - 'null'
+          description: Previous folder identifier (for move within/between matters).
+          example: 6a5c3b2e-0f1e-4c7e-90e2-2ad3c3e8b0b9
+        newFolderId:
+          type:
+          - string
+          - 'null'
+          description: New folder identifier (for move within/between matters).
+          example: 9b7a2c4d-2e1f-4b6a-8e01-1f2a3b4c5d6e
+        copySourceFileId:
+          type:
+          - string
+          - 'null'
+          description: For copy operations, the source file's identifier when copying a file.
+          example: bb3a6c1d-1e2f-4a7b-9c01-0d9a8c7b6e5f
+        copySourceFolderId:
+          type:
+          - string
+          - 'null'
+          description: For copy operations, the source folder's identifier when copying a folder.
+          example: aa2b5c1e-7f8a-4d9e-8c01-1a2b3c4d5e6f
+        documentVersionId:
+          type:
+          - string
+          - 'null'
+          description: 'Identifier of the document version involved (only for version replace/revert scenarios).
+
+            Can be used to download particular file versions.'
+          example: 2d97e267-0618-4822-a515-281cd4f31ae8-72324ca30d263b32bb38a481cc5f7a0b
+        userId:
+          type:
+          - string
+          - 'null'
+          description: The user who is responsible for this change.
+      additionalProperties: false
+      description: Represents a single file/folder activity (rename, move, delete, etc.).
+    Folder:
+      type: object
+      properties:
+        href:
+          type:
+          - string
+          - 'null'
+        relation:
+          type:
+          - string
+          - 'null'
+        method:
+          type:
+          - string
+          - 'null'
+          default: GET
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+        id:
+          type:
+          - string
+          - 'null'
+          description: Unique identifier of the folder
+          example: b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2
+        parentId:
+          type:
+          - string
+          - 'null'
+          description: Unique identifier of the parent folder
+          example: 750eb5c5-ac0b-7d11-4997-e0ce9d8896c8
+        name:
+          type:
+          - string
+          - 'null'
+          description: Name of the folder
+          example: Property Documents
+      additionalProperties: false
+    FileFolderLogEntryCollection:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+        href:
+          type:
+          - string
+          - 'null'
+        relation:
+          type:
+          - string
+          - 'null'
+        method:
+          type:
+          - string
+          - 'null'
+          default: GET
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+        value:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/FileFolderLogEntry'
+      additionalProperties: false
+    FolderListingPagedCollection:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+        href:
+          type:
+          - string
+          - 'null'
+        relation:
+          type:
+          - string
+          - 'null'
+        method:
+          type:
+          - string
+          - 'null'
+          default: GET
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+        value:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/FolderListing'
+        offset:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        limit:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        size:
+          type: integer
+          format: int64
+        first:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+        previous:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+        next:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+        last:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+        parentId:
+          type:
+          - string
+          - 'null'
+          description: Unique identifier of the parent folder
+          example: 750eb5c5-ac0b-7d11-4997-e0ce9d8896c8
+        name:
+          type:
+          - string
+          - 'null'
+          description: Name of the folder
+          example: Property Documents
+      additionalProperties: false
+    FolderPathSegment:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+          description: Unique identifier of the folder
+          example: b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2
+        name:
+          type:
+          - string
+          - 'null'
+          description: Name of the folder
+          example: Property Documents
+        parentId:
+          type:
+          - string
+          - 'null'
+          description: Unique identifier of the parent folder
+          example: 750eb5c5-ac0b-7d11-4997-e0ce9d8896c8
+        depth:
+          type: integer
+          description: 'The depth of the folder in the folder path hierarchy.
+
+
+            0 indicates the root folder, 1 indicates a direct child of that folder, and so on.'
+          format: int32
+          example: 2
+      additionalProperties: false
+    ProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        instance:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
+    FolderDto:
+      required:
+      - name
+      type: object
+      properties:
+        name:
+          maxLength: 256
+          minLength: 1
+          type: string
+          description: Name of the folder
+          example: Property Documents
+        parentFolderId:
+          type:
+          - string
+          - 'null'
+          description: Unique identifier of the parent folder
+          example: b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2
+        userId:
+          type:
+          - string
+          - 'null'
+          description: Unique identifier of the user modifying the folder. If null it will fallback to the authenticated user
+          example: 750eb5c5-ac0b-7d11-4997-e0ce9d8896c8
+      additionalProperties: false
+    FolderListing:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+        href:
+          type:
+          - string
+          - 'null'
+        relation:
+          type:
+          - string
+          - 'null'
+        method:
+          type:
+          - string
+          - 'null'
+          default: GET
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+        folders:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/Folder'
+          description: List of folders
+          readOnly: true
+        files:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/File'
+          description: List of files
+          readOnly: true
+      additionalProperties: false
+    FolderPathSegmentCollection:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+        href:
+          type:
+          - string
+          - 'null'
+        relation:
+          type:
+          - string
+          - 'null'
+        method:
+          type:
+          - string
+          - 'null'
+          default: GET
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+        value:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/FolderPathSegment'
       additionalProperties: false
   securitySchemes:
     api-key:

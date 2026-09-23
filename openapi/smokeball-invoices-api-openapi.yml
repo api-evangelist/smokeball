@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Smokeball Activity Codes Invoices API
+  title: Smokeball Invoices API
   version: '1.0'
   description: REST API for integrating with Smokeball legal practice management software. Supports matters, contacts, documents, time entries, billing, trust accounting, staff, webhooks, and law firm workflows across US, AU, and UK regions. Uses OAuth 2.0 (client credentials) authentication.
   contact:
@@ -164,155 +164,85 @@ paths:
                 $ref: '#/components/schemas/ProblemDetails'
 components:
   schemas:
-    InvoiceStatus:
-      enum:
-      - 0
-      - 1
-      - 2
-      - 3
-      - 4
-      type: integer
-      description: "The status of the invoice.\r\n\r\nPossible values: Draft = 0, Final = 1, Paid = 2, Deleted = 3 or Void = 4."
-      format: int32
-    InvoicedMatterEntryItem:
-      type: object
-      properties:
-        id:
-          type: string
-          nullable: true
-        versionId:
-          type: string
-          nullable: true
-        type:
-          allOf:
-          - $ref: '#/components/schemas/EntryType'
-          description: "Type of the activity.\r\n\r\nPossible values: Fixed = '0', Time = '1', Expense = '2'"
-      additionalProperties: false
-    Surcharge:
-      type: object
-      properties:
-        type:
-          allOf:
-          - $ref: '#/components/schemas/SurchargeType'
-          description: "The type of surcharge applied to the invoice.\r\n\r\nPossible values: None = 0, Fixed = 1, Percentage = 2."
-          example: 1
-        fixedSurcharge:
-          type: number
-          description: "The fixed surcharge amount applied to the invoice total.\r\n\r\nOnly applicable when Type is Fixed."
-          format: double
-          nullable: true
-          example: 100
-        percentage:
-          type: number
-          format: double
-          nullable: true
-        description:
-          type: string
-          description: A description of the surcharge, such as the reason or category.
-          nullable: true
-          example: Late Payment Fee
-        applyTo:
-          allOf:
-          - $ref: '#/components/schemas/SurchargeApplyType'
-          description: "The surcharge application type, indicating what the surcharge applies to.\r\n\r\nPossible values: None = 0, Fees = 1, Expenses = 2, FeesAndExpenses = 3."
-          example: 1
-      additionalProperties: false
-    InvoiceFileInfo:
-      type: object
-      properties:
-        invoiceId:
-          type: string
-          description: Unique identifier of the requested invoice
-          nullable: true
-          example: b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2
-        versionId:
-          type: string
-          description: Unique identifier of the invoice version
-          nullable: true
-          example: b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2
-        downloadUrl:
-          type: string
-          description: Link to download file
-          nullable: true
-          example: ''
-        expiry:
-          type: string
-          description: Expiry date/time when the download link is no longer accessible
-          format: date-time
-          example: '2022-04-23T14:30:00Z'
-        status:
-          type: string
-          description: Current status of the invoice
-          nullable: true
-          example: Draft
-      additionalProperties: false
     Invoice:
       type: object
       properties:
         href:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         relation:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         method:
-          type: string
+          type:
+          - string
+          - 'null'
           default: GET
-          nullable: true
         self:
           allOf:
           - $ref: '#/components/schemas/Link'
-          nullable: true
         id:
-          type: string
+          type:
+          - string
+          - 'null'
           description: The unique identifier of the invoice.
-          nullable: true
           example: 16567e88-784c-470e-8952-e5a70fe2eb0c
         versionId:
-          type: string
+          type:
+          - string
+          - 'null'
           description: The unique identifier representing the current version of the invoice.
-          nullable: true
           example: 39ffde97-eeeb-4747-bb8f-7c7c10b3c985
         matter:
           allOf:
           - $ref: '#/components/schemas/Link'
           description: A link to the matter associated with the invoice.
-          nullable: true
         matterId:
-          type: string
+          type:
+          - string
+          - 'null'
           description: The unique identifier of the matter this invoice belongs to.
-          nullable: true
           example: 6398a045-509e-49a2-9268-bb8231fa9340
         lastUpdatedByUserId:
-          type: string
+          type:
+          - string
+          - 'null'
           description: The unique identifier of the user who last updated the invoice.
-          nullable: true
           example: 5fc5ee85-6643-4623-b019-a0dccceafe47
         description:
-          type: string
+          type:
+          - string
+          - 'null'
           description: A short description of the invoice contents or purpose.
-          nullable: true
           example: Services provided.
         status:
           allOf:
           - $ref: '#/components/schemas/InvoiceStatus'
-          description: "The status of the invoice.\r\n\r\nPossible values: Draft = 0, Final = 1, Paid = 2, Deleted = 3 or Void = 4."
+          description: 'The status of the invoice.
+
+
+            Possible values: Draft = 0, Final = 1, Paid = 2, Deleted = 3 or Void = 4.'
           example: 0
         invoiceNumber:
-          type: integer
+          type:
+          - integer
+          - 'null'
           description: The sequential number assigned to the invoice.
           format: int64
-          nullable: true
           example: 10001
         invoiceTitle:
-          type: string
+          type:
+          - string
+          - 'null'
           description: The main title of the invoice.
-          nullable: true
           example: My First Invoice
         invoiceTitleLine2:
-          type: string
+          type:
+          - string
+          - 'null'
           description: The optional second line of the invoice title.
-          nullable: true
           example: Subtitle
         issuedDate:
           type: string
@@ -326,31 +256,37 @@ components:
           example: '2022-09-25T00:00:00+00:00'
         paidDate:
           type: string
-          description: "The date the invoice was fully paid.\r\n\r\nOnly populated if the invoice has been paid in full."
+          description: 'The date the invoice was fully paid.
+
+
+            Only populated if the invoice has been paid in full.'
           format: date-time
           example: '2022-09-20T00:00:00+00:00'
         discount:
           allOf:
           - $ref: '#/components/schemas/Discount'
-          description: "The discount configuration for the invoice (e.g., fixed or percentage).\r\n\r\nSee InvoiceTotals.Discount for the actual amount discounted."
-          nullable: true
+          description: 'The discount configuration for the invoice (e.g., fixed or percentage).
+
+
+            See InvoiceTotals.Discount for the actual amount discounted.'
         surcharge:
           allOf:
           - $ref: '#/components/schemas/Surcharge'
           description: The surcharge configuration for the invoice (e.g., fixed or percentage).
-          nullable: true
         debtors:
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             $ref: '#/components/schemas/Debtor'
           description: The list of debtors associated with this invoice.
-          nullable: true
         entries:
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             $ref: '#/components/schemas/InvoicedMatterEntryItem'
           description: The individual entries (fees or expenses) included in the invoice.
-          nullable: true
         waived:
           type: boolean
           description: Indicates whether the invoice has been waived.
@@ -359,8 +295,34 @@ components:
           allOf:
           - $ref: '#/components/schemas/InvoiceTotals'
           description: The calculated totals for the invoice, including billed, paid, unpaid, tax, interest, discounts, etc.
-          nullable: true
       additionalProperties: false
+    Link:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+        href:
+          type:
+          - string
+          - 'null'
+        relation:
+          type:
+          - string
+          - 'null'
+        method:
+          type:
+          - string
+          - 'null'
+          default: GET
+      additionalProperties: false
+    DiscountType:
+      enum:
+      - 0
+      - 1
+      type: integer
+      format: int32
     SurchargeType:
       enum:
       - 0
@@ -368,61 +330,19 @@ components:
       - 2
       type: integer
       format: int32
-    DiscountType:
-      enum:
-      - 0
-      - 1
-      type: integer
-      format: int32
-    EntryType:
+    InvoiceStatus:
       enum:
       - 0
       - 1
       - 2
+      - 3
+      - 4
       type: integer
-      description: "Type of the activity.\r\n\r\nPossible values: Fixed = '0', Time = '1', Expense = '2'"
+      description: 'The status of the invoice.
+
+
+        Possible values: Draft = 0, Final = 1, Paid = 2, Deleted = 3 or Void = 4.'
       format: int32
-    Discount:
-      type: object
-      properties:
-        type:
-          allOf:
-          - $ref: '#/components/schemas/DiscountType'
-          description: "The type of discount applied to the invoice.\r\n\r\nFixed for a fixed amount, or Percentage for a percentage-based discount.\r\n\r\nPossible values: Fixed = 0, Percentage = 1."
-          example: 0
-        fixedDiscount:
-          type: number
-          description: "The fixed discount amount to be subtracted from the invoice total.\r\n\r\nOnly applicable when Type is Fixed."
-          format: double
-          example: 100
-        percentage:
-          type: number
-          description: "The percentage discount to be applied to the invoice total.\r\n\r\nOnly applicable when Type is Percentage.\r\n\r\nExpressed as a number between 0 and 100."
-          format: double
-          example: 10
-        description:
-          type: string
-          description: A description of the discount, such as the reason or category.
-          nullable: true
-          example: Friend of the Firm
-      additionalProperties: false
-    Link:
-      type: object
-      properties:
-        id:
-          type: string
-          nullable: true
-        href:
-          type: string
-          nullable: true
-        relation:
-          type: string
-          nullable: true
-        method:
-          type: string
-          default: GET
-          nullable: true
-      additionalProperties: false
     InvoiceTotals:
       type: object
       properties:
@@ -433,7 +353,10 @@ components:
           example: 100
         billed:
           type: number
-          description: "The total amount billed on the invoice, excluding tax and interest.\r\n\r\nThis includes all fees and expenses before discounts or write-offs."
+          description: 'The total amount billed on the invoice, excluding tax and interest.
+
+
+            This includes all fees and expenses before discounts or write-offs.'
           format: double
           example: 200
         unpaid:
@@ -443,7 +366,12 @@ components:
           example: 100
         unpaidExcInterest:
           type: number
-          description: "The total unpaid amount excluding interest.\r\n\r\nIf this value is zero on an interest-bearing invoice, it indicates the principal has been fully paid,\r\nalthough interest may still be outstanding."
+          description: 'The total unpaid amount excluding interest.
+
+
+            If this value is zero on an interest-bearing invoice, it indicates the principal has been fully paid,
+
+            although interest may still be outstanding.'
           format: double
           example: 100
         writtenOff:
@@ -453,12 +381,18 @@ components:
           example: 0
         waived:
           type: number
-          description: "The total amount that has been waived on the invoice.\r\n\r\nWaived amounts are not charged but are also not written off."
+          description: 'The total amount that has been waived on the invoice.
+
+
+            Waived amounts are not charged but are also not written off.'
           format: double
           example: 0
         discount:
           type: number
-          description: "The total amount discounted on the invoice.\r\n\r\nThis includes all applied discounts reducing the billed amount."
+          description: 'The total amount discounted on the invoice.
+
+
+            This includes all applied discounts reducing the billed amount.'
           format: double
           example: 0
         total:
@@ -501,75 +435,97 @@ components:
       type: object
       properties:
         id:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         href:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         relation:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         method:
-          type: string
+          type:
+          - string
+          - 'null'
           default: GET
-          nullable: true
         self:
           allOf:
           - $ref: '#/components/schemas/Link'
-          nullable: true
         value:
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             $ref: '#/components/schemas/Invoice'
-          nullable: true
         offset:
-          type: integer
+          type:
+          - integer
+          - 'null'
           format: int32
-          nullable: true
         limit:
-          type: integer
+          type:
+          - integer
+          - 'null'
           format: int32
-          nullable: true
         size:
           type: integer
           format: int64
         first:
           allOf:
           - $ref: '#/components/schemas/Link'
-          nullable: true
         previous:
           allOf:
           - $ref: '#/components/schemas/Link'
-          nullable: true
         next:
           allOf:
           - $ref: '#/components/schemas/Link'
-          nullable: true
         last:
           allOf:
           - $ref: '#/components/schemas/Link'
-          nullable: true
       additionalProperties: false
-    ProblemDetails:
+    Discount:
       type: object
       properties:
         type:
-          type: string
-          nullable: true
-        title:
-          type: string
-          nullable: true
-        status:
-          type: integer
-          format: int32
-          nullable: true
-        detail:
-          type: string
-          nullable: true
-        instance:
-          type: string
-          nullable: true
-      additionalProperties: {}
+          allOf:
+          - $ref: '#/components/schemas/DiscountType'
+          description: 'The type of discount applied to the invoice.
+
+
+            Fixed for a fixed amount, or Percentage for a percentage-based discount.
+
+
+            Possible values: Fixed = 0, Percentage = 1.'
+          example: 0
+        fixedDiscount:
+          type: number
+          description: 'The fixed discount amount to be subtracted from the invoice total.
+
+
+            Only applicable when Type is Fixed.'
+          format: double
+          example: 100
+        percentage:
+          type: number
+          description: 'The percentage discount to be applied to the invoice total.
+
+
+            Only applicable when Type is Percentage.
+
+
+            Expressed as a number between 0 and 100.'
+          format: double
+          example: 10
+        description:
+          type:
+          - string
+          - 'null'
+          description: A description of the discount, such as the reason or category.
+          example: Friend of the Firm
+      additionalProperties: false
     SurchargeApplyType:
       enum:
       - 0
@@ -578,6 +534,58 @@ components:
       - 3
       type: integer
       format: int32
+    InvoicedMatterEntryItem:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+        versionId:
+          type:
+          - string
+          - 'null'
+        type:
+          allOf:
+          - $ref: '#/components/schemas/EntryType'
+          description: 'Type of the activity.
+
+
+            Possible values: Fixed = ''0'', Time = ''1'', Expense = ''2'''
+      additionalProperties: false
+    InvoiceFileInfo:
+      type: object
+      properties:
+        invoiceId:
+          type:
+          - string
+          - 'null'
+          description: Unique identifier of the requested invoice
+          example: b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2
+        versionId:
+          type:
+          - string
+          - 'null'
+          description: Unique identifier of the invoice version
+          example: b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2
+        downloadUrl:
+          type:
+          - string
+          - 'null'
+          description: Link to download file
+          example: ''
+        expiry:
+          type: string
+          description: Expiry date/time when the download link is no longer accessible
+          format: date-time
+          example: '2022-04-23T14:30:00Z'
+        status:
+          type:
+          - string
+          - 'null'
+          description: Current status of the invoice
+          example: Draft
+      additionalProperties: false
     Debtor:
       type: object
       properties:
@@ -585,7 +593,83 @@ components:
           allOf:
           - $ref: '#/components/schemas/Link'
           description: Hypermedia link of the associated contact.
-          nullable: true
+      additionalProperties: false
+    ProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        instance:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
+    EntryType:
+      enum:
+      - 0
+      - 1
+      - 2
+      type: integer
+      description: 'Type of the activity.
+
+
+        Possible values: Fixed = ''0'', Time = ''1'', Expense = ''2'''
+      format: int32
+    Surcharge:
+      type: object
+      properties:
+        type:
+          allOf:
+          - $ref: '#/components/schemas/SurchargeType'
+          description: 'The type of surcharge applied to the invoice.
+
+
+            Possible values: None = 0, Fixed = 1, Percentage = 2.'
+          example: 1
+        fixedSurcharge:
+          type:
+          - number
+          - 'null'
+          description: 'The fixed surcharge amount applied to the invoice total.
+
+
+            Only applicable when Type is Fixed.'
+          format: double
+          example: 100
+        percentage:
+          type:
+          - number
+          - 'null'
+          format: double
+        description:
+          type:
+          - string
+          - 'null'
+          description: A description of the surcharge, such as the reason or category.
+          example: Late Payment Fee
+        applyTo:
+          allOf:
+          - $ref: '#/components/schemas/SurchargeApplyType'
+          description: 'The surcharge application type, indicating what the surcharge applies to.
+
+
+            Possible values: None = 0, Fees = 1, Expenses = 2, FeesAndExpenses = 3.'
+          example: 1
       additionalProperties: false
   securitySchemes:
     api-key:

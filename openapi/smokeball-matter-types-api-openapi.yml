@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Smokeball Activity Codes Matter Types API
+  title: Smokeball Matter Types API
   version: '1.0'
   description: REST API for integrating with Smokeball legal practice management software. Supports matters, contacts, documents, time entries, billing, trust accounting, staff, webhooks, and law firm workflows across US, AU, and UK regions. Uses OAuth 2.0 (client credentials) authentication.
   contact:
@@ -26,7 +26,10 @@ paths:
       tags:
       - Matter Types
       summary: Get matter types
-      description: "Returns a paginated list of matter types based on search criteria. Deleted matter types are not included.\r\n\r\nNote: If no `Location` is provided, all matter types from all locations will be returned."
+      description: 'Returns a paginated list of matter types based on search criteria. Deleted matter types are not included.
+
+
+        Note: If no `Location` is provided, all matter types from all locations will be returned.'
       operationId: GetMatterTypes
       parameters:
       - name: Offset
@@ -60,7 +63,7 @@ paths:
           type: string
       - name: Type
         in: query
-        description: "Return matter types by category type (i.e. MatterType or LeadType).\r\n            \r\nPossible values: Matter Type = 0, Lead Type = 1."
+        description: "Return matter types by category type (i.e. MatterType or LeadType).\n            \nPossible values: Matter Type = 0, Lead Type = 1."
         schema:
           allOf:
           - $ref: '#/components/schemas/TypeCategory'
@@ -133,298 +136,343 @@ paths:
                 $ref: '#/components/schemas/ProblemDetails'
 components:
   schemas:
+    Link:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+        href:
+          type:
+          - string
+          - 'null'
+        relation:
+          type:
+          - string
+          - 'null'
+        method:
+          type:
+          - string
+          - 'null'
+          default: GET
+      additionalProperties: false
     MatterListItem:
       type: object
       properties:
         href:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         relation:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         method:
-          type: string
+          type:
+          - string
+          - 'null'
           default: GET
-          nullable: true
         self:
           allOf:
           - $ref: '#/components/schemas/Link'
-          nullable: true
         id:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Unique provider-specific identifier of the item.
-          nullable: true
           example: Plaintiff
         providerId:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Provider name of the item.
-          nullable: true
           example: roles_provider
         itemId:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Unique identifier of the item.
-          nullable: true
           example: 009f778f-83df-454a-b344-768a862a7e55
         name:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Name of the item.
-          nullable: true
           example: Claimant
         subItems:
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             $ref: '#/components/schemas/MatterListItem'
           description: List of sub items belonging to the item.
-          nullable: true
       additionalProperties: false
-    MatterTypeInfo:
+    StringCollection:
       type: object
       properties:
+        id:
+          type:
+          - string
+          - 'null'
         href:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         relation:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         method:
-          type: string
+          type:
+          - string
+          - 'null'
           default: GET
-          nullable: true
         self:
           allOf:
           - $ref: '#/components/schemas/Link'
-          nullable: true
-        id:
-          type: string
-          description: Unique identifier of the matter type.
-          nullable: true
-          example: 009f778f-83df-454a-b344-768a862a7e55
-        versionId:
-          type: string
-          description: Version id of the record.
-          nullable: true
-          example: 832e778f-83df-454a-b344-768a862a7e67
-        name:
-          type: string
-          description: Name of the matter type.
-          nullable: true
-          example: Federal Litigation
-        category:
-          type: string
-          description: Name of the category to which the matter type belongs.
-          nullable: true
-          example: Litigation
-        type:
-          allOf:
-          - $ref: '#/components/schemas/TypeCategory'
-          description: "Name of the category type to which the matter type belongs (i.e. MatterType or LeadType).\r\n            \r\nPossible values: Matter Type = 0, Lead Type = 1."
-          example: 0
-        representativeOptions:
-          type: array
+        value:
+          type:
+          - array
+          - 'null'
           items:
             type: string
-          description: List of possible representative types for the matter type.
-          nullable: true
-          example:
-          - Applicant
-          - Respondent
-        location:
-          type: string
-          description: State to which the matter type belongs.
-          nullable: true
-          example: Litigation
-        isDeleted:
-          type: boolean
-          description: "Returns true if the matter type is deleted.\r\n\r\nDeleted matter types cannot be used when creating new leads/matters."
-      additionalProperties: false
-    MatterType:
-      type: object
-      properties:
-        href:
-          type: string
-          nullable: true
-        relation:
-          type: string
-          nullable: true
-        method:
-          type: string
-          default: GET
-          nullable: true
-        self:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-          nullable: true
-        id:
-          type: string
-          description: Unique identifier of the matter type.
-          nullable: true
-          example: 009f778f-83df-454a-b344-768a862a7e55
-        versionId:
-          type: string
-          description: Version id of the record.
-          nullable: true
-          example: 832e778f-83df-454a-b344-768a862a7e67
-        name:
-          type: string
-          description: Name of the matter type.
-          nullable: true
-          example: Federal Litigation
-        category:
-          type: string
-          description: Name of the category to which the matter type belongs.
-          nullable: true
-          example: Litigation
-        type:
-          allOf:
-          - $ref: '#/components/schemas/TypeCategory'
-          description: "Name of the category type to which the matter type belongs (i.e. MatterType or LeadType).\r\n            \r\nPossible values: Matter Type = 0, Lead Type = 1."
-          example: 0
-        representativeOptions:
-          type: array
-          items:
-            type: string
-          description: List of possible representative types for the matter type.
-          nullable: true
-          example:
-          - Applicant
-          - Respondent
-        location:
-          type: string
-          description: State to which the matter type belongs.
-          nullable: true
-          example: Litigation
-        isDeleted:
-          type: boolean
-          description: "Returns true if the matter type is deleted.\r\n\r\nDeleted matter types cannot be used when creating new leads/matters."
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/MatterListItem'
-          nullable: true
       additionalProperties: false
     MatterTypeInfoPagedCollection:
       type: object
       properties:
         id:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         href:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         relation:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         method:
-          type: string
+          type:
+          - string
+          - 'null'
           default: GET
-          nullable: true
         self:
           allOf:
           - $ref: '#/components/schemas/Link'
-          nullable: true
         value:
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             $ref: '#/components/schemas/MatterTypeInfo'
-          nullable: true
         offset:
-          type: integer
+          type:
+          - integer
+          - 'null'
           format: int32
-          nullable: true
         limit:
-          type: integer
+          type:
+          - integer
+          - 'null'
           format: int32
-          nullable: true
         size:
           type: integer
           format: int64
         first:
           allOf:
           - $ref: '#/components/schemas/Link'
-          nullable: true
         previous:
           allOf:
           - $ref: '#/components/schemas/Link'
-          nullable: true
         next:
           allOf:
           - $ref: '#/components/schemas/Link'
-          nullable: true
         last:
           allOf:
           - $ref: '#/components/schemas/Link'
-          nullable: true
       additionalProperties: false
-    Link:
+    MatterTypeInfo:
       type: object
       properties:
-        id:
-          type: string
-          nullable: true
         href:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         relation:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         method:
-          type: string
+          type:
+          - string
+          - 'null'
           default: GET
-          nullable: true
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+        id:
+          type:
+          - string
+          - 'null'
+          description: Unique identifier of the matter type.
+          example: 009f778f-83df-454a-b344-768a862a7e55
+        versionId:
+          type:
+          - string
+          - 'null'
+          description: Version id of the record.
+          example: 832e778f-83df-454a-b344-768a862a7e67
+        name:
+          type:
+          - string
+          - 'null'
+          description: Name of the matter type.
+          example: Federal Litigation
+        category:
+          type:
+          - string
+          - 'null'
+          description: Name of the category to which the matter type belongs.
+          example: Litigation
+        type:
+          allOf:
+          - $ref: '#/components/schemas/TypeCategory'
+          description: "Name of the category type to which the matter type belongs (i.e. MatterType or LeadType).\n            \nPossible values: Matter Type = 0, Lead Type = 1."
+          example: 0
+        representativeOptions:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+          description: List of possible representative types for the matter type.
+          example:
+          - Applicant
+          - Respondent
+        location:
+          type:
+          - string
+          - 'null'
+          description: State to which the matter type belongs.
+          example: Litigation
+        isDeleted:
+          type: boolean
+          description: 'Returns true if the matter type is deleted.
+
+
+            Deleted matter types cannot be used when creating new leads/matters.'
       additionalProperties: false
     ProblemDetails:
       type: object
       properties:
         type:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         title:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         status:
-          type: integer
+          type:
+          - integer
+          - 'null'
           format: int32
-          nullable: true
         detail:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         instance:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
       additionalProperties: {}
-    StringCollection:
-      type: object
-      properties:
-        id:
-          type: string
-          nullable: true
-        href:
-          type: string
-          nullable: true
-        relation:
-          type: string
-          nullable: true
-        method:
-          type: string
-          default: GET
-          nullable: true
-        self:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-          nullable: true
-        value:
-          type: array
-          items:
-            type: string
-          nullable: true
-      additionalProperties: false
     TypeCategory:
       enum:
       - 0
       - 1
       type: integer
-      description: "Name of the category type to which the matter type belongs (i.e. MatterType or LeadType).\r\n            \r\nPossible values: Matter Type = 0, Lead Type = 1."
+      description: "Name of the category type to which the matter type belongs (i.e. MatterType or LeadType).\n            \nPossible values: Matter Type = 0, Lead Type = 1."
       format: int32
+    MatterType:
+      type: object
+      properties:
+        href:
+          type:
+          - string
+          - 'null'
+        relation:
+          type:
+          - string
+          - 'null'
+        method:
+          type:
+          - string
+          - 'null'
+          default: GET
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+        id:
+          type:
+          - string
+          - 'null'
+          description: Unique identifier of the matter type.
+          example: 009f778f-83df-454a-b344-768a862a7e55
+        versionId:
+          type:
+          - string
+          - 'null'
+          description: Version id of the record.
+          example: 832e778f-83df-454a-b344-768a862a7e67
+        name:
+          type:
+          - string
+          - 'null'
+          description: Name of the matter type.
+          example: Federal Litigation
+        category:
+          type:
+          - string
+          - 'null'
+          description: Name of the category to which the matter type belongs.
+          example: Litigation
+        type:
+          allOf:
+          - $ref: '#/components/schemas/TypeCategory'
+          description: "Name of the category type to which the matter type belongs (i.e. MatterType or LeadType).\n            \nPossible values: Matter Type = 0, Lead Type = 1."
+          example: 0
+        representativeOptions:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+          description: List of possible representative types for the matter type.
+          example:
+          - Applicant
+          - Respondent
+        location:
+          type:
+          - string
+          - 'null'
+          description: State to which the matter type belongs.
+          example: Litigation
+        isDeleted:
+          type: boolean
+          description: 'Returns true if the matter type is deleted.
+
+
+            Deleted matter types cannot be used when creating new leads/matters.'
+        items:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/MatterListItem'
+      additionalProperties: false
   securitySchemes:
     api-key:
       type: apiKey

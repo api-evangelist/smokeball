@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Smokeball Activity Codes Integrated Search API
+  title: Smokeball Integrated Search API
   version: '1.0'
   description: REST API for integrating with Smokeball legal practice management software. Supports matters, contacts, documents, time entries, billing, trust accounting, staff, webhooks, and law firm workflows across US, AU, and UK regions. Uses OAuth 2.0 (client credentials) authentication.
   contact:
@@ -26,7 +26,10 @@ paths:
       tags:
       - Integrated Search
       summary: Get mapping
-      description: "Retrieves integrated search mapping data associated with the authenticated client.\r\n            \r\nUses the integrated search provider used by the firm (e.g. InfoTrack)."
+      description: 'Retrieves integrated search mapping data associated with the authenticated client.
+
+
+        Uses the integrated search provider used by the firm (e.g. InfoTrack).'
       operationId: GetMappingAsync
       parameters:
       - name: matterId

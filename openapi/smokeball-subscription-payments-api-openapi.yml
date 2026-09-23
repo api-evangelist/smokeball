@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Smokeball Activity Codes Subscription Payments API
+  title: Smokeball Subscription Payments API
   version: '1.0'
   description: REST API for integrating with Smokeball legal practice management software. Supports matters, contacts, documents, time entries, billing, trust accounting, staff, webhooks, and law firm workflows across US, AU, and UK regions. Uses OAuth 2.0 (client credentials) authentication.
   contact:
@@ -69,7 +69,16 @@ paths:
       tags:
       - Subscription Payments
       summary: Add payment method
-      description: "Adds a new payment method to the account.\r\n\r\nImportant notes:\r\n* Can optionally set as default payment method for the entire account\r\n* Can force immediate charge for overdue invoices for all active subscriptions\r\n* Payment information format depends on payment system"
+      description: 'Adds a new payment method to the account.
+
+
+        Important notes:
+
+        * Can optionally set as default payment method for the entire account
+
+        * Can force immediate charge for overdue invoices for all active subscriptions
+
+        * Payment information format depends on payment system'
       operationId: AddPaymentMethodAsync
       requestBody:
         description: Payment method details including system and payment information
@@ -207,11 +216,22 @@ paths:
         '500':
           description: Internal Server Error
       x-excluded: true
+      summary: Update subscription payment method async
+      x-summary-source: derived
     post:
       tags:
       - Subscription Payments
       summary: Add payment method
-      description: "Adds a new payment method to the account and sets it for the specified subscription \r\n\r\nImportant notes:\r\n* Can optionally set as default payment method for the entire account, or the specified subscription\r\n* Can force immediate charge for overdue invoices for the specified subscription\r\n* Payment information format depends on payment system"
+      description: 'Adds a new payment method to the account and sets it for the specified subscription
+
+
+        Important notes:
+
+        * Can optionally set as default payment method for the entire account, or the specified subscription
+
+        * Can force immediate charge for overdue invoices for the specified subscription
+
+        * Payment information format depends on payment system'
       operationId: AddSubscriptionPaymentMethodAsync
       parameters:
       - name: subscriptionId
@@ -304,7 +324,14 @@ paths:
       tags:
       - Subscription Payments
       summary: Remove payment method
-      description: "Removes a payment method from a subscription.\r\n\r\nImportant notes:\r\n* Can optionally specify a new default payment method\r\n* Removing default without replacement may cause subscription to go OVERDUE"
+      description: 'Removes a payment method from a subscription.
+
+
+        Important notes:
+
+        * Can optionally specify a new default payment method
+
+        * Removing default without replacement may cause subscription to go OVERDUE'
       operationId: RemovePaymentMethodAsync
       parameters:
       - name: subscriptionId
@@ -356,7 +383,11 @@ paths:
       tags:
       - Subscription Payments
       summary: Get supported payment systems
-      description: "Returns all supported payment systems and their supported payment method types.\r\nCurrently supports:\r\n* STRIPE with CREDIT_CARD payment type"
+      description: 'Returns all supported payment systems and their supported payment method types.
+
+        Currently supports:
+
+        * STRIPE with CREDIT_CARD payment type'
       operationId: GetSupportedPaymentSystemsAsync
       responses:
         '200':
@@ -370,211 +401,49 @@ paths:
       x-excluded: true
 components:
   schemas:
-    AddPaymentMethodRequest:
-      type: object
-      properties:
-        paymentSystemId:
-          type: string
-          description: Payment system to use.
-          nullable: true
-          example: STRIPE
-        paymentInformation:
-          allOf:
-          - $ref: '#/components/schemas/PaymentInformation'
-          description: "Payment information specific to the payment system.\r\n\r\nFor Stripe, this should be StripePaymentInformation."
-          nullable: true
-        isDefault:
-          type: boolean
-          description: "Whether to set this as the default payment method for the entire account \r\n\r\nThis does not set the default payment method for the subscription."
-          nullable: true
-          example: true
-        chargeImmediately:
-          type: boolean
-          description: "Whether to charge immediately if subscription(s) are overdue.\r\n\r\nIf true, the payment system will attempt to charge the customer immediately if there are any overdue subscriptions.\r\n\r\nIf a subscription id is passed as a parameter to the request, only that subscription will be charged immediately if overdue."
-          nullable: true
-          example: true
-      additionalProperties: false
-    PaymentSystem:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Id of payment system.
-          nullable: true
-          example: STRIPE
-        supportedPaymentTypes:
-          type: array
-          items:
-            type: string
-            description: "The payment type.\r\n\r\n* None - The payment type is missing or unknown.\r\n\r\n* CreditCard - Credit Card payment type.\r\n\r\n* DirectDeposit - Direct Deposit payment type. (not currently supported)"
-          description: List of supported payment method types.
-          nullable: true
-      additionalProperties: false
-    SetDefaultPaymentMethodRequest:
-      type: object
-      properties:
-        paymentMethodId:
-          type: string
-          description: Public payment method id. Null clears the subscription override which reverts behavior to the Customer's default.
-          format: uuid
-          nullable: true
-        subscriptionType:
-          allOf:
-          - $ref: '#/components/schemas/SubscriptionType'
-          description: Deprecated. The subscription type is inferred from the route subscription id.
-      additionalProperties: false
-      description: Request to set or clear a subscription default payment method.
-    SubscriptionType:
-      enum:
-      - 0
-      - 1
-      type: integer
-      format: int32
-    PaymentInformation:
-      type: object
-      additionalProperties: false
-      description: Base class for payment information.
-    PaymentMethodDetails:
-      type: object
-      properties:
-        brand:
-          type: string
-          description: The brand of the credit card.
-          nullable: true
-        lastFourDigits:
-          type: string
-          description: Last four digits of the credit card.
-          nullable: true
-          example: '1234'
-        expiry:
-          type: string
-          description: Expiry date of the credit card in MM/YY format.
-          nullable: true
-          example: 10/28
-        expiryMonth:
-          type: integer
-          description: Expiry month.
-          format: int64
-          nullable: true
-          example: 10
-        expiryYear:
-          type: integer
-          description: Expiry year.
-          format: int64
-          nullable: true
-          example: 2028
-        accountNumber:
-          type: integer
-          description: "The account number of the direct deposit account.\r\n\r\nNot yet supported."
-          format: int64
-          nullable: true
-          example: 123456789
-        bsb:
-          type: integer
-          description: "The BSB of the direct deposit account.\r\n\r\nNot yet supported."
-          format: int64
-          nullable: true
-      additionalProperties: false
-    Link:
-      type: object
-      properties:
-        id:
-          type: string
-          nullable: true
-        href:
-          type: string
-          nullable: true
-        relation:
-          type: string
-          nullable: true
-        method:
-          type: string
-          default: GET
-          nullable: true
-      additionalProperties: false
-    PaymentMethodPagedCollection:
-      type: object
-      properties:
-        id:
-          type: string
-          nullable: true
-        href:
-          type: string
-          nullable: true
-        relation:
-          type: string
-          nullable: true
-        method:
-          type: string
-          default: GET
-          nullable: true
-        self:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-          nullable: true
-        value:
-          type: array
-          items:
-            $ref: '#/components/schemas/PaymentMethod'
-          nullable: true
-        offset:
-          type: integer
-          format: int32
-          nullable: true
-        limit:
-          type: integer
-          format: int32
-          nullable: true
-        size:
-          type: integer
-          format: int64
-        first:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-          nullable: true
-        previous:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-          nullable: true
-        next:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-          nullable: true
-        last:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-          nullable: true
-      additionalProperties: false
     PaymentMethod:
       type: object
       properties:
         href:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         relation:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         method:
-          type: string
+          type:
+          - string
+          - 'null'
           default: GET
-          nullable: true
         self:
           allOf:
           - $ref: '#/components/schemas/Link'
-          nullable: true
         id:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Unique identifier of the payment method.
-          nullable: true
           example: 784b3497-bf1f-47d2-93e6-1d38b96b8d3f
         paymentSystem:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Payment system.
-          nullable: true
           example: STRIPE
         type:
           type: string
-          description: "The payment type.\r\n\r\n* None - The payment type is missing or unknown.\r\n\r\n* CreditCard - Credit Card payment type.\r\n\r\n* DirectDeposit - Direct Deposit payment type. (not currently supported)"
+          description: 'The payment type.
+
+
+            * None - The payment type is missing or unknown.
+
+
+            * CreditCard - Credit Card payment type.
+
+
+            * DirectDeposit - Direct Deposit payment type. (not currently supported)'
           example: CreditCard
         isDefault:
           type: boolean
@@ -584,10 +453,24 @@ components:
           allOf:
           - $ref: '#/components/schemas/PaymentMethodDetails'
           description: Payment method specific details for display.
-          nullable: true
         lastPaymentState:
           type: string
-          description: "The status of a payment.\r\n\r\n* None: The payment status is unknown.\r\n\r\n* Succeeded: The payment was successful.\r\n\r\n* Processing: The payment is being processed.\r\n\r\n* Canceled: The payment was canceled.\r\n\r\n* Failed: The payment requires a payment method to be provided, the provided payment method failed or other action is required (e.g. confirmation or other action by the customer)"
+          description: 'The status of a payment.
+
+
+            * None: The payment status is unknown.
+
+
+            * Succeeded: The payment was successful.
+
+
+            * Processing: The payment is being processed.
+
+
+            * Canceled: The payment was canceled.
+
+
+            * Failed: The payment requires a payment method to be provided, the provided payment method failed or other action is required (e.g. confirmation or other action by the customer)'
           example: Succeeded
         createdDate:
           type: string
@@ -595,59 +478,286 @@ components:
           format: date-time
           example: '2022-04-23T14:00:00Z'
       additionalProperties: false
+    Link:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+        href:
+          type:
+          - string
+          - 'null'
+        relation:
+          type:
+          - string
+          - 'null'
+        method:
+          type:
+          - string
+          - 'null'
+          default: GET
+      additionalProperties: false
     PaymentSystemCollection:
       type: object
       properties:
         id:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         href:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         relation:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         method:
-          type: string
+          type:
+          - string
+          - 'null'
           default: GET
-          nullable: true
         self:
           allOf:
           - $ref: '#/components/schemas/Link'
-          nullable: true
         value:
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             $ref: '#/components/schemas/PaymentSystem'
-          nullable: true
+      additionalProperties: false
+    PaymentInformation:
+      type: object
+      additionalProperties: false
+      description: Base class for payment information.
+    SubscriptionType:
+      enum:
+      - 0
+      - 1
+      type: integer
+      format: int32
+    PaymentMethodDetails:
+      type: object
+      properties:
+        brand:
+          type:
+          - string
+          - 'null'
+          description: The brand of the credit card.
+        lastFourDigits:
+          type:
+          - string
+          - 'null'
+          description: Last four digits of the credit card.
+          example: '1234'
+        expiry:
+          type:
+          - string
+          - 'null'
+          description: Expiry date of the credit card in MM/YY format.
+          example: 10/28
+        expiryMonth:
+          type:
+          - integer
+          - 'null'
+          description: Expiry month.
+          format: int64
+          example: 10
+        expiryYear:
+          type:
+          - integer
+          - 'null'
+          description: Expiry year.
+          format: int64
+          example: 2028
+        accountNumber:
+          type:
+          - integer
+          - 'null'
+          description: 'The account number of the direct deposit account.
+
+
+            Not yet supported.'
+          format: int64
+          example: 123456789
+        bsb:
+          type:
+          - integer
+          - 'null'
+          description: 'The BSB of the direct deposit account.
+
+
+            Not yet supported.'
+          format: int64
+      additionalProperties: false
+    RemovePaymentMethodRequest:
+      type: object
+      properties:
+        newDefaultPaymentMethodId:
+          type:
+          - string
+          - 'null'
+          description: Optional ID of payment method to set as new default.
       additionalProperties: false
     ProblemDetails:
       type: object
       properties:
         type:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         title:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         status:
-          type: integer
+          type:
+          - integer
+          - 'null'
           format: int32
-          nullable: true
         detail:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         instance:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
       additionalProperties: {}
-    RemovePaymentMethodRequest:
+    PaymentMethodPagedCollection:
       type: object
       properties:
-        newDefaultPaymentMethodId:
-          type: string
-          description: Optional ID of payment method to set as new default.
-          nullable: true
+        id:
+          type:
+          - string
+          - 'null'
+        href:
+          type:
+          - string
+          - 'null'
+        relation:
+          type:
+          - string
+          - 'null'
+        method:
+          type:
+          - string
+          - 'null'
+          default: GET
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+        value:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/PaymentMethod'
+        offset:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        limit:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        size:
+          type: integer
+          format: int64
+        first:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+        previous:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+        next:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+        last:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+      additionalProperties: false
+    AddPaymentMethodRequest:
+      type: object
+      properties:
+        paymentSystemId:
+          type:
+          - string
+          - 'null'
+          description: Payment system to use.
+          example: STRIPE
+        paymentInformation:
+          allOf:
+          - $ref: '#/components/schemas/PaymentInformation'
+          description: 'Payment information specific to the payment system.
+
+
+            For Stripe, this should be StripePaymentInformation.'
+        isDefault:
+          type:
+          - boolean
+          - 'null'
+          description: "Whether to set this as the default payment method for the entire account \n\nThis does not set the default payment method for the subscription."
+          example: true
+        chargeImmediately:
+          type:
+          - boolean
+          - 'null'
+          description: 'Whether to charge immediately if subscription(s) are overdue.
+
+
+            If true, the payment system will attempt to charge the customer immediately if there are any overdue subscriptions.
+
+
+            If a subscription id is passed as a parameter to the request, only that subscription will be charged immediately if overdue.'
+          example: true
+      additionalProperties: false
+    SetDefaultPaymentMethodRequest:
+      type: object
+      properties:
+        paymentMethodId:
+          type:
+          - string
+          - 'null'
+          description: Public payment method id. Null clears the subscription override which reverts behavior to the Customer's default.
+          format: uuid
+        subscriptionType:
+          allOf:
+          - $ref: '#/components/schemas/SubscriptionType'
+          description: Deprecated. The subscription type is inferred from the route subscription id.
+      additionalProperties: false
+      description: Request to set or clear a subscription default payment method.
+    PaymentSystem:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+          description: Id of payment system.
+          example: STRIPE
+        supportedPaymentTypes:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+            description: 'The payment type.
+
+
+              * None - The payment type is missing or unknown.
+
+
+              * CreditCard - Credit Card payment type.
+
+
+              * DirectDeposit - Direct Deposit payment type. (not currently supported)'
+          description: List of supported payment method types.
       additionalProperties: false
   securitySchemes:
     api-key:

@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Smokeball Activity Codes Relationships API
+  title: Smokeball Relationships API
   version: '1.0'
   description: REST API for integrating with Smokeball legal practice management software. Supports matters, contacts, documents, time entries, billing, trust accounting, staff, webhooks, and law firm workflows across US, AU, and UK regions. Uses OAuth 2.0 (client credentials) authentication.
   contact:
@@ -205,7 +205,7 @@ paths:
     delete:
       tags:
       - Relationships
-      summary: Remove relationship from a role in a matter.
+      summary: Remove relationship from a role in a matter
       description: Removes a relationship from a role in a matter.
       operationId: RemoveRelationshipFromRole
       parameters:
@@ -251,95 +251,51 @@ components:
       type: object
       properties:
         id:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         href:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         relation:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         method:
-          type: string
+          type:
+          - string
+          - 'null'
           default: GET
-          nullable: true
       additionalProperties: false
-    MatterRelationships:
-      type: object
-      properties:
-        id:
-          type: string
-          nullable: true
-        href:
-          type: string
-          nullable: true
-        relation:
-          type: string
-          nullable: true
-        method:
-          type: string
-          default: GET
-          nullable: true
-        self:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-          nullable: true
-        versionId:
-          type: string
-          description: Version id of the record.
-          nullable: true
-          example: 832e778f-83df-454a-b344-768a862a7e67
-        relationships:
-          type: array
-          items:
-            $ref: '#/components/schemas/Relationship'
-          description: List of associated relationships.
-          nullable: true
-      additionalProperties: false
-    ProblemDetails:
-      type: object
-      properties:
-        type:
-          type: string
-          nullable: true
-        title:
-          type: string
-          nullable: true
-        status:
-          type: integer
-          format: int32
-          nullable: true
-        detail:
-          type: string
-          nullable: true
-        instance:
-          type: string
-          nullable: true
-      additionalProperties: {}
     RelationshipDto:
       type: object
       properties:
         name:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Name of the relationship.
-          nullable: true
           example: Provider
         displayName:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Display Name of the relationship.
-          nullable: true
           example: Medical Provider
         contactId:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Unique identifier of the contact.
-          nullable: true
           example: c85d28cb-a760-4627-aa59-0a853c2e65ed
         representativeIds:
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             type: string
           description: List of associated representative contact ids.
-          nullable: true
           example:
           - 776e778f-83df-454a-b344-768a862a7e67
         isMatterItemRequired:
@@ -350,40 +306,106 @@ components:
       type: object
       properties:
         href:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         relation:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         method:
-          type: string
+          type:
+          - string
+          - 'null'
           default: GET
-          nullable: true
         self:
           allOf:
           - $ref: '#/components/schemas/Link'
-          nullable: true
         id:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Unique identifier of the relationship.
-          nullable: true
           example: 009f778f-83df-454a-b344-768a862a7e55
         name:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Name of the relationship.
-          nullable: true
           example: Solicitor
         contact:
           allOf:
           - $ref: '#/components/schemas/Link'
           description: Hypermedia link of the associated contact.
-          nullable: true
         representatives:
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             $ref: '#/components/schemas/Link'
           description: List of hypermedia links of the associated representatives.
-          nullable: true
+      additionalProperties: false
+    ProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        instance:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
+    MatterRelationships:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+        href:
+          type:
+          - string
+          - 'null'
+        relation:
+          type:
+          - string
+          - 'null'
+        method:
+          type:
+          - string
+          - 'null'
+          default: GET
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+        versionId:
+          type:
+          - string
+          - 'null'
+          description: Version id of the record.
+          example: 832e778f-83df-454a-b344-768a862a7e67
+        relationships:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/Relationship'
+          description: List of associated relationships.
       additionalProperties: false
   securitySchemes:
     api-key:

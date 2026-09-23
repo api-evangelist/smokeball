@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Smokeball Activity Codes Tasks API
+  title: Smokeball Tasks API
   version: '1.0'
   description: REST API for integrating with Smokeball legal practice management software. Supports matters, contacts, documents, time entries, billing, trust accounting, staff, webhooks, and law firm workflows across US, AU, and UK regions. Uses OAuth 2.0 (client credentials) authentication.
   contact:
@@ -561,7 +561,10 @@ paths:
         example: true
       - name: UpdatedSince
         in: query
-        description: "Filter by tasks updated since a specified time (.net ticks representation of the UTC datetime). Cannot be used in conjunction with `LastUpdated`.\r\n\r\nThis field will not be supported in future, please use LastUpdated instead."
+        description: 'Filter by tasks updated since a specified time (.net ticks representation of the UTC datetime). Cannot be used in conjunction with `LastUpdated`.
+
+
+          This field will not be supported in future, please use LastUpdated instead.'
         schema:
           type: integer
           format: int64
@@ -629,84 +632,26 @@ paths:
                 $ref: '#/components/schemas/ProblemDetails'
 components:
   schemas:
-    TaskPagedCollection:
+    Link:
       type: object
       properties:
         id:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         href:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         relation:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         method:
-          type: string
+          type:
+          - string
+          - 'null'
           default: GET
-          nullable: true
-        self:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-          nullable: true
-        value:
-          type: array
-          items:
-            $ref: '#/components/schemas/Task'
-          nullable: true
-        offset:
-          type: integer
-          format: int32
-          nullable: true
-        limit:
-          type: integer
-          format: int32
-          nullable: true
-        size:
-          type: integer
-          format: int64
-        first:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-          nullable: true
-        previous:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-          nullable: true
-        next:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-          nullable: true
-        last:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-          nullable: true
-      additionalProperties: false
-    SubTaskCollection:
-      type: object
-      properties:
-        id:
-          type: string
-          nullable: true
-        href:
-          type: string
-          nullable: true
-        relation:
-          type: string
-          nullable: true
-        method:
-          type: string
-          default: GET
-          nullable: true
-        self:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-          nullable: true
-        value:
-          type: array
-          items:
-            $ref: '#/components/schemas/SubTask'
-          nullable: true
       additionalProperties: false
     SubTaskDto:
       required:
@@ -720,9 +665,10 @@ components:
           description: Unique identifier of the associated staff member creating or updating the subtask.
           example: 750eb5c5-ac0b-7d11-4997-e0ce9d8896c8
         completedByStaffId:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Unique identifier of the associated staff member who completed the subtask.
-          nullable: true
           example: 750eb5c5-ac0b-7d11-4997-e0ce9d8896c8
         subject:
           minLength: 1
@@ -734,437 +680,94 @@ components:
           description: True when the subtask is completed.
           example: false
         completedDate:
-          type: string
-          description: "**Deprecated.** Use `CompletedDateOnly` instead.\n\nCompleted date of the subtask in UTC.\r\nIf not provided and IsCompleted is set to true, the current date will be used."
+          type:
+          - string
+          - 'null'
+          description: '**Deprecated.** Use `CompletedDateOnly` instead.
+
+
+            Completed date of the subtask in UTC.
+
+            If not provided and IsCompleted is set to true, the current date will be used.'
           format: date-time
-          nullable: true
           example: '2020-02-15T13:00:00Z'
           deprecated: true
         completedDateOnly:
-          type: string
-          description: "Completed date of the subtask. Takes precendence over CompletedDate if set.\r\nIf not provided and IsCompleted is set to true, the current date will be used.\n\nAny time/timezone information will be discarded\nand only the date portion will be considered."
-          format: date-time
-          nullable: true
-          example: '2020-02-15'
-      additionalProperties: false
-      description: Data transfer object for a subtask.
-    TaskDto:
-      required:
-      - staffId
-      type: object
-      properties:
-        matterId:
-          type: string
-          description: Unique identifier of the matter associated to the task.
-          nullable: true
-          example: 750eb5c5-ac0b-7d11-4997-e0ce9d8896c8
-        staffId:
-          minLength: 1
-          type: string
-          description: Unique identifier of the associated staff member creating or updating the task.
-          example: 750eb5c5-ac0b-7d11-4997-e0ce9d8896c8
-        completedByStaffId:
-          type: string
-          description: Unique identifier of the associated staff member completing the task.
-          nullable: true
-          example: 750eb5c5-ac0b-7d11-4997-e0ce9d8896c8
-        assigneeIds:
-          type: array
-          items:
-            type: string
-          description: Unique identifier(s) of the associated staff member(s) assigned to the task.
-          nullable: true
-        subject:
-          type: string
-          description: The subject - this should be a short description of the task.
-          nullable: true
-          example: Review contract for John Smith
-        note:
-          type: string
-          description: Notes on the task.
-          nullable: true
-          example: Contract needs to be reviewed and discussed with John
-        isCompleted:
-          type: boolean
-          description: True when the task is completed.
-          example: false
-        categories:
-          type: array
-          items:
-            type: string
-          description: Categories for the task.
-          nullable: true
-        completedDate:
-          type: string
-          description: "**Deprecated.** Use `CompletedDateOnly` instead.\n\nCompleted date of the task in UTC.\r\nIf not provided and IsCompleted is set to true, the current date will be used."
-          format: date-time
-          nullable: true
-          example: '2020-02-15T13:00:00Z'
-          deprecated: true
-        completedDateOnly:
-          type: string
-          description: "Completed date of the task. Takes precendence over CompletedDate if set.\r\nIf not provided and IsCompleted is set to true, the current date will be used.\n\nAny time/timezone information will be discarded\nand only the date portion will be considered."
-          format: date-time
-          nullable: true
-          example: '2020-02-15'
-        dueDate:
-          type: string
-          description: '**Deprecated.** Use `DueDateOnly` instead.
+          type:
+          - string
+          - 'null'
+          description: 'Completed date of the subtask. Takes precendence over CompletedDate if set.
 
-
-            Due date of the task in UTC.'
-          format: date-time
-          nullable: true
-          example: '2020-02-15T13:00:00Z'
-          deprecated: true
-        dueDateOnly:
-          type: string
-          description: 'Due date of the task. Takes precendence over DueDate if set.
+            If not provided and IsCompleted is set to true, the current date will be used.
 
 
             Any time/timezone information will be discarded
 
             and only the date portion will be considered.'
           format: date-time
-          nullable: true
           example: '2020-02-15'
-        duration:
-          type: string
-          description: Duration of the task in ISO 8601 duration format.
-          nullable: true
-          example: PT4H33M
       additionalProperties: false
-    TaskDocumentCollection:
-      type: object
-      properties:
-        id:
-          type: string
-          nullable: true
-        href:
-          type: string
-          nullable: true
-        relation:
-          type: string
-          nullable: true
-        method:
-          type: string
-          default: GET
-          nullable: true
-        self:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-          nullable: true
-        value:
-          type: array
-          items:
-            $ref: '#/components/schemas/TaskDocument'
-          nullable: true
-      additionalProperties: false
-    Link:
-      type: object
-      properties:
-        id:
-          type: string
-          nullable: true
-        href:
-          type: string
-          nullable: true
-        relation:
-          type: string
-          nullable: true
-        method:
-          type: string
-          default: GET
-          nullable: true
-      additionalProperties: false
-    Task:
-      type: object
-      properties:
-        id:
-          type: string
-          nullable: true
-        href:
-          type: string
-          nullable: true
-        relation:
-          type: string
-          nullable: true
-        method:
-          type: string
-          default: GET
-          nullable: true
-        self:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-          nullable: true
-        matter:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-          description: Matter associated to the task.
-          nullable: true
-        parentTask:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-          description: The parent task associated to this task. Id is missing if this task is not a sub task.
-          nullable: true
-        createdBy:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-          description: The staff member who created the task.
-          nullable: true
-        completedBy:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-          description: The staff member who completed the task.
-          nullable: true
-        lastUpdatedBy:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-          description: The staff member who last updated the task.
-          nullable: true
-        assignees:
-          type: array
-          items:
-            $ref: '#/components/schemas/Link'
-          description: The staff member(s) assigned to the task.
-          nullable: true
-        subTasks:
-          type: array
-          items:
-            $ref: '#/components/schemas/Link'
-          description: The tasks associated to the task.
-          nullable: true
-        subject:
-          type: string
-          description: The subject - a short description of the task.
-          nullable: true
-          example: Review contract for John Smith
-        note:
-          type: string
-          description: Notes on the task.
-          nullable: true
-          example: Contract needs to be reviewed and discussed with John
-        categories:
-          type: array
-          items:
-            type: string
-          description: Categories for the task.
-          nullable: true
-        dueDate:
-          type: string
-          description: '**Deprecated.** Use `DueDateOnly` instead.
-
-
-            The due date of the task in UTC.'
-          format: date-time
-          nullable: true
-          example: '2020-02-15T13:00:00Z'
-          deprecated: true
-        dueDateOnly:
-          type: string
-          description: 'The due date of the task.
-
-
-            The time portion will always be set to 00:00:00
-
-            and should be ignored. Only the date portion is relevant.'
-          format: date-time
-          nullable: true
-          example: '2020-02-15T00:00:00'
-        completedDate:
-          type: string
-          description: '**Deprecated.** Use `CompletedDateOnly` instead.
-
-
-            When the task was completed in UTC.'
-          format: date-time
-          nullable: true
-          example: '2020-02-15T13:00:00Z'
-          deprecated: true
-        completedDateOnly:
-          type: string
-          description: 'The date when the task was completed.
-
-
-            The time portion will always be set to 00:00:00
-
-            and should be ignored. Only the date portion is relevant.'
-          format: date-time
-          nullable: true
-          example: '2020-02-15T00:00:00'
-        createdDate:
-          type: string
-          description: '**Deprecated.** Use `CreatedDateOnly` instead.
-
-
-            When the task was created in UTC.'
-          format: date-time
-          nullable: true
-          example: '2020-02-15T13:00:00Z'
-          deprecated: true
-        createdDateOnly:
-          type: string
-          description: 'The date when the task was created.
-
-
-            The time portion will always be set to 00:00:00
-
-            and should be ignored. Only the date portion is relevant.'
-          format: date-time
-          nullable: true
-          example: '2020-02-15T00:00:00'
-        isCompleted:
-          type: boolean
-          description: True when the task is completed.
-          example: false
-        isDeleted:
-          type: boolean
-          description: True when the task is deleted.
-          example: false
-        lastUpdated:
-          type: integer
-          description: Last updated timestamp.
-          format: int64
-          example: 637847425252027400
-        duration:
-          type: string
-          description: Duration of the task in ISO 8601 duration format.
-          nullable: true
-          example: PT4H33M
-      additionalProperties: false
-    TaskDocumentDto:
-      required:
-      - type
-      type: object
-      properties:
-        documentId:
-          type: string
-          description: "Unique identifier of the document (file or memo).\r\n\r\nIf a file, the type must be 0 (File). \r\n\r\nIf a memo, the type must be 2 (Memo).\r\n\r\nThe FormTemplate (1) document type is not currently supported for task document creation."
-          nullable: true
-          example: cf666f06-3ff2-4a41-8c7f-ab5a8bc6a277
-        type:
-          allOf:
-          - $ref: '#/components/schemas/DocumentType'
-          description: "The type of the document.\r\n\r\nPossible values: File = 0, FormTemplate = 1, Memo = 2.\r\n\r\nThe FormTemplate (1) document type is not currently supported for task document creation."
-          example: 0
-      additionalProperties: false
-      description: Data transfer object for a task document.
-    ProblemDetails:
-      type: object
-      properties:
-        type:
-          type: string
-          nullable: true
-        title:
-          type: string
-          nullable: true
-        status:
-          type: integer
-          format: int32
-          nullable: true
-        detail:
-          type: string
-          nullable: true
-        instance:
-          type: string
-          nullable: true
-      additionalProperties: {}
-    TaskDocument:
-      type: object
-      properties:
-        id:
-          type: string
-          nullable: true
-        href:
-          type: string
-          nullable: true
-        relation:
-          type: string
-          nullable: true
-        method:
-          type: string
-          default: GET
-          nullable: true
-        self:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-          nullable: true
-        task:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-          description: The associated task.
-          nullable: true
-        type:
-          allOf:
-          - $ref: '#/components/schemas/DocumentType'
-          description: "The type of the document.\r\n\r\nPossible values: File = 0, FormTemplate = 1, Memo = 2."
-          example: 0
-        isDeleted:
-          type: boolean
-          description: True when the task document has been deleted.
-          example: false
-        document:
-          description: Link to the the document.
-          nullable: true
-      additionalProperties: false
-      description: Task document resource.
+      description: Data transfer object for a subtask.
     SubTask:
       type: object
       properties:
         id:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         href:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         relation:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         method:
-          type: string
+          type:
+          - string
+          - 'null'
           default: GET
-          nullable: true
         self:
           allOf:
           - $ref: '#/components/schemas/Link'
-          nullable: true
         parentTask:
           allOf:
           - $ref: '#/components/schemas/Link'
           description: The parent (task) of the subtask.
-          nullable: true
         createdBy:
           allOf:
           - $ref: '#/components/schemas/Link'
           description: The staff member who created the subtask.
-          nullable: true
         completedBy:
           allOf:
           - $ref: '#/components/schemas/Link'
           description: The staff member who completed the subtask.
-          nullable: true
         lastUpdatedBy:
           allOf:
           - $ref: '#/components/schemas/Link'
           description: The staff member who last updated the subtask.
-          nullable: true
         subject:
-          type: string
+          type:
+          - string
+          - 'null'
           description: The subject - a short description of the subtask.
-          nullable: true
           example: Confer with Mary
         completedDate:
-          type: string
+          type:
+          - string
+          - 'null'
           description: '**Deprecated.** Use `CompletedDateOnly` instead.
 
 
             When the subtask was completed in UTC.'
           format: date-time
-          nullable: true
           example: '2020-02-15T13:00:00Z'
           deprecated: true
         completedDateOnly:
-          type: string
+          type:
+          - string
+          - 'null'
           description: 'The date when the subtask was completed.
 
 
@@ -1172,20 +775,22 @@ components:
 
             and should be ignored. Only the date portion is relevant.'
           format: date-time
-          nullable: true
           example: '2020-02-15T00:00:00'
         createdDate:
-          type: string
+          type:
+          - string
+          - 'null'
           description: '**Deprecated.** Use `CreatedDateOnly` instead.
 
 
             When the subtask was created in UTC.'
           format: date-time
-          nullable: true
           example: '2020-02-15T13:00:00Z'
           deprecated: true
         createdDateOnly:
-          type: string
+          type:
+          - string
+          - 'null'
           description: 'The date when the subtask was created.
 
 
@@ -1193,7 +798,6 @@ components:
 
             and should be ignored. Only the date portion is relevant.'
           format: date-time
-          nullable: true
           example: '2020-02-15T00:00:00'
         isCompleted:
           type: boolean
@@ -1216,8 +820,489 @@ components:
       - 1
       - 2
       type: integer
-      description: "Available document types: \"File = 0\", \"FormTemplate = 1\", \"Memo = 2\" \r\n\r\nThe FormTemplate (1) document type is not currently supported for task document creation."
+      description: "Available document types: \"File = 0\", \"FormTemplate = 1\", \"Memo = 2\" \n\nThe FormTemplate (1) document type is not currently supported for task document creation."
       format: int32
+    TaskDto:
+      required:
+      - staffId
+      type: object
+      properties:
+        matterId:
+          type:
+          - string
+          - 'null'
+          description: Unique identifier of the matter associated to the task.
+          example: 750eb5c5-ac0b-7d11-4997-e0ce9d8896c8
+        staffId:
+          minLength: 1
+          type: string
+          description: Unique identifier of the associated staff member creating or updating the task.
+          example: 750eb5c5-ac0b-7d11-4997-e0ce9d8896c8
+        completedByStaffId:
+          type:
+          - string
+          - 'null'
+          description: Unique identifier of the associated staff member completing the task.
+          example: 750eb5c5-ac0b-7d11-4997-e0ce9d8896c8
+        assigneeIds:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+          description: Unique identifier(s) of the associated staff member(s) assigned to the task.
+        subject:
+          type:
+          - string
+          - 'null'
+          description: The subject - this should be a short description of the task.
+          example: Review contract for John Smith
+        note:
+          type:
+          - string
+          - 'null'
+          description: Notes on the task.
+          example: Contract needs to be reviewed and discussed with John
+        isCompleted:
+          type: boolean
+          description: True when the task is completed.
+          example: false
+        categories:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+          description: Categories for the task.
+        completedDate:
+          type:
+          - string
+          - 'null'
+          description: '**Deprecated.** Use `CompletedDateOnly` instead.
+
+
+            Completed date of the task in UTC.
+
+            If not provided and IsCompleted is set to true, the current date will be used.'
+          format: date-time
+          example: '2020-02-15T13:00:00Z'
+          deprecated: true
+        completedDateOnly:
+          type:
+          - string
+          - 'null'
+          description: 'Completed date of the task. Takes precendence over CompletedDate if set.
+
+            If not provided and IsCompleted is set to true, the current date will be used.
+
+
+            Any time/timezone information will be discarded
+
+            and only the date portion will be considered.'
+          format: date-time
+          example: '2020-02-15'
+        dueDate:
+          type:
+          - string
+          - 'null'
+          description: '**Deprecated.** Use `DueDateOnly` instead.
+
+
+            Due date of the task in UTC.'
+          format: date-time
+          example: '2020-02-15T13:00:00Z'
+          deprecated: true
+        dueDateOnly:
+          type:
+          - string
+          - 'null'
+          description: 'Due date of the task. Takes precendence over DueDate if set.
+
+
+            Any time/timezone information will be discarded
+
+            and only the date portion will be considered.'
+          format: date-time
+          example: '2020-02-15'
+        duration:
+          type:
+          - string
+          - 'null'
+          description: Duration of the task in ISO 8601 duration format.
+          example: PT4H33M
+      additionalProperties: false
+    Task:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+        href:
+          type:
+          - string
+          - 'null'
+        relation:
+          type:
+          - string
+          - 'null'
+        method:
+          type:
+          - string
+          - 'null'
+          default: GET
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+        matter:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          description: Matter associated to the task.
+        parentTask:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          description: The parent task associated to this task. Id is missing if this task is not a sub task.
+        createdBy:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          description: The staff member who created the task.
+        completedBy:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          description: The staff member who completed the task.
+        lastUpdatedBy:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          description: The staff member who last updated the task.
+        assignees:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/Link'
+          description: The staff member(s) assigned to the task.
+        subTasks:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/Link'
+          description: The tasks associated to the task.
+        subject:
+          type:
+          - string
+          - 'null'
+          description: The subject - a short description of the task.
+          example: Review contract for John Smith
+        note:
+          type:
+          - string
+          - 'null'
+          description: Notes on the task.
+          example: Contract needs to be reviewed and discussed with John
+        categories:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+          description: Categories for the task.
+        dueDate:
+          type:
+          - string
+          - 'null'
+          description: '**Deprecated.** Use `DueDateOnly` instead.
+
+
+            The due date of the task in UTC.'
+          format: date-time
+          example: '2020-02-15T13:00:00Z'
+          deprecated: true
+        dueDateOnly:
+          type:
+          - string
+          - 'null'
+          description: 'The due date of the task.
+
+
+            The time portion will always be set to 00:00:00
+
+            and should be ignored. Only the date portion is relevant.'
+          format: date-time
+          example: '2020-02-15T00:00:00'
+        completedDate:
+          type:
+          - string
+          - 'null'
+          description: '**Deprecated.** Use `CompletedDateOnly` instead.
+
+
+            When the task was completed in UTC.'
+          format: date-time
+          example: '2020-02-15T13:00:00Z'
+          deprecated: true
+        completedDateOnly:
+          type:
+          - string
+          - 'null'
+          description: 'The date when the task was completed.
+
+
+            The time portion will always be set to 00:00:00
+
+            and should be ignored. Only the date portion is relevant.'
+          format: date-time
+          example: '2020-02-15T00:00:00'
+        createdDate:
+          type:
+          - string
+          - 'null'
+          description: '**Deprecated.** Use `CreatedDateOnly` instead.
+
+
+            When the task was created in UTC.'
+          format: date-time
+          example: '2020-02-15T13:00:00Z'
+          deprecated: true
+        createdDateOnly:
+          type:
+          - string
+          - 'null'
+          description: 'The date when the task was created.
+
+
+            The time portion will always be set to 00:00:00
+
+            and should be ignored. Only the date portion is relevant.'
+          format: date-time
+          example: '2020-02-15T00:00:00'
+        isCompleted:
+          type: boolean
+          description: True when the task is completed.
+          example: false
+        isDeleted:
+          type: boolean
+          description: True when the task is deleted.
+          example: false
+        lastUpdated:
+          type: integer
+          description: Last updated timestamp.
+          format: int64
+          example: 637847425252027400
+        duration:
+          type:
+          - string
+          - 'null'
+          description: Duration of the task in ISO 8601 duration format.
+          example: PT4H33M
+      additionalProperties: false
+    TaskPagedCollection:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+        href:
+          type:
+          - string
+          - 'null'
+        relation:
+          type:
+          - string
+          - 'null'
+        method:
+          type:
+          - string
+          - 'null'
+          default: GET
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+        value:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/Task'
+        offset:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        limit:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        size:
+          type: integer
+          format: int64
+        first:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+        previous:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+        next:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+        last:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+      additionalProperties: false
+    ProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        instance:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
+    TaskDocumentDto:
+      required:
+      - type
+      type: object
+      properties:
+        documentId:
+          type:
+          - string
+          - 'null'
+          description: "Unique identifier of the document (file or memo).\n\nIf a file, the type must be 0 (File). \n\nIf a memo, the type must be 2 (Memo).\n\nThe FormTemplate (1) document type is not currently supported for task document creation."
+          example: cf666f06-3ff2-4a41-8c7f-ab5a8bc6a277
+        type:
+          allOf:
+          - $ref: '#/components/schemas/DocumentType'
+          description: 'The type of the document.
+
+
+            Possible values: File = 0, FormTemplate = 1, Memo = 2.
+
+
+            The FormTemplate (1) document type is not currently supported for task document creation.'
+          example: 0
+      additionalProperties: false
+      description: Data transfer object for a task document.
+    SubTaskCollection:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+        href:
+          type:
+          - string
+          - 'null'
+        relation:
+          type:
+          - string
+          - 'null'
+        method:
+          type:
+          - string
+          - 'null'
+          default: GET
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+        value:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/SubTask'
+      additionalProperties: false
+    TaskDocumentCollection:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+        href:
+          type:
+          - string
+          - 'null'
+        relation:
+          type:
+          - string
+          - 'null'
+        method:
+          type:
+          - string
+          - 'null'
+          default: GET
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+        value:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/TaskDocument'
+      additionalProperties: false
+    TaskDocument:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+        href:
+          type:
+          - string
+          - 'null'
+        relation:
+          type:
+          - string
+          - 'null'
+        method:
+          type:
+          - string
+          - 'null'
+          default: GET
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+        task:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          description: The associated task.
+        type:
+          allOf:
+          - $ref: '#/components/schemas/DocumentType'
+          description: 'The type of the document.
+
+
+            Possible values: File = 0, FormTemplate = 1, Memo = 2.'
+          example: 0
+        isDeleted:
+          type: boolean
+          description: True when the task document has been deleted.
+          example: false
+        document:
+          description: Link to the the document.
+      additionalProperties: false
+      description: Task document resource.
   securitySchemes:
     api-key:
       type: apiKey

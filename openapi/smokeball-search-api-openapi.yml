@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Smokeball Activity Codes Search API
+  title: Smokeball Search API
   version: '1.0'
   description: REST API for integrating with Smokeball legal practice management software. Supports matters, contacts, documents, time entries, billing, trust accounting, staff, webhooks, and law firm workflows across US, AU, and UK regions. Uses OAuth 2.0 (client credentials) authentication.
   contact:
@@ -69,53 +69,6 @@ paths:
           description: When request body fields are invalid.
 components:
   schemas:
-    FileSearchFilters:
-      type: object
-      properties:
-        searchFields:
-          type: array
-          items:
-            type: string
-          description: "Which file fields to match the search query against. Allowed values: `Name`, `Content`.\r\nOmit the property (or pass an empty array) to default to both."
-          nullable: true
-          example:
-          - Name
-          - Content
-        includeFileExtensions:
-          type: array
-          items:
-            type: string
-          description: File extensions to include in the results (e.g. `pdf`, `docx`). When empty or null, all extensions are allowed.
-          nullable: true
-          example:
-          - pdf
-          - docx
-        excludeFileExtensions:
-          type: array
-          items:
-            type: string
-          description: File extensions to exclude from the results. Applied after IncludeFileExtensions.
-          nullable: true
-          example:
-          - tmp
-          - bak
-        authorIds:
-          type: array
-          items:
-            type: string
-          description: User identifiers of file authors to filter by. Results match files authored by any of the supplied users.
-          nullable: true
-          example:
-          - 750eb5c5-ac0b-7d11-4997-e0ce9d8896c8
-        contactIds:
-          type: array
-          items:
-            type: string
-          description: Contact identifiers to filter by. Results match files associated with any of the supplied contacts.
-          nullable: true
-          example:
-          - b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2
-      additionalProperties: false
     FileSearchRequest:
       required:
       - query
@@ -130,7 +83,60 @@ components:
           allOf:
           - $ref: '#/components/schemas/FileSearchFilters'
           description: Filters narrowing the search to specific extensions, date ranges, authors, contacts, and which fields to match against.
-          nullable: true
+      additionalProperties: false
+    FileSearchFilters:
+      type: object
+      properties:
+        searchFields:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+          description: 'Which file fields to match the search query against. Allowed values: `Name`, `Content`.
+
+            Omit the property (or pass an empty array) to default to both.'
+          example:
+          - Name
+          - Content
+        includeFileExtensions:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+          description: File extensions to include in the results (e.g. `pdf`, `docx`). When empty or null, all extensions are allowed.
+          example:
+          - pdf
+          - docx
+        excludeFileExtensions:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+          description: File extensions to exclude from the results. Applied after IncludeFileExtensions.
+          example:
+          - tmp
+          - bak
+        authorIds:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+          description: User identifiers of file authors to filter by. Results match files authored by any of the supplied users.
+          example:
+          - 750eb5c5-ac0b-7d11-4997-e0ce9d8896c8
+        contactIds:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+          description: Contact identifiers to filter by. Results match files associated with any of the supplied contacts.
+          example:
+          - b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2
       additionalProperties: false
   securitySchemes:
     api-key:

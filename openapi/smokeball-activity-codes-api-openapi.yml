@@ -1,4 +1,4 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
   title: Smokeball Activity Codes API
   version: '1.0'
@@ -223,60 +223,108 @@ paths:
                 $ref: '#/components/schemas/ProblemDetails'
 components:
   schemas:
-    ActivityRateType:
-      enum:
-      - 0
-      - 1
-      - 2
-      type: integer
-      description: "The activity rate type.\r\n\r\nPossible values: UseDefaultStaffRate = '0', OverrideRateForAllStaff = '1', OverrideRatePerStaff = '2'"
-      format: int32
+    Link:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+        href:
+          type:
+          - string
+          - 'null'
+        relation:
+          type:
+          - string
+          - 'null'
+        method:
+          type:
+          - string
+          - 'null'
+          default: GET
+      additionalProperties: false
+    ProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        instance:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
     Activity:
       type: object
       properties:
         href:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         relation:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         method:
-          type: string
+          type:
+          - string
+          - 'null'
           default: GET
-          nullable: true
         self:
           allOf:
           - $ref: '#/components/schemas/Link'
-          nullable: true
         id:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Unique identifier of the activity.
-          nullable: true
           example: 23d2a4bc-8529-462e-8560-dfbf4fa24e49
         versionId:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Unique version identifier of the activity.
-          nullable: true
           example: 23d2a4bc-8529-462e-8560-dfbf4fa24e49
         updatedByUserId:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Unique identifier of the user that last updated the activity.
-          nullable: true
           example: 750eb5c5-ac0b-7d11-4997-e0ce9d8896c8
         type:
           allOf:
           - $ref: '#/components/schemas/EntryType'
-          description: "Type of the activity.\r\n\r\nPossible values: Fixed = '0', Time = '1', Expense = '2'"
+          description: 'Type of the activity.
+
+
+            Possible values: Fixed = ''0'', Time = ''1'', Expense = ''2'''
           example: 0
         description:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Description of the activity.
-          nullable: true
           example: Contract review
         code:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Code of the activity.
-          nullable: true
           example: CR
         isBillable:
           type: boolean
@@ -285,21 +333,43 @@ components:
         rateType:
           allOf:
           - $ref: '#/components/schemas/ActivityRateType'
-          description: "The activity rate type.\r\n\r\nPossible values: UseDefaultStaffRate = '0', OverrideRateForAllStaff = '1', OverrideRatePerStaff = '2'"
+          description: 'The activity rate type.
+
+
+            Possible values: UseDefaultStaffRate = ''0'', OverrideRateForAllStaff = ''1'', OverrideRatePerStaff = ''2'''
           example: 2
         rate:
           type: number
-          description: "Rate of the activity in dollars.\r\n\r\nIf set, rate type must be OverrideRateForAllStaff"
+          description: 'Rate of the activity in dollars.
+
+
+            If set, rate type must be OverrideRateForAllStaff'
           format: double
           example: 23.2
         quantity:
           type: number
-          description: "Quantity of the activity. This is the default value used when creating an expense or time-based fee.\r\n\r\nFor type 'Expense', this field represents the quantity of the expense in units.\r\nFor type 'Time', this field represents the duration of in minutes, divided by 100,\r\ne.g. for 1 hour duration, quantity is 0.6, which is 60 minutes divided by 100.\r\n\r\nApplies only for 'Time' and 'Expense' types. Not applicable for activity type 'Fixed'."
+          description: 'Quantity of the activity. This is the default value used when creating an expense or time-based fee.
+
+
+            For type ''Expense'', this field represents the quantity of the expense in units.
+
+            For type ''Time'', this field represents the duration of in minutes, divided by 100,
+
+            e.g. for 1 hour duration, quantity is 0.6, which is 60 minutes divided by 100.
+
+
+            Applies only for ''Time'' and ''Expense'' types. Not applicable for activity type ''Fixed''.'
           format: double
           example: 0.6
         taxInclusive:
           type: boolean
-          description: "If true, the amount is GST inclusive, otherwise GST exclusive. Only applicable in AU.\r\n\r\nGST inclusive means: Amount exc. GST = Amount - GST, Amount inc. GST = Amount.\r\n\r\nGST exclusive means: Amount exc. GST = Amount, Amount inc. GST = Amount + GST."
+          description: 'If true, the amount is GST inclusive, otherwise GST exclusive. Only applicable in AU.
+
+
+            GST inclusive means: Amount exc. GST = Amount - GST, Amount inc. GST = Amount.
+
+
+            GST exclusive means: Amount exc. GST = Amount, Amount inc. GST = Amount + GST.'
           example: true
         taxExempt:
           type: boolean
@@ -318,16 +388,18 @@ components:
           description: True if the activity is deleted.
           example: true
         inputTaxRate:
-          type: number
+          type:
+          - number
+          - 'null'
           description: Input tax rate of the activity percentage accurate to two decimal places.
           format: double
-          nullable: true
           example: 45.63
         outputTaxRate:
-          type: number
+          type:
+          - number
+          - 'null'
           description: Output tax rate of the activity percentage accurate to two decimal places.
           format: double
-          nullable: true
           example: 45.63
       additionalProperties: false
     EntryType:
@@ -336,120 +408,97 @@ components:
       - 1
       - 2
       type: integer
-      description: "Type of the activity.\r\n\r\nPossible values: Fixed = '0', Time = '1', Expense = '2'"
+      description: 'Type of the activity.
+
+
+        Possible values: Fixed = ''0'', Time = ''1'', Expense = ''2'''
       format: int32
-    Link:
-      type: object
-      properties:
-        id:
-          type: string
-          nullable: true
-        href:
-          type: string
-          nullable: true
-        relation:
-          type: string
-          nullable: true
-        method:
-          type: string
-          default: GET
-          nullable: true
-      additionalProperties: false
     ActivityPagedCollection:
       type: object
       properties:
         id:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         href:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         relation:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         method:
-          type: string
+          type:
+          - string
+          - 'null'
           default: GET
-          nullable: true
         self:
           allOf:
           - $ref: '#/components/schemas/Link'
-          nullable: true
         value:
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             $ref: '#/components/schemas/Activity'
-          nullable: true
         offset:
-          type: integer
+          type:
+          - integer
+          - 'null'
           format: int32
-          nullable: true
         limit:
-          type: integer
+          type:
+          - integer
+          - 'null'
           format: int32
-          nullable: true
         size:
           type: integer
           format: int64
         first:
           allOf:
           - $ref: '#/components/schemas/Link'
-          nullable: true
         previous:
           allOf:
           - $ref: '#/components/schemas/Link'
-          nullable: true
         next:
           allOf:
           - $ref: '#/components/schemas/Link'
-          nullable: true
         last:
           allOf:
           - $ref: '#/components/schemas/Link'
-          nullable: true
       additionalProperties: false
-    ProblemDetails:
-      type: object
-      properties:
-        type:
-          type: string
-          nullable: true
-        title:
-          type: string
-          nullable: true
-        status:
-          type: integer
-          format: int32
-          nullable: true
-        detail:
-          type: string
-          nullable: true
-        instance:
-          type: string
-          nullable: true
-      additionalProperties: {}
     ActivityDto:
       type: object
       properties:
         updatedByUserId:
-          type: string
-          description: "Unique identifier of the user updating the activity.\r\n\r\nThis field is reserved for server-to-server operations."
-          nullable: true
+          type:
+          - string
+          - 'null'
+          description: 'Unique identifier of the user updating the activity.
+
+
+            This field is reserved for server-to-server operations.'
           example: 750eb5c5-ac0b-7d11-4997-e0ce9d8896c8
         type:
           allOf:
           - $ref: '#/components/schemas/EntryType'
-          description: "Type of the activity.\r\n\r\nPossible values: Fixed = '0', Time = '1', Expense = '2'"
+          description: 'Type of the activity.
+
+
+            Possible values: Fixed = ''0'', Time = ''1'', Expense = ''2'''
           example: 0
         description:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Description of the activity.
-          nullable: true
           example: Review contract
         code:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Code of the activity. Cannot be longer than 20 characters.
-          nullable: true
           example: RC
         isBillable:
           type: boolean
@@ -458,47 +507,94 @@ components:
         rateType:
           allOf:
           - $ref: '#/components/schemas/ActivityRateType'
-          description: "The activity rate type.\r\n            \r\nPossible values: UseDefaultStaffRate = '0', OverrideRateForAllStaff = '1', OverrideRatePerStaff = '2'"
+          description: "The activity rate type.\n            \nPossible values: UseDefaultStaffRate = '0', OverrideRateForAllStaff = '1', OverrideRatePerStaff = '2'"
           example: 0
         rate:
-          type: number
-          description: "Rate of the activity in dollars.\r\n\r\nIf set, rateType must be OverrideRateForAllStaff"
+          type:
+          - number
+          - 'null'
+          description: 'Rate of the activity in dollars.
+
+
+            If set, rateType must be OverrideRateForAllStaff'
           format: double
-          nullable: true
           example: 23.21
         quantity:
-          type: number
-          description: "Quantity of the activity. This is the default value used when creating an expense or time-based fee.\r\n\r\nFor type 'Expense', this field represents the quantity of the expense in units.\r\nFor type 'Time', this field represents the duration of in minutes, divided by 100,\r\ne.g. for 1 hour duration, quantity is 0.6, which is 60 minutes divided by 100.\r\n\r\nApplies only for 'Time' and 'Expense' types. Not applicable for activity type 'Fixed'."
+          type:
+          - number
+          - 'null'
+          description: 'Quantity of the activity. This is the default value used when creating an expense or time-based fee.
+
+
+            For type ''Expense'', this field represents the quantity of the expense in units.
+
+            For type ''Time'', this field represents the duration of in minutes, divided by 100,
+
+            e.g. for 1 hour duration, quantity is 0.6, which is 60 minutes divided by 100.
+
+
+            Applies only for ''Time'' and ''Expense'' types. Not applicable for activity type ''Fixed''.'
           format: double
-          nullable: true
           example: 0.6
         taxInclusive:
           type: boolean
-          description: "If true, the amount is tax inclusive, otherwise tax exclusive. Only applicable in AU and UK regions.\r\n\r\nTax inclusive means: Amount exc. tax = Amount - Tax, Amount inc. tax = Amount.\r\n\r\nTax exclusive means: Amount exc. tax = Amount, Amount inc. tax = Amount + Tax."
+          description: 'If true, the amount is tax inclusive, otherwise tax exclusive. Only applicable in AU and UK regions.
+
+
+            Tax inclusive means: Amount exc. tax = Amount - Tax, Amount inc. tax = Amount.
+
+
+            Tax exclusive means: Amount exc. tax = Amount, Amount inc. tax = Amount + Tax.'
           example: false
         taxExempt:
           type: boolean
-          description: "True if the activity is exempt from tax.\r\n\r\nThis field is mutually exclusive with TaxZeroRated and TaxOutOfScope."
+          description: 'True if the activity is exempt from tax.
+
+
+            This field is mutually exclusive with TaxZeroRated and TaxOutOfScope.'
           example: false
         taxZeroRated:
           type: boolean
-          description: "True if the activity is zero-rated for tax purposes. Only supported in UK regions.\r\n\r\nThis field is mutually exclusive with TaxOutOfScope and TaxExempt."
+          description: 'True if the activity is zero-rated for tax purposes. Only supported in UK regions.
+
+
+            This field is mutually exclusive with TaxOutOfScope and TaxExempt.'
           example: false
         taxOutOfScope:
           type: boolean
-          description: "True if the activity is out of scope for tax purposes. Only supported in UK regions.\r\n\r\nThis field is mutually exclusive with TaxZeroRated and TaxExempt."
+          description: 'True if the activity is out of scope for tax purposes. Only supported in UK regions.
+
+
+            This field is mutually exclusive with TaxZeroRated and TaxExempt.'
           example: false
         inputTaxRate:
-          type: number
-          description: "Input tax rate of the activity in a percentage accurate to two decimal places.\r\ne.g: 45.63"
+          type:
+          - number
+          - 'null'
+          description: 'Input tax rate of the activity in a percentage accurate to two decimal places.
+
+            e.g: 45.63'
           format: double
-          nullable: true
         outputTaxRate:
-          type: number
-          description: "Output tax rate of the activity percentage accurate to two decimal places.\r\ne.g: 45.63"
+          type:
+          - number
+          - 'null'
+          description: 'Output tax rate of the activity percentage accurate to two decimal places.
+
+            e.g: 45.63'
           format: double
-          nullable: true
       additionalProperties: false
+    ActivityRateType:
+      enum:
+      - 0
+      - 1
+      - 2
+      type: integer
+      description: 'The activity rate type.
+
+
+        Possible values: UseDefaultStaffRate = ''0'', OverrideRateForAllStaff = ''1'', OverrideRatePerStaff = ''2'''
+      format: int32
   securitySchemes:
     api-key:
       type: apiKey
