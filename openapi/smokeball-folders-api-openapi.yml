@@ -353,7 +353,199 @@ paths:
                 $ref: '#/components/schemas/ProblemDetails'
 components:
   schemas:
-    File:
+    FolderListingPagedCollection:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+        href:
+          type:
+          - string
+          - 'null'
+        relation:
+          type:
+          - string
+          - 'null'
+        method:
+          type:
+          - string
+          - 'null'
+          default: GET
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+        value:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/FolderListing'
+        offset:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        limit:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        size:
+          type: integer
+          format: int64
+        first:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+        previous:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+        next:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+        last:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+        parentId:
+          type:
+          - string
+          - 'null'
+          description: Unique identifier of the parent folder
+          example: 750eb5c5-ac0b-7d11-4997-e0ce9d8896c8
+        name:
+          type:
+          - string
+          - 'null'
+          description: Name of the folder
+          example: Property Documents
+      additionalProperties: false
+    FolderListing:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+        href:
+          type:
+          - string
+          - 'null'
+        relation:
+          type:
+          - string
+          - 'null'
+        method:
+          type:
+          - string
+          - 'null'
+          default: GET
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+        folders:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/Folder'
+          description: List of folders
+          readOnly: true
+        files:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/File'
+          description: List of files
+          readOnly: true
+      additionalProperties: false
+    FolderPathSegment:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+          description: Unique identifier of the folder
+          example: b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2
+        name:
+          type:
+          - string
+          - 'null'
+          description: Name of the folder
+          example: Property Documents
+        parentId:
+          type:
+          - string
+          - 'null'
+          description: Unique identifier of the parent folder
+          example: 750eb5c5-ac0b-7d11-4997-e0ce9d8896c8
+        depth:
+          type: integer
+          description: 'The depth of the folder in the folder path hierarchy.
+
+
+            0 indicates the root folder, 1 indicates a direct child of that folder, and so on.'
+          format: int32
+          example: 2
+      additionalProperties: false
+    ProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        instance:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
+    FolderPathSegmentCollection:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+        href:
+          type:
+          - string
+          - 'null'
+        relation:
+          type:
+          - string
+          - 'null'
+        method:
+          type:
+          - string
+          - 'null'
+          default: GET
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+        value:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/FolderPathSegment'
+      additionalProperties: false
+    Folder:
       type: object
       properties:
         href:
@@ -376,95 +568,20 @@ components:
           type:
           - string
           - 'null'
-          description: Unique identifier of the file.
+          description: Unique identifier of the folder
           example: b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2
-        versionId:
+        parentId:
           type:
           - string
           - 'null'
-          description: Unique identifier of the file's current version.
-        folder:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-          description: Hypermedia link of the folder to which the file belongs.
-        matter:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-          description: Hypermedia link of the matter to which the file belongs.
+          description: Unique identifier of the parent folder
+          example: 750eb5c5-ac0b-7d11-4997-e0ce9d8896c8
         name:
           type:
           - string
           - 'null'
-          description: Name of the file, excluding file extension.
-          example: court filing
-        fileExtension:
-          type:
-          - string
-          - 'null'
-          description: Extension of the file.
-          example: .pdf
-        ownerId:
-          type:
-          - string
-          - 'null'
-          description: Unique identifier of the user who created/uploaded this file.
-          example: 750eb5c5-ac0b-7d11-4997-e0ce9d8896c8
-        to:
-          type:
-          - string
-          - 'null'
-          description: The 'To' or recipients' email address (only applicable for email files).
-          example: recipient@email.com
-        from:
-          type:
-          - string
-          - 'null'
-          description: The 'From' or sender's email address (only applicable for email files).
-          example: sender@email.com
-        dateCreated:
-          type: string
-          description: The original datetime that the file was created.
-          format: date-time
-          example: '2022-04-23T14:00:00Z'
-        dateModified:
-          type: string
-          description: The datetime that the file was last modified.
-          format: date-time
-          example: '2022-04-25T17:00:00Z'
-        sizeBytes:
-          type: integer
-          description: Size of the file (in bytes).
-          format: int64
-          example: 19104768
-        downloadInfo:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-          description: Hypermedia link to the download details of the file.
-        additionalData:
-          type:
-          - object
-          - 'null'
-          additionalProperties: {}
-          description: Collection of file meta data as KeyValuePair(string, object).
-        isFavorite:
-          type: boolean
-          description: Flag indicating whether this file is a favorite
-          example: false
-        isUploaded:
-          type: boolean
-          description: Flag indicating whether the file contents are uploaded to the server.
-          example: false
-        isCancelled:
-          type: boolean
-          description: Flag indicating whether the file upload has been cancelled.
-          example: false
-        isDuplicate:
-          type: boolean
-          description: Flag indicating whether the file data is duplicated. Applies to emails only for now.
-        isDeleted:
-          type: boolean
-          description: Flag indicating whether the file has been deleted.
-          example: false
+          description: Name of the folder
+          example: Property Documents
       additionalProperties: false
     Link:
       type: object
@@ -596,7 +713,7 @@ components:
           description: The user who is responsible for this change.
       additionalProperties: false
       description: Represents a single file/folder activity (rename, move, delete, etc.).
-    Folder:
+    File:
       type: object
       properties:
         href:
@@ -619,20 +736,95 @@ components:
           type:
           - string
           - 'null'
-          description: Unique identifier of the folder
+          description: Unique identifier of the file.
           example: b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2
-        parentId:
+        versionId:
           type:
           - string
           - 'null'
-          description: Unique identifier of the parent folder
-          example: 750eb5c5-ac0b-7d11-4997-e0ce9d8896c8
+          description: Unique identifier of the file's current version.
+        folder:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          description: Hypermedia link of the folder to which the file belongs.
+        matter:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          description: Hypermedia link of the matter to which the file belongs.
         name:
           type:
           - string
           - 'null'
-          description: Name of the folder
-          example: Property Documents
+          description: Name of the file, excluding file extension.
+          example: court filing
+        fileExtension:
+          type:
+          - string
+          - 'null'
+          description: Extension of the file.
+          example: .pdf
+        ownerId:
+          type:
+          - string
+          - 'null'
+          description: Unique identifier of the user who created/uploaded this file.
+          example: 750eb5c5-ac0b-7d11-4997-e0ce9d8896c8
+        to:
+          type:
+          - string
+          - 'null'
+          description: The 'To' or recipients' email address (only applicable for email files).
+          example: recipient@email.com
+        from:
+          type:
+          - string
+          - 'null'
+          description: The 'From' or sender's email address (only applicable for email files).
+          example: sender@email.com
+        dateCreated:
+          type: string
+          description: The original datetime that the file was created.
+          format: date-time
+          example: '2022-04-23T14:00:00Z'
+        dateModified:
+          type: string
+          description: The datetime that the file was last modified.
+          format: date-time
+          example: '2022-04-25T17:00:00Z'
+        sizeBytes:
+          type: integer
+          description: Size of the file (in bytes).
+          format: int64
+          example: 19104768
+        downloadInfo:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          description: Hypermedia link to the download details of the file.
+        additionalData:
+          type:
+          - object
+          - 'null'
+          additionalProperties: {}
+          description: Collection of file meta data as KeyValuePair(string, object).
+        isFavorite:
+          type: boolean
+          description: Flag indicating whether this file is a favorite
+          example: false
+        isUploaded:
+          type: boolean
+          description: Flag indicating whether the file contents are uploaded to the server.
+          example: false
+        isCancelled:
+          type: boolean
+          description: Flag indicating whether the file upload has been cancelled.
+          example: false
+        isDuplicate:
+          type: boolean
+          description: Flag indicating whether the file data is duplicated. Applies to emails only for now.
+        isDeleted:
+          type: boolean
+          description: Flag indicating whether the file has been deleted.
+          example: false
       additionalProperties: false
     FileFolderLogEntryCollection:
       type: object
@@ -664,128 +856,6 @@ components:
           items:
             $ref: '#/components/schemas/FileFolderLogEntry'
       additionalProperties: false
-    FolderListingPagedCollection:
-      type: object
-      properties:
-        id:
-          type:
-          - string
-          - 'null'
-        href:
-          type:
-          - string
-          - 'null'
-        relation:
-          type:
-          - string
-          - 'null'
-        method:
-          type:
-          - string
-          - 'null'
-          default: GET
-        self:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-        value:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/FolderListing'
-        offset:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        limit:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        size:
-          type: integer
-          format: int64
-        first:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-        previous:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-        next:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-        last:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-        parentId:
-          type:
-          - string
-          - 'null'
-          description: Unique identifier of the parent folder
-          example: 750eb5c5-ac0b-7d11-4997-e0ce9d8896c8
-        name:
-          type:
-          - string
-          - 'null'
-          description: Name of the folder
-          example: Property Documents
-      additionalProperties: false
-    FolderPathSegment:
-      type: object
-      properties:
-        id:
-          type:
-          - string
-          - 'null'
-          description: Unique identifier of the folder
-          example: b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2
-        name:
-          type:
-          - string
-          - 'null'
-          description: Name of the folder
-          example: Property Documents
-        parentId:
-          type:
-          - string
-          - 'null'
-          description: Unique identifier of the parent folder
-          example: 750eb5c5-ac0b-7d11-4997-e0ce9d8896c8
-        depth:
-          type: integer
-          description: 'The depth of the folder in the folder path hierarchy.
-
-
-            0 indicates the root folder, 1 indicates a direct child of that folder, and so on.'
-          format: int32
-          example: 2
-      additionalProperties: false
-    ProblemDetails:
-      type: object
-      properties:
-        type:
-          type:
-          - string
-          - 'null'
-        title:
-          type:
-          - string
-          - 'null'
-        status:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        detail:
-          type:
-          - string
-          - 'null'
-        instance:
-          type:
-          - string
-          - 'null'
-      additionalProperties: {}
     FolderDto:
       required:
       - name
@@ -809,76 +879,6 @@ components:
           - 'null'
           description: Unique identifier of the user modifying the folder. If null it will fallback to the authenticated user
           example: 750eb5c5-ac0b-7d11-4997-e0ce9d8896c8
-      additionalProperties: false
-    FolderListing:
-      type: object
-      properties:
-        id:
-          type:
-          - string
-          - 'null'
-        href:
-          type:
-          - string
-          - 'null'
-        relation:
-          type:
-          - string
-          - 'null'
-        method:
-          type:
-          - string
-          - 'null'
-          default: GET
-        self:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-        folders:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/Folder'
-          description: List of folders
-          readOnly: true
-        files:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/File'
-          description: List of files
-          readOnly: true
-      additionalProperties: false
-    FolderPathSegmentCollection:
-      type: object
-      properties:
-        id:
-          type:
-          - string
-          - 'null'
-        href:
-          type:
-          - string
-          - 'null'
-        relation:
-          type:
-          - string
-          - 'null'
-        method:
-          type:
-          - string
-          - 'null'
-          default: GET
-        self:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-        value:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/FolderPathSegment'
       additionalProperties: false
   securitySchemes:
     api-key:

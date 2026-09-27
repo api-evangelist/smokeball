@@ -275,128 +275,6 @@ paths:
                 $ref: '#/components/schemas/ProblemDetails'
 components:
   schemas:
-    Link:
-      type: object
-      properties:
-        id:
-          type:
-          - string
-          - 'null'
-        href:
-          type:
-          - string
-          - 'null'
-        relation:
-          type:
-          - string
-          - 'null'
-        method:
-          type:
-          - string
-          - 'null'
-          default: GET
-      additionalProperties: false
-    PolicyDto:
-      type: object
-      properties:
-        principalId:
-          type:
-          - string
-          - 'null'
-          description: 'Principal id associated to this policy if it is a principal based policy. This can be either a user id or a group id.
-
-
-            This is null if the policy is a resource based policy.'
-          example: a7922e80-f833-48f0-8250-c00df1ebbc16
-        resourceId:
-          type:
-          - string
-          - 'null'
-          description: 'Resource id associated to this policy if it is a resource based policy.
-
-
-            This is null if the policy is a principal based policy.'
-          example: matters/54171794-5ca3-472b-889a-c03538d8c89a
-        rules:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/RuleDto'
-          description: The rules associated to this policy.
-      additionalProperties: false
-    Group:
-      type: object
-      properties:
-        href:
-          type:
-          - string
-          - 'null'
-        relation:
-          type:
-          - string
-          - 'null'
-        method:
-          type:
-          - string
-          - 'null'
-          default: GET
-        self:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-        id:
-          type:
-          - string
-          - 'null'
-          description: Unique identifier of the group.
-          example: ed028979-5b64-4f63-82ef-2deef728d852
-        name:
-          type:
-          - string
-          - 'null'
-          description: Name of the group.
-          example: Administrators
-        principalIds:
-          type:
-          - array
-          - 'null'
-          items:
-            type: string
-          description: Principals that are members of the group. This can be either user ids or other group ids.
-          example:
-          - 2595a645-94a2-46be-a60d-8410851a9671
-          - 2595a645-94a2-46be-a60d-8410851a9671
-        isDeleted:
-          type: boolean
-          description: True when the group is deleted.
-          example: false
-      additionalProperties: false
-    AuthorizationPolicyType:
-      enum:
-      - 0
-      - 1
-      type: integer
-      format: int32
-    CreateGroupDto:
-      type: object
-      properties:
-        name:
-          type:
-          - string
-          - 'null'
-          description: "s\n            Name of the group."
-          example: Administrators
-        principalIds:
-          type:
-          - array
-          - 'null'
-          items:
-            type: string
-          description: Principals that are members of the group. This can be either user ids or other group ids.
-          example:
-          - 2595a645-94a2-46be-a60d-8410851a9671
-          - 2595a645-94a2-46be-a60d-8410851a9671
-      additionalProperties: false
     Policy:
       type: object
       properties:
@@ -454,6 +332,110 @@ components:
             $ref: '#/components/schemas/Rule'
           description: The rules associated to this policy.
       additionalProperties: false
+    UpdateGroupDto:
+      type: object
+      properties:
+        principalIds:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+          description: Principals that are members of the group. This can be either user ids or other group ids.
+          example:
+          - 2595a645-94a2-46be-a60d-8410851a9671
+          - 2595a645-94a2-46be-a60d-8410851a9671
+      additionalProperties: false
+    Rule:
+      type: object
+      properties:
+        principalId:
+          type:
+          - string
+          - 'null'
+          description: 'Principal id associated to this rule if the rule is associated to a resource based policy. This can be either a user id or a group id.
+
+
+            This is null if the policy is a principal based policy.'
+          example: a7922e80-f833-48f0-8250-c00df1ebbc16
+        resourceId:
+          type:
+          - string
+          - 'null'
+          description: "Resource id associated to this rule if it is a principal based policy. \n\nFor matter based policies, use `matters/{matterId}` for a single matter or `matters` for all matters.\n\nThis is null if the associated policy is a resource based policy."
+          example: matters/69406c65-309d-4e35-a636-ad145e64770a
+        operation:
+          type: string
+          description: 'The operation associated to this rule.
+
+
+            Possible values: ''Access'',''Execute''.'
+          example: Access
+        type:
+          allOf:
+          - $ref: '#/components/schemas/AuthorizationPolicyType'
+          description: "The type of the rule.\n            \nPossible values: 'Deny','Allow'."
+      additionalProperties: false
+    ProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        instance:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
+    PolicyDto:
+      type: object
+      properties:
+        principalId:
+          type:
+          - string
+          - 'null'
+          description: 'Principal id associated to this policy if it is a principal based policy. This can be either a user id or a group id.
+
+
+            This is null if the policy is a resource based policy.'
+          example: a7922e80-f833-48f0-8250-c00df1ebbc16
+        resourceId:
+          type:
+          - string
+          - 'null'
+          description: 'Resource id associated to this policy if it is a resource based policy.
+
+
+            This is null if the policy is a principal based policy.'
+          example: matters/54171794-5ca3-472b-889a-c03538d8c89a
+        rules:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/RuleDto'
+          description: The rules associated to this policy.
+      additionalProperties: false
+    AuthorizationPolicyType:
+      enum:
+      - 0
+      - 1
+      type: integer
+      format: int32
     RuleDto:
       type: object
       properties:
@@ -483,6 +465,27 @@ components:
           allOf:
           - $ref: '#/components/schemas/AuthorizationPolicyType'
           description: "The type of the rule.\n            \nPossible values: 'Deny','Allow'."
+      additionalProperties: false
+    Link:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+        href:
+          type:
+          - string
+          - 'null'
+        relation:
+          type:
+          - string
+          - 'null'
+        method:
+          type:
+          - string
+          - 'null'
+          default: GET
       additionalProperties: false
     GroupPagedCollection:
       type: object
@@ -539,64 +542,61 @@ components:
           allOf:
           - $ref: '#/components/schemas/Link'
       additionalProperties: false
-    ProblemDetails:
+    Group:
       type: object
       properties:
-        type:
+        href:
           type:
           - string
           - 'null'
-        title:
+        relation:
           type:
           - string
           - 'null'
-        status:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        detail:
+        method:
           type:
           - string
           - 'null'
-        instance:
-          type:
-          - string
-          - 'null'
-      additionalProperties: {}
-    Rule:
-      type: object
-      properties:
-        principalId:
-          type:
-          - string
-          - 'null'
-          description: 'Principal id associated to this rule if the rule is associated to a resource based policy. This can be either a user id or a group id.
-
-
-            This is null if the policy is a principal based policy.'
-          example: a7922e80-f833-48f0-8250-c00df1ebbc16
-        resourceId:
-          type:
-          - string
-          - 'null'
-          description: "Resource id associated to this rule if it is a principal based policy. \n\nFor matter based policies, use `matters/{matterId}` for a single matter or `matters` for all matters.\n\nThis is null if the associated policy is a resource based policy."
-          example: matters/69406c65-309d-4e35-a636-ad145e64770a
-        operation:
-          type: string
-          description: 'The operation associated to this rule.
-
-
-            Possible values: ''Access'',''Execute''.'
-          example: Access
-        type:
+          default: GET
+        self:
           allOf:
-          - $ref: '#/components/schemas/AuthorizationPolicyType'
-          description: "The type of the rule.\n            \nPossible values: 'Deny','Allow'."
+          - $ref: '#/components/schemas/Link'
+        id:
+          type:
+          - string
+          - 'null'
+          description: Unique identifier of the group.
+          example: ed028979-5b64-4f63-82ef-2deef728d852
+        name:
+          type:
+          - string
+          - 'null'
+          description: Name of the group.
+          example: Administrators
+        principalIds:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+          description: Principals that are members of the group. This can be either user ids or other group ids.
+          example:
+          - 2595a645-94a2-46be-a60d-8410851a9671
+          - 2595a645-94a2-46be-a60d-8410851a9671
+        isDeleted:
+          type: boolean
+          description: True when the group is deleted.
+          example: false
       additionalProperties: false
-    UpdateGroupDto:
+    CreateGroupDto:
       type: object
       properties:
+        name:
+          type:
+          - string
+          - 'null'
+          description: "s\n            Name of the group."
+          example: Administrators
         principalIds:
           type:
           - array

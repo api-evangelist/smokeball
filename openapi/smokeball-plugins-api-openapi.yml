@@ -457,101 +457,6 @@ paths:
                 $ref: '#/components/schemas/ProblemDetails'
 components:
   schemas:
-    Link:
-      type: object
-      properties:
-        id:
-          type:
-          - string
-          - 'null'
-        href:
-          type:
-          - string
-          - 'null'
-        relation:
-          type:
-          - string
-          - 'null'
-        method:
-          type:
-          - string
-          - 'null'
-          default: GET
-      additionalProperties: false
-    PluginPage:
-      type: object
-      properties:
-        title:
-          type:
-          - string
-          - 'null'
-          description: 'Optional: The title of the page rendered by the plugin (where applicable).
-
-            If not specified, the name of the plugin will be used.'
-        width:
-          type: integer
-          description: 'Optional: The width of the page rendered by the plugin (where applicable).
-
-            If not specified, a default width will be used.'
-          format: int32
-        height:
-          type: integer
-          description: 'Optional: The height of the page rendered by the plugin (where applicable).
-
-            If not specified, a default width will be used.'
-          format: int32
-        useDefaultBrowser:
-          type: boolean
-          description: 'Optional: Override browser behavior.
-
-            When true, loads the endpoint in the internal browser (where applicable).'
-      additionalProperties: false
-    PluginVersionDto:
-      type: object
-      properties:
-        name:
-          type:
-          - string
-          - 'null'
-          description: The name of the plugin.
-        description:
-          type:
-          - string
-          - 'null'
-          description: A description of the plugin.
-        placement:
-          type:
-          - string
-          - 'null'
-          description: 'A placement key representing where the plugin should be rendered in the UI.
-
-
-            Placement key must correspond to the type of the plugin.
-
-
-            Refer to documentation for valid placement keys.'
-        requestEndpointUrl:
-          type:
-          - string
-          - 'null'
-          description: 'The url that is called to request the plugin endpoint.
-
-
-            When a user views a plugin, we request the url to view securely through your backend.
-
-
-            Matter and user information is passed to the endpoint through POST body, and the endpoint is expected to return a JSON object containing a url field.
-
-            The plugin will then load the URL and display it to the user.'
-        attributes:
-          allOf:
-          - $ref: '#/components/schemas/PluginAttributes'
-          description: Visual attributes associated to this plugin.
-        availability:
-          allOf:
-          - $ref: '#/components/schemas/PluginAvailability'
-          description: Optional settings for determining the availability of a plugin.
-      additionalProperties: false
     PluginVersion:
       type: object
       properties:
@@ -620,6 +525,96 @@ components:
           format: date-time
           example: '2020-02-15T00:00:00Z'
       additionalProperties: false
+    PluginApplication:
+      enum:
+      - Native
+      - Web
+      - Archie
+      type: string
+      description: The application that the plugin should be rendered in.
+    PluginPage:
+      type: object
+      properties:
+        title:
+          type:
+          - string
+          - 'null'
+          description: 'Optional: The title of the page rendered by the plugin (where applicable).
+
+            If not specified, the name of the plugin will be used.'
+        width:
+          type: integer
+          description: 'Optional: The width of the page rendered by the plugin (where applicable).
+
+            If not specified, a default width will be used.'
+          format: int32
+        height:
+          type: integer
+          description: 'Optional: The height of the page rendered by the plugin (where applicable).
+
+            If not specified, a default width will be used.'
+          format: int32
+        useDefaultBrowser:
+          type: boolean
+          description: 'Optional: Override browser behavior.
+
+            When true, loads the endpoint in the internal browser (where applicable).'
+      additionalProperties: false
+    PluginSubscriptionPagedCollection:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+        href:
+          type:
+          - string
+          - 'null'
+        relation:
+          type:
+          - string
+          - 'null'
+        method:
+          type:
+          - string
+          - 'null'
+          default: GET
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+        value:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/PluginSubscription'
+        offset:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        limit:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        size:
+          type: integer
+          format: int64
+        first:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+        previous:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+        next:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+        last:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+      additionalProperties: false
     PluginAvailability:
       type: object
       properties:
@@ -634,36 +629,37 @@ components:
 
             Plugin is applicable for all matter types if this is left empty.'
       additionalProperties: false
-    PluginAttributes:
+    ProblemDetails:
       type: object
       properties:
-        text:
+        type:
           type:
           - string
           - 'null'
-          description: The text to be rendered on the plugin component (where applicable).
-        icon:
+        title:
           type:
           - string
           - 'null'
-          description: 'The Icon to be rendered on the plugin component (where applicable).
-
-            Refer to documentation for a full list of icons.'
-        color:
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
           type:
           - string
           - 'null'
-          description: The hex color code to be rendered on the plugin component (where applicable).
-        tooltip:
+        instance:
           type:
           - string
           - 'null'
-          description: 'Optional: The tooltip to display on component hover (where applicable).'
-        page:
-          allOf:
-          - $ref: '#/components/schemas/PluginPage'
-          description: Page attributes for the plugin (where applicable).
-      additionalProperties: false
+      additionalProperties: {}
+    PluginType:
+      enum:
+      - Button
+      - Tab
+      type: string
+      description: The type of component the plugin should represent.
     Plugin:
       type: object
       properties:
@@ -731,60 +727,51 @@ components:
           additionalProperties: {}
           description: Collection of plugin meta data as KeyValuePair(string, object).
       additionalProperties: false
-    PluginSubscriptionPagedCollection:
+    PluginVersionDto:
       type: object
       properties:
-        id:
+        name:
           type:
           - string
           - 'null'
-        href:
+          description: The name of the plugin.
+        description:
           type:
           - string
           - 'null'
-        relation:
+          description: A description of the plugin.
+        placement:
           type:
           - string
           - 'null'
-        method:
+          description: 'A placement key representing where the plugin should be rendered in the UI.
+
+
+            Placement key must correspond to the type of the plugin.
+
+
+            Refer to documentation for valid placement keys.'
+        requestEndpointUrl:
           type:
           - string
           - 'null'
-          default: GET
-        self:
+          description: 'The url that is called to request the plugin endpoint.
+
+
+            When a user views a plugin, we request the url to view securely through your backend.
+
+
+            Matter and user information is passed to the endpoint through POST body, and the endpoint is expected to return a JSON object containing a url field.
+
+            The plugin will then load the URL and display it to the user.'
+        attributes:
           allOf:
-          - $ref: '#/components/schemas/Link'
-        value:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/PluginSubscription'
-        offset:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        limit:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        size:
-          type: integer
-          format: int64
-        first:
+          - $ref: '#/components/schemas/PluginAttributes'
+          description: Visual attributes associated to this plugin.
+        availability:
           allOf:
-          - $ref: '#/components/schemas/Link'
-        previous:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-        next:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-        last:
-          allOf:
-          - $ref: '#/components/schemas/Link'
+          - $ref: '#/components/schemas/PluginAvailability'
+          description: Optional settings for determining the availability of a plugin.
       additionalProperties: false
     PluginUrlRequestDto:
       type: object
@@ -804,38 +791,57 @@ components:
 
             Reserved keys (AccountId, UserId, UserEmail, MatterId) will be rejected.'
       additionalProperties: false
-    PluginApplication:
-      enum:
-      - Native
-      - Web
-      - Archie
-      type: string
-      description: The application that the plugin should be rendered in.
-    ProblemDetails:
+    Link:
       type: object
       properties:
-        type:
+        id:
           type:
           - string
           - 'null'
-        title:
+        href:
           type:
           - string
           - 'null'
-        status:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        detail:
+        relation:
           type:
           - string
           - 'null'
-        instance:
+        method:
           type:
           - string
           - 'null'
-      additionalProperties: {}
+          default: GET
+      additionalProperties: false
+    PluginAttributes:
+      type: object
+      properties:
+        text:
+          type:
+          - string
+          - 'null'
+          description: The text to be rendered on the plugin component (where applicable).
+        icon:
+          type:
+          - string
+          - 'null'
+          description: 'The Icon to be rendered on the plugin component (where applicable).
+
+            Refer to documentation for a full list of icons.'
+        color:
+          type:
+          - string
+          - 'null'
+          description: The hex color code to be rendered on the plugin component (where applicable).
+        tooltip:
+          type:
+          - string
+          - 'null'
+          description: 'Optional: The tooltip to display on component hover (where applicable).'
+        page:
+          allOf:
+          - $ref: '#/components/schemas/PluginPage'
+          description: Page attributes for the plugin (where applicable).
+      additionalProperties: false
     PluginDto:
       type: object
       properties:
@@ -869,6 +875,57 @@ components:
           - 'null'
           additionalProperties: {}
           description: Collection of KeyValuePair(string, object) to update Plugin meta data.
+      additionalProperties: false
+    PluginSubscription:
+      type: object
+      properties:
+        href:
+          type:
+          - string
+          - 'null'
+        relation:
+          type:
+          - string
+          - 'null'
+        method:
+          type:
+          - string
+          - 'null'
+          default: GET
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+        id:
+          type:
+          - string
+          - 'null'
+          description: Unique identifier of the subscription.
+          example: b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2
+        pluginId:
+          type:
+          - string
+          - 'null'
+          description: Unique identifier of the plugin.
+          example: b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2
+        pluginVersionId:
+          type:
+          - string
+          - 'null'
+          description: Unique identifier of the plugin version. Can be null.
+          example: b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2
+        createdDate:
+          type: string
+          description: Plugin subscription created date in UTC.
+          format: date-time
+          example: '2020-02-15T00:00:00Z'
+        lastUpdatedDate:
+          type: string
+          description: Plugin subscription last updated date in UTC.
+          format: date-time
+          example: '2020-02-15T00:00:00Z'
+        isDisabled:
+          type: boolean
+          description: True when the subscription is disabled (the plugin will not function for the user).
       additionalProperties: false
     PluginPagedCollection:
       type: object
@@ -925,63 +982,6 @@ components:
           allOf:
           - $ref: '#/components/schemas/Link'
       additionalProperties: false
-    PluginSubscription:
-      type: object
-      properties:
-        href:
-          type:
-          - string
-          - 'null'
-        relation:
-          type:
-          - string
-          - 'null'
-        method:
-          type:
-          - string
-          - 'null'
-          default: GET
-        self:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-        id:
-          type:
-          - string
-          - 'null'
-          description: Unique identifier of the subscription.
-          example: b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2
-        pluginId:
-          type:
-          - string
-          - 'null'
-          description: Unique identifier of the plugin.
-          example: b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2
-        pluginVersionId:
-          type:
-          - string
-          - 'null'
-          description: Unique identifier of the plugin version. Can be null.
-          example: b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2
-        createdDate:
-          type: string
-          description: Plugin subscription created date in UTC.
-          format: date-time
-          example: '2020-02-15T00:00:00Z'
-        lastUpdatedDate:
-          type: string
-          description: Plugin subscription last updated date in UTC.
-          format: date-time
-          example: '2020-02-15T00:00:00Z'
-        isDisabled:
-          type: boolean
-          description: True when the subscription is disabled (the plugin will not function for the user).
-      additionalProperties: false
-    PluginType:
-      enum:
-      - Button
-      - Tab
-      type: string
-      description: The type of component the plugin should represent.
   securitySchemes:
     api-key:
       type: apiKey

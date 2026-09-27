@@ -181,27 +181,6 @@ paths:
       x-excluded: true
 components:
   schemas:
-    Link:
-      type: object
-      properties:
-        id:
-          type:
-          - string
-          - 'null'
-        href:
-          type:
-          - string
-          - 'null'
-        relation:
-          type:
-          - string
-          - 'null'
-        method:
-          type:
-          - string
-          - 'null'
-          default: GET
-      additionalProperties: false
     PromotionCode:
       type: object
       properties:
@@ -345,6 +324,170 @@ components:
         updatedDate:
           type: string
           description: The updated date of the tier.
+          format: date-time
+          example: '2022-04-23T14:00:00Z'
+      additionalProperties: false
+    ProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        instance:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
+    Price:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+          description: The internal price id.
+        externalPriceId:
+          type:
+          - string
+          - 'null'
+          description: The external price id.
+        default:
+          type: boolean
+          description: Returns `true` if the price is the default price.
+          example: true
+        active:
+          type: boolean
+          description: Returns `true` if the Price is active.
+          example: true
+        type:
+          type: string
+          description: The type of price.
+          example: Recurring
+        name:
+          type:
+          - string
+          - 'null'
+          description: The price display name.
+          example: '"$109 per user/month"'
+        amount:
+          type:
+          - number
+          - 'null'
+          description: The per user amount for this pricing option for the specified interval (in cents).
+          format: double
+          example: 5900
+        interval:
+          type: string
+          description: Recurring payment interval type.
+          example: Monthly
+      additionalProperties: false
+    Link:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+        href:
+          type:
+          - string
+          - 'null'
+        relation:
+          type:
+          - string
+          - 'null'
+        method:
+          type:
+          - string
+          - 'null'
+          default: GET
+      additionalProperties: false
+    AddOn:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier of the add-on.
+          format: uuid
+          example: b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2
+        href:
+          type:
+          - string
+          - 'null'
+        relation:
+          type:
+          - string
+          - 'null'
+        method:
+          type:
+          - string
+          - 'null'
+          default: GET
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+        smokeballId:
+          type:
+          - string
+          - 'null'
+          description: "Unique Smokeball identifier of the add-on. \n\nThis identifier convenience purposes only and should not be used to interact with the subscriptions API."
+        productSuite:
+          type:
+          - string
+          - 'null'
+          description: The product suite that this add-on belongs to.
+        name:
+          type:
+          - string
+          - 'null'
+          description: The display name of the add-on.
+          example: Intake
+        description:
+          type:
+          - string
+          - 'null'
+          description: 'The description of the add-on.
+
+
+            Can be used to describe the add-on to a customer.'
+        trialPeriodDays:
+          type:
+          - integer
+          - 'null'
+          description: 'The number of days the add-on can be trialed for.
+
+
+            Cannot be trialed if zero or missing.'
+          format: int32
+        prices:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/Price'
+          description: The price options for the add-on.
+        createdDate:
+          type: string
+          description: The created date of the add-on.
+          format: date-time
+          example: '2022-04-23T14:00:00Z'
+        updatedDate:
+          type: string
+          description: The updated date of the add-on.
           format: date-time
           example: '2022-04-23T14:00:00Z'
       additionalProperties: false
@@ -518,74 +661,6 @@ components:
           - 'null'
           description: Whether this promotion has been deleted.
       additionalProperties: false
-    ProblemDetails:
-      type: object
-      properties:
-        type:
-          type:
-          - string
-          - 'null'
-        title:
-          type:
-          - string
-          - 'null'
-        status:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        detail:
-          type:
-          - string
-          - 'null'
-        instance:
-          type:
-          - string
-          - 'null'
-      additionalProperties: {}
-    Price:
-      type: object
-      properties:
-        id:
-          type:
-          - string
-          - 'null'
-          description: The internal price id.
-        externalPriceId:
-          type:
-          - string
-          - 'null'
-          description: The external price id.
-        default:
-          type: boolean
-          description: Returns `true` if the price is the default price.
-          example: true
-        active:
-          type: boolean
-          description: Returns `true` if the Price is active.
-          example: true
-        type:
-          type: string
-          description: The type of price.
-          example: Recurring
-        name:
-          type:
-          - string
-          - 'null'
-          description: The price display name.
-          example: '"$109 per user/month"'
-        amount:
-          type:
-          - number
-          - 'null'
-          description: The per user amount for this pricing option for the specified interval (in cents).
-          format: double
-          example: 5900
-        interval:
-          type: string
-          description: Recurring payment interval type.
-          example: Monthly
-      additionalProperties: false
     SubscriptionPromotionPagedCollection:
       type: object
       properties:
@@ -640,81 +715,6 @@ components:
         last:
           allOf:
           - $ref: '#/components/schemas/Link'
-      additionalProperties: false
-    AddOn:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Unique identifier of the add-on.
-          format: uuid
-          example: b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2
-        href:
-          type:
-          - string
-          - 'null'
-        relation:
-          type:
-          - string
-          - 'null'
-        method:
-          type:
-          - string
-          - 'null'
-          default: GET
-        self:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-        smokeballId:
-          type:
-          - string
-          - 'null'
-          description: "Unique Smokeball identifier of the add-on. \n\nThis identifier convenience purposes only and should not be used to interact with the subscriptions API."
-        productSuite:
-          type:
-          - string
-          - 'null'
-          description: The product suite that this add-on belongs to.
-        name:
-          type:
-          - string
-          - 'null'
-          description: The display name of the add-on.
-          example: Intake
-        description:
-          type:
-          - string
-          - 'null'
-          description: 'The description of the add-on.
-
-
-            Can be used to describe the add-on to a customer.'
-        trialPeriodDays:
-          type:
-          - integer
-          - 'null'
-          description: 'The number of days the add-on can be trialed for.
-
-
-            Cannot be trialed if zero or missing.'
-          format: int32
-        prices:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/Price'
-          description: The price options for the add-on.
-        createdDate:
-          type: string
-          description: The created date of the add-on.
-          format: date-time
-          example: '2022-04-23T14:00:00Z'
-        updatedDate:
-          type: string
-          description: The updated date of the add-on.
-          format: date-time
-          example: '2022-04-23T14:00:00Z'
       additionalProperties: false
   securitySchemes:
     api-key:

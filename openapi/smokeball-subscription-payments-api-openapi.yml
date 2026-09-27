@@ -401,6 +401,138 @@ paths:
       x-excluded: true
 components:
   schemas:
+    AddPaymentMethodRequest:
+      type: object
+      properties:
+        paymentSystemId:
+          type:
+          - string
+          - 'null'
+          description: Payment system to use.
+          example: STRIPE
+        paymentInformation:
+          allOf:
+          - $ref: '#/components/schemas/PaymentInformation'
+          description: 'Payment information specific to the payment system.
+
+
+            For Stripe, this should be StripePaymentInformation.'
+        isDefault:
+          type:
+          - boolean
+          - 'null'
+          description: "Whether to set this as the default payment method for the entire account \n\nThis does not set the default payment method for the subscription."
+          example: true
+        chargeImmediately:
+          type:
+          - boolean
+          - 'null'
+          description: 'Whether to charge immediately if subscription(s) are overdue.
+
+
+            If true, the payment system will attempt to charge the customer immediately if there are any overdue subscriptions.
+
+
+            If a subscription id is passed as a parameter to the request, only that subscription will be charged immediately if overdue.'
+          example: true
+      additionalProperties: false
+    PaymentSystemCollection:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+        href:
+          type:
+          - string
+          - 'null'
+        relation:
+          type:
+          - string
+          - 'null'
+        method:
+          type:
+          - string
+          - 'null'
+          default: GET
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+        value:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/PaymentSystem'
+      additionalProperties: false
+    SubscriptionType:
+      enum:
+      - 0
+      - 1
+      type: integer
+      format: int32
+    PaymentSystem:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+          description: Id of payment system.
+          example: STRIPE
+        supportedPaymentTypes:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+            description: 'The payment type.
+
+
+              * None - The payment type is missing or unknown.
+
+
+              * CreditCard - Credit Card payment type.
+
+
+              * DirectDeposit - Direct Deposit payment type. (not currently supported)'
+          description: List of supported payment method types.
+      additionalProperties: false
+    RemovePaymentMethodRequest:
+      type: object
+      properties:
+        newDefaultPaymentMethodId:
+          type:
+          - string
+          - 'null'
+          description: Optional ID of payment method to set as new default.
+      additionalProperties: false
+    ProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        instance:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
     PaymentMethod:
       type: object
       properties:
@@ -478,67 +610,25 @@ components:
           format: date-time
           example: '2022-04-23T14:00:00Z'
       additionalProperties: false
-    Link:
+    SetDefaultPaymentMethodRequest:
       type: object
       properties:
-        id:
+        paymentMethodId:
           type:
           - string
           - 'null'
-        href:
-          type:
-          - string
-          - 'null'
-        relation:
-          type:
-          - string
-          - 'null'
-        method:
-          type:
-          - string
-          - 'null'
-          default: GET
-      additionalProperties: false
-    PaymentSystemCollection:
-      type: object
-      properties:
-        id:
-          type:
-          - string
-          - 'null'
-        href:
-          type:
-          - string
-          - 'null'
-        relation:
-          type:
-          - string
-          - 'null'
-        method:
-          type:
-          - string
-          - 'null'
-          default: GET
-        self:
+          description: Public payment method id. Null clears the subscription override which reverts behavior to the Customer's default.
+          format: uuid
+        subscriptionType:
           allOf:
-          - $ref: '#/components/schemas/Link'
-        value:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/PaymentSystem'
+          - $ref: '#/components/schemas/SubscriptionType'
+          description: Deprecated. The subscription type is inferred from the route subscription id.
       additionalProperties: false
+      description: Request to set or clear a subscription default payment method.
     PaymentInformation:
       type: object
       additionalProperties: false
       description: Base class for payment information.
-    SubscriptionType:
-      enum:
-      - 0
-      - 1
-      type: integer
-      format: int32
     PaymentMethodDetails:
       type: object
       properties:
@@ -593,40 +683,6 @@ components:
             Not yet supported.'
           format: int64
       additionalProperties: false
-    RemovePaymentMethodRequest:
-      type: object
-      properties:
-        newDefaultPaymentMethodId:
-          type:
-          - string
-          - 'null'
-          description: Optional ID of payment method to set as new default.
-      additionalProperties: false
-    ProblemDetails:
-      type: object
-      properties:
-        type:
-          type:
-          - string
-          - 'null'
-        title:
-          type:
-          - string
-          - 'null'
-        status:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        detail:
-          type:
-          - string
-          - 'null'
-        instance:
-          type:
-          - string
-          - 'null'
-      additionalProperties: {}
     PaymentMethodPagedCollection:
       type: object
       properties:
@@ -682,82 +738,26 @@ components:
           allOf:
           - $ref: '#/components/schemas/Link'
       additionalProperties: false
-    AddPaymentMethodRequest:
-      type: object
-      properties:
-        paymentSystemId:
-          type:
-          - string
-          - 'null'
-          description: Payment system to use.
-          example: STRIPE
-        paymentInformation:
-          allOf:
-          - $ref: '#/components/schemas/PaymentInformation'
-          description: 'Payment information specific to the payment system.
-
-
-            For Stripe, this should be StripePaymentInformation.'
-        isDefault:
-          type:
-          - boolean
-          - 'null'
-          description: "Whether to set this as the default payment method for the entire account \n\nThis does not set the default payment method for the subscription."
-          example: true
-        chargeImmediately:
-          type:
-          - boolean
-          - 'null'
-          description: 'Whether to charge immediately if subscription(s) are overdue.
-
-
-            If true, the payment system will attempt to charge the customer immediately if there are any overdue subscriptions.
-
-
-            If a subscription id is passed as a parameter to the request, only that subscription will be charged immediately if overdue.'
-          example: true
-      additionalProperties: false
-    SetDefaultPaymentMethodRequest:
-      type: object
-      properties:
-        paymentMethodId:
-          type:
-          - string
-          - 'null'
-          description: Public payment method id. Null clears the subscription override which reverts behavior to the Customer's default.
-          format: uuid
-        subscriptionType:
-          allOf:
-          - $ref: '#/components/schemas/SubscriptionType'
-          description: Deprecated. The subscription type is inferred from the route subscription id.
-      additionalProperties: false
-      description: Request to set or clear a subscription default payment method.
-    PaymentSystem:
+    Link:
       type: object
       properties:
         id:
           type:
           - string
           - 'null'
-          description: Id of payment system.
-          example: STRIPE
-        supportedPaymentTypes:
+        href:
           type:
-          - array
+          - string
           - 'null'
-          items:
-            type: string
-            description: 'The payment type.
-
-
-              * None - The payment type is missing or unknown.
-
-
-              * CreditCard - Credit Card payment type.
-
-
-              * DirectDeposit - Direct Deposit payment type. (not currently supported)'
-          description: List of supported payment method types.
+        relation:
+          type:
+          - string
+          - 'null'
+        method:
+          type:
+          - string
+          - 'null'
+          default: GET
       additionalProperties: false
   securitySchemes:
     api-key:

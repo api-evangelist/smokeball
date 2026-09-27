@@ -219,27 +219,6 @@ paths:
                 $ref: '#/components/schemas/ProblemDetails'
 components:
   schemas:
-    Link:
-      type: object
-      properties:
-        id:
-          type:
-          - string
-          - 'null'
-        href:
-          type:
-          - string
-          - 'null'
-        relation:
-          type:
-          - string
-          - 'null'
-        method:
-          type:
-          - string
-          - 'null'
-          default: GET
-      additionalProperties: false
     StageSet:
       type: object
       properties:
@@ -295,54 +274,31 @@ components:
           example: 637847425252027400
       additionalProperties: false
       description: Contains the stage set and stages information.
-    MatterStage:
+    ProblemDetails:
       type: object
       properties:
-        id:
+        type:
           type:
           - string
           - 'null'
-        href:
+        title:
           type:
           - string
           - 'null'
-        relation:
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
           type:
           - string
           - 'null'
-        method:
+        instance:
           type:
           - string
           - 'null'
-          default: GET
-        self:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-        versionId:
-          type:
-          - string
-          - 'null'
-          description: Version id of the record.
-          example: da4e7fd1-5394-4ca9-b1c6-e18c4e2bf262
-        matter:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-          description: Matter in which this mapping is associated to.
-        stageSet:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-          description: Current stage set of the matter.
-        stage:
-          allOf:
-          - $ref: '#/components/schemas/Stage'
-          description: Current stage of the matter.
-        lastUpdated:
-          type: integer
-          description: Timestamp when the matter stage was last updated.
-          format: int64
-          example: 637847425252027400
-      additionalProperties: false
-      description: Contains the current stage of the matter.
+      additionalProperties: {}
     MatterStagePagedCollection:
       type: object
       properties:
@@ -398,34 +354,13 @@ components:
           allOf:
           - $ref: '#/components/schemas/Link'
       additionalProperties: false
-    ProblemDetails:
+    Link:
       type: object
       properties:
-        type:
+        id:
           type:
           - string
           - 'null'
-        title:
-          type:
-          - string
-          - 'null'
-        status:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        detail:
-          type:
-          - string
-          - 'null'
-        instance:
-          type:
-          - string
-          - 'null'
-      additionalProperties: {}
-    Stage:
-      type: object
-      properties:
         href:
           type:
           - string
@@ -439,38 +374,7 @@ components:
           - string
           - 'null'
           default: GET
-        self:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-        id:
-          type:
-          - string
-          - 'null'
-          description: Unique identifier of the stage.
-          example: 45b94df1-1657-48b0-ae81-583b42ed52d6
-        versionId:
-          type:
-          - string
-          - 'null'
-          description: Version id of the record.
-          example: 09d1f360-b810-4a63-acaa-5ed81a551f06
-        name:
-          type:
-          - string
-          - 'null'
-          description: Name of the stage.
-          example: Review contract
-        isDeleted:
-          type: boolean
-          description: True when the stage is deleted.
-          example: true
-        lastUpdated:
-          type: integer
-          description: Timestamp when the stage was last updated.
-          format: int64
-          example: 637847425252027400
       additionalProperties: false
-      description: Contains information of a stage in a stage set.
     StageSetPagedCollection:
       type: object
       properties:
@@ -526,6 +430,102 @@ components:
           allOf:
           - $ref: '#/components/schemas/Link'
       additionalProperties: false
+    MatterStage:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+        href:
+          type:
+          - string
+          - 'null'
+        relation:
+          type:
+          - string
+          - 'null'
+        method:
+          type:
+          - string
+          - 'null'
+          default: GET
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+        versionId:
+          type:
+          - string
+          - 'null'
+          description: Version id of the record.
+          example: da4e7fd1-5394-4ca9-b1c6-e18c4e2bf262
+        matter:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          description: Matter in which this mapping is associated to.
+        stageSet:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          description: Current stage set of the matter.
+        stage:
+          allOf:
+          - $ref: '#/components/schemas/Stage'
+          description: Current stage of the matter.
+        lastUpdated:
+          type: integer
+          description: Timestamp when the matter stage was last updated.
+          format: int64
+          example: 637847425252027400
+      additionalProperties: false
+      description: Contains the current stage of the matter.
+    Stage:
+      type: object
+      properties:
+        href:
+          type:
+          - string
+          - 'null'
+        relation:
+          type:
+          - string
+          - 'null'
+        method:
+          type:
+          - string
+          - 'null'
+          default: GET
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+        id:
+          type:
+          - string
+          - 'null'
+          description: Unique identifier of the stage.
+          example: 45b94df1-1657-48b0-ae81-583b42ed52d6
+        versionId:
+          type:
+          - string
+          - 'null'
+          description: Version id of the record.
+          example: 09d1f360-b810-4a63-acaa-5ed81a551f06
+        name:
+          type:
+          - string
+          - 'null'
+          description: Name of the stage.
+          example: Review contract
+        isDeleted:
+          type: boolean
+          description: True when the stage is deleted.
+          example: true
+        lastUpdated:
+          type: integer
+          description: Timestamp when the stage was last updated.
+          format: int64
+          example: 637847425252027400
+      additionalProperties: false
+      description: Contains information of a stage in a stage set.
   securitySchemes:
     api-key:
       type: apiKey

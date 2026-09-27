@@ -196,6 +196,31 @@ paths:
                 $ref: '#/components/schemas/ProblemDetails'
 components:
   schemas:
+    ProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        instance:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
     Staff:
       type: object
       properties:
@@ -328,6 +353,18 @@ components:
           - $ref: '#/components/schemas/OutOfOffice'
           description: Staff member's Out-of-office period, if enabled.
       additionalProperties: false
+    OutOfOffice:
+      type: object
+      properties:
+        startDate:
+          type: string
+          description: Out-of-office start date.
+          format: date-time
+        endDate:
+          type: string
+          description: Out-of-office end date.
+          format: date-time
+      additionalProperties: false
     Link:
       type: object
       properties:
@@ -349,6 +386,43 @@ components:
           - 'null'
           default: GET
       additionalProperties: false
+    PhoneNumberDto:
+      type: object
+      properties:
+        areaCode:
+          type:
+          - string
+          - 'null'
+          description: Phone area code.
+          example: '555'
+        number:
+          type:
+          - string
+          - 'null'
+          description: Phone number (excluding area code).
+          example: '1234567'
+      additionalProperties: false
+    LicenceNumber:
+      type: object
+      properties:
+        state:
+          type:
+          - string
+          - 'null'
+          description: State associated to the licence.
+          example: IL
+        type:
+          type:
+          - string
+          - 'null'
+          description: Type of the licence.
+          example: ''
+        number:
+          type:
+          - string
+          - 'null'
+          description: Licence number.
+      additionalProperties: false
     PhoneNumber:
       type: object
       properties:
@@ -365,33 +439,60 @@ components:
           description: Phone number (excluding area code).
           example: '1234567'
       additionalProperties: false
-    OutOfOffice:
+    StaffPagedCollection:
       type: object
       properties:
-        startDate:
-          type: string
-          description: Out-of-office start date.
-          format: date-time
-        endDate:
-          type: string
-          description: Out-of-office end date.
-          format: date-time
-      additionalProperties: false
-    PhoneNumberDto:
-      type: object
-      properties:
-        areaCode:
+        id:
           type:
           - string
           - 'null'
-          description: Phone area code.
-          example: '555'
-        number:
+        href:
           type:
           - string
           - 'null'
-          description: Phone number (excluding area code).
-          example: '1234567'
+        relation:
+          type:
+          - string
+          - 'null'
+        method:
+          type:
+          - string
+          - 'null'
+          default: GET
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+        value:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/Staff'
+        offset:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        limit:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        size:
+          type: integer
+          format: int64
+        first:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+        previous:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+        next:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+        last:
+          allOf:
+          - $ref: '#/components/schemas/Link'
       additionalProperties: false
     StaffDto:
       type: object
@@ -478,107 +579,6 @@ components:
           - 'null'
           description: Staff member's stroke color hex code.
           example: '#64666a'
-      additionalProperties: false
-    StaffPagedCollection:
-      type: object
-      properties:
-        id:
-          type:
-          - string
-          - 'null'
-        href:
-          type:
-          - string
-          - 'null'
-        relation:
-          type:
-          - string
-          - 'null'
-        method:
-          type:
-          - string
-          - 'null'
-          default: GET
-        self:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-        value:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/Staff'
-        offset:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        limit:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        size:
-          type: integer
-          format: int64
-        first:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-        previous:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-        next:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-        last:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-      additionalProperties: false
-    ProblemDetails:
-      type: object
-      properties:
-        type:
-          type:
-          - string
-          - 'null'
-        title:
-          type:
-          - string
-          - 'null'
-        status:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        detail:
-          type:
-          - string
-          - 'null'
-        instance:
-          type:
-          - string
-          - 'null'
-      additionalProperties: {}
-    LicenceNumber:
-      type: object
-      properties:
-        state:
-          type:
-          - string
-          - 'null'
-          description: State associated to the licence.
-          example: IL
-        type:
-          type:
-          - string
-          - 'null'
-          description: Type of the licence.
-          example: ''
-        number:
-          type:
-          - string
-          - 'null'
-          description: Licence number.
       additionalProperties: false
   securitySchemes:
     api-key:

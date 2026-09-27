@@ -302,6 +302,277 @@ paths:
                 $ref: '#/components/schemas/ProblemDetails'
 components:
   schemas:
+    FeeSourceItem:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+        href:
+          type:
+          - string
+          - 'null'
+        relation:
+          type:
+          - string
+          - 'null'
+        method:
+          type:
+          - string
+          - 'null'
+          default: GET
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+        description:
+          type:
+          - string
+          - 'null'
+          description: The description.
+        duration:
+          type: integer
+          description: The duration in minutes.
+          format: int64
+        isBillable:
+          type: boolean
+          description: True if the fee source item is billable.
+      additionalProperties: false
+    ProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        instance:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
+    FeePagedCollection:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+        href:
+          type:
+          - string
+          - 'null'
+        relation:
+          type:
+          - string
+          - 'null'
+        method:
+          type:
+          - string
+          - 'null'
+          default: GET
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+        value:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/Fee'
+        offset:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        limit:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        size:
+          type: integer
+          format: int64
+        first:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+        previous:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+        next:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+        last:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+      additionalProperties: false
+    FeeType:
+      enum:
+      - 0
+      - 1
+      type: integer
+      description: The type of the fee (Fixed = 0, Time = 1).
+      format: int32
+    FeeDto:
+      required:
+      - feeDate
+      - subject
+      type: object
+      properties:
+        updatedByUserId:
+          type:
+          - string
+          - 'null'
+          description: 'Unique identifier of the user updating the fee.
+
+
+            This field is reserved for server-to-server operations.'
+          example: 750eb5c5-ac0b-7d11-4997-e0ce9d8896c8
+        staffId:
+          type:
+          - string
+          - 'null'
+          description: 'Unique identifier of the associated staff member.
+
+
+            When StaffId is not provided, the API will attempt to match your User Id to a Staff Id automatically.'
+          example: 750eb5c5-ac0b-7d11-4997-e0ce9d8896c8
+        invoiceId:
+          type:
+          - string
+          - 'null'
+          description: Unique identifier of the associated invoice.
+          example: 750eb5c5-ac0b-7d11-4997-e0ce9d8896c8
+        activityCode:
+          type:
+          - string
+          - 'null'
+          description: The activity code associated to the fee.
+          example: PRT
+        feeType:
+          allOf:
+          - $ref: '#/components/schemas/FeeType'
+          description: The type of the fee (Fixed = 0, Time = 1).
+          example: 0
+        feeDate:
+          type: string
+          description: The date of the fee.
+          format: date-time
+          example: '2022-07-01'
+        subject:
+          minLength: 1
+          type: string
+          description: The subject - this should be a short description of the fee.
+          example: Review contract
+        description:
+          type:
+          - string
+          - 'null'
+          description: Optional detailed description of the fee.
+          example: Print documents
+        duration:
+          type: integer
+          description: The duration billed - in minutes. This duration is used if there are no sub activities.
+          format: int64
+          example: 60
+        durationWorked:
+          type:
+          - integer
+          - 'null'
+          description: The duration worked - in minutes. This duration is used if there are no sub activities.
+          format: int64
+          example: 50
+        rate:
+          type: number
+          description: The rate of the fee in dollars.
+          format: double
+          example: 350
+        tax:
+          type:
+          - number
+          - 'null'
+          description: 'Tax amount of the fee in dollars. Only applicable in AU and UK regions.
+
+
+            When TaxOutOfScope or TaxExempt is true, this value must be 0.'
+          format: double
+          example: 35
+        taxInclusive:
+          type: boolean
+          description: 'If true, the amount is tax inclusive, otherwise tax exclusive. Only applicable in AU and UK regions.
+
+
+            Tax inclusive means: Amount exc. tax = Amount - Tax, Amount inc. tax = Amount.
+
+
+            Tax exclusive means: Amount exc. tax = Amount, Amount inc. tax = Amount + Tax.
+
+
+            (Amount = Rate for fixed fees, or Rate * Duration for time fees, Tax = value of the Tax field)'
+          example: false
+        taxExempt:
+          type: boolean
+          description: 'True if the fee is exempt from tax.
+
+
+            This field is mutually exclusive with TaxOutOfScope.
+
+            When true, Tax must be 0.'
+          example: false
+        taxOutOfScope:
+          type: boolean
+          description: 'True if the fee is out of scope for tax purposes. Only supported in UK regions.
+
+
+            This field is mutually exclusive with TaxExempt.
+
+            When true, Tax must be 0.'
+          example: false
+        finalized:
+          type: boolean
+          description: True if the fee has been finalized.
+          example: false
+        isWrittenOff:
+          type: boolean
+          description: 'True if the fee is written off. True only allowed if IsBillable is true.
+
+
+            Written off fee will show on an invoice with their amount, but will not be counted in the invoice total.'
+          example: false
+        isBillable:
+          type: boolean
+          description: True if the fee is billable. Non-billable fee will, by default, not be shown on invoices (and, if shown, the amount will be 0).
+          example: false
+        isInvoicedExternally:
+          type: boolean
+          description: True if the fee is invoiced externally.
+          example: false
+        sourceItems:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/FeeSourceItemDto'
+          description: The source items on the fee.
+        createdFromActivityId:
+          type:
+          - string
+          - 'null'
+          description: "Associates an existing activity id to a fee.\nOnly valid for Fee creation. \nValue is supplied by Smokeball for some partners."
+          example: 504b9f77-20c7-4dee-8227-d3007c8f6cea
+      additionalProperties: false
     Link:
       type: object
       properties:
@@ -323,13 +594,25 @@ components:
           - 'null'
           default: GET
       additionalProperties: false
-    FeeType:
-      enum:
-      - 0
-      - 1
-      type: integer
-      description: The type of the fee (Fixed = 0, Time = 1).
-      format: int32
+    FeeSourceItemDto:
+      type: object
+      properties:
+        description:
+          type:
+          - string
+          - 'null'
+          description: The description.
+          example: Print document
+        duration:
+          type: integer
+          description: The duration in minutes.
+          format: int64
+          example: 5
+        isBillable:
+          type: boolean
+          description: True if the fee source item is billable.
+          example: false
+      additionalProperties: false
     Fee:
       type: object
       properties:
@@ -565,289 +848,6 @@ components:
           description: Unique identifier of the Activity used to create the fee, if applicable.
           example: 504b9f77-20c7-4dee-8227-d3007c8f6cea
       additionalProperties: false
-    FeePagedCollection:
-      type: object
-      properties:
-        id:
-          type:
-          - string
-          - 'null'
-        href:
-          type:
-          - string
-          - 'null'
-        relation:
-          type:
-          - string
-          - 'null'
-        method:
-          type:
-          - string
-          - 'null'
-          default: GET
-        self:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-        value:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/Fee'
-        offset:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        limit:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        size:
-          type: integer
-          format: int64
-        first:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-        previous:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-        next:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-        last:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-      additionalProperties: false
-    FeeSourceItemDto:
-      type: object
-      properties:
-        description:
-          type:
-          - string
-          - 'null'
-          description: The description.
-          example: Print document
-        duration:
-          type: integer
-          description: The duration in minutes.
-          format: int64
-          example: 5
-        isBillable:
-          type: boolean
-          description: True if the fee source item is billable.
-          example: false
-      additionalProperties: false
-    FeeSourceItem:
-      type: object
-      properties:
-        id:
-          type:
-          - string
-          - 'null'
-        href:
-          type:
-          - string
-          - 'null'
-        relation:
-          type:
-          - string
-          - 'null'
-        method:
-          type:
-          - string
-          - 'null'
-          default: GET
-        self:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-        description:
-          type:
-          - string
-          - 'null'
-          description: The description.
-        duration:
-          type: integer
-          description: The duration in minutes.
-          format: int64
-        isBillable:
-          type: boolean
-          description: True if the fee source item is billable.
-      additionalProperties: false
-    FeeDto:
-      required:
-      - feeDate
-      - subject
-      type: object
-      properties:
-        updatedByUserId:
-          type:
-          - string
-          - 'null'
-          description: 'Unique identifier of the user updating the fee.
-
-
-            This field is reserved for server-to-server operations.'
-          example: 750eb5c5-ac0b-7d11-4997-e0ce9d8896c8
-        staffId:
-          type:
-          - string
-          - 'null'
-          description: 'Unique identifier of the associated staff member.
-
-
-            When StaffId is not provided, the API will attempt to match your User Id to a Staff Id automatically.'
-          example: 750eb5c5-ac0b-7d11-4997-e0ce9d8896c8
-        invoiceId:
-          type:
-          - string
-          - 'null'
-          description: Unique identifier of the associated invoice.
-          example: 750eb5c5-ac0b-7d11-4997-e0ce9d8896c8
-        activityCode:
-          type:
-          - string
-          - 'null'
-          description: The activity code associated to the fee.
-          example: PRT
-        feeType:
-          allOf:
-          - $ref: '#/components/schemas/FeeType'
-          description: The type of the fee (Fixed = 0, Time = 1).
-          example: 0
-        feeDate:
-          type: string
-          description: The date of the fee.
-          format: date-time
-          example: '2022-07-01'
-        subject:
-          minLength: 1
-          type: string
-          description: The subject - this should be a short description of the fee.
-          example: Review contract
-        description:
-          type:
-          - string
-          - 'null'
-          description: Optional detailed description of the fee.
-          example: Print documents
-        duration:
-          type: integer
-          description: The duration billed - in minutes. This duration is used if there are no sub activities.
-          format: int64
-          example: 60
-        durationWorked:
-          type:
-          - integer
-          - 'null'
-          description: The duration worked - in minutes. This duration is used if there are no sub activities.
-          format: int64
-          example: 50
-        rate:
-          type: number
-          description: The rate of the fee in dollars.
-          format: double
-          example: 350
-        tax:
-          type:
-          - number
-          - 'null'
-          description: 'Tax amount of the fee in dollars. Only applicable in AU and UK regions.
-
-
-            When TaxOutOfScope or TaxExempt is true, this value must be 0.'
-          format: double
-          example: 35
-        taxInclusive:
-          type: boolean
-          description: 'If true, the amount is tax inclusive, otherwise tax exclusive. Only applicable in AU and UK regions.
-
-
-            Tax inclusive means: Amount exc. tax = Amount - Tax, Amount inc. tax = Amount.
-
-
-            Tax exclusive means: Amount exc. tax = Amount, Amount inc. tax = Amount + Tax.
-
-
-            (Amount = Rate for fixed fees, or Rate * Duration for time fees, Tax = value of the Tax field)'
-          example: false
-        taxExempt:
-          type: boolean
-          description: 'True if the fee is exempt from tax.
-
-
-            This field is mutually exclusive with TaxOutOfScope.
-
-            When true, Tax must be 0.'
-          example: false
-        taxOutOfScope:
-          type: boolean
-          description: 'True if the fee is out of scope for tax purposes. Only supported in UK regions.
-
-
-            This field is mutually exclusive with TaxExempt.
-
-            When true, Tax must be 0.'
-          example: false
-        finalized:
-          type: boolean
-          description: True if the fee has been finalized.
-          example: false
-        isWrittenOff:
-          type: boolean
-          description: 'True if the fee is written off. True only allowed if IsBillable is true.
-
-
-            Written off fee will show on an invoice with their amount, but will not be counted in the invoice total.'
-          example: false
-        isBillable:
-          type: boolean
-          description: True if the fee is billable. Non-billable fee will, by default, not be shown on invoices (and, if shown, the amount will be 0).
-          example: false
-        isInvoicedExternally:
-          type: boolean
-          description: True if the fee is invoiced externally.
-          example: false
-        sourceItems:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/FeeSourceItemDto'
-          description: The source items on the fee.
-        createdFromActivityId:
-          type:
-          - string
-          - 'null'
-          description: "Associates an existing activity id to a fee.\nOnly valid for Fee creation. \nValue is supplied by Smokeball for some partners."
-          example: 504b9f77-20c7-4dee-8227-d3007c8f6cea
-      additionalProperties: false
-    ProblemDetails:
-      type: object
-      properties:
-        type:
-          type:
-          - string
-          - 'null'
-        title:
-          type:
-          - string
-          - 'null'
-        status:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        detail:
-          type:
-          - string
-          - 'null'
-        instance:
-          type:
-          - string
-          - 'null'
-      additionalProperties: {}
   securitySchemes:
     api-key:
       type: apiKey

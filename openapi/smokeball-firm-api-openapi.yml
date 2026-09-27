@@ -250,34 +250,29 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    Link:
+    FirmDxAddressDto:
       type: object
       properties:
-        id:
+        number:
           type:
           - string
           - 'null'
-        href:
+          description: Direct Exchange number (if applicable).
+          example: '376'
+        exchange:
           type:
           - string
           - 'null'
-        relation:
+          description: Direct Exchange name.
+          example: DX
+        state:
           type:
           - string
           - 'null'
-        method:
-          type:
-          - string
-          - 'null'
-          default: GET
+          description: State, province, or region.
+          example: NSW
       additionalProperties: false
-    FirmAccountStatus:
-      enum:
-      - Active
-      - Warning
-      - Suspended
-      type: string
-    FirmAddressDto:
+    FirmAddress:
       type: object
       properties:
         buildingLevel:
@@ -338,7 +333,7 @@ components:
           type:
           - string
           - 'null'
-          description: State, province, or region (if applicable).
+          description: State, province, or region.
           example: IL
         zipCode:
           type:
@@ -350,14 +345,14 @@ components:
           type:
           - string
           - 'null'
-          description: County (if applicable).
-          example: ''
+          description: County (if applicable)
+          example: Berkshire
         locality:
           type:
           - string
           - 'null'
-          description: Locality (if applicable).
-          example: ''
+          description: Locality (if applicable)
+          example: Windsor
         country:
           type:
           - string
@@ -369,85 +364,85 @@ components:
           - string
           - 'null'
           description: Care of the addressee (if applicable).
+          readOnly: true
           example: ''
         poBoxType:
           type:
           - string
           - 'null'
           description: PO box type in address (if applicable).
+          readOnly: true
           example: ''
         poBoxNumber:
           type:
           - string
           - 'null'
           description: PO box Number in address (if applicable).
+          readOnly: true
           example: ''
       additionalProperties: false
-    FirmSubscriptionDto:
+    PhoneNumber:
       type: object
       properties:
-        productSuite:
+        areaCode:
           type:
           - string
           - 'null'
-          description: 'Optional product suite to use when creating the firm.
-
-
-            Use ''SMOKEBALL'' to use the new product suite.'
-        promotionId:
-          type:
-          - string
-          - 'null'
-          description: Optional promotion ID that will be used when the firm is subscribed.
-        interval:
-          type:
-          - string
-          - 'null'
-          description: 'Optional interval to register the account subscription with.
-
-
-            Possible values: Monthly, Yearly'
-      additionalProperties: false
-      description: The subscription details for the firm.
-    FirmDxAddressDto:
-      type: object
-      properties:
+          description: Phone area code.
+          example: '555'
         number:
           type:
           - string
           - 'null'
-          description: Direct Exchange number (if applicable).
-          example: '376'
-        exchange:
-          type:
-          - string
-          - 'null'
-          description: Direct Exchange name.
-          example: DX
-        state:
-          type:
-          - string
-          - 'null'
-          description: State, province, or region.
-          example: NSW
+          description: Phone number (excluding area code).
+          example: '1234567'
       additionalProperties: false
-    FirmUserDto:
+    FirmUser:
       type: object
       properties:
-        userId:
+        id:
           type:
           - string
           - 'null'
-          description: Unique identifier of the associated user.
-          example: b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2
+        href:
+          type:
+          - string
+          - 'null'
+        relation:
+          type:
+          - string
+          - 'null'
+        method:
+          type:
+          - string
+          - 'null'
+          default: GET
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
         staffId:
           type:
           - string
           - 'null'
-          description: Unique identifier of the associated staff member..
+          description: Unique identifier of the staff member.
           example: 750eb5c5-ac0b-7d11-4997-e0ce9d8896c8
+        userId:
+          type:
+          - string
+          - 'null'
+          description: Unique identifier of the user.
+          example: b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2
+        isFormerUser:
+          type: boolean
+          description: Returns true if this user is a former user.
+          example: false
       additionalProperties: false
-      description: Represents a mapping between a user and a staff member in a firm.
+    FirmAccountStatus:
+      enum:
+      - Active
+      - Warning
+      - Suspended
+      type: string
     FirmStatus:
       type: object
       properties:
@@ -664,169 +659,6 @@ components:
           format: date-time
           example: '2024-01-15T10:30:00Z'
       additionalProperties: false
-    PhoneNumber:
-      type: object
-      properties:
-        areaCode:
-          type:
-          - string
-          - 'null'
-          description: Phone area code.
-          example: '555'
-        number:
-          type:
-          - string
-          - 'null'
-          description: Phone number (excluding area code).
-          example: '1234567'
-      additionalProperties: false
-    StylingDetails:
-      type: object
-      properties:
-        primaryColorHexCode:
-          type:
-          - string
-          - 'null'
-          description: Firm's primary color hex code.
-          example: '#FF000000'
-        secondaryColorHexCode:
-          type:
-          - string
-          - 'null'
-          description: Firm's secondary color hex code.
-          example: '#FF000000'
-        fontFamilyName:
-          type:
-          - string
-          - 'null'
-          description: Firm's font family name.
-          example: Open Sans
-      additionalProperties: false
-    FirmAddress:
-      type: object
-      properties:
-        buildingLevel:
-          type:
-          - string
-          - 'null'
-          description: Building level in address (if applicable).
-          example: Level 1
-        unitNumber:
-          type:
-          - string
-          - 'null'
-          description: Unit number in address (if applicable).
-          example: '10'
-        unitType:
-          type:
-          - string
-          - 'null'
-          description: Unit type (e.g. Unit,Flat,Villa,Suite,etc.) in address (if applicable).
-          example: Suite
-        streetNumber:
-          type:
-          - string
-          - 'null'
-          description: Street number in address.
-          example: '100'
-        streetName:
-          type:
-          - string
-          - 'null'
-          description: Street name in address.
-          example: Broad
-        streetType:
-          type:
-          - string
-          - 'null'
-          description: Street type (e.g. Street,Road,Avenue,Lane,etc.) in address.
-          example: Street
-        addressLine1:
-          type:
-          - string
-          - 'null'
-          description: First line of address.
-          example: Level 1/10
-        addressLine2:
-          type:
-          - string
-          - 'null'
-          description: Second line of address (if applicable).
-          example: 100 Broad Street
-        city:
-          type:
-          - string
-          - 'null'
-          description: City, district, suburb, town, or village.
-          example: Chicago
-        state:
-          type:
-          - string
-          - 'null'
-          description: State, province, or region.
-          example: IL
-        zipCode:
-          type:
-          - string
-          - 'null'
-          description: Zip or post code.
-          example: '60606'
-        county:
-          type:
-          - string
-          - 'null'
-          description: County (if applicable)
-          example: Berkshire
-        locality:
-          type:
-          - string
-          - 'null'
-          description: Locality (if applicable)
-          example: Windsor
-        country:
-          type:
-          - string
-          - 'null'
-          description: Country.
-          example: United States
-        careOf:
-          type:
-          - string
-          - 'null'
-          description: Care of the addressee (if applicable).
-          readOnly: true
-          example: ''
-        poBoxType:
-          type:
-          - string
-          - 'null'
-          description: PO box type in address (if applicable).
-          readOnly: true
-          example: ''
-        poBoxNumber:
-          type:
-          - string
-          - 'null'
-          description: PO box Number in address (if applicable).
-          readOnly: true
-          example: ''
-      additionalProperties: false
-    PhoneNumberDto:
-      type: object
-      properties:
-        areaCode:
-          type:
-          - string
-          - 'null'
-          description: Phone area code.
-          example: '555'
-        number:
-          type:
-          - string
-          - 'null'
-          description: Phone number (excluding area code).
-          example: '1234567'
-      additionalProperties: false
     ProblemDetails:
       type: object
       properties:
@@ -852,205 +684,6 @@ components:
           - string
           - 'null'
       additionalProperties: {}
-    LicenceNumber:
-      type: object
-      properties:
-        state:
-          type:
-          - string
-          - 'null'
-          description: State associated to the licence.
-          example: IL
-        type:
-          type:
-          - string
-          - 'null'
-          description: Type of the licence.
-          example: ''
-        number:
-          type:
-          - string
-          - 'null'
-          description: Licence number.
-      additionalProperties: false
-    UpdateFirmDto:
-      type: object
-      properties:
-        productId:
-          type:
-          - string
-          - 'null'
-          description: 'The product/tier the firm is subscribed to. Must be set when creating the firm and is optional when updating the firm.
-
-
-            The supported products are listed in order below, the identifier (in brackets) must be used.
-
-
-            * Bill (SMK001)
-
-
-            * Boost (SMK004)
-
-
-            * Grow (SMK002)
-
-
-            * Prosper + (SMK003)
-
-
-            Possible values: SMK001, SMK004, SMK002, SMK003'
-          example: SMK001
-        addOnIds:
-          uniqueItems: true
-          type:
-          - array
-          - 'null'
-          items:
-            type: string
-          description: 'The optional add-ons the firm is subscribed to. Must be specified with an accompanying productId.
-
-
-            The supported add-ons are listed below, the identifier (listed in brackets) must be used.
-
-
-            * Intake (ADD001)
-
-
-            * AutoTime (ADD003)
-
-
-            * FamilyPro (ADD004)
-
-
-            * Api (ADD005)
-
-
-            * Workflows (ADD006)
-
-
-            * PowerBI (ADD007)
-
-
-            * Archie (ADD008)
-
-
-            * SSO (ADD010)
-
-
-            Possible values: ADD01, ADD003, ADD004, ADD005, ADD006, ADD007, ADD008, ADD010'
-          example:
-          - ADD01
-          - ADD003
-        name:
-          type:
-          - string
-          - 'null'
-          description: The name of the firm.
-          example: Brown LLC
-        email:
-          type:
-          - string
-          - 'null'
-          description: 'The email of the firm.
-
-
-            Only supported in AU.'
-          example: john.smith@law.com
-        abn:
-          type:
-          - string
-          - 'null'
-          description: 'Represents a different field depending on the region.
-
-
-            * For AU: Australian Business Number (ABN) of the firm.
-
-
-            * For UK: Value-added Tax Number (VAT) of the firm.
-
-
-            Only supported in AU and UK.'
-          example: '1234567890'
-        acn:
-          type:
-          - string
-          - 'null'
-          description: 'Represents a different field depending on the region.
-
-
-            * For AU: Australian Company Number (ACN) of the firm.
-
-
-            * For UK: Company Registration Number (CRN) of the firm.
-
-
-            Only supported in AU and UK.'
-          example: '1234567890'
-        streetAddress:
-          allOf:
-          - $ref: '#/components/schemas/FirmAddressDto'
-          description: Street address of the firm.
-        mailingAddress:
-          allOf:
-          - $ref: '#/components/schemas/FirmAddressDto'
-          description: Mailing address of the firm.
-        dxAddress:
-          allOf:
-          - $ref: '#/components/schemas/FirmDxAddressDto'
-          description: 'DX address of the firm.
-
-
-            Only supported in AU.'
-        phone:
-          allOf:
-          - $ref: '#/components/schemas/PhoneNumberDto'
-          description: Phone number of the firm.
-        fax:
-          allOf:
-          - $ref: '#/components/schemas/PhoneNumberDto'
-          description: Fax number of the firm.
-        status:
-          allOf:
-          - $ref: '#/components/schemas/FirmStatusDto'
-          description: The status of the firm.
-      additionalProperties: false
-    FirmStatusDto:
-      type: object
-      properties:
-        status:
-          allOf:
-          - $ref: '#/components/schemas/FirmAccountStatus'
-          description: The status of the firm account.
-          example: Active
-        statusMessage:
-          type:
-          - string
-          - 'null'
-          description: The status message of the firm. If left blank, an appropriate message is set depending on the status.
-      additionalProperties: false
-      description: The status of the firm.
-    DxAddress:
-      type: object
-      properties:
-        number:
-          type:
-          - string
-          - 'null'
-          description: Direct Exchange number (if applicable).
-          example: '376'
-        exchange:
-          type:
-          - string
-          - 'null'
-          description: Direct Exchange name.
-          example: DX
-        state:
-          type:
-          - string
-          - 'null'
-          description: State, province, or region.
-          example: NSW
-      additionalProperties: false
     CreateFirmDto:
       type: object
       properties:
@@ -1200,7 +833,155 @@ components:
           - $ref: '#/components/schemas/FirmSubscriptionDto'
           description: Optional subscription details that will be used when creating the firm.
       additionalProperties: false
-    FirmUser:
+    FirmAddressDto:
+      type: object
+      properties:
+        buildingLevel:
+          type:
+          - string
+          - 'null'
+          description: Building level in address (if applicable).
+          example: Level 1
+        unitNumber:
+          type:
+          - string
+          - 'null'
+          description: Unit number in address (if applicable).
+          example: '10'
+        unitType:
+          type:
+          - string
+          - 'null'
+          description: Unit type (e.g. Unit,Flat,Villa,Suite,etc.) in address (if applicable).
+          example: Suite
+        streetNumber:
+          type:
+          - string
+          - 'null'
+          description: Street number in address.
+          example: '100'
+        streetName:
+          type:
+          - string
+          - 'null'
+          description: Street name in address.
+          example: Broad
+        streetType:
+          type:
+          - string
+          - 'null'
+          description: Street type (e.g. Street,Road,Avenue,Lane,etc.) in address.
+          example: Street
+        addressLine1:
+          type:
+          - string
+          - 'null'
+          description: First line of address.
+          example: Level 1/10
+        addressLine2:
+          type:
+          - string
+          - 'null'
+          description: Second line of address (if applicable).
+          example: 100 Broad Street
+        city:
+          type:
+          - string
+          - 'null'
+          description: City, district, suburb, town, or village.
+          example: Chicago
+        state:
+          type:
+          - string
+          - 'null'
+          description: State, province, or region (if applicable).
+          example: IL
+        zipCode:
+          type:
+          - string
+          - 'null'
+          description: Zip or post code.
+          example: '60606'
+        county:
+          type:
+          - string
+          - 'null'
+          description: County (if applicable).
+          example: ''
+        locality:
+          type:
+          - string
+          - 'null'
+          description: Locality (if applicable).
+          example: ''
+        country:
+          type:
+          - string
+          - 'null'
+          description: Country.
+          example: United States
+        careOf:
+          type:
+          - string
+          - 'null'
+          description: Care of the addressee (if applicable).
+          example: ''
+        poBoxType:
+          type:
+          - string
+          - 'null'
+          description: PO box type in address (if applicable).
+          example: ''
+        poBoxNumber:
+          type:
+          - string
+          - 'null'
+          description: PO box Number in address (if applicable).
+          example: ''
+      additionalProperties: false
+    FirmSubscriptionDto:
+      type: object
+      properties:
+        productSuite:
+          type:
+          - string
+          - 'null'
+          description: 'Optional product suite to use when creating the firm.
+
+
+            Use ''SMOKEBALL'' to use the new product suite.'
+        promotionId:
+          type:
+          - string
+          - 'null'
+          description: Optional promotion ID that will be used when the firm is subscribed.
+        interval:
+          type:
+          - string
+          - 'null'
+          description: 'Optional interval to register the account subscription with.
+
+
+            Possible values: Monthly, Yearly'
+      additionalProperties: false
+      description: The subscription details for the firm.
+    PhoneNumberDto:
+      type: object
+      properties:
+        areaCode:
+          type:
+          - string
+          - 'null'
+          description: Phone area code.
+          example: '555'
+        number:
+          type:
+          - string
+          - 'null'
+          description: Phone number (excluding area code).
+          example: '1234567'
+      additionalProperties: false
+    Link:
       type: object
       properties:
         id:
@@ -1220,25 +1001,244 @@ components:
           - string
           - 'null'
           default: GET
-        self:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-        staffId:
+      additionalProperties: false
+    LicenceNumber:
+      type: object
+      properties:
+        state:
           type:
           - string
           - 'null'
-          description: Unique identifier of the staff member.
-          example: 750eb5c5-ac0b-7d11-4997-e0ce9d8896c8
+          description: State associated to the licence.
+          example: IL
+        type:
+          type:
+          - string
+          - 'null'
+          description: Type of the licence.
+          example: ''
+        number:
+          type:
+          - string
+          - 'null'
+          description: Licence number.
+      additionalProperties: false
+    DxAddress:
+      type: object
+      properties:
+        number:
+          type:
+          - string
+          - 'null'
+          description: Direct Exchange number (if applicable).
+          example: '376'
+        exchange:
+          type:
+          - string
+          - 'null'
+          description: Direct Exchange name.
+          example: DX
+        state:
+          type:
+          - string
+          - 'null'
+          description: State, province, or region.
+          example: NSW
+      additionalProperties: false
+    FirmStatusDto:
+      type: object
+      properties:
+        status:
+          allOf:
+          - $ref: '#/components/schemas/FirmAccountStatus'
+          description: The status of the firm account.
+          example: Active
+        statusMessage:
+          type:
+          - string
+          - 'null'
+          description: The status message of the firm. If left blank, an appropriate message is set depending on the status.
+      additionalProperties: false
+      description: The status of the firm.
+    StylingDetails:
+      type: object
+      properties:
+        primaryColorHexCode:
+          type:
+          - string
+          - 'null'
+          description: Firm's primary color hex code.
+          example: '#FF000000'
+        secondaryColorHexCode:
+          type:
+          - string
+          - 'null'
+          description: Firm's secondary color hex code.
+          example: '#FF000000'
+        fontFamilyName:
+          type:
+          - string
+          - 'null'
+          description: Firm's font family name.
+          example: Open Sans
+      additionalProperties: false
+    FirmUserDto:
+      type: object
+      properties:
         userId:
           type:
           - string
           - 'null'
-          description: Unique identifier of the user.
+          description: Unique identifier of the associated user.
           example: b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2
-        isFormerUser:
-          type: boolean
-          description: Returns true if this user is a former user.
-          example: false
+        staffId:
+          type:
+          - string
+          - 'null'
+          description: Unique identifier of the associated staff member..
+          example: 750eb5c5-ac0b-7d11-4997-e0ce9d8896c8
+      additionalProperties: false
+      description: Represents a mapping between a user and a staff member in a firm.
+    UpdateFirmDto:
+      type: object
+      properties:
+        productId:
+          type:
+          - string
+          - 'null'
+          description: 'The product/tier the firm is subscribed to. Must be set when creating the firm and is optional when updating the firm.
+
+
+            The supported products are listed in order below, the identifier (in brackets) must be used.
+
+
+            * Bill (SMK001)
+
+
+            * Boost (SMK004)
+
+
+            * Grow (SMK002)
+
+
+            * Prosper + (SMK003)
+
+
+            Possible values: SMK001, SMK004, SMK002, SMK003'
+          example: SMK001
+        addOnIds:
+          uniqueItems: true
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+          description: 'The optional add-ons the firm is subscribed to. Must be specified with an accompanying productId.
+
+
+            The supported add-ons are listed below, the identifier (listed in brackets) must be used.
+
+
+            * Intake (ADD001)
+
+
+            * AutoTime (ADD003)
+
+
+            * FamilyPro (ADD004)
+
+
+            * Api (ADD005)
+
+
+            * Workflows (ADD006)
+
+
+            * PowerBI (ADD007)
+
+
+            * Archie (ADD008)
+
+
+            * SSO (ADD010)
+
+
+            Possible values: ADD01, ADD003, ADD004, ADD005, ADD006, ADD007, ADD008, ADD010'
+          example:
+          - ADD01
+          - ADD003
+        name:
+          type:
+          - string
+          - 'null'
+          description: The name of the firm.
+          example: Brown LLC
+        email:
+          type:
+          - string
+          - 'null'
+          description: 'The email of the firm.
+
+
+            Only supported in AU.'
+          example: john.smith@law.com
+        abn:
+          type:
+          - string
+          - 'null'
+          description: 'Represents a different field depending on the region.
+
+
+            * For AU: Australian Business Number (ABN) of the firm.
+
+
+            * For UK: Value-added Tax Number (VAT) of the firm.
+
+
+            Only supported in AU and UK.'
+          example: '1234567890'
+        acn:
+          type:
+          - string
+          - 'null'
+          description: 'Represents a different field depending on the region.
+
+
+            * For AU: Australian Company Number (ACN) of the firm.
+
+
+            * For UK: Company Registration Number (CRN) of the firm.
+
+
+            Only supported in AU and UK.'
+          example: '1234567890'
+        streetAddress:
+          allOf:
+          - $ref: '#/components/schemas/FirmAddressDto'
+          description: Street address of the firm.
+        mailingAddress:
+          allOf:
+          - $ref: '#/components/schemas/FirmAddressDto'
+          description: Mailing address of the firm.
+        dxAddress:
+          allOf:
+          - $ref: '#/components/schemas/FirmDxAddressDto'
+          description: 'DX address of the firm.
+
+
+            Only supported in AU.'
+        phone:
+          allOf:
+          - $ref: '#/components/schemas/PhoneNumberDto'
+          description: Phone number of the firm.
+        fax:
+          allOf:
+          - $ref: '#/components/schemas/PhoneNumberDto'
+          description: Fax number of the firm.
+        status:
+          allOf:
+          - $ref: '#/components/schemas/FirmStatusDto'
+          description: The status of the firm.
       additionalProperties: false
     StaffDto:
       type: object

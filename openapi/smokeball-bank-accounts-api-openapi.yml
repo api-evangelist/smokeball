@@ -517,291 +517,6 @@ paths:
                 $ref: '#/components/schemas/ProblemDetails'
 components:
   schemas:
-    Link:
-      type: object
-      properties:
-        id:
-          type:
-          - string
-          - 'null'
-        href:
-          type:
-          - string
-          - 'null'
-        relation:
-          type:
-          - string
-          - 'null'
-        method:
-          type:
-          - string
-          - 'null'
-          default: GET
-      additionalProperties: false
-    BankAccountCollection:
-      type: object
-      properties:
-        id:
-          type:
-          - string
-          - 'null'
-        href:
-          type:
-          - string
-          - 'null'
-        relation:
-          type:
-          - string
-          - 'null'
-        method:
-          type:
-          - string
-          - 'null'
-          default: GET
-        self:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-        value:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/BankAccount'
-      additionalProperties: false
-    AccountState:
-      enum:
-      - 0
-      - 1
-      type: integer
-      format: int32
-    TransactionDto:
-      type: object
-      properties:
-        matterId:
-          type:
-          - string
-          - 'null'
-          description: Unique identifier of the associated matter.
-          example: da4e7fd1-5394-4ca9-b1c6-e18c4e2bf262
-        payorId:
-          type:
-          - string
-          - 'null'
-          description: Unique identifier of the associated contact.
-        type:
-          type:
-          - string
-          - 'null'
-          description: 'The type of the transaction.
-
-
-            Possible values: Deposit.'
-          example: Deposit
-        amount:
-          type: number
-          description: The amount of the transaction in dollars. Limited to 2 decimal places (cents).
-          format: double
-          example: 102.65
-        effectiveDate:
-          type: string
-          description: Date of the transaction.
-          format: date-time
-        reference:
-          type:
-          - string
-          - 'null'
-          description: Reference for the transaction.
-        reason:
-          type:
-          - string
-          - 'null'
-          description: Reason for the transaction.
-        description:
-          type:
-          - string
-          - 'null'
-          description: Description of the transaction.
-        note:
-          type:
-          - string
-          - 'null'
-          description: Note for the transaction (for internal use).
-      additionalProperties: false
-    ProtectFundsDto:
-      required:
-      - amount
-      - effectiveDate
-      - matterId
-      type: object
-      properties:
-        matterId:
-          minLength: 1
-          type: string
-          description: Unique identifier of the associated matter. Required.
-          example: da4e7fd1-5394-4ca9-b1c6-e18c4e2bf262
-        contactId:
-          type:
-          - string
-          - 'null'
-          description: Unique identifier of the associated contact. Required in US only.
-          example: 18c05819-c321-4907-800c-d5a608729c5a
-        reason:
-          type:
-          - string
-          - 'null'
-          description: Reason for protecting the funds.
-          example: Court order requiring protection of funds
-        effectiveDate:
-          type: string
-          description: Date of protecting the funds.
-          format: date-time
-        amount:
-          minimum: 0.01
-          type: number
-          description: The amount to protect in dollars. Limited to 2 decimal places (cents).
-          format: double
-          example: 100.5
-      additionalProperties: false
-    Requisition:
-      type: object
-      properties:
-        id:
-          type:
-          - string
-          - 'null'
-          description: Requisition ID if requisition requires approval.
-          example: 18c05819-c321-4907-800c-d5a608729c5a
-        status:
-          type: string
-          description: Status of the requisition (e.g., Pending, Approved).
-          example: Approved
-        protectedBalance:
-          type: number
-          description: Protected balance after the requisition.
-          format: double
-          example: 1000
-        availableBalance:
-          type: number
-          description: Available balance after the requisition.
-          format: double
-          example: 5000
-        totalBalance:
-          type: number
-          description: Total balance after the requisition.
-          format: double
-          example: 6000
-        pdfPaymentDetail:
-          type:
-          - string
-          - 'null'
-          description: Link to the PDF payment detail document.
-      additionalProperties: false
-    BankAccount:
-      type: object
-      properties:
-        href:
-          type:
-          - string
-          - 'null'
-        relation:
-          type:
-          - string
-          - 'null'
-        method:
-          type:
-          - string
-          - 'null'
-          default: GET
-        self:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-        id:
-          type:
-          - string
-          - 'null'
-          description: Unique identifier of the bank account.
-          example: b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2
-        type:
-          type: string
-          description: The type of the bank account (Operating, Trust, Credit, ControlledMoney).
-          example: Trust
-        status:
-          allOf:
-          - $ref: '#/components/schemas/AccountState'
-          description: The status of the account (Open, Closed).
-        matter:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-          description: "The Matter associated to the account. \n\nApplies to 'ControlledMoney' accounts only."
-        accountType:
-          type: integer
-          description: 'The type of the bank account (Operating = 0, Trust = 1, Credit = 2, ControlledMoney = 3).
-
-
-            This field is deprecated and scheduled for removal - use the Type field instead.'
-          format: int32
-          example: 0
-        accountName:
-          type:
-          - string
-          - 'null'
-          description: Account Name.
-          example: John Smith
-        accountNumber:
-          type:
-          - string
-          - 'null'
-          description: Account Number.
-          example: '10436489'
-        bankName:
-          type:
-          - string
-          - 'null'
-          description: Bank Name.
-          example: Commonwealth Bank
-        branchNumber:
-          type:
-          - string
-          - 'null'
-          description: Branch Number.
-          example: '062201'
-        branchName:
-          type:
-          - string
-          - 'null'
-          description: Branch Name.
-          example: Sydney
-        balance:
-          type: number
-          description: Total balance of the bank account.
-          format: double
-          example: 1000
-        contactBalances:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/BankAccountContactBalance'
-          description: 'List of contact balances.
-
-
-            If balances are stored by matter, not by contact, then there can be
-
-            a contact balance with no contact id. In this case, MatterBalances are used instead.
-
-
-            Only supported in US.'
-        matterBalances:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/BankAccountMatterBalance'
-          description: 'List of matter balances.
-
-
-            A matter balance will be equal to the sum of all contact balances with the same MatterId.'
-      additionalProperties: false
     BankAccountMatterBalancePagedCollection:
       type: object
       properties:
@@ -857,6 +572,218 @@ components:
           allOf:
           - $ref: '#/components/schemas/Link'
       additionalProperties: false
+    BankAccountCollection:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+        href:
+          type:
+          - string
+          - 'null'
+        relation:
+          type:
+          - string
+          - 'null'
+        method:
+          type:
+          - string
+          - 'null'
+          default: GET
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+        value:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/BankAccount'
+      additionalProperties: false
+    TransactionDto:
+      type: object
+      properties:
+        matterId:
+          type:
+          - string
+          - 'null'
+          description: Unique identifier of the associated matter.
+          example: da4e7fd1-5394-4ca9-b1c6-e18c4e2bf262
+        payorId:
+          type:
+          - string
+          - 'null'
+          description: Unique identifier of the associated contact.
+        type:
+          type:
+          - string
+          - 'null'
+          description: 'The type of the transaction.
+
+
+            Possible values: Deposit.'
+          example: Deposit
+        amount:
+          type: number
+          description: The amount of the transaction in dollars. Limited to 2 decimal places (cents).
+          format: double
+          example: 102.65
+        effectiveDate:
+          type: string
+          description: Date of the transaction.
+          format: date-time
+        reference:
+          type:
+          - string
+          - 'null'
+          description: Reference for the transaction.
+        reason:
+          type:
+          - string
+          - 'null'
+          description: Reason for the transaction.
+        description:
+          type:
+          - string
+          - 'null'
+          description: Description of the transaction.
+        note:
+          type:
+          - string
+          - 'null'
+          description: Note for the transaction (for internal use).
+      additionalProperties: false
+    Requisition:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+          description: Requisition ID if requisition requires approval.
+          example: 18c05819-c321-4907-800c-d5a608729c5a
+        status:
+          type: string
+          description: Status of the requisition (e.g., Pending, Approved).
+          example: Approved
+        protectedBalance:
+          type: number
+          description: Protected balance after the requisition.
+          format: double
+          example: 1000
+        availableBalance:
+          type: number
+          description: Available balance after the requisition.
+          format: double
+          example: 5000
+        totalBalance:
+          type: number
+          description: Total balance after the requisition.
+          format: double
+          example: 6000
+        pdfPaymentDetail:
+          type:
+          - string
+          - 'null'
+          description: Link to the PDF payment detail document.
+      additionalProperties: false
+    Transaction:
+      type: object
+      properties:
+        href:
+          type:
+          - string
+          - 'null'
+        relation:
+          type:
+          - string
+          - 'null'
+        method:
+          type:
+          - string
+          - 'null'
+          default: GET
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+        id:
+          type:
+          - string
+          - 'null'
+          description: Unique identifier of the transaction.
+          example: 64818ee0-c7b4-46ec-862e-514d8b29540a
+        payorName:
+          type:
+          - string
+          - 'null'
+          description: The name of the associated contact.
+          example: John Smith
+        matter:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          description: The associated matter.
+        payor:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          description: The associated contact that paid the funds.
+        bankAccount:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          description: The bank account where the transaction took place.
+        type:
+          type:
+          - string
+          - 'null'
+          description: "The type of the transaction.\n\nPossible values:\n    Deposit, DepositReversal, InvoicePayment, InvoicePaymentReversal, \n    VendorPayment, VendorPaymentReversal Transfer, \n    BankFees, BankFeesReversal, Interest, InterestReversal."
+          example: Deposit
+        amount:
+          type: number
+          description: The amount of the transaction in dollars. Limited to 2 decimal places (cents).
+          format: double
+          example: 102.65
+        enteredDate:
+          type: string
+          description: Date the transaction was entered.
+          format: date-time
+        effectiveDate:
+          type: string
+          description: Date the transaction took effect.
+          format: date-time
+        reference:
+          type:
+          - string
+          - 'null'
+          description: Reference for the transaction.
+        reason:
+          type:
+          - string
+          - 'null'
+          description: Reason for the transaction.
+        description:
+          type:
+          - string
+          - 'null'
+          description: Description of the transaction.
+        note:
+          type:
+          - string
+          - 'null'
+          description: Note for the transaction (for internal use).
+        reversed:
+          type: boolean
+          description: True if this transaction has been reversed.
+          example: true
+        reversedToTransaction:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          description: The transaction that was created as a result of reversing this transaction.
+        reversedFromTransaction:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          description: The transaction that was recversed to create this transaction.
+      additionalProperties: false
     BankAccountContactBalance:
       type: object
       properties:
@@ -890,6 +817,31 @@ components:
           description: Date and time that the balance was last updated.
           format: date-time
       additionalProperties: false
+    ProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        instance:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
     RequisitionDto:
       required:
       - amount
@@ -1008,101 +960,6 @@ components:
           description: Internal note. Free format string.
           example: Internal note about this payment
       additionalProperties: false
-    Transaction:
-      type: object
-      properties:
-        href:
-          type:
-          - string
-          - 'null'
-        relation:
-          type:
-          - string
-          - 'null'
-        method:
-          type:
-          - string
-          - 'null'
-          default: GET
-        self:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-        id:
-          type:
-          - string
-          - 'null'
-          description: Unique identifier of the transaction.
-          example: 64818ee0-c7b4-46ec-862e-514d8b29540a
-        payorName:
-          type:
-          - string
-          - 'null'
-          description: The name of the associated contact.
-          example: John Smith
-        matter:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-          description: The associated matter.
-        payor:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-          description: The associated contact that paid the funds.
-        bankAccount:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-          description: The bank account where the transaction took place.
-        type:
-          type:
-          - string
-          - 'null'
-          description: "The type of the transaction.\n\nPossible values:\n    Deposit, DepositReversal, InvoicePayment, InvoicePaymentReversal, \n    VendorPayment, VendorPaymentReversal Transfer, \n    BankFees, BankFeesReversal, Interest, InterestReversal."
-          example: Deposit
-        amount:
-          type: number
-          description: The amount of the transaction in dollars. Limited to 2 decimal places (cents).
-          format: double
-          example: 102.65
-        enteredDate:
-          type: string
-          description: Date the transaction was entered.
-          format: date-time
-        effectiveDate:
-          type: string
-          description: Date the transaction took effect.
-          format: date-time
-        reference:
-          type:
-          - string
-          - 'null'
-          description: Reference for the transaction.
-        reason:
-          type:
-          - string
-          - 'null'
-          description: Reason for the transaction.
-        description:
-          type:
-          - string
-          - 'null'
-          description: Description of the transaction.
-        note:
-          type:
-          - string
-          - 'null'
-          description: Note for the transaction (for internal use).
-        reversed:
-          type: boolean
-          description: True if this transaction has been reversed.
-          example: true
-        reversedToTransaction:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-          description: The transaction that was created as a result of reversing this transaction.
-        reversedFromTransaction:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-          description: The transaction that was recversed to create this transaction.
-      additionalProperties: false
     ProtectedAccountBalance:
       type: object
       properties:
@@ -1183,43 +1040,174 @@ components:
           format: date-time
           example: '2024-01-15T10:30:00Z'
       additionalProperties: false
-    ProblemDetails:
+    BankAccount:
       type: object
       properties:
+        href:
+          type:
+          - string
+          - 'null'
+        relation:
+          type:
+          - string
+          - 'null'
+        method:
+          type:
+          - string
+          - 'null'
+          default: GET
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+        id:
+          type:
+          - string
+          - 'null'
+          description: Unique identifier of the bank account.
+          example: b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2
         type:
-          type:
-          - string
-          - 'null'
-        title:
-          type:
-          - string
-          - 'null'
+          type: string
+          description: The type of the bank account (Operating, Trust, Credit, ControlledMoney).
+          example: Trust
         status:
-          type:
-          - integer
-          - 'null'
+          allOf:
+          - $ref: '#/components/schemas/AccountState'
+          description: The status of the account (Open, Closed).
+        matter:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          description: "The Matter associated to the account. \n\nApplies to 'ControlledMoney' accounts only."
+        accountType:
+          type: integer
+          description: 'The type of the bank account (Operating = 0, Trust = 1, Credit = 2, ControlledMoney = 3).
+
+
+            This field is deprecated and scheduled for removal - use the Type field instead.'
           format: int32
-        detail:
+          example: 0
+        accountName:
           type:
           - string
           - 'null'
-        instance:
+          description: Account Name.
+          example: John Smith
+        accountNumber:
           type:
           - string
           - 'null'
-      additionalProperties: {}
-    UnprotectFundsDto:
+          description: Account Number.
+          example: '10436489'
+        bankName:
+          type:
+          - string
+          - 'null'
+          description: Bank Name.
+          example: Commonwealth Bank
+        branchNumber:
+          type:
+          - string
+          - 'null'
+          description: Branch Number.
+          example: '062201'
+        branchName:
+          type:
+          - string
+          - 'null'
+          description: Branch Name.
+          example: Sydney
+        balance:
+          type: number
+          description: Total balance of the bank account.
+          format: double
+          example: 1000
+        contactBalances:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/BankAccountContactBalance'
+          description: 'List of contact balances.
+
+
+            If balances are stored by matter, not by contact, then there can be
+
+            a contact balance with no contact id. In this case, MatterBalances are used instead.
+
+
+            Only supported in US.'
+        matterBalances:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/BankAccountMatterBalance'
+          description: 'List of matter balances.
+
+
+            A matter balance will be equal to the sum of all contact balances with the same MatterId.'
+      additionalProperties: false
+    Link:
       type: object
       properties:
+        id:
+          type:
+          - string
+          - 'null'
+        href:
+          type:
+          - string
+          - 'null'
+        relation:
+          type:
+          - string
+          - 'null'
+        method:
+          type:
+          - string
+          - 'null'
+          default: GET
+      additionalProperties: false
+    ProtectFundsDto:
+      required:
+      - amount
+      - effectiveDate
+      - matterId
+      type: object
+      properties:
+        matterId:
+          minLength: 1
+          type: string
+          description: Unique identifier of the associated matter. Required.
+          example: da4e7fd1-5394-4ca9-b1c6-e18c4e2bf262
+        contactId:
+          type:
+          - string
+          - 'null'
+          description: Unique identifier of the associated contact. Required in US only.
+          example: 18c05819-c321-4907-800c-d5a608729c5a
+        reason:
+          type:
+          - string
+          - 'null'
+          description: Reason for protecting the funds.
+          example: Court order requiring protection of funds
+        effectiveDate:
+          type: string
+          description: Date of protecting the funds.
+          format: date-time
         amount:
           minimum: 0.01
-          type:
-          - number
-          - 'null'
-          description: "The amount to unprotect in dollars. Limited to 2 decimal places (cents).\n            \nThis value must exactly match the originally protected amount.\nPartial unprotect is not supported - the full protected amount must be unprotected.\n            \nIf not specified, the full protected amount will be unprotected automatically.\nSpecifying this value provides validation to ensure you're unprotecting the expected amount."
+          type: number
+          description: The amount to protect in dollars. Limited to 2 decimal places (cents).
           format: double
-          example: 50.25
+          example: 100.5
       additionalProperties: false
+    AccountState:
+      enum:
+      - 0
+      - 1
+      type: integer
+      format: int32
     BankAccountMatterBalance:
       type: object
       properties:
@@ -1253,6 +1241,18 @@ components:
           - 'null'
           description: Date and time that the balance was last updated.
           format: date-time
+      additionalProperties: false
+    UnprotectFundsDto:
+      type: object
+      properties:
+        amount:
+          minimum: 0.01
+          type:
+          - number
+          - 'null'
+          description: "The amount to unprotect in dollars. Limited to 2 decimal places (cents).\n            \nThis value must exactly match the originally protected amount.\nPartial unprotect is not supported - the full protected amount must be unprotected.\n            \nIf not specified, the full protected amount will be unprotected automatically.\nSpecifying this value provides validation to ensure you're unprotecting the expected amount."
+          format: double
+          example: 50.25
       additionalProperties: false
   securitySchemes:
     api-key:

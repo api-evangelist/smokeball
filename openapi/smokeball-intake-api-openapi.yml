@@ -207,50 +207,7 @@ paths:
       x-excluded: true
 components:
   schemas:
-    Link:
-      type: object
-      properties:
-        id:
-          type:
-          - string
-          - 'null'
-        href:
-          type:
-          - string
-          - 'null'
-        relation:
-          type:
-          - string
-          - 'null'
-        method:
-          type:
-          - string
-          - 'null'
-          default: GET
-      additionalProperties: false
-    IntakeRecipientDto:
-      type: object
-      properties:
-        contactId:
-          type:
-          - string
-          - 'null'
-          description: Contact id that the submission is sent to.
-          example: 5d9b8697-8c6f-45dd-b22d-87045ed4df35
-        email:
-          type:
-          - string
-          - 'null'
-          description: Email address of the recipient.
-          example: client@example.com
-        name:
-          type:
-          - string
-          - 'null'
-          description: Display name of the recipient.
-          example: Sample Client
-      additionalProperties: false
-    IntakeSubmission:
+    IntakeForm:
       type: object
       properties:
         id:
@@ -273,68 +230,181 @@ components:
         self:
           allOf:
           - $ref: '#/components/schemas/Link'
-        formId:
+        isSmokeballForm:
+          type: boolean
+          description: 'Whether the form is a Smokeball form.
+
+
+            There are some forms that are created / can only be modified by Smokeball staff. The user can choose to use these “preset” forms if they don’t want to create their own ones.'
+          example: true
+        title:
           type:
           - string
           - 'null'
-          description: Id of the form that the submission is for.
-          example: ae4bc84e-b601-4767-9d0f-5d078832418e
-        formTitle:
-          type:
-          - string
-          - 'null'
-          description: Title of the form that the submission is for.
+          description: Display title of the intake form.
           example: Client Intake Form
-        status:
+        category:
           allOf:
-          - $ref: '#/components/schemas/IntakeSubmissionStatus'
-          description: Current status of the submission.
-          example: draft
-        communicationMethod:
-          allOf:
-          - $ref: '#/components/schemas/IntakeSubmissionCommunicationMethod'
-          description: How the form was sent.
-          example: email
-        matter:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-          description: Link to matter that the submission is associated with.
+          - $ref: '#/components/schemas/IntakeFormCategory'
+          description: Category of the form.
+          example: matter
+        matterTypes:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/Link'
+          description: Links to matter types that this form is available for.
+        active:
+          type:
+          - boolean
+          - 'null'
+          description: Whether the form is active.
+          example: true
         createdDate:
           type: string
-          description: When the submission was created.
+          description: When the form was created.
           format: date-time
           example: '2026-01-01T00:00:00.0000000+00:00'
         lastUpdated:
           type: string
-          description: When the submission was last updated.
+          description: When the form was last updated.
           format: date-time
           example: '2026-01-01T00:00:00.0000000+00:00'
+      additionalProperties: false
+      description: Intake form.
+    IntakeSubmissionResponseGroupDto:
+      type: object
+      properties:
+        label:
+          type:
+          - string
+          - 'null'
+          description: Display label for the group.
+          example: Primary Contact
+        fields:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/IntakeSubmissionResponseFieldDto'
+          description: Fields within the group.
+      additionalProperties: false
+    IntakeSubmissionStatus:
+      enum:
+      - draft
+      - active
+      - completed
+      - cancelled
+      type: string
+      description: Intake submission status.
+    CreateSubmissionCommunicationMethod:
+      enum:
+      - email
+      - communicate
+      type: string
+      description: Specifies the communication method used when creating an intake submission
+    IntakeFormCategory:
+      enum:
+      - lead
+      - matter
+      type: string
+    ProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        instance:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
+    IntakeSubmissionCreated:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+        href:
+          type:
+          - string
+          - 'null'
+        relation:
+          type:
+          - string
+          - 'null'
+        method:
+          type:
+          - string
+          - 'null'
+          default: GET
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+        link:
+          type:
+          - string
+          - 'null'
+          description: URL to complete the intake submission.
+          example: https://example.smokeball.com/intake/submissions/e8b673fe-5493-4b1f-986c-af82542fb6d8
+      additionalProperties: false
+      description: Intake submission created response.
+    CreateIntakeSubmissionRequestDto:
+      type: object
+      properties:
+        formId:
+          type:
+          - string
+          - 'null'
+          description: Id of the intake form to create a submission for.
+          example: ae4bc84e-b601-4767-9d0f-5d078832418e
+        communicationMethod:
+          allOf:
+          - $ref: '#/components/schemas/CreateSubmissionCommunicationMethod'
+          description: How the form will be delivered.
+          example: email
         recipient:
           allOf:
           - $ref: '#/components/schemas/IntakeRecipientDto'
-          description: Recipient that the submission is sent to.
+          description: Recipient details for the submission.
       additionalProperties: false
-      description: Intake submission.
-    SubmissionResponseFieldType:
-      enum:
-      - text
-      - multilineText
-      - number
-      - currency
-      - choice
-      - info
-      - date
-      - checkbox
-      - address
-      - yesNo
-      - phoneNumber
-      - email
-      - file
-      - appointment
-      - payment
-      - signature
-      type: string
-      description: Submission response field type.
+    IntakeSubmissionResponseFieldDto:
+      type: object
+      properties:
+        type:
+          allOf:
+          - $ref: '#/components/schemas/SubmissionResponseFieldType'
+          description: Field control type.
+          example: text
+        label:
+          type:
+          - string
+          - 'null'
+          description: Display label for the field.
+          example: Phone number
+        value:
+          type:
+          - string
+          - 'null'
+          description: Submitted value as a string.
+          example: 0400 000 000
+      additionalProperties: false
     IntakeSubmissionPagedCollection:
       type: object
       properties:
@@ -390,199 +460,27 @@ components:
           allOf:
           - $ref: '#/components/schemas/Link'
       additionalProperties: false
-    IntakeSubmissionResponseGroupDto:
+    IntakeRecipientDto:
       type: object
       properties:
-        label:
+        contactId:
           type:
           - string
           - 'null'
-          description: Display label for the group.
-          example: Primary Contact
-        fields:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/IntakeSubmissionResponseFieldDto'
-          description: Fields within the group.
-      additionalProperties: false
-    CreateIntakeSubmissionRequestDto:
-      type: object
-      properties:
-        formId:
+          description: Contact id that the submission is sent to.
+          example: 5d9b8697-8c6f-45dd-b22d-87045ed4df35
+        email:
           type:
           - string
           - 'null'
-          description: Id of the intake form to create a submission for.
-          example: ae4bc84e-b601-4767-9d0f-5d078832418e
-        communicationMethod:
-          allOf:
-          - $ref: '#/components/schemas/CreateSubmissionCommunicationMethod'
-          description: How the form will be delivered.
-          example: email
-        recipient:
-          allOf:
-          - $ref: '#/components/schemas/IntakeRecipientDto'
-          description: Recipient details for the submission.
-      additionalProperties: false
-    IntakeSubmissionCommunicationMethod:
-      enum:
-      - email
-      - communicate
-      - embed
-      - internalUse
-      - document
-      type: string
-      description: Intake submission communication method.
-    IntakeSubmissionCreated:
-      type: object
-      properties:
-        id:
+          description: Email address of the recipient.
+          example: client@example.com
+        name:
           type:
           - string
           - 'null'
-        href:
-          type:
-          - string
-          - 'null'
-        relation:
-          type:
-          - string
-          - 'null'
-        method:
-          type:
-          - string
-          - 'null'
-          default: GET
-        self:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-        link:
-          type:
-          - string
-          - 'null'
-          description: URL to complete the intake submission.
-          example: https://example.smokeball.com/intake/submissions/e8b673fe-5493-4b1f-986c-af82542fb6d8
-      additionalProperties: false
-      description: Intake submission created response.
-    IntakeFormPagedCollection:
-      type: object
-      properties:
-        id:
-          type:
-          - string
-          - 'null'
-        href:
-          type:
-          - string
-          - 'null'
-        relation:
-          type:
-          - string
-          - 'null'
-        method:
-          type:
-          - string
-          - 'null'
-          default: GET
-        self:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-        value:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/IntakeForm'
-        offset:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        limit:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        size:
-          type: integer
-          format: int64
-        first:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-        previous:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-        next:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-        last:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-      additionalProperties: false
-    ProblemDetails:
-      type: object
-      properties:
-        type:
-          type:
-          - string
-          - 'null'
-        title:
-          type:
-          - string
-          - 'null'
-        status:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        detail:
-          type:
-          - string
-          - 'null'
-        instance:
-          type:
-          - string
-          - 'null'
-      additionalProperties: {}
-    IntakeSubmissionStatus:
-      enum:
-      - draft
-      - active
-      - completed
-      - cancelled
-      type: string
-      description: Intake submission status.
-    CreateSubmissionCommunicationMethod:
-      enum:
-      - email
-      - communicate
-      type: string
-      description: Specifies the communication method used when creating an intake submission
-    IntakeSubmissionResponseSectionDto:
-      type: object
-      properties:
-        sectionTitle:
-          type:
-          - string
-          - 'null'
-          description: Title of the section.
-          example: Contact Details
-        groups:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/IntakeSubmissionResponseGroupDto'
-          description: Groups within the section.
-        fields:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/IntakeSubmissionResponseFieldDto'
-          description: Fields directly under the section.
+          description: Display name of the recipient.
+          example: Sample Client
       additionalProperties: false
     IntakeSubmissionDetail:
       type: object
@@ -656,33 +554,57 @@ components:
           description: Ordered list of sections with submitted values.
       additionalProperties: false
       description: Intake submission detail.
-    IntakeFormCategory:
+    IntakeSubmissionCommunicationMethod:
       enum:
-      - lead
-      - matter
+      - email
+      - communicate
+      - embed
+      - internalUse
+      - document
       type: string
-    IntakeSubmissionResponseFieldDto:
+      description: Intake submission communication method.
+    SubmissionResponseFieldType:
+      enum:
+      - text
+      - multilineText
+      - number
+      - currency
+      - choice
+      - info
+      - date
+      - checkbox
+      - address
+      - yesNo
+      - phoneNumber
+      - email
+      - file
+      - appointment
+      - payment
+      - signature
+      type: string
+      description: Submission response field type.
+    Link:
       type: object
       properties:
-        type:
-          allOf:
-          - $ref: '#/components/schemas/SubmissionResponseFieldType'
-          description: Field control type.
-          example: text
-        label:
+        id:
           type:
           - string
           - 'null'
-          description: Display label for the field.
-          example: Phone number
-        value:
+        href:
           type:
           - string
           - 'null'
-          description: Submitted value as a string.
-          example: 0400 000 000
+        relation:
+          type:
+          - string
+          - 'null'
+        method:
+          type:
+          - string
+          - 'null'
+          default: GET
       additionalProperties: false
-    IntakeForm:
+    IntakeFormPagedCollection:
       type: object
       properties:
         id:
@@ -705,49 +627,127 @@ components:
         self:
           allOf:
           - $ref: '#/components/schemas/Link'
-        isSmokeballForm:
-          type: boolean
-          description: 'Whether the form is a Smokeball form.
-
-
-            There are some forms that are created / can only be modified by Smokeball staff. The user can choose to use these “preset” forms if they don’t want to create their own ones.'
-          example: true
-        title:
-          type:
-          - string
-          - 'null'
-          description: Display title of the intake form.
-          example: Client Intake Form
-        category:
-          allOf:
-          - $ref: '#/components/schemas/IntakeFormCategory'
-          description: Category of the form.
-          example: matter
-        matterTypes:
+        value:
           type:
           - array
           - 'null'
           items:
-            $ref: '#/components/schemas/Link'
-          description: Links to matter types that this form is available for.
-        active:
+            $ref: '#/components/schemas/IntakeForm'
+        offset:
           type:
-          - boolean
+          - integer
           - 'null'
-          description: Whether the form is active.
-          example: true
+          format: int32
+        limit:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        size:
+          type: integer
+          format: int64
+        first:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+        previous:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+        next:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+        last:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+      additionalProperties: false
+    IntakeSubmissionResponseSectionDto:
+      type: object
+      properties:
+        sectionTitle:
+          type:
+          - string
+          - 'null'
+          description: Title of the section.
+          example: Contact Details
+        groups:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/IntakeSubmissionResponseGroupDto'
+          description: Groups within the section.
+        fields:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/IntakeSubmissionResponseFieldDto'
+          description: Fields directly under the section.
+      additionalProperties: false
+    IntakeSubmission:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+        href:
+          type:
+          - string
+          - 'null'
+        relation:
+          type:
+          - string
+          - 'null'
+        method:
+          type:
+          - string
+          - 'null'
+          default: GET
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+        formId:
+          type:
+          - string
+          - 'null'
+          description: Id of the form that the submission is for.
+          example: ae4bc84e-b601-4767-9d0f-5d078832418e
+        formTitle:
+          type:
+          - string
+          - 'null'
+          description: Title of the form that the submission is for.
+          example: Client Intake Form
+        status:
+          allOf:
+          - $ref: '#/components/schemas/IntakeSubmissionStatus'
+          description: Current status of the submission.
+          example: draft
+        communicationMethod:
+          allOf:
+          - $ref: '#/components/schemas/IntakeSubmissionCommunicationMethod'
+          description: How the form was sent.
+          example: email
+        matter:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          description: Link to matter that the submission is associated with.
         createdDate:
           type: string
-          description: When the form was created.
+          description: When the submission was created.
           format: date-time
           example: '2026-01-01T00:00:00.0000000+00:00'
         lastUpdated:
           type: string
-          description: When the form was last updated.
+          description: When the submission was last updated.
           format: date-time
           example: '2026-01-01T00:00:00.0000000+00:00'
+        recipient:
+          allOf:
+          - $ref: '#/components/schemas/IntakeRecipientDto'
+          description: Recipient that the submission is sent to.
       additionalProperties: false
-      description: Intake form.
+      description: Intake submission.
   securitySchemes:
     api-key:
       type: apiKey

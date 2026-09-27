@@ -217,6 +217,219 @@ paths:
                 $ref: '#/components/schemas/ProblemDetails'
 components:
   schemas:
+    ProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        instance:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
+    Relationship:
+      type: object
+      properties:
+        href:
+          type:
+          - string
+          - 'null'
+        relation:
+          type:
+          - string
+          - 'null'
+        method:
+          type:
+          - string
+          - 'null'
+          default: GET
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+        id:
+          type:
+          - string
+          - 'null'
+          description: Unique identifier of the relationship.
+          example: 009f778f-83df-454a-b344-768a862a7e55
+        name:
+          type:
+          - string
+          - 'null'
+          description: Name of the relationship.
+          example: Solicitor
+        contact:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          description: Hypermedia link of the associated contact.
+        representatives:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/Link'
+          description: List of hypermedia links of the associated representatives.
+      additionalProperties: false
+    RoleDto:
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+          description: Name of the role.
+          example: Provider
+        displayName:
+          type:
+          - string
+          - 'null'
+          description: Display Name of the role.
+          example: Medical Provider
+        description:
+          type:
+          - string
+          - 'null'
+          description: Description of the role.
+          example: Client
+        contactId:
+          type:
+          - string
+          - 'null'
+          description: Unique identifier of the contact.
+          example: c85d28cb-a760-4627-aa59-0a853c2e65ed
+        representativeIds:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+          description: List of associated representative contact ids.
+          example:
+          - 776e778f-83df-454a-b344-768a862a7e67
+        isMatterItemRequired:
+          type: boolean
+          description: Boolean flag indicating if matter item is required.
+        relationships:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/RelationshipDto'
+          description: List if relationships associated with the role.
+      additionalProperties: false
+    Link:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+        href:
+          type:
+          - string
+          - 'null'
+        relation:
+          type:
+          - string
+          - 'null'
+        method:
+          type:
+          - string
+          - 'null'
+          default: GET
+      additionalProperties: false
+    RelationshipDto:
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+          description: Name of the relationship.
+          example: Provider
+        displayName:
+          type:
+          - string
+          - 'null'
+          description: Display Name of the relationship.
+          example: Medical Provider
+        contactId:
+          type:
+          - string
+          - 'null'
+          description: Unique identifier of the contact.
+          example: c85d28cb-a760-4627-aa59-0a853c2e65ed
+        representativeIds:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+          description: List of associated representative contact ids.
+          example:
+          - 776e778f-83df-454a-b344-768a862a7e67
+        isMatterItemRequired:
+          type: boolean
+          description: Boolean flag indicating if a matter item is required.
+      additionalProperties: false
+    MatterRoles:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+        href:
+          type:
+          - string
+          - 'null'
+        relation:
+          type:
+          - string
+          - 'null'
+        method:
+          type:
+          - string
+          - 'null'
+          default: GET
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+        versionId:
+          type:
+          - string
+          - 'null'
+          description: Version id of the record.
+          example: 832e778f-83df-454a-b344-768a862a7e67
+        matterId:
+          type:
+          - string
+          - 'null'
+          description: Matter id.
+          example: b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2
+        roles:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/Role'
+          description: List of associated roles.
+      additionalProperties: false
     Role:
       type: object
       properties:
@@ -286,219 +499,6 @@ components:
           type: boolean
           description: Boolean flag indicating if role belongs to an 'OtherSide'.
           example: false
-      additionalProperties: false
-    Link:
-      type: object
-      properties:
-        id:
-          type:
-          - string
-          - 'null'
-        href:
-          type:
-          - string
-          - 'null'
-        relation:
-          type:
-          - string
-          - 'null'
-        method:
-          type:
-          - string
-          - 'null'
-          default: GET
-      additionalProperties: false
-    RelationshipDto:
-      type: object
-      properties:
-        name:
-          type:
-          - string
-          - 'null'
-          description: Name of the relationship.
-          example: Provider
-        displayName:
-          type:
-          - string
-          - 'null'
-          description: Display Name of the relationship.
-          example: Medical Provider
-        contactId:
-          type:
-          - string
-          - 'null'
-          description: Unique identifier of the contact.
-          example: c85d28cb-a760-4627-aa59-0a853c2e65ed
-        representativeIds:
-          type:
-          - array
-          - 'null'
-          items:
-            type: string
-          description: List of associated representative contact ids.
-          example:
-          - 776e778f-83df-454a-b344-768a862a7e67
-        isMatterItemRequired:
-          type: boolean
-          description: Boolean flag indicating if a matter item is required.
-      additionalProperties: false
-    Relationship:
-      type: object
-      properties:
-        href:
-          type:
-          - string
-          - 'null'
-        relation:
-          type:
-          - string
-          - 'null'
-        method:
-          type:
-          - string
-          - 'null'
-          default: GET
-        self:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-        id:
-          type:
-          - string
-          - 'null'
-          description: Unique identifier of the relationship.
-          example: 009f778f-83df-454a-b344-768a862a7e55
-        name:
-          type:
-          - string
-          - 'null'
-          description: Name of the relationship.
-          example: Solicitor
-        contact:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-          description: Hypermedia link of the associated contact.
-        representatives:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/Link'
-          description: List of hypermedia links of the associated representatives.
-      additionalProperties: false
-    ProblemDetails:
-      type: object
-      properties:
-        type:
-          type:
-          - string
-          - 'null'
-        title:
-          type:
-          - string
-          - 'null'
-        status:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        detail:
-          type:
-          - string
-          - 'null'
-        instance:
-          type:
-          - string
-          - 'null'
-      additionalProperties: {}
-    MatterRoles:
-      type: object
-      properties:
-        id:
-          type:
-          - string
-          - 'null'
-        href:
-          type:
-          - string
-          - 'null'
-        relation:
-          type:
-          - string
-          - 'null'
-        method:
-          type:
-          - string
-          - 'null'
-          default: GET
-        self:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-        versionId:
-          type:
-          - string
-          - 'null'
-          description: Version id of the record.
-          example: 832e778f-83df-454a-b344-768a862a7e67
-        matterId:
-          type:
-          - string
-          - 'null'
-          description: Matter id.
-          example: b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2
-        roles:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/Role'
-          description: List of associated roles.
-      additionalProperties: false
-    RoleDto:
-      type: object
-      properties:
-        name:
-          type:
-          - string
-          - 'null'
-          description: Name of the role.
-          example: Provider
-        displayName:
-          type:
-          - string
-          - 'null'
-          description: Display Name of the role.
-          example: Medical Provider
-        description:
-          type:
-          - string
-          - 'null'
-          description: Description of the role.
-          example: Client
-        contactId:
-          type:
-          - string
-          - 'null'
-          description: Unique identifier of the contact.
-          example: c85d28cb-a760-4627-aa59-0a853c2e65ed
-        representativeIds:
-          type:
-          - array
-          - 'null'
-          items:
-            type: string
-          description: List of associated representative contact ids.
-          example:
-          - 776e778f-83df-454a-b344-768a862a7e67
-        isMatterItemRequired:
-          type: boolean
-          description: Boolean flag indicating if matter item is required.
-        relationships:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/RelationshipDto'
-          description: List if relationships associated with the role.
       additionalProperties: false
   securitySchemes:
     api-key:

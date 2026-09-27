@@ -88,27 +88,6 @@ components:
           - string
           - 'null'
       additionalProperties: {}
-    Link:
-      type: object
-      properties:
-        id:
-          type:
-          - string
-          - 'null'
-        href:
-          type:
-          - string
-          - 'null'
-        relation:
-          type:
-          - string
-          - 'null'
-        method:
-          type:
-          - string
-          - 'null'
-          default: GET
-      additionalProperties: false
     ReferralType:
       type: object
       properties:
@@ -141,6 +120,27 @@ components:
         isDeleted:
           type: boolean
           description: Flag indicating whether the referral type has been deleted.
+      additionalProperties: false
+    Link:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+        href:
+          type:
+          - string
+          - 'null'
+        relation:
+          type:
+          - string
+          - 'null'
+        method:
+          type:
+          - string
+          - 'null'
+          default: GET
       additionalProperties: false
     ReferralTypeCollection:
       type: object
