@@ -599,2025 +599,6 @@ paths:
                 $ref: '#/components/schemas/ProblemDetails'
 components:
   schemas:
-    ExecutionPersonDto:
-      type: object
-      properties:
-        name:
-          type:
-          - string
-          - 'null'
-          description: Person's full name
-          example: John Smith
-        address:
-          allOf:
-          - $ref: '#/components/schemas/AddressDto'
-          description: Person's address
-        personType:
-          type:
-          - string
-          - 'null'
-          description: 'Person type for execution.
-
-
-            Possible values: ''Director'', ''Secretary'', ''SoleDirectorAndSecretary'', ''AuthorisedSignatory'', ''Other'', ''Unset'''
-          example: Director
-        selectedOfficeHeld:
-          type:
-          - string
-          - 'null'
-          description: 'Office held by the person.
-
-
-            Possible values: ''Director'', ''Secretary'', ''SoleDirectorAndSecretary'', ''Partner'', ''AuthorisedRepresentative'', ''Other'', ''Unset'''
-          example: Director
-      additionalProperties: false
-      description: 'Represents an authorized person for organization execution
-
-
-        Only supported in AU.'
-    Tag:
-      type: object
-      properties:
-        id:
-          type:
-          - string
-          - 'null'
-          description: Identifier of the tag. Role tags do not have an identifier.
-        name:
-          type:
-          - string
-          - 'null'
-          description: Name of tag.
-        type:
-          type: string
-          description: Type of tag. Accepted values are 'Role' or 'Custom'
-          example: Custom
-      additionalProperties: false
-      description: Represents a tag with an identifier, name, and type.
-    IdentificationDetailsDto:
-      type: object
-      properties:
-        alienNumber:
-          type:
-          - string
-          - 'null'
-          description: 'Alien number
-
-            Only supported in the US.'
-        registrationAuthority:
-          type:
-          - string
-          - 'null'
-          description: 'Registration authority
-
-            Only supported in the US.'
-        registrationNumber:
-          type:
-          - string
-          - 'null'
-          description: 'Registration number
-
-            Only supported in the US.'
-        driversLicenseNumber:
-          type:
-          - string
-          - 'null'
-          description: Driver's license number
-        driversLicenseState:
-          type:
-          - string
-          - 'null'
-          description: 'Driver''s licence state
-
-            <example>IL</example><example>NSW</example>'
-        medicareNumber:
-          type:
-          - string
-          - 'null'
-          description: Medicare number
-        nhsNumber:
-          type:
-          - string
-          - 'null'
-          description: 'NHS (National Health Service) number
-
-            Only supported in UK.'
-      additionalProperties: false
-    PhoneNumberWithExtensionDto:
-      type: object
-      properties:
-        areaCode:
-          type:
-          - string
-          - 'null'
-          description: "Phone area code. \n\nOnly supported in the US."
-          example: '555'
-        number:
-          type:
-          - string
-          - 'null'
-          description: Phone number (excluding area code).
-          example: '1234567'
-        extension:
-          type:
-          - string
-          - 'null'
-          description: Phone number extension. Accepts numeric characters only.
-          example: '103'
-      additionalProperties: false
-    AddressDto:
-      type: object
-      properties:
-        careOf:
-          type:
-          - string
-          - 'null'
-          description: Care of the addressee (if applicable).
-          example: John Smith
-        buildingLevel:
-          type:
-          - string
-          - 'null'
-          description: Building level in address (if applicable).
-          example: Level 1
-        unitNumber:
-          type:
-          - string
-          - 'null'
-          description: Unit number in address (if applicable).
-          example: '10'
-        unitType:
-          type:
-          - string
-          - 'null'
-          description: 'Unit type in address (if applicable). Accepts custom values.
-
-
-            e.g. Apartment, Unit, Flat, Villa, Suite.'
-          example: Suite
-        streetNumber:
-          type:
-          - string
-          - 'null'
-          description: Street number in address.
-          example: '100'
-        streetName:
-          type:
-          - string
-          - 'null'
-          description: Street name in address.
-          example: Broad
-        streetType:
-          type:
-          - string
-          - 'null'
-          description: 'Street type. Accepts custom values.
-
-
-            e.g. Street, Road, Avenue, Lane.'
-          example: Street
-        addressLine1:
-          type:
-          - string
-          - 'null'
-          description: 'First line of address.
-
-
-            Only supported in the US.'
-          example: Level 1/10
-        addressLine2:
-          type:
-          - string
-          - 'null'
-          description: 'Second line of address (if applicable).
-
-
-            Only supported in the US.'
-          example: 100 Broad Street
-        city:
-          type:
-          - string
-          - 'null'
-          description: City, district, suburb, town, or village.
-          example: Chicago
-        state:
-          type:
-          - string
-          - 'null'
-          description: State, province, or region.
-          example: IL
-        zipCode:
-          type:
-          - string
-          - 'null'
-          description: Zip or post code.
-          example: '60606'
-        locality:
-          type:
-          - string
-          - 'null'
-          description: 'Locality.
-
-
-            Only supported in the UK.'
-          example: Dunkirk
-        county:
-          type:
-          - string
-          - 'null'
-          description: 'County.
-
-
-            Only supported in the US and UK.'
-          example: New York
-        country:
-          type:
-          - string
-          - 'null'
-          description: Country.
-          example: United States
-        poBox:
-          allOf:
-          - $ref: '#/components/schemas/PoBoxAddressDto'
-          description: 'PO Box details.
-
-
-            Only supported in AU.'
-      additionalProperties: false
-    ExecutionOptionsDto:
-      type: object
-      properties:
-        person1:
-          allOf:
-          - $ref: '#/components/schemas/ExecutionPersonDto'
-          description: First authorized person for execution
-        person2:
-          allOf:
-          - $ref: '#/components/schemas/ExecutionPersonDto'
-          description: Second authorized person for execution
-        executingUnder127:
-          type:
-          - boolean
-          - 'null'
-          description: Indicates if executing under section 127
-        executingAuthority:
-          type:
-          - string
-          - 'null'
-          description: Executing authority details
-        sealType:
-          type:
-          - string
-          - 'null'
-          description: 'Seal type for execution.
-
-
-            Possible values: ''WithSeal'', ''WithoutSeal'', ''Unset'''
-          example: WithSeal
-        authorisedDepositTakingInstitution:
-          type:
-          - boolean
-          - 'null'
-          description: Indicates if organization is an Authorised Deposit Taking Institution
-        poaRegistrationNumber:
-          type:
-          - string
-          - 'null'
-          description: Power of Attorney registration number
-        attorneyNames:
-          type:
-          - array
-          - 'null'
-          items:
-            type: string
-          description: List of attorney names
-          example:
-          - John Smith
-          - Jane Doe
-        executionType:
-          type:
-          - string
-          - 'null'
-          description: 'Execution type.
-
-
-            Possible values: ''Individual'', ''SoleDirector'', ''JointDirectors'', ''Director'', ''Secretary'', ''Authorised'', ''Other'', ''Unset'', ''None'''
-          example: JointDirectors
-      additionalProperties: false
-      description: 'Execution options for organizations (Company, Partnership, Sole Proprietor)
-
-
-        Only supported in AU.'
-    DeathDetails:
-      type: object
-      properties:
-        deathDate:
-          type:
-          - string
-          - 'null'
-          description: Contact person's date of death.
-          format: date-time
-          example: '2020-08-01'
-        isDeathDateUnknown:
-          type: boolean
-          description: Whether the person's exact date of death is known.
-          example: false
-        deathDateFrom:
-          type:
-          - string
-          - 'null'
-          description: Starting range for person's possible date of death.
-          format: date-time
-          example: '2020-08-01'
-        deathDateTo:
-          type:
-          - string
-          - 'null'
-          description: Ending range for person's possible date of death.
-          format: date-time
-          example: '2020-08-01'
-        deathPlace:
-          type:
-          - string
-          - 'null'
-          description: Contact person's place of death.
-          example: Chicago
-        deathState:
-          type:
-          - string
-          - 'null'
-          description: "Contact person's death state.\n            \nOnly supported in AU and US."
-          example: IL
-        deathCountry:
-          type:
-          - string
-          - 'null'
-          description: Contact person's death country.
-          example: USA
-        deathCounty:
-          type:
-          - string
-          - 'null'
-          description: "Contact person's death county.\n            \nOnly supported in US."
-          example: San Bernardino County
-      additionalProperties: false
-    PhoneNumber:
-      type: object
-      properties:
-        areaCode:
-          type:
-          - string
-          - 'null'
-          description: Phone area code.
-          example: '555'
-        number:
-          type:
-          - string
-          - 'null'
-          description: Phone number (excluding area code).
-          example: '1234567'
-      additionalProperties: false
-    ExecutionPerson:
-      type: object
-      properties:
-        name:
-          type:
-          - string
-          - 'null'
-          description: Person's full name
-          example: John Smith
-        address:
-          allOf:
-          - $ref: '#/components/schemas/Address'
-          description: Person's address
-        personType:
-          type:
-          - string
-          - 'null'
-          description: 'Person type for execution.
-
-
-            Only supported in AU.'
-          example: Director
-        selectedOfficeHeld:
-          type:
-          - string
-          - 'null'
-          description: Office held by the person.
-          example: Director
-        voiDetails:
-          allOf:
-          - $ref: '#/components/schemas/VoiDetails'
-          description: Verification of identity details for this person
-      additionalProperties: false
-      description: 'Represents an authorized person for organization execution
-
-
-        Only supported in AU.'
-    DxAddressDto:
-      type: object
-      properties:
-        number:
-          type:
-          - string
-          - 'null'
-        exchange:
-          type:
-          - string
-          - 'null'
-        state:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
-    ContactRelationDto:
-      type: object
-      properties:
-        relatedContactId:
-          type:
-          - string
-          - 'null'
-          description: Unique identifier of the related contact.
-          example: b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2
-        businessRole:
-          type:
-          - string
-          - 'null'
-          description: 'Business role of related contact.
-
-
-            Only applicable for companies (not trusts).'
-          example: Bookkeeper
-      additionalProperties: false
-    DeathDetailsDto:
-      type: object
-      properties:
-        deathDate:
-          type:
-          - string
-          - 'null'
-          description: Contact person's date of death.
-          format: date-time
-          example: '2020-08-01'
-        isDeathDateUnknown:
-          type: boolean
-          description: Whether the person's exact date of death is known.
-          example: false
-        deathDateFrom:
-          type:
-          - string
-          - 'null'
-          description: Starting range for person's possible date of death.
-          format: date-time
-          example: '2020-08-01'
-        deathDateTo:
-          type:
-          - string
-          - 'null'
-          description: Ending range for person's possible date of death.
-          format: date-time
-          example: '2020-08-01'
-        deathPlace:
-          type:
-          - string
-          - 'null'
-          description: Contact person's place of death.
-          example: Chicago
-        deathState:
-          type:
-          - string
-          - 'null'
-          description: "Contact person's death state.\n            \nOnly supported in AU and US."
-          example: IL
-        deathCountry:
-          type:
-          - string
-          - 'null'
-          description: Contact person's death country.
-          example: USA
-        deathCounty:
-          type:
-          - string
-          - 'null'
-          description: "Contact person's death county.\n            \nOnly supported in US."
-          example: San Bernardino County
-      additionalProperties: false
-    PersonExecutionOptionsDto:
-      type: object
-      properties:
-        poaType:
-          type:
-          - string
-          - 'null'
-          description: 'Power of Attorney type.
-
-
-            Possible values: ''None'', ''General'', ''Enduring'', ''Medical'', ''Financial'', ''Other'', ''Unset'''
-          example: Enduring
-        poaDate:
-          type:
-          - string
-          - 'null'
-          description: Date the Power of Attorney was executed
-          format: date-time
-          example: '2023-05-15'
-        attorneyName:
-          type:
-          - string
-          - 'null'
-          description: Name of the attorney
-          example: Jane Doe
-        address:
-          allOf:
-          - $ref: '#/components/schemas/AddressDto'
-          description: Attorney's address
-        poaRegisteredBook:
-          type:
-          - string
-          - 'null'
-          description: Power of Attorney registration book reference
-        poaRegisteredNumber:
-          type:
-          - string
-          - 'null'
-          description: Power of Attorney registration number
-        executionType:
-          type:
-          - string
-          - 'null'
-          description: 'Person execution type.
-
-
-            Possible values: ''Individual'', ''PowerOfAttorney'', ''Other'', ''Unset'', ''None'''
-          example: PowerOfAttorney
-      additionalProperties: false
-      description: 'Execution options for individual persons (Power of Attorney)
-
-
-        Only supported in AU.'
-    VoiDetails:
-      type: object
-      properties:
-        isCompleted:
-          type: boolean
-          description: Indicates if VOI has been completed
-          example: true
-        completedDateTime:
-          type:
-          - string
-          - 'null'
-          description: Date and time when VOI was completed
-          format: date-time
-          example: '2024-01-15T10:30:00Z'
-        reference:
-          type:
-          - string
-          - 'null'
-          description: Reference number or order ID from the VOI service
-          example: '12345678'
-        source:
-          type:
-          - string
-          - 'null'
-          description: Source/provider of the VOI service
-          example: InfoTrackID
-        status:
-          type:
-          - string
-          - 'null'
-          description: Current status of the VOI check
-          example: Complete
-      additionalProperties: false
-      description: 'Verification of Identity (VOI) details
-
-
-        Only supported in AU.'
-    PoBoxAddressDto:
-      type: object
-      properties:
-        careOf:
-          type:
-          - string
-          - 'null'
-          description: Care of the addressee (if applicable).
-          example: John Smith
-        poBoxType:
-          type:
-          - string
-          - 'null'
-          description: "PO Box type. Accepts custom values.\n            \ne.g. Care PO, PO Box, Locked Bag, RMS."
-          example: Locked Bag
-        poBoxNumber:
-          type:
-          - string
-          - 'null'
-          description: PO Box number.
-          example: '12345'
-        city:
-          type:
-          - string
-          - 'null'
-          description: City, district, suburb, town, or village.
-          example: Chicago
-        state:
-          type:
-          - string
-          - 'null'
-          description: State, province, or region.
-          example: IL
-        zipCode:
-          type:
-          - string
-          - 'null'
-          description: Zip or post code.
-          example: '60606'
-      additionalProperties: false
-      description: PO Box address.
-    ProblemDetails:
-      type: object
-      properties:
-        type:
-          type:
-          - string
-          - 'null'
-        title:
-          type:
-          - string
-          - 'null'
-        status:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        detail:
-          type:
-          - string
-          - 'null'
-        instance:
-          type:
-          - string
-          - 'null'
-      additionalProperties: {}
-    PhoneNumberWithExtension:
-      type: object
-      properties:
-        areaCode:
-          type:
-          - string
-          - 'null'
-          description: 'Phone area code.
-
-
-            Only supported in the US.'
-          example: '555'
-        number:
-          type:
-          - string
-          - 'null'
-          description: Phone number (excluding area code).
-          example: '1234567'
-        extension:
-          type:
-          - string
-          - 'null'
-          description: Phone number extension.
-          example: '103'
-      additionalProperties: false
-    Contact:
-      type: object
-      properties:
-        href:
-          type:
-          - string
-          - 'null'
-        relation:
-          type:
-          - string
-          - 'null'
-        method:
-          type:
-          - string
-          - 'null'
-          default: GET
-        self:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-        id:
-          type:
-          - string
-          - 'null'
-          description: Unique identifier of the contact.
-          example: b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2
-        externalSystemId:
-          type:
-          - string
-          - 'null'
-          description: External system id for the contact.
-          example: EXT01
-        versionId:
-          type:
-          - string
-          - 'null'
-          description: Version id of the record.
-          example: 750eb5c5-ac0b-7d11-4997-e0ce9d8896c8
-        person:
-          allOf:
-          - $ref: '#/components/schemas/Person'
-          description: Contact person details (if applicable).
-        company:
-          allOf:
-          - $ref: '#/components/schemas/Company'
-          description: Contact company details (if applicable).
-        trust:
-          allOf:
-          - $ref: '#/components/schemas/Trust'
-          description: 'Contact trust details (if applicable).
-
-
-            Note that Trust is only supported in the US. It is not available in other regions.'
-        groupOfPeople:
-          allOf:
-          - $ref: '#/components/schemas/GroupOfPeople'
-          description: Contact group details (if applicable).
-        isDeleted:
-          type: boolean
-          description: Returns true if the contact is deleted.
-          example: true
-        lastUpdated:
-          type: integer
-          description: Last updated timestamp.
-          format: int64
-          example: 637847425252027400
-        tags:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/Tag'
-          description: Set of contact's tags.
-      additionalProperties: false
-    GroupOfPeople:
-      type: object
-      properties:
-        people:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/Link'
-          description: List of contact person hypermedia links.
-        residentialAddress:
-          allOf:
-          - $ref: '#/components/schemas/Address'
-          description: Contact group's residential address details.
-        mailingAddress:
-          allOf:
-          - $ref: '#/components/schemas/Address'
-          description: "Contact group's mailing address details.\n            \nOnly supported in the US."
-        name:
-          type:
-          - string
-          - 'null'
-          description: Names of the people in the group. Limited to the first 5 names.
-          example: John Smith & Jane Citizen
-      additionalProperties: false
-    Address:
-      type: object
-      properties:
-        careOf:
-          type:
-          - string
-          - 'null'
-          description: Care of the addressee (if applicable).
-          example: John Smith
-        buildingLevel:
-          type:
-          - string
-          - 'null'
-          description: Building level in address (if applicable).
-          example: Level 1
-        unitNumber:
-          type:
-          - string
-          - 'null'
-          description: Unit number in address (if applicable).
-          example: '10'
-        unitType:
-          type:
-          - string
-          - 'null'
-          description: 'Unit type in address (if applicable). Accepts custom values.
-
-
-            e.g. Apartment, Unit, Flat, Villa, Suite.'
-          example: Suite
-        streetNumber:
-          type:
-          - string
-          - 'null'
-          description: Street number in address.
-          example: '100'
-        streetName:
-          type:
-          - string
-          - 'null'
-          description: Street name in address.
-          example: Broad
-        streetType:
-          type:
-          - string
-          - 'null'
-          description: 'Street type. Accepts custom values.
-
-
-            e.g. Street, Road, Avenue, Lane.'
-          example: Street
-        addressLine1:
-          type:
-          - string
-          - 'null'
-          description: First line of address.
-          example: Level 1/10
-        addressLine2:
-          type:
-          - string
-          - 'null'
-          description: Second line of address (if applicable).
-          example: 100 Broad Street
-        city:
-          type:
-          - string
-          - 'null'
-          description: City, district, suburb, town, or village.
-          example: Chicago
-        state:
-          type:
-          - string
-          - 'null'
-          description: State, province, or region.
-          example: IL
-        zipCode:
-          type:
-          - string
-          - 'null'
-          description: Zip or post code.
-          example: '60606'
-        locality:
-          type:
-          - string
-          - 'null'
-          description: 'Locality.
-
-
-            Only supported in the UK.'
-          example: Dunkirk
-        county:
-          type:
-          - string
-          - 'null'
-          description: 'County.
-
-
-            Only supported in the US and UK.'
-          example: New York
-        country:
-          type:
-          - string
-          - 'null'
-          description: Country.
-          example: United States
-        poBox:
-          allOf:
-          - $ref: '#/components/schemas/PoBoxAddress'
-          description: PO Box details (if applicable).
-      additionalProperties: false
-    AddressWithDxAddress:
-      type: object
-      properties:
-        careOf:
-          type:
-          - string
-          - 'null'
-          description: Care of the addressee (if applicable).
-          example: John Smith
-        buildingLevel:
-          type:
-          - string
-          - 'null'
-          description: Building level in address (if applicable).
-          example: Level 1
-        unitNumber:
-          type:
-          - string
-          - 'null'
-          description: Unit number in address (if applicable).
-          example: '10'
-        unitType:
-          type:
-          - string
-          - 'null'
-          description: 'Unit type in address (if applicable). Accepts custom values.
-
-
-            e.g. Apartment, Unit, Flat, Villa, Suite.'
-          example: Suite
-        streetNumber:
-          type:
-          - string
-          - 'null'
-          description: Street number in address.
-          example: '100'
-        streetName:
-          type:
-          - string
-          - 'null'
-          description: Street name in address.
-          example: Broad
-        streetType:
-          type:
-          - string
-          - 'null'
-          description: 'Street type. Accepts custom values.
-
-
-            e.g. Street, Road, Avenue, Lane.'
-          example: Street
-        addressLine1:
-          type:
-          - string
-          - 'null'
-          description: First line of address.
-          example: Level 1/10
-        addressLine2:
-          type:
-          - string
-          - 'null'
-          description: Second line of address (if applicable).
-          example: 100 Broad Street
-        city:
-          type:
-          - string
-          - 'null'
-          description: City, district, suburb, town, or village.
-          example: Chicago
-        state:
-          type:
-          - string
-          - 'null'
-          description: State, province, or region.
-          example: IL
-        zipCode:
-          type:
-          - string
-          - 'null'
-          description: Zip or post code.
-          example: '60606'
-        locality:
-          type:
-          - string
-          - 'null'
-          description: 'Locality.
-
-
-            Only supported in the UK.'
-          example: Dunkirk
-        county:
-          type:
-          - string
-          - 'null'
-          description: 'County.
-
-
-            Only supported in the US and UK.'
-          example: New York
-        country:
-          type:
-          - string
-          - 'null'
-          description: Country.
-          example: United States
-        poBox:
-          allOf:
-          - $ref: '#/components/schemas/PoBoxAddress'
-          description: PO Box details (if applicable).
-        dxAddress:
-          allOf:
-          - $ref: '#/components/schemas/DxAddress'
-          description: DX address details (only applicable for AUS).
-      additionalProperties: false
-    PassportDetails:
-      type: object
-      properties:
-        passportNumber:
-          type:
-          - string
-          - 'null'
-          description: Contact person's passport number.
-          example: AB123456
-        passportIssueDate:
-          type:
-          - string
-          - 'null'
-          description: Contact person's passport issue date.
-          format: date-time
-          example: '2010-08-01'
-        passportExpireDate:
-          type:
-          - string
-          - 'null'
-          description: Contact person's passport expiry date.
-          format: date-time
-          example: '2030-08-01'
-        passportIssueCountry:
-          type:
-          - string
-          - 'null'
-          description: Contact person's passport country of issue.
-          example: USA
-        passportIssueAuthority:
-          type:
-          - string
-          - 'null'
-          description: "Contact person's passport issuing authority.\n            \nOnly supported in the UK."
-          example: HM Passport Office
-      additionalProperties: false
-    Company:
-      type: object
-      properties:
-        name:
-          type:
-          - string
-          - 'null'
-          description: Company's name.
-          example: Brown LLC
-        type:
-          type:
-          - string
-          - 'null'
-          description: 'Company''s type.
-
-
-            Possible values for US: ''Corporation'', ''Government Agency'', ''Limited Liability Company'', ''Sole Proprietor'', ''Partnership'', ''Not-for-Profit''
-
-
-            Possible values for AU: ''Company'', ''Sole Proprietor'', ''Partnership'', ''Government Department''
-
-
-            Possible values for UK: ''Company'', ''Sole Trader'', ''Partnership'', ''Limited Liability Partnership'', ''Government Department'''
-          example: Corporation
-        phone:
-          allOf:
-          - $ref: '#/components/schemas/PhoneNumber'
-          description: Company's phone details.
-        fax:
-          allOf:
-          - $ref: '#/components/schemas/PhoneNumber'
-          description: Company's fax details.
-        email:
-          type:
-          - string
-          - 'null'
-          description: Company's email address.
-          example: contact@brown.com
-        website:
-          type:
-          - string
-          - 'null'
-          description: Company's website URL.
-          example: https://www.brownllc.com
-        notes:
-          type:
-          - string
-          - 'null'
-          description: Additional notes for company (if applicable).
-          example: Construction company
-        abn:
-          type:
-          - string
-          - 'null'
-          description: 'For AU: Australian Company Number (ABN) of the firm.
-
-
-            For UK: Company Registration Number (CRN) of the firm.
-
-
-            Only supported in AU and UK.'
-          example: '1234567890'
-        companyNumberType:
-          type:
-          - string
-          - 'null'
-          description: 'Company''s Australian company number type.
-
-
-            Accepted values - ACN, ARBN
-
-
-            Only supported in AU.'
-          example: ACN
-        companyNumber:
-          type:
-          - string
-          - 'null'
-          description: "Company's Australian Company Number.\n            \nOnly supported in AU."
-          example: '234567890'
-        doingBusinessAsName:
-          type:
-          - string
-          - 'null'
-          description: "Doing Business As (DBA) name.\n            \nOnly supported in US."
-          example: Brown Holdings
-        tradingAs:
-          type:
-          - string
-          - 'null'
-          description: "Trading As type (e.g. 'Trading As', 'Doing Business As').\n            \nOnly supported in AU."
-          example: Trading As
-        tradingName:
-          type:
-          - string
-          - 'null'
-          description: "Trading name of the organisation.\n            \nOnly supported in AU and UK."
-          example: Brown Trading Co
-        mailingAddress:
-          allOf:
-          - $ref: '#/components/schemas/Address'
-          description: Company's mailing address details.
-        businessAddress:
-          allOf:
-          - $ref: '#/components/schemas/AddressWithDxAddress'
-          description: Company's business address details.
-        staff:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/Link'
-          description: Company's staff hypermedia links.
-          readOnly: true
-        directors:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/Link'
-          description: Company's directors hypermedia links.
-          readOnly: true
-        staffIds:
-          type:
-          - array
-          - 'null'
-          items:
-            type: string
-          description: Deprecated - use Staff instead. This field may not be supported in future.
-          readOnly: true
-        executionOptions:
-          allOf:
-          - $ref: '#/components/schemas/ExecutionOptions'
-          description: 'Company''s execution options for document signing and VOI details.
-
-
-            Only supported in AU.'
-      additionalProperties: false
-    PoBoxAddress:
-      type: object
-      properties:
-        careOf:
-          type:
-          - string
-          - 'null'
-          description: Care of the addressee (if applicable).
-          example: John Smith
-        poBoxType:
-          type:
-          - string
-          - 'null'
-          description: "PO Box type. Accepts custom values.\n            \ne.g. Care PO, PO Box, Locked Bag, RMS."
-          example: Locked Bag
-        poBoxNumber:
-          type:
-          - string
-          - 'null'
-          description: PO Box number.
-          example: '12345'
-        city:
-          type:
-          - string
-          - 'null'
-          description: City, district, suburb, town, or village.
-          example: Chicago
-        state:
-          type:
-          - string
-          - 'null'
-          description: State, province, or region.
-          example: IL
-        zipCode:
-          type:
-          - string
-          - 'null'
-          description: Zip or post code.
-          example: '60606'
-      additionalProperties: false
-    ExecutionOptions:
-      type: object
-      properties:
-        person1:
-          allOf:
-          - $ref: '#/components/schemas/ExecutionPerson'
-          description: First authorized person for execution
-        person2:
-          allOf:
-          - $ref: '#/components/schemas/ExecutionPerson'
-          description: Second authorized person for execution
-        executingUnder127:
-          type:
-          - boolean
-          - 'null'
-          description: Indicates if executing under section 127
-        executingAuthority:
-          type:
-          - string
-          - 'null'
-          description: Executing authority details
-        sealType:
-          type:
-          - string
-          - 'null'
-          description: Seal type for execution.
-          example: WithSeal
-        authorisedDepositTakingInstitution:
-          type:
-          - boolean
-          - 'null'
-          description: Indicates if organization is an Authorised Deposit Taking Institution
-        poaRegistrationNumber:
-          type:
-          - string
-          - 'null'
-          description: Power of Attorney registration number
-        attorneyNames:
-          type:
-          - array
-          - 'null'
-          items:
-            type: string
-          description: List of attorney names
-        executionType:
-          type:
-          - string
-          - 'null'
-          description: Execution type.
-          example: JointDirectors
-      additionalProperties: false
-      description: 'Execution options for organizations
-
-
-        Only supported in AU.'
-    TagCollection:
-      type: object
-      properties:
-        id:
-          type:
-          - string
-          - 'null'
-        href:
-          type:
-          - string
-          - 'null'
-        relation:
-          type:
-          - string
-          - 'null'
-        method:
-          type:
-          - string
-          - 'null'
-          default: GET
-        self:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-        value:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/Tag'
-      additionalProperties: false
-    PassportDetailsDto:
-      type: object
-      properties:
-        passportNumber:
-          type:
-          - string
-          - 'null'
-          description: Contact person's passport number.
-          example: AB123456
-        passportIssueDate:
-          type:
-          - string
-          - 'null'
-          description: Contact person's passport issue date.
-          format: date-time
-          example: '2010-08-01'
-        passportExpireDate:
-          type:
-          - string
-          - 'null'
-          description: Contact person's passport expiry date.
-          format: date-time
-          example: '2030-08-01'
-        passportIssueCountry:
-          type:
-          - string
-          - 'null'
-          description: Contact person's passport country of issue.
-          example: USA
-        passportIssueAuthority:
-          type:
-          - string
-          - 'null'
-          description: "Contact person's passport issuing authority.\n            \nOnly supported in the UK."
-          example: HM Passport Office
-      additionalProperties: false
-    Trust:
-      type: object
-      properties:
-        name:
-          type:
-          - string
-          - 'null'
-          description: Trust's name.
-          example: Trinity Trust
-        status:
-          type:
-          - string
-          - 'null'
-          description: 'Trust''s status.
-
-
-            Standard values are: as Trustee of, as Trustees of, as Co-Trustees of, as an Individual and as Trustee of, as Successor Trustee of.
-
-            A custom value can be supplied instead.'
-          example: as Trustee of
-        trustNumber:
-          type:
-          - string
-          - 'null'
-          description: Trust's number.
-          example: '12345678'
-        executedDate:
-          type:
-          - string
-          - 'null'
-          description: Date trust was executed.
-          format: date-time
-          example: '1980-07-01'
-        phone:
-          allOf:
-          - $ref: '#/components/schemas/PhoneNumber'
-          description: Trust's phone details.
-        fax:
-          allOf:
-          - $ref: '#/components/schemas/PhoneNumber'
-          description: Trust's fax details.
-        address:
-          allOf:
-          - $ref: '#/components/schemas/Address'
-          description: Trust's address.
-        trustees:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/Trustee'
-          description: List of trustees.
-          example:
-          - Name: John Smith
-            Type: Individual
-          - Name: Smithfield Steel
-            Type: Company
-        contacts:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/Link'
-          description: Trust's contacts hypermedia links.
-          readOnly: true
-      additionalProperties: false
-    Person:
-      type: object
-      properties:
-        title:
-          type:
-          - string
-          - 'null'
-          description: 'Contact person''s title. Accepts custom values.
-
-
-            e.g. Mr, Mrs, Miss, Honourable, Judge.'
-          example: Mr
-        firstName:
-          type:
-          - string
-          - 'null'
-          description: Contact person's first name.
-          example: John
-        middleName:
-          type:
-          - string
-          - 'null'
-          description: Contact person's middle name (if applicable).
-          example: Michael
-        lastName:
-          type:
-          - string
-          - 'null'
-          description: Contact person's last name.
-          example: Smith
-        nameSuffix:
-          type:
-          - string
-          - 'null'
-          description: Contact person's name suffix (if applicable).
-          example: PhD
-        customName:
-          type:
-          - string
-          - 'null'
-          description: Contact person's custom name to be used in letters (if applicable).
-          example: Johnny
-        residentialAddress:
-          allOf:
-          - $ref: '#/components/schemas/Address'
-          description: Contact person's residential address details.
-        mailingAddress:
-          allOf:
-          - $ref: '#/components/schemas/Address'
-          description: 'Contact person''s mailing address details.
-
-
-            Only supported in the US.'
-        phone:
-          allOf:
-          - $ref: '#/components/schemas/PhoneNumber'
-          description: Contact person's phone details.
-        phone2:
-          allOf:
-          - $ref: '#/components/schemas/PhoneNumberWithExtension'
-          description: Contact person's alternate phone details.
-        fax:
-          allOf:
-          - $ref: '#/components/schemas/PhoneNumber'
-          description: "Contact person's fax details. \n\nOnly supported in the US."
-        cell:
-          allOf:
-          - $ref: '#/components/schemas/PhoneNumber'
-          description: Contact person's mobile details.
-        email:
-          type:
-          - string
-          - 'null'
-          description: Contact person's email address.
-          example: john.smith@brown.com
-        notes:
-          type:
-          - string
-          - 'null'
-          description: Additional notes about contact (if applicable).
-          example: Prefers to answer work phone.
-        occupation:
-          type:
-          - string
-          - 'null'
-          description: Contact person's occupation.
-          example: Bookkeeper
-        gender:
-          type:
-          - string
-          - 'null'
-          description: 'Contact person''s gender.
-
-
-            Accepted values - Male, Female, Other as well as any free text.'
-          example: Male
-        maritalStatus:
-          type:
-          - string
-          - 'null'
-          description: 'Contact person''s marital status. Accepts custom values.
-
-
-            e.g. Single, Married, Separated, Divorced, Widowed, De facto.'
-          example: Single
-        specialNeeds:
-          type:
-          - string
-          - 'null'
-          description: 'Brief description of any special needs (if applicable).
-
-
-            Only supported in Australia.'
-          example: Wheelchair access
-        birthDate:
-          type:
-          - string
-          - 'null'
-          description: Contact person's date of birth.
-          format: date-time
-          example: '1980-07-01'
-        birthPlace:
-          type:
-          - string
-          - 'null'
-          description: Contact person's place of birth.
-          example: Chicago
-        birthState:
-          type:
-          - string
-          - 'null'
-          description: Contact person's birth state.
-          example: Illinois
-        birthCountry:
-          type:
-          - string
-          - 'null'
-          description: Contact person's birth country.
-          example: USA
-        identificationNumberType:
-          type:
-          - string
-          - 'null'
-          description: Contact person's type of identification.
-          example: Passport
-        identificationNumber:
-          type:
-          - string
-          - 'null'
-          description: Contact person's identification number.
-          example: PP123456789
-        birthFirstName:
-          type:
-          - string
-          - 'null'
-          description: Contact person's first name at birth.
-          example: James
-        birthMiddleName:
-          type:
-          - string
-          - 'null'
-          description: Contact person's middle name at birth.
-          example: Thomas
-        birthLastName:
-          type:
-          - string
-          - 'null'
-          description: Contact person's last name at birth.
-          example: Jones
-        previousNames:
-          type:
-          - string
-          - 'null'
-          description: Contact person's previous names.
-          example: Jane Smith
-        passportDetails:
-          allOf:
-          - $ref: '#/components/schemas/PassportDetails'
-          description: Contact person's passport details.
-        deathDetails:
-          allOf:
-          - $ref: '#/components/schemas/DeathDetails'
-          description: Contact person's death details.
-        correctionsReferenceNumber:
-          type:
-          - string
-          - 'null'
-          description: 'Contact person''s corrections reference number.
-
-
-            Only supported in Australia.'
-        centrelinkReferenceNumber:
-          type:
-          - string
-          - 'null'
-          description: 'Contact person''s centrelink reference number.
-
-
-            Only supported in Australia.'
-        citizenshipDetails:
-          allOf:
-          - $ref: '#/components/schemas/CitizenshipDetails'
-          description: Contact person's citizenship details.
-        utbmsDetails:
-          allOf:
-          - $ref: '#/components/schemas/UtbmsDetails'
-          description: 'Contact''s UTBMS Details.
-
-
-            Only supported in the US.'
-        executionOptions:
-          allOf:
-          - $ref: '#/components/schemas/PersonExecutionOptions'
-          description: 'Person''s execution options including Power of Attorney and VOI details.
-
-
-            Only supported in AU.'
-        voiDetails:
-          allOf:
-          - $ref: '#/components/schemas/VoiDetails'
-          description: 'Person''s verification of identity details.
-
-
-            Only supported in AU.'
-      additionalProperties: false
-    GroupOfPeopleDto:
-      type: object
-      properties:
-        peopleIds:
-          type:
-          - array
-          - 'null'
-          items:
-            type: string
-          description: List of contact person Ids.
-          example:
-          - b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2
-          - 750eb5c5-ac0b-7d11-4997-e0ce9d8896c8
-        residentialAddress:
-          allOf:
-          - $ref: '#/components/schemas/AddressDto'
-          description: Contact group's residential address details.
-        mailingAddress:
-          allOf:
-          - $ref: '#/components/schemas/AddressDto'
-          description: "Contact group's mailing address details.\n            \nOnly supported in the US."
-      additionalProperties: false
-    UtbmsDetailsDto:
-      type: object
-      properties:
-        ledesClientId:
-          type:
-          - string
-          - 'null'
-          description: LEDES client Id
-      additionalProperties: false
-      description: Utbms Details
-    PhoneNumberDto:
-      type: object
-      properties:
-        areaCode:
-          type:
-          - string
-          - 'null'
-          description: Phone area code.
-          example: '555'
-        number:
-          type:
-          - string
-          - 'null'
-          description: Phone number (excluding area code).
-          example: '1234567'
-      additionalProperties: false
-    Link:
-      type: object
-      properties:
-        id:
-          type:
-          - string
-          - 'null'
-        href:
-          type:
-          - string
-          - 'null'
-        relation:
-          type:
-          - string
-          - 'null'
-        method:
-          type:
-          - string
-          - 'null'
-          default: GET
-      additionalProperties: false
-    UtbmsDetails:
-      type: object
-      properties:
-        ledesClientId:
-          type:
-          - string
-          - 'null'
-          description: LEDES client Id
-      additionalProperties: false
-      description: Utbms Details
-    CompanyDto:
-      type: object
-      properties:
-        name:
-          type:
-          - string
-          - 'null'
-          description: Company's name.
-          example: Brown LLC
-        type:
-          type:
-          - string
-          - 'null'
-          description: 'Company''s type.
-
-
-            Possible values for US: ''Corporation'', ''Government Agency'', ''Limited Liability Company'', ''Sole Proprietor'', ''Partnership'', ''Not-for-Profit''
-
-
-            Possible values for AU: ''Company'', ''Sole Proprietor'', ''Partnership'', ''Government Department''
-
-
-            Possible values for UK: ''Company'', ''Sole Trader'', ''Partnership'', ''Limited Liability Partnership'', ''Government Department'''
-          example: Corporation
-        phone:
-          allOf:
-          - $ref: '#/components/schemas/PhoneNumberDto'
-          description: Company's phone details.
-        fax:
-          allOf:
-          - $ref: '#/components/schemas/PhoneNumberDto'
-          description: Company's fax details.
-        email:
-          type:
-          - string
-          - 'null'
-          description: Company's email address.
-          example: contact@brown.com
-        website:
-          type:
-          - string
-          - 'null'
-          description: Company's website URL.
-          example: https://www.brownllc.com
-        notes:
-          type:
-          - string
-          - 'null'
-          description: Additional notes for company (if applicable).
-          example: Recently merged with Cyberdyne Inc.
-        businessAddress:
-          allOf:
-          - $ref: '#/components/schemas/AddressWithDxAddressDto'
-        mailingAddress:
-          allOf:
-          - $ref: '#/components/schemas/AddressDto'
-          description: Only applicable for USA.
-        abn:
-          type:
-          - string
-          - 'null'
-          description: 'For AU: Australian Company Number (ABN) of the company.
-
-
-            For UK: Company Registration Number (CRN) of the company.
-
-
-            Only supported in AU and UK.'
-          example: '1234567890'
-        companyNumberType:
-          type:
-          - string
-          - 'null'
-          description: 'Company''s Australian company number type.
-
-
-            Possible values: ''ACN'', ''ARBN''
-
-
-            Only supported in AU.'
-          example: ACN
-        companyNumber:
-          type:
-          - string
-          - 'null'
-          description: 'Company''s Australian Company Number.
-
-
-            Only supported in AU.'
-          example: '234567890'
-        doingBusinessAsName:
-          type:
-          - string
-          - 'null'
-          description: "Doing Business As (DBA) name.\n            \nOnly supported in US."
-          example: Brown Holdings
-        tradingAs:
-          type:
-          - string
-          - 'null'
-          description: "Trading As type (e.g. 'Trading As', 'Doing Business As').\n            \nOnly supported in AU."
-          example: Trading As
-        tradingName:
-          type:
-          - string
-          - 'null'
-          description: "Trading name of the organisation.\n            \nOnly supported in AU and UK."
-          example: Brown Trading Co
-        staffIds:
-          type:
-          - array
-          - 'null'
-          items:
-            type: string
-          description: List of Staff IDs for this company.
-          example:
-          - 73481c13-b7f8-4610-b221-aaccbf7aaade
-          - 18cd6029-4a9e-4b99-bae5-710a7d79a19b
-        directorIds:
-          type:
-          - array
-          - 'null'
-          items:
-            type: string
-          description: List of Director IDs for this company.
-          example:
-          - 73481c13-b7f8-4610-b221-aaccbf7aaade
-          - 18cd6029-4a9e-4b99-bae5-710a7d79a19b
-        executionOptions:
-          allOf:
-          - $ref: '#/components/schemas/ExecutionOptionsDto'
-          description: 'Company''s execution options for document signing and VOI details.
-
-
-            Only supported in AU.'
-      additionalProperties: false
-    CitizenshipDetailsDto:
-      type: object
-      properties:
-        countryOfCitizenship:
-          type:
-          - string
-          - 'null'
-          description: Country of citizenship
-          example: USA
-        nationality:
-          type:
-          - string
-          - 'null'
-          description: Nationality
-          example: American
-        languageOfInterpreter:
-          type:
-          - string
-          - 'null'
-          description: Language of interpreter
-          example: French
-      additionalProperties: false
-    CitizenshipDetails:
-      type: object
-      properties:
-        countryOfCitizenship:
-          type:
-          - string
-          - 'null'
-          description: Country of citizenship
-          example: USA
-        nationality:
-          type:
-          - string
-          - 'null'
-          description: Nationality
-          example: American
-        languageOfInterpreter:
-          type:
-          - string
-          - 'null'
-          description: Language of interpreter
-          example: French
-      additionalProperties: false
-    DxAddress:
-      type: object
-      properties:
-        number:
-          type:
-          - string
-          - 'null'
-          description: Direct Exchange number (if applicable).
-          example: '376'
-        exchange:
-          type:
-          - string
-          - 'null'
-          description: Direct Exchange name.
-          example: DX
-        state:
-          type:
-          - string
-          - 'null'
-          description: State, province, or region.
-          example: NSW
-      additionalProperties: false
-    ContactPagedCollection:
-      type: object
-      properties:
-        id:
-          type:
-          - string
-          - 'null'
-        href:
-          type:
-          - string
-          - 'null'
-        relation:
-          type:
-          - string
-          - 'null'
-        method:
-          type:
-          - string
-          - 'null'
-          default: GET
-        self:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-        value:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/Contact'
-        offset:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        limit:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        size:
-          type: integer
-          format: int64
-        first:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-        previous:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-        next:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-        last:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-      additionalProperties: false
-    PersonExecutionOptions:
-      type: object
-      properties:
-        poaType:
-          type:
-          - string
-          - 'null'
-          description: Power of Attorney type.
-          example: Enduring
-        poaDate:
-          type:
-          - string
-          - 'null'
-          description: Date the Power of Attorney was executed
-          format: date-time
-          example: '2023-05-15'
-        attorneyName:
-          type:
-          - string
-          - 'null'
-          description: Name of the attorney
-          example: Jane Doe
-        address:
-          allOf:
-          - $ref: '#/components/schemas/Address'
-          description: Attorney's address
-        poaRegisteredBook:
-          type:
-          - string
-          - 'null'
-          description: Power of Attorney registration book reference
-        poaRegisteredNumber:
-          type:
-          - string
-          - 'null'
-          description: Power of Attorney registration number
-        executionType:
-          type:
-          - string
-          - 'null'
-          description: Person execution type.
-          example: PowerOfAttorney
-        poaVoiDetails:
-          allOf:
-          - $ref: '#/components/schemas/VoiDetails'
-          description: Verification of identity details for the attorney (Power of Attorney)
-      additionalProperties: false
-      description: 'Execution options for individual persons (Power of Attorney)
-
-
-        Only supported in AU.'
     LinkPagedCollection:
       type: object
       properties:
@@ -2672,6 +653,81 @@ components:
         last:
           allOf:
           - $ref: '#/components/schemas/Link'
+      additionalProperties: false
+    CitizenshipDetails:
+      type: object
+      properties:
+        countryOfCitizenship:
+          type:
+          - string
+          - 'null'
+          description: Country of citizenship
+          example: USA
+        nationality:
+          type:
+          - string
+          - 'null'
+          description: Nationality
+          example: American
+        languageOfInterpreter:
+          type:
+          - string
+          - 'null'
+          description: Language of interpreter
+          example: French
+      additionalProperties: false
+    ExecutionPerson:
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+          description: Person's full name
+          example: John Smith
+        address:
+          allOf:
+          - $ref: '#/components/schemas/Address'
+          description: Person's address
+        personType:
+          type:
+          - string
+          - 'null'
+          description: 'Person type for execution.
+
+
+            Only supported in AU.'
+          example: Director
+        selectedOfficeHeld:
+          type:
+          - string
+          - 'null'
+          description: Office held by the person.
+          example: Director
+        voiDetails:
+          allOf:
+          - $ref: '#/components/schemas/VoiDetails'
+          description: Verification of identity details for this person
+      additionalProperties: false
+      description: 'Represents an authorized person for organization execution
+
+
+        Only supported in AU.'
+    PhoneNumber:
+      type: object
+      properties:
+        areaCode:
+          type:
+          - string
+          - 'null'
+          description: Phone area code.
+          example: '555'
+        number:
+          type:
+          - string
+          - 'null'
+          description: Phone number (excluding area code).
+          example: '1234567'
       additionalProperties: false
     PersonDto:
       type: object
@@ -2904,6 +960,1000 @@ components:
 
             Only supported in AU.'
       additionalProperties: false
+    IdentificationDetailsDto:
+      type: object
+      properties:
+        alienNumber:
+          type:
+          - string
+          - 'null'
+          description: 'Alien number
+
+            Only supported in the US.'
+        registrationAuthority:
+          type:
+          - string
+          - 'null'
+          description: 'Registration authority
+
+            Only supported in the US.'
+        registrationNumber:
+          type:
+          - string
+          - 'null'
+          description: 'Registration number
+
+            Only supported in the US.'
+        driversLicenseNumber:
+          type:
+          - string
+          - 'null'
+          description: Driver's license number
+        driversLicenseState:
+          type:
+          - string
+          - 'null'
+          description: 'Driver''s licence state
+
+            <example>IL</example><example>NSW</example>'
+        medicareNumber:
+          type:
+          - string
+          - 'null'
+          description: Medicare number
+        nhsNumber:
+          type:
+          - string
+          - 'null'
+          description: 'NHS (National Health Service) number
+
+            Only supported in UK.'
+      additionalProperties: false
+    ContactPagedCollection:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+        href:
+          type:
+          - string
+          - 'null'
+        relation:
+          type:
+          - string
+          - 'null'
+        method:
+          type:
+          - string
+          - 'null'
+          default: GET
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+        value:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/Contact'
+        offset:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        limit:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        size:
+          type: integer
+          format: int64
+        first:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+        previous:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+        next:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+        last:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+      additionalProperties: false
+    PassportDetailsDto:
+      type: object
+      properties:
+        passportNumber:
+          type:
+          - string
+          - 'null'
+          description: Contact person's passport number.
+          example: AB123456
+        passportIssueDate:
+          type:
+          - string
+          - 'null'
+          description: Contact person's passport issue date.
+          format: date-time
+          example: '2010-08-01'
+        passportExpireDate:
+          type:
+          - string
+          - 'null'
+          description: Contact person's passport expiry date.
+          format: date-time
+          example: '2030-08-01'
+        passportIssueCountry:
+          type:
+          - string
+          - 'null'
+          description: Contact person's passport country of issue.
+          example: USA
+        passportIssueAuthority:
+          type:
+          - string
+          - 'null'
+          description: "Contact person's passport issuing authority.\n            \nOnly supported in the UK."
+          example: HM Passport Office
+      additionalProperties: false
+    Company:
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+          description: Company's name.
+          example: Brown LLC
+        type:
+          type:
+          - string
+          - 'null'
+          description: 'Company''s type.
+
+
+            Possible values for US: ''Corporation'', ''Government Agency'', ''Limited Liability Company'', ''Sole Proprietor'', ''Partnership'', ''Not-for-Profit''
+
+
+            Possible values for AU: ''Company'', ''Sole Proprietor'', ''Partnership'', ''Government Department''
+
+
+            Possible values for UK: ''Company'', ''Sole Trader'', ''Partnership'', ''Limited Liability Partnership'', ''Government Department'''
+          example: Corporation
+        phone:
+          allOf:
+          - $ref: '#/components/schemas/PhoneNumber'
+          description: Company's phone details.
+        fax:
+          allOf:
+          - $ref: '#/components/schemas/PhoneNumber'
+          description: Company's fax details.
+        email:
+          type:
+          - string
+          - 'null'
+          description: Company's email address.
+          example: contact@brown.com
+        website:
+          type:
+          - string
+          - 'null'
+          description: Company's website URL.
+          example: https://www.brownllc.com
+        notes:
+          type:
+          - string
+          - 'null'
+          description: Additional notes for company (if applicable).
+          example: Construction company
+        abn:
+          type:
+          - string
+          - 'null'
+          description: 'For AU: Australian Company Number (ABN) of the firm.
+
+
+            For UK: Company Registration Number (CRN) of the firm.
+
+
+            Only supported in AU and UK.'
+          example: '1234567890'
+        companyNumberType:
+          type:
+          - string
+          - 'null'
+          description: 'Company''s Australian company number type.
+
+
+            Accepted values - ACN, ARBN
+
+
+            Only supported in AU.'
+          example: ACN
+        companyNumber:
+          type:
+          - string
+          - 'null'
+          description: "Company's Australian Company Number.\n            \nOnly supported in AU."
+          example: '234567890'
+        doingBusinessAsName:
+          type:
+          - string
+          - 'null'
+          description: "Doing Business As (DBA) name.\n            \nOnly supported in US."
+          example: Brown Holdings
+        tradingAs:
+          type:
+          - string
+          - 'null'
+          description: "Trading As type (e.g. 'Trading As', 'Doing Business As').\n            \nOnly supported in AU."
+          example: Trading As
+        tradingName:
+          type:
+          - string
+          - 'null'
+          description: "Trading name of the organisation.\n            \nOnly supported in AU and UK."
+          example: Brown Trading Co
+        mailingAddress:
+          allOf:
+          - $ref: '#/components/schemas/Address'
+          description: Company's mailing address details.
+        businessAddress:
+          allOf:
+          - $ref: '#/components/schemas/AddressWithDxAddress'
+          description: Company's business address details.
+        staff:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/Link'
+          description: Company's staff hypermedia links.
+          readOnly: true
+        directors:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/Link'
+          description: Company's directors hypermedia links.
+          readOnly: true
+        staffIds:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+          description: Deprecated - use Staff instead. This field may not be supported in future.
+          readOnly: true
+        executionOptions:
+          allOf:
+          - $ref: '#/components/schemas/ExecutionOptions'
+          description: 'Company''s execution options for document signing and VOI details.
+
+
+            Only supported in AU.'
+      additionalProperties: false
+    Contact:
+      type: object
+      properties:
+        href:
+          type:
+          - string
+          - 'null'
+        relation:
+          type:
+          - string
+          - 'null'
+        method:
+          type:
+          - string
+          - 'null'
+          default: GET
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+        id:
+          type:
+          - string
+          - 'null'
+          description: Unique identifier of the contact.
+          example: b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2
+        externalSystemId:
+          type:
+          - string
+          - 'null'
+          description: External system id for the contact.
+          example: EXT01
+        versionId:
+          type:
+          - string
+          - 'null'
+          description: Version id of the record.
+          example: 750eb5c5-ac0b-7d11-4997-e0ce9d8896c8
+        person:
+          allOf:
+          - $ref: '#/components/schemas/Person'
+          description: Contact person details (if applicable).
+        company:
+          allOf:
+          - $ref: '#/components/schemas/Company'
+          description: Contact company details (if applicable).
+        trust:
+          allOf:
+          - $ref: '#/components/schemas/Trust'
+          description: 'Contact trust details (if applicable).
+
+
+            Note that Trust is only supported in the US. It is not available in other regions.'
+        groupOfPeople:
+          allOf:
+          - $ref: '#/components/schemas/GroupOfPeople'
+          description: Contact group details (if applicable).
+        isDeleted:
+          type: boolean
+          description: Returns true if the contact is deleted.
+          example: true
+        lastUpdated:
+          type: integer
+          description: Last updated timestamp.
+          format: int64
+          example: 637847425252027400
+        tags:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/Tag'
+          description: Set of contact's tags.
+      additionalProperties: false
+    VoiDetails:
+      type: object
+      properties:
+        isCompleted:
+          type: boolean
+          description: Indicates if VOI has been completed
+          example: true
+        completedDateTime:
+          type:
+          - string
+          - 'null'
+          description: Date and time when VOI was completed
+          format: date-time
+          example: '2024-01-15T10:30:00Z'
+        reference:
+          type:
+          - string
+          - 'null'
+          description: Reference number or order ID from the VOI service
+          example: '12345678'
+        source:
+          type:
+          - string
+          - 'null'
+          description: Source/provider of the VOI service
+          example: InfoTrackID
+        status:
+          type:
+          - string
+          - 'null'
+          description: Current status of the VOI check
+          example: Complete
+      additionalProperties: false
+      description: 'Verification of Identity (VOI) details
+
+
+        Only supported in AU.'
+    Tag:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+          description: Identifier of the tag. Role tags do not have an identifier.
+        name:
+          type:
+          - string
+          - 'null'
+          description: Name of tag.
+        type:
+          type: string
+          description: Type of tag. Accepted values are 'Role' or 'Custom'
+          example: Custom
+      additionalProperties: false
+      description: Represents a tag with an identifier, name, and type.
+    DeathDetails:
+      type: object
+      properties:
+        deathDate:
+          type:
+          - string
+          - 'null'
+          description: Contact person's date of death.
+          format: date-time
+          example: '2020-08-01'
+        isDeathDateUnknown:
+          type: boolean
+          description: Whether the person's exact date of death is known.
+          example: false
+        deathDateFrom:
+          type:
+          - string
+          - 'null'
+          description: Starting range for person's possible date of death.
+          format: date-time
+          example: '2020-08-01'
+        deathDateTo:
+          type:
+          - string
+          - 'null'
+          description: Ending range for person's possible date of death.
+          format: date-time
+          example: '2020-08-01'
+        deathPlace:
+          type:
+          - string
+          - 'null'
+          description: Contact person's place of death.
+          example: Chicago
+        deathState:
+          type:
+          - string
+          - 'null'
+          description: "Contact person's death state.\n            \nOnly supported in AU and US."
+          example: IL
+        deathCountry:
+          type:
+          - string
+          - 'null'
+          description: Contact person's death country.
+          example: USA
+        deathCounty:
+          type:
+          - string
+          - 'null'
+          description: "Contact person's death county.\n            \nOnly supported in US."
+          example: San Bernardino County
+      additionalProperties: false
+    ExecutionOptionsDto:
+      type: object
+      properties:
+        person1:
+          allOf:
+          - $ref: '#/components/schemas/ExecutionPersonDto'
+          description: First authorized person for execution
+        person2:
+          allOf:
+          - $ref: '#/components/schemas/ExecutionPersonDto'
+          description: Second authorized person for execution
+        executingUnder127:
+          type:
+          - boolean
+          - 'null'
+          description: Indicates if executing under section 127
+        executingAuthority:
+          type:
+          - string
+          - 'null'
+          description: Executing authority details
+        sealType:
+          type:
+          - string
+          - 'null'
+          description: 'Seal type for execution.
+
+
+            Possible values: ''WithSeal'', ''WithoutSeal'', ''Unset'''
+          example: WithSeal
+        authorisedDepositTakingInstitution:
+          type:
+          - boolean
+          - 'null'
+          description: Indicates if organization is an Authorised Deposit Taking Institution
+        poaRegistrationNumber:
+          type:
+          - string
+          - 'null'
+          description: Power of Attorney registration number
+        attorneyNames:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+          description: List of attorney names
+          example:
+          - John Smith
+          - Jane Doe
+        executionType:
+          type:
+          - string
+          - 'null'
+          description: 'Execution type.
+
+
+            Possible values: ''Individual'', ''SoleDirector'', ''JointDirectors'', ''Director'', ''Secretary'', ''Authorised'', ''Other'', ''Unset'', ''None'''
+          example: JointDirectors
+      additionalProperties: false
+      description: 'Execution options for organizations (Company, Partnership, Sole Proprietor)
+
+
+        Only supported in AU.'
+    UtbmsDetailsDto:
+      type: object
+      properties:
+        ledesClientId:
+          type:
+          - string
+          - 'null'
+          description: LEDES client Id
+      additionalProperties: false
+      description: Utbms Details
+    CompanyDto:
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+          description: Company's name.
+          example: Brown LLC
+        type:
+          type:
+          - string
+          - 'null'
+          description: 'Company''s type.
+
+
+            Possible values for US: ''Corporation'', ''Government Agency'', ''Limited Liability Company'', ''Sole Proprietor'', ''Partnership'', ''Not-for-Profit''
+
+
+            Possible values for AU: ''Company'', ''Sole Proprietor'', ''Partnership'', ''Government Department''
+
+
+            Possible values for UK: ''Company'', ''Sole Trader'', ''Partnership'', ''Limited Liability Partnership'', ''Government Department'''
+          example: Corporation
+        phone:
+          allOf:
+          - $ref: '#/components/schemas/PhoneNumberDto'
+          description: Company's phone details.
+        fax:
+          allOf:
+          - $ref: '#/components/schemas/PhoneNumberDto'
+          description: Company's fax details.
+        email:
+          type:
+          - string
+          - 'null'
+          description: Company's email address.
+          example: contact@brown.com
+        website:
+          type:
+          - string
+          - 'null'
+          description: Company's website URL.
+          example: https://www.brownllc.com
+        notes:
+          type:
+          - string
+          - 'null'
+          description: Additional notes for company (if applicable).
+          example: Recently merged with Cyberdyne Inc.
+        businessAddress:
+          allOf:
+          - $ref: '#/components/schemas/AddressWithDxAddressDto'
+        mailingAddress:
+          allOf:
+          - $ref: '#/components/schemas/AddressDto'
+          description: Only applicable for USA.
+        abn:
+          type:
+          - string
+          - 'null'
+          description: 'For AU: Australian Company Number (ABN) of the company.
+
+
+            For UK: Company Registration Number (CRN) of the company.
+
+
+            Only supported in AU and UK.'
+          example: '1234567890'
+        companyNumberType:
+          type:
+          - string
+          - 'null'
+          description: 'Company''s Australian company number type.
+
+
+            Possible values: ''ACN'', ''ARBN''
+
+
+            Only supported in AU.'
+          example: ACN
+        companyNumber:
+          type:
+          - string
+          - 'null'
+          description: 'Company''s Australian Company Number.
+
+
+            Only supported in AU.'
+          example: '234567890'
+        doingBusinessAsName:
+          type:
+          - string
+          - 'null'
+          description: "Doing Business As (DBA) name.\n            \nOnly supported in US."
+          example: Brown Holdings
+        tradingAs:
+          type:
+          - string
+          - 'null'
+          description: "Trading As type (e.g. 'Trading As', 'Doing Business As').\n            \nOnly supported in AU."
+          example: Trading As
+        tradingName:
+          type:
+          - string
+          - 'null'
+          description: "Trading name of the organisation.\n            \nOnly supported in AU and UK."
+          example: Brown Trading Co
+        staffIds:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+          description: List of Staff IDs for this company.
+          example:
+          - 73481c13-b7f8-4610-b221-aaccbf7aaade
+          - 18cd6029-4a9e-4b99-bae5-710a7d79a19b
+        directorIds:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+          description: List of Director IDs for this company.
+          example:
+          - 73481c13-b7f8-4610-b221-aaccbf7aaade
+          - 18cd6029-4a9e-4b99-bae5-710a7d79a19b
+        executionOptions:
+          allOf:
+          - $ref: '#/components/schemas/ExecutionOptionsDto'
+          description: 'Company''s execution options for document signing and VOI details.
+
+
+            Only supported in AU.'
+      additionalProperties: false
+    DxAddress:
+      type: object
+      properties:
+        number:
+          type:
+          - string
+          - 'null'
+          description: Direct Exchange number (if applicable).
+          example: '376'
+        exchange:
+          type:
+          - string
+          - 'null'
+          description: Direct Exchange name.
+          example: DX
+        state:
+          type:
+          - string
+          - 'null'
+          description: State, province, or region.
+          example: NSW
+      additionalProperties: false
+    Person:
+      type: object
+      properties:
+        title:
+          type:
+          - string
+          - 'null'
+          description: 'Contact person''s title. Accepts custom values.
+
+
+            e.g. Mr, Mrs, Miss, Honourable, Judge.'
+          example: Mr
+        firstName:
+          type:
+          - string
+          - 'null'
+          description: Contact person's first name.
+          example: John
+        middleName:
+          type:
+          - string
+          - 'null'
+          description: Contact person's middle name (if applicable).
+          example: Michael
+        lastName:
+          type:
+          - string
+          - 'null'
+          description: Contact person's last name.
+          example: Smith
+        nameSuffix:
+          type:
+          - string
+          - 'null'
+          description: Contact person's name suffix (if applicable).
+          example: PhD
+        customName:
+          type:
+          - string
+          - 'null'
+          description: Contact person's custom name to be used in letters (if applicable).
+          example: Johnny
+        residentialAddress:
+          allOf:
+          - $ref: '#/components/schemas/Address'
+          description: Contact person's residential address details.
+        mailingAddress:
+          allOf:
+          - $ref: '#/components/schemas/Address'
+          description: 'Contact person''s mailing address details.
+
+
+            Only supported in the US.'
+        phone:
+          allOf:
+          - $ref: '#/components/schemas/PhoneNumber'
+          description: Contact person's phone details.
+        phone2:
+          allOf:
+          - $ref: '#/components/schemas/PhoneNumberWithExtension'
+          description: Contact person's alternate phone details.
+        fax:
+          allOf:
+          - $ref: '#/components/schemas/PhoneNumber'
+          description: "Contact person's fax details. \n\nOnly supported in the US."
+        cell:
+          allOf:
+          - $ref: '#/components/schemas/PhoneNumber'
+          description: Contact person's mobile details.
+        email:
+          type:
+          - string
+          - 'null'
+          description: Contact person's email address.
+          example: john.smith@brown.com
+        notes:
+          type:
+          - string
+          - 'null'
+          description: Additional notes about contact (if applicable).
+          example: Prefers to answer work phone.
+        occupation:
+          type:
+          - string
+          - 'null'
+          description: Contact person's occupation.
+          example: Bookkeeper
+        gender:
+          type:
+          - string
+          - 'null'
+          description: 'Contact person''s gender.
+
+
+            Accepted values - Male, Female, Other as well as any free text.'
+          example: Male
+        maritalStatus:
+          type:
+          - string
+          - 'null'
+          description: 'Contact person''s marital status. Accepts custom values.
+
+
+            e.g. Single, Married, Separated, Divorced, Widowed, De facto.'
+          example: Single
+        specialNeeds:
+          type:
+          - string
+          - 'null'
+          description: 'Brief description of any special needs (if applicable).
+
+
+            Only supported in Australia.'
+          example: Wheelchair access
+        birthDate:
+          type:
+          - string
+          - 'null'
+          description: Contact person's date of birth.
+          format: date-time
+          example: '1980-07-01'
+        birthPlace:
+          type:
+          - string
+          - 'null'
+          description: Contact person's place of birth.
+          example: Chicago
+        birthState:
+          type:
+          - string
+          - 'null'
+          description: Contact person's birth state.
+          example: Illinois
+        birthCountry:
+          type:
+          - string
+          - 'null'
+          description: Contact person's birth country.
+          example: USA
+        identificationNumberType:
+          type:
+          - string
+          - 'null'
+          description: Contact person's type of identification.
+          example: Passport
+        identificationNumber:
+          type:
+          - string
+          - 'null'
+          description: Contact person's identification number.
+          example: PP123456789
+        birthFirstName:
+          type:
+          - string
+          - 'null'
+          description: Contact person's first name at birth.
+          example: James
+        birthMiddleName:
+          type:
+          - string
+          - 'null'
+          description: Contact person's middle name at birth.
+          example: Thomas
+        birthLastName:
+          type:
+          - string
+          - 'null'
+          description: Contact person's last name at birth.
+          example: Jones
+        previousNames:
+          type:
+          - string
+          - 'null'
+          description: Contact person's previous names.
+          example: Jane Smith
+        passportDetails:
+          allOf:
+          - $ref: '#/components/schemas/PassportDetails'
+          description: Contact person's passport details.
+        deathDetails:
+          allOf:
+          - $ref: '#/components/schemas/DeathDetails'
+          description: Contact person's death details.
+        correctionsReferenceNumber:
+          type:
+          - string
+          - 'null'
+          description: 'Contact person''s corrections reference number.
+
+
+            Only supported in Australia.'
+        centrelinkReferenceNumber:
+          type:
+          - string
+          - 'null'
+          description: 'Contact person''s centrelink reference number.
+
+
+            Only supported in Australia.'
+        citizenshipDetails:
+          allOf:
+          - $ref: '#/components/schemas/CitizenshipDetails'
+          description: Contact person's citizenship details.
+        utbmsDetails:
+          allOf:
+          - $ref: '#/components/schemas/UtbmsDetails'
+          description: 'Contact''s UTBMS Details.
+
+
+            Only supported in the US.'
+        executionOptions:
+          allOf:
+          - $ref: '#/components/schemas/PersonExecutionOptions'
+          description: 'Person''s execution options including Power of Attorney and VOI details.
+
+
+            Only supported in AU.'
+        voiDetails:
+          allOf:
+          - $ref: '#/components/schemas/VoiDetails'
+          description: 'Person''s verification of identity details.
+
+
+            Only supported in AU.'
+      additionalProperties: false
+    PhoneNumberWithExtension:
+      type: object
+      properties:
+        areaCode:
+          type:
+          - string
+          - 'null'
+          description: 'Phone area code.
+
+
+            Only supported in the US.'
+          example: '555'
+        number:
+          type:
+          - string
+          - 'null'
+          description: Phone number (excluding area code).
+          example: '1234567'
+        extension:
+          type:
+          - string
+          - 'null'
+          description: Phone number extension.
+          example: '103'
+      additionalProperties: false
+    ExecutionPersonDto:
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+          description: Person's full name
+          example: John Smith
+        address:
+          allOf:
+          - $ref: '#/components/schemas/AddressDto'
+          description: Person's address
+        personType:
+          type:
+          - string
+          - 'null'
+          description: 'Person type for execution.
+
+
+            Possible values: ''Director'', ''Secretary'', ''SoleDirectorAndSecretary'', ''AuthorisedSignatory'', ''Other'', ''Unset'''
+          example: Director
+        selectedOfficeHeld:
+          type:
+          - string
+          - 'null'
+          description: 'Office held by the person.
+
+
+            Possible values: ''Director'', ''Secretary'', ''SoleDirectorAndSecretary'', ''Partner'', ''AuthorisedRepresentative'', ''Other'', ''Unset'''
+          example: Director
+      additionalProperties: false
+      description: 'Represents an authorized person for organization execution
+
+
+        Only supported in AU.'
+    DxAddressDto:
+      type: object
+      properties:
+        number:
+          type:
+          - string
+          - 'null'
+        exchange:
+          type:
+          - string
+          - 'null'
+        state:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
     TrustDto:
       type: object
       properties:
@@ -2963,6 +2013,571 @@ components:
           - Name: Smithfield Steel
             Type: Company
       additionalProperties: false
+    UtbmsDetails:
+      type: object
+      properties:
+        ledesClientId:
+          type:
+          - string
+          - 'null'
+          description: LEDES client Id
+      additionalProperties: false
+      description: Utbms Details
+    CitizenshipDetailsDto:
+      type: object
+      properties:
+        countryOfCitizenship:
+          type:
+          - string
+          - 'null'
+          description: Country of citizenship
+          example: USA
+        nationality:
+          type:
+          - string
+          - 'null'
+          description: Nationality
+          example: American
+        languageOfInterpreter:
+          type:
+          - string
+          - 'null'
+          description: Language of interpreter
+          example: French
+      additionalProperties: false
+    PassportDetails:
+      type: object
+      properties:
+        passportNumber:
+          type:
+          - string
+          - 'null'
+          description: Contact person's passport number.
+          example: AB123456
+        passportIssueDate:
+          type:
+          - string
+          - 'null'
+          description: Contact person's passport issue date.
+          format: date-time
+          example: '2010-08-01'
+        passportExpireDate:
+          type:
+          - string
+          - 'null'
+          description: Contact person's passport expiry date.
+          format: date-time
+          example: '2030-08-01'
+        passportIssueCountry:
+          type:
+          - string
+          - 'null'
+          description: Contact person's passport country of issue.
+          example: USA
+        passportIssueAuthority:
+          type:
+          - string
+          - 'null'
+          description: "Contact person's passport issuing authority.\n            \nOnly supported in the UK."
+          example: HM Passport Office
+      additionalProperties: false
+    TagCollection:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+        href:
+          type:
+          - string
+          - 'null'
+        relation:
+          type:
+          - string
+          - 'null'
+        method:
+          type:
+          - string
+          - 'null'
+          default: GET
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+        value:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/Tag'
+      additionalProperties: false
+    ContactRelationDto:
+      type: object
+      properties:
+        relatedContactId:
+          type:
+          - string
+          - 'null'
+          description: Unique identifier of the related contact.
+          example: b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2
+        businessRole:
+          type:
+          - string
+          - 'null'
+          description: 'Business role of related contact.
+
+
+            Only applicable for companies (not trusts).'
+          example: Bookkeeper
+      additionalProperties: false
+    ExecutionOptions:
+      type: object
+      properties:
+        person1:
+          allOf:
+          - $ref: '#/components/schemas/ExecutionPerson'
+          description: First authorized person for execution
+        person2:
+          allOf:
+          - $ref: '#/components/schemas/ExecutionPerson'
+          description: Second authorized person for execution
+        executingUnder127:
+          type:
+          - boolean
+          - 'null'
+          description: Indicates if executing under section 127
+        executingAuthority:
+          type:
+          - string
+          - 'null'
+          description: Executing authority details
+        sealType:
+          type:
+          - string
+          - 'null'
+          description: Seal type for execution.
+          example: WithSeal
+        authorisedDepositTakingInstitution:
+          type:
+          - boolean
+          - 'null'
+          description: Indicates if organization is an Authorised Deposit Taking Institution
+        poaRegistrationNumber:
+          type:
+          - string
+          - 'null'
+          description: Power of Attorney registration number
+        attorneyNames:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+          description: List of attorney names
+        executionType:
+          type:
+          - string
+          - 'null'
+          description: Execution type.
+          example: JointDirectors
+      additionalProperties: false
+      description: 'Execution options for organizations
+
+
+        Only supported in AU.'
+    ContactDto:
+      type: object
+      properties:
+        externalSystemId:
+          type:
+          - string
+          - 'null'
+          description: External system id for the contact.
+          example: EXT01
+        person:
+          allOf:
+          - $ref: '#/components/schemas/PersonDto'
+          description: Contact person details (if applicable).
+        company:
+          allOf:
+          - $ref: '#/components/schemas/CompanyDto'
+          description: Contact company details (if applicable).
+        trust:
+          allOf:
+          - $ref: '#/components/schemas/TrustDto'
+          description: 'Contact trust details (if applicable).
+
+
+            Only supported in US.'
+        groupOfPeople:
+          allOf:
+          - $ref: '#/components/schemas/GroupOfPeopleDto'
+          description: 'Contact group details (if applicable).
+
+
+            Only supported in US and AU.'
+        isDeleted:
+          type: boolean
+          description: Contact can be restored by setting this to false.
+          example: false
+      additionalProperties: false
+    PoBoxAddress:
+      type: object
+      properties:
+        careOf:
+          type:
+          - string
+          - 'null'
+          description: Care of the addressee (if applicable).
+          example: John Smith
+        poBoxType:
+          type:
+          - string
+          - 'null'
+          description: "PO Box type. Accepts custom values.\n            \ne.g. Care PO, PO Box, Locked Bag, RMS."
+          example: Locked Bag
+        poBoxNumber:
+          type:
+          - string
+          - 'null'
+          description: PO Box number.
+          example: '12345'
+        city:
+          type:
+          - string
+          - 'null'
+          description: City, district, suburb, town, or village.
+          example: Chicago
+        state:
+          type:
+          - string
+          - 'null'
+          description: State, province, or region.
+          example: IL
+        zipCode:
+          type:
+          - string
+          - 'null'
+          description: Zip or post code.
+          example: '60606'
+      additionalProperties: false
+    PersonExecutionOptions:
+      type: object
+      properties:
+        poaType:
+          type:
+          - string
+          - 'null'
+          description: Power of Attorney type.
+          example: Enduring
+        poaDate:
+          type:
+          - string
+          - 'null'
+          description: Date the Power of Attorney was executed
+          format: date-time
+          example: '2023-05-15'
+        attorneyName:
+          type:
+          - string
+          - 'null'
+          description: Name of the attorney
+          example: Jane Doe
+        address:
+          allOf:
+          - $ref: '#/components/schemas/Address'
+          description: Attorney's address
+        poaRegisteredBook:
+          type:
+          - string
+          - 'null'
+          description: Power of Attorney registration book reference
+        poaRegisteredNumber:
+          type:
+          - string
+          - 'null'
+          description: Power of Attorney registration number
+        executionType:
+          type:
+          - string
+          - 'null'
+          description: Person execution type.
+          example: PowerOfAttorney
+        poaVoiDetails:
+          allOf:
+          - $ref: '#/components/schemas/VoiDetails'
+          description: Verification of identity details for the attorney (Power of Attorney)
+      additionalProperties: false
+      description: 'Execution options for individual persons (Power of Attorney)
+
+
+        Only supported in AU.'
+    TrusteeDto:
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+          description: Trustee's name.
+          example: John Smith
+        type:
+          type:
+          - string
+          - 'null'
+          description: 'Type of trustee.
+
+
+            Standard values are: Company, Individual.
+
+
+            A custom value can be supplied instead.'
+          example: Individual
+      additionalProperties: false
+    ProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        instance:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
+    PhoneNumberWithExtensionDto:
+      type: object
+      properties:
+        areaCode:
+          type:
+          - string
+          - 'null'
+          description: "Phone area code. \n\nOnly supported in the US."
+          example: '555'
+        number:
+          type:
+          - string
+          - 'null'
+          description: Phone number (excluding area code).
+          example: '1234567'
+        extension:
+          type:
+          - string
+          - 'null'
+          description: Phone number extension. Accepts numeric characters only.
+          example: '103'
+      additionalProperties: false
+    PhoneNumberDto:
+      type: object
+      properties:
+        areaCode:
+          type:
+          - string
+          - 'null'
+          description: Phone area code.
+          example: '555'
+        number:
+          type:
+          - string
+          - 'null'
+          description: Phone number (excluding area code).
+          example: '1234567'
+      additionalProperties: false
+    Trustee:
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+          description: Trustee's name.
+          example: John Smith
+        type:
+          type:
+          - string
+          - 'null'
+          description: 'Type of trustee.
+
+
+            Standard values are: Company, Individual.
+
+            A custom value can be supplied instead.'
+          example: Individual
+      additionalProperties: false
+    AddressDto:
+      type: object
+      properties:
+        careOf:
+          type:
+          - string
+          - 'null'
+          description: Care of the addressee (if applicable).
+          example: John Smith
+        buildingLevel:
+          type:
+          - string
+          - 'null'
+          description: Building level in address (if applicable).
+          example: Level 1
+        unitNumber:
+          type:
+          - string
+          - 'null'
+          description: Unit number in address (if applicable).
+          example: '10'
+        unitType:
+          type:
+          - string
+          - 'null'
+          description: 'Unit type in address (if applicable). Accepts custom values.
+
+
+            e.g. Apartment, Unit, Flat, Villa, Suite.'
+          example: Suite
+        streetNumber:
+          type:
+          - string
+          - 'null'
+          description: Street number in address.
+          example: '100'
+        streetName:
+          type:
+          - string
+          - 'null'
+          description: Street name in address.
+          example: Broad
+        streetType:
+          type:
+          - string
+          - 'null'
+          description: 'Street type. Accepts custom values.
+
+
+            e.g. Street, Road, Avenue, Lane.'
+          example: Street
+        addressLine1:
+          type:
+          - string
+          - 'null'
+          description: 'First line of address.
+
+
+            Only supported in the US.'
+          example: Level 1/10
+        addressLine2:
+          type:
+          - string
+          - 'null'
+          description: 'Second line of address (if applicable).
+
+
+            Only supported in the US.'
+          example: 100 Broad Street
+        city:
+          type:
+          - string
+          - 'null'
+          description: City, district, suburb, town, or village.
+          example: Chicago
+        state:
+          type:
+          - string
+          - 'null'
+          description: State, province, or region.
+          example: IL
+        zipCode:
+          type:
+          - string
+          - 'null'
+          description: Zip or post code.
+          example: '60606'
+        locality:
+          type:
+          - string
+          - 'null'
+          description: 'Locality.
+
+
+            Only supported in the UK.'
+          example: Dunkirk
+        county:
+          type:
+          - string
+          - 'null'
+          description: 'County.
+
+
+            Only supported in the US and UK.'
+          example: New York
+        country:
+          type:
+          - string
+          - 'null'
+          description: Country.
+          example: United States
+        poBox:
+          allOf:
+          - $ref: '#/components/schemas/PoBoxAddressDto'
+          description: 'PO Box details.
+
+
+            Only supported in AU.'
+      additionalProperties: false
+    PoBoxAddressDto:
+      type: object
+      properties:
+        careOf:
+          type:
+          - string
+          - 'null'
+          description: Care of the addressee (if applicable).
+          example: John Smith
+        poBoxType:
+          type:
+          - string
+          - 'null'
+          description: "PO Box type. Accepts custom values.\n            \ne.g. Care PO, PO Box, Locked Bag, RMS."
+          example: Locked Bag
+        poBoxNumber:
+          type:
+          - string
+          - 'null'
+          description: PO Box number.
+          example: '12345'
+        city:
+          type:
+          - string
+          - 'null'
+          description: City, district, suburb, town, or village.
+          example: Chicago
+        state:
+          type:
+          - string
+          - 'null'
+          description: State, province, or region.
+          example: IL
+        zipCode:
+          type:
+          - string
+          - 'null'
+          description: Zip or post code.
+          example: '60606'
+      additionalProperties: false
+      description: PO Box address.
     AddressWithDxAddressDto:
       type: object
       properties:
@@ -3086,84 +2701,469 @@ components:
           - $ref: '#/components/schemas/DxAddressDto'
           description: DX address of the company (only applicable for AUS).
       additionalProperties: false
-    TrusteeDto:
+    DeathDetailsDto:
       type: object
       properties:
-        name:
+        deathDate:
           type:
           - string
           - 'null'
-          description: Trustee's name.
-          example: John Smith
-        type:
-          type:
-          - string
-          - 'null'
-          description: 'Type of trustee.
-
-
-            Standard values are: Company, Individual.
-
-
-            A custom value can be supplied instead.'
-          example: Individual
-      additionalProperties: false
-    Trustee:
-      type: object
-      properties:
-        name:
-          type:
-          - string
-          - 'null'
-          description: Trustee's name.
-          example: John Smith
-        type:
-          type:
-          - string
-          - 'null'
-          description: 'Type of trustee.
-
-
-            Standard values are: Company, Individual.
-
-            A custom value can be supplied instead.'
-          example: Individual
-      additionalProperties: false
-    ContactDto:
-      type: object
-      properties:
-        externalSystemId:
-          type:
-          - string
-          - 'null'
-          description: External system id for the contact.
-          example: EXT01
-        person:
-          allOf:
-          - $ref: '#/components/schemas/PersonDto'
-          description: Contact person details (if applicable).
-        company:
-          allOf:
-          - $ref: '#/components/schemas/CompanyDto'
-          description: Contact company details (if applicable).
-        trust:
-          allOf:
-          - $ref: '#/components/schemas/TrustDto'
-          description: 'Contact trust details (if applicable).
-
-
-            Only supported in US.'
-        groupOfPeople:
-          allOf:
-          - $ref: '#/components/schemas/GroupOfPeopleDto'
-          description: 'Contact group details (if applicable).
-
-
-            Only supported in US and AU.'
-        isDeleted:
+          description: Contact person's date of death.
+          format: date-time
+          example: '2020-08-01'
+        isDeathDateUnknown:
           type: boolean
-          description: Contact can be restored by setting this to false.
+          description: Whether the person's exact date of death is known.
           example: false
+        deathDateFrom:
+          type:
+          - string
+          - 'null'
+          description: Starting range for person's possible date of death.
+          format: date-time
+          example: '2020-08-01'
+        deathDateTo:
+          type:
+          - string
+          - 'null'
+          description: Ending range for person's possible date of death.
+          format: date-time
+          example: '2020-08-01'
+        deathPlace:
+          type:
+          - string
+          - 'null'
+          description: Contact person's place of death.
+          example: Chicago
+        deathState:
+          type:
+          - string
+          - 'null'
+          description: "Contact person's death state.\n            \nOnly supported in AU and US."
+          example: IL
+        deathCountry:
+          type:
+          - string
+          - 'null'
+          description: Contact person's death country.
+          example: USA
+        deathCounty:
+          type:
+          - string
+          - 'null'
+          description: "Contact person's death county.\n            \nOnly supported in US."
+          example: San Bernardino County
+      additionalProperties: false
+    AddressWithDxAddress:
+      type: object
+      properties:
+        careOf:
+          type:
+          - string
+          - 'null'
+          description: Care of the addressee (if applicable).
+          example: John Smith
+        buildingLevel:
+          type:
+          - string
+          - 'null'
+          description: Building level in address (if applicable).
+          example: Level 1
+        unitNumber:
+          type:
+          - string
+          - 'null'
+          description: Unit number in address (if applicable).
+          example: '10'
+        unitType:
+          type:
+          - string
+          - 'null'
+          description: 'Unit type in address (if applicable). Accepts custom values.
+
+
+            e.g. Apartment, Unit, Flat, Villa, Suite.'
+          example: Suite
+        streetNumber:
+          type:
+          - string
+          - 'null'
+          description: Street number in address.
+          example: '100'
+        streetName:
+          type:
+          - string
+          - 'null'
+          description: Street name in address.
+          example: Broad
+        streetType:
+          type:
+          - string
+          - 'null'
+          description: 'Street type. Accepts custom values.
+
+
+            e.g. Street, Road, Avenue, Lane.'
+          example: Street
+        addressLine1:
+          type:
+          - string
+          - 'null'
+          description: First line of address.
+          example: Level 1/10
+        addressLine2:
+          type:
+          - string
+          - 'null'
+          description: Second line of address (if applicable).
+          example: 100 Broad Street
+        city:
+          type:
+          - string
+          - 'null'
+          description: City, district, suburb, town, or village.
+          example: Chicago
+        state:
+          type:
+          - string
+          - 'null'
+          description: State, province, or region.
+          example: IL
+        zipCode:
+          type:
+          - string
+          - 'null'
+          description: Zip or post code.
+          example: '60606'
+        locality:
+          type:
+          - string
+          - 'null'
+          description: 'Locality.
+
+
+            Only supported in the UK.'
+          example: Dunkirk
+        county:
+          type:
+          - string
+          - 'null'
+          description: 'County.
+
+
+            Only supported in the US and UK.'
+          example: New York
+        country:
+          type:
+          - string
+          - 'null'
+          description: Country.
+          example: United States
+        poBox:
+          allOf:
+          - $ref: '#/components/schemas/PoBoxAddress'
+          description: PO Box details (if applicable).
+        dxAddress:
+          allOf:
+          - $ref: '#/components/schemas/DxAddress'
+          description: DX address details (only applicable for AUS).
+      additionalProperties: false
+    Address:
+      type: object
+      properties:
+        careOf:
+          type:
+          - string
+          - 'null'
+          description: Care of the addressee (if applicable).
+          example: John Smith
+        buildingLevel:
+          type:
+          - string
+          - 'null'
+          description: Building level in address (if applicable).
+          example: Level 1
+        unitNumber:
+          type:
+          - string
+          - 'null'
+          description: Unit number in address (if applicable).
+          example: '10'
+        unitType:
+          type:
+          - string
+          - 'null'
+          description: 'Unit type in address (if applicable). Accepts custom values.
+
+
+            e.g. Apartment, Unit, Flat, Villa, Suite.'
+          example: Suite
+        streetNumber:
+          type:
+          - string
+          - 'null'
+          description: Street number in address.
+          example: '100'
+        streetName:
+          type:
+          - string
+          - 'null'
+          description: Street name in address.
+          example: Broad
+        streetType:
+          type:
+          - string
+          - 'null'
+          description: 'Street type. Accepts custom values.
+
+
+            e.g. Street, Road, Avenue, Lane.'
+          example: Street
+        addressLine1:
+          type:
+          - string
+          - 'null'
+          description: First line of address.
+          example: Level 1/10
+        addressLine2:
+          type:
+          - string
+          - 'null'
+          description: Second line of address (if applicable).
+          example: 100 Broad Street
+        city:
+          type:
+          - string
+          - 'null'
+          description: City, district, suburb, town, or village.
+          example: Chicago
+        state:
+          type:
+          - string
+          - 'null'
+          description: State, province, or region.
+          example: IL
+        zipCode:
+          type:
+          - string
+          - 'null'
+          description: Zip or post code.
+          example: '60606'
+        locality:
+          type:
+          - string
+          - 'null'
+          description: 'Locality.
+
+
+            Only supported in the UK.'
+          example: Dunkirk
+        county:
+          type:
+          - string
+          - 'null'
+          description: 'County.
+
+
+            Only supported in the US and UK.'
+          example: New York
+        country:
+          type:
+          - string
+          - 'null'
+          description: Country.
+          example: United States
+        poBox:
+          allOf:
+          - $ref: '#/components/schemas/PoBoxAddress'
+          description: PO Box details (if applicable).
+      additionalProperties: false
+    GroupOfPeople:
+      type: object
+      properties:
+        people:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/Link'
+          description: List of contact person hypermedia links.
+        residentialAddress:
+          allOf:
+          - $ref: '#/components/schemas/Address'
+          description: Contact group's residential address details.
+        mailingAddress:
+          allOf:
+          - $ref: '#/components/schemas/Address'
+          description: "Contact group's mailing address details.\n            \nOnly supported in the US."
+        name:
+          type:
+          - string
+          - 'null'
+          description: Names of the people in the group. Limited to the first 5 names.
+          example: John Smith & Jane Citizen
+      additionalProperties: false
+    PersonExecutionOptionsDto:
+      type: object
+      properties:
+        poaType:
+          type:
+          - string
+          - 'null'
+          description: 'Power of Attorney type.
+
+
+            Possible values: ''None'', ''General'', ''Enduring'', ''Medical'', ''Financial'', ''Other'', ''Unset'''
+          example: Enduring
+        poaDate:
+          type:
+          - string
+          - 'null'
+          description: Date the Power of Attorney was executed
+          format: date-time
+          example: '2023-05-15'
+        attorneyName:
+          type:
+          - string
+          - 'null'
+          description: Name of the attorney
+          example: Jane Doe
+        address:
+          allOf:
+          - $ref: '#/components/schemas/AddressDto'
+          description: Attorney's address
+        poaRegisteredBook:
+          type:
+          - string
+          - 'null'
+          description: Power of Attorney registration book reference
+        poaRegisteredNumber:
+          type:
+          - string
+          - 'null'
+          description: Power of Attorney registration number
+        executionType:
+          type:
+          - string
+          - 'null'
+          description: 'Person execution type.
+
+
+            Possible values: ''Individual'', ''PowerOfAttorney'', ''Other'', ''Unset'', ''None'''
+          example: PowerOfAttorney
+      additionalProperties: false
+      description: 'Execution options for individual persons (Power of Attorney)
+
+
+        Only supported in AU.'
+    Trust:
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+          description: Trust's name.
+          example: Trinity Trust
+        status:
+          type:
+          - string
+          - 'null'
+          description: 'Trust''s status.
+
+
+            Standard values are: as Trustee of, as Trustees of, as Co-Trustees of, as an Individual and as Trustee of, as Successor Trustee of.
+
+            A custom value can be supplied instead.'
+          example: as Trustee of
+        trustNumber:
+          type:
+          - string
+          - 'null'
+          description: Trust's number.
+          example: '12345678'
+        executedDate:
+          type:
+          - string
+          - 'null'
+          description: Date trust was executed.
+          format: date-time
+          example: '1980-07-01'
+        phone:
+          allOf:
+          - $ref: '#/components/schemas/PhoneNumber'
+          description: Trust's phone details.
+        fax:
+          allOf:
+          - $ref: '#/components/schemas/PhoneNumber'
+          description: Trust's fax details.
+        address:
+          allOf:
+          - $ref: '#/components/schemas/Address'
+          description: Trust's address.
+        trustees:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/Trustee'
+          description: List of trustees.
+          example:
+          - Name: John Smith
+            Type: Individual
+          - Name: Smithfield Steel
+            Type: Company
+        contacts:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/Link'
+          description: Trust's contacts hypermedia links.
+          readOnly: true
+      additionalProperties: false
+    GroupOfPeopleDto:
+      type: object
+      properties:
+        peopleIds:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+          description: List of contact person Ids.
+          example:
+          - b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2
+          - 750eb5c5-ac0b-7d11-4997-e0ce9d8896c8
+        residentialAddress:
+          allOf:
+          - $ref: '#/components/schemas/AddressDto'
+          description: Contact group's residential address details.
+        mailingAddress:
+          allOf:
+          - $ref: '#/components/schemas/AddressDto'
+          description: "Contact group's mailing address details.\n            \nOnly supported in the US."
+      additionalProperties: false
+    Link:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+        href:
+          type:
+          - string
+          - 'null'
+        relation:
+          type:
+          - string
+          - 'null'
+        method:
+          type:
+          - string
+          - 'null'
+          default: GET
       additionalProperties: false
   securitySchemes:
     api-key:

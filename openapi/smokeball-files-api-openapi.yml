@@ -590,56 +590,6 @@ paths:
                 $ref: '#/components/schemas/ProblemDetails'
 components:
   schemas:
-    AddFileDto:
-      required:
-      - fileName
-      type: object
-      properties:
-        fileName:
-          maxLength: 256
-          minLength: 0
-          type: string
-          description: Full name of the file including the file extension
-          example: court filing.pdf
-        folderId:
-          type:
-          - string
-          - 'null'
-          description: Unique identifier of the folder to add the file to. If null it will be placed in the root folder
-          example: b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2
-        userId:
-          type:
-          - string
-          - 'null'
-          description: Unique identifier of the file owner. If null it will fallback to the authenticated user
-          example: 750eb5c5-ac0b-7d11-4997-e0ce9d8896c8
-        folderPath:
-          type:
-          - string
-          - 'null'
-          description: Path of the folder to add the file to. If null then the FolderId will be used
-          example: Court Filings/2023/January
-        fileAdditionalData:
-          type:
-          - object
-          - 'null'
-          additionalProperties: {}
-          description: Collection of KeyValuePair(string, string) to update File meta data.
-        dateCreated:
-          type:
-          - string
-          - 'null'
-          description: The original datetime that the file was created. If null the current datetime will be used
-          format: date-time
-          example: '2023-04-23T14:00:00Z'
-        dateModified:
-          type:
-          - string
-          - 'null'
-          description: The initial datetime that the file was last modified. If null the current datetime will be used
-          format: date-time
-          example: '2023-04-24T14:00:00Z'
-      additionalProperties: false
     UploadFileInfo:
       type: object
       properties:
@@ -667,278 +617,6 @@ components:
           format: date-time
           example: '2022-04-23T14:30:00Z'
       additionalProperties: false
-    FilePagedCollection:
-      type: object
-      properties:
-        id:
-          type:
-          - string
-          - 'null'
-        href:
-          type:
-          - string
-          - 'null'
-        relation:
-          type:
-          - string
-          - 'null'
-        method:
-          type:
-          - string
-          - 'null'
-          default: GET
-        self:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-        value:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/File'
-        offset:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        limit:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        size:
-          type: integer
-          format: int64
-        first:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-        previous:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-        next:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-        last:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-      additionalProperties: false
-    ProblemDetails:
-      type: object
-      properties:
-        type:
-          type:
-          - string
-          - 'null'
-        title:
-          type:
-          - string
-          - 'null'
-        status:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        detail:
-          type:
-          - string
-          - 'null'
-        instance:
-          type:
-          - string
-          - 'null'
-      additionalProperties: {}
-    EditFileDto:
-      required:
-      - fileName
-      type: object
-      properties:
-        fileName:
-          maxLength: 256
-          minLength: 0
-          type: string
-          description: Full name of the file including the file extension
-          example: court filing.pdf
-        folderId:
-          type:
-          - string
-          - 'null'
-          description: Unique identifier of the folder to add the file to. If null it will be placed in the root folder
-          example: b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2
-        userId:
-          type:
-          - string
-          - 'null'
-          description: Unique identifier of the user modifying the file. If null it will fallback to the authenticated user
-          example: 750eb5c5-ac0b-7d11-4997-e0ce9d8896c8
-        fileAdditionalData:
-          type:
-          - object
-          - 'null'
-          additionalProperties: {}
-          description: Collection of KeyValuePair(string, string) to update File meta data.
-        isFavorite:
-          type:
-          - boolean
-          - 'null'
-          description: Flag indicating whether this file is a favorite. If null it will be ignored
-      additionalProperties: false
-    PreviewFileInfo:
-      type: object
-      properties:
-        fileId:
-          type:
-          - string
-          - 'null'
-          description: Unique identifier of the requested file
-          example: b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2
-        documentVersionId:
-          type:
-          - string
-          - 'null'
-        downloadUrl:
-          type:
-          - string
-          - 'null'
-          description: Temporary Link to download file
-          example: ''
-        expiry:
-          type:
-          - string
-          - 'null'
-          description: Expiry date/time when the download link is no longer accessible
-          format: date-time
-          example: '2022-04-23T14:30:00Z'
-      additionalProperties: false
-    Link:
-      type: object
-      properties:
-        id:
-          type:
-          - string
-          - 'null'
-        href:
-          type:
-          - string
-          - 'null'
-        relation:
-          type:
-          - string
-          - 'null'
-        method:
-          type:
-          - string
-          - 'null'
-          default: GET
-      additionalProperties: false
-    FileFolderLogEntry:
-      type: object
-      properties:
-        href:
-          type:
-          - string
-          - 'null'
-        relation:
-          type:
-          - string
-          - 'null'
-        method:
-          type:
-          - string
-          - 'null'
-          default: GET
-        self:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-        id:
-          type:
-          - string
-          - 'null'
-          description: Unique identifier of this log entry.
-          example: 3f2b1f2a-1d5f-48a4-8f3c-7a7a3c2b5e1a
-        type:
-          type: string
-          description: The type of entity this log entry refers to.
-          example: File
-        changeType:
-          type: string
-          description: The type of change that occurred.
-          example: Move
-        timestamp:
-          type: string
-          description: When the client recorded the action (UTC).
-          format: date-time
-          example: '2025-08-27T04:12:45Z'
-        file:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-          description: Link to the file affected by this entry (only populated when Type is File).
-        folder:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-          description: Link to the folder affected by this entry (only populated when Type is Folder).
-        oldName:
-          type:
-          - string
-          - 'null'
-          description: Old name prior to a rename operation (when applicable).
-          example: Draft Response
-        newName:
-          type:
-          - string
-          - 'null'
-          description: New name after a rename operation (when applicable).
-          example: Final Response
-        oldMatterId:
-          type:
-          - string
-          - 'null'
-          description: Previous matter identifier (for move/copy across matters).
-          example: f9e1a9d5-1d2b-4bd2-9a72-6a6e7b5c2f01
-        newMatterId:
-          type:
-          - string
-          - 'null'
-          description: New matter identifier (for move/copy across matters).
-          example: 1c0b8a31-0a05-4601-8b87-2d7b1d0caa9a
-        oldFolderId:
-          type:
-          - string
-          - 'null'
-          description: Previous folder identifier (for move within/between matters).
-          example: 6a5c3b2e-0f1e-4c7e-90e2-2ad3c3e8b0b9
-        newFolderId:
-          type:
-          - string
-          - 'null'
-          description: New folder identifier (for move within/between matters).
-          example: 9b7a2c4d-2e1f-4b6a-8e01-1f2a3b4c5d6e
-        copySourceFileId:
-          type:
-          - string
-          - 'null'
-          description: For copy operations, the source file's identifier when copying a file.
-          example: bb3a6c1d-1e2f-4a7b-9c01-0d9a8c7b6e5f
-        copySourceFolderId:
-          type:
-          - string
-          - 'null'
-          description: For copy operations, the source folder's identifier when copying a folder.
-          example: aa2b5c1e-7f8a-4d9e-8c01-1a2b3c4d5e6f
-        documentVersionId:
-          type:
-          - string
-          - 'null'
-          description: 'Identifier of the document version involved (only for version replace/revert scenarios).
-
-            Can be used to download particular file versions.'
-          example: 2d97e267-0618-4822-a515-281cd4f31ae8-72324ca30d263b32bb38a481cc5f7a0b
-        userId:
-          type:
-          - string
-          - 'null'
-          description: The user who is responsible for this change.
-      additionalProperties: false
-      description: Represents a single file/folder activity (rename, move, delete, etc.).
     File:
       type: object
       properties:
@@ -1082,6 +760,197 @@ components:
           items:
             $ref: '#/components/schemas/FileFolderLogEntry'
       additionalProperties: false
+    FileFolderLogEntry:
+      type: object
+      properties:
+        href:
+          type:
+          - string
+          - 'null'
+        relation:
+          type:
+          - string
+          - 'null'
+        method:
+          type:
+          - string
+          - 'null'
+          default: GET
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+        id:
+          type:
+          - string
+          - 'null'
+          description: Unique identifier of this log entry.
+          example: 3f2b1f2a-1d5f-48a4-8f3c-7a7a3c2b5e1a
+        type:
+          type: string
+          description: The type of entity this log entry refers to.
+          example: File
+        changeType:
+          type: string
+          description: The type of change that occurred.
+          example: Move
+        timestamp:
+          type: string
+          description: When the client recorded the action (UTC).
+          format: date-time
+          example: '2025-08-27T04:12:45Z'
+        file:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          description: Link to the file affected by this entry (only populated when Type is File).
+        folder:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          description: Link to the folder affected by this entry (only populated when Type is Folder).
+        oldName:
+          type:
+          - string
+          - 'null'
+          description: Old name prior to a rename operation (when applicable).
+          example: Draft Response
+        newName:
+          type:
+          - string
+          - 'null'
+          description: New name after a rename operation (when applicable).
+          example: Final Response
+        oldMatterId:
+          type:
+          - string
+          - 'null'
+          description: Previous matter identifier (for move/copy across matters).
+          example: f9e1a9d5-1d2b-4bd2-9a72-6a6e7b5c2f01
+        newMatterId:
+          type:
+          - string
+          - 'null'
+          description: New matter identifier (for move/copy across matters).
+          example: 1c0b8a31-0a05-4601-8b87-2d7b1d0caa9a
+        oldFolderId:
+          type:
+          - string
+          - 'null'
+          description: Previous folder identifier (for move within/between matters).
+          example: 6a5c3b2e-0f1e-4c7e-90e2-2ad3c3e8b0b9
+        newFolderId:
+          type:
+          - string
+          - 'null'
+          description: New folder identifier (for move within/between matters).
+          example: 9b7a2c4d-2e1f-4b6a-8e01-1f2a3b4c5d6e
+        copySourceFileId:
+          type:
+          - string
+          - 'null'
+          description: For copy operations, the source file's identifier when copying a file.
+          example: bb3a6c1d-1e2f-4a7b-9c01-0d9a8c7b6e5f
+        copySourceFolderId:
+          type:
+          - string
+          - 'null'
+          description: For copy operations, the source folder's identifier when copying a folder.
+          example: aa2b5c1e-7f8a-4d9e-8c01-1a2b3c4d5e6f
+        documentVersionId:
+          type:
+          - string
+          - 'null'
+          description: 'Identifier of the document version involved (only for version replace/revert scenarios).
+
+            Can be used to download particular file versions.'
+          example: 2d97e267-0618-4822-a515-281cd4f31ae8-72324ca30d263b32bb38a481cc5f7a0b
+        userId:
+          type:
+          - string
+          - 'null'
+          description: The user who is responsible for this change.
+      additionalProperties: false
+      description: Represents a single file/folder activity (rename, move, delete, etc.).
+    FilePagedCollection:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+        href:
+          type:
+          - string
+          - 'null'
+        relation:
+          type:
+          - string
+          - 'null'
+        method:
+          type:
+          - string
+          - 'null'
+          default: GET
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+        value:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/File'
+        offset:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        limit:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        size:
+          type: integer
+          format: int64
+        first:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+        previous:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+        next:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+        last:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+      additionalProperties: false
+    PreviewFileInfo:
+      type: object
+      properties:
+        fileId:
+          type:
+          - string
+          - 'null'
+          description: Unique identifier of the requested file
+          example: b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2
+        documentVersionId:
+          type:
+          - string
+          - 'null'
+        downloadUrl:
+          type:
+          - string
+          - 'null'
+          description: Temporary Link to download file
+          example: ''
+        expiry:
+          type:
+          - string
+          - 'null'
+          description: Expiry date/time when the download link is no longer accessible
+          format: date-time
+          example: '2022-04-23T14:30:00Z'
+      additionalProperties: false
     DownloadFileInfo:
       type: object
       properties:
@@ -1119,6 +988,137 @@ components:
           description: Size of the requested file (in bytes)
           format: int64
           example: 19104768
+      additionalProperties: false
+    ProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        instance:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
+    EditFileDto:
+      required:
+      - fileName
+      type: object
+      properties:
+        fileName:
+          maxLength: 256
+          minLength: 0
+          type: string
+          description: Full name of the file including the file extension
+          example: court filing.pdf
+        folderId:
+          type:
+          - string
+          - 'null'
+          description: Unique identifier of the folder to add the file to. If null it will be placed in the root folder
+          example: b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2
+        userId:
+          type:
+          - string
+          - 'null'
+          description: Unique identifier of the user modifying the file. If null it will fallback to the authenticated user
+          example: 750eb5c5-ac0b-7d11-4997-e0ce9d8896c8
+        fileAdditionalData:
+          type:
+          - object
+          - 'null'
+          additionalProperties: {}
+          description: Collection of KeyValuePair(string, string) to update File meta data.
+        isFavorite:
+          type:
+          - boolean
+          - 'null'
+          description: Flag indicating whether this file is a favorite. If null it will be ignored
+      additionalProperties: false
+    AddFileDto:
+      required:
+      - fileName
+      type: object
+      properties:
+        fileName:
+          maxLength: 256
+          minLength: 0
+          type: string
+          description: Full name of the file including the file extension
+          example: court filing.pdf
+        folderId:
+          type:
+          - string
+          - 'null'
+          description: Unique identifier of the folder to add the file to. If null it will be placed in the root folder
+          example: b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2
+        userId:
+          type:
+          - string
+          - 'null'
+          description: Unique identifier of the file owner. If null it will fallback to the authenticated user
+          example: 750eb5c5-ac0b-7d11-4997-e0ce9d8896c8
+        folderPath:
+          type:
+          - string
+          - 'null'
+          description: Path of the folder to add the file to. If null then the FolderId will be used
+          example: Court Filings/2023/January
+        fileAdditionalData:
+          type:
+          - object
+          - 'null'
+          additionalProperties: {}
+          description: Collection of KeyValuePair(string, string) to update File meta data.
+        dateCreated:
+          type:
+          - string
+          - 'null'
+          description: The original datetime that the file was created. If null the current datetime will be used
+          format: date-time
+          example: '2023-04-23T14:00:00Z'
+        dateModified:
+          type:
+          - string
+          - 'null'
+          description: The initial datetime that the file was last modified. If null the current datetime will be used
+          format: date-time
+          example: '2023-04-24T14:00:00Z'
+      additionalProperties: false
+    Link:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+        href:
+          type:
+          - string
+          - 'null'
+        relation:
+          type:
+          - string
+          - 'null'
+        method:
+          type:
+          - string
+          - 'null'
+          default: GET
       additionalProperties: false
   securitySchemes:
     api-key:

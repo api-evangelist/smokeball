@@ -213,6 +213,38 @@ paths:
                 $ref: '#/components/schemas/ProblemDetails'
 components:
   schemas:
+    MemoDto:
+      required:
+      - text
+      - title
+      type: object
+      properties:
+        title:
+          minLength: 1
+          type: string
+          description: The title of the memo.
+          example: Update
+        text:
+          type: string
+          description: "The text (content) of the memo.\n            \nSupports plain-text and RTF."
+          example: There has been a recent update on this matter.
+        userId:
+          type:
+          - string
+          - 'null'
+          description: Unique identifier of the user.
+          example: b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2
+        createdDateUtc:
+          type:
+          - string
+          - 'null'
+          description: 'Date that the memo was created.
+
+
+            Will default to the current date and time, if not supplied.'
+          format: date-time
+          example: '2022-07-01'
+      additionalProperties: false
     Memo:
       type: object
       properties:
@@ -315,38 +347,6 @@ components:
           - string
           - 'null'
       additionalProperties: {}
-    MemoDto:
-      required:
-      - text
-      - title
-      type: object
-      properties:
-        title:
-          minLength: 1
-          type: string
-          description: The title of the memo.
-          example: Update
-        text:
-          type: string
-          description: "The text (content) of the memo.\n            \nSupports plain-text and RTF."
-          example: There has been a recent update on this matter.
-        userId:
-          type:
-          - string
-          - 'null'
-          description: Unique identifier of the user.
-          example: b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2
-        createdDateUtc:
-          type:
-          - string
-          - 'null'
-          description: 'Date that the memo was created.
-
-
-            Will default to the current date and time, if not supplied.'
-          format: date-time
-          example: '2022-07-01'
-      additionalProperties: false
     MemoPagedCollection:
       type: object
       properties:

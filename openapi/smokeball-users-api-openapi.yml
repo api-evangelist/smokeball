@@ -188,7 +188,7 @@ paths:
                 $ref: '#/components/schemas/ProblemDetails'
 components:
   schemas:
-    InviteUserDto:
+    UserDto:
       required:
       - email
       type: object
@@ -196,7 +196,40 @@ components:
         email:
           minLength: 1
           type: string
-          description: Invite user by email address.
+          description: Email address of the user.
+          example: user@domain.com
+        password:
+          type:
+          - string
+          - 'null'
+          description: 'Password for the user.
+
+
+            Password must include atleast one lowercase character, uppercase character, numeric character as well as a special character.'
+        expireAfterDays:
+          type:
+          - integer
+          - 'null'
+          description: Expire after the specified days. Must be left blank for users that do not expire.
+          format: int32
+          example: 7
+        isInternal:
+          type: boolean
+          description: 'Creates the user as an internal user.
+
+
+            Internal users are excluded from billing and license counts.
+
+
+            Use this option for testing, background services, or other non-customer-facing purposes.'
+          example: true
+        bypassMfa:
+          type: boolean
+          description: 'Bypasses multi-factor authentication for the user.
+
+
+            When enabled, the user will not be prompted for two factor authentication during login.'
+          example: true
       additionalProperties: false
     User:
       type: object
@@ -267,7 +300,7 @@ components:
           - string
           - 'null'
       additionalProperties: {}
-    UserDto:
+    InviteUserDto:
       required:
       - email
       type: object
@@ -275,40 +308,7 @@ components:
         email:
           minLength: 1
           type: string
-          description: Email address of the user.
-          example: user@domain.com
-        password:
-          type:
-          - string
-          - 'null'
-          description: 'Password for the user.
-
-
-            Password must include atleast one lowercase character, uppercase character, numeric character as well as a special character.'
-        expireAfterDays:
-          type:
-          - integer
-          - 'null'
-          description: Expire after the specified days. Must be left blank for users that do not expire.
-          format: int32
-          example: 7
-        isInternal:
-          type: boolean
-          description: 'Creates the user as an internal user.
-
-
-            Internal users are excluded from billing and license counts.
-
-
-            Use this option for testing, background services, or other non-customer-facing purposes.'
-          example: true
-        bypassMfa:
-          type: boolean
-          description: 'Bypasses multi-factor authentication for the user.
-
-
-            When enabled, the user will not be prompted for two factor authentication during login.'
-          example: true
+          description: Invite user by email address.
       additionalProperties: false
     Link:
       type: object

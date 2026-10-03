@@ -236,31 +236,68 @@ paths:
                 $ref: '#/components/schemas/ProblemDetails'
 components:
   schemas:
-    ProblemDetails:
+    WebhookSubscriptionDto:
       type: object
       properties:
-        type:
+        key:
           type:
           - string
           - 'null'
-        title:
+          description: Unique key used for creating signature header in webhook notification requests.
+          example: da4e7fd1-5394-4ca9-b1c6-e18c4e2bf262
+        name:
           type:
           - string
           - 'null'
-        status:
+          description: Name or description of the webhook subscription.
+          example: Listen to matter and contact changes
+        eventTypes:
           type:
-          - integer
+          - array
           - 'null'
-          format: int32
-        detail:
+          items:
+            type: string
+          description: The event types that the webhook subscription should be subscribed to.
+          example:
+          - matter.updated
+          - contact.created
+        eventNotificationUrl:
           type:
           - string
           - 'null'
-        instance:
+          description: The uri to notify when an event has occurred.
+          example: http://yourdomain.com/notify
+      additionalProperties: false
+    StringCollection:
+      type: object
+      properties:
+        id:
           type:
           - string
           - 'null'
-      additionalProperties: {}
+        href:
+          type:
+          - string
+          - 'null'
+        relation:
+          type:
+          - string
+          - 'null'
+        method:
+          type:
+          - string
+          - 'null'
+          default: GET
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+        value:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+      additionalProperties: false
     WebhookSubscriptionPagedCollection:
       type: object
       properties:
@@ -316,27 +353,31 @@ components:
           allOf:
           - $ref: '#/components/schemas/Link'
       additionalProperties: false
-    Link:
+    ProblemDetails:
       type: object
       properties:
-        id:
+        type:
           type:
           - string
           - 'null'
-        href:
+        title:
           type:
           - string
           - 'null'
-        relation:
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
           type:
           - string
           - 'null'
-        method:
+        instance:
           type:
           - string
           - 'null'
-          default: GET
-      additionalProperties: false
+      additionalProperties: {}
     WebhookSubscription:
       type: object
       properties:
@@ -404,39 +445,7 @@ components:
           format: int64
           example: 637847425252027400
       additionalProperties: false
-    WebhookSubscriptionDto:
-      type: object
-      properties:
-        key:
-          type:
-          - string
-          - 'null'
-          description: Unique key used for creating signature header in webhook notification requests.
-          example: da4e7fd1-5394-4ca9-b1c6-e18c4e2bf262
-        name:
-          type:
-          - string
-          - 'null'
-          description: Name or description of the webhook subscription.
-          example: Listen to matter and contact changes
-        eventTypes:
-          type:
-          - array
-          - 'null'
-          items:
-            type: string
-          description: The event types that the webhook subscription should be subscribed to.
-          example:
-          - matter.updated
-          - contact.created
-        eventNotificationUrl:
-          type:
-          - string
-          - 'null'
-          description: The uri to notify when an event has occurred.
-          example: http://yourdomain.com/notify
-      additionalProperties: false
-    StringCollection:
+    Link:
       type: object
       properties:
         id:
@@ -456,15 +465,6 @@ components:
           - string
           - 'null'
           default: GET
-        self:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-        value:
-          type:
-          - array
-          - 'null'
-          items:
-            type: string
       additionalProperties: false
   securitySchemes:
     api-key:

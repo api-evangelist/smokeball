@@ -499,18 +499,24 @@ components:
             - 'null'
           description: Collection of key value pairs to update file meta data.
       additionalProperties: false
-    EventType:
-      enum:
-      - Normal
-      - Pattern
-      - Occurrence
-      - ChangedOccurrence
-      - DeletedOccurrence
-      type: string
-      description: 'The type of the event.
-
-
-        Possible values: Non Recurring Event = 0, Recurring Pattern Series = 1, Single Recurring Occurrence = 2, Modified Recurring Occurrence = 3, Deleted Recurring Occurrence = 4'
+    ReminderDto:
+      type: object
+      properties:
+        offset:
+          type: integer
+          format: int32
+        offsetTypeId:
+          type: integer
+          format: int32
+        isAllDayReminder:
+          type: boolean
+        userIds:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+      additionalProperties: false
     ProblemDetails:
       type: object
       properties:
@@ -536,6 +542,18 @@ components:
           - string
           - 'null'
       additionalProperties: {}
+    EventType:
+      enum:
+      - Normal
+      - Pattern
+      - Occurrence
+      - ChangedOccurrence
+      - DeletedOccurrence
+      type: string
+      description: 'The type of the event.
+
+
+        Possible values: Non Recurring Event = 0, Recurring Pattern Series = 1, Single Recurring Occurrence = 2, Modified Recurring Occurrence = 3, Deleted Recurring Occurrence = 4'
     EventPagedCollection:
       type: object
       properties:
@@ -749,24 +767,6 @@ components:
           - string
           - 'null'
           default: GET
-      additionalProperties: false
-    ReminderDto:
-      type: object
-      properties:
-        offset:
-          type: integer
-          format: int32
-        offsetTypeId:
-          type: integer
-          format: int32
-        isAllDayReminder:
-          type: boolean
-        userIds:
-          type:
-          - array
-          - 'null'
-          items:
-            type: string
       additionalProperties: false
   securitySchemes:
     api-key:

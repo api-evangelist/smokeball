@@ -398,41 +398,73 @@ paths:
                 $ref: '#/components/schemas/ProblemDetails'
 components:
   schemas:
-    LayoutValue:
+    LayoutMatterItemData:
       type: object
       properties:
-        key:
+        itemId:
           type:
           - string
           - 'null'
-        value:
+          description: Unique identifier for the matter list item.
+          example: 59791902-6280-471b-bd18-f8439ba3042f
+        layoutDesignId:
           type:
           - string
           - 'null'
-        state:
-          description: 'Gets or sets the object that contains supplemental data about the key/value pair.
-
-
-            This property was introduced in NV-2643, and is usage-specific. It contains data which is used together with Value.
-
-            For example, if a layout contains a textbox control with an override checkbox, their Text and IsChecked properties
-
-            can be persisted in Value and State respectively. In this case, the type of State would be bool or bool?.'
-      additionalProperties: false
-    LayoutContactData:
-      required:
-      - contactId
-      - key
-      type: object
-      properties:
-        key:
-          minLength: 1
-          type: string
-          description: Name (mapping) of the layout field that contains ContactId.
-        contactId:
-          type: string
-          description: Unique identifier for the layout contact.
-          format: uuid
+          description: Identifier of the layout design.
+          example: 414ab774-adce-4659-b18c-82d1b0e826a0
+        index:
+          type: integer
+          description: Zero-based index of the layout item.
+          format: int32
+          example: 0
+        parentItemId:
+          type:
+          - string
+          - 'null'
+          description: Unique identifier for the parent matter list item.
+          example: 59791902-6280-471b-bd18-f8439ba3042f
+        parentId:
+          type:
+          - string
+          - 'null'
+          description: Identifier of the parent matter list item specific to the provider.
+          example: Client
+        parentIndex:
+          type: integer
+          description: Zero-based index of the parent matter list item.
+          format: int32
+          example: 0
+        name:
+          type:
+          - string
+          - 'null'
+          description: Name of the layout item.
+          example: Item
+        description:
+          type:
+          - string
+          - 'null'
+          description: Brief description of the layout item.
+          example: Text describing item
+        values:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/LayoutValue'
+          description: List of layout values.
+        events:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/LayoutEvent'
+          description: List of layout events.
+        isRemoved:
+          type: boolean
+          description: Boolean flag indicating if the layout item is to be removed.
+          example: false
       additionalProperties: false
     LayoutMatterItem:
       type: object
@@ -510,132 +542,6 @@ components:
           items:
             $ref: '#/components/schemas/LayoutEvent'
           description: List of layout events.
-      additionalProperties: false
-    ProblemDetails:
-      type: object
-      properties:
-        type:
-          type:
-          - string
-          - 'null'
-        title:
-          type:
-          - string
-          - 'null'
-        status:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        detail:
-          type:
-          - string
-          - 'null'
-        instance:
-          type:
-          - string
-          - 'null'
-      additionalProperties: {}
-    LayoutMatterItemData:
-      type: object
-      properties:
-        itemId:
-          type:
-          - string
-          - 'null'
-          description: Unique identifier for the matter list item.
-          example: 59791902-6280-471b-bd18-f8439ba3042f
-        layoutDesignId:
-          type:
-          - string
-          - 'null'
-          description: Identifier of the layout design.
-          example: 414ab774-adce-4659-b18c-82d1b0e826a0
-        index:
-          type: integer
-          description: Zero-based index of the layout item.
-          format: int32
-          example: 0
-        parentItemId:
-          type:
-          - string
-          - 'null'
-          description: Unique identifier for the parent matter list item.
-          example: 59791902-6280-471b-bd18-f8439ba3042f
-        parentId:
-          type:
-          - string
-          - 'null'
-          description: Identifier of the parent matter list item specific to the provider.
-          example: Client
-        parentIndex:
-          type: integer
-          description: Zero-based index of the parent matter list item.
-          format: int32
-          example: 0
-        name:
-          type:
-          - string
-          - 'null'
-          description: Name of the layout item.
-          example: Item
-        description:
-          type:
-          - string
-          - 'null'
-          description: Brief description of the layout item.
-          example: Text describing item
-        values:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/LayoutValue'
-          description: List of layout values.
-        events:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/LayoutEvent'
-          description: List of layout events.
-        isRemoved:
-          type: boolean
-          description: Boolean flag indicating if the layout item is to be removed.
-          example: false
-      additionalProperties: false
-    Link:
-      type: object
-      properties:
-        id:
-          type:
-          - string
-          - 'null'
-        href:
-          type:
-          - string
-          - 'null'
-        relation:
-          type:
-          - string
-          - 'null'
-        method:
-          type:
-          - string
-          - 'null'
-          default: GET
-      additionalProperties: false
-    LayoutEvent:
-      type: object
-      properties:
-        id:
-          type:
-          - string
-          - 'null'
-        appointmentId:
-          type:
-          - string
-          - 'null'
       additionalProperties: false
     LayoutMatterItemApiPatch:
       type: object
@@ -739,6 +645,58 @@ components:
           - $ref: '#/components/schemas/Link'
           description: Hypermedia link of the layout contact.
       additionalProperties: false
+    LayoutContactData:
+      required:
+      - contactId
+      - key
+      type: object
+      properties:
+        key:
+          minLength: 1
+          type: string
+          description: Name (mapping) of the layout field that contains ContactId.
+        contactId:
+          type: string
+          description: Unique identifier for the layout contact.
+          format: uuid
+      additionalProperties: false
+    LayoutEvent:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+        appointmentId:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    ProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        instance:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
     LayoutMatterItemDataCollection:
       type: object
       properties:
@@ -768,6 +726,48 @@ components:
           - 'null'
           items:
             $ref: '#/components/schemas/LayoutMatterItem'
+      additionalProperties: false
+    LayoutValue:
+      type: object
+      properties:
+        key:
+          type:
+          - string
+          - 'null'
+        value:
+          type:
+          - string
+          - 'null'
+        state:
+          description: 'Gets or sets the object that contains supplemental data about the key/value pair.
+
+
+            This property was introduced in NV-2643, and is usage-specific. It contains data which is used together with Value.
+
+            For example, if a layout contains a textbox control with an override checkbox, their Text and IsChecked properties
+
+            can be persisted in Value and State respectively. In this case, the type of State would be bool or bool?.'
+      additionalProperties: false
+    Link:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+        href:
+          type:
+          - string
+          - 'null'
+        relation:
+          type:
+          - string
+          - 'null'
+        method:
+          type:
+          - string
+          - 'null'
+          default: GET
       additionalProperties: false
   securitySchemes:
     api-key:

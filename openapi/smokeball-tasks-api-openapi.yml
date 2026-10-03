@@ -632,14 +632,112 @@ paths:
                 $ref: '#/components/schemas/ProblemDetails'
 components:
   schemas:
-    DocumentType:
-      enum:
-      - 0
-      - 1
-      - 2
-      type: integer
-      description: "Available document types: \"File = 0\", \"FormTemplate = 1\", \"Memo = 2\" \n\nThe FormTemplate (1) document type is not currently supported for task document creation."
-      format: int32
+    SubTask:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+        href:
+          type:
+          - string
+          - 'null'
+        relation:
+          type:
+          - string
+          - 'null'
+        method:
+          type:
+          - string
+          - 'null'
+          default: GET
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+        parentTask:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          description: The parent (task) of the subtask.
+        createdBy:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          description: The staff member who created the subtask.
+        completedBy:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          description: The staff member who completed the subtask.
+        lastUpdatedBy:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          description: The staff member who last updated the subtask.
+        subject:
+          type:
+          - string
+          - 'null'
+          description: The subject - a short description of the subtask.
+          example: Confer with Mary
+        completedDate:
+          type:
+          - string
+          - 'null'
+          description: '**Deprecated.** Use `CompletedDateOnly` instead.
+
+
+            When the subtask was completed in UTC.'
+          format: date-time
+          example: '2020-02-15T13:00:00Z'
+          deprecated: true
+        completedDateOnly:
+          type:
+          - string
+          - 'null'
+          description: 'The date when the subtask was completed.
+
+
+            The time portion will always be set to 00:00:00
+
+            and should be ignored. Only the date portion is relevant.'
+          format: date-time
+          example: '2020-02-15T00:00:00'
+        createdDate:
+          type:
+          - string
+          - 'null'
+          description: '**Deprecated.** Use `CreatedDateOnly` instead.
+
+
+            When the subtask was created in UTC.'
+          format: date-time
+          example: '2020-02-15T13:00:00Z'
+          deprecated: true
+        createdDateOnly:
+          type:
+          - string
+          - 'null'
+          description: 'The date when the subtask was created.
+
+
+            The time portion will always be set to 00:00:00
+
+            and should be ignored. Only the date portion is relevant.'
+          format: date-time
+          example: '2020-02-15T00:00:00'
+        isCompleted:
+          type: boolean
+          description: True when the subtask is completed.
+          example: false
+        isDeleted:
+          type: boolean
+          description: True when the subtask is deleted.
+          example: false
+        lastUpdated:
+          type: integer
+          description: Last updated timestamp.
+          format: int64
+          example: 637847425252027400
+      additionalProperties: false
+      description: Subtask resource.
     TaskDocumentCollection:
       type: object
       properties:
@@ -670,6 +768,216 @@ components:
           items:
             $ref: '#/components/schemas/TaskDocument'
       additionalProperties: false
+    TaskPagedCollection:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+        href:
+          type:
+          - string
+          - 'null'
+        relation:
+          type:
+          - string
+          - 'null'
+        method:
+          type:
+          - string
+          - 'null'
+          default: GET
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+        value:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/Task'
+        offset:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        limit:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        size:
+          type: integer
+          format: int64
+        first:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+        previous:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+        next:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+        last:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+      additionalProperties: false
+    ProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        instance:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
+    SubTaskDto:
+      required:
+      - staffId
+      - subject
+      type: object
+      properties:
+        staffId:
+          minLength: 1
+          type: string
+          description: Unique identifier of the associated staff member creating or updating the subtask.
+          example: 750eb5c5-ac0b-7d11-4997-e0ce9d8896c8
+        completedByStaffId:
+          type:
+          - string
+          - 'null'
+          description: Unique identifier of the associated staff member who completed the subtask.
+          example: 750eb5c5-ac0b-7d11-4997-e0ce9d8896c8
+        subject:
+          minLength: 1
+          type: string
+          description: Subject of the subtask.
+          example: Confer with Mary
+        isCompleted:
+          type: boolean
+          description: True when the subtask is completed.
+          example: false
+        completedDate:
+          type:
+          - string
+          - 'null'
+          description: '**Deprecated.** Use `CompletedDateOnly` instead.
+
+
+            Completed date of the subtask in UTC.
+
+            If not provided and IsCompleted is set to true, the current date will be used.'
+          format: date-time
+          example: '2020-02-15T13:00:00Z'
+          deprecated: true
+        completedDateOnly:
+          type:
+          - string
+          - 'null'
+          description: 'Completed date of the subtask. Takes precendence over CompletedDate if set.
+
+            If not provided and IsCompleted is set to true, the current date will be used.
+
+
+            Any time/timezone information will be discarded
+
+            and only the date portion will be considered.'
+          format: date-time
+          example: '2020-02-15'
+      additionalProperties: false
+      description: Data transfer object for a subtask.
+    DocumentType:
+      enum:
+      - 0
+      - 1
+      - 2
+      type: integer
+      description: "Available document types: \"File = 0\", \"FormTemplate = 1\", \"Memo = 2\" \n\nThe FormTemplate (1) document type is not currently supported for task document creation."
+      format: int32
+    TaskDocumentDto:
+      required:
+      - type
+      type: object
+      properties:
+        documentId:
+          type:
+          - string
+          - 'null'
+          description: "Unique identifier of the document (file or memo).\n\nIf a file, the type must be 0 (File). \n\nIf a memo, the type must be 2 (Memo).\n\nThe FormTemplate (1) document type is not currently supported for task document creation."
+          example: cf666f06-3ff2-4a41-8c7f-ab5a8bc6a277
+        type:
+          allOf:
+          - $ref: '#/components/schemas/DocumentType'
+          description: 'The type of the document.
+
+
+            Possible values: File = 0, FormTemplate = 1, Memo = 2.
+
+
+            The FormTemplate (1) document type is not currently supported for task document creation.'
+          example: 0
+      additionalProperties: false
+      description: Data transfer object for a task document.
+    TaskDocument:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+        href:
+          type:
+          - string
+          - 'null'
+        relation:
+          type:
+          - string
+          - 'null'
+        method:
+          type:
+          - string
+          - 'null'
+          default: GET
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+        task:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          description: The associated task.
+        type:
+          allOf:
+          - $ref: '#/components/schemas/DocumentType'
+          description: 'The type of the document.
+
+
+            Possible values: File = 0, FormTemplate = 1, Memo = 2.'
+          example: 0
+        isDeleted:
+          type: boolean
+          description: True when the task document has been deleted.
+          example: false
+        document:
+          description: Link to the the document.
+      additionalProperties: false
+      description: Task document resource.
     TaskDto:
       required:
       - staffId
@@ -779,7 +1087,7 @@ components:
           description: Duration of the task in ISO 8601 duration format.
           example: PT4H33M
       additionalProperties: false
-    SubTask:
+    SubTaskCollection:
       type: object
       properties:
         id:
@@ -802,89 +1110,13 @@ components:
         self:
           allOf:
           - $ref: '#/components/schemas/Link'
-        parentTask:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-          description: The parent (task) of the subtask.
-        createdBy:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-          description: The staff member who created the subtask.
-        completedBy:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-          description: The staff member who completed the subtask.
-        lastUpdatedBy:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-          description: The staff member who last updated the subtask.
-        subject:
+        value:
           type:
-          - string
+          - array
           - 'null'
-          description: The subject - a short description of the subtask.
-          example: Confer with Mary
-        completedDate:
-          type:
-          - string
-          - 'null'
-          description: '**Deprecated.** Use `CompletedDateOnly` instead.
-
-
-            When the subtask was completed in UTC.'
-          format: date-time
-          example: '2020-02-15T13:00:00Z'
-          deprecated: true
-        completedDateOnly:
-          type:
-          - string
-          - 'null'
-          description: 'The date when the subtask was completed.
-
-
-            The time portion will always be set to 00:00:00
-
-            and should be ignored. Only the date portion is relevant.'
-          format: date-time
-          example: '2020-02-15T00:00:00'
-        createdDate:
-          type:
-          - string
-          - 'null'
-          description: '**Deprecated.** Use `CreatedDateOnly` instead.
-
-
-            When the subtask was created in UTC.'
-          format: date-time
-          example: '2020-02-15T13:00:00Z'
-          deprecated: true
-        createdDateOnly:
-          type:
-          - string
-          - 'null'
-          description: 'The date when the subtask was created.
-
-
-            The time portion will always be set to 00:00:00
-
-            and should be ignored. Only the date portion is relevant.'
-          format: date-time
-          example: '2020-02-15T00:00:00'
-        isCompleted:
-          type: boolean
-          description: True when the subtask is completed.
-          example: false
-        isDeleted:
-          type: boolean
-          description: True when the subtask is deleted.
-          example: false
-        lastUpdated:
-          type: integer
-          description: Last updated timestamp.
-          format: int64
-          example: 637847425252027400
+          items:
+            $ref: '#/components/schemas/SubTask'
       additionalProperties: false
-      description: Subtask resource.
     Task:
       type: object
       properties:
@@ -1050,140 +1282,6 @@ components:
           description: Duration of the task in ISO 8601 duration format.
           example: PT4H33M
       additionalProperties: false
-    TaskDocumentDto:
-      required:
-      - type
-      type: object
-      properties:
-        documentId:
-          type:
-          - string
-          - 'null'
-          description: "Unique identifier of the document (file or memo).\n\nIf a file, the type must be 0 (File). \n\nIf a memo, the type must be 2 (Memo).\n\nThe FormTemplate (1) document type is not currently supported for task document creation."
-          example: cf666f06-3ff2-4a41-8c7f-ab5a8bc6a277
-        type:
-          allOf:
-          - $ref: '#/components/schemas/DocumentType'
-          description: 'The type of the document.
-
-
-            Possible values: File = 0, FormTemplate = 1, Memo = 2.
-
-
-            The FormTemplate (1) document type is not currently supported for task document creation.'
-          example: 0
-      additionalProperties: false
-      description: Data transfer object for a task document.
-    ProblemDetails:
-      type: object
-      properties:
-        type:
-          type:
-          - string
-          - 'null'
-        title:
-          type:
-          - string
-          - 'null'
-        status:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        detail:
-          type:
-          - string
-          - 'null'
-        instance:
-          type:
-          - string
-          - 'null'
-      additionalProperties: {}
-    SubTaskCollection:
-      type: object
-      properties:
-        id:
-          type:
-          - string
-          - 'null'
-        href:
-          type:
-          - string
-          - 'null'
-        relation:
-          type:
-          - string
-          - 'null'
-        method:
-          type:
-          - string
-          - 'null'
-          default: GET
-        self:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-        value:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/SubTask'
-      additionalProperties: false
-    TaskPagedCollection:
-      type: object
-      properties:
-        id:
-          type:
-          - string
-          - 'null'
-        href:
-          type:
-          - string
-          - 'null'
-        relation:
-          type:
-          - string
-          - 'null'
-        method:
-          type:
-          - string
-          - 'null'
-          default: GET
-        self:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-        value:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/Task'
-        offset:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        limit:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        size:
-          type: integer
-          format: int64
-        first:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-        previous:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-        next:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-        last:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-      additionalProperties: false
     Link:
       type: object
       properties:
@@ -1205,104 +1303,6 @@ components:
           - 'null'
           default: GET
       additionalProperties: false
-    TaskDocument:
-      type: object
-      properties:
-        id:
-          type:
-          - string
-          - 'null'
-        href:
-          type:
-          - string
-          - 'null'
-        relation:
-          type:
-          - string
-          - 'null'
-        method:
-          type:
-          - string
-          - 'null'
-          default: GET
-        self:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-        task:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-          description: The associated task.
-        type:
-          allOf:
-          - $ref: '#/components/schemas/DocumentType'
-          description: 'The type of the document.
-
-
-            Possible values: File = 0, FormTemplate = 1, Memo = 2.'
-          example: 0
-        isDeleted:
-          type: boolean
-          description: True when the task document has been deleted.
-          example: false
-        document:
-          description: Link to the the document.
-      additionalProperties: false
-      description: Task document resource.
-    SubTaskDto:
-      required:
-      - staffId
-      - subject
-      type: object
-      properties:
-        staffId:
-          minLength: 1
-          type: string
-          description: Unique identifier of the associated staff member creating or updating the subtask.
-          example: 750eb5c5-ac0b-7d11-4997-e0ce9d8896c8
-        completedByStaffId:
-          type:
-          - string
-          - 'null'
-          description: Unique identifier of the associated staff member who completed the subtask.
-          example: 750eb5c5-ac0b-7d11-4997-e0ce9d8896c8
-        subject:
-          minLength: 1
-          type: string
-          description: Subject of the subtask.
-          example: Confer with Mary
-        isCompleted:
-          type: boolean
-          description: True when the subtask is completed.
-          example: false
-        completedDate:
-          type:
-          - string
-          - 'null'
-          description: '**Deprecated.** Use `CompletedDateOnly` instead.
-
-
-            Completed date of the subtask in UTC.
-
-            If not provided and IsCompleted is set to true, the current date will be used.'
-          format: date-time
-          example: '2020-02-15T13:00:00Z'
-          deprecated: true
-        completedDateOnly:
-          type:
-          - string
-          - 'null'
-          description: 'Completed date of the subtask. Takes precendence over CompletedDate if set.
-
-            If not provided and IsCompleted is set to true, the current date will be used.
-
-
-            Any time/timezone information will be discarded
-
-            and only the date portion will be considered.'
-          format: date-time
-          example: '2020-02-15'
-      additionalProperties: false
-      description: Data transfer object for a subtask.
   securitySchemes:
     api-key:
       type: apiKey

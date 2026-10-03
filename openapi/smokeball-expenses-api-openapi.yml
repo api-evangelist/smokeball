@@ -302,196 +302,6 @@ paths:
                 $ref: '#/components/schemas/ProblemDetails'
 components:
   schemas:
-    ProblemDetails:
-      type: object
-      properties:
-        type:
-          type:
-          - string
-          - 'null'
-        title:
-          type:
-          - string
-          - 'null'
-        status:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        detail:
-          type:
-          - string
-          - 'null'
-        instance:
-          type:
-          - string
-          - 'null'
-      additionalProperties: {}
-    ExpenseDto:
-      type: object
-      properties:
-        updatedByUserId:
-          type:
-          - string
-          - 'null'
-          description: 'Unique identifier of the user updating the expense.
-
-
-            This field is reserved for server-to-server operations.'
-          example: 750eb5c5-ac0b-7d11-4997-e0ce9d8896c8
-        staffId:
-          type:
-          - string
-          - 'null'
-          description: 'Unique identifier of the associated staff member.
-
-
-            When StaffId is not provided, the API will attempt to match your User Id to a Staff Id automatically.'
-          example: 47efff74-3e4b-45b3-bddf-affc6649db0b
-        invoiceId:
-          type:
-          - string
-          - 'null'
-          description: Unique identifier of the associated invoice.
-          example: fdb766bc-eb20-4bc1-9417-08b51a7b2286
-        expenseDate:
-          type: string
-          description: The date of the expense.
-          format: date-time
-          example: '2022-07-01'
-        activityCode:
-          type:
-          - string
-          - 'null'
-          description: The activity code associated to the expense.
-          example: PRT
-        subject:
-          type:
-          - string
-          - 'null'
-          description: The subject - this should be a short description of the expense.
-          example: Review contract
-        description:
-          type:
-          - string
-          - 'null'
-          description: Optional detailed description of the expense.
-          example: Print documents
-        costType:
-          type: string
-          description: 'The cost type of the expense.
-
-
-            * Hard - Direct cost such as travel, accommodation, or materials.
-
-
-            * Soft - Indirect cost such as administrative fees or overhead.'
-          example: Hard
-        quantity:
-          type: number
-          description: 'The quantity of the expense in units (if not applicable, use 1).
-
-
-            The expense amount will be calculated as Quantity * Price.'
-          format: double
-          example: 3
-        price:
-          type: number
-          description: 'The price of the expense in dollars. Limited to 2 decimal places (cents).
-
-
-            The expense amount will be calculated as Quantity * Price.'
-          format: double
-          example: 350.32
-        tax:
-          type:
-          - number
-          - 'null'
-          description: 'Tax amount of the expense in dollars. Only applicable in AU and UK regions.
-
-
-            When TaxOutOfScope or TaxExempt is true, this value must be 0.
-
-            When TaxZeroRated is true, this value can be greater than 0.'
-          format: double
-          example: 90
-        outputTax:
-          type:
-          - number
-          - 'null'
-          description: 'Output tax amount of the expense in dollars. Only applicable in AU and UK regions.
-
-
-            When TaxOutOfScope or TaxZeroRated is true, this value must be 0.
-
-            When TaxExempt is true, this value can be greater than 0.'
-          format: double
-          example: 85
-        taxInclusive:
-          type: boolean
-          description: 'If true, the amount is tax inclusive, otherwise tax exclusive. Only applicable in AU and UK regions.
-
-
-            Tax inclusive means: Amount exc. tax = Amount - Tax, Amount inc. tax = Amount.
-
-
-            Tax exclusive means: Amount exc. tax = Amount, Amount inc. tax = Amount + Tax.
-
-            (Amount = Price * Quantity, Tax = value of the Tax field)
-
-
-            This field is mutually exclusive with TaxZeroRated, TaxOutOfScope and TaxExempt.'
-          example: false
-        taxZeroRated:
-          type: boolean
-          description: 'True if the expense is zero-rated for tax purposes. Only supported in UK regions.
-
-
-            This field is mutually exclusive with TaxInclusive, TaxOutOfScope and TaxExempt.
-
-            When true, OutputTax must be 0.'
-          example: false
-        taxOutOfScope:
-          type: boolean
-          description: 'True if the expense is out of scope for tax purposes. Only supported in UK regions.
-
-
-            This field is mutually exclusive with TaxInclusive, TaxZeroRated and TaxExempt.
-
-            When true, both Tax and OutputTax must be 0.'
-          example: false
-        taxExempt:
-          type: boolean
-          description: 'True if the expense is exempt from tax.
-
-
-            This field is mutually exclusive with TaxInclusive, TaxZeroRated and TaxOutOfScope.
-
-            When true, Tax must be 0 but OutputTax can be greater than 0.'
-          example: false
-        finalized:
-          type: boolean
-          description: True if the expense has been finalized.
-          example: false
-        isWrittenOff:
-          type: boolean
-          description: "True if the expense is written off. True only allowed if IsBillable is true. \n\nWritten off expenses will show on an invoice with their amount, but will not be counted in the invoice total."
-          example: false
-        isBillable:
-          type: boolean
-          description: True if the expense is billable. Non-billable expense will, by default, not be shown on invoices (and, if shown, the amount will be 0).
-          example: false
-        isInvoicedExternally:
-          type: boolean
-          description: True if the expense is invoiced externally.
-          example: false
-        assignToFirmOwner:
-          type: boolean
-          description: 'Assigns expense to a firm owner if true. Ignored if a StaffId is provided.
-
-
-            Note: If there are multiple firm owners, it is not guaranteed that the same firm owner will be assigned everytime.'
-      additionalProperties: false
     Expense:
       type: object
       properties:
@@ -699,6 +509,52 @@ components:
           description: True if the expense is deleted.
           example: false
       additionalProperties: false
+    Link:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+        href:
+          type:
+          - string
+          - 'null'
+        relation:
+          type:
+          - string
+          - 'null'
+        method:
+          type:
+          - string
+          - 'null'
+          default: GET
+      additionalProperties: false
+    ProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        instance:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
     ExpensePagedCollection:
       type: object
       properties:
@@ -754,26 +610,170 @@ components:
           allOf:
           - $ref: '#/components/schemas/Link'
       additionalProperties: false
-    Link:
+    ExpenseDto:
       type: object
       properties:
-        id:
+        updatedByUserId:
           type:
           - string
           - 'null'
-        href:
+          description: 'Unique identifier of the user updating the expense.
+
+
+            This field is reserved for server-to-server operations.'
+          example: 750eb5c5-ac0b-7d11-4997-e0ce9d8896c8
+        staffId:
           type:
           - string
           - 'null'
-        relation:
+          description: 'Unique identifier of the associated staff member.
+
+
+            When StaffId is not provided, the API will attempt to match your User Id to a Staff Id automatically.'
+          example: 47efff74-3e4b-45b3-bddf-affc6649db0b
+        invoiceId:
           type:
           - string
           - 'null'
-        method:
+          description: Unique identifier of the associated invoice.
+          example: fdb766bc-eb20-4bc1-9417-08b51a7b2286
+        expenseDate:
+          type: string
+          description: The date of the expense.
+          format: date-time
+          example: '2022-07-01'
+        activityCode:
           type:
           - string
           - 'null'
-          default: GET
+          description: The activity code associated to the expense.
+          example: PRT
+        subject:
+          type:
+          - string
+          - 'null'
+          description: The subject - this should be a short description of the expense.
+          example: Review contract
+        description:
+          type:
+          - string
+          - 'null'
+          description: Optional detailed description of the expense.
+          example: Print documents
+        costType:
+          type: string
+          description: 'The cost type of the expense.
+
+
+            * Hard - Direct cost such as travel, accommodation, or materials.
+
+
+            * Soft - Indirect cost such as administrative fees or overhead.'
+          example: Hard
+        quantity:
+          type: number
+          description: 'The quantity of the expense in units (if not applicable, use 1).
+
+
+            The expense amount will be calculated as Quantity * Price.'
+          format: double
+          example: 3
+        price:
+          type: number
+          description: 'The price of the expense in dollars. Limited to 2 decimal places (cents).
+
+
+            The expense amount will be calculated as Quantity * Price.'
+          format: double
+          example: 350.32
+        tax:
+          type:
+          - number
+          - 'null'
+          description: 'Tax amount of the expense in dollars. Only applicable in AU and UK regions.
+
+
+            When TaxOutOfScope or TaxExempt is true, this value must be 0.
+
+            When TaxZeroRated is true, this value can be greater than 0.'
+          format: double
+          example: 90
+        outputTax:
+          type:
+          - number
+          - 'null'
+          description: 'Output tax amount of the expense in dollars. Only applicable in AU and UK regions.
+
+
+            When TaxOutOfScope or TaxZeroRated is true, this value must be 0.
+
+            When TaxExempt is true, this value can be greater than 0.'
+          format: double
+          example: 85
+        taxInclusive:
+          type: boolean
+          description: 'If true, the amount is tax inclusive, otherwise tax exclusive. Only applicable in AU and UK regions.
+
+
+            Tax inclusive means: Amount exc. tax = Amount - Tax, Amount inc. tax = Amount.
+
+
+            Tax exclusive means: Amount exc. tax = Amount, Amount inc. tax = Amount + Tax.
+
+            (Amount = Price * Quantity, Tax = value of the Tax field)
+
+
+            This field is mutually exclusive with TaxZeroRated, TaxOutOfScope and TaxExempt.'
+          example: false
+        taxZeroRated:
+          type: boolean
+          description: 'True if the expense is zero-rated for tax purposes. Only supported in UK regions.
+
+
+            This field is mutually exclusive with TaxInclusive, TaxOutOfScope and TaxExempt.
+
+            When true, OutputTax must be 0.'
+          example: false
+        taxOutOfScope:
+          type: boolean
+          description: 'True if the expense is out of scope for tax purposes. Only supported in UK regions.
+
+
+            This field is mutually exclusive with TaxInclusive, TaxZeroRated and TaxExempt.
+
+            When true, both Tax and OutputTax must be 0.'
+          example: false
+        taxExempt:
+          type: boolean
+          description: 'True if the expense is exempt from tax.
+
+
+            This field is mutually exclusive with TaxInclusive, TaxZeroRated and TaxOutOfScope.
+
+            When true, Tax must be 0 but OutputTax can be greater than 0.'
+          example: false
+        finalized:
+          type: boolean
+          description: True if the expense has been finalized.
+          example: false
+        isWrittenOff:
+          type: boolean
+          description: "True if the expense is written off. True only allowed if IsBillable is true. \n\nWritten off expenses will show on an invoice with their amount, but will not be counted in the invoice total."
+          example: false
+        isBillable:
+          type: boolean
+          description: True if the expense is billable. Non-billable expense will, by default, not be shown on invoices (and, if shown, the amount will be 0).
+          example: false
+        isInvoicedExternally:
+          type: boolean
+          description: True if the expense is invoiced externally.
+          example: false
+        assignToFirmOwner:
+          type: boolean
+          description: 'Assigns expense to a firm owner if true. Ignored if a StaffId is provided.
+
+
+            Note: If there are multiple firm owners, it is not guaranteed that the same firm owner will be assigned everytime.'
       additionalProperties: false
   securitySchemes:
     api-key:

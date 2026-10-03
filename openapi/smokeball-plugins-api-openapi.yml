@@ -457,6 +457,375 @@ paths:
                 $ref: '#/components/schemas/ProblemDetails'
 components:
   schemas:
+    PluginSubscription:
+      type: object
+      properties:
+        href:
+          type:
+          - string
+          - 'null'
+        relation:
+          type:
+          - string
+          - 'null'
+        method:
+          type:
+          - string
+          - 'null'
+          default: GET
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+        id:
+          type:
+          - string
+          - 'null'
+          description: Unique identifier of the subscription.
+          example: b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2
+        pluginId:
+          type:
+          - string
+          - 'null'
+          description: Unique identifier of the plugin.
+          example: b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2
+        pluginVersionId:
+          type:
+          - string
+          - 'null'
+          description: Unique identifier of the plugin version. Can be null.
+          example: b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2
+        createdDate:
+          type: string
+          description: Plugin subscription created date in UTC.
+          format: date-time
+          example: '2020-02-15T00:00:00Z'
+        lastUpdatedDate:
+          type: string
+          description: Plugin subscription last updated date in UTC.
+          format: date-time
+          example: '2020-02-15T00:00:00Z'
+        isDisabled:
+          type: boolean
+          description: True when the subscription is disabled (the plugin will not function for the user).
+      additionalProperties: false
+    Plugin:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+        href:
+          type:
+          - string
+          - 'null'
+        relation:
+          type:
+          - string
+          - 'null'
+        method:
+          type:
+          - string
+          - 'null'
+          default: GET
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+        externalId:
+          type:
+          - string
+          - 'null'
+          description: Optional id provided by the external system that owns this plugin.
+        application:
+          allOf:
+          - $ref: '#/components/schemas/PluginApplication'
+          description: The application that the plugin should be rendered in.
+        type:
+          allOf:
+          - $ref: '#/components/schemas/PluginType'
+          description: The type of component the plugin should represent.
+        version:
+          allOf:
+          - $ref: '#/components/schemas/PluginVersion'
+          description: Current version of the plugin.
+        lastUpdated:
+          type: integer
+          description: Last updated timestamp.
+          format: int64
+          example: 637847425252027400
+        createdDate:
+          type: string
+          description: Plugin created date in UTC.
+          format: date-time
+          example: '2020-02-15T00:00:00Z'
+        lastUpdatedDate:
+          type: string
+          description: Plugin last updated date in UTC.
+          format: date-time
+          example: '2020-02-15T00:00:00Z'
+        key:
+          type:
+          - string
+          - 'null'
+          description: Signing key of the plugin to verify integrity of requesting secure URLs.
+        additionalData:
+          type:
+          - object
+          - 'null'
+          additionalProperties: {}
+          description: Collection of plugin meta data as KeyValuePair(string, object).
+      additionalProperties: false
+    PluginAttributes:
+      type: object
+      properties:
+        text:
+          type:
+          - string
+          - 'null'
+          description: The text to be rendered on the plugin component (where applicable).
+        icon:
+          type:
+          - string
+          - 'null'
+          description: 'The Icon to be rendered on the plugin component (where applicable).
+
+            Refer to documentation for a full list of icons.'
+        color:
+          type:
+          - string
+          - 'null'
+          description: The hex color code to be rendered on the plugin component (where applicable).
+        tooltip:
+          type:
+          - string
+          - 'null'
+          description: 'Optional: The tooltip to display on component hover (where applicable).'
+        page:
+          allOf:
+          - $ref: '#/components/schemas/PluginPage'
+          description: Page attributes for the plugin (where applicable).
+      additionalProperties: false
+    PluginPagedCollection:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+        href:
+          type:
+          - string
+          - 'null'
+        relation:
+          type:
+          - string
+          - 'null'
+        method:
+          type:
+          - string
+          - 'null'
+          default: GET
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+        value:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/Plugin'
+        offset:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        limit:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        size:
+          type: integer
+          format: int64
+        first:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+        previous:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+        next:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+        last:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+      additionalProperties: false
+    PluginApplication:
+      enum:
+      - Native
+      - Web
+      - Archie
+      type: string
+      description: The application that the plugin should be rendered in.
+    PluginSubscriptionPagedCollection:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+        href:
+          type:
+          - string
+          - 'null'
+        relation:
+          type:
+          - string
+          - 'null'
+        method:
+          type:
+          - string
+          - 'null'
+          default: GET
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+        value:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/PluginSubscription'
+        offset:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        limit:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        size:
+          type: integer
+          format: int64
+        first:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+        previous:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+        next:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+        last:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+      additionalProperties: false
+    PluginDto:
+      type: object
+      properties:
+        externalId:
+          type:
+          - string
+          - 'null'
+          description: Optional id provided by the external system that owns this plugin.
+        application:
+          allOf:
+          - $ref: '#/components/schemas/PluginApplication'
+          description: The application that the plugin should be rendered in.
+        type:
+          allOf:
+          - $ref: '#/components/schemas/PluginType'
+          description: The type of component the plugin should represent.
+        version:
+          allOf:
+          - $ref: '#/components/schemas/PluginVersionDto'
+          description: Current version of the plugin.
+        key:
+          type:
+          - string
+          - 'null'
+          description: 'Signing key of the plugin to verify integrity of requesting secure URLs.
+
+            Only available to set on Plugin creation.'
+        additionalData:
+          type:
+          - object
+          - 'null'
+          additionalProperties: {}
+          description: Collection of KeyValuePair(string, object) to update Plugin meta data.
+      additionalProperties: false
+    PluginUrlRequestDto:
+      type: object
+      properties:
+        matterId:
+          type:
+          - string
+          - 'null'
+          description: The matter id associated with the request, if applicable.
+          example: 0c5a2296-9e02-4c58-bd14-b7467d4c9bcb
+        additionalData:
+          type:
+          - object
+          - 'null'
+          additionalProperties: {}
+          description: 'Additional key/value pairs to pass to the plugin endpoint.
+
+            Reserved keys (AccountId, UserId, UserEmail, MatterId) will be rejected.'
+      additionalProperties: false
+    Link:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+        href:
+          type:
+          - string
+          - 'null'
+        relation:
+          type:
+          - string
+          - 'null'
+        method:
+          type:
+          - string
+          - 'null'
+          default: GET
+      additionalProperties: false
+    ProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        instance:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
+    PluginType:
+      enum:
+      - Button
+      - Tab
+      type: string
+      description: The type of component the plugin should represent.
     PluginVersion:
       type: object
       properties:
@@ -525,13 +894,6 @@ components:
           format: date-time
           example: '2020-02-15T00:00:00Z'
       additionalProperties: false
-    PluginApplication:
-      enum:
-      - Native
-      - Web
-      - Archie
-      type: string
-      description: The application that the plugin should be rendered in.
     PluginPage:
       type: object
       properties:
@@ -560,61 +922,6 @@ components:
 
             When true, loads the endpoint in the internal browser (where applicable).'
       additionalProperties: false
-    PluginSubscriptionPagedCollection:
-      type: object
-      properties:
-        id:
-          type:
-          - string
-          - 'null'
-        href:
-          type:
-          - string
-          - 'null'
-        relation:
-          type:
-          - string
-          - 'null'
-        method:
-          type:
-          - string
-          - 'null'
-          default: GET
-        self:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-        value:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/PluginSubscription'
-        offset:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        limit:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        size:
-          type: integer
-          format: int64
-        first:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-        previous:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-        next:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-        last:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-      additionalProperties: false
     PluginAvailability:
       type: object
       properties:
@@ -628,104 +935,6 @@ components:
 
 
             Plugin is applicable for all matter types if this is left empty.'
-      additionalProperties: false
-    ProblemDetails:
-      type: object
-      properties:
-        type:
-          type:
-          - string
-          - 'null'
-        title:
-          type:
-          - string
-          - 'null'
-        status:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        detail:
-          type:
-          - string
-          - 'null'
-        instance:
-          type:
-          - string
-          - 'null'
-      additionalProperties: {}
-    PluginType:
-      enum:
-      - Button
-      - Tab
-      type: string
-      description: The type of component the plugin should represent.
-    Plugin:
-      type: object
-      properties:
-        id:
-          type:
-          - string
-          - 'null'
-        href:
-          type:
-          - string
-          - 'null'
-        relation:
-          type:
-          - string
-          - 'null'
-        method:
-          type:
-          - string
-          - 'null'
-          default: GET
-        self:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-        externalId:
-          type:
-          - string
-          - 'null'
-          description: Optional id provided by the external system that owns this plugin.
-        application:
-          allOf:
-          - $ref: '#/components/schemas/PluginApplication'
-          description: The application that the plugin should be rendered in.
-        type:
-          allOf:
-          - $ref: '#/components/schemas/PluginType'
-          description: The type of component the plugin should represent.
-        version:
-          allOf:
-          - $ref: '#/components/schemas/PluginVersion'
-          description: Current version of the plugin.
-        lastUpdated:
-          type: integer
-          description: Last updated timestamp.
-          format: int64
-          example: 637847425252027400
-        createdDate:
-          type: string
-          description: Plugin created date in UTC.
-          format: date-time
-          example: '2020-02-15T00:00:00Z'
-        lastUpdatedDate:
-          type: string
-          description: Plugin last updated date in UTC.
-          format: date-time
-          example: '2020-02-15T00:00:00Z'
-        key:
-          type:
-          - string
-          - 'null'
-          description: Signing key of the plugin to verify integrity of requesting secure URLs.
-        additionalData:
-          type:
-          - object
-          - 'null'
-          additionalProperties: {}
-          description: Collection of plugin meta data as KeyValuePair(string, object).
       additionalProperties: false
     PluginVersionDto:
       type: object
@@ -772,215 +981,6 @@ components:
           allOf:
           - $ref: '#/components/schemas/PluginAvailability'
           description: Optional settings for determining the availability of a plugin.
-      additionalProperties: false
-    PluginUrlRequestDto:
-      type: object
-      properties:
-        matterId:
-          type:
-          - string
-          - 'null'
-          description: The matter id associated with the request, if applicable.
-          example: 0c5a2296-9e02-4c58-bd14-b7467d4c9bcb
-        additionalData:
-          type:
-          - object
-          - 'null'
-          additionalProperties: {}
-          description: 'Additional key/value pairs to pass to the plugin endpoint.
-
-            Reserved keys (AccountId, UserId, UserEmail, MatterId) will be rejected.'
-      additionalProperties: false
-    Link:
-      type: object
-      properties:
-        id:
-          type:
-          - string
-          - 'null'
-        href:
-          type:
-          - string
-          - 'null'
-        relation:
-          type:
-          - string
-          - 'null'
-        method:
-          type:
-          - string
-          - 'null'
-          default: GET
-      additionalProperties: false
-    PluginAttributes:
-      type: object
-      properties:
-        text:
-          type:
-          - string
-          - 'null'
-          description: The text to be rendered on the plugin component (where applicable).
-        icon:
-          type:
-          - string
-          - 'null'
-          description: 'The Icon to be rendered on the plugin component (where applicable).
-
-            Refer to documentation for a full list of icons.'
-        color:
-          type:
-          - string
-          - 'null'
-          description: The hex color code to be rendered on the plugin component (where applicable).
-        tooltip:
-          type:
-          - string
-          - 'null'
-          description: 'Optional: The tooltip to display on component hover (where applicable).'
-        page:
-          allOf:
-          - $ref: '#/components/schemas/PluginPage'
-          description: Page attributes for the plugin (where applicable).
-      additionalProperties: false
-    PluginDto:
-      type: object
-      properties:
-        externalId:
-          type:
-          - string
-          - 'null'
-          description: Optional id provided by the external system that owns this plugin.
-        application:
-          allOf:
-          - $ref: '#/components/schemas/PluginApplication'
-          description: The application that the plugin should be rendered in.
-        type:
-          allOf:
-          - $ref: '#/components/schemas/PluginType'
-          description: The type of component the plugin should represent.
-        version:
-          allOf:
-          - $ref: '#/components/schemas/PluginVersionDto'
-          description: Current version of the plugin.
-        key:
-          type:
-          - string
-          - 'null'
-          description: 'Signing key of the plugin to verify integrity of requesting secure URLs.
-
-            Only available to set on Plugin creation.'
-        additionalData:
-          type:
-          - object
-          - 'null'
-          additionalProperties: {}
-          description: Collection of KeyValuePair(string, object) to update Plugin meta data.
-      additionalProperties: false
-    PluginSubscription:
-      type: object
-      properties:
-        href:
-          type:
-          - string
-          - 'null'
-        relation:
-          type:
-          - string
-          - 'null'
-        method:
-          type:
-          - string
-          - 'null'
-          default: GET
-        self:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-        id:
-          type:
-          - string
-          - 'null'
-          description: Unique identifier of the subscription.
-          example: b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2
-        pluginId:
-          type:
-          - string
-          - 'null'
-          description: Unique identifier of the plugin.
-          example: b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2
-        pluginVersionId:
-          type:
-          - string
-          - 'null'
-          description: Unique identifier of the plugin version. Can be null.
-          example: b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2
-        createdDate:
-          type: string
-          description: Plugin subscription created date in UTC.
-          format: date-time
-          example: '2020-02-15T00:00:00Z'
-        lastUpdatedDate:
-          type: string
-          description: Plugin subscription last updated date in UTC.
-          format: date-time
-          example: '2020-02-15T00:00:00Z'
-        isDisabled:
-          type: boolean
-          description: True when the subscription is disabled (the plugin will not function for the user).
-      additionalProperties: false
-    PluginPagedCollection:
-      type: object
-      properties:
-        id:
-          type:
-          - string
-          - 'null'
-        href:
-          type:
-          - string
-          - 'null'
-        relation:
-          type:
-          - string
-          - 'null'
-        method:
-          type:
-          - string
-          - 'null'
-          default: GET
-        self:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-        value:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/Plugin'
-        offset:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        limit:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        size:
-          type: integer
-          format: int64
-        first:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-        previous:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-        next:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-        last:
-          allOf:
-          - $ref: '#/components/schemas/Link'
       additionalProperties: false
   securitySchemes:
     api-key:

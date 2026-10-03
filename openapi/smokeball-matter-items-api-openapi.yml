@@ -104,68 +104,6 @@ paths:
                 $ref: '#/components/schemas/ProblemDetails'
 components:
   schemas:
-    MatterItems:
-      type: object
-      properties:
-        id:
-          type:
-          - string
-          - 'null'
-        href:
-          type:
-          - string
-          - 'null'
-        relation:
-          type:
-          - string
-          - 'null'
-        method:
-          type:
-          - string
-          - 'null'
-          default: GET
-        self:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-        versionId:
-          type:
-          - string
-          - 'null'
-          description: Version id of the record.
-          example: 832e778f-83df-454a-b344-768a862a7e67
-        items:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/MatterItem'
-          description: List of items on a matter.
-      additionalProperties: false
-    ProblemDetails:
-      type: object
-      properties:
-        type:
-          type:
-          - string
-          - 'null'
-        title:
-          type:
-          - string
-          - 'null'
-        status:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        detail:
-          type:
-          - string
-          - 'null'
-        instance:
-          type:
-          - string
-          - 'null'
-      additionalProperties: {}
     MatterItem:
       type: object
       properties:
@@ -213,6 +151,68 @@ components:
           items:
             $ref: '#/components/schemas/MatterItem'
           description: List of child items associated with the item.
+      additionalProperties: false
+    ProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        instance:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
+    MatterItems:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+        href:
+          type:
+          - string
+          - 'null'
+        relation:
+          type:
+          - string
+          - 'null'
+        method:
+          type:
+          - string
+          - 'null'
+          default: GET
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+        versionId:
+          type:
+          - string
+          - 'null'
+          description: Version id of the record.
+          example: 832e778f-83df-454a-b344-768a862a7e67
+        items:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/MatterItem'
+          description: List of items on a matter.
       additionalProperties: false
     Link:
       type: object

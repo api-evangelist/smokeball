@@ -339,6 +339,17 @@ components:
             e.g: 45.63'
           format: double
       additionalProperties: false
+    EntryType:
+      enum:
+      - 0
+      - 1
+      - 2
+      type: integer
+      description: 'Type of the activity.
+
+
+        Possible values: Fixed = ''0'', Time = ''1'', Expense = ''2'''
+      format: int32
     ActivityPagedCollection:
       type: object
       properties:
@@ -394,17 +405,6 @@ components:
           allOf:
           - $ref: '#/components/schemas/Link'
       additionalProperties: false
-    EntryType:
-      enum:
-      - 0
-      - 1
-      - 2
-      type: integer
-      description: 'Type of the activity.
-
-
-        Possible values: Fixed = ''0'', Time = ''1'', Expense = ''2'''
-      format: int32
     ProblemDetails:
       type: object
       properties:
@@ -563,6 +563,17 @@ components:
           format: double
           example: 45.63
       additionalProperties: false
+    ActivityRateType:
+      enum:
+      - 0
+      - 1
+      - 2
+      type: integer
+      description: 'The activity rate type.
+
+
+        Possible values: UseDefaultStaffRate = ''0'', OverrideRateForAllStaff = ''1'', OverrideRatePerStaff = ''2'''
+      format: int32
     Link:
       type: object
       properties:
@@ -584,17 +595,6 @@ components:
           - 'null'
           default: GET
       additionalProperties: false
-    ActivityRateType:
-      enum:
-      - 0
-      - 1
-      - 2
-      type: integer
-      description: 'The activity rate type.
-
-
-        Possible values: UseDefaultStaffRate = ''0'', OverrideRateForAllStaff = ''1'', OverrideRatePerStaff = ''2'''
-      format: int32
   securitySchemes:
     api-key:
       type: apiKey
