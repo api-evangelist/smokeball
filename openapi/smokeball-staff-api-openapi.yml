@@ -196,7 +196,7 @@ paths:
                 $ref: '#/components/schemas/ProblemDetails'
 components:
   schemas:
-    PhoneNumber:
+    PhoneNumberDto:
       type: object
       properties:
         areaCode:
@@ -211,92 +211,6 @@ components:
           - 'null'
           description: Phone number (excluding area code).
           example: '1234567'
-      additionalProperties: false
-    StaffDto:
-      type: object
-      properties:
-        userId:
-          type:
-          - string
-          - 'null'
-          description: 'Unique identifier of the associated user. Used to map staff member to the specified user id and ignored if left blank.
-
-            Use the FirmUsers API to remove a staff/user mapping.'
-          example: b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2
-        title:
-          type:
-          - string
-          - 'null'
-          description: Staff member's title.
-          example: Mr
-        firstName:
-          type:
-          - string
-          - 'null'
-          description: Staff member's first name.
-          example: John
-        middleName:
-          type:
-          - string
-          - 'null'
-          description: Staff member's middle name (if applicable).
-          example: ''
-        lastName:
-          type:
-          - string
-          - 'null'
-          description: Staff member's last name.
-          example: Smith
-        initials:
-          type:
-          - string
-          - 'null'
-          description: Staff member's initials.
-          example: JS
-        phone:
-          allOf:
-          - $ref: '#/components/schemas/PhoneNumberDto'
-          description: Staff member's phone number.
-        cell:
-          allOf:
-          - $ref: '#/components/schemas/PhoneNumberDto'
-          description: Staff member's cell number.
-        email:
-          type:
-          - string
-          - 'null'
-          description: Staff member's email address.
-          example: john.smith@brown.com
-        role:
-          type:
-          - string
-          - 'null'
-          description: Staff member's role.
-          example: Bookkeeper
-        avatar:
-          type:
-          - string
-          - 'null'
-          description: Staff member's avatar.
-          example: https://example-avatar-url.com/image
-        former:
-          type:
-          - boolean
-          - 'null'
-          description: "Whether he/she is a former member. \n\nCaution: Setting a staff member to former staff will also deregister them from the firm."
-          example: false
-        colorFill:
-          type:
-          - string
-          - 'null'
-          description: Staff member's fill color hex code.
-          example: '#797d85'
-        colorStroke:
-          type:
-          - string
-          - 'null'
-          description: Staff member's stroke color hex code.
-          example: '#64666a'
       additionalProperties: false
     Staff:
       type: object
@@ -430,6 +344,141 @@ components:
           - $ref: '#/components/schemas/OutOfOffice'
           description: Staff member's Out-of-office period, if enabled.
       additionalProperties: false
+    LicenceNumber:
+      type: object
+      properties:
+        state:
+          type:
+          - string
+          - 'null'
+          description: State associated to the licence.
+          example: IL
+        type:
+          type:
+          - string
+          - 'null'
+          description: Type of the licence.
+          example: ''
+        number:
+          type:
+          - string
+          - 'null'
+          description: Licence number.
+      additionalProperties: false
+    OutOfOffice:
+      type: object
+      properties:
+        startDate:
+          type: string
+          description: Out-of-office start date.
+          format: date-time
+        endDate:
+          type: string
+          description: Out-of-office end date.
+          format: date-time
+      additionalProperties: false
+    PhoneNumber:
+      type: object
+      properties:
+        areaCode:
+          type:
+          - string
+          - 'null'
+          description: Phone area code.
+          example: '555'
+        number:
+          type:
+          - string
+          - 'null'
+          description: Phone number (excluding area code).
+          example: '1234567'
+      additionalProperties: false
+    StaffDto:
+      type: object
+      properties:
+        userId:
+          type:
+          - string
+          - 'null'
+          description: 'Unique identifier of the associated user. Used to map staff member to the specified user id and ignored if left blank.
+
+            Use the FirmUsers API to remove a staff/user mapping.'
+          example: b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2
+        title:
+          type:
+          - string
+          - 'null'
+          description: Staff member's title.
+          example: Mr
+        firstName:
+          type:
+          - string
+          - 'null'
+          description: Staff member's first name.
+          example: John
+        middleName:
+          type:
+          - string
+          - 'null'
+          description: Staff member's middle name (if applicable).
+          example: ''
+        lastName:
+          type:
+          - string
+          - 'null'
+          description: Staff member's last name.
+          example: Smith
+        initials:
+          type:
+          - string
+          - 'null'
+          description: Staff member's initials.
+          example: JS
+        phone:
+          allOf:
+          - $ref: '#/components/schemas/PhoneNumberDto'
+          description: Staff member's phone number.
+        cell:
+          allOf:
+          - $ref: '#/components/schemas/PhoneNumberDto'
+          description: Staff member's cell number.
+        email:
+          type:
+          - string
+          - 'null'
+          description: Staff member's email address.
+          example: john.smith@brown.com
+        role:
+          type:
+          - string
+          - 'null'
+          description: Staff member's role.
+          example: Bookkeeper
+        avatar:
+          type:
+          - string
+          - 'null'
+          description: Staff member's avatar.
+          example: https://example-avatar-url.com/image
+        former:
+          type:
+          - boolean
+          - 'null'
+          description: "Whether he/she is a former member. \n\nCaution: Setting a staff member to former staff will also deregister them from the firm."
+          example: false
+        colorFill:
+          type:
+          - string
+          - 'null'
+          description: Staff member's fill color hex code.
+          example: '#797d85'
+        colorStroke:
+          type:
+          - string
+          - 'null'
+          description: Staff member's stroke color hex code.
+          example: '#64666a'
+      additionalProperties: false
     StaffPagedCollection:
       type: object
       properties:
@@ -485,17 +534,26 @@ components:
           allOf:
           - $ref: '#/components/schemas/Link'
       additionalProperties: false
-    OutOfOffice:
+    Link:
       type: object
       properties:
-        startDate:
-          type: string
-          description: Out-of-office start date.
-          format: date-time
-        endDate:
-          type: string
-          description: Out-of-office end date.
-          format: date-time
+        id:
+          type:
+          - string
+          - 'null'
+        href:
+          type:
+          - string
+          - 'null'
+        relation:
+          type:
+          - string
+          - 'null'
+        method:
+          type:
+          - string
+          - 'null'
+          default: GET
       additionalProperties: false
     ProblemDetails:
       type: object
@@ -522,64 +580,6 @@ components:
           - string
           - 'null'
       additionalProperties: {}
-    PhoneNumberDto:
-      type: object
-      properties:
-        areaCode:
-          type:
-          - string
-          - 'null'
-          description: Phone area code.
-          example: '555'
-        number:
-          type:
-          - string
-          - 'null'
-          description: Phone number (excluding area code).
-          example: '1234567'
-      additionalProperties: false
-    LicenceNumber:
-      type: object
-      properties:
-        state:
-          type:
-          - string
-          - 'null'
-          description: State associated to the licence.
-          example: IL
-        type:
-          type:
-          - string
-          - 'null'
-          description: Type of the licence.
-          example: ''
-        number:
-          type:
-          - string
-          - 'null'
-          description: Licence number.
-      additionalProperties: false
-    Link:
-      type: object
-      properties:
-        id:
-          type:
-          - string
-          - 'null'
-        href:
-          type:
-          - string
-          - 'null'
-        relation:
-          type:
-          - string
-          - 'null'
-        method:
-          type:
-          - string
-          - 'null'
-          default: GET
-      additionalProperties: false
   securitySchemes:
     api-key:
       type: apiKey

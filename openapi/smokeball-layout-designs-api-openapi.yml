@@ -89,111 +89,6 @@ paths:
                 $ref: '#/components/schemas/ProblemDetails'
 components:
   schemas:
-    LayoutDesignField:
-      type: object
-      properties:
-        name:
-          type:
-          - string
-          - 'null'
-          description: Name (mapping) of the layout design field.
-          example: PinAndLotSizes[]/AccountNumber
-        type:
-          type: string
-          description: "Type of the layout design field.\n            \nPossible values: 'Text','Combobox','Checkbox','Date','Role','Number'.\n            \n'Role' type can represent a matter role (for a top-level layout item) or a matter relationship (for a sublayout item)."
-          example: Combobox
-        possibleValues:
-          type:
-          - array
-          - 'null'
-          items:
-            type: string
-          description: List of possible values (e.g. for Combobox field).
-          example:
-          - Residence
-          - Commercial
-          - Factory
-          - Office
-      additionalProperties: false
-    ProblemDetails:
-      type: object
-      properties:
-        type:
-          type:
-          - string
-          - 'null'
-        title:
-          type:
-          - string
-          - 'null'
-        status:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        detail:
-          type:
-          - string
-          - 'null'
-        instance:
-          type:
-          - string
-          - 'null'
-      additionalProperties: {}
-    LayoutDesign:
-      type: object
-      properties:
-        id:
-          type:
-          - string
-          - 'null'
-        href:
-          type:
-          - string
-          - 'null'
-        relation:
-          type:
-          - string
-          - 'null'
-        method:
-          type:
-          - string
-          - 'null'
-          default: GET
-        self:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-        versionId:
-          type:
-          - string
-          - 'null'
-          description: Version id of the layout design.
-          example: 763c3857-2ed9-4c5d-bee0-c48d48a7543e
-        name:
-          type:
-          - string
-          - 'null'
-          description: Name of the layout design.
-          example: Case Details
-        lastUpdated:
-          type: integer
-          description: Last updated timestamp.
-          format: int64
-          example: 637847425252027400
-        description:
-          type:
-          - string
-          - 'null'
-          description: Brief description of the layout design.
-          example: Property and title details
-        fields:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/LayoutDesignField'
-          description: Collection of layout design fields.
-      additionalProperties: false
     LayoutDesignInfoPagedCollection:
       type: object
       properties:
@@ -290,6 +185,86 @@ components:
           format: int64
           example: 637847425252027400
       additionalProperties: false
+    LayoutDesignField:
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+          description: Name (mapping) of the layout design field.
+          example: PinAndLotSizes[]/AccountNumber
+        type:
+          type: string
+          description: "Type of the layout design field.\n            \nPossible values: 'Text','Combobox','Checkbox','Date','Role','Number'.\n            \n'Role' type can represent a matter role (for a top-level layout item) or a matter relationship (for a sublayout item)."
+          example: Combobox
+        possibleValues:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+          description: List of possible values (e.g. for Combobox field).
+          example:
+          - Residence
+          - Commercial
+          - Factory
+          - Office
+      additionalProperties: false
+    LayoutDesign:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+        href:
+          type:
+          - string
+          - 'null'
+        relation:
+          type:
+          - string
+          - 'null'
+        method:
+          type:
+          - string
+          - 'null'
+          default: GET
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+        versionId:
+          type:
+          - string
+          - 'null'
+          description: Version id of the layout design.
+          example: 763c3857-2ed9-4c5d-bee0-c48d48a7543e
+        name:
+          type:
+          - string
+          - 'null'
+          description: Name of the layout design.
+          example: Case Details
+        lastUpdated:
+          type: integer
+          description: Last updated timestamp.
+          format: int64
+          example: 637847425252027400
+        description:
+          type:
+          - string
+          - 'null'
+          description: Brief description of the layout design.
+          example: Property and title details
+        fields:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/LayoutDesignField'
+          description: Collection of layout design fields.
+      additionalProperties: false
     Link:
       type: object
       properties:
@@ -311,6 +286,31 @@ components:
           - 'null'
           default: GET
       additionalProperties: false
+    ProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        instance:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
   securitySchemes:
     api-key:
       type: apiKey

@@ -210,6 +210,27 @@ components:
           description: True if the notification has been deleted.
           example: false
       additionalProperties: false
+    Link:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+        href:
+          type:
+          - string
+          - 'null'
+        relation:
+          type:
+          - string
+          - 'null'
+        method:
+          type:
+          - string
+          - 'null'
+          default: GET
+      additionalProperties: false
     NotificationDto:
       type: object
       properties:
@@ -255,27 +276,6 @@ components:
           - string
           - 'null'
           description: The Smokeball uri to execute when the notification is clicked.
-      additionalProperties: false
-    Link:
-      type: object
-      properties:
-        id:
-          type:
-          - string
-          - 'null'
-        href:
-          type:
-          - string
-          - 'null'
-        relation:
-          type:
-          - string
-          - 'null'
-        method:
-          type:
-          - string
-          - 'null'
-          default: GET
       additionalProperties: false
   securitySchemes:
     api-key:

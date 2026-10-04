@@ -632,6 +632,30 @@ paths:
                 $ref: '#/components/schemas/ProblemDetails'
 components:
   schemas:
+    TaskDocumentDto:
+      required:
+      - type
+      type: object
+      properties:
+        documentId:
+          type:
+          - string
+          - 'null'
+          description: "Unique identifier of the document (file or memo).\n\nIf a file, the type must be 0 (File). \n\nIf a memo, the type must be 2 (Memo).\n\nThe FormTemplate (1) document type is not currently supported for task document creation."
+          example: cf666f06-3ff2-4a41-8c7f-ab5a8bc6a277
+        type:
+          allOf:
+          - $ref: '#/components/schemas/DocumentType'
+          description: 'The type of the document.
+
+
+            Possible values: File = 0, FormTemplate = 1, Memo = 2.
+
+
+            The FormTemplate (1) document type is not currently supported for task document creation.'
+          example: 0
+      additionalProperties: false
+      description: Data transfer object for a task document.
     SubTask:
       type: object
       properties:
@@ -738,36 +762,6 @@ components:
           example: 637847425252027400
       additionalProperties: false
       description: Subtask resource.
-    TaskDocumentCollection:
-      type: object
-      properties:
-        id:
-          type:
-          - string
-          - 'null'
-        href:
-          type:
-          - string
-          - 'null'
-        relation:
-          type:
-          - string
-          - 'null'
-        method:
-          type:
-          - string
-          - 'null'
-          default: GET
-        self:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-        value:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/TaskDocument'
-      additionalProperties: false
     TaskPagedCollection:
       type: object
       properties:
@@ -823,31 +817,87 @@ components:
           allOf:
           - $ref: '#/components/schemas/Link'
       additionalProperties: false
-    ProblemDetails:
+    TaskDocumentCollection:
       type: object
       properties:
+        id:
+          type:
+          - string
+          - 'null'
+        href:
+          type:
+          - string
+          - 'null'
+        relation:
+          type:
+          - string
+          - 'null'
+        method:
+          type:
+          - string
+          - 'null'
+          default: GET
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+        value:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/TaskDocument'
+      additionalProperties: false
+    TaskDocument:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+        href:
+          type:
+          - string
+          - 'null'
+        relation:
+          type:
+          - string
+          - 'null'
+        method:
+          type:
+          - string
+          - 'null'
+          default: GET
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+        task:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          description: The associated task.
         type:
-          type:
-          - string
-          - 'null'
-        title:
-          type:
-          - string
-          - 'null'
-        status:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        detail:
-          type:
-          - string
-          - 'null'
-        instance:
-          type:
-          - string
-          - 'null'
-      additionalProperties: {}
+          allOf:
+          - $ref: '#/components/schemas/DocumentType'
+          description: 'The type of the document.
+
+
+            Possible values: File = 0, FormTemplate = 1, Memo = 2.'
+          example: 0
+        isDeleted:
+          type: boolean
+          description: True when the task document has been deleted.
+          example: false
+        document:
+          description: Link to the the document.
+      additionalProperties: false
+      description: Task document resource.
+    DocumentType:
+      enum:
+      - 0
+      - 1
+      - 2
+      type: integer
+      description: "Available document types: \"File = 0\", \"FormTemplate = 1\", \"Memo = 2\" \n\nThe FormTemplate (1) document type is not currently supported for task document creation."
+      format: int32
     SubTaskDto:
       required:
       - staffId
@@ -903,39 +953,7 @@ components:
           example: '2020-02-15'
       additionalProperties: false
       description: Data transfer object for a subtask.
-    DocumentType:
-      enum:
-      - 0
-      - 1
-      - 2
-      type: integer
-      description: "Available document types: \"File = 0\", \"FormTemplate = 1\", \"Memo = 2\" \n\nThe FormTemplate (1) document type is not currently supported for task document creation."
-      format: int32
-    TaskDocumentDto:
-      required:
-      - type
-      type: object
-      properties:
-        documentId:
-          type:
-          - string
-          - 'null'
-          description: "Unique identifier of the document (file or memo).\n\nIf a file, the type must be 0 (File). \n\nIf a memo, the type must be 2 (Memo).\n\nThe FormTemplate (1) document type is not currently supported for task document creation."
-          example: cf666f06-3ff2-4a41-8c7f-ab5a8bc6a277
-        type:
-          allOf:
-          - $ref: '#/components/schemas/DocumentType'
-          description: 'The type of the document.
-
-
-            Possible values: File = 0, FormTemplate = 1, Memo = 2.
-
-
-            The FormTemplate (1) document type is not currently supported for task document creation.'
-          example: 0
-      additionalProperties: false
-      description: Data transfer object for a task document.
-    TaskDocument:
+    SubTaskCollection:
       type: object
       properties:
         id:
@@ -958,26 +976,59 @@ components:
         self:
           allOf:
           - $ref: '#/components/schemas/Link'
-        task:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-          description: The associated task.
-        type:
-          allOf:
-          - $ref: '#/components/schemas/DocumentType'
-          description: 'The type of the document.
-
-
-            Possible values: File = 0, FormTemplate = 1, Memo = 2.'
-          example: 0
-        isDeleted:
-          type: boolean
-          description: True when the task document has been deleted.
-          example: false
-        document:
-          description: Link to the the document.
+        value:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/SubTask'
       additionalProperties: false
-      description: Task document resource.
+    Link:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+        href:
+          type:
+          - string
+          - 'null'
+        relation:
+          type:
+          - string
+          - 'null'
+        method:
+          type:
+          - string
+          - 'null'
+          default: GET
+      additionalProperties: false
+    ProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        instance:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
     TaskDto:
       required:
       - staffId
@@ -1086,36 +1137,6 @@ components:
           - 'null'
           description: Duration of the task in ISO 8601 duration format.
           example: PT4H33M
-      additionalProperties: false
-    SubTaskCollection:
-      type: object
-      properties:
-        id:
-          type:
-          - string
-          - 'null'
-        href:
-          type:
-          - string
-          - 'null'
-        relation:
-          type:
-          - string
-          - 'null'
-        method:
-          type:
-          - string
-          - 'null'
-          default: GET
-        self:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-        value:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/SubTask'
       additionalProperties: false
     Task:
       type: object
@@ -1281,27 +1302,6 @@ components:
           - 'null'
           description: Duration of the task in ISO 8601 duration format.
           example: PT4H33M
-      additionalProperties: false
-    Link:
-      type: object
-      properties:
-        id:
-          type:
-          - string
-          - 'null'
-        href:
-          type:
-          - string
-          - 'null'
-        relation:
-          type:
-          - string
-          - 'null'
-        method:
-          type:
-          - string
-          - 'null'
-          default: GET
       additionalProperties: false
   securitySchemes:
     api-key:

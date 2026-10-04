@@ -590,32 +590,35 @@ paths:
                 $ref: '#/components/schemas/ProblemDetails'
 components:
   schemas:
-    UploadFileInfo:
+    FileFolderLogEntryCollection:
       type: object
       properties:
-        fileId:
+        id:
           type:
           - string
           - 'null'
-          description: Unique identifier of the file.
-          example: b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2
-        uploadUrl:
+        href:
           type:
           - string
           - 'null'
-          description: 'Temporary Link to upload file.
-
-
-            Important note: When uploading to this URL, set the ''Content-Type'' header to an empty value.
-
-
-            Example cURL: curl --location --request PUT ''URL_GOES_HERE'' \ --header ''Content-Type: ""'' \ --data ''@/C:/dir/test.pdf'''
-          example: ''
-        expiry:
-          type: string
-          description: Expiry date/time when the upload link is no longer accessible.
-          format: date-time
-          example: '2022-04-23T14:30:00Z'
+        relation:
+          type:
+          - string
+          - 'null'
+        method:
+          type:
+          - string
+          - 'null'
+          default: GET
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+        value:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/FileFolderLogEntry'
       additionalProperties: false
     File:
       type: object
@@ -730,7 +733,111 @@ components:
           description: Flag indicating whether the file has been deleted.
           example: false
       additionalProperties: false
-    FileFolderLogEntryCollection:
+    PreviewFileInfo:
+      type: object
+      properties:
+        fileId:
+          type:
+          - string
+          - 'null'
+          description: Unique identifier of the requested file
+          example: b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2
+        documentVersionId:
+          type:
+          - string
+          - 'null'
+        downloadUrl:
+          type:
+          - string
+          - 'null'
+          description: Temporary Link to download file
+          example: ''
+        expiry:
+          type:
+          - string
+          - 'null'
+          description: Expiry date/time when the download link is no longer accessible
+          format: date-time
+          example: '2022-04-23T14:30:00Z'
+      additionalProperties: false
+    UploadFileInfo:
+      type: object
+      properties:
+        fileId:
+          type:
+          - string
+          - 'null'
+          description: Unique identifier of the file.
+          example: b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2
+        uploadUrl:
+          type:
+          - string
+          - 'null'
+          description: 'Temporary Link to upload file.
+
+
+            Important note: When uploading to this URL, set the ''Content-Type'' header to an empty value.
+
+
+            Example cURL: curl --location --request PUT ''URL_GOES_HERE'' \ --header ''Content-Type: ""'' \ --data ''@/C:/dir/test.pdf'''
+          example: ''
+        expiry:
+          type: string
+          description: Expiry date/time when the upload link is no longer accessible.
+          format: date-time
+          example: '2022-04-23T14:30:00Z'
+      additionalProperties: false
+    AddFileDto:
+      required:
+      - fileName
+      type: object
+      properties:
+        fileName:
+          maxLength: 256
+          minLength: 0
+          type: string
+          description: Full name of the file including the file extension
+          example: court filing.pdf
+        folderId:
+          type:
+          - string
+          - 'null'
+          description: Unique identifier of the folder to add the file to. If null it will be placed in the root folder
+          example: b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2
+        userId:
+          type:
+          - string
+          - 'null'
+          description: Unique identifier of the file owner. If null it will fallback to the authenticated user
+          example: 750eb5c5-ac0b-7d11-4997-e0ce9d8896c8
+        folderPath:
+          type:
+          - string
+          - 'null'
+          description: Path of the folder to add the file to. If null then the FolderId will be used
+          example: Court Filings/2023/January
+        fileAdditionalData:
+          type:
+          - object
+          - 'null'
+          additionalProperties: {}
+          description: Collection of KeyValuePair(string, string) to update File meta data.
+        dateCreated:
+          type:
+          - string
+          - 'null'
+          description: The original datetime that the file was created. If null the current datetime will be used
+          format: date-time
+          example: '2023-04-23T14:00:00Z'
+        dateModified:
+          type:
+          - string
+          - 'null'
+          description: The initial datetime that the file was last modified. If null the current datetime will be used
+          format: date-time
+          example: '2023-04-24T14:00:00Z'
+      additionalProperties: false
+    FilePagedCollection:
       type: object
       properties:
         id:
@@ -758,7 +865,151 @@ components:
           - array
           - 'null'
           items:
-            $ref: '#/components/schemas/FileFolderLogEntry'
+            $ref: '#/components/schemas/File'
+        offset:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        limit:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        size:
+          type: integer
+          format: int64
+        first:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+        previous:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+        next:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+        last:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+      additionalProperties: false
+    Link:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+        href:
+          type:
+          - string
+          - 'null'
+        relation:
+          type:
+          - string
+          - 'null'
+        method:
+          type:
+          - string
+          - 'null'
+          default: GET
+      additionalProperties: false
+    ProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        instance:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
+    EditFileDto:
+      required:
+      - fileName
+      type: object
+      properties:
+        fileName:
+          maxLength: 256
+          minLength: 0
+          type: string
+          description: Full name of the file including the file extension
+          example: court filing.pdf
+        folderId:
+          type:
+          - string
+          - 'null'
+          description: Unique identifier of the folder to add the file to. If null it will be placed in the root folder
+          example: b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2
+        userId:
+          type:
+          - string
+          - 'null'
+          description: Unique identifier of the user modifying the file. If null it will fallback to the authenticated user
+          example: 750eb5c5-ac0b-7d11-4997-e0ce9d8896c8
+        fileAdditionalData:
+          type:
+          - object
+          - 'null'
+          additionalProperties: {}
+          description: Collection of KeyValuePair(string, string) to update File meta data.
+        isFavorite:
+          type:
+          - boolean
+          - 'null'
+          description: Flag indicating whether this file is a favorite. If null it will be ignored
+      additionalProperties: false
+    DownloadFileInfo:
+      type: object
+      properties:
+        fileId:
+          type:
+          - string
+          - 'null'
+          description: Unique identifier of the requested file
+          example: b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2
+        name:
+          type:
+          - string
+          - 'null'
+          description: Name of the file, excluding file extension.
+          example: court filing
+        fileExtension:
+          type:
+          - string
+          - 'null'
+          description: Extension of the file.
+          example: .pdf
+        downloadUrl:
+          type:
+          - string
+          - 'null'
+          description: Temporary Link to download file
+          example: ''
+        expiry:
+          type: string
+          description: Expiry date/time when the download link is no longer accessible
+          format: date-time
+          example: '2022-04-23T14:30:00Z'
+        sizeBytes:
+          type: integer
+          description: Size of the requested file (in bytes)
+          format: int64
+          example: 19104768
       additionalProperties: false
     FileFolderLogEntry:
       type: object
@@ -869,257 +1120,6 @@ components:
           description: The user who is responsible for this change.
       additionalProperties: false
       description: Represents a single file/folder activity (rename, move, delete, etc.).
-    FilePagedCollection:
-      type: object
-      properties:
-        id:
-          type:
-          - string
-          - 'null'
-        href:
-          type:
-          - string
-          - 'null'
-        relation:
-          type:
-          - string
-          - 'null'
-        method:
-          type:
-          - string
-          - 'null'
-          default: GET
-        self:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-        value:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/File'
-        offset:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        limit:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        size:
-          type: integer
-          format: int64
-        first:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-        previous:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-        next:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-        last:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-      additionalProperties: false
-    PreviewFileInfo:
-      type: object
-      properties:
-        fileId:
-          type:
-          - string
-          - 'null'
-          description: Unique identifier of the requested file
-          example: b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2
-        documentVersionId:
-          type:
-          - string
-          - 'null'
-        downloadUrl:
-          type:
-          - string
-          - 'null'
-          description: Temporary Link to download file
-          example: ''
-        expiry:
-          type:
-          - string
-          - 'null'
-          description: Expiry date/time when the download link is no longer accessible
-          format: date-time
-          example: '2022-04-23T14:30:00Z'
-      additionalProperties: false
-    DownloadFileInfo:
-      type: object
-      properties:
-        fileId:
-          type:
-          - string
-          - 'null'
-          description: Unique identifier of the requested file
-          example: b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2
-        name:
-          type:
-          - string
-          - 'null'
-          description: Name of the file, excluding file extension.
-          example: court filing
-        fileExtension:
-          type:
-          - string
-          - 'null'
-          description: Extension of the file.
-          example: .pdf
-        downloadUrl:
-          type:
-          - string
-          - 'null'
-          description: Temporary Link to download file
-          example: ''
-        expiry:
-          type: string
-          description: Expiry date/time when the download link is no longer accessible
-          format: date-time
-          example: '2022-04-23T14:30:00Z'
-        sizeBytes:
-          type: integer
-          description: Size of the requested file (in bytes)
-          format: int64
-          example: 19104768
-      additionalProperties: false
-    ProblemDetails:
-      type: object
-      properties:
-        type:
-          type:
-          - string
-          - 'null'
-        title:
-          type:
-          - string
-          - 'null'
-        status:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        detail:
-          type:
-          - string
-          - 'null'
-        instance:
-          type:
-          - string
-          - 'null'
-      additionalProperties: {}
-    EditFileDto:
-      required:
-      - fileName
-      type: object
-      properties:
-        fileName:
-          maxLength: 256
-          minLength: 0
-          type: string
-          description: Full name of the file including the file extension
-          example: court filing.pdf
-        folderId:
-          type:
-          - string
-          - 'null'
-          description: Unique identifier of the folder to add the file to. If null it will be placed in the root folder
-          example: b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2
-        userId:
-          type:
-          - string
-          - 'null'
-          description: Unique identifier of the user modifying the file. If null it will fallback to the authenticated user
-          example: 750eb5c5-ac0b-7d11-4997-e0ce9d8896c8
-        fileAdditionalData:
-          type:
-          - object
-          - 'null'
-          additionalProperties: {}
-          description: Collection of KeyValuePair(string, string) to update File meta data.
-        isFavorite:
-          type:
-          - boolean
-          - 'null'
-          description: Flag indicating whether this file is a favorite. If null it will be ignored
-      additionalProperties: false
-    AddFileDto:
-      required:
-      - fileName
-      type: object
-      properties:
-        fileName:
-          maxLength: 256
-          minLength: 0
-          type: string
-          description: Full name of the file including the file extension
-          example: court filing.pdf
-        folderId:
-          type:
-          - string
-          - 'null'
-          description: Unique identifier of the folder to add the file to. If null it will be placed in the root folder
-          example: b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2
-        userId:
-          type:
-          - string
-          - 'null'
-          description: Unique identifier of the file owner. If null it will fallback to the authenticated user
-          example: 750eb5c5-ac0b-7d11-4997-e0ce9d8896c8
-        folderPath:
-          type:
-          - string
-          - 'null'
-          description: Path of the folder to add the file to. If null then the FolderId will be used
-          example: Court Filings/2023/January
-        fileAdditionalData:
-          type:
-          - object
-          - 'null'
-          additionalProperties: {}
-          description: Collection of KeyValuePair(string, string) to update File meta data.
-        dateCreated:
-          type:
-          - string
-          - 'null'
-          description: The original datetime that the file was created. If null the current datetime will be used
-          format: date-time
-          example: '2023-04-23T14:00:00Z'
-        dateModified:
-          type:
-          - string
-          - 'null'
-          description: The initial datetime that the file was last modified. If null the current datetime will be used
-          format: date-time
-          example: '2023-04-24T14:00:00Z'
-      additionalProperties: false
-    Link:
-      type: object
-      properties:
-        id:
-          type:
-          - string
-          - 'null'
-        href:
-          type:
-          - string
-          - 'null'
-        relation:
-          type:
-          - string
-          - 'null'
-        method:
-          type:
-          - string
-          - 'null'
-          default: GET
-      additionalProperties: false
   securitySchemes:
     api-key:
       type: apiKey

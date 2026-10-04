@@ -726,66 +726,6 @@ paths:
                 $ref: '#/components/schemas/ProblemDetails'
 components:
   schemas:
-    IMatterItem:
-      type: object
-      properties:
-        type:
-          type:
-          - string
-          - 'null'
-          description: Type of the matter item.
-          readOnly: true
-          example: role or layout
-        id:
-          type:
-          - string
-          - 'null'
-          description: Unique identifier of the matter item.
-          example: 009f778f-83df-454a-b344-768a862a7e55
-        name:
-          type:
-          - string
-          - 'null'
-          description: Name of the matter item as it appears on the matter.
-          example: Vendor
-        subItems:
-          type:
-          - object
-          - 'null'
-          additionalProperties:
-            type:
-            - array
-            - 'null'
-            items:
-              $ref: '#/components/schemas/IMatterItem'
-          description: Subitems associated to the matter item. These items vary depending on the matter.
-      additionalProperties: false
-    SplitMatterStaffDto:
-      type: object
-      properties:
-        matterStaffId:
-          type:
-          - string
-          - 'null'
-          description: The unique identifier for the split matter staff.
-        matterStaffRatio:
-          type: integer
-          description: The split ratio for the matter staff.
-          format: int64
-      additionalProperties: false
-    BillingTypeEnum:
-      enum:
-      - 0
-      - 1
-      - 2
-      - 3
-      - 4
-      - 5
-      - 6
-      - 7
-      type: integer
-      description: "The billing type.\n\nPossible values: \nNone = 0, \nFixed Fee = 1, \nFixed Fee per Appearance = 2, \nTime Based = 3, \nContingency Dollars = 4, \nContingency Percent = 5, \nNot Billable = 6,\nConditionalFeeAgreement = 7"
-      format: int32
     MatterItemDto:
       type: object
       properties:
@@ -835,6 +775,1028 @@ components:
 
 
             Not applicable for matter sub items.'
+      additionalProperties: false
+    MatterDto:
+      type: object
+      properties:
+        externalSystemId:
+          type:
+          - string
+          - 'null'
+          description: External system id for the matter.
+          example: EXT01
+        number:
+          type:
+          - string
+          - 'null'
+          description: Human-friendly number assigned to matter.
+          example: FUS-124
+        matterTypeId:
+          type:
+          - string
+          - 'null'
+          description: "Unique identifier of the matter type associated with the matter.\n            \nMatter types define what information can be saved to the matter, relevant to that area of law and state / location.\n            \nA pre-configured list of matter types can be obtained via the 'GET /mattertypes' API.\n            \n'Lead' matter types are different from the standard matter types used when creating a 'Matter'.\n            \nUse the 'Type' query parameter in the 'GET /mattertypes' API call to get 'Lead' specific matter types."
+          example: 009f778f-83df-454a-b344-768a862a7e55
+        clientIds:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+          description: List of 'Client' contact id's associated with the matter.
+          example:
+          - 832e778f-83df-454a-b344-768a862a7e67
+        otherSideIds:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+          description: List of 'OtherSide' contact id's associated with the matter.
+          example:
+          - 776e778f-83df-454a-b344-768a862a6e58
+        branchId:
+          type:
+          - string
+          - 'null'
+          description: Unique identifier of the associated branch.
+          example: dd4e4381-b6a0-4c64-8feb-e8ea8016ea42
+        branchProviderId:
+          type:
+          - string
+          - 'null'
+          description: Unique identifier of the associated branch provider.
+          example: Smokeball
+        clientRole:
+          type:
+          - string
+          - 'null'
+          description: '''Client'' matter type representative option for the matter.
+
+
+            If unsure, this can be left empty and the default Client role will be used.'
+          example: Buyer
+        otherSideRole:
+          type:
+          - string
+          - 'null'
+          description: '''OtherSide'' matter type representative option for the matter.
+
+
+            If unsure, this can be left empty and the default OtherSide role will be used.'
+          example: Seller
+        description:
+          type:
+          - string
+          - 'null'
+          description: Brief description of the matter.
+          example: This is a brief description for the matter
+        status:
+          type:
+          - string
+          - 'null'
+          description: 'Current status of matter.
+
+
+            Possible values: Open, Pending, Closed, Deleted or Cancelled.'
+          example: Open
+        openedDate:
+          type:
+          - string
+          - 'null'
+          description: Date the matter was opened. This can be backdated if required.
+          format: date-time
+          example: '2022-04-23T14:00:00Z'
+        closedDate:
+          type:
+          - string
+          - 'null'
+          description: Date the matter was closed. This can be backdated if required.
+          format: date-time
+          example: '2022-04-23T14:00:00Z'
+        leadOpenedDate:
+          type:
+          - string
+          - 'null'
+          description: 'Date the lead was opened. This can be backdated if required.
+
+
+            Only applies if isLead is true.'
+          format: date-time
+          example: '2022-04-23T14:00:00Z'
+        leadClosedDate:
+          type:
+          - string
+          - 'null'
+          description: 'Date the lead was closed. This can be backdated if required.
+
+
+            Only applies if isLead is true.'
+          format: date-time
+          example: '2022-04-23T14:00:00Z'
+        leadClosedReason:
+          type:
+          - string
+          - 'null'
+          description: 'Reason the lead was closed.
+
+
+            Only applies if isLead is true.'
+          example: No longer interested
+        referralType:
+          type:
+          - string
+          - 'null'
+          description: 'Referral Type of the matter.
+
+
+            Custom Referral Types are also supported, the name or id of the Custom Referral Type can be used. If the name is used, it is looked up and stored as the id.
+
+
+            See the Referral Types API for retrieval of all valid Referral Types.
+
+
+            Possible values may also differ per region.'
+          example: Google
+        referrerId:
+          type:
+          - string
+          - 'null'
+          description: Contact id of the person that referred the matter.
+          example: 97bbe49f-6460-4bfc-b287-34ddfdbb81ef
+        referralAgreementFeeType:
+          type:
+          - string
+          - 'null'
+          description: 'The referral agreement fee type.
+
+
+            Possible values: %, Flat fee, Other'
+        referralAgreementFee:
+          type:
+          - number
+          - 'null'
+          description: The referral agreement fee value.
+          format: double
+        referralAgreementFeeComment:
+          type:
+          - string
+          - 'null'
+          description: The referral agreement fee comment.
+        personResponsibleStaffId:
+          type:
+          - string
+          - 'null'
+          description: Staff id of the person responsible for the matter (if applicable).
+          example: c85d28cb-a760-4627-aa59-0a853c2e65ed
+        personAssistingStaffId:
+          type:
+          - string
+          - 'null'
+          description: Staff id of the person assisting in the matter (if applicable).
+          example: c85d28cb-a760-4627-aa59-0a853c2e65ed
+        personAssistingStaffIds:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+          description: Staff ids of the other persons assisting in the matter (if applicable).
+          example:
+          - c85d28cb-a760-4627-aa59-0a853c2e65ed
+        originatingStaffId:
+          type:
+          - string
+          - 'null'
+          description: Staff id of the originating attorney (if in US) or an Introducer (if in AU)
+          example: c85d28cb-a760-4627-aa59-0a853c2e65ed
+        originatingStaffIds:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+          description: 'Staff ids of the other originating attorneys (if in US) or an Introducer (if in AU)
+
+
+            Required when SplitOriginatingStaffSettings is provided and enabled.'
+          example:
+          - c85d28cb-a760-4627-aa59-0a853c2e65ed
+        splitOriginatingStaffSettings:
+          allOf:
+          - $ref: '#/components/schemas/SplitMatterStaffSettingsDto'
+          description: 'Settings for splitting originating staff members on a matter.
+
+
+            When enabled, this allows distribution of originating staff responsibilities across multiple staff members
+
+            using either equal splits or custom ratios. The staff IDs specified in SplitMatterStaffs must exactly
+
+            match the OriginatingStaffIds provided.
+
+
+            Validation rules:
+
+            - OriginatingStaffIds must be provided when this setting is enabled
+
+            - Staff ratios must sum to 10000 (100%) when using UseRatio split method
+
+            - RemainderStaffId must be one of the staff members in the SplitMatterStaffs collection
+
+            - No duplicate staff members allowed'
+        supervisorStaffId:
+          type:
+          - string
+          - 'null'
+          description: 'Staff id of the supervisor of the matter.
+
+
+            Only supported in the UK.'
+          example: c85d28cb-a760-4627-aa59-0a853c2e65ed
+        clientCode:
+          type:
+          - string
+          - 'null'
+          description: 'Associates an external client code to this matter.
+
+
+            Only supported in AU and UK.'
+          example: Client A
+        isLead:
+          type: boolean
+          description: Optional boolean flag indicating if a 'Lead' is being created. This must be set to 'true' when creating a 'Lead'.
+          example: false
+      additionalProperties: false
+    BillingTypeEnum:
+      enum:
+      - 0
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      - 6
+      - 7
+      type: integer
+      description: "The billing type.\n\nPossible values: \nNone = 0, \nFixed Fee = 1, \nFixed Fee per Appearance = 2, \nTime Based = 3, \nContingency Dollars = 4, \nContingency Percent = 5, \nNot Billable = 6,\nConditionalFeeAgreement = 7"
+      format: int32
+    MatterTagDto:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+          description: 'Unique identifier for the tag.
+
+
+            When the tag Type is Staff, this value represents the staff member''s ID.
+
+
+            When GET tags, this value represents the tag''s unique identifier after creation.
+
+
+            Not required when posting standard custom tags.'
+        name:
+          type:
+          - string
+          - 'null'
+          description: 'Human-readable display name of the tag.
+
+
+            API would know you are adding the same tag to multiple matters as long as they have the same Name.
+
+
+            You can put any string you like and you can re-use strings as they are stored and re-used per account.
+
+
+            Theoretically an Id would be the same across matters for a custom tag.'
+        color:
+          type:
+          - string
+          - 'null'
+          description: 'Visual color associated with the tag.
+
+
+            Must be one of the supported color values (the valid list is documented separately).
+
+
+            If not provided, the color will default to Brown.
+
+
+            If the tag already exists, this field will be ignored and the existing color will be retained.'
+        type:
+          type: string
+          description: 'Defines what kind of tag this is.
+
+
+            Accepted values:
+
+
+            Staff – The tag represents a firm staff member.
+
+
+            Custom – The tag is a user-defined custom label.'
+          example: Staff
+      additionalProperties: false
+    MatterTag:
+      type: object
+      properties:
+        href:
+          type:
+          - string
+          - 'null'
+        relation:
+          type:
+          - string
+          - 'null'
+        method:
+          type:
+          - string
+          - 'null'
+          default: GET
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+        id:
+          type:
+          - string
+          - 'null'
+          description: Unique identifier of the tag.
+          example: a15086f5-4da7-4271-8fea-b24d479ced2b
+        type:
+          type: string
+          description: Tag type.
+          example: Staff
+        name:
+          type:
+          - string
+          - 'null'
+          description: Name of the tag.
+          example: ''
+        color:
+          type:
+          - string
+          - 'null'
+          description: 'Color associated with the tag.
+
+
+            Defaults to ''Brown'' if not specified.'
+          example: Light Blue
+        staff:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          description: 'Link to staff.
+
+
+            Available when `P:MatterManagement.Api.Shared.Resources.MatterTag.Type` is `F:MatterManagement.Api.Shared.Resources.MatterTagType.Staff`.'
+      additionalProperties: false
+    MatterPagedCollection:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+        href:
+          type:
+          - string
+          - 'null'
+        relation:
+          type:
+          - string
+          - 'null'
+        method:
+          type:
+          - string
+          - 'null'
+          default: GET
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+        value:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/Matter'
+        offset:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        limit:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        size:
+          type: integer
+          format: int64
+        first:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+        previous:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+        next:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+        last:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+      additionalProperties: false
+    MatterTagCollection:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+        href:
+          type:
+          - string
+          - 'null'
+        relation:
+          type:
+          - string
+          - 'null'
+        method:
+          type:
+          - string
+          - 'null'
+          default: GET
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+        value:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/MatterTag'
+      additionalProperties: false
+    Link:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+        href:
+          type:
+          - string
+          - 'null'
+        relation:
+          type:
+          - string
+          - 'null'
+        method:
+          type:
+          - string
+          - 'null'
+          default: GET
+      additionalProperties: false
+    SplitMatterStaffDto:
+      type: object
+      properties:
+        matterStaffId:
+          type:
+          - string
+          - 'null'
+          description: The unique identifier for the split matter staff.
+        matterStaffRatio:
+          type: integer
+          description: The split ratio for the matter staff.
+          format: int64
+      additionalProperties: false
+    SplitMatterStaffSettings:
+      type: object
+      properties:
+        isEnabled:
+          type: boolean
+          description: Indicates whether the split matter staff settings are enabled or not.
+        splitMatterStaffs:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/SplitMatterStaff'
+          description: List of staff members involved in the split matter settings.
+        splitMethod:
+          type:
+          - string
+          - 'null'
+          description: 'Method used to split the matter staff.
+
+
+            Possible values: Unknown, SplitEvenly, UseRatio.'
+        remainderStaffId:
+          type:
+          - string
+          - 'null'
+          description: The unique identifier for the staff member who will handle the remainder of the matter after the split.
+      additionalProperties: false
+    SplitMatterStaff:
+      type: object
+      properties:
+        matterStaffId:
+          type:
+          - string
+          - 'null'
+          description: The unique identifier for the split matter staff.
+        matterStaffRatio:
+          type: integer
+          description: The split ratio for the matter staff.
+          format: int64
+      additionalProperties: false
+    ArchiveDto:
+      required:
+      - isArchived
+      type: object
+      properties:
+        archivedDate:
+          type: string
+          description: Date the matter was archived.
+          format: date-time
+          example: '2022-04-23T14:00:00Z'
+        archiveBoxNumber:
+          type:
+          - string
+          - 'null'
+          description: Archive box number.
+          example: '24'
+        archiveComments:
+          type:
+          - string
+          - 'null'
+          description: Archive comments.
+          example: Lot 1
+        archivedLocation:
+          type:
+          - string
+          - 'null'
+          description: Archived location.
+          example: Box
+        destroyDate:
+          type: string
+          description: Date the files of the matter were destroyed.
+          format: date-time
+          example: '2022-04-29T14:00:00Z'
+        isArchived:
+          type: boolean
+          description: Flag indicating if the matter is archived.
+          example: true
+      additionalProperties: false
+    BillingConfiguration:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+        href:
+          type:
+          - string
+          - 'null'
+        relation:
+          type:
+          - string
+          - 'null'
+        method:
+          type:
+          - string
+          - 'null'
+          default: GET
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+        versionId:
+          type:
+          - string
+          - 'null'
+          description: Version id of the billing configuration.
+          example: 750eb5c5-ac0b-7d11-4997-e0ce9d8896c8
+        billingType:
+          allOf:
+          - $ref: '#/components/schemas/BillingTypeEnum'
+          description: 'The billing type.
+
+
+            Possible values: None = 0, Fixed Fee = 1, Fixed Fee per Appearance = 2, Time Based = 3, Contingency Dollars = 4, Contingency Percent = 5, Not Billable = 6'
+          example: 1
+        amount:
+          type: number
+          description: 'The amount (currency).
+
+
+            Only applicable when BillingType is ''Fixed Fee'', ''Fixed Fee per Apperance'' or ''Time Based''.'
+          format: double
+          example: 142.31
+        disbursementAmount:
+          type: number
+          description: "The disbursement amount (currency). \n\nOnly applicable when BillingType is 'Fixed Fee', 'Fixed Fee per Apperance' or 'Time Based'.\n\nOnly supported in AU and the UK."
+          format: double
+          example: 160
+        contingencyAmount:
+          type: number
+          description: "The contingency amount (percentage). \n\nOnly applicable when BillingType is 'Contingency Percent'."
+          format: double
+          example: 32
+        debtors:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/Link'
+          description: The matter debtors.
+        rateSetId:
+          type:
+          - string
+          - 'null'
+          description: 'The rate set id.
+
+
+            Only supported in AU and the UK.'
+          example: '100558'
+        isUtbmsEnabled:
+          type: boolean
+          description: 'True if Uniform Task Based Management (UTBMS) is enabled for this matter.
+
+
+            Only supported in the US.'
+          example: true
+        ledesFirmId:
+          type:
+          - string
+          - 'null'
+          description: 'The associated Legal Electronic Data Exchange Standard (LEDES) firm.
+
+
+            Only supported in the US.'
+          example: '100558'
+        ledesMatterId:
+          type:
+          - string
+          - 'null'
+          description: 'The associated Legal Electronic Data Exchange Standard (LEDES) matter.
+
+
+            Only supported in the US.'
+          example: '100558'
+        ledesClientMatterId:
+          type:
+          - string
+          - 'null'
+          description: 'The associated Legal Electronic Data Exchange Standard (LEDES) client matter.
+
+
+            Only supported in the US.'
+          example: '100558'
+        ledesTimekeeperClassificationType:
+          allOf:
+          - $ref: '#/components/schemas/TimekeeperClassificationType'
+          description: "The associated Legal Electronic Data Exchange Standard (LEDES) classification type.\n            \nPossible values: Length6 = 0, Length2 = 1, UseFirmDefault = 2.\n            \nOnly supported in the US."
+          example: 0
+      additionalProperties: false
+    MatterItemContactDto:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+          description: Unique identifier of the contact.
+          example: 009f778f-83df-454a-b344-768a862a7e55
+      additionalProperties: false
+    TimekeeperClassificationType:
+      enum:
+      - 0
+      - 1
+      - 2
+      type: integer
+      description: "The associated Legal Electronic Data Exchange Standard (LEDES) classification type.\n            \nPossible values: Length6 = 0, Length2 = 1, UseFirmDefault = 2.\n            \nOnly supported in the US."
+      format: int32
+    IMatterItem:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+          description: Type of the matter item.
+          readOnly: true
+          example: role or layout
+        id:
+          type:
+          - string
+          - 'null'
+          description: Unique identifier of the matter item.
+          example: 009f778f-83df-454a-b344-768a862a7e55
+        name:
+          type:
+          - string
+          - 'null'
+          description: Name of the matter item as it appears on the matter.
+          example: Vendor
+        subItems:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type:
+            - array
+            - 'null'
+            items:
+              $ref: '#/components/schemas/IMatterItem'
+          description: Subitems associated to the matter item. These items vary depending on the matter.
+      additionalProperties: false
+    Archive:
+      type: object
+      properties:
+        href:
+          type:
+          - string
+          - 'null'
+        relation:
+          type:
+          - string
+          - 'null'
+        method:
+          type:
+          - string
+          - 'null'
+          default: GET
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+        id:
+          type:
+          - string
+          - 'null'
+          description: Matter Id.
+          example: f489b750-544e-4aa7-962e-f388b775bc14
+        archivedDate:
+          type: string
+          description: Date the matter was archived.
+          format: date-time
+          example: '2022-04-23T14:00:00Z'
+        archiveBoxNumber:
+          type:
+          - string
+          - 'null'
+          description: Archive box number.
+          example: '24'
+        archiveComments:
+          type:
+          - string
+          - 'null'
+          description: Archive comments.
+          example: Lot 1
+        archivedLocation:
+          type:
+          - string
+          - 'null'
+          description: Archived location.
+          example: Box
+        destroyDate:
+          type: string
+          description: Date the files of the matter were destroyed.
+          format: date-time
+          example: '2022-04-29T14:00:00Z'
+        isArchived:
+          type: boolean
+          description: Flag indicating if the matter is archived.
+          example: true
+      additionalProperties: false
+    Matter:
+      type: object
+      properties:
+        href:
+          type:
+          - string
+          - 'null'
+        relation:
+          type:
+          - string
+          - 'null'
+        method:
+          type:
+          - string
+          - 'null'
+          default: GET
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+        id:
+          type:
+          - string
+          - 'null'
+          description: Unique identifier of the matter.
+          example: b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2
+        externalSystemId:
+          type:
+          - string
+          - 'null'
+          description: External system id for the matter.
+          example: EXT01
+        versionId:
+          type:
+          - string
+          - 'null'
+          description: Version id of the record. This can be used in the UpdatedSince query parameter.
+          example: '637771038395217729'
+        number:
+          type:
+          - string
+          - 'null'
+          description: Human-friendly number assigned to matter.
+          example: FUS-124
+        title:
+          type:
+          - string
+          - 'null'
+          description: Title of the matter.
+          example: AM-0323-0005 - Smith - Sale - Jones
+        matterType:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          description: Hypermedia link of the associated matter type.
+        clients:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/Link'
+          description: List of hypermedia links of 'Client' contacts associated with the matter.
+        otherSides:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/Link'
+          description: List of hypermedia links of 'OtherSide' contacts associated with the matter.
+        description:
+          type:
+          - string
+          - 'null'
+          description: Brief description of the matter.
+          example: This is a brief description for the matter
+        status:
+          type:
+          - string
+          - 'null'
+          description: 'Current status of the matter.
+
+
+            Possible values: Open, Pending, Closed, Deleted or Cancelled.'
+          example: Open
+        personResponsible:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          description: Hypermedia link of the person responsible for the matter (if applicable).
+        personAssisting:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          description: Hypermedia link of the person assisting in the matter (if applicable).
+        personAssistingStaffs:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/Link'
+          description: List of hypermedia links of additional person assisting staff members associated with the matter.
+        originatingStaff:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          description: Hypermedia link of the originating attorney (if in US) or introducer (if in AU) of the matter.
+        originatingStaffs:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/Link'
+          description: List of hypermedia links of additional originating (if in US) or introducer (if in AU) staff members associated with the matter.
+        splitOriginatingStaffSettings:
+          allOf:
+          - $ref: '#/components/schemas/SplitMatterStaffSettings'
+          description: Settings for splitting originating staff members on a matter.
+        supervisor:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          description: 'Hypermedia link of the supervisor of the matter.
+
+
+            Only supported in the UK.'
+        clientCode:
+          type:
+          - string
+          - 'null'
+          description: 'Associates an external client code to this matter.
+
+
+            Only supported in AU and UK.'
+          example: Client A
+        openedDate:
+          type:
+          - string
+          - 'null'
+          description: Date the matter was opened.
+          format: date-time
+          example: '2022-04-23T14:00:00Z'
+        closedDate:
+          type:
+          - string
+          - 'null'
+          description: Date the matter was closed.
+          format: date-time
+          example: '2022-04-23T14:00:00Z'
+        leadOpenedDate:
+          type:
+          - string
+          - 'null'
+          description: 'Date the lead was opened.
+
+
+            Only applies if isLead is true.'
+          format: date-time
+          example: '2022-04-23T14:00:00Z'
+        leadClosedDate:
+          type:
+          - string
+          - 'null'
+          description: 'Date the lead was closed.
+
+
+            Only applies if isLead is true.'
+          format: date-time
+          example: '2022-04-23T14:00:00Z'
+        leadClosedReason:
+          type:
+          - string
+          - 'null'
+          description: 'Reason the lead was closed.
+
+
+            Only applies if isLead is true.'
+          example: No longer interested
+        isLead:
+          type: boolean
+          description: Boolean flag indicating if the matter is a lead.
+          example: false
+        branch:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          description: Hypermedia link of the associated branch.
+        branchProviderId:
+          type:
+          - string
+          - 'null'
+          description: Unique identifier of the associated branch provider.
+          example: Smokeball
+        referralType:
+          type:
+          - string
+          - 'null'
+          description: The referral type of the matter.
+        referrer:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          description: The referrer contact of the matter.
+        referralAgreementFeeType:
+          type:
+          - string
+          - 'null'
+          description: The referral agreement fee type.
+        referralAgreementFee:
+          type:
+          - number
+          - 'null'
+          description: The referral agreement fee value.
+          format: double
+        referralAgreementFeeComment:
+          type:
+          - string
+          - 'null'
+          description: The referral agreement fee comment.
+        items:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type:
+            - array
+            - 'null'
+            items:
+              $ref: '#/components/schemas/IMatterItem'
+          description: Items associated with the matter.
+        tags:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/MatterTag'
+          description: Tags associated with the matter.
       additionalProperties: false
     BillingConfigurationDto:
       type: object
@@ -923,46 +1885,6 @@ components:
 
             Only supported in the UK.'
           example: '100558'
-      additionalProperties: false
-    SplitMatterStaffSettings:
-      type: object
-      properties:
-        isEnabled:
-          type: boolean
-          description: Indicates whether the split matter staff settings are enabled or not.
-        splitMatterStaffs:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/SplitMatterStaff'
-          description: List of staff members involved in the split matter settings.
-        splitMethod:
-          type:
-          - string
-          - 'null'
-          description: 'Method used to split the matter staff.
-
-
-            Possible values: Unknown, SplitEvenly, UseRatio.'
-        remainderStaffId:
-          type:
-          - string
-          - 'null'
-          description: The unique identifier for the staff member who will handle the remainder of the matter after the split.
-      additionalProperties: false
-    SplitMatterStaff:
-      type: object
-      properties:
-        matterStaffId:
-          type:
-          - string
-          - 'null'
-          description: The unique identifier for the split matter staff.
-        matterStaffRatio:
-          type: integer
-          description: The split ratio for the matter staff.
-          format: int64
       additionalProperties: false
     MatterDto2:
       type: object
@@ -1219,734 +2141,6 @@ components:
               $ref: '#/components/schemas/MatterItemDto'
           description: Items associated with the matter.
       additionalProperties: false
-    BillingConfiguration:
-      type: object
-      properties:
-        id:
-          type:
-          - string
-          - 'null'
-        href:
-          type:
-          - string
-          - 'null'
-        relation:
-          type:
-          - string
-          - 'null'
-        method:
-          type:
-          - string
-          - 'null'
-          default: GET
-        self:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-        versionId:
-          type:
-          - string
-          - 'null'
-          description: Version id of the billing configuration.
-          example: 750eb5c5-ac0b-7d11-4997-e0ce9d8896c8
-        billingType:
-          allOf:
-          - $ref: '#/components/schemas/BillingTypeEnum'
-          description: 'The billing type.
-
-
-            Possible values: None = 0, Fixed Fee = 1, Fixed Fee per Appearance = 2, Time Based = 3, Contingency Dollars = 4, Contingency Percent = 5, Not Billable = 6'
-          example: 1
-        amount:
-          type: number
-          description: 'The amount (currency).
-
-
-            Only applicable when BillingType is ''Fixed Fee'', ''Fixed Fee per Apperance'' or ''Time Based''.'
-          format: double
-          example: 142.31
-        disbursementAmount:
-          type: number
-          description: "The disbursement amount (currency). \n\nOnly applicable when BillingType is 'Fixed Fee', 'Fixed Fee per Apperance' or 'Time Based'.\n\nOnly supported in AU and the UK."
-          format: double
-          example: 160
-        contingencyAmount:
-          type: number
-          description: "The contingency amount (percentage). \n\nOnly applicable when BillingType is 'Contingency Percent'."
-          format: double
-          example: 32
-        debtors:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/Link'
-          description: The matter debtors.
-        rateSetId:
-          type:
-          - string
-          - 'null'
-          description: 'The rate set id.
-
-
-            Only supported in AU and the UK.'
-          example: '100558'
-        isUtbmsEnabled:
-          type: boolean
-          description: 'True if Uniform Task Based Management (UTBMS) is enabled for this matter.
-
-
-            Only supported in the US.'
-          example: true
-        ledesFirmId:
-          type:
-          - string
-          - 'null'
-          description: 'The associated Legal Electronic Data Exchange Standard (LEDES) firm.
-
-
-            Only supported in the US.'
-          example: '100558'
-        ledesMatterId:
-          type:
-          - string
-          - 'null'
-          description: 'The associated Legal Electronic Data Exchange Standard (LEDES) matter.
-
-
-            Only supported in the US.'
-          example: '100558'
-        ledesClientMatterId:
-          type:
-          - string
-          - 'null'
-          description: 'The associated Legal Electronic Data Exchange Standard (LEDES) client matter.
-
-
-            Only supported in the US.'
-          example: '100558'
-        ledesTimekeeperClassificationType:
-          allOf:
-          - $ref: '#/components/schemas/TimekeeperClassificationType'
-          description: "The associated Legal Electronic Data Exchange Standard (LEDES) classification type.\n            \nPossible values: Length6 = 0, Length2 = 1, UseFirmDefault = 2.\n            \nOnly supported in the US."
-          example: 0
-      additionalProperties: false
-    MatterDto:
-      type: object
-      properties:
-        externalSystemId:
-          type:
-          - string
-          - 'null'
-          description: External system id for the matter.
-          example: EXT01
-        number:
-          type:
-          - string
-          - 'null'
-          description: Human-friendly number assigned to matter.
-          example: FUS-124
-        matterTypeId:
-          type:
-          - string
-          - 'null'
-          description: "Unique identifier of the matter type associated with the matter.\n            \nMatter types define what information can be saved to the matter, relevant to that area of law and state / location.\n            \nA pre-configured list of matter types can be obtained via the 'GET /mattertypes' API.\n            \n'Lead' matter types are different from the standard matter types used when creating a 'Matter'.\n            \nUse the 'Type' query parameter in the 'GET /mattertypes' API call to get 'Lead' specific matter types."
-          example: 009f778f-83df-454a-b344-768a862a7e55
-        clientIds:
-          type:
-          - array
-          - 'null'
-          items:
-            type: string
-          description: List of 'Client' contact id's associated with the matter.
-          example:
-          - 832e778f-83df-454a-b344-768a862a7e67
-        otherSideIds:
-          type:
-          - array
-          - 'null'
-          items:
-            type: string
-          description: List of 'OtherSide' contact id's associated with the matter.
-          example:
-          - 776e778f-83df-454a-b344-768a862a6e58
-        branchId:
-          type:
-          - string
-          - 'null'
-          description: Unique identifier of the associated branch.
-          example: dd4e4381-b6a0-4c64-8feb-e8ea8016ea42
-        branchProviderId:
-          type:
-          - string
-          - 'null'
-          description: Unique identifier of the associated branch provider.
-          example: Smokeball
-        clientRole:
-          type:
-          - string
-          - 'null'
-          description: '''Client'' matter type representative option for the matter.
-
-
-            If unsure, this can be left empty and the default Client role will be used.'
-          example: Buyer
-        otherSideRole:
-          type:
-          - string
-          - 'null'
-          description: '''OtherSide'' matter type representative option for the matter.
-
-
-            If unsure, this can be left empty and the default OtherSide role will be used.'
-          example: Seller
-        description:
-          type:
-          - string
-          - 'null'
-          description: Brief description of the matter.
-          example: This is a brief description for the matter
-        status:
-          type:
-          - string
-          - 'null'
-          description: 'Current status of matter.
-
-
-            Possible values: Open, Pending, Closed, Deleted or Cancelled.'
-          example: Open
-        openedDate:
-          type:
-          - string
-          - 'null'
-          description: Date the matter was opened. This can be backdated if required.
-          format: date-time
-          example: '2022-04-23T14:00:00Z'
-        closedDate:
-          type:
-          - string
-          - 'null'
-          description: Date the matter was closed. This can be backdated if required.
-          format: date-time
-          example: '2022-04-23T14:00:00Z'
-        leadOpenedDate:
-          type:
-          - string
-          - 'null'
-          description: 'Date the lead was opened. This can be backdated if required.
-
-
-            Only applies if isLead is true.'
-          format: date-time
-          example: '2022-04-23T14:00:00Z'
-        leadClosedDate:
-          type:
-          - string
-          - 'null'
-          description: 'Date the lead was closed. This can be backdated if required.
-
-
-            Only applies if isLead is true.'
-          format: date-time
-          example: '2022-04-23T14:00:00Z'
-        leadClosedReason:
-          type:
-          - string
-          - 'null'
-          description: 'Reason the lead was closed.
-
-
-            Only applies if isLead is true.'
-          example: No longer interested
-        referralType:
-          type:
-          - string
-          - 'null'
-          description: 'Referral Type of the matter.
-
-
-            Custom Referral Types are also supported, the name or id of the Custom Referral Type can be used. If the name is used, it is looked up and stored as the id.
-
-
-            See the Referral Types API for retrieval of all valid Referral Types.
-
-
-            Possible values may also differ per region.'
-          example: Google
-        referrerId:
-          type:
-          - string
-          - 'null'
-          description: Contact id of the person that referred the matter.
-          example: 97bbe49f-6460-4bfc-b287-34ddfdbb81ef
-        referralAgreementFeeType:
-          type:
-          - string
-          - 'null'
-          description: 'The referral agreement fee type.
-
-
-            Possible values: %, Flat fee, Other'
-        referralAgreementFee:
-          type:
-          - number
-          - 'null'
-          description: The referral agreement fee value.
-          format: double
-        referralAgreementFeeComment:
-          type:
-          - string
-          - 'null'
-          description: The referral agreement fee comment.
-        personResponsibleStaffId:
-          type:
-          - string
-          - 'null'
-          description: Staff id of the person responsible for the matter (if applicable).
-          example: c85d28cb-a760-4627-aa59-0a853c2e65ed
-        personAssistingStaffId:
-          type:
-          - string
-          - 'null'
-          description: Staff id of the person assisting in the matter (if applicable).
-          example: c85d28cb-a760-4627-aa59-0a853c2e65ed
-        personAssistingStaffIds:
-          type:
-          - array
-          - 'null'
-          items:
-            type: string
-          description: Staff ids of the other persons assisting in the matter (if applicable).
-          example:
-          - c85d28cb-a760-4627-aa59-0a853c2e65ed
-        originatingStaffId:
-          type:
-          - string
-          - 'null'
-          description: Staff id of the originating attorney (if in US) or an Introducer (if in AU)
-          example: c85d28cb-a760-4627-aa59-0a853c2e65ed
-        originatingStaffIds:
-          type:
-          - array
-          - 'null'
-          items:
-            type: string
-          description: 'Staff ids of the other originating attorneys (if in US) or an Introducer (if in AU)
-
-
-            Required when SplitOriginatingStaffSettings is provided and enabled.'
-          example:
-          - c85d28cb-a760-4627-aa59-0a853c2e65ed
-        splitOriginatingStaffSettings:
-          allOf:
-          - $ref: '#/components/schemas/SplitMatterStaffSettingsDto'
-          description: 'Settings for splitting originating staff members on a matter.
-
-
-            When enabled, this allows distribution of originating staff responsibilities across multiple staff members
-
-            using either equal splits or custom ratios. The staff IDs specified in SplitMatterStaffs must exactly
-
-            match the OriginatingStaffIds provided.
-
-
-            Validation rules:
-
-            - OriginatingStaffIds must be provided when this setting is enabled
-
-            - Staff ratios must sum to 10000 (100%) when using UseRatio split method
-
-            - RemainderStaffId must be one of the staff members in the SplitMatterStaffs collection
-
-            - No duplicate staff members allowed'
-        supervisorStaffId:
-          type:
-          - string
-          - 'null'
-          description: 'Staff id of the supervisor of the matter.
-
-
-            Only supported in the UK.'
-          example: c85d28cb-a760-4627-aa59-0a853c2e65ed
-        clientCode:
-          type:
-          - string
-          - 'null'
-          description: 'Associates an external client code to this matter.
-
-
-            Only supported in AU and UK.'
-          example: Client A
-        isLead:
-          type: boolean
-          description: Optional boolean flag indicating if a 'Lead' is being created. This must be set to 'true' when creating a 'Lead'.
-          example: false
-      additionalProperties: false
-    ArchiveDto:
-      required:
-      - isArchived
-      type: object
-      properties:
-        archivedDate:
-          type: string
-          description: Date the matter was archived.
-          format: date-time
-          example: '2022-04-23T14:00:00Z'
-        archiveBoxNumber:
-          type:
-          - string
-          - 'null'
-          description: Archive box number.
-          example: '24'
-        archiveComments:
-          type:
-          - string
-          - 'null'
-          description: Archive comments.
-          example: Lot 1
-        archivedLocation:
-          type:
-          - string
-          - 'null'
-          description: Archived location.
-          example: Box
-        destroyDate:
-          type: string
-          description: Date the files of the matter were destroyed.
-          format: date-time
-          example: '2022-04-29T14:00:00Z'
-        isArchived:
-          type: boolean
-          description: Flag indicating if the matter is archived.
-          example: true
-      additionalProperties: false
-    MatterTagDto:
-      type: object
-      properties:
-        id:
-          type:
-          - string
-          - 'null'
-          description: 'Unique identifier for the tag.
-
-
-            When the tag Type is Staff, this value represents the staff member''s ID.
-
-
-            When GET tags, this value represents the tag''s unique identifier after creation.
-
-
-            Not required when posting standard custom tags.'
-        name:
-          type:
-          - string
-          - 'null'
-          description: 'Human-readable display name of the tag.
-
-
-            API would know you are adding the same tag to multiple matters as long as they have the same Name.
-
-
-            You can put any string you like and you can re-use strings as they are stored and re-used per account.
-
-
-            Theoretically an Id would be the same across matters for a custom tag.'
-        color:
-          type:
-          - string
-          - 'null'
-          description: 'Visual color associated with the tag.
-
-
-            Must be one of the supported color values (the valid list is documented separately).
-
-
-            If not provided, the color will default to Brown.
-
-
-            If the tag already exists, this field will be ignored and the existing color will be retained.'
-        type:
-          type: string
-          description: 'Defines what kind of tag this is.
-
-
-            Accepted values:
-
-
-            Staff – The tag represents a firm staff member.
-
-
-            Custom – The tag is a user-defined custom label.'
-          example: Staff
-      additionalProperties: false
-    Matter:
-      type: object
-      properties:
-        href:
-          type:
-          - string
-          - 'null'
-        relation:
-          type:
-          - string
-          - 'null'
-        method:
-          type:
-          - string
-          - 'null'
-          default: GET
-        self:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-        id:
-          type:
-          - string
-          - 'null'
-          description: Unique identifier of the matter.
-          example: b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2
-        externalSystemId:
-          type:
-          - string
-          - 'null'
-          description: External system id for the matter.
-          example: EXT01
-        versionId:
-          type:
-          - string
-          - 'null'
-          description: Version id of the record. This can be used in the UpdatedSince query parameter.
-          example: '637771038395217729'
-        number:
-          type:
-          - string
-          - 'null'
-          description: Human-friendly number assigned to matter.
-          example: FUS-124
-        title:
-          type:
-          - string
-          - 'null'
-          description: Title of the matter.
-          example: AM-0323-0005 - Smith - Sale - Jones
-        matterType:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-          description: Hypermedia link of the associated matter type.
-        clients:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/Link'
-          description: List of hypermedia links of 'Client' contacts associated with the matter.
-        otherSides:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/Link'
-          description: List of hypermedia links of 'OtherSide' contacts associated with the matter.
-        description:
-          type:
-          - string
-          - 'null'
-          description: Brief description of the matter.
-          example: This is a brief description for the matter
-        status:
-          type:
-          - string
-          - 'null'
-          description: 'Current status of the matter.
-
-
-            Possible values: Open, Pending, Closed, Deleted or Cancelled.'
-          example: Open
-        personResponsible:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-          description: Hypermedia link of the person responsible for the matter (if applicable).
-        personAssisting:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-          description: Hypermedia link of the person assisting in the matter (if applicable).
-        personAssistingStaffs:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/Link'
-          description: List of hypermedia links of additional person assisting staff members associated with the matter.
-        originatingStaff:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-          description: Hypermedia link of the originating attorney (if in US) or introducer (if in AU) of the matter.
-        originatingStaffs:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/Link'
-          description: List of hypermedia links of additional originating (if in US) or introducer (if in AU) staff members associated with the matter.
-        splitOriginatingStaffSettings:
-          allOf:
-          - $ref: '#/components/schemas/SplitMatterStaffSettings'
-          description: Settings for splitting originating staff members on a matter.
-        supervisor:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-          description: 'Hypermedia link of the supervisor of the matter.
-
-
-            Only supported in the UK.'
-        clientCode:
-          type:
-          - string
-          - 'null'
-          description: 'Associates an external client code to this matter.
-
-
-            Only supported in AU and UK.'
-          example: Client A
-        openedDate:
-          type:
-          - string
-          - 'null'
-          description: Date the matter was opened.
-          format: date-time
-          example: '2022-04-23T14:00:00Z'
-        closedDate:
-          type:
-          - string
-          - 'null'
-          description: Date the matter was closed.
-          format: date-time
-          example: '2022-04-23T14:00:00Z'
-        leadOpenedDate:
-          type:
-          - string
-          - 'null'
-          description: 'Date the lead was opened.
-
-
-            Only applies if isLead is true.'
-          format: date-time
-          example: '2022-04-23T14:00:00Z'
-        leadClosedDate:
-          type:
-          - string
-          - 'null'
-          description: 'Date the lead was closed.
-
-
-            Only applies if isLead is true.'
-          format: date-time
-          example: '2022-04-23T14:00:00Z'
-        leadClosedReason:
-          type:
-          - string
-          - 'null'
-          description: 'Reason the lead was closed.
-
-
-            Only applies if isLead is true.'
-          example: No longer interested
-        isLead:
-          type: boolean
-          description: Boolean flag indicating if the matter is a lead.
-          example: false
-        branch:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-          description: Hypermedia link of the associated branch.
-        branchProviderId:
-          type:
-          - string
-          - 'null'
-          description: Unique identifier of the associated branch provider.
-          example: Smokeball
-        referralType:
-          type:
-          - string
-          - 'null'
-          description: The referral type of the matter.
-        referrer:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-          description: The referrer contact of the matter.
-        referralAgreementFeeType:
-          type:
-          - string
-          - 'null'
-          description: The referral agreement fee type.
-        referralAgreementFee:
-          type:
-          - number
-          - 'null'
-          description: The referral agreement fee value.
-          format: double
-        referralAgreementFeeComment:
-          type:
-          - string
-          - 'null'
-          description: The referral agreement fee comment.
-        items:
-          type:
-          - object
-          - 'null'
-          additionalProperties:
-            type:
-            - array
-            - 'null'
-            items:
-              $ref: '#/components/schemas/IMatterItem'
-          description: Items associated with the matter.
-        tags:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/MatterTag'
-          description: Tags associated with the matter.
-      additionalProperties: false
-    MatterItemContactDto:
-      type: object
-      properties:
-        id:
-          type:
-          - string
-          - 'null'
-          description: Unique identifier of the contact.
-          example: 009f778f-83df-454a-b344-768a862a7e55
-      additionalProperties: false
-    MatterTagCollection:
-      type: object
-      properties:
-        id:
-          type:
-          - string
-          - 'null'
-        href:
-          type:
-          - string
-          - 'null'
-        relation:
-          type:
-          - string
-          - 'null'
-        method:
-          type:
-          - string
-          - 'null'
-          default: GET
-        self:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-        value:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/MatterTag'
-      additionalProperties: false
     ProblemDetails:
       type: object
       properties:
@@ -1972,113 +2166,6 @@ components:
           - string
           - 'null'
       additionalProperties: {}
-    MatterPagedCollection:
-      type: object
-      properties:
-        id:
-          type:
-          - string
-          - 'null'
-        href:
-          type:
-          - string
-          - 'null'
-        relation:
-          type:
-          - string
-          - 'null'
-        method:
-          type:
-          - string
-          - 'null'
-          default: GET
-        self:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-        value:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/Matter'
-        offset:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        limit:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        size:
-          type: integer
-          format: int64
-        first:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-        previous:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-        next:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-        last:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-      additionalProperties: false
-    MatterTag:
-      type: object
-      properties:
-        href:
-          type:
-          - string
-          - 'null'
-        relation:
-          type:
-          - string
-          - 'null'
-        method:
-          type:
-          - string
-          - 'null'
-          default: GET
-        self:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-        id:
-          type:
-          - string
-          - 'null'
-          description: Unique identifier of the tag.
-          example: a15086f5-4da7-4271-8fea-b24d479ced2b
-        type:
-          type: string
-          description: Tag type.
-          example: Staff
-        name:
-          type:
-          - string
-          - 'null'
-          description: Name of the tag.
-          example: ''
-        color:
-          type:
-          - string
-          - 'null'
-          description: 'Color associated with the tag.
-
-
-            Defaults to ''Brown'' if not specified.'
-          example: Light Blue
-        staff:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-          description: 'Link to staff.
-
-
-            Available when `P:MatterManagement.Api.Shared.Resources.MatterTag.Type` is `F:MatterManagement.Api.Shared.Resources.MatterTagType.Staff`.'
-      additionalProperties: false
     SplitMatterStaffSettingsDto:
       type: object
       properties:
@@ -2105,93 +2192,6 @@ components:
           - string
           - 'null'
           description: The unique identifier for the staff member who will handle the remainder of the matter after the split.
-      additionalProperties: false
-    Archive:
-      type: object
-      properties:
-        href:
-          type:
-          - string
-          - 'null'
-        relation:
-          type:
-          - string
-          - 'null'
-        method:
-          type:
-          - string
-          - 'null'
-          default: GET
-        self:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-        id:
-          type:
-          - string
-          - 'null'
-          description: Matter Id.
-          example: f489b750-544e-4aa7-962e-f388b775bc14
-        archivedDate:
-          type: string
-          description: Date the matter was archived.
-          format: date-time
-          example: '2022-04-23T14:00:00Z'
-        archiveBoxNumber:
-          type:
-          - string
-          - 'null'
-          description: Archive box number.
-          example: '24'
-        archiveComments:
-          type:
-          - string
-          - 'null'
-          description: Archive comments.
-          example: Lot 1
-        archivedLocation:
-          type:
-          - string
-          - 'null'
-          description: Archived location.
-          example: Box
-        destroyDate:
-          type: string
-          description: Date the files of the matter were destroyed.
-          format: date-time
-          example: '2022-04-29T14:00:00Z'
-        isArchived:
-          type: boolean
-          description: Flag indicating if the matter is archived.
-          example: true
-      additionalProperties: false
-    TimekeeperClassificationType:
-      enum:
-      - 0
-      - 1
-      - 2
-      type: integer
-      description: "The associated Legal Electronic Data Exchange Standard (LEDES) classification type.\n            \nPossible values: Length6 = 0, Length2 = 1, UseFirmDefault = 2.\n            \nOnly supported in the US."
-      format: int32
-    Link:
-      type: object
-      properties:
-        id:
-          type:
-          - string
-          - 'null'
-        href:
-          type:
-          - string
-          - 'null'
-        relation:
-          type:
-          - string
-          - 'null'
-        method:
-          type:
-          - string
-          - 'null'
-          default: GET
       additionalProperties: false
   securitySchemes:
     api-key:

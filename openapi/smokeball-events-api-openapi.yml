@@ -387,228 +387,6 @@ paths:
                 $ref: '#/components/schemas/ProblemDetails'
 components:
   schemas:
-    EventDto:
-      type: object
-      properties:
-        matterId:
-          type:
-          - string
-          - 'null'
-          description: Matter Id.
-          example: b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2
-        subject:
-          type:
-          - string
-          - 'null'
-          description: Subject of event.
-          example: Subject
-        description:
-          type:
-          - string
-          - 'null'
-          description: Description of event.
-          example: Description
-        location:
-          type:
-          - string
-          - 'null'
-          description: Location of event.
-          example: Location
-        allDay:
-          type: boolean
-          description: Whether or not the event is all day.
-          example: false
-        nonBillable:
-          type: boolean
-          description: 'Whether or not the event is billable.
-
-            Note events with a duration greater than 12 hours automatically become non-billable.'
-          example: false
-        type:
-          allOf:
-          - $ref: '#/components/schemas/EventType'
-          description: 'The type of the event.
-
-
-            We currently support create and updates requests for non recurring events (type = Normal).'
-          example: Normal
-        eventType:
-          allOf:
-          - $ref: '#/components/schemas/EventType'
-          description: '**Deprecated.** Use `type` instead.
-
-
-            The type of the event.
-
-
-            We currently support create and updates requests for non recurring events (EventType = 0).'
-          example: '0'
-          deprecated: true
-        attendees:
-          type:
-          - array
-          - 'null'
-          items:
-            type: string
-          description: The staff Ids of the attendees of the event.
-        externalAttendees:
-          type:
-          - array
-          - 'null'
-          items:
-            type: string
-          description: 'The contact Ids of the external or third party attendees of the event.
-
-
-            The contacts must be of Person type and must be part of the matter.'
-        startTime:
-          type: string
-          description: 'Start date and time of the event.
-
-            Supported date format is ISO YYYY-MM-DDThh:mm:ss.
-
-            Note: date and time will correlate with the time zone provided.'
-          format: date-time
-          example: '2000-01-01T20:00:00'
-        endTime:
-          type: string
-          description: 'End date and time of the event.
-
-            Supported date format is ISO YYYY-MM-DDThh:mm:ss.
-
-            Note: date and time will correlate with the time zone provided.'
-          format: date-time
-          example: '2000-01-01T20:00:00'
-        timeZone:
-          type:
-          - string
-          - 'null'
-          description: 'Time zone of the event for determining the start time and end time.
-
-            Time zones are expected in the IANA time zone format.
-
-            For a list of valid time zones, see https://nodatime.org/TimeZones.'
-          example: Australia/Sydney
-        additionalData:
-          type:
-          - object
-          - 'null'
-          additionalProperties:
-            type:
-            - string
-            - 'null'
-          description: Collection of key value pairs to update file meta data.
-      additionalProperties: false
-    ReminderDto:
-      type: object
-      properties:
-        offset:
-          type: integer
-          format: int32
-        offsetTypeId:
-          type: integer
-          format: int32
-        isAllDayReminder:
-          type: boolean
-        userIds:
-          type:
-          - array
-          - 'null'
-          items:
-            type: string
-      additionalProperties: false
-    ProblemDetails:
-      type: object
-      properties:
-        type:
-          type:
-          - string
-          - 'null'
-        title:
-          type:
-          - string
-          - 'null'
-        status:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        detail:
-          type:
-          - string
-          - 'null'
-        instance:
-          type:
-          - string
-          - 'null'
-      additionalProperties: {}
-    EventType:
-      enum:
-      - Normal
-      - Pattern
-      - Occurrence
-      - ChangedOccurrence
-      - DeletedOccurrence
-      type: string
-      description: 'The type of the event.
-
-
-        Possible values: Non Recurring Event = 0, Recurring Pattern Series = 1, Single Recurring Occurrence = 2, Modified Recurring Occurrence = 3, Deleted Recurring Occurrence = 4'
-    EventPagedCollection:
-      type: object
-      properties:
-        id:
-          type:
-          - string
-          - 'null'
-        href:
-          type:
-          - string
-          - 'null'
-        relation:
-          type:
-          - string
-          - 'null'
-        method:
-          type:
-          - string
-          - 'null'
-          default: GET
-        self:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-        value:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/Event'
-        offset:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        limit:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        size:
-          type: integer
-          format: int64
-        first:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-        previous:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-        next:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-        last:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-      additionalProperties: false
     Event:
       type: object
       properties:
@@ -747,6 +525,185 @@ components:
           description: Whether the event has been deleted.
           example: false
       additionalProperties: false
+    EventType:
+      enum:
+      - Normal
+      - Pattern
+      - Occurrence
+      - ChangedOccurrence
+      - DeletedOccurrence
+      type: string
+      description: 'The type of the event.
+
+
+        Possible values: Non Recurring Event = 0, Recurring Pattern Series = 1, Single Recurring Occurrence = 2, Modified Recurring Occurrence = 3, Deleted Recurring Occurrence = 4'
+    EventPagedCollection:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+        href:
+          type:
+          - string
+          - 'null'
+        relation:
+          type:
+          - string
+          - 'null'
+        method:
+          type:
+          - string
+          - 'null'
+          default: GET
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+        value:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/Event'
+        offset:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        limit:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        size:
+          type: integer
+          format: int64
+        first:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+        previous:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+        next:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+        last:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+      additionalProperties: false
+    EventDto:
+      type: object
+      properties:
+        matterId:
+          type:
+          - string
+          - 'null'
+          description: Matter Id.
+          example: b471682e-fa17-4e46-b7fe-9b2b8fdcb3c2
+        subject:
+          type:
+          - string
+          - 'null'
+          description: Subject of event.
+          example: Subject
+        description:
+          type:
+          - string
+          - 'null'
+          description: Description of event.
+          example: Description
+        location:
+          type:
+          - string
+          - 'null'
+          description: Location of event.
+          example: Location
+        allDay:
+          type: boolean
+          description: Whether or not the event is all day.
+          example: false
+        nonBillable:
+          type: boolean
+          description: 'Whether or not the event is billable.
+
+            Note events with a duration greater than 12 hours automatically become non-billable.'
+          example: false
+        type:
+          allOf:
+          - $ref: '#/components/schemas/EventType'
+          description: 'The type of the event.
+
+
+            We currently support create and updates requests for non recurring events (type = Normal).'
+          example: Normal
+        eventType:
+          allOf:
+          - $ref: '#/components/schemas/EventType'
+          description: '**Deprecated.** Use `type` instead.
+
+
+            The type of the event.
+
+
+            We currently support create and updates requests for non recurring events (EventType = 0).'
+          example: '0'
+          deprecated: true
+        attendees:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+          description: The staff Ids of the attendees of the event.
+        externalAttendees:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+          description: 'The contact Ids of the external or third party attendees of the event.
+
+
+            The contacts must be of Person type and must be part of the matter.'
+        startTime:
+          type: string
+          description: 'Start date and time of the event.
+
+            Supported date format is ISO YYYY-MM-DDThh:mm:ss.
+
+            Note: date and time will correlate with the time zone provided.'
+          format: date-time
+          example: '2000-01-01T20:00:00'
+        endTime:
+          type: string
+          description: 'End date and time of the event.
+
+            Supported date format is ISO YYYY-MM-DDThh:mm:ss.
+
+            Note: date and time will correlate with the time zone provided.'
+          format: date-time
+          example: '2000-01-01T20:00:00'
+        timeZone:
+          type:
+          - string
+          - 'null'
+          description: 'Time zone of the event for determining the start time and end time.
+
+            Time zones are expected in the IANA time zone format.
+
+            For a list of valid time zones, see https://nodatime.org/TimeZones.'
+          example: Australia/Sydney
+        additionalData:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+          description: Collection of key value pairs to update file meta data.
+      additionalProperties: false
     Link:
       type: object
       properties:
@@ -767,6 +724,49 @@ components:
           - string
           - 'null'
           default: GET
+      additionalProperties: false
+    ProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        instance:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
+    ReminderDto:
+      type: object
+      properties:
+        offset:
+          type: integer
+          format: int32
+        offsetTypeId:
+          type: integer
+          format: int32
+        isAllDayReminder:
+          type: boolean
+        userIds:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
       additionalProperties: false
   securitySchemes:
     api-key:

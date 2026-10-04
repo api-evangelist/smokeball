@@ -302,6 +302,104 @@ paths:
                 $ref: '#/components/schemas/ProblemDetails'
 components:
   schemas:
+    FeeType:
+      enum:
+      - 0
+      - 1
+      type: integer
+      description: The type of the fee (Fixed = 0, Time = 1).
+      format: int32
+    FeePagedCollection:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+        href:
+          type:
+          - string
+          - 'null'
+        relation:
+          type:
+          - string
+          - 'null'
+        method:
+          type:
+          - string
+          - 'null'
+          default: GET
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+        value:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/Fee'
+        offset:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        limit:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        size:
+          type: integer
+          format: int64
+        first:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+        previous:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+        next:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+        last:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+      additionalProperties: false
+    FeeSourceItem:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+        href:
+          type:
+          - string
+          - 'null'
+        relation:
+          type:
+          - string
+          - 'null'
+        method:
+          type:
+          - string
+          - 'null'
+          default: GET
+        self:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+        description:
+          type:
+          - string
+          - 'null'
+          description: The description.
+        duration:
+          type: integer
+          description: The duration in minutes.
+          format: int64
+        isBillable:
+          type: boolean
+          description: True if the fee source item is billable.
+      additionalProperties: false
     FeeDto:
       required:
       - feeDate
@@ -450,96 +548,24 @@ components:
           description: "Associates an existing activity id to a fee.\nOnly valid for Fee creation. \nValue is supplied by Smokeball for some partners."
           example: 504b9f77-20c7-4dee-8227-d3007c8f6cea
       additionalProperties: false
-    FeePagedCollection:
+    FeeSourceItemDto:
       type: object
       properties:
-        id:
-          type:
-          - string
-          - 'null'
-        href:
-          type:
-          - string
-          - 'null'
-        relation:
-          type:
-          - string
-          - 'null'
-        method:
-          type:
-          - string
-          - 'null'
-          default: GET
-        self:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-        value:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/Fee'
-        offset:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        limit:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        size:
-          type: integer
-          format: int64
-        first:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-        previous:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-        next:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-        last:
-          allOf:
-          - $ref: '#/components/schemas/Link'
-      additionalProperties: false
-    FeeSourceItem:
-      type: object
-      properties:
-        id:
-          type:
-          - string
-          - 'null'
-        href:
-          type:
-          - string
-          - 'null'
-        relation:
-          type:
-          - string
-          - 'null'
-        method:
-          type:
-          - string
-          - 'null'
-          default: GET
-        self:
-          allOf:
-          - $ref: '#/components/schemas/Link'
         description:
           type:
           - string
           - 'null'
           description: The description.
+          example: Print document
         duration:
           type: integer
           description: The duration in minutes.
           format: int64
+          example: 5
         isBillable:
           type: boolean
           description: True if the fee source item is billable.
+          example: false
       additionalProperties: false
     Fee:
       type: object
@@ -776,31 +802,26 @@ components:
           description: Unique identifier of the Activity used to create the fee, if applicable.
           example: 504b9f77-20c7-4dee-8227-d3007c8f6cea
       additionalProperties: false
-    FeeType:
-      enum:
-      - 0
-      - 1
-      type: integer
-      description: The type of the fee (Fixed = 0, Time = 1).
-      format: int32
-    FeeSourceItemDto:
+    Link:
       type: object
       properties:
-        description:
+        id:
           type:
           - string
           - 'null'
-          description: The description.
-          example: Print document
-        duration:
-          type: integer
-          description: The duration in minutes.
-          format: int64
-          example: 5
-        isBillable:
-          type: boolean
-          description: True if the fee source item is billable.
-          example: false
+        href:
+          type:
+          - string
+          - 'null'
+        relation:
+          type:
+          - string
+          - 'null'
+        method:
+          type:
+          - string
+          - 'null'
+          default: GET
       additionalProperties: false
     ProblemDetails:
       type: object
@@ -827,27 +848,6 @@ components:
           - string
           - 'null'
       additionalProperties: {}
-    Link:
-      type: object
-      properties:
-        id:
-          type:
-          - string
-          - 'null'
-        href:
-          type:
-          - string
-          - 'null'
-        relation:
-          type:
-          - string
-          - 'null'
-        method:
-          type:
-          - string
-          - 'null'
-          default: GET
-      additionalProperties: false
   securitySchemes:
     api-key:
       type: apiKey

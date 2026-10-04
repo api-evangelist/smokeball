@@ -182,31 +182,6 @@ paths:
                 $ref: '#/components/schemas/ProblemDetails'
 components:
   schemas:
-    ProblemDetails:
-      type: object
-      properties:
-        type:
-          type:
-          - string
-          - 'null'
-        title:
-          type:
-          - string
-          - 'null'
-        status:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        detail:
-          type:
-          - string
-          - 'null'
-        instance:
-          type:
-          - string
-          - 'null'
-      additionalProperties: {}
     PortalMessageDto:
       required:
       - message
@@ -224,6 +199,71 @@ components:
           type: boolean
           description: Whether MFA is required before showing the message content.
           example: true
+      additionalProperties: false
+    PortalTaskDto:
+      required:
+      - externalUserId
+      - title
+      - url
+      type: object
+      properties:
+        contactId:
+          type:
+          - string
+          - 'null'
+          description: Unique identifier of the contact.
+          format: uuid
+          example: 93421c6f-40bd-465d-bb95-3b3b5e200e30
+        email:
+          type:
+          - string
+          - 'null'
+          description: Email address of the contact. If provided, this takes precedence over ContactId.
+          example: contact@example.com
+        externalUserId:
+          minLength: 1
+          type: string
+          description: The optional external user identifier of the external system.
+        title:
+          minLength: 1
+          type: string
+          description: The title of the task to be displayed in the UI.
+          example: 'Sign: Verification of Identity'
+        url:
+          minLength: 1
+          type: string
+          description: The URL that will be displayed within the task content.
+          example: http://www.yourwebsite.com
+        requireMFA:
+          type: boolean
+          description: Whether MFA is required before showing the task content.
+        optional:
+          type: boolean
+          description: 'Whether the task is "Required" or "Optional".
+
+
+            Optional tasks appear in a separate section in the UI.'
+        actionText:
+          type:
+          - string
+          - 'null'
+          description: "Optional action text, a single word to describe the action the task relates to. \n\nDefaults to \"Complete\", but other examples could be \"Sign\" or \"Review\"."
+          example: Complete
+        completedText:
+          type:
+          - string
+          - 'null'
+          description: Optional completed text, used on the task success screen if provided.
+          example: Signing Complete!
+        completedUrl:
+          type:
+          - string
+          - 'null'
+          description: 'Optional completed URL, which is a URL that is loaded in the task content body instead of the default success screen if provided.
+
+
+            This option overrides CompletedText if provided.'
+          example: http://www.yourwebsite.com
       additionalProperties: false
     PatchPortalTaskDto:
       type: object
@@ -315,71 +355,31 @@ components:
             This option overrides ExpiredText if provided.'
           example: http://www.yourwebsite.com
       additionalProperties: false
-    PortalTaskDto:
-      required:
-      - externalUserId
-      - title
-      - url
+    ProblemDetails:
       type: object
       properties:
-        contactId:
+        type:
           type:
           - string
           - 'null'
-          description: Unique identifier of the contact.
-          format: uuid
-          example: 93421c6f-40bd-465d-bb95-3b3b5e200e30
-        email:
-          type:
-          - string
-          - 'null'
-          description: Email address of the contact. If provided, this takes precedence over ContactId.
-          example: contact@example.com
-        externalUserId:
-          minLength: 1
-          type: string
-          description: The optional external user identifier of the external system.
         title:
-          minLength: 1
-          type: string
-          description: The title of the task to be displayed in the UI.
-          example: 'Sign: Verification of Identity'
-        url:
-          minLength: 1
-          type: string
-          description: The URL that will be displayed within the task content.
-          example: http://www.yourwebsite.com
-        requireMFA:
-          type: boolean
-          description: Whether MFA is required before showing the task content.
-        optional:
-          type: boolean
-          description: 'Whether the task is "Required" or "Optional".
-
-
-            Optional tasks appear in a separate section in the UI.'
-        actionText:
           type:
           - string
           - 'null'
-          description: "Optional action text, a single word to describe the action the task relates to. \n\nDefaults to \"Complete\", but other examples could be \"Sign\" or \"Review\"."
-          example: Complete
-        completedText:
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
           type:
           - string
           - 'null'
-          description: Optional completed text, used on the task success screen if provided.
-          example: Signing Complete!
-        completedUrl:
+        instance:
           type:
           - string
           - 'null'
-          description: 'Optional completed URL, which is a URL that is loaded in the task content body instead of the default success screen if provided.
-
-
-            This option overrides CompletedText if provided.'
-          example: http://www.yourwebsite.com
-      additionalProperties: false
+      additionalProperties: {}
   securitySchemes:
     api-key:
       type: apiKey
