@@ -1,17 +1,31 @@
-generated: '2026-07-15'
+generated: '2026-09-23'
 method: generated
-source: openapi/smokeball-smokeball-api-openapi.yml
+source: openapi/smokeball-activity-codes-api-openapi.yml, openapi/smokeball-authorization-api-openapi.yml,
+  openapi/smokeball-bank-accounts-api-openapi.yml, openapi/smokeball-contacts-api-openapi.yml,
+  openapi/smokeball-events-api-openapi.yml, openapi/smokeball-expenses-api-openapi.yml, openapi/smokeball-fees-api-openapi.yml,
+  openapi/smokeball-files-api-openapi.yml, openapi/smokeball-firm-api-openapi.yml, openapi/smokeball-folders-api-openapi.yml,
+  openapi/smokeball-intake-api-openapi.yml, openapi/smokeball-integrated-search-api-openapi.yml,
+  openapi/smokeball-invoices-api-openapi.yml, openapi/smokeball-layout-designs-api-openapi.yml,
+  openapi/smokeball-layout-matter-items-api-openapi.yml, openapi/smokeball-matter-items-api-openapi.yml,
+  openapi/smokeball-matter-types-api-openapi.yml, openapi/smokeball-matters-api-openapi.yml,
+  openapi/smokeball-memos-api-openapi.yml, openapi/smokeball-notifications-api-openapi.yml,
+  openapi/smokeball-plugins-api-openapi.yml, openapi/smokeball-portal-api-openapi.yml, openapi/smokeball-referral-types-api-openapi.yml,
+  openapi/smokeball-relationships-api-openapi.yml, openapi/smokeball-roles-api-openapi.yml,
+  openapi/smokeball-search-api-openapi.yml, openapi/smokeball-staff-api-openapi.yml, openapi/smokeball-stages-api-openapi.yml,
+  openapi/smokeball-subscription-payments-api-openapi.yml, openapi/smokeball-subscription-promotions-api-openapi.yml,
+  openapi/smokeball-subscriptions-api-openapi.yml, openapi/smokeball-tasks-api-openapi.yml,
+  openapi/smokeball-users-api-openapi.yml, openapi/smokeball-webhooks-api-openapi.yml
 description: Recommended x-agentic-access execution contracts, classified heuristically from
   the OpenAPI. A governance starting point for exposing this API to AI agents — review and bind
   audience per deployment. See research/curity/agentic-governance/.
 summary:
   operations: 233
   by_action_class:
-    connected: 114
-    acting: 119
+    connected: 115
+    acting: 118
   by_consequence:
-    read: 114
-    write: 107
+    read: 115
+    write: 106
     physical: 12
   human_in_the_loop_required: 0
 operations:
@@ -999,6 +1013,7 @@ operations:
     audit: required
 - path: /firmusers
   method: get
+  operationId: getFirmusers
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -1018,6 +1033,7 @@ operations:
     audit: none
 - path: /firmusers/{id}
   method: put
+  operationId: putFirmusersById
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -1033,6 +1049,7 @@ operations:
     audit: required
 - path: /firmusers/{id}
   method: delete
+  operationId: deleteFirmusersById
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -2056,18 +2073,12 @@ operations:
   method: post
   operationId: SearchFilesAsync
   x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
+    action-class: connected
+    consequence: read
+    subject: optional
     token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
+      max-ttl: 3600
+    audit: none
 - path: /staff
   method: get
   operationId: GetStaff
@@ -2352,6 +2363,7 @@ operations:
     audit: required
 - path: /subscriptions/addons
   method: get
+  operationId: getSubscriptionsAddons
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -2371,6 +2383,7 @@ operations:
     audit: none
 - path: /{id}
   method: post
+  operationId: postById
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -2386,6 +2399,7 @@ operations:
     audit: required
 - path: /{id}
   method: delete
+  operationId: deleteById
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -2639,6 +2653,7 @@ operations:
     audit: required
 - path: /subscriptions/tiers
   method: get
+  operationId: getSubscriptionsTiers
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -2658,6 +2673,7 @@ operations:
     audit: none
 - path: /subscriptions/tiers/{id}/addons
   method: get
+  operationId: getSubscriptionsTiersByIdAddons
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -2667,6 +2683,7 @@ operations:
     audit: none
 - path: /subscriptions/{subscriptionId}/tiers/{id}
   method: patch
+  operationId: patchSubscriptionsBySubscriptionIdTiersById
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -2682,6 +2699,7 @@ operations:
     audit: required
 - path: /subscriptions/usages
   method: get
+  operationId: getSubscriptionsUsages
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -2701,6 +2719,7 @@ operations:
     audit: none
 - path: /subscriptions/{subscriptionId}/usages/{id}
   method: post
+  operationId: postSubscriptionsBySubscriptionIdUsagesById
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -2716,6 +2735,7 @@ operations:
     audit: required
 - path: /subscriptions/{subscriptionId}/usages/{id}
   method: delete
+  operationId: deleteSubscriptionsBySubscriptionIdUsagesById
   x-agentic-access:
     action-class: acting
     consequence: write
