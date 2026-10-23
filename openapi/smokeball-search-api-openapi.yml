@@ -148,3 +148,9 @@ components:
       name: Authorization
       in: header
       x-amazon-apigateway-authtype: cognito_user_pools
+x-provenance:
+  method: harvested
+  publisher: Smokeball
+  source: https://docs.smokeball.com/openapi.json
+  note: split by refine-openapis from the provider's own published document, verified by fetch (openapi/_original/*.fetch.json);
+    stamped by stamp-openapi-provenance.py (roadmap#793)
